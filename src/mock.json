@@ -1,0 +1,92 @@
+{
+  "theme": {
+    "color": "rgba(126,211,33,1)",
+    "emptyColor": "rgba(144,19,254,1)",
+    "bubbleColor": "rgba(80,227,194,1)",
+    "loginBg": ""
+  },
+  "card": {
+    "order": 1,
+    "isShow": 1,
+    "height": 176,
+    "width": 345,
+    "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/1baab297eaaf5b18a3db145272e59aabaf5d023c.png",
+    "marginBottom": 12,
+    "marginTop": 12,
+    "borderRadius": 10,
+    "type": "card"
+  },
+  "menu": {
+    "order": 2,
+    "marginBottom": 1,
+    "marginTop": 12,
+    "backgroundColor": "#fff",
+    "borderRadius": 10,
+    "childrens": [
+      {
+        "title": "堂食",
+        "desc": "",
+        "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/791fb2f0160714c693ba38f51dc2e67db45353a1.png",
+        "width": 170,
+        "height": 180,
+        "backgroundColor": "",
+        "isShow": 1,
+        "type": "reserve"
+      },
+      {
+        "title": "小锅菜",
+        "desc": "",
+        "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/c875ac96a7900f83301f1729996b947d6ae60215.png",
+        "width": 170,
+        "height": 180,
+        "backgroundColor": "",
+        "isShow": 1,
+        "type": "special"
+      }
+    ],
+    "type": "menu"
+  },
+  "shop": {
+    "order": 4,
+    "isShow": 1,
+    "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/60ed7d38c65818df539f46f1cc44c83a46caf9e4.png",
+    "url": "",
+    "width": 343,
+    "height": 100,
+    "marginTop": 12,
+    "marginBottom": 12,
+    "type": "shop"
+  },
+  "explain": {
+    "order": 3,
+    "isShow": 1,
+    "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/d56f700e27fc7d1eaf368e6009c342f5c9828ab7.png",
+    "names": "菜谱",
+    "backgroundColor": "#fff",
+    "width": 343,
+    "height": 80,
+    "borderRadius": 10,
+    "marginTop": 12,
+    "marginBottom": 1,
+    "type": "explain"
+  },
+  "mine": {
+    "unbound": 1,
+    "recharge": 1,
+    "type": "mine"
+  },
+  "tabbars": [
+    {
+      "id": 1,
+      "text": "首页",
+      "activeImage": "https://saas-oss-test.jsrxjt.com/image/20220902/f43c86df716e7610bcc407795b7d034e507ade90.png",
+      "inactiveImage": ""
+    },
+    {
+      "id": 2,
+      "text": "个人中心",
+      "activeImage": "https://saas-oss-test.jsrxjt.com/image/20220902/16e719efb1344dc6f0ce9993d0fe66e8a19cbcb3.png",
+      "inactiveImage": ""
+    }
+  ]
+}

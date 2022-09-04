@@ -1,4 +1,37 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { App, createApp } from 'vue'
+import AppVue from './App.vue'
+import { createPinia, Pinia } from 'pinia'
+import { useApp } from './store'
+import ElementPlus from 'element-plus'
+import 'element-plus/theme-chalk/index.css'
 
-createApp(App).mount('#app')
+let app: App | null
+let store: Pinia | null
+
+function mount() {
+  app = createApp(AppVue)
+  store = createPinia()
+  app.use(ElementPlus)
+  app.use(store)
+  app.mount('#app')
+
+  const appStore = useApp()
+  window.microApp?.addDataListener((data: Record<string, unknown>) => {
+    appStore.config = data
+  }, true)
+}
+
+function unmount() {
+  app?.unmount()
+  store = null
+  app = null
+  window.microApp?.clearDataListener()
+}
+
+if (window.__MICRO_APP_ENVIRONMENT__) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  window[`micro-app-${window.__MICRO_APP_NAME__}`] = { mount, unmount }
+} else {
+  mount()
+}
