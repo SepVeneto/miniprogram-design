@@ -24,7 +24,6 @@ export default defineComponent({
     return (
       <div
         class={['card', {'is-active': this.active}, `dir-${this.dir}`, {'has-mask': this.mask}]}
-        style="margin-top: 10px;"
       >
         <div class='operate'>
           <el-icon class="operate-icon operate-move" color="#fff" size={20}><Rank /></el-icon>
@@ -46,7 +45,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
-  background: #fff;
   position: relative;
   &.dir-top {
     overflow: hidden;
@@ -102,6 +100,7 @@ export default defineComponent({
     position: absolute;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1;
     .operate-icon {
       cursor: move;
       & > svg {
@@ -111,8 +110,12 @@ export default defineComponent({
     // right: -50%;
   }
   .container {
-    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px dashed transparent;
+    transition: all 0.3s;
+    overflow: hidden;
   }
   &.has-mask {
     .container::before {

@@ -11,6 +11,7 @@ specifiers:
   '@vue/cli-plugin-typescript': ~5.0.0
   '@vue/cli-service': ~5.0.0
   '@vue/eslint-config-typescript': ^9.1.0
+  '@vueuse/core': ^9.1.1
   core-js: ^3.8.3
   element-plus: ^2.2.16
   eslint: ^7.32.0
@@ -26,6 +27,7 @@ specifiers:
 
 dependencies:
   '@element-plus/icons-vue': 2.0.9_vue@3.2.38
+  '@vueuse/core': 9.1.1_vue@3.2.38
   core-js: 3.25.0
   element-plus: 2.2.16_vue@3.2.38
   pinia: 2.0.21_zb7ypfx73epgrfnxouuwishrgy
@@ -3144,7 +3146,7 @@ packages:
       lodash: ^4.17.20
       marko: ^3.14.4
       mote: ^0.2.0
-      mustache: ^3.0.0
+      mustache: ^4.0.1
       nunjucks: ^3.2.2
       plates: ~0.4.11
       pug: ^3.0.0

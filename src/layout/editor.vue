@@ -1,35 +1,41 @@
 <template>
-  <draggable
-    class="draggable-box"
-    v-model="data"
-    item-key="uuid"
-    handle=".operate"
-    group="widgets"
+  <main
+    ref="mainRef"
+    style="min-height: calc(667px - 60px); position: relative;"
   >
-    <template #item="{element: item}">
-      <draggable-wrapper
-        v-if="true"
-        dir="top"
-        @click="handleSelect(item)"
-        :active="selected.uuid === item.uuid"
-        mask
-      >
-        <card-preview v-if="item.type === 'card'" :config="item" />
-      </draggable-wrapper>
-      <div
-        v-else
-        :class="['card', {'is-active': selected.uuid === item.uuid }]"
-        style="margin-bottom: 20px;"
-        @click="handleSelect(item)"
-      >
-        <div class="container">
-          <div class="operate">
-            <el-icon style="z-index: 1;"><Rank /></el-icon>
+    <draggable
+      class="draggable-box"
+      v-model="data"
+      item-key="uuid"
+      handle=".operate"
+      group="widgets"
+    >
+      <template #item="{element: item}">
+        <draggable-wrapper
+          v-if="true"
+          dir="top"
+          @click="handleSelect(item)"
+          :active="selected.uuid === item.uuid"
+          mask
+        >
+          <card-preview v-if="['card', 'explain', 'shop'].includes(item.type)" :config="item" />
+          <menu-preview v-else-if="item.type === 'menu'" :config="item" />
+        </draggable-wrapper>
+        <div
+          v-else
+          :class="['card', {'is-active': selected.uuid === item.uuid }]"
+          style="margin-bottom: 20px;"
+          @click="handleSelect(item)"
+        >
+          <div class="container">
+            <div class="operate">
+              <el-icon style="z-index: 1;"><Rank /></el-icon>
+            </div>
           </div>
         </div>
-      </div>
-    </template>
-  </draggable>
+      </template>
+    </draggable>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -39,7 +45,9 @@ import { Rank } from '@element-plus/icons-vue'
 import { ref, computed } from 'vue'
 import { useApp } from '@/store';
 import CardPreview from '../widgets/card/preview.vue'
+import { menuPreview } from '../widgets/menu'
 const app = useApp()
+const mainRef = ref()
 
 const data = ref(app.config.body)
 // const selected = ref({} as any)

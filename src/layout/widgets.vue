@@ -24,7 +24,8 @@
 import draggable from 'vuedraggable'
 import { v4 as uuidv4 } from 'uuid'
 const widgetList = [
-  { type: 'card', name: '食堂卡' }
+  { type: 'card', name: '食堂卡', style: {} },
+  { type: 'card', name: '菜品预订', style: {} },
 ]
 
 function onClone(origin: Record<string, unknown>) {

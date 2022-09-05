@@ -11,21 +11,22 @@
       <widgets />
     </aside>
     <div class="mobile-frame">
-      <header class="header">
-        <!-- <span>{{globalConfig.title}}</span> -->
-      </header>
-      <el-scrollbar wrap-style="height: calc(667px - 60px);" style="height: calc(100% - 60px - 26px)">
-        <main style="min-height: calc(667px - 60px); position: relative;">
+      <div class="mobile-content">
+        <header class="header">
+          <span>{{globalConfig.title}}</span>
+          <span class="icon"></span>
+        </header>
+        <el-scrollbar
+          style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
+        >
           <v-editor />
-          <!-- <div v-if="globalConfig.supportVal" style="text-align: center; font-size: 12px;">{{globalConfig.supportVal}}提供技术支持</div> -->
-        </main>
-      </el-scrollbar>
-      <footer-bar
-        v-model="footerConfig.list"
-        :color="config.color"
-        :active="selected.uuid === footerConfig.uuid"
-        @click="handleSelect(footerConfig)"
-      />
+        </el-scrollbar>
+        <tabbar-preview
+          :config="tabbar"
+          :active="tabbar.uuid === selected.uuid"
+          @click="handleSelect(tabbar)"
+        />
+      </div>
     </div>
     <aside style="background: #fff; width: 400px;">
       <div style="display: flex; justify-content: space-between; padding: 20px; align-items: center; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
@@ -43,23 +44,26 @@
 import VEditor from '@/layout/editor.vue'
 import widgets from '@/layout/widgets.vue'
 import VConfig from '@/layout/config.vue'
-import { ref } from 'vue';
+import { tabbarPreview } from '@/widgets/tabbar'
+import { ref, computed } from 'vue';
+import { useApp } from '@/store'
+const app = useApp()
 const mainRef = ref()
-const selected = ref({} as any)
-const config = {} as any
-const globalConfig = { share: {} } as any
 const footerConfig = {} as any
 const data = ref([{ uuid: 1 }])
+const tabbar = computed(() => app.config.tabbars)
+const selected = computed(() => app.selected)
+const globalConfig = computed(() => app.config.globalConfig ?? {})
 
 function handleDelete(data: any) {
   return;
 }
 function handleSelect(data: any) {
-  selected.value = data
+  app.selected = data
 }
 function handleOutside({ target }: Event) {
   if (target === mainRef.value) {
-    selected.value = {}
+    app.selected = {}
   }
 }
 
@@ -75,23 +79,42 @@ function handleOutside({ target }: Event) {
   margin-bottom: 20px;
 }
 .mobile-frame {
-  background: #fff;
-  flex: 0 0 375px;
-  height: 695px;
-  border: 8px solid #222;
-  border-radius: 10px;
+  --padding-x: 15px;
+  --tabbar-height: 50px;
+  --header-height: 44px;
+  --safe-bottom: 40px;
+  background: url('./assets/iPhone13.png');
+  width: 375px;
+  height: 720px;
+  padding: 0 var(--padding-x);
+  padding-top: 50px;
+  padding-bottom: var(--safe-bottom);
+  box-sizing: content-box;
+  background-size: calc(375px + 2 * var(--padding-x)) 100%;
+  .mobile-content {
+    height: inherit;
+    background: #f4f5f7;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    overflow: hidden;
+  }
   .header {
     width: 375px;
-    background-image: url('http://club.liantuobank.com/imgPath/club-open/1554278245739.png');
-    height: 26px;
+    height: var(--header-height);
+    box-sizing: border-box;
+    padding: 0 16px;
+    font-size: 18px;
     position: relative;
-    & > span {
-      position: absolute;
-      top: 18px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      z-index: 1;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .icon {
+      background: url('./assets/4_objects.svg');
+      background-size: 100%;
+      display: inline-block;
+      width: 87px;
+      height: 32px;
     }
   }
 }
