@@ -39,15 +39,16 @@
 
 <script lang="ts" setup>
 import ossUpload from '@/components/ossUpload.vue'
-import { ref, watch } from 'vue'
+import { PropType, ref, watch } from 'vue'
+import type { CardWidgetConfig } from '../type'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: {
-    type: Object,
+    type: Object as PropType<CardWidgetConfig>,
     default: () => ({})
   }
 })
-const data = ref({} as any)
+const data = ref({} as CardWidgetConfig)
 watch(() => props.modelValue, (val) => {
   data.value = val;
 }, { deep: true, immediate: true })

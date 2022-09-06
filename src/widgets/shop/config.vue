@@ -31,15 +31,16 @@
 
 <script lang="ts" setup>
 import ossUpload from '@/components/ossUpload.vue'
-import { ref, watch } from 'vue'
+import { PropType, ref, watch } from 'vue'
+import { ShopWidgetConfig } from '../type';
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: {
-    type: Object,
+    type: Object as PropType<ShopWidgetConfig>,
     default: () => ({})
   }
 })
-const data = ref({} as any)
+const data = ref({} as ShopWidgetConfig)
 watch(() => props.modelValue, (val) => {
   data.value = val;
 }, { deep: true, immediate: true })

@@ -1,14 +1,7 @@
 <template>
   <main id="menus">
-    <div
-      class="menu-swarps"
-      style="position: relative"
-      :style="style"
-    >
-      <div
-        v-for="itemchild in list"
-        :key="itemchild.id"
-      >
+    <div class="menu-swarps" style="position: relative" :style="style">
+      <div v-for="itemchild in list" :key="itemchild.id">
         <div
           class="menu-item"
           :style="{
@@ -23,11 +16,7 @@
             {{ itemchild.title }}
           </div>
           <div class="menu-desc">{{ itemchild.desc }}</div>
-          <img
-            class="menu-img"
-            :src="itemchild.defaultImg"
-            alt=""
-          />
+          <img class="menu-img" :src="itemchild.defaultImg" alt="" />
         </div>
       </div>
     </div>
@@ -35,23 +24,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useNormalizeStyle } from '@/hooks'
+import { computed } from 'vue';
+import { useNormalizeStyle } from '@/hooks';
 const props = defineProps({
   config: {
     type: Object,
-    default: () => ({})
-  }
-})
-const style = computed(() => {
-  return {
-    transition: 'inherit',
-    ...useNormalizeStyle(props.config.style),
-  }
-})
+    default: () => ({}),
+  },
+});
+const style = useNormalizeStyle(props.config.style);
 const list = computed(() => {
-  return props.config.childrens
-})
+  return props.config.childrens;
+});
 </script>
 
 <style lang="scss" scoped>

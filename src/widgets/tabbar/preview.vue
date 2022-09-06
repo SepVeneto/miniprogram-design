@@ -32,11 +32,12 @@ import homeIconInactive from './assets/sy_icon_sy_sel.png'
 import homeIconActive from './assets/sy_icon_active_sy_sel.png'
 import myIconInactive from './assets/my_icon_sy_sel.png'
 import myIconActive from './assets/my_icon_active_sy_sel.png'
-import { ref, computed } from 'vue'
+import { ref, computed, PropType } from 'vue'
+import { TabbarWidgetConfig } from '../type'
 const props = defineProps({
   active: Boolean,
   config: {
-    type: Object,
+    type: Object as PropType<TabbarWidgetConfig>,
     default: () => ({
       list: []
     })
@@ -64,7 +65,7 @@ const configList = computed(() => {
 })
 const tabbarIdx = ref()
 const tabbarType = ref()
-function handleSelect(index, type) {
+function handleSelect(index: number, type: string) {
   tabbarIdx.value = index;
   tabbarType.value = type;
 }

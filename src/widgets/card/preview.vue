@@ -10,29 +10,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { useNormalizeStyle } from '@/hooks';
 const props = defineProps({
   config: {
     type: Object,
     default: () => ({})
   }
 })
-const style = computed(() => {
-  const _style = normalizeStyle(props.config.style)
-  return {
-    transition: 'inherit',
-    ..._style
-  }
-})
-function normalizeStyle(data = {}) {
-  return Object.entries(data).reduce((obj, _style) => {
-    const [key, value] = _style
-    if (typeof value === 'number') {
-      obj[key] = value + 'px'
-    } else {
-      obj[key] = value
-    }
-    return obj
-  }, {})
-}
+const style = useNormalizeStyle(props.config.style)
 </script>

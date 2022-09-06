@@ -2,9 +2,18 @@ import { defineStore } from 'pinia';
 import { ref, watchEffect, watch } from 'vue';
 import mock from '@/mock.json'
 import { v4 as uuidv4 } from 'uuid'
+import { CardWidgetConfig, GlobalConfig, MenuWidgetConfig, ShopWidgetConfig, Tabbar, WidgetConfig } from '@/widgets/type'
+
+type Widget = CardWidgetConfig | MenuWidgetConfig | ShopWidgetConfig | CardWidgetConfig
+
+interface Config{
+  globalConfig: GlobalConfig
+  body: Widget[]
+  tabbars: Tabbar[]
+}
 
 export const useApp = defineStore('app', () => {
-  const config = ref<any>(normalizeLayout(mock));
+  const config = ref<Config>(normalizeLayout(mock));
   function setConfig(data: any) {
     console.log(data)
     config.value = normalizeLayout(data)
@@ -41,14 +50,14 @@ function restore(data: any) {
   return { theme, ...res, tabbars }
 }
 
-function restoreStyle(config: any) {
+function restoreStyle(config: WidgetConfig) {
   const { style, ...args } = config
   return {
     ...style,
     ...args,
   }
 }
-function normalizeLayout(config: typeof mock) {
+function normalizeLayout(config: any) {
   const cards = arrayLike(config.card).map(normalizeCard)
   const menu = arrayLike(config.menu).map(item => {
     return {
@@ -74,7 +83,7 @@ function normalizeLayout(config: typeof mock) {
 function normalizeTheme(theme: typeof mock.theme) {
   return theme
 }
-function normalizeCard(config: typeof mock.card) {
+function normalizeCard(config: any): CardWidgetConfig {
   const { marginBottom, marginTop, borderRadius, width, height, ...args } = config
   const style = {
     marginBottom: marginBottom,

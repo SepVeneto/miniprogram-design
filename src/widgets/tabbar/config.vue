@@ -11,7 +11,7 @@
       >
         <div>
           <span>图标：</span>
-          <el-image :src="element.activeImage" />
+          <oss-upload v-model="element.activeImage" />
         </div>
         <div style="display: flex; margin: 10px 0;">
           <span style="white-space: nowrap;">名称：</span>
@@ -30,15 +30,16 @@
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import ossUpload from '@/components/ossUpload.vue'
-import { ref, watch } from 'vue'
+import { ref, watch, PropType } from 'vue'
+import { TabbarWidgetConfig } from '../type'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: {
-    type: Object,
+    type: Object as PropType<TabbarWidgetConfig>,
     default: () => ({})
   }
 })
-const data = ref({} as any)
+const data = ref({} as TabbarWidgetConfig)
 watch(() => props.modelValue, (val) => {
   data.value = val;
 }, { deep: true, immediate: true })

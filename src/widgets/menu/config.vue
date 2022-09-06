@@ -33,17 +33,18 @@
 
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
-import draggableWrapper from '@/components/draggableWrapper'
+import draggableWrapper from '@/components/draggableWrapper.vue'
 import ossUpload from '@/components/ossUpload.vue'
-import { ref, watch } from 'vue'
+import { PropType, ref, watch } from 'vue'
+import { MenuWidgetConfig } from '../type';
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: {
-    type: Object,
+    type: Object as PropType<MenuWidgetConfig>,
     default: () => ({})
   }
 })
-const data = ref({} as any)
+const data = ref({} as MenuWidgetConfig)
 watch(() => props.modelValue, (val) => {
   data.value = val;
 }, { deep: true, immediate: true })
