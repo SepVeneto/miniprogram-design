@@ -1,13 +1,18 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, watchEffect, watch } from 'vue';
 import mock from '@/mock.json'
 import { v4 as uuidv4 } from 'uuid'
 
 export const useApp = defineStore('app', () => {
   const config = ref<any>(normalizeLayout(mock));
   function setConfig(data: any) {
+    console.log(data)
     config.value = normalizeLayout(data)
   }
+  watch(config, (val) => {
+    const res = restore(val)
+    window.microApp?.dispatch(res)
+  }, { deep: true })
   return {
     setConfig,
     selected: {} as any,
@@ -23,6 +28,26 @@ function arrayLike<T>(data: T): T[] {
   }
 }
 
+function restore(data: any) {
+  const theme = data.globalConfig
+  const res = {}
+  data.body.forEach((item: any, index: number) => {
+    res[item.type] = {
+      ...restoreStyle(item),
+      order: index,
+    }
+  })
+  const tabbars = data.tabbars.list
+  return { theme, ...res, tabbars }
+}
+
+function restoreStyle(config: any) {
+  const { style, ...args } = config
+  return {
+    ...style,
+    ...args,
+  }
+}
 function normalizeLayout(config: typeof mock) {
   const cards = arrayLike(config.card).map(normalizeCard)
   const menu = arrayLike(config.menu).map(item => {
@@ -52,11 +77,11 @@ function normalizeTheme(theme: typeof mock.theme) {
 function normalizeCard(config: typeof mock.card) {
   const { marginBottom, marginTop, borderRadius, width, height, ...args } = config
   const style = {
-    marginBottom: marginBottom + 'px',
-    marginTop: marginTop + 'px',
-    width: width + 'px',
-    height: height + 'px',
-    borderRadius: borderRadius + 'px',
+    marginBottom: marginBottom,
+    marginTop: marginTop,
+    width: width,
+    height: height,
+    borderRadius: borderRadius,
   }
   return {
     uuid: uuidv4(),

@@ -49,7 +49,14 @@ import { menuPreview } from '../widgets/menu'
 const app = useApp()
 const mainRef = ref()
 
-const data = ref(app.config.body)
+const data = computed({
+  get() {
+    return app.config.body
+  },
+  set(val) {
+    app.config.body = val;
+  }
+})
 // const selected = ref({} as any)
 const selected = computed(() => app.selected)
 

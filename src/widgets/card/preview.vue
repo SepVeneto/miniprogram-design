@@ -19,7 +19,6 @@ const props = defineProps({
 })
 const style = computed(() => {
   const _style = normalizeStyle(props.config.style)
-  console.log(_style)
   return {
     transition: 'inherit',
     ..._style

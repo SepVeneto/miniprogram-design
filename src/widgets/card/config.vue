@@ -2,17 +2,27 @@
   <div>食堂卡</div>
   <el-form label-width="100px">
     <el-form-item label="顶部外边距">
-      <el-input v-model="data.style.marginTop">
+      <el-input v-model.number="data.style.marginTop" type="number">
         <template #suffix>px</template>
       </el-input>
     </el-form-item>
     <el-form-item label="底部外边距">
-      <el-input v-model="data.style.marginBottom">
+      <el-input v-model.number="data.style.marginBottom" type="number">
         <template #suffix>px</template>
       </el-input>
     </el-form-item>
     <el-form-item label="边框圆角">
-      <el-input v-model="data.style.borderRadius">
+      <el-input v-model.number="data.style.borderRadius" type="number">
+        <template #suffix>px</template>
+      </el-input>
+    </el-form-item>
+    <el-form-item label="宽度">
+      <el-input v-model.number="data.style.width" type="number">
+        <template #suffix>px</template>
+      </el-input>
+    </el-form-item>
+    <el-form-item label="高度">
+      <el-input v-model.number="data.style.height" type="number">
         <template #suffix>px</template>
       </el-input>
     </el-form-item>

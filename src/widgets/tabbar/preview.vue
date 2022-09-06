@@ -44,7 +44,6 @@ const props = defineProps({
 })
 const configList = computed(() => {
   const _list = props.config.list ?? []
-  console.log(props.config)
   return _list.map(item => {
     if (item.id === 1) {
       return {
