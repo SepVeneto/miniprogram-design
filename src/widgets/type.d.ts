@@ -13,6 +13,7 @@ export interface GlobalConfig {
   emptyColor: string
   bubbleColor: string
   loginBg: string
+  title: string
 }
 
 export interface MenuIcon {
@@ -47,5 +48,7 @@ export interface ShopWidgetConfig extends WidgetConfig {
 }
 
 export interface TabbarWidgetConfig {
+  uuid: string
+  type: string
   list: Tabbar[]
 }

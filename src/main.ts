@@ -16,7 +16,7 @@ function mount() {
   app.mount('#app')
 
   const appStore = useApp()
-  window.microApp?.addDataListener((data: Record<string, unknown>) => {
+  window.microApp?.addDataListener((data: any) => {
     if (!data.config) return;
     appStore.setConfig(data.config)
   }, true)

@@ -20,6 +20,7 @@
         >
           <card-preview v-if="['card', 'explain', 'shop'].includes(item.type)" :config="item" />
           <menu-preview v-else-if="item.type === 'menu'" :config="item" />
+          <mine-preview v-else-if="item.type === 'mine'" :config="item" />
         </draggable-wrapper>
         <div
           v-else
@@ -44,7 +45,9 @@ import draggableWrapper from '@/components/draggableWrapper.vue'
 import { Rank } from '@element-plus/icons-vue'
 import { ref, computed } from 'vue'
 import { useApp } from '@/store';
-import CardPreview from '../widgets/card/preview.vue'
+// import CardPreview from '../widgets/card/preview.vue'
+import { cardPreview } from 'canteenWidgets/card'
+import { minePreview } from '../widgets/mine'
 import { menuPreview } from '../widgets/menu'
 const app = useApp()
 const mainRef = ref()

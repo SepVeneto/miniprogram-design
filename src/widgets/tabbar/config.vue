@@ -9,9 +9,21 @@
         dir="right"
         style="background: #f8f8f8"
       >
-        <div>
-          <span>图标：</span>
-          <oss-upload v-model="element.activeImage" />
+        <div style="display: flex;">
+          <span style="flex-basis: 100px;">激活图标：</span>
+          <oss-upload
+            v-model="element.activeImage"
+            width="25px"
+            height="25px"
+          />
+        </div>
+        <div style="display: flex">
+          <span style="flex-basis: 100px">未激活图标：</span>
+          <oss-upload
+            v-model="element.inactiveImage"
+            width="25px"
+            height="25px"
+          />
         </div>
         <div style="display: flex; margin: 10px 0;">
           <span style="white-space: nowrap;">名称：</span>

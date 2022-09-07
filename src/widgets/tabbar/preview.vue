@@ -63,7 +63,7 @@ const configList = computed(() => {
     }
   })
 })
-const tabbarIdx = ref()
+const tabbarIdx = ref(0)
 const tabbarType = ref()
 function handleSelect(index: number, type: string) {
   tabbarIdx.value = index;

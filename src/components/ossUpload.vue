@@ -9,8 +9,13 @@
       v-if="imageUrl"
       :src="imageUrl"
       class="avatar"
+      :style="imgStyle"
     />
-    <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+    <el-icon
+      v-else
+      class="avatar-uploader-icon"
+      :style="imgStyle"
+    ><Plus /></el-icon>
   </el-upload>
 </template>
 
@@ -20,6 +25,8 @@ import { computed, PropType } from 'vue'
 import type { UploadRequestOptions } from 'element-plus'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
+  width: String,
+  height: String,
   httpRequest: {
     type: Function as PropType<any>,
     default: undefined,
@@ -27,6 +34,12 @@ const props = defineProps({
   modelValue: {
     type: String,
     default: ''
+  }
+})
+const imgStyle = computed(() => {
+  return {
+    width: props.width,
+    height: props.height,
   }
 })
 const imageUrl = computed({

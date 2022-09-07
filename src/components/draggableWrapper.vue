@@ -117,6 +117,9 @@ export default defineComponent({
     transition: all 0.3s;
     overflow: hidden;
   }
+  &.dir-right .container {
+    display: block;
+  }
   &.has-mask {
     .container::before {
       position: absolute;

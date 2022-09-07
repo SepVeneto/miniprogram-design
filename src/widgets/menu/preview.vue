@@ -50,6 +50,7 @@ const list = computed(() => {
     .menu-item {
       box-sizing: border-box;
       text-align: center;
+      transition: all 0.3s;
       .menu-title {
         font-size: 17px;
         font-weight: 600;
