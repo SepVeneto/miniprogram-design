@@ -14,7 +14,9 @@ interface Config{
 export const useApp = defineStore('app', () => {
   const config = ref<Config>({
     globalConfig: {},
-    body: [],
+    body: [
+      { type: 'card', defaultImg: '', uuid: uuidv4(), isShow: 1, url: '', order: 0, style: {} }
+    ],
     tabbars: {
       uuid: uuidv4(),
       type: 'tabbar',

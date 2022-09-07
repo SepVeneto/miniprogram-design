@@ -10,13 +10,24 @@ module.exports = defineConfig({
     }
   },
   configureWebpack: {
+    target: 'es2020',
+    experiments: {
+      outputModule: true
+    },
     plugins: [
       new webpack.container.ModuleFederationPlugin({
         name: 'miniprogram-design',
         filename: 'remoteEntry.js',
+        library: {type: 'module'},
         remotes: {
-          canteenWidgets: 'canteenWidgets@http://localhost:8085/remoteEntry.js',
-        }
+          'widgetsSide': 'http://localhost:4173/assets/remoteEntry.js',
+          'vite-side': 'vite-side@http://localhost:5000/assets/remoteEntry.js'
+        },
+        shared: {
+          vue: {
+            singleton: true,
+          },
+        },
       })
     ]
   },

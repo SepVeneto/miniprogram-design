@@ -3,7 +3,7 @@ import { CSSProperties } from "vue"
 interface WidgetConfig {
   order: number
   style: CSSProperties
-  isShow: boolean
+  isShow: number
   uuid: string
   type: string
 }
