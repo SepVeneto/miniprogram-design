@@ -16,11 +16,13 @@
           dir="top"
           @click="handleSelect(item)"
           :active="selected.uuid === item.uuid"
+          :hide="item.isShow != null && !item.isShow"
           mask
         >
           <card-preview v-if="['card', 'explain', 'shop'].includes(item.type)" :config="item" />
           <menu-preview v-else-if="item.type === 'menu'" :config="item" />
           <mine-preview v-else-if="item.type === 'mine'" :config="item" />
+          <reserve-preview v-else-if="item.type === 'reserve'" :config="item" />
         </draggable-wrapper>
         <div
           v-else
@@ -43,14 +45,15 @@
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import { Rank } from '@element-plus/icons-vue'
-import { ref, computed, defineAsyncComponent } from 'vue'
+import { ref, computed } from 'vue'
 import { useApp } from '@/store';
-// import CardPreview from '../widgets/card/preview.vue'
-import cardPreview from 'widgetsSide/card'
+import CardPreview from '../widgets/card/preview.vue'
+// import cardPreview from 'widgetsSide/card'
 
 // import cardPreview from 'vite-side/Content'
 import { minePreview } from '../widgets/mine'
 import { menuPreview } from '../widgets/menu'
+import { reservePreview } from '../widgets/reserve'
 // const cardPreview = defineAsyncComponent('widgets-side/card')
 
 const app = useApp()
@@ -58,10 +61,10 @@ const mainRef = ref()
 
 const data = computed({
   get() {
-    return app.config.body
+    return app.config.body[app.currentRoute] ?? []
   },
   set(val) {
-    app.config.body = val;
+    app.config.body[app.currentRoute] = val;
   }
 })
 // const selected = ref({} as any)

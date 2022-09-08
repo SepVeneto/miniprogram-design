@@ -13,7 +13,7 @@
     <div class="mobile-frame">
       <div class="mobile-content">
         <header class="header">
-          <span>{{globalConfig.title}}</span>
+          <span>{{app.currentTab.text}}</span>
           <span class="icon"></span>
         </header>
         <el-scrollbar
@@ -30,8 +30,8 @@
     </div>
     <aside style="background: #fff; width: 400px;">
       <div style="display: flex; justify-content: space-between; padding: 20px; align-items: center; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
-        <span>配置</span>
-        <el-button type="primary" text @click="handleDelete" :disabled="!['freeCouponCard', 'btnMenu'].includes(selected.type)">删除</el-button>
+        <span>{{selected._name || '配置'}}</span>
+        <el-button type="primary" text @click="handleDelete" :disabled="!['card', 'shop', 'menu', 'mine', 'reserve'].includes(selected.type)">删除</el-button>
       </div>
       <el-scrollbar wrap-style="height: 700px; padding: 20px;">
         <v-config />
@@ -49,14 +49,14 @@ import { ref, computed } from 'vue';
 import { useApp } from '@/store'
 const app = useApp()
 const mainRef = ref()
-const footerConfig = {} as any
-const data = ref([{ uuid: 1 }])
 const tabbar = computed(() => app.config.tabbars)
 const selected = computed(() => app.selected)
-const globalConfig = computed(() => app.config.globalConfig ?? {})
 
-function handleDelete(data: any) {
-  return;
+function handleDelete() {
+  const index = app.config.body[app.currentRoute].findIndex(item => item.uuid === selected.value.uuid)
+  if (index === -1) return;
+  app.config.body[app.currentRoute].splice(index, 1)
+  app.selected = {}
 }
 function handleSelect(data: any) {
   app.selected = data

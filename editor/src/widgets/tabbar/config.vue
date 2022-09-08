@@ -8,6 +8,7 @@
       <draggable-wrapper
         dir="right"
         style="background: #f8f8f8"
+        disabled
       >
         <div style="display: flex;">
           <span style="flex-basis: 100px;">激活图标：</span>

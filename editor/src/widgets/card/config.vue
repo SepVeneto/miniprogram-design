@@ -1,6 +1,6 @@
 <template>
-  <div>食堂卡</div>
   <el-form label-width="100px">
+    <el-divider content-position="left">样式</el-divider>
     <el-form-item label="顶部外边距">
       <el-input v-model.number="data.style.marginTop" type="number">
         <template #suffix>px</template>
@@ -26,6 +26,8 @@
         <template #suffix>px</template>
       </el-input>
     </el-form-item>
+
+    <el-divider content-position="left">配置</el-divider>
     <el-form-item label="可见性">
       <el-checkbox v-model="data.isShow" :true-label="1" :false-label="0" />
     </el-form-item>

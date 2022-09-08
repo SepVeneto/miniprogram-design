@@ -13,7 +13,7 @@
       >
         <div
           style="font-weight: bold; padding-left: 20px; border-left: 4px solid #4089ef;"
-        >{{element.name}}</div>
+        >{{element._name}}</div>
         <!-- <el-image :src="element.img" /> -->
       </div>
     </template>
@@ -23,10 +23,10 @@
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
 import { v4 as uuidv4 } from 'uuid'
-const widgetList = [
-  { type: 'card', name: '食堂卡', style: {} },
-  { type: 'card', name: '菜品预订', style: {} },
-]
+import { useApp } from '@/store'
+import { computed } from 'vue'
+const app = useApp()
+const widgetList = computed(() => app.widgetList)
 
 function onClone(origin: Record<string, unknown>) {
   const _data = { ...origin, uuid: uuidv4() }
