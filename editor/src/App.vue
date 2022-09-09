@@ -31,7 +31,7 @@
     <aside style="background: #fff; width: 400px;">
       <div style="display: flex; justify-content: space-between; padding: 20px; align-items: center; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
         <span>{{selected._name || '配置'}}</span>
-        <el-button type="primary" text @click="handleDelete" :disabled="!['card', 'shop', 'menu', 'mine', 'reserve'].includes(selected.type)">删除</el-button>
+        <el-button type="primary" text @click="handleDelete" :disabled="!['reserve'].includes(selected.type)">删除</el-button>
       </div>
       <el-scrollbar wrap-style="height: 700px; padding: 20px;">
         <v-config />

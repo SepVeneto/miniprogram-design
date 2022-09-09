@@ -5,6 +5,7 @@ const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
   publicPath: '/miniprogram-design',
+  outputDir: 'miniprogram-design',
   devServer: {
     port: 8082,
     headers: {

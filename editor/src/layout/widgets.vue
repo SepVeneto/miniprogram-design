@@ -10,6 +10,7 @@
     <template #item="{element}">
       <div
         style="border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; cursor: move"
+        :class="{ disabled: element._disabled }"
       >
         <div
           style="font-weight: bold; padding-left: 20px; border-left: 4px solid #4089ef;"
