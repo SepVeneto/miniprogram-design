@@ -3,6 +3,8 @@ node_modules
 node_modules.bk
 dist
 
+miniprogram-design
+
 
 # local env files
 .env.local
