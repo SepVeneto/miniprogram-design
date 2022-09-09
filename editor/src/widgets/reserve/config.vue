@@ -1,6 +1,6 @@
 <template>
   <el-form label-width="100px">
-    <el-divider content-position="left">样式</el-divider>
+    <!-- <el-divider content-position="left">样式</el-divider>
     <el-form-item label="顶部外边距">
       <el-input v-model.number="data.style.marginTop" type="number">
         <template #suffix>px</template>
@@ -25,7 +25,7 @@
       <el-input v-model.number="data.style.height" type="number">
         <template #suffix>px</template>
       </el-input>
-    </el-form-item>
+    </el-form-item> -->
 
     <el-divider content-position="left">配置</el-divider>
     <el-form-item label="可见性">
