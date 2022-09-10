@@ -74,9 +74,11 @@ importers:
       eslint-plugin-vue: ^8.0.3
       typescript: ~4.5.5
       vue: ^3.2.13
+      webpack: ^5.74.0
     dependencies:
       core-js: 3.25.0
       vue: 3.2.38
+      webpack: 5.74.0
     devDependencies:
       '@typescript-eslint/eslint-plugin': 5.36.2_wbicyge7vgc2gaxgyetpbhd3vi
       '@typescript-eslint/parser': 5.36.2_sgaiclxgc5mltnpgmg7py4v6ca
@@ -1529,7 +1531,7 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.4.6
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
 
   /@types/eslint/8.4.6:
     resolution: {integrity: sha512-/fqTbjxyFUaYNO7VcW5g+4npmqVACz1bB7RTHYuLj+PRjw9hrCwrUXVQFpChUS0JsyEFvMZ7U/PfmvWgxJhI9g==}
@@ -1940,7 +1942,7 @@ packages:
     dependencies:
       '@babel/core': 7.19.0
       '@vue/babel-preset-app': 5.0.8_vue@3.2.38
-      '@vue/cli-service': 5.0.8_sass-loader@13.0.2
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.2.5_z22tmofudeh3tyeifpjvwjl5ei
       thread-loader: 3.0.4_webpack@5.74.0
@@ -1961,7 +1963,7 @@ packages:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
       eslint: '>=7.5.0'
     dependencies:
-      '@vue/cli-service': 5.0.8_sass-loader@13.0.2
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
       eslint: 7.32.0
       eslint-webpack-plugin: 3.2.0_2gji4j2x5okmdz3i2csw4u63de
@@ -1981,7 +1983,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8_sass-loader@13.0.2
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
     transitivePeerDependencies:
       - encoding
@@ -2003,7 +2005,7 @@ packages:
     dependencies:
       '@babel/core': 7.19.0
       '@types/webpack-env': 1.18.0
-      '@vue/cli-service': 5.0.8_sass-loader@13.0.2
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.2.5_z22tmofudeh3tyeifpjvwjl5ei
       fork-ts-checker-webpack-plugin: 6.5.2_byowiwio77oag6qn7snrf3hvz4
@@ -2028,7 +2030,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8_sass-loader@13.0.2
+      '@vue/cli-service': 5.0.8
     dev: true
 
   /@vue/cli-service/5.0.8:

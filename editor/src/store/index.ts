@@ -7,7 +7,7 @@ type Widget = CardWidgetConfig | MenuWidgetConfig | ShopWidgetConfig | CardWidge
 
 interface Config{
   globalConfig: Partial<GlobalConfig>
-  body: Widget[]
+  body: Widget[][]
   tabbars: TabbarWidgetConfig
 }
 
@@ -15,7 +15,9 @@ export const useApp = defineStore('app', () => {
   const widgetList = ref([])
   const config = ref<Config>({
     globalConfig: {},
-    body: [],
+    body: [[
+      { type: 'card', style: {}, isShow: 1, order: 1, defaultImg: '', uuid: '1', _name: 'test' }
+    ], []],
     tabbars: {
       uuid: uuidv4(),
       type: 'tabbar',

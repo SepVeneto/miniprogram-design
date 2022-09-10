@@ -11,6 +11,7 @@
 
 <script lang="ts" setup>
 import { useNormalizeStyle } from '@/hooks';
+console.log(window.__MICRO_APP_PUBLIC_PATH__)
 const props = defineProps({
   config: {
     type: Object,

@@ -30,7 +30,8 @@
 </template>
 
 <script lang="ts" setup>
-import { cardConfig } from '@/widgets/card'
+// import { cardConfig } from '@/widgets/card'
+import { cardConfig } from 'widgets_side/card'
 import { tabbarConfig } from '@/widgets/tabbar'
 import { menuConfig } from '@/widgets/menu'
 import { shopConfig } from '@/widgets/shop'

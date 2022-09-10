@@ -45,16 +45,16 @@
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import { Rank } from '@element-plus/icons-vue'
-import { ref, computed } from 'vue'
+import { ref, computed, defineAsyncComponent } from 'vue'
 import { useApp } from '@/store';
-import CardPreview from '../widgets/card/preview.vue'
-// import cardPreview from 'widgetsSide/card'
+// import CardPreview from '../widgets/card/preview.vue'
+import { cardPreview } from 'widgets_side/card'
 
 // import cardPreview from 'vite-side/Content'
 import { minePreview } from '../widgets/mine'
 import { menuPreview } from '../widgets/menu'
 import { reservePreview } from '../widgets/reserve'
-// const cardPreview = defineAsyncComponent('widgets-side/card')
+// const cardPreview = defineAsyncComponent('widgets_side/card')
 
 const app = useApp()
 const mainRef = ref()
