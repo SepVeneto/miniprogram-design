@@ -8,6 +8,7 @@
       <draggable-wrapper
         dir="right"
         style="background: #f8f8f8"
+        disabled
       >
         <div style="display: flex;">
           <span style="flex-basis: 100px;">激活图标：</span>
@@ -38,19 +39,20 @@
   </draggable>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import ossUpload from '@/components/ossUpload.vue'
-import { ref, watch } from 'vue'
+import { ref, watch, PropType } from 'vue'
+import { TabbarWidgetConfig } from '../type'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: {
-    type: Object,
+    type: Object as PropType<TabbarWidgetConfig>,
     default: () => ({})
   }
 })
-const data = ref({})
+const data = ref({} as TabbarWidgetConfig)
 watch(() => props.modelValue, (val) => {
   data.value = val;
 }, { deep: true, immediate: true })

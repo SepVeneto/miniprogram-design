@@ -27,22 +27,24 @@
   </footer>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import homeIconInactive from './assets/sy_icon_sy_sel.png'
 import homeIconActive from './assets/sy_icon_active_sy_sel.png'
 import myIconInactive from './assets/my_icon_sy_sel.png'
 import myIconActive from './assets/my_icon_active_sy_sel.png'
 import { ref, computed, PropType } from 'vue'
 import { TabbarWidgetConfig } from '../type'
+import { useApp } from '@/store'
 const props = defineProps({
   active: Boolean,
   config: {
-    type: Object,
+    type: Object as PropType<TabbarWidgetConfig>,
     default: () => ({
       list: []
     })
   }
 })
+const app = useApp()
 const configList = computed(() => {
   const _list = props.config.list ?? []
   return _list.map(item => {
@@ -65,7 +67,9 @@ const configList = computed(() => {
 })
 const tabbarIdx = ref(0)
 const tabbarType = ref()
-function handleSelect(index, type) {
+function handleSelect(index: number, type: string) {
+  app.currentRoute = index
+  app.currentTab = configList.value[index]
   tabbarIdx.value = index;
   tabbarType.value = type;
 }

@@ -3,6 +3,7 @@
     <div class="menu-swarps" style="position: relative" :style="style">
       <div v-for="itemchild in list" :key="itemchild.id">
         <div
+          v-if="itemchild.isShow"
           class="menu-item"
           :style="{
             width: itemchild.width + 'px',
@@ -40,6 +41,7 @@ const list = computed(() => {
 
 <style lang="scss" scoped>
 #menus {
+  flex: 1;
   .menu-swarps {
     display: flex;
     flex-direction: row;

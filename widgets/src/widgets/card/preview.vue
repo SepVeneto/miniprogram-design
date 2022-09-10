@@ -5,11 +5,11 @@
       style="width: 100%; height: 100%;"
       :src="config.defaultImg"
     />
-    <div style="width: 100%; height: 100%;">empty</div>
+    <div v-else style="width: 100%; height: 100%;">empty</div>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useNormalizeStyle } from '@/hooks';
 const props = defineProps({
   config: {
