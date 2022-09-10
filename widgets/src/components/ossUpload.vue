@@ -19,15 +19,16 @@
   </el-upload>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { Plus } from '@element-plus/icons-vue'
 import { computed, PropType } from 'vue'
+import type { UploadRequestOptions } from 'element-plus'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   width: String,
   height: String,
   httpRequest: {
-    type: Function,
+    type: Function as PropType<any>,
     default: undefined,
   },
   modelValue: {
@@ -49,11 +50,11 @@ const imageUrl = computed({
     emit('update:modelValue', val)
   }
 })
-const uploadRequest = window.microApp?.getData()?.upload ?? noop
+const uploadRequest: any = window.microApp?.getData()?.upload ?? noop
 function noop() {
   return;
 }
-async function customRequest(data) {
+async function customRequest(data: UploadRequestOptions) {
   const res = await uploadRequest(data)
   imageUrl.value = res
 }

@@ -1,6 +1,6 @@
 <template>
   <el-form label-width="100px">
-    <el-divider content-position="left">样式</el-divider>
+    <!-- <el-divider content-position="left">样式</el-divider>
     <el-form-item label="顶部外边距">
       <el-input v-model.number="data.style.marginTop" type="number">
         <template #suffix>px</template>
@@ -25,22 +25,23 @@
       <el-input v-model.number="data.style.height" type="number">
         <template #suffix>px</template>
       </el-input>
-    </el-form-item>
-    
+    </el-form-item> -->
+
     <el-divider content-position="left">配置</el-divider>
     <el-form-item label="可见性">
       <el-checkbox v-model="data.isShow" :true-label="1" :false-label="0" />
-    </el-form-item>
-    <el-form-item label="解绑">
-      <el-checkbox v-model="data.unbound" :true-label="1" :false-label="0" />
-    </el-form-item>
-    <el-form-item label="充值">
-      <el-checkbox v-model="data.recharge" :true-label="1" :false-label="0" />
     </el-form-item>
     <el-form-item label="背景图片">
       <oss-upload
         v-model="data.defaultImg"
       />
+    </el-form-item>
+    
+    <el-form-item label="菜品预订名称">
+      <el-input v-model="data.title.content" />
+    </el-form-item>
+    <el-form-item label="菜品预订描述">
+      <el-input v-model="data.desc.content" />
     </el-form-item>
   </el-form>
 </template>

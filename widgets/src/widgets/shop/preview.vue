@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useNormalizeStyle } from '@/hooks';
 const props = defineProps({
   config: {

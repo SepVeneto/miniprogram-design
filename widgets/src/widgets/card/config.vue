@@ -1,6 +1,6 @@
 <template>
-  <div>食堂卡</div>
   <el-form label-width="100px">
+    <el-divider content-position="left">样式</el-divider>
     <el-form-item label="顶部外边距">
       <el-input v-model.number="data.style.marginTop" type="number">
         <template #suffix>px</template>
@@ -26,6 +26,8 @@
         <template #suffix>px</template>
       </el-input>
     </el-form-item>
+
+    <el-divider content-position="left">配置</el-divider>
     <el-form-item label="可见性">
       <el-checkbox v-model="data.isShow" :true-label="1" :false-label="0" />
     </el-form-item>
@@ -37,17 +39,18 @@
   </el-form>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ossUpload from '@/components/ossUpload.vue'
-import { ref, watch } from 'vue'
+import { PropType, ref, watch } from 'vue'
+import type { CardWidgetConfig } from '../type'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: {
-    type: Object,
+    type: Object as PropType<CardWidgetConfig>,
     default: () => ({})
   }
 })
-const data = ref({})
+const data = ref({} as CardWidgetConfig)
 watch(() => props.modelValue, (val) => {
   data.value = val;
 }, { deep: true, immediate: true })

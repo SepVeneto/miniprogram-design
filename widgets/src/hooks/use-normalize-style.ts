@@ -1,7 +1,10 @@
-import { computed } from 'vue';
-export function useNormalizeStyle( style) {
+import { computed, CSSProperties } from 'vue';
+type Style = Partial<Record<keyof CSSProperties, string | number>>
+export function useNormalizeStyle(
+  style: Style
+) {
   return computed(() => {
-    const _style = Object.entries(style).reduce(
+    const _style = Object.entries(style).reduce<Partial<CSSProperties>>(
     (obj, _style) => {
       const [key, value] = _style;
       if (typeof value === 'number') {
@@ -10,7 +13,7 @@ export function useNormalizeStyle( style) {
         obj[key] = value;
       }
       return obj;
-    }, {})
+    }, {} as Partial<CSSProperties>)
 
     return {
       transition: 'inherit',

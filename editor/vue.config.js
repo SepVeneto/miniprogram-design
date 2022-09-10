@@ -1,5 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
-// const webpack = require('webpack')
+const webpack = require('webpack')
 // const htmlWebpackPlugin = require('html-webpack-plugin')
 // const path = require('path')
 
@@ -11,6 +11,22 @@ module.exports = defineConfig({
     headers: {
       'Access-Control-Allow-Origin': '*',
     }
+  },
+  configureWebpack: {
+    plugins: [
+      new webpack.container.ModuleFederationPlugin({
+        name: 'editor_side',
+        filename: 'remoteEntry.js',
+        remotes: {
+          widgets_side: 'widgets_side@http://localhost:8090/remoteEntry.js'
+        },
+        shared: {
+          vue: {
+            singleton: true
+          }
+        }
+      })
+    ]
   },
   // configureWebpack: {
   //   target: 'es2020',
