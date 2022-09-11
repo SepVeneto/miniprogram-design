@@ -20,7 +20,7 @@
           mask
         >
           <card-preview v-if="['card', 'explain', 'shop'].includes(item.type)" :config="item" />
-          <!-- <menu-preview v-else-if="item.type === 'menu'" :config="item" /> -->
+          <container-view v-else-if="item.type === 'menu'" :config="item" />
           <mine-preview v-else-if="item.type === 'mine'" :config="item" />
           <reserve-preview v-else-if="item.type === 'reserve'" :config="item" />
         </draggable-wrapper>
@@ -47,6 +47,7 @@ import draggableWrapper from '@/components/draggableWrapper.vue'
 import { Rank } from '@element-plus/icons-vue'
 import { ref, computed, defineAsyncComponent } from 'vue'
 import { useApp } from '@/store';
+import containerView from '@/widgets/container.view.vue';
 // import CardPreview from '../widgets/card/preview.vue'
 // import { cardPreview } from 'widgets_side/card'
 
@@ -57,6 +58,7 @@ import { useApp } from '@/store';
 const cardPreview = defineAsyncComponent(() => import('widgets_side/card'))
 const minePreview = defineAsyncComponent(() => import('widgets_side/mine'))
 const reservePreview = defineAsyncComponent(() => import('widgets_side/reserve'))
+// const menuPreview = defineAsyncComponent(() => import('widgets_side/menu'))
 
 const app = useApp()
 const mainRef = ref()
