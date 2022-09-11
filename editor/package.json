@@ -17,7 +17,8 @@
     "uuid": "^8.3.2",
     "vue": "^3.2.13",
     "vuedraggable": "^4.1.0",
-    "webpack": "^5.74.0"
+    "webpack": "^5.74.0",
+    "@mpd/schema": "workspace: *"
   },
   "devDependencies": {
     "@micro-zoe/micro-app": "^0.8.10",

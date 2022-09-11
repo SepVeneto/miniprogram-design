@@ -1,10 +1,15 @@
 <template>
-  <card-config v-if="['card', 'explain'].includes(selected.type)" v-model="selected" />
+  <!-- <card-config v-if="['card', 'explain'].includes(selected.type)" v-model="selected" />
   <tabbar-config v-else-if="selected.type === 'tabbar'" v-model="selected" />
   <shop-config v-else-if="selected.type === 'shop'" v-model="selected" />
   <menu-config v-else-if="selected.type === 'menu'" v-model="selected" />
   <mine-config v-else-if="selected.type === 'mine'" v-model="selected" />
-  <reserve-config v-else-if="selected.type === 'reserve'" v-model="selected" />
+  <reserve-config v-else-if="selected.type === 'reserve'" v-model="selected" /> -->
+  <schema-render
+    v-if="selected.type"
+    v-model="selected"
+    :schema="app.schema[selected.type]"
+  />
   <section v-else>
     <el-form label-width="100px">
       <el-form-item label="主题">
@@ -30,13 +35,14 @@
 </template>
 
 <script lang="ts" setup>
+import schemaRender from '@mpd/schema'
 // import { cardConfig } from '@/widgets/card'
-import { cardConfig } from 'widgets_side/card'
-import { tabbarConfig } from '@/widgets/tabbar'
-import { menuConfig } from '@/widgets/menu'
-import { shopConfig } from '@/widgets/shop'
-import { mineConfig } from '@/widgets/mine'
-import { reserveConfig } from '@/widgets/reserve'
+// import { cardConfig } from 'widgets_side/card'
+// import { tabbarConfig } from '@/widgets/tabbar'
+// import { menuConfig } from '@/widgets/menu'
+// import { shopConfig } from '@/widgets/shop'
+// import { mineConfig } from '@/widgets/mine'
+// import { reserveConfig } from '@/widgets/reserve'
 import { useApp } from '@/store'
 import { ref, computed } from 'vue'
 import ossUpload from '@/components/ossUpload.vue'
@@ -53,6 +59,7 @@ const selected = computed({
   },
   set(val) {
     app.selected = val
+    app.updateConfig()
   }
 })
 const globalConfig = computed({

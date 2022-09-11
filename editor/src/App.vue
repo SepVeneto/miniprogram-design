@@ -44,7 +44,7 @@
 import VEditor from '@/layout/editor.vue'
 import widgets from '@/layout/widgets.vue'
 import VConfig from '@/layout/config.vue'
-import { tabbarPreview } from '@/widgets/tabbar'
+import { tabbarPreview } from '@/layout/tabbar'
 import { ref, computed } from 'vue';
 import { useApp } from '@/store'
 const app = useApp()

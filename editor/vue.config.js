@@ -4,10 +4,16 @@ const webpack = require('webpack')
 // const path = require('path')
 
 module.exports = defineConfig({
+  assetsDir: 'deign-static',
   publicPath: '/miniprogram-design',
   outputDir: 'miniprogram-design',
   devServer: {
     port: 8082,
+    proxy: {
+      '/static': {
+        target: 'http://localhost:8000',
+      }
+    },
     headers: {
       'Access-Control-Allow-Origin': '*',
     }

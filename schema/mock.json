@@ -1,0 +1,18 @@
+[
+  {
+    "type": "input",
+    "name": "名称"
+  },
+  {
+    "type": "number",
+    "name": "顶部外边距"
+  },
+  {
+    "type": "upload",
+    "name": "背景图片"
+  },
+  {
+    "type": "checkbox",
+    "name": "可见性"
+  }
+]

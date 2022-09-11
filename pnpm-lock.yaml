@@ -9,6 +9,7 @@ importers:
     specifiers:
       '@element-plus/icons-vue': ^2.0.9
       '@micro-zoe/micro-app': ^0.8.10
+      '@mpd/schema': 'workspace: *'
       '@types/uuid': ^8.3.4
       '@typescript-eslint/eslint-plugin': ^5.4.0
       '@typescript-eslint/parser': ^5.4.0
@@ -34,6 +35,7 @@ importers:
       webpack: ^5.74.0
     dependencies:
       '@element-plus/icons-vue': 2.0.9_vue@3.2.38
+      '@mpd/schema': link:../schema
       '@vueuse/core': 9.2.0_vue@3.2.38
       core-js: 3.25.0
       element-plus: 2.2.16_vue@3.2.38
@@ -59,6 +61,12 @@ importers:
       sass: 1.54.8
       sass-loader: 13.0.2_sass@1.54.8+webpack@5.74.0
       typescript: 4.5.5
+
+  schema:
+    specifiers:
+      vue: ^3.2.13
+    dependencies:
+      vue: 3.2.38
 
   widgets:
     specifiers:
