@@ -6,7 +6,7 @@
     <draggable
       class="draggable-box"
       v-model="data"
-      item-key="uuid"
+      item-key="_uuid"
       handle=".operate"
       group="widgets"
     >
@@ -14,18 +14,18 @@
         <draggable-wrapper
           v-if="true"
           dir="top"
-          @click="handleSelect(item)"
-          :active="selected.uuid === item.uuid"
+          :active="selected._uuid === item._uuid"
           :hide="item.isShow != null && !item.isShow"
-          :container="item.type === 'menu'"
-          mask
+          :container="item._view === 'container'"
+          :mask="item._view !== 'container'"
+          @click="handleSelect(item)"
         >
-          <container-view v-if="item.type === 'menu'" :config="item" />
-          <view-render v-else :type="item.type" :config="item" />
+          <container-view v-if="item._view === 'container'" :config="item" />
+          <view-render v-else :type="item._view" :config="item" />
         </draggable-wrapper>
         <div
           v-else
-          :class="['card', {'is-active': selected.uuid === item.uuid }]"
+          :class="['card', {'is-active': selected._uuid === item._uuid }]"
           style="margin-bottom: 20px;"
           @click="handleSelect(item)"
         >

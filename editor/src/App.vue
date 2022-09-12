@@ -23,7 +23,7 @@
         </el-scrollbar>
         <tabbar-preview
           :config="tabbar"
-          :active="tabbar.uuid === selected.uuid"
+          :active="tabbar._uuid === selected._uuid"
           @click="handleSelect(tabbar)"
         />
       </div>
@@ -53,7 +53,7 @@ const tabbar = computed(() => app.config.tabbars)
 const selected = computed(() => app.selected)
 
 function handleDelete() {
-  const index = app.config.body[app.currentRoute].findIndex(item => item.uuid === selected.value.uuid)
+  const index = app.config.body[app.currentRoute].findIndex(item => item._uuid === selected.value._uuid)
   if (index === -1) return;
   app.config.body[app.currentRoute].splice(index, 1)
   app.selected = {}

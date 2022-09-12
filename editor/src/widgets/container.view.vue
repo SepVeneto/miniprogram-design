@@ -1,6 +1,6 @@
 <template>
   <draggable
-    v-model="_config.childrens"
+    v-model="_config.list"
     item-key="uuid"
     handle=".operate"
     group="widgets"
@@ -9,12 +9,13 @@
     <template #item="{element}">
       <draggable-wrapper
         dir="top"
-        :active="selected.uuid === element.uuid"
+        :class="element._uuid"
+        :active="selected._uuid === element._uuid"
         :hide="element.isShow != null && !element.isShow"
         mask
-        @click="handleSelect(element)"
+        @click.stop="handleSelect(element)"
       >
-        <view-render :type="'container-' + element.type" :config="element" />
+        <view-render :type="element._view" :config="element" />
       </draggable-wrapper>
     </template>
   </draggable>
@@ -35,6 +36,7 @@ const props = defineProps({
 const app = useApp()
 const selected = computed(() => app.selected)
 const emit = defineEmits(['update:modelValue'])
+console.log(props.config)
 const _config = computed({
   get() {
     return props.config
@@ -44,6 +46,7 @@ const _config = computed({
   }
 })
 function handleSelect(data: any) {
+  console.log('container', data)
   app.selected = data
 }
 </script>

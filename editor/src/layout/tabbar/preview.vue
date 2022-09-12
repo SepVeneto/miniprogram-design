@@ -5,7 +5,7 @@
         <li
           class="bottom-nav-item"
           v-for="(item, index) in configList"
-          :key="item.id"
+          :key="item._uuid"
           @click="handleSelect(index, item.type)"
         >
           <div class="li_content">
@@ -40,35 +40,36 @@ const props = defineProps({
   config: {
     type: Object as PropType<TabbarWidgetConfig>,
     default: () => ({
-      list: []
+      list: [],
     })
   }
 })
 const app = useApp()
 const configList = computed(() => {
   const _list = props.config.list ?? []
-  return _list.map(item => {
-    if (item.id === 1) {
-      return {
-        ...item,
-        activeImage: item.activeImage || homeIconActive,
-        inactiveImage: item.inactiveImage || homeIconInactive,
-      }
-    } else if (item.id === 2) {
-      return {
-        ...item,
-        activeImage: item.activeImage || myIconActive,
-        inactiveImage: item.inactiveImage || myIconInactive,
-      }
-    } else {
-      return item;
-    }
-  })
+  return _list
+  // return _list.map(item => {
+  //   if (item.id === 1) {
+  //     return {
+  //       ...item,
+  //       activeImage: item.activeImage || homeIconActive,
+  //       inactiveImage: item.inactiveImage || homeIconInactive,
+  //     }
+  //   } else if (item.id === 2) {
+  //     return {
+  //       ...item,
+  //       activeImage: item.activeImage || myIconActive,
+  //       inactiveImage: item.inactiveImage || myIconInactive,
+  //     }
+  //   } else {
+  //     return item;
+  //   }
+  // })
 })
 const tabbarIdx = ref(0)
 const tabbarType = ref()
 function handleSelect(index: number, type: string) {
-  app.currentRoute = index
+  app.currentRoute = type
   app.currentTab = configList.value[index]
   tabbarIdx.value = index;
   tabbarType.value = type;
