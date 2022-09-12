@@ -17,6 +17,7 @@ function mount() {
   app.mount('#app')
 
   const appStore = useApp()
+  appStore.globalApp = app
   window.microApp?.addDataListener((data: any) => {
     if (!data.config) return;
     appStore.setConfig(data.config, data.widgets)

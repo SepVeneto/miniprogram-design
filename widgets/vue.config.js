@@ -42,10 +42,11 @@ module.exports = defineConfig({
           name: 'widgets_side'
         },
         exposes: {
-          './card': './src/widgets/card.view.vue',
-          './mine': './src/widgets/mine.view.vue',
-          './reserve': './src/widgets/reserve.view.vue',
-          './menu': './src/widgets/menu.view.vue',
+          './viewRender': './src/components/viewRender.vue'
+          // './card': './src/widgets/card.view.vue',
+          // './mine': './src/widgets/mine.view.vue',
+          // './reserve': './src/widgets/reserve.view.vue',
+          // './menu': './src/widgets/menu.view.vue',
         },
         shared: {
           vue: {

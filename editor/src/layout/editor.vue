@@ -17,12 +17,11 @@
           @click="handleSelect(item)"
           :active="selected.uuid === item.uuid"
           :hide="item.isShow != null && !item.isShow"
+          :container="item.type === 'menu'"
           mask
         >
-          <card-preview v-if="['card', 'explain', 'shop'].includes(item.type)" :config="item" />
-          <container-view v-else-if="item.type === 'menu'" :config="item" />
-          <mine-preview v-else-if="item.type === 'mine'" :config="item" />
-          <reserve-preview v-else-if="item.type === 'reserve'" :config="item" />
+          <container-view v-if="item.type === 'menu'" :config="item" />
+          <view-render v-else :type="item.type" :config="item" />
         </draggable-wrapper>
         <div
           v-else
@@ -48,16 +47,7 @@ import { Rank } from '@element-plus/icons-vue'
 import { ref, computed, defineAsyncComponent } from 'vue'
 import { useApp } from '@/store';
 import containerView from '@/widgets/container.view.vue';
-// import CardPreview from '../widgets/card/preview.vue'
-// import { cardPreview } from 'widgets_side/card'
-
-// import cardPreview from 'vite-side/Content'
-// import { minePreview } from '../widgets/mine'
-// import { menuPreview } from '../widgets/menu'
-// import { reservePreview } from '../widgets/reserve'
-const cardPreview = defineAsyncComponent(() => import('widgets_side/card'))
-const minePreview = defineAsyncComponent(() => import('widgets_side/mine'))
-const reservePreview = defineAsyncComponent(() => import('widgets_side/reserve'))
+import viewRender from 'widgets_side/viewRender'
 // const menuPreview = defineAsyncComponent(() => import('widgets_side/menu'))
 
 const app = useApp()

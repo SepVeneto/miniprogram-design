@@ -1,8 +1,20 @@
 <template>
-  <draggable v-model="_config.childrens">
+  <draggable
+    v-model="_config.childrens"
+    item-key="uuid"
+    handle=".operate"
+    group="widgets"
+    style="display: grid; grid-template-columns: repeat(2, 1fr);"
+  >
     <template #item="{element}">
-      <draggable-wrapper>
-        <div>{{element}}</div>
+      <draggable-wrapper
+        dir="top"
+        :active="selected.uuid === element.uuid"
+        :hide="element.isShow != null && !element.isShow"
+        mask
+        @click="handleSelect(element)"
+      >
+        <view-render :type="'container-' + element.type" :config="element" />
       </draggable-wrapper>
     </template>
   </draggable>
@@ -11,13 +23,17 @@
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
+import viewRender from 'widgets_side/viewRender'
 import { computed } from 'vue'
+import { useApp } from '@/store'
 const props = defineProps({
   config: {
     type: Object,
     default: () => ({})
   }
 })
+const app = useApp()
+const selected = computed(() => app.selected)
 const emit = defineEmits(['update:modelValue'])
 const _config = computed({
   get() {
@@ -27,5 +43,7 @@ const _config = computed({
     emit('update:modelValue', val)
   }
 })
-console.log(props.config)
+function handleSelect(data: any) {
+  app.selected = data
+}
 </script>

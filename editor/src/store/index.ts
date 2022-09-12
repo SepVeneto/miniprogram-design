@@ -13,12 +13,12 @@ export interface GlobalConfig {
 
 interface Config{
   globalConfig: Partial<GlobalConfig>
-  body: Record<string, unknown>[][]
+  body: Record<string, any>[][]
   tabbars: TabbarWidgetConfig
 }
 
 export const useApp = defineStore('app', () => {
-  const widgetList = ref<unknown[]>([])
+  const widgetList = ref<any[]>([])
   const config = ref<Config>({
     globalConfig: {},
     body: [[
@@ -34,7 +34,7 @@ export const useApp = defineStore('app', () => {
   const currentRoute = ref(0)
   const schema = shallowRef<Record<string, any>>({})
 
-  function setConfig(data: Config, widgets: Record<string, unknown>) {
+  function setConfig(data: Config, widgets: Record<string, any>) {
     config.value = data
     currentRoute.value = 0
     currentTab.value = data.tabbars.list[currentRoute.value]
@@ -212,7 +212,7 @@ export const useApp = defineStore('app', () => {
           falseLabel: 0,
         }
       ],
-      container: {
+      menu: {
         columns: 2,
         config: [
           {
@@ -247,7 +247,9 @@ export const useApp = defineStore('app', () => {
     return config.value.body[currentRoute.value]
   })
   const selected = ref<any>({})
+  const globalApp = ref<any>()
   return {
+    globalApp,
     updateConfig,
     setConfig,
     widgetList,

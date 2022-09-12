@@ -8,6 +8,7 @@ export default defineComponent({
     CloseBold,
   },
   props: {
+    container: Boolean,
     dir: String,
     active: Boolean,
     mask: Boolean,
@@ -39,7 +40,13 @@ export default defineComponent({
     )
     return (
       <div
-        class={['card', {'is-active': this.active}, `dir-${this.dir}`, {'has-mask': this.mask}]}
+        class={[
+          'card',
+          {'is-active': this.active},
+          `dir-${this.dir}`,
+          {'has-mask': this.mask},
+          {'is-container': this.container}
+        ]}
       >
         {!this.disabled && operate()}
         <div class="container">
@@ -104,6 +111,9 @@ export default defineComponent({
   &.is-active > .container, &:hover > .container{
     border: 1px dashed #4089ef;
   }
+  &.is-active.is-container > .container, &.is-container:hover > .container {
+    border: 1px dashed #E6A23C;
+  }
   .operate {
     display: none;
     position: absolute;
@@ -125,6 +135,9 @@ export default defineComponent({
     border: 1px dashed transparent;
     transition: all 0.3s;
     overflow: hidden;
+    // &.is-container {
+    //   display: grid;
+    // }
   }
   &.dir-right:not(:last-child) {
     margin-bottom: 20px;
