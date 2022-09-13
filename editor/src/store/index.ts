@@ -37,7 +37,7 @@ export const useApp = defineStore('app', () => {
 
   /** mock */
   config.value = mock
-  schema.value = schemaConfig
+  schema.value = { ...schemaConfig }
   currentRoute.value = config.value.tabbars.list[0].type
 
   function setConfig(data: Config, widgets: Record<string, any>, _schema: any) {
@@ -55,7 +55,7 @@ export const useApp = defineStore('app', () => {
   }, { deep: true })
 
   function updateConfig() {
-    const index = currentConfig.value.findIndex((item: any) => item.uuid === selected.value.uuid)
+    const index = currentConfig.value.findIndex((item: any) => item._uuid === selected.value._uuid)
     if (index === -1) return;
     currentConfig.value[index] = { ...selected.value };
   }

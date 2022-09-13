@@ -4,10 +4,11 @@
     item-key="uuid"
     handle=".operate"
     group="widgets"
-    style="display: grid; grid-template-columns: repeat(2, 1fr);"
+    :style="viewStyle"
   >
     <template #item="{element}">
       <draggable-wrapper
+        v-if="!preview"
         dir="top"
         :class="element._uuid"
         :active="selected._uuid === element._uuid"
@@ -17,6 +18,7 @@
       >
         <view-render :type="element._view" :config="element" />
       </draggable-wrapper>
+      <view-render v-else :type="element._view" :config="element" />
     </template>
   </draggable>
 </template>
@@ -25,7 +27,7 @@
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import viewRender from 'widgets_side/viewRender'
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { useApp } from '@/store'
 const props = defineProps({
   config: {
@@ -36,7 +38,10 @@ const props = defineProps({
 const app = useApp()
 const selected = computed(() => app.selected)
 const emit = defineEmits(['update:modelValue'])
-console.log(props.config)
+const viewStyle = computed(() => ({
+  display: 'grid',
+  gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`
+}))
 const _config = computed({
   get() {
     return props.config
@@ -44,6 +49,11 @@ const _config = computed({
   set(val) {
     emit('update:modelValue', val)
   }
+})
+
+const editorContext = inject('Editor', { preview: false })
+const preview = computed(() => {
+  return editorContext.preview
 })
 function handleSelect(data: any) {
   console.log('container', data)

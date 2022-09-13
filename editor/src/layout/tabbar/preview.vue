@@ -1,6 +1,6 @@
 <template>
   <footer class="tabbar">
-    <div :class="['footer-container', { 'is-active': active }]">
+    <div :class="['footer-container', { 'is-active': active }, { 'is-preview': preview }]">
       <ul>
         <li
           class="bottom-nav-item"
@@ -36,6 +36,7 @@ import { ref, computed, PropType } from 'vue'
 import { TabbarWidgetConfig } from '../type'
 import { useApp } from '@/store'
 const props = defineProps({
+  preview: Boolean,
   active: Boolean,
   config: {
     type: Object as PropType<TabbarWidgetConfig>,
@@ -144,6 +145,9 @@ function handleSelect(index: number, type: string) {
       border-bottom-left-radius: 18px;
       border-bottom-right-radius: 18px;
       box-sizing: border-box;
+    }
+    &.is-preview:hover::before, &.is-active.is-preview::before {
+      display: none;
     }
 }
 </style>

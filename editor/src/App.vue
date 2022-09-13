@@ -1,43 +1,52 @@
 <template>
-  <main
+  <section
     ref="mainRef"
     class="main-container"
     @click="handleOutside"
   >
-    <aside style="width: 300px; background: #fff;">
-      <div
-        style="padding: 20px; margin-bottom: 10px; border-bottom: 1px solid #ddd;"
-      >组件</div>
-      <widgets />
-    </aside>
-    <div class="mobile-frame">
-      <div class="mobile-content">
-        <header class="header">
-          <span>{{app.currentTab.text}}</span>
-          <span class="icon"></span>
-        </header>
-        <el-scrollbar
-          style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
-        >
-          <v-editor />
+    <header>
+      <el-button
+        :type="preview && 'primary'"
+        @click="preview = !preview"
+      >预览</el-button>
+    </header>
+    <main style="display: flex; justify-content: space-between;">
+      <aside style="width: 300px; background: #fff;">
+        <div
+          style="padding: 20px; margin-bottom: 10px; border-bottom: 1px solid #ddd;"
+        >组件</div>
+        <widgets />
+      </aside>
+      <div class="mobile-frame">
+        <div class="mobile-content">
+          <header class="header">
+            <span>{{app.currentTab.text}}</span>
+            <span class="icon"></span>
+          </header>
+          <el-scrollbar
+            style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
+          >
+            <v-editor :preview="preview" />
+          </el-scrollbar>
+          <tabbar-preview
+            :preview="preview"
+            :config="tabbar"
+            :active="tabbar._uuid === selected._uuid"
+            @click="handleSelect(tabbar)"
+          />
+        </div>
+      </div>
+      <aside style="background: #fff; width: 400px;">
+        <div style="display: flex; justify-content: space-between; padding: 20px; align-items: center; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
+          <span>{{selected._name || '配置'}}</span>
+          <el-button type="primary" text @click="handleDelete" :disabled="!['reserve'].includes(selected.type)">删除</el-button>
+        </div>
+        <el-scrollbar wrap-style="height: 700px; padding: 20px;">
+          <v-config />
         </el-scrollbar>
-        <tabbar-preview
-          :config="tabbar"
-          :active="tabbar._uuid === selected._uuid"
-          @click="handleSelect(tabbar)"
-        />
-      </div>
-    </div>
-    <aside style="background: #fff; width: 400px;">
-      <div style="display: flex; justify-content: space-between; padding: 20px; align-items: center; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
-        <span>{{selected._name || '配置'}}</span>
-        <el-button type="primary" text @click="handleDelete" :disabled="!['reserve'].includes(selected.type)">删除</el-button>
-      </div>
-      <el-scrollbar wrap-style="height: 700px; padding: 20px;">
-        <v-config />
-      </el-scrollbar>
-    </aside>
-  </main>
+      </aside>
+    </main>
+  </section>
 </template>
 
 <script lang="ts" setup>
@@ -51,6 +60,7 @@ const app = useApp()
 const mainRef = ref()
 const tabbar = computed(() => app.config.tabbars)
 const selected = computed(() => app.selected)
+const preview = ref(false)
 
 function handleDelete() {
   const index = app.config.body[app.currentRoute].findIndex(item => item._uuid === selected.value._uuid)
@@ -119,9 +129,9 @@ function handleOutside({ target }: Event) {
   }
 }
 .main-container {
-  display: flex;
+  // display: flex;
   width: 100%;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 // .mobile-wrapper {
 //   padding: 10px;

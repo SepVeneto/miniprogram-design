@@ -1,13 +1,9 @@
 <template>
   <div
-    v-if="config.isShow"
     class="menu-item"
     :style="{
-      width: config.width + 'px',
-      height: config.height + 'px',
-      backgroundColor: config.backgroundColor,
       padding: 16 + 'px',
-      marginBottom: config.marginBottom + 'px',
+      ...style
     }"
   >
     <div class="menu-title">
@@ -19,10 +15,21 @@
 </template>
 
 <script lang="ts" setup>
+import { useNormalizeStyle } from '@/hooks';
 const props = defineProps({
   config: {
     type: Object,
     default: () => ({})
   }
 })
+const style = useNormalizeStyle(props.config.style)
 </script>
+
+<style lang="scss" scoped>
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

@@ -173,9 +173,13 @@ const mine = [
   }
 ]
 
-const container = {
-  grid: 2,
-}
+const container = [
+  {
+    type: 'number',
+    label: '列',
+    key: 'grid',
+  }
+]
 
 export const schema = {
   card: cardSchema,

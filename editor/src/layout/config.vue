@@ -8,7 +8,7 @@
   <schema-render
     v-if="selected.type"
     v-model="selected"
-    :schema="app.schema[selected.type]"
+    :schema="app.schema[selected._schema]"
   />
   <section v-else>
     <el-form label-width="100px">

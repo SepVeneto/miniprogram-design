@@ -62,6 +62,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .card {
   position: relative;
+  &.is-container > .container {
+    padding: 10px;
+  }
   &.dir-top {
     overflow: hidden;
     .operate {

@@ -90,6 +90,7 @@ export default defineComponent({
         <el-form-item label={schema.label}>{node}</el-form-item>
       )
     }
+    console.log(this.schema)
     return (
       <el-form label-width="100px">
         {this.schema.map(item => {

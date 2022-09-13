@@ -12,7 +12,7 @@
     >
       <template #item="{element: item}">
         <draggable-wrapper
-          v-if="true"
+          v-if="!preview"
           dir="top"
           :active="selected._uuid === item._uuid"
           :hide="item.isShow != null && !item.isShow"
@@ -23,18 +23,10 @@
           <container-view v-if="item._view === 'container'" :config="item" />
           <view-render v-else :type="item._view" :config="item" />
         </draggable-wrapper>
-        <div
-          v-else
-          :class="['card', {'is-active': selected._uuid === item._uuid }]"
-          style="margin-bottom: 20px;"
-          @click="handleSelect(item)"
-        >
-          <div class="container">
-            <div class="operate">
-              <el-icon style="z-index: 1;"><Rank /></el-icon>
-            </div>
-          </div>
-        </div>
+        <template v-else>
+          <container-view v-if="item._view === 'container'" :config="item" />
+          <view-render v-else :type="item._view" :config="item" />
+        </template>
       </template>
     </draggable>
   </main>
@@ -44,11 +36,17 @@
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import { Rank } from '@element-plus/icons-vue'
-import { ref, computed, defineAsyncComponent } from 'vue'
+import { ref, computed, provide } from 'vue'
 import { useApp } from '@/store';
 import containerView from '@/widgets/container.view.vue';
 import viewRender from 'widgets_side/viewRender'
 // const menuPreview = defineAsyncComponent(() => import('widgets_side/menu'))
+
+const props = defineProps({
+  preview: Boolean,
+})
+
+provide('Editor', props)
 
 const app = useApp()
 const mainRef = ref()
