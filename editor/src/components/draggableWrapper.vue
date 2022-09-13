@@ -132,9 +132,9 @@ export default defineComponent({
     // right: -50%;
   }
   .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     border: 1px dashed transparent;
     transition: all 0.3s;
     overflow: hidden;

@@ -30,7 +30,7 @@ const app = useApp()
 const widgetList = computed(() => app.widgetList)
 
 function onClone(origin: Record<string, unknown>) {
-  const _data = { ...origin, uuid: uuidv4() }
+  const _data = { ...origin, _uuid: uuidv4() }
   return _data
 }
 </script>

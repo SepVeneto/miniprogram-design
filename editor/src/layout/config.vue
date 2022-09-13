@@ -5,8 +5,9 @@
   <menu-config v-else-if="selected.type === 'menu'" v-model="selected" />
   <mine-config v-else-if="selected.type === 'mine'" v-model="selected" />
   <reserve-config v-else-if="selected.type === 'reserve'" v-model="selected" /> -->
+  <tabbar-config v-if="selected._schema === 'tabbar'" v-model="selected" />
   <schema-render
-    v-if="selected.type"
+    v-else-if="selected._schema"
     v-model="selected"
     :schema="app.schema[selected._schema]"
   />
@@ -38,7 +39,7 @@
 import schemaRender from '@mpd/schema'
 // import { cardConfig } from '@/widgets/card'
 // import { cardConfig } from 'widgets_side/card'
-// import { tabbarConfig } from '@/widgets/tabbar'
+import { tabbarConfig } from '@/layout/tabbar'
 // import { menuConfig } from '@/widgets/menu'
 // import { shopConfig } from '@/widgets/shop'
 // import { mineConfig } from '@/widgets/mine'

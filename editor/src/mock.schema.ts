@@ -181,6 +181,14 @@ const container = [
   }
 ]
 
+const menuItem = [
+  {
+    type: 'input',
+    label: '标题',
+    key: 'title',
+  }
+]
+
 export const schema = {
   card: cardSchema,
   explain,
@@ -188,4 +196,5 @@ export const schema = {
   mine,
   reserve,
   container,
+  menuItem,
 }

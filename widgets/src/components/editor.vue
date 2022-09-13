@@ -2,7 +2,7 @@
   <div style="border: 1px solid #ccc">
     <Toolbar
       style="border-bottom: 1px solid #ccc"
-      :editor="editor"
+      :editor="editorRef"
       :defaultConfig="toolbarConfig"
       :mode="mode"
     />
@@ -16,32 +16,25 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts" setup>
 // import { Editor, Toolbar, getEditor, removeEditor } from '@wangeditor/editor-for-vue'
-import { v4 as uuidv4 } from 'uuid';
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
-import OSS from 'ali-oss'
+import { IDomEditor} from '@wangeditor/editor'
+import { ref, shallowRef, onMounted, onBeforeUnmount } from 'vue'
 
-export default Vue.extend({
-  components: { Editor, Toolbar },
-  data() {
-    return {
-      eidtorId: uuidv4(),
-      editor: null,
-      // html: '<p>hello</p>',
-      toolbarConfig: {
-        // customUploadImg: this.customUploadImg,
-      },
-      editorConfig: { placeholder: '请输入内容...', MENU_CONF: {} },
-      mode: 'default', // or 'simple'
-    };
-  },
-  created() {
-    this.editorConfig.MENU_CONF['uploadImage'] = {
-      // 自定义上传
-      customUpload: async (file, insertFn) => {
+const editorRef = shallowRef<IDomEditor>()
+
+// onMounted(() => {
+
+// })
+
+const toolbarConfig = {}
+const editorConfig = {
+  placeholder: '请输入内容...',
+  MENU_CONF: {
+    uploadImage: {
+      customUpload: async (file: File, insertFn: any) => {
         // file 即选中的文件
         // 自己实现上传，并得到图片 url alt href
         // 最后插入图片
@@ -50,46 +43,14 @@ export default Vue.extend({
       },
     }
   },
-  methods: {
-    onCreated(editor) {
-      this.editor = Object.seal(editor); // 一定要用 Object.seal() ，否则会报错
-    },
-    uploadFile(file) {
-      return this.uploadOss({ file })
-    },
-    async uploadOss(fileData) {
-      const { file } = fileData
-      // 获取参数信息
-      const {data:{save_path, credentials_data}} = await this.$api.uploadOssData({name:file.name})
+}
+const mode = 'default'
 
-      // 上传到oss
-      const client = new OSS(credentials_data)
-      const result = await client.put(save_path , file);
-      // 上传-OSS上传保存
-      const prama = {
-        name: file.name,
-        size: file.size,
-        mime: file.type,
-        url: result.url,
-        md5: result.res.headers.etag,
-      }
-      return this.uploadOssSave(prama)
-    },
+onBeforeUnmount(() => {
+  editorRef.value?.destroy?.()
+})
 
-    // 上传-OSS上传保存
-    async uploadOssSave(prama) {
-      const { code, msg, data } = await this.$api.uploadOssSave(prama)
-      if (code == 0) {
-        return data
-      } else {
-        this.$message.error(msg)
-      }
-    },
-  },
-  beforeDestroy() {
-    const editor = this.editor;
-    if (editor == null) return;
-    editor.destroy(); // 组件销毁时，及时销毁编辑器
-  },
-});
+function onCreated(editor) {
+  editorRef.value = editor
+}
 </script>

@@ -38,6 +38,24 @@ export const useApp = defineStore('app', () => {
   /** mock */
   config.value = mock
   schema.value = { ...schemaConfig }
+  widgetList.value = [
+    {
+      "_name": "容器",
+      "_view": "container",
+      "_schema": "container",
+      grid: 2,
+      list: [],
+    },
+    {
+      "_name": "菜单项",
+      "_view": "menuItem",
+      "_schema": "menuItem",
+      title: '标题',
+      style: {
+        background: '#fff',
+      }
+    }
+  ]
   currentRoute.value = config.value.tabbars.list[0].type
 
   function setConfig(data: Config, widgets: Record<string, any>, _schema: any) {

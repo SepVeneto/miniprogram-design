@@ -4,13 +4,13 @@
     item-key="uuid"
     handle=".operate"
     group="widgets"
+    :class="['draggable-group', { 'is-preview': preview }]"
     :style="viewStyle"
   >
     <template #item="{element}">
       <draggable-wrapper
         v-if="!preview"
         dir="top"
-        :class="element._uuid"
         :active="selected._uuid === element._uuid"
         :hide="element.isShow != null && !element.isShow"
         mask
@@ -60,3 +60,24 @@ function handleSelect(data: any) {
   app.selected = data
 }
 </script>
+
+<style scoped lang="scss">
+.draggable-group {
+  width: 100%;
+  min-height: 50px;
+  position: relative;
+  &::before {
+    content: '拖拽至此区域';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+</style>

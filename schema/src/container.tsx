@@ -1,7 +1,15 @@
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import ossUpload from '@/components/ossUpload.vue'
 // import rInput from './input.vue'
 // import rCheckbox from './'
+type WidgetType = 'input' | 'number' | 'checkbox' | 'image' | 'colorPicker'
+interface ISchema {
+  type: WidgetType
+  label: string
+  key: string
+  [attr: string]: any
+}
+
 export default defineComponent({
   components: {
     ossUpload
@@ -13,7 +21,7 @@ export default defineComponent({
       default: () => ({})
     },
     schema: {
-      type: Array,
+      type: Array as PropType<ISchema[]>,
       default: () => ([])
     }
   },
@@ -34,10 +42,51 @@ export default defineComponent({
         return obj[curr]
       }, data)
     }
-    function renderCheckbox(schema) {
+    function renderCheckbox(schema: ISchema) {
       const { type, label, key, ...args } = schema
       return (
         <el-checkbox
+          model-value={getData(prop.modelValue, key)}
+          onUpdate:modelValue={(val: string) => updateData(key, val)}
+          {...args}
+        />
+      )
+    }
+    function renderInput(schema: ISchema) {
+      const { type, label, key, ...args } = schema
+      return (
+        <el-input
+          model-value={getData(prop.modelValue, key)}
+          onUpdate:modelValue={(val: string) => updateData(key, val)}
+          {...args}
+        />
+      )
+    }
+    function renderNumber(schema: ISchema) {
+      const { type, label, key, ...args } = schema
+      return (
+        <el-input
+          model-value={getData(prop.modelValue, key)}
+          type="number"
+          onUpdate:modelValue={(val: string) => updateData(key, Number(val))}
+          {...args}
+        />
+      )
+    }
+    function renderImage(schema: ISchema) {
+      const { type, label, key, ...args } = schema
+      return (
+        <oss-upload
+          model-value={getData(prop.modelValue, key)}
+          onUpdate:modelValue={(val: string) => updateData(key, val)}
+          {...args}
+        />
+      )
+    }
+    function renderColorPicker(schema: ISchema) {
+      const { type, label, key, ...args } = schema
+      return (
+        <el-color-picker
           model-value={getData(prop.modelValue, key)}
           onUpdate:modelValue={(val: string) => updateData(key, val)}
           {...args}
@@ -48,40 +97,31 @@ export default defineComponent({
       updateData,
       getData,
 
+      renderInput,
+      renderNumber,
       renderCheckbox,
+      renderImage,
+      renderColorPicker,
     }
   },
   render() {
-    const wrapper = (schema) => {
+    const wrapper = (schema: ISchema) => {
       let node
       switch (schema.type) {
         case 'input':
-          node = <el-input
-            model-value={this.getData(this.modelValue, schema.key)}
-            onUpdate:modelValue={(val: string) => this.updateData(schema.key, val)}
-          />
+          node = this.renderInput(schema)
           break;
         case 'number':
-          node = <el-input
-            model-value={this.getData(this.modelValue, schema.key)}
-            type="number"
-            onUpdate:modelValue={(val: string) => this.updateData(schema.key, Number(val))}
-          />
+          node = this.renderNumber(schema)
           break;
         case 'checkbox':
           node = this.renderCheckbox(schema)
           break;
         case 'image':
-          node = <oss-upload
-            model-value={this.getData(this.modelValue, schema.key)}
-            onUpdate:modelValue={(val: string) => this.updateData(schema.key, val)}
-          />
+          node = this.renderImage(schema)
           break;
         case 'colorPicker':
-          node = <el-color-picker
-            model-value={this.getData(this.modelValue, schema.key)}
-            onUpdate:modelValue={(val: string) => this.updateData(schema.key, val)}
-          />
+          node = this.renderColorPicker(schema)
           break;
         default:
           node = <div>{schema.type}</div>
@@ -90,7 +130,6 @@ export default defineComponent({
         <el-form-item label={schema.label}>{node}</el-form-item>
       )
     }
-    console.log(this.schema)
     return (
       <el-form label-width="100px">
         {this.schema.map(item => {
