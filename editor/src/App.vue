@@ -1,16 +1,18 @@
 <template>
   <section
-    ref="mainRef"
     class="main-container"
     @click="handleOutside"
   >
     <header>
       <el-button
-        :type="preview && 'primary'"
+        :type="preview ? 'primary' : ''"
         @click="preview = !preview"
       >预览</el-button>
     </header>
-    <main style="display: flex; justify-content: space-between;">
+    <main
+      ref="mainRef"
+      style="display: flex; justify-content: space-between;"
+    >
       <aside style="width: 300px; background: #fff;">
         <div
           style="padding: 20px; margin-bottom: 10px; border-bottom: 1px solid #ddd;"

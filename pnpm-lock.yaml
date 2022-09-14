@@ -64,8 +64,12 @@ importers:
 
   schema:
     specifiers:
+      '@wangeditor/editor': ^5.1.15
+      '@wangeditor/editor-for-vue': ^5.1.12
       vue: ^3.2.13
     dependencies:
+      '@wangeditor/editor': 5.1.15
+      '@wangeditor/editor-for-vue': 5.1.12_jgpudypperxb44z2klejzz4so4
       vue: 3.2.38
 
   widgets:
@@ -77,8 +81,6 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.0
       '@vue/cli-service': ~5.0.0
       '@vue/eslint-config-typescript': ^9.1.0
-      '@wangeditor/editor': ^5.1.15
-      '@wangeditor/editor-for-vue': ^5.1.12
       core-js: ^3.8.3
       eslint: ^7.32.0
       eslint-plugin-vue: ^8.0.3
@@ -86,8 +88,6 @@ importers:
       vue: ^3.2.13
       webpack: ^5.74.0
     dependencies:
-      '@wangeditor/editor': 5.1.15
-      '@wangeditor/editor-for-vue': 5.1.12_jgpudypperxb44z2klejzz4so4
       core-js: 3.25.0
       vue: 3.2.38
       webpack: 5.74.0
@@ -3547,7 +3547,7 @@ packages:
       lodash: ^4.17.20
       marko: ^3.14.4
       mote: ^0.2.0
-      mustache: ^3.0.0
+      mustache: ^4.0.1
       nunjucks: ^3.2.2
       plates: ~0.4.11
       pug: ^3.0.0

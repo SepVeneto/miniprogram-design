@@ -1,8 +1,8 @@
-import { defineComponent, PropType } from 'vue'
-import ossUpload from '@/components/ossUpload.vue'
+import { defineComponent, PropType, defineAsyncComponent } from 'vue'
+import ossUpload from './components/ossUpload.vue'
 // import rInput from './input.vue'
 // import rCheckbox from './'
-type WidgetType = 'input' | 'number' | 'checkbox' | 'image' | 'colorPicker'
+type WidgetType = 'input' | 'number' | 'checkbox' | 'image' | 'colorPicker' | 'select' | 'radioGroup' | 'editor'
 interface ISchema {
   type: WidgetType
   label: string
@@ -12,7 +12,8 @@ interface ISchema {
 
 export default defineComponent({
   components: {
-    ossUpload
+    ossUpload,
+    richTextEditor: defineAsyncComponent(() => import('./components/editor.vue')),
   },
   emits: ['update:modelValue'],
   props: {
@@ -93,6 +94,40 @@ export default defineComponent({
         />
       )
     }
+    function renderSelect(schema: ISchema) {
+      const { type, label, key, options, ...args } = schema
+      return (
+        <el-select
+          model-value={getData(prop.modelValue, key)}
+          onUpdate:modelValue={(val: string) => updateData(key, val)}
+          {...args}
+        >
+          {options.map((option: any) => <el-option label={option.label} value={option.value} />)}
+        </el-select>
+      )
+    }
+    function renderRadioGroup(schema: ISchema) {
+      const { type, label, key, options, ...args } = schema
+      return (
+        <el-radio-group
+          model-value={getData(prop.modelValue, key)}
+          onUpdate:modelValue={(val: string) => updateData(key, val)}
+          {...args}
+        >
+          {options.map((option: any) => <el-radio label={option.value}>{option.label}</el-radio>)}
+        </el-radio-group>
+      )
+    }
+    function renderEditor(schema: ISchema) {
+      const { type, label, key, ...args } = schema
+      return (
+        <rich-text-editor
+          model-value={getData(prop.modelValue, key)}
+          onUpdate:modelValue={(val: string) => updateData(key, val)}
+          {...args}
+        />
+      )
+    }
     return {
       updateData,
       getData,
@@ -102,6 +137,9 @@ export default defineComponent({
       renderCheckbox,
       renderImage,
       renderColorPicker,
+      renderSelect,
+      renderRadioGroup,
+      renderEditor,
     }
   },
   render() {
@@ -123,8 +161,17 @@ export default defineComponent({
         case 'colorPicker':
           node = this.renderColorPicker(schema)
           break;
+        case 'select':
+          node = this.renderSelect(schema)
+          break;
+        case 'radioGroup':
+          node = this.renderRadioGroup(schema)
+          break;
+        case 'editor':
+          node = this.renderEditor(schema)
+          break;
         default:
-          node = <div>{schema.type}</div>
+          node = <div>暂不支持</div>
       }
       return (
         <el-form-item label={schema.label}>{node}</el-form-item>

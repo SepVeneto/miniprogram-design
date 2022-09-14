@@ -189,6 +189,14 @@ const menuItem = [
   }
 ]
 
+const desc = [
+  {
+    type: 'editor',
+    label: '说明内容',
+    key: 'content',
+  }
+]
+
 export const schema = {
   card: cardSchema,
   explain,
@@ -197,4 +205,5 @@ export const schema = {
   reserve,
   container,
   menuItem,
+  desc,
 }

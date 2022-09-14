@@ -29,6 +29,7 @@ import draggableWrapper from '@/components/draggableWrapper.vue'
 import viewRender from 'widgets_side/viewRender'
 import { computed, inject } from 'vue'
 import { useApp } from '@/store'
+import { useNormalizeStyle } from '@/hooks'
 const props = defineProps({
   config: {
     type: Object,
@@ -38,9 +39,11 @@ const props = defineProps({
 const app = useApp()
 const selected = computed(() => app.selected)
 const emit = defineEmits(['update:modelValue'])
+const style = useNormalizeStyle(props.config.style)
 const viewStyle = computed(() => ({
   display: 'grid',
-  gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`
+  gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`,
+  ...style.value
 }))
 const _config = computed({
   get() {
@@ -56,7 +59,6 @@ const preview = computed(() => {
   return editorContext.preview
 })
 function handleSelect(data: any) {
-  console.log('container', data)
   app.selected = data
 }
 </script>
@@ -68,6 +70,7 @@ function handleSelect(data: any) {
   position: relative;
   &::before {
     content: '拖拽至此区域';
+    color: #ddd;
     top: 0;
     left: 0;
     bottom: 0;
@@ -78,6 +81,9 @@ function handleSelect(data: any) {
     align-items: center;
     width: 100%;
     height: 100%;
+  }
+  &.is-preview::before {
+    display: none;
   }
 }
 </style>

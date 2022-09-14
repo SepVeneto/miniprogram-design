@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid #ccc">
+  <div style="border: 1px solid #ccc; z-index: 1;">
     <Toolbar
       style="border-bottom: 1px solid #ccc"
       :editor="editorRef"
@@ -17,11 +17,10 @@
 </template>
 
 <script lang="ts" setup>
-// import { Editor, Toolbar, getEditor, removeEditor } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
-import { IDomEditor} from '@wangeditor/editor'
-import { ref, shallowRef, onMounted, onBeforeUnmount } from 'vue'
+import { IDomEditor, IToolbarConfig, DomEditor } from '@wangeditor/editor'
+import { shallowRef, onBeforeUnmount, nextTick } from 'vue'
 
 const editorRef = shallowRef<IDomEditor>()
 
@@ -29,7 +28,15 @@ const editorRef = shallowRef<IDomEditor>()
 
 // })
 
-const toolbarConfig = {}
+const toolbarConfig: Partial<IToolbarConfig> = {
+  excludeKeys: [
+    'blockquote',
+    'code',
+    'fontFamily',
+    'codeBlock',
+    'group-indent',
+  ]
+}
 const editorConfig = {
   placeholder: '请输入内容...',
   MENU_CONF: {
@@ -50,7 +57,11 @@ onBeforeUnmount(() => {
   editorRef.value?.destroy?.()
 })
 
-function onCreated(editor) {
+async function onCreated(editor: IDomEditor) {
   editorRef.value = editor
+  setTimeout(() => {
+    const toolbar = DomEditor.getToolbar(editor)
+    console.log(toolbar?.getConfig())
+  }, 10 * 1000)
 }
 </script>

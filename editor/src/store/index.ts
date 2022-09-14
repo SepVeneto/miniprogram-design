@@ -44,6 +44,7 @@ export const useApp = defineStore('app', () => {
       "_view": "container",
       "_schema": "container",
       grid: 2,
+      style: {},
       list: [],
     },
     {
@@ -53,6 +54,15 @@ export const useApp = defineStore('app', () => {
       title: '标题',
       style: {
         background: '#fff',
+      }
+    },
+    {
+      "_name": "说明",
+      "_view": "menuItem",
+      "_schema": "desc",
+      title: '说明',
+      style: {
+        background: '#fff'
       }
     }
   ]
