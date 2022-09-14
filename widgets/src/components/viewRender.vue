@@ -1,5 +1,5 @@
 <template>
-  <component :is="compView" />
+  <component :is="compView" v-bind="$attrs" />
 </template>
 
 <script lang="ts" setup>

@@ -21,7 +21,7 @@
           @click="handleSelect(item)"
         >
           <container-view v-if="item._view === 'container'" :config="item" />
-          <view-render v-else :type="item._view" :config="item" />
+          <view-render v-else :type="item._view" :config="item" @update:config="updateConfig" />
         </draggable-wrapper>
         <template v-else>
           <container-view v-if="item._view === 'container'" :config="item" />
@@ -64,6 +64,10 @@ const selected = computed(() => app.selected)
 
 function handleSelect(data: any) {
   app.selected = data
+}
+function updateConfig(data: any) {
+  app.selected = data;
+  app.updateConfig()
 }
 </script>
 

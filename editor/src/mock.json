@@ -122,7 +122,9 @@
         "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/d56f700e27fc7d1eaf368e6009c342f5c9828ab7.png",
         "title": {
           "content": "特色预约",
-          "style": {}
+          "style": {
+            "transform": "translate(0px, 0px)"
+          }
         },
         "desc": {
           "content": "GO>",

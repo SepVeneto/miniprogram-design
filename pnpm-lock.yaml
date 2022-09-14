@@ -81,6 +81,7 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.0
       '@vue/cli-service': ~5.0.0
       '@vue/eslint-config-typescript': ^9.1.0
+      '@vueuse/core': ^9.1.1
       core-js: ^3.8.3
       eslint: ^7.32.0
       eslint-plugin-vue: ^8.0.3
@@ -88,6 +89,7 @@ importers:
       vue: ^3.2.13
       webpack: ^5.74.0
     dependencies:
+      '@vueuse/core': 9.2.0_vue@3.2.38
       core-js: 3.25.0
       vue: 3.2.38
       webpack: 5.74.0

@@ -29,7 +29,8 @@ module.exports = defineConfig({
         shared: {
           vue: {
             singleton: true
-          }
+          },
+          '@vueuse/core': { singleton: true },
         }
       })
     ]
