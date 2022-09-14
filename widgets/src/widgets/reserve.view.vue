@@ -10,10 +10,11 @@
       />
       <widget-wrapper
         class="title"
-        :style="config.title.style"
-        v-model:custom-style="_config.title.style"
+        :style="wrapStyle"
+        v-model:custom-style="config.title.style"
+        @update:customStyle="val => config.title.style = val"
       >
-        <span>{{config.title.content}}</span>
+        <div>{{config.title.content}}</div>
       </widget-wrapper>
       <!-- <div class="reserve_con">
         <div class="text_side">
@@ -29,7 +30,7 @@
 <script lang="ts" setup>
 import { useNormalizeStyle } from '@/hooks';
 import widgetWrapper from '@/components/widgetWrapper.vue'
-import { computed } from 'vue';
+import { computed, watchEffect, ref, customRef } from 'vue';
 const emit = defineEmits(['update:config'])
 const props = defineProps({
   config: {
@@ -37,15 +38,26 @@ const props = defineProps({
     default: () => ({})
   }
 })
-const _config = computed({
-  get() {
-    return props.config
-  },
-  set(val) {
-    emit('update:config', val)
-  }
+const _config = ref()
+
+watchEffect(() => {
+  _config.value = props.config 
 })
+
+/** TODO */
+//   get() {
+//     return props.config
+//   },
+//   set(val) {
+//     console.log('trigger emit')
+//     emit('update:config', val)
+//   }
+// })
 const style = useNormalizeStyle(props.config.style)
+const wrapStyle = useNormalizeStyle(props.config.title.style, () => console.log('trigger'))
+function onT() {
+console.log('trigger listen')
+}
 function onDragover(evt: DragEvent) {
   evt.preventDefault()
 }

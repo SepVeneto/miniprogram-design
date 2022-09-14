@@ -108,7 +108,6 @@ function onMousedownDot(evt: MouseEvent, dot: string) {
   document.addEventListener('mouseup', up)
 }
 function setPosition(pos: { x: number, y: number, width: number, height: number }) {
-  console.log(pos.x, pos.y, pos.width, pos.height)
   emit('update:customStyle', {
     transform: `translate(${pos.x}px, ${pos.y}px)`,
     width: pos.width,
@@ -181,6 +180,7 @@ function getPos(style: CSSProperties) {
 
 <style scoped lang="scss">
 .widget-wrapper {
+  border: 1px dashed#4089ef;
   display: inline-block;
   position: absolute;
   cursor: move;
