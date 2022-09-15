@@ -1,7 +1,7 @@
 <template>
   <section
-    ref="widgetRef"
     :class="['widget-wrapper', {'can-move': _move}]"
+    :style="wrapStyle"
     @mousedown="onMousedown"
   >
     <template v-if="_scale">
@@ -13,14 +13,17 @@
         @mousedown="onMousedownDot($event, dot)"
       ></div>
     </template>
-    <slot />
+    <div ref="widgetRef">
+      <slot />
+    </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import type { CSSProperties, PropType } from 'vue'
-import { computed, shallowRef, inject } from 'vue'
+import { CSSProperties, onMounted, PropType, watch, watchEffect } from 'vue'
+import { computed, shallowRef, inject, ref } from 'vue'
 import { onClickOutside, useElementBounding } from '@vueuse/core'
+import { useNormalizeStyle } from '@/hooks';
 const emit = defineEmits(['update:customStyle'])
 const props = defineProps({
   customStyle: {
@@ -40,7 +43,14 @@ const _scale = computed(() => !_preview.value && props.scale)
 const _move = computed(() => !_preview.value && props.move)
 const widgetRef = shallowRef()
 const rect = useElementBounding(widgetRef)
-const _style = computed(() => {
+const _style = ref<CSSProperties>({})
+const wrapStyle = useNormalizeStyle(_style)
+
+watch(() => rect, () => {
+  normalizeCustomStyle()
+}, { deep: true })
+
+function normalizeCustomStyle() {
   const { width, height } = props.customStyle
   let _width = width;
   let _height = height;
@@ -50,12 +60,14 @@ const _style = computed(() => {
   if(!_height) {
     _height = rect.height.value
   }
-  return {
+  console.log(_height)
+  _style.value = {
     ...props.customStyle,
     width: _width,
     height: _height,
   }
-})
+}
+
 onClickOutside(widgetRef, () => {
   // console.log('outside')
 })
@@ -109,19 +121,27 @@ function onMousedownDot(evt: MouseEvent, dot: string) {
   const up = () => {
     document.removeEventListener('mousemove', move)
     document.removeEventListener('mouseup', up)
+    emit('update:customStyle', _style.value)
   }
   document.addEventListener('mousemove', move)
   document.addEventListener('mouseup', up)
 }
 function setPosition(pos: { x: number, y: number, width: number, height: number }) {
-  emit('update:customStyle', {
+  _style.value = {
     ...props.customStyle,
     transform: `translate(${pos.x}px, ${pos.y}px)`,
     width: pos.width,
     height: pos.height,
-  })
+  }
+  // emit('update:customStyle', {
+  //   ...props.customStyle,
+  //   transform: `translate(${pos.x}px, ${pos.y}px)`,
+  //   width: pos.width,
+  //   height: pos.height,
+  // })
 }
 function getDotPos(dot: string): CSSProperties {
+  if (!_style.value) return {}
   const { width, height } = _style.value
   const isL = /l/.test(dot)
   const isR = /r/.test(dot)
@@ -168,6 +188,7 @@ function onMousedown(evt: MouseEvent) {
     // console.log('drag', 'up')
     document.removeEventListener('mousemove', move)
     document.removeEventListener('mouseup', up)
+    emit('update:customStyle', _style.value)
   }
   document.addEventListener('mousemove', move)
   document.addEventListener('mouseup', up)

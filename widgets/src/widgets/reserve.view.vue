@@ -10,7 +10,6 @@
       />
       <widget-wrapper
         class="title"
-        :style="wrapTitleStyle"
         move
         scale
         v-model:custom-style="titleStyle"
@@ -19,7 +18,6 @@
       </widget-wrapper>
       <widget-wrapper
         class="title"
-        :style="wrapDescStyle"
         move
         scale
         v-model:custom-style="descStyle"
@@ -75,7 +73,7 @@ function onDragover(evt: DragEvent) {
 
 }
 .title{
-	line-height: 1.5;
+	// line-height: 1.5;
   top: 0;
   left: 0;
 }
