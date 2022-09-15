@@ -1,23 +1,25 @@
 <template>
   <section
     ref="widgetRef"
-    class="widget-wrapper"
+    :class="['widget-wrapper', {'can-move': _move}]"
     @mousedown="onMousedown"
   >
-    <div
-      v-for="(dot, index) in dots"
-      :key="index"
-      class="widget-dot"
-      :style="getDotPos(dot)"
-      @mousedown="onMousedownDot($event, dot)"
-    ></div>
+    <template v-if="_scale">
+      <div
+        v-for="(dot, index) in dots"
+        :key="index"
+        class="widget-dot"
+        :style="getDotPos(dot)"
+        @mousedown="onMousedownDot($event, dot)"
+      ></div>
+    </template>
     <slot />
   </section>
 </template>
 
 <script lang="ts" setup>
 import type { CSSProperties, PropType } from 'vue'
-import { computed, shallowRef } from 'vue'
+import { computed, shallowRef, inject } from 'vue'
 import { onClickOutside, useElementBounding } from '@vueuse/core'
 const emit = defineEmits(['update:customStyle'])
 const props = defineProps({
@@ -25,12 +27,17 @@ const props = defineProps({
     type: Object as PropType<CSSProperties>,
     required: true,
   },
+  scale: Boolean,
+  move: Boolean,
   // element: {
   //   type: Object as PropType<ComponentData>,
   //   required: true,
   // }
 })
-
+const editorContext = inject('Editor', { preview: false })
+const _preview = computed(() => editorContext.preview)
+const _scale = computed(() => !_preview.value && props.scale)
+const _move = computed(() => !_preview.value && props.move)
 const widgetRef = shallowRef()
 const rect = useElementBounding(widgetRef)
 const _style = computed(() => {
@@ -72,7 +79,6 @@ function onMousedownDot(evt: MouseEvent, dot: string) {
   evt.preventDefault()
 
   const { x, y, width, height } = getPos(_style.value)
-  console.log('mousedown', x, y, width, height)
   const cWidth = width ?? rect.width
   const cHeight = height ?? rect.height
 
@@ -109,6 +115,7 @@ function onMousedownDot(evt: MouseEvent, dot: string) {
 }
 function setPosition(pos: { x: number, y: number, width: number, height: number }) {
   emit('update:customStyle', {
+    ...props.customStyle,
     transform: `translate(${pos.x}px, ${pos.y}px)`,
     width: pos.width,
     height: pos.height,
@@ -145,10 +152,11 @@ function getDotPos(dot: string): CSSProperties {
 }
 function onMousedown(evt: MouseEvent) {
   evt.stopPropagation()
+  if (!_move.value) return;
   // componentData.current = props.element
   const pos = getPos(_style.value)
   const move = (mouseEvt: MouseEvent) => {
-    console.log('drag', 'move')
+    // console.log('drag', 'move')
     const { clientX, clientY } = mouseEvt
     setPosition({
       ...pos,
@@ -157,7 +165,7 @@ function onMousedown(evt: MouseEvent) {
     })
   }
   const up = () => {
-    console.log('drag', 'up')
+    // console.log('drag', 'up')
     document.removeEventListener('mousemove', move)
     document.removeEventListener('mouseup', up)
   }
@@ -168,7 +176,7 @@ function getPos(style: CSSProperties) {
   const { transform, width, height } = style
   const posRegexp = /translate\((\d+)px[, ]+(\d+)px\)/
   const [, x, y] = posRegexp.exec(transform!) ?? []
-  console.log('getPos', x, y)
+  // console.log('getPos', x, y)
   return {
     x: x ? Number(x) : Number(width) / 2,
     y: y ? Number(y) : Number(height) / 2,
@@ -180,12 +188,22 @@ function getPos(style: CSSProperties) {
 
 <style scoped lang="scss">
 .widget-wrapper {
-  border: 1px dashed#4089ef;
   display: inline-block;
   position: absolute;
-  cursor: move;
+  border: 1px dashed transparent;
+  transition: border-color 0.3s;
+  &.can-move:hover {
+    border: 1px dashed#4089ef;
+    cursor: move;
+  }
+  &:hover {
+    .widget-dot {
+      opacity: 1;
+    }
+  }
 }
 .widget-dot {
+  opacity: 0;
   position: absolute;
   width: 4px;
   height: 4px;

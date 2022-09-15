@@ -10,54 +10,44 @@
       />
       <widget-wrapper
         class="title"
-        :style="wrapStyle"
-        v-model:custom-style="config.title.style"
-        @update:customStyle="val => config.title.style = val"
+        :style="wrapTitleStyle"
+        move
+        scale
+        v-model:custom-style="titleStyle"
       >
         <div>{{config.title.content}}</div>
       </widget-wrapper>
-      <!-- <div class="reserve_con">
-        <div class="text_side">
-          <div class="title" :style="config.title.style">{{ config.title.content }}</div>
-          <div class="desc" :style="config.desc.style">{{ config.desc.content }}</div>
-        </div>
-      </div> -->
+      <widget-wrapper
+        class="title"
+        :style="wrapDescStyle"
+        move
+        scale
+        v-model:custom-style="descStyle"
+      >
+        <div>{{config.desc.content}}</div>
+      </widget-wrapper>
     </div>
     <div v-else style="width: 100%; height: 100%;">empty</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useNormalizeStyle } from '@/hooks';
+import { useNormalizeStyle, useState } from '@/hooks';
 import widgetWrapper from '@/components/widgetWrapper.vue'
-import { computed, watchEffect, ref, customRef } from 'vue';
-const emit = defineEmits(['update:config'])
+// import { computed, watchEffect, ref, customRef } from 'vue';
+// const emit = defineEmits(['update:config'])
 const props = defineProps({
   config: {
     type: Object,
     default: () => ({})
   }
 })
-const _config = ref()
 
-watchEffect(() => {
-  _config.value = props.config 
-})
-
-/** TODO */
-//   get() {
-//     return props.config
-//   },
-//   set(val) {
-//     console.log('trigger emit')
-//     emit('update:config', val)
-//   }
-// })
+const titleStyle = useState(props.config.title, 'style')
+const descStyle = useState(props.config.desc, 'style')
 const style = useNormalizeStyle(props.config.style)
-const wrapStyle = useNormalizeStyle(props.config.title.style, () => console.log('trigger'))
-function onT() {
-console.log('trigger listen')
-}
+const wrapTitleStyle = useNormalizeStyle(titleStyle)
+const wrapDescStyle = useNormalizeStyle(descStyle)
 function onDragover(evt: DragEvent) {
   evt.preventDefault()
 }
@@ -85,8 +75,6 @@ function onDragover(evt: DragEvent) {
 
 }
 .title{
-	color: #FF9171;
-	font-size: 16px;
 	line-height: 1.5;
   top: 0;
   left: 0;

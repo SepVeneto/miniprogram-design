@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid #ccc; z-index: 1;">
+  <div style="border: 1px solid #ccc; z-index: 10;">
     <Toolbar
       style="border-bottom: 1px solid #ccc"
       :editor="editorRef"
@@ -45,8 +45,8 @@ const editorConfig = {
         // file 即选中的文件
         // 自己实现上传，并得到图片 url alt href
         // 最后插入图片
-        const res = await window.microApp?.getData()?.upload?.(file)
-        insertFn(res.url);
+        const url = await window.microApp?.getData()?.upload?.({ file })
+        insertFn(url);
       },
     }
   },

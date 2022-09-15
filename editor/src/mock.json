@@ -123,12 +123,18 @@
         "title": {
           "content": "特色预约",
           "style": {
-            "transform": "translate(0px, 0px)"
+            "transform": "translate(245px, 16px)",
+	          "color": "#FF9171",
+	          "fontSize": 16
           }
         },
         "desc": {
           "content": "GO>",
-          "style": {}
+          "style": {
+            "transform": "translate(261px, 39px)",
+			      "fontSize": 13,
+			      "color": "#848484"
+          }
         },
         "style": {
           "width": 343,
@@ -159,6 +165,90 @@
           "marginTop": 12,
           "borderRadius": 10
         }
+      },
+      {
+        "_uuid": 12,
+        "_name": "菜单",
+        "_view": "container",
+        "_schema": "container",
+        "isShow": true,
+        "grid": 1,
+        "style": {},
+        "list": [
+          {
+            "_uuid": 13,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "我的食堂订单",
+            "style": {}
+          },
+          {
+            "_uuid": 14,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "交易明细",
+            "style": {}
+          },
+          {
+            "_uuid": 15,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "充值明细",
+            "style": {}
+          },
+          {
+            "_uuid": 16,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "扣减记录",
+            "style": {}
+          },
+          {
+            "_uuid": 17,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "刷脸信息",
+            "style": {}
+          },
+          {
+            "_uuid": 18,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "清除缓存",
+            "style": {}
+          },
+          {
+            "_uuid": 19,
+            "_name": "说明",
+            "_view": "menuItem",
+            "_schema": "desc",
+            "isShow": true,
+            "title": "取餐使用说明",
+            "style": {}
+          },
+          {
+            "_uuid": 20,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "link",
+            "isShow": true,
+            "title": "联系客服",
+            "phone": "952529",
+            "style": {}
+          }
+        ]
       }
     ]
   },

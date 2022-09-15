@@ -2,7 +2,7 @@
   <draggable
     v-model="widgetList"
     item-key="type"
-    :group="{ name: 'widgets', pull: 'clone', put: false }"
+    :group="{ name: 'widgets', pull: preview ? false : 'clone', put: false }"
     :clone="onClone"
     style="padding: 0 10px;"
     :sort="false"
@@ -26,6 +26,9 @@ import draggable from 'vuedraggable'
 import { v4 as uuidv4 } from 'uuid'
 import { useApp } from '@/store'
 import { computed } from 'vue'
+defineProps({
+  preview: Boolean,
+})
 const app = useApp()
 const widgetList = computed(() => app.widgetList)
 

@@ -36,7 +36,7 @@
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import { Rank } from '@element-plus/icons-vue'
-import { ref, computed, provide } from 'vue'
+import { ref, computed, provide, reactive, toRefs } from 'vue'
 import { useApp } from '@/store';
 import containerView from '@/widgets/container.view.vue';
 import viewRender from 'widgets_side/viewRender'
@@ -46,7 +46,7 @@ const props = defineProps({
   preview: Boolean,
 })
 
-provide('Editor', props)
+provide('Editor', reactive({ ...toRefs(props), updateConfig }))
 
 const app = useApp()
 const mainRef = ref()

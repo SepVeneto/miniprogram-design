@@ -13,6 +13,10 @@
   "dependencies": {
     "@wangeditor/editor": "^5.1.15",
     "@wangeditor/editor-for-vue": "^5.1.12",
+    "uuid": "^8.3.2",
     "vue": "^3.2.13"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.4"
   }
 }

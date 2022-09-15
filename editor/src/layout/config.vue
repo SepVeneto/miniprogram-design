@@ -7,6 +7,7 @@
   <reserve-config v-else-if="selected.type === 'reserve'" v-model="selected" /> -->
   <tabbar-config v-if="selected._schema === 'tabbar'" v-model="selected" />
   <schema-render
+    :key="selected._uuid"
     v-else-if="selected._schema"
     v-model="selected"
     :schema="app.schema[selected._schema]"

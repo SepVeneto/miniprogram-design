@@ -28,6 +28,8 @@ const cardSchema = [
     type: 'checkbox',
     label: '可见性',
     key: 'isShow',
+    trueLabel: 1,
+    falseLabel: 0,
   },
   {
     type: 'image',
@@ -66,6 +68,8 @@ const explain = [
     type: 'checkbox',
     label: '可见性',
     key: 'isShow',
+    trueLabel: 1,
+    falseLabel: 0,
   },
   {
     type: 'image',
@@ -99,6 +103,8 @@ const shop = [
     type: 'checkbox',
     label: '可见性',
     key: 'isShow',
+    trueLabel: 1,
+    falseLabel: 0,
   },
   {
     type: 'input',
@@ -149,10 +155,20 @@ const reserve = [
     key: 'title.content',
   },
   {
+    type: 'colorPicker',
+    label: '字体颜色',
+    key: 'title.style.color',
+  },
+  {
     type: 'input',
     label: '菜品预定描述',
     key: 'desc.content'
-  }
+  },
+  {
+    type: 'colorPicker',
+    label: '字体颜色',
+    key: 'desc.style.color',
+  },
 ]
 
 const mine = [
@@ -186,6 +202,11 @@ const menuItem = [
     type: 'input',
     label: '标题',
     key: 'title',
+  },
+  {
+    type: 'checkbox',
+    label: '可见性',
+    key: 'isShow',
   }
 ]
 
@@ -194,6 +215,49 @@ const desc = [
     type: 'editor',
     label: '说明内容',
     key: 'content',
+  },
+  {
+    type: 'checkbox',
+    label: '可见性',
+    key: 'isShow',
+  },
+]
+
+const link = [
+  {
+    type: 'checkbox',
+    label: '可见性',
+    key: 'isShow'
+  },
+  {
+    type: 'input',
+    label: '客服电话',
+    key: 'phone',
+  },
+]
+
+const entry = [
+  {
+    type: 'checkbox',
+    label: '可见性',
+    key: 'isShow',
+    trueLabel: 1,
+    falseLabel: 0,
+  },
+  {
+    type: 'input',
+    label: '名称',
+    key: 'title',
+  },
+  {
+    type: 'input',
+    label: '描述',
+    key: 'desc',
+  },
+  {
+    type: 'image',
+    label: '背景图片',
+    key: 'defaultImg',
   }
 ]
 
@@ -206,4 +270,6 @@ export const schema = {
   container,
   menuItem,
   desc,
+  link,
+  entry,
 }

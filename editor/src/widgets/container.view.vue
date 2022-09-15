@@ -56,10 +56,12 @@ const _config = computed({
 
 const editorContext = inject('Editor', { preview: false })
 const preview = computed(() => {
+  console.log(editorContext.preview)
   return editorContext.preview
 })
 function handleSelect(data: any) {
   app.selected = data
+  app.updateConfig()
 }
 </script>
 

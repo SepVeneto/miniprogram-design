@@ -30,6 +30,7 @@ const style = useNormalizeStyle(props.config.style)
 <style scoped lang="scss">
 .mine-preview {
   position: relative;
+  margin: 0 auto;
   .mine-unbound {
 		position: absolute;
 		top: 0;

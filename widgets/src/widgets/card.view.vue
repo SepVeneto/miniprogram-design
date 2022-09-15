@@ -1,5 +1,5 @@
 <template>
-  <div :style="style">
+  <div :style="style" class="card-view">
     <el-image
       v-if="config.defaultImg"
       style="width: 100%; height: 100%;"
@@ -19,3 +19,9 @@ const props = defineProps({
 })
 const style = useNormalizeStyle(props.config.style)
 </script>
+
+<style scoped>
+.card-view {
+  margin: 0 auto;
+}
+</style>
