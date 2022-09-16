@@ -1,5 +1,6 @@
 <template>
   <section
+    ref="widgetRef"
     :class="['widget-wrapper', {'can-move': _move}]"
     :style="wrapStyle"
     @mousedown="onMousedown"
@@ -13,14 +14,14 @@
         @mousedown="onMousedownDot($event, dot)"
       ></div>
     </template>
-    <div ref="widgetRef">
+    <div>
       <slot />
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import { CSSProperties, onMounted, PropType, watch, watchEffect } from 'vue'
+import { CSSProperties, nextTick, onMounted, PropType, watch, watchEffect } from 'vue'
 import { computed, shallowRef, inject, ref } from 'vue'
 import { onClickOutside, useElementBounding } from '@vueuse/core'
 import { useNormalizeStyle } from '@/hooks';
@@ -46,21 +47,33 @@ const rect = useElementBounding(widgetRef)
 const _style = ref<CSSProperties>({})
 const wrapStyle = useNormalizeStyle(_style)
 
-watch(() => rect, () => {
-  normalizeCustomStyle()
-}, { deep: true })
+// watch(() => rect, async () => {
+//   normalizeCustomStyle()
+//   // normalizeCustomStyle()
+//   console.log(rect.width, rect.height)
+// }, { deep: true })
 
-function normalizeCustomStyle() {
+
+onMounted(() => {
+  normalizeCustomStyle()
+})
+
+async function normalizeCustomStyle() {
   const { width, height } = props.customStyle
   let _width = width;
   let _height = height;
-  if (!_width) {
-    _width = rect.width.value
+  // if (!_width) {
+  //   _width = rect.width.value
+  // }
+  // if(!_height) {
+  //   _height = rect.height.value
+  // }
+  _style.value = {
+    ...props.customStyle,
   }
-  if(!_height) {
-    _height = rect.height.value
-  }
-  console.log(_height)
+  await nextTick()
+  _height = parseFloat(getComputedStyle(widgetRef.value).height)
+  _width = parseFloat(getComputedStyle(widgetRef.value).width)
   _style.value = {
     ...props.customStyle,
     width: _width,

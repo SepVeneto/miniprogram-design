@@ -1,5 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 const webpack = require('webpack')
+const isProduction = process.env.NODE_ENV === 'production'
 // const htmlWebpackPlugin = require('html-webpack-plugin')
 // const path = require('path')
 
@@ -24,7 +25,7 @@ module.exports = defineConfig({
         name: 'editor_side',
         filename: 'remoteEntry.js',
         remotes: {
-          widgets_side: 'widgets_side@http://localhost:8090/remoteEntry.js'
+          widgets_side: `widgets_side@${isProduction ? '/miniprogram-design/widgets' : 'http://localhost:8090'}/remoteEntry.js`
         },
         shared: {
           vue: {

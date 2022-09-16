@@ -1,6 +1,7 @@
 <template>
   <div
     :style="style" 
+    style="margin: 0 auto;"
     @dragover="onDragover"
   >
     <div v-if="config.defaultImg" style="position: relative;">
