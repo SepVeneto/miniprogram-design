@@ -6,6 +6,12 @@
     <draggable
       class="draggable-box"
       v-model="data"
+      :animation="200"
+      ghost-class="ghost"
+      :component-data="{
+        type: 'transition-group',
+        name: 'flip-list'
+      }"
       item-key="_uuid"
       handle=".operate"
       group="widgets"
@@ -75,44 +81,15 @@ function updateConfig(data: any) {
 .draggable-box {
   padding: 2px;
   height: 400px;
-  // .card {
-  //   position: relative;
-  //   .container {
-  //     position: relative;
-  //     padding: 10px;
-  //     overflow: hidden;
-  //     .operate {
-  //       display: none;
-  //       position: absolute;
-  //       cursor: move;
-  //       top: 0;
-  //       left: 50%;
-  //       transform: translateX(-50%);
-  //       &::after {
-  //         content: '';
-  //         display: block;
-  //         width: 36px;
-  //         height: 28px;
-  //         border-radius: 50%;
-  //         background: #fff;
-  //         position: absolute;
-  //         top: -50%;
-  //         left: 50%;
-  //         transform: translateX(-50%);
-  //       }
-  //     }
-  //   }
-  //   &.is-active .operate, &:hover .operate {
-  //     display: block;
-  //   }
-  //   &:hover::before, &.is-active::before {
-  //     content: '';
-  //     display: block;
-  //     width: 100%;
-  //     height: 100%;
-  //     position: absolute;
-  //     border: 1px dashed #4a09ef
-  //   }
-  // }
+}
+</style>
+
+<style>
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
 }
 </style>

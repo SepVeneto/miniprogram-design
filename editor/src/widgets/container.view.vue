@@ -1,11 +1,19 @@
 <template>
   <draggable
     v-model="_config.list"
-    item-key="uuid"
+    item-key="_uuid"
     handle=".operate"
+    :animation="200"
+    ghost-class="ghost"
+    :component-data="{
+      type: 'transition-group',
+      name: 'flip-list'
+    }"
     group="widgets"
     :class="['draggable-group', { 'is-preview': preview }]"
     :style="viewStyle"
+            @start="drag = true"
+        @end="drag = false"
   >
     <template #item="{element}">
       <draggable-wrapper
@@ -27,9 +35,10 @@
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import viewRender from 'widgets_side/viewRender'
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { useApp } from '@/store'
 import { useNormalizeStyle } from '@/hooks'
+const drag = ref(false)
 const props = defineProps({
   config: {
     type: Object,
@@ -89,3 +98,15 @@ function handleSelect(data: any) {
   }
 }
 </style>
+
+<style>
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
+</style>
+
+
