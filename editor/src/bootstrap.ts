@@ -1,3 +1,4 @@
+import './public-path'
 import { App, createApp } from 'vue'
 import AppVue from './App.vue'
 import { createPinia, Pinia } from 'pinia'

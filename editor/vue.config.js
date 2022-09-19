@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 module.exports = defineConfig({
   assetsDir: 'deign-static',
   publicPath: '',
-  outputDir: 'miniprogram-design',
+  outputDir: 'editor',
   devServer: {
     port: 8082,
     proxy: {
@@ -25,7 +25,7 @@ module.exports = defineConfig({
         name: 'editor_side',
         filename: 'remoteEntry.js',
         remotes: {
-          widgets_side: `widgets_side@${isProduction ? '' : 'http://localhost:8090'}/remoteEntry.js`
+          widgets_side: `widgets_side@${isProduction ? '/miniprogram-design' : 'http://localhost:8090'}/remoteEntry.js`
         },
         shared: {
           vue: {
