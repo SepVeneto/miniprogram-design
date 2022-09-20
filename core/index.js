@@ -1,12 +1,12 @@
 import microApp from '@micro-zoe/micro-app'
 import { onMounted } from 'vue-demi'
 export async function useDesign(dom, options) {
-  const { port = 8090, name = 'miniprogram-design' } = options
+  const { url, name = 'miniprogram-design' } = options
   await new Promise((resolve, reject) => {
     onMounted(() => {
       microApp.renderApp({
         name,
-        url: `http://localhost:${port}/miniprogram-design`,
+        url,
         container: dom,
         inline: true,
         'clear-data': true,
