@@ -8,6 +8,7 @@ module.exports = defineConfig({
   assetsDir: 'deign-static',
   publicPath: '/miniprogram-design',
   outputDir: 'miniprogram-design',
+  productionSourceMap: false,
   devServer: {
     port: 8082,
     proxy: {

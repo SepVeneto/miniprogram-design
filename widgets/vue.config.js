@@ -4,6 +4,7 @@ const webpack = require('webpack')
 module.exports = defineConfig({
   publicPath: 'auto',
   // assetsDir: 'widgets-static',
+  productionSourceMap: false,
   devServer: {
     port: 8090,
     headers: {
