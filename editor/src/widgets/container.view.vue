@@ -9,11 +9,9 @@
       type: 'transition-group',
       name: 'flip-list'
     }"
-    group="widgets"
+    :group="{name: 'widgets', pull: true, put: onPut}"
     :class="['draggable-group', { 'is-preview': preview }]"
     :style="viewStyle"
-            @start="drag = true"
-        @end="drag = false"
   >
     <template #item="{element}">
       <draggable-wrapper
@@ -24,7 +22,7 @@
         mask
         @click.stop="handleSelect(element)"
       >
-        <view-render :type="element._view" :config="element" />
+        <view-render v-if="element._view !== 'container'" :type="element._view" :config="element" />
       </draggable-wrapper>
       <view-render v-else :type="element._view" :config="element" />
     </template>
@@ -38,7 +36,6 @@ import viewRender from 'widgets_side/viewRender'
 import { computed, inject, ref } from 'vue'
 import { useApp } from '@/store'
 import { useNormalizeStyle } from '@/hooks'
-const drag = ref(false)
 const props = defineProps({
   config: {
     type: Object,
@@ -65,9 +62,12 @@ const _config = computed({
 
 const editorContext = inject('Editor', { preview: false })
 const preview = computed(() => {
-  console.log(editorContext.preview)
   return editorContext.preview
 })
+function onPut(_1: any, _2: any, dom: any) {
+  const { _inContainer } = dom.__draggable_context.element
+  return _inContainer === 'inner'
+}
 function handleSelect(data: any) {
   app.selected = data
   app.updateConfig()

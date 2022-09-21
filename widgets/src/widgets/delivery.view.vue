@@ -1,25 +1,25 @@
 <template>
-  <div class="card" :style="{ background: '#fff' }">
+  <div class="card" :style="{ background: '#fff', ...style }">
     <img :src="config.icon">
     <div style="flex-grow: 1">
-      <div class="title">送餐预定</div>
-      <div class="tips">预定后就餐时段内送达</div>
+      <div class="title">{{props.config.title?.content}}</div>
+      <div class="tips">{{props.config.desc?.content}}</div>
     </div>
     <div style="flex-shrink: 1">
-      <div class="btn" :style="{ color: '#222' }">
-        立即预定
-      </div>
+      <div class="btn" :style="{ color: '#222' }">立即预定</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps({
+import { useNormalizeStyle } from '@/hooks';
+const props = defineProps({
   config: {
     type: Object,
     default: () => ({})
   }
 })
+const style = useNormalizeStyle(props.config.style)
 </script>
 
 <style lang="scss" scoped>
