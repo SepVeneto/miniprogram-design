@@ -1,11 +1,8 @@
 {
   "name": "@mpd/cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "scripts/index.js",
-  "bin": {
-    "mpd-design": "bin/service.js"
-  },
   "scripts": {
     "postinstall": "node scripts/prepare.js",
     "test": "echo \"Error: no test specified\" && exit 1"
