@@ -8,6 +8,7 @@ module.exports = defineConfig({
   assetsDir: 'deign-static',
   publicPath: '',
   outputDir: '../cli/editor',
+  productionSourceMap: false,
   devServer: {
     port: 8082,
     proxy: {

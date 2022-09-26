@@ -14,7 +14,7 @@
       }"
       item-key="_uuid"
       handle=".operate"
-      group="widgets"
+      :group="{name: 'widgets', pull: true, put: onPut}"
     >
       <template #item="{element: item}">
         <draggable-wrapper
@@ -26,8 +26,8 @@
           :mask="item._view !== 'container'"
           @click="handleSelect(item)"
         >
+          <view-render v-if="item._view !== 'container'" :type="item._view" :config="item" @update:config="updateConfig" />
           <container-view v-if="item._view === 'container'" :config="item" />
-          <view-render v-else :type="item._view" :config="item" @update:config="updateConfig" />
         </draggable-wrapper>
         <template v-else>
           <container-view v-if="item._view === 'container'" :config="item" />
@@ -68,6 +68,10 @@ const data = computed({
 // const selected = ref({} as any)
 const selected = computed(() => app.selected)
 
+function onPut(_1, _2, dom: any) {
+  const { _inContainer } = dom.__draggable_context.element
+  return !_inContainer || _inContainer === 'outer'
+}
 function handleSelect(data: any) {
   app.selected = data
 }
