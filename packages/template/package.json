@@ -1,0 +1,29 @@
+{
+  "name": "@mpd/create-template",
+  "version": "0.0.1",
+  "main": "init.js",
+  "bin": {
+    "create-template": "init.js"
+  },
+  "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/.gitignore/CHANGELOG.md",
+  "homepage": "https://github.com/SepVeneto/miniprogram-design",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SepVeneto/miniprogram-design"
+  },
+  "files": [
+    "raw",
+    "init.js",
+    "README.md"
+  ],
+  "scripts": {
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path . --lerna-package template && git add CHANGELOG.md"
+  },
+  "author": "sepveneto <sepveneto@qq.com>",
+  "license": "ISC",
+  "dependencies": {
+    "kolorist": "^1.5.0",
+    "prompts": "^2.4.2"
+  },
+  "description": ""
+}

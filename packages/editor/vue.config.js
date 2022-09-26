@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 module.exports = defineConfig({
   assetsDir: 'deign-static',
   publicPath: '',
-  outputDir: 'editor',
+  outputDir: 'dist',
   productionSourceMap: false,
   devServer: {
     port: 8082,
