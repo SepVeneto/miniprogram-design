@@ -1,13 +1,18 @@
 {
-  "name": "miniprogram-design",
-  "version": "0.1.0",
+  "name": "@mpd/editor",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postinstall": "node scripts/prepare.js"
   },
-  "dependencies": {
+  "files": [
+    "editor",
+    "scripts"
+  ],
+  "devDependencies": {
     "@element-plus/icons-vue": "^2.0.9",
     "@vueuse/core": "^9.1.1",
     "core-js": "^3.8.3",
@@ -18,9 +23,7 @@
     "vue": "^3.2.13",
     "vuedraggable": "^4.1.0",
     "webpack": "^5.74.0",
-    "@mpd/schema": "workspace: *"
-  },
-  "devDependencies": {
+    "@mpd/schema": "workspace: *",
     "@micro-zoe/micro-app": "^0.8.10",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
