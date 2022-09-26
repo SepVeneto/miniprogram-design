@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "editor:init": "mpd init --dir public"
   },
   "dependencies": {
     "@mpd/core": "^0.0.1",

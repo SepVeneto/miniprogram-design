@@ -1,15 +1,17 @@
 {
   "name": "@mpd/editor",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "private": true,
+  "bin": {
+    "mpd": "./scripts/bin.js"
+  },
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "postinstall": "node scripts/prepare.js"
+    "lint": "vue-cli-service lint"
   },
   "files": [
-    "editor",
+    "dist",
     "scripts"
   ],
   "devDependencies": {
@@ -41,6 +43,7 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
-    "fs-extra": "^10.1.0"
+    "fs-extra": "^10.1.0",
+    "minimist": "^1.2.6"
   }
 }
