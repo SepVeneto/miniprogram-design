@@ -1,7 +1,6 @@
 {
   "name": "@mpd/editor",
   "version": "0.0.5",
-  "private": true,
   "bin": {
     "mpd": "./scripts/bin.js"
   },
