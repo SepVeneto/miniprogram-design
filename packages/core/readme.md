@@ -13,6 +13,6 @@ import { useDesign } from '@mpd/core'
 
 const [getData, setData] = await useDesign('#mpd-container', {
   name: 'mpd-editor',
-  url: '//localhost:8080/editor'
+  url: '//localhost:9999/miniprogram/editor'
 })
 ```

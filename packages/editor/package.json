@@ -48,7 +48,7 @@
     "fs-extra": "^10.1.0",
     "minimist": "^1.2.6"
   },
-  "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/CHANGELOG.md",
+  "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor",
   "repository": {
     "type": "git",

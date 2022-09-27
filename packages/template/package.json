@@ -5,7 +5,7 @@
   "bin": {
     "create-template": "init.js"
   },
-  "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/CHANGELOG.md",
+  "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/template/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/template",
   "repository": {
     "type": "git",
