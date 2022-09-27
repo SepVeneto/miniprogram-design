@@ -1,0 +1,277 @@
+{
+  "globalConfig": {
+    "color": "rgba(126,211,33,1)",
+    "emptyColor": "rgba(144,19,254,1)",
+    "bubbleColor": "rgba(80,227,194,1)",
+    "loginBg": ""
+  },
+  "body": {
+    "home": [
+      {
+        "_uuid": "1",
+        "_name": "食堂卡",
+        "_view": "card",
+        "_schema": "card",
+        "type": "card",
+        "isShow": 1,
+        "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/1baab297eaaf5b18a3db145272e59aabaf5d023c.png",
+        "style": {
+          "height": 176,
+          "width": 345,
+          "margin": "0 auto",
+          "marginBottom": 12,
+          "marginTop": 12,
+          "borderRadius": 10
+        }
+      },
+      {
+        "_uuid": "2",
+        "_name": "容器",
+        "_view": "container",
+        "_schema": "container",
+        "type": "menu",
+        "isShow": 1,
+        "grid": 2,
+        "style": {
+          "margin": "0 auto",
+          "marginBottom": 1,
+          "marginTop": 12,
+          "backgroundColor": "#fff",
+          "borderRadius": 10
+        },
+        "list": [
+          {
+            "_uuid": "11",
+            "_name": "入口",
+            "_view": "entry",
+            "_schema": "entry",
+            "type": "reserve",
+            "title": "堂食",
+            "desc": "",
+            "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/791fb2f0160714c693ba38f51dc2e67db45353a1.png",
+            "style": {
+              "width": 170,
+              "height": 180,
+              "margin": "0 auto",
+              "boxSizing": "border-box",
+              "backgroundColor": ""
+            }
+          },
+          {
+            "_uuid": "12",
+            "_name": "入口",
+            "_view": "entry",
+            "_schema": "entry",
+            "type": "special",
+            "title": "小锅菜",
+            "desc": "",
+            "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/c875ac96a7900f83301f1729996b947d6ae60215.png",
+            "style": {
+              "width": 170,
+              "height": 180,
+              "margin": "0 auto",
+              "boxSizing": "border-box",
+              "backgroundColor": ""
+            }
+          }
+        ]
+      },
+      {
+        "_uuid": "3",
+        "_name": "商城",
+        "_view": "card",
+        "_schema": "shop",
+        "type": "shop",
+        "isShow": 1,
+        "url": "",
+        "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/60ed7d38c65818df539f46f1cc44c83a46caf9e4.png",
+        "style": {
+          "width": 343,
+          "height": 100,
+          "margin": "0 auto",
+          "marginTop": 12,
+          "marginBottom": 12
+        }
+      },
+      {
+        "_uuid": "4",
+        "_name": "菜谱",
+        "_view": "card",
+        "_schema": "card",
+        "type": "explain",
+        "isShow": 1,
+        "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/d56f700e27fc7d1eaf368e6009c342f5c9828ab7.png",
+        "names": "菜谱",
+        "style": {
+          "backgroundColor": "#fff",
+          "width": 343,
+          "height": 80,
+          "borderRadius": 10,
+          "margin": "0 auto",
+          "marginTop": 12,
+          "marginBottom": 1
+        }
+      },
+      {
+        "_uuid": "10",
+        "_name": "菜品预订",
+        "_view": "reserve",
+        "_schema": "reserve",
+        "type": "reserve",
+        "isShow": 1,
+        "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/d56f700e27fc7d1eaf368e6009c342f5c9828ab7.png",
+        "title": {
+          "content": "特色预约",
+          "style": {
+            "transform": "translate(245px, 16px)",
+	          "color": "#FF9171",
+	          "fontSize": 16
+          }
+        },
+        "desc": {
+          "content": "GO>",
+          "style": {
+            "transform": "translate(261px, 39px)",
+			      "fontSize": 13,
+			      "color": "#848484"
+          }
+        },
+        "style": {
+          "width": 343,
+          "height": 80,
+          "borderRadius": 10,
+          "margin": "0 auto",
+          "marginTop": 12,
+          "marginBottom": 1
+        }
+      }
+    ],
+    "personal": [
+      {
+        "_uuid": "5",
+        "_name": "食堂卡",
+        "_view": "mine",
+        "_schema": "card",
+        "type": "mine",
+        "isShow": 1,
+        "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/1baab297eaaf5b18a3db145272e59aabaf5d023c.png",
+        "unbound": 1,
+        "recharge": 1,
+        "style": {
+          "height": 176,
+          "width": 345,
+          "margin": "0 auto",
+          "marginBottom": 12,
+          "marginTop": 12,
+          "borderRadius": 10
+        }
+      },
+      {
+        "_uuid": 12,
+        "_name": "菜单",
+        "_view": "container",
+        "_schema": "container",
+        "isShow": true,
+        "grid": 1,
+        "style": {},
+        "list": [
+          {
+            "_uuid": 13,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "我的食堂订单",
+            "style": {}
+          },
+          {
+            "_uuid": 14,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "交易明细",
+            "style": {}
+          },
+          {
+            "_uuid": 15,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "充值明细",
+            "style": {}
+          },
+          {
+            "_uuid": 16,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "扣减记录",
+            "style": {}
+          },
+          {
+            "_uuid": 17,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "刷脸信息",
+            "style": {}
+          },
+          {
+            "_uuid": 18,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            "isShow": true,
+            "title": "清除缓存",
+            "style": {}
+          },
+          {
+            "_uuid": 19,
+            "_name": "说明",
+            "_view": "menuItem",
+            "_schema": "desc",
+            "isShow": true,
+            "title": "取餐使用说明",
+            "style": {}
+          },
+          {
+            "_uuid": 20,
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "link",
+            "isShow": true,
+            "title": "联系客服",
+            "phone": "952529",
+            "style": {}
+          }
+        ]
+      }
+    ]
+  },
+  "tabbars": {
+    "_uuid": "9",
+    "_name": "底部导航栏",
+    "_view": "tabbar",
+    "_schema": "tabbar",
+    "list": [
+      {
+        "_uuid": "7",
+        "type": "home",
+        "text": "首页",
+        "activeImage": "https://saas-oss-test.jsrxjt.com/image/20220902/f43c86df716e7610bcc407795b7d034e507ade90.png",
+        "inactiveImage": ""
+      },
+      {
+        "_uuid": "8",
+        "type": "personal",
+        "text": "个人中心",
+        "activeImage": "https://saas-oss-test.jsrxjt.com/image/20220902/16e719efb1344dc6f0ce9993d0fe66e8a19cbcb3.png",
+        "inactiveImage": ""
+      }
+    ]
+  }
+}
