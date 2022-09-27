@@ -13,10 +13,8 @@ export async function useDesign(dom, options) {
         'disable-patch-request': false, // 关闭对子应用请求的拦截
       }).then((result) => {
         if (result) {
-          console.log('success')
           resolve()
         } else {
-          console.error('faile')
           reject(new Error('应用加载失败'))
         }
       })

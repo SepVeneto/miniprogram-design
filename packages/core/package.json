@@ -3,13 +3,21 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "types": "./type.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "version": " pnpm changelog && git add CHANGELOG.md",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path ."
   },
   "peerDependencies": {
     "@micro-zoe/micro-app": "^1.0.0-alpha.9"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/core/CHANGELOG.md",
+  "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/core",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SepVeneto/miniprogram-design"
+  }
 }
