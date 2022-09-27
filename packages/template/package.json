@@ -5,8 +5,8 @@
   "bin": {
     "create-template": "init.js"
   },
-  "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/.gitignore/CHANGELOG.md",
-  "homepage": "https://github.com/SepVeneto/miniprogram-design",
+  "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/CHANGELOG.md",
+  "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/template",
   "repository": {
     "type": "git",
     "url": "https://github.com/SepVeneto/miniprogram-design"
@@ -17,7 +17,8 @@
     "README.md"
   ],
   "scripts": {
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path . --lerna-package template && git add CHANGELOG.md"
+    "version": " pnpm changelog && git add CHANGELOG.md",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path ."
   },
   "author": "sepveneto <sepveneto@qq.com>",
   "license": "ISC",
