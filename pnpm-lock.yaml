@@ -2,6 +2,14 @@ lockfileVersion: 5.4
 
 importers:
 
+  packages/core:
+    specifiers:
+      '@micro-zoe/micro-app': ^0.8.10
+      vue-demi: ^0.13.11
+    devDependencies:
+      '@micro-zoe/micro-app': 0.8.10
+      vue-demi: 0.13.11
+
   packages/editor:
     specifiers:
       '@element-plus/icons-vue': ^2.0.9
@@ -7010,6 +7018,19 @@ packages:
   /vary/1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
+    dev: true
+
+  /vue-demi/0.13.11:
+    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
     dev: true
 
   /vue-demi/0.13.11_vue@3.2.39:

@@ -1,9 +1,10 @@
 import microApp from '@micro-zoe/micro-app'
-import { onMounted } from 'vue-demi'
+import { nextTick } from 'vue-demi'
+import { onMounted, getCurrentInstance } from 'vue-demi'
 export async function useDesign(dom, options) {
   const { url, name = 'miniprogram-design' } = options
   await new Promise((resolve, reject) => {
-    onMounted(() => {
+    tryOnMounted(() => {
       microApp.renderApp({
         name,
         url,
@@ -28,4 +29,12 @@ export async function useDesign(dom, options) {
     return microApp.getData(name)
   }
   return [get, set]
+}
+
+function tryOnMounted(fn) {
+  if (getCurrentInstance()) {
+    onMounted(fn)
+  } else {
+    nextTick(fn)
+  }
 }
