@@ -261,7 +261,31 @@ const entry = [
   }
 ]
 
+const globalConfig = [
+  {
+    type: 'colorPicker',
+    label: '主题色',
+    key: 'color'
+  },
+  {
+    type: 'colorPicker',
+    label: '空记录背景色',
+    key: 'emptyColor',
+  },
+  {
+    type: 'colorPicker',
+    label: '气泡颜色',
+    key: 'bubbleColor',
+  },
+  {
+    type: 'image',
+    label: '登录背景图片',
+    key: 'loginBg',
+  }
+]
+
 export const schema = {
+  globalConfig,
   card: cardSchema,
   explain,
   shop,

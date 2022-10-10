@@ -1,10 +1,4 @@
 <template>
-  <!-- <card-config v-if="['card', 'explain'].includes(selected.type)" v-model="selected" />
-  <tabbar-config v-else-if="selected.type === 'tabbar'" v-model="selected" />
-  <shop-config v-else-if="selected.type === 'shop'" v-model="selected" />
-  <menu-config v-else-if="selected.type === 'menu'" v-model="selected" />
-  <mine-config v-else-if="selected.type === 'mine'" v-model="selected" />
-  <reserve-config v-else-if="selected.type === 'reserve'" v-model="selected" /> -->
   <tabbar-config v-if="selected._schema === 'tabbar'" v-model="selected" />
   <schema-render
     :key="selected._uuid"
@@ -13,42 +7,19 @@
     :schema="app.schema[selected._schema]"
   />
   <section v-else>
-    <el-form label-width="100px">
-      <el-form-item label="主题">
-        <el-color-picker v-model="globalConfig.color" show-alpha />
-      </el-form-item>
-      <el-form-item label="空记录背景色">
-        <el-color-picker v-model="globalConfig.emptyColor" show-alpha />
-      </el-form-item>
-      <el-form-item label="气泡颜色">
-        <el-color-picker v-model="globalConfig.bubbleColor" show-alpha />
-      </el-form-item>
-      <!-- <el-form-item label="页面标题">
-        <el-input v-model="globalConfig.title" />
-      </el-form-item> -->
-      <el-form-item label="登录背景图片">
-        <oss-upload v-model="globalConfig.loginBg" />
-      </el-form-item>
-      <!-- <el-form-item label="分享标题">
-        <el-input v-model="globalConfig.share.title" />
-      </el-form-item> -->
-    </el-form>
+    <schema-render
+      v-model="globalConfig"
+      :schema="app.schema.globalConfig"
+    />
   </section>
 </template>
 
 <script lang="ts" setup>
 import schemaRender from '@mpd/schema'
-// import { cardConfig } from '@/widgets/card'
-// import { cardConfig } from 'widgets_side/card'
 import { tabbarConfig } from '@/layout/tabbar'
-// import { menuConfig } from '@/widgets/menu'
-// import { shopConfig } from '@/widgets/shop'
-// import { mineConfig } from '@/widgets/mine'
-// import { reserveConfig } from '@/widgets/reserve'
 import { useApp } from '@/store'
-import { ref, computed } from 'vue'
-import ossUpload from '@/components/ossUpload.vue'
-const props = defineProps({
+import { computed } from 'vue'
+defineProps({
   config: {
     type: Object,
     default: () => ({})
