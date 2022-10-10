@@ -8,8 +8,8 @@
     "editor:init": "mpd init --dir public"
   },
   "dependencies": {
-    "@mpd/core": "^0.0.1",
-    "@mpd/editor": "^0.0.1",
+    "@mpd/core": "^0.0.2",
+    "@mpd/editor": "^0.0.5",
     "@vueuse/core": "^9.1.1",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
