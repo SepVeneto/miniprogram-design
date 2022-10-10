@@ -17,7 +17,7 @@
         <div
           style="padding: 20px; margin-bottom: 10px; border-bottom: 1px solid #ddd;"
         >组件</div>
-        <widgets :preview="preview" />
+        <widget-wrap :list="app.widgetList" :preview="preview" />
       </aside>
       <div class="mobile-frame">
         <div class="mobile-content">
@@ -58,7 +58,7 @@
 
 <script lang="ts" setup>
 import VEditor from '@/layout/editor.vue'
-import widgets from '@/layout/widgets.vue'
+import widgetWrap from '@/layout/widgetWrap.vue'
 import VConfig from '@/layout/config.vue'
 import { tabbarPreview } from '@/layout/tabbar'
 import { ref, computed } from 'vue';

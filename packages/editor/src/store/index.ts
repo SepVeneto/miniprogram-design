@@ -41,6 +41,29 @@ export const useApp = defineStore('app', () => {
     schema.value = { ...schemaConfig }
     widgetList.value = [
       {
+        name: '基本组件',
+        group: [
+          {
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            title: '标题',
+            style: {
+              background: '#fff',
+            }
+          },
+          {
+            "_name": "说明",
+            "_view": "menuItem",
+            "_schema": "desc",
+            title: '说明',
+            style: {
+              background: '#fff'
+            }
+          }
+        ]
+      },
+      {
         "_name": "容器",
         "_view": "container",
         "_schema": "container",
@@ -48,24 +71,6 @@ export const useApp = defineStore('app', () => {
         style: {},
         list: [],
       },
-      {
-        "_name": "菜单项",
-        "_view": "menuItem",
-        "_schema": "menuItem",
-        title: '标题',
-        style: {
-          background: '#fff',
-        }
-      },
-      {
-        "_name": "说明",
-        "_view": "menuItem",
-        "_schema": "desc",
-        title: '说明',
-        style: {
-          background: '#fff'
-        }
-      }
     ]
     currentRoute.value = config.value.tabbars.list[0].type
   }
