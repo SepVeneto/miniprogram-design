@@ -284,7 +284,40 @@ const globalConfig = [
   }
 ]
 
+const text = [
+  {
+    type: 'colorPicker',
+    label: '字体颜色',
+    key: 'style.color',
+  },
+  {
+    type: 'number',
+    label: '字体大小',
+    key: 'style.fontSize',
+  }
+]
+
+const image = [
+  // {
+  //   type: 'number',
+  //   label: '宽度',
+  //   key: 'style.width',
+  // },
+  // {
+  //   type: 'number',
+  //   label: '高度',
+  //   key: 'style.height',
+  // },
+  {
+    type: 'image',
+    label: '图片',
+    key: 'img',
+  }
+]
+
 export const schema = {
+  image,
+  text,
   globalConfig,
   card: cardSchema,
   explain,

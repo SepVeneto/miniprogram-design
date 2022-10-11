@@ -1,6 +1,6 @@
 {
   "name": "@mpd/editor",
-  "version": "0.0.5",
+  "version": "0.0.6-rc.1",
   "bin": {
     "mpd": "./scripts/bin.js"
   },
@@ -44,6 +44,7 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
+    "free-dom": "^0.0.3",
     "fs-extra": "^10.1.0",
     "minimist": "^1.2.6"
   },

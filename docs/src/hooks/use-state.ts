@@ -15,9 +15,14 @@ export function useState<T>(data: T, key: string) {
       return _data.value
     },
     set(val) {
+      // console.log('set', val)
       trigger()
       data[key] = val;
-      inst && editorContext.updateConfig(inst.props.config as T)
+      // console.log(data === inst?.props.config)
+      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // // @ts-ignore
+      // console.log('info', data.style, inst?.props.config.style)
+      inst && editorContext.updateConfig(data)
     }
   }))
 }

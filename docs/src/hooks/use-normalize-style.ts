@@ -2,6 +2,7 @@ import { CSSProperties, ref, Ref, unref, watchEffect } from 'vue';
 type Style = Partial<Record<keyof CSSProperties, string | number>>
 export function useNormalizeStyle(
   style: Style | Ref<any>,
+  exclude: string[] = []
 ) {
 
   const _style = ref({
@@ -11,7 +12,7 @@ export function useNormalizeStyle(
     const res = Object.entries(unref(style)).reduce<Partial<CSSProperties>>(
       (obj, _style) => {
         const [key, value] = _style;
-        if (typeof value === 'number') {
+        if (typeof value === 'number' && !exclude.includes(key)) {
           obj[key] = `${value}px`;
         } else {
           obj[key] = value;

@@ -21,6 +21,7 @@ importers:
       core-js: ^3.8.3
       eslint: ^7.32.0
       eslint-plugin-vue: ^8.0.3
+      free-dom: ^0.0.3
       sass: ^1.54.9
       sass-loader: ^13.0.2
       typescript: ~4.5.5
@@ -28,9 +29,10 @@ importers:
       webpack: ^5.74.0
     dependencies:
       '@mpd/core': link:../packages/core
-      '@mpd/editor': link:../packages/editor
+      '@mpd/editor': 0.0.5
       '@vueuse/core': 9.3.0_vue@3.2.39
       core-js: 3.25.3
+      free-dom: 0.0.3_vue@3.2.39
       vue: 3.2.39
       webpack: 5.74.0
     devDependencies:
@@ -74,6 +76,7 @@ importers:
       element-plus: ^2.2.16
       eslint: ^7.32.0
       eslint-plugin-vue: ^8.0.3
+      free-dom: ^0.0.3
       fs-extra: ^10.1.0
       html-webpack-plugin: ^5.5.0
       minimist: ^1.2.6
@@ -87,6 +90,7 @@ importers:
       vuedraggable: ^4.1.0
       webpack: ^5.74.0
     dependencies:
+      free-dom: 0.0.3_vue@3.2.39
       fs-extra: 10.1.0
       minimist: 1.2.6
     devDependencies:
@@ -1480,6 +1484,14 @@ packages:
   /@micro-zoe/micro-app/1.0.0-alpha.9:
     resolution: {integrity: sha512-/wIzf3jVzDVeg6eb0f2Fj08Mp2OKwucfHldJaUSb/KeC1LdA1yKNEAqXAfUDzmcQ7RAPrGuM5fGZNJSlj3nPSQ==}
     dev: true
+
+  /@mpd/editor/0.0.5:
+    resolution: {integrity: sha512-VcCxl9ew4GszCmKHWFIFixgCd4awAtDSIlqJQIkiq83ARDuDlJZBAIDm057hppLk3S64vCvMH2rKrE3wOdm6Pw==}
+    hasBin: true
+    dependencies:
+      fs-extra: 10.1.0
+      minimist: 1.2.6
+    dev: false
 
   /@node-ipc/js-queue/2.0.3:
     resolution: {integrity: sha512-fL1wpr8hhD5gT2dA1qifeVaoDFlQR5es8tFuKqjHX+kdOtdNHnxkVZbtIrR2rxnMFvehkjaZRNV2H/gPXlb0hw==}
@@ -4596,6 +4608,21 @@ packages:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
+  /free-dom/0.0.3_vue@3.2.39:
+    resolution: {integrity: sha512-eRZXZcFFCh95qV5jWDCYg38W6K03fEqeF+sPH135kCHcbF93NfYI/y7fznOU/Zp6zJpb4lpc1TjKoV4ql7AoAQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      '@vueuse/core': 9.3.0_vue@3.2.39
+      uuid: 9.0.0
+      vue: 3.2.39
+      vue-demi: 0.13.11_vue@3.2.39
+    dev: false
+
   /fresh/0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -7371,6 +7398,11 @@ packages:
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}

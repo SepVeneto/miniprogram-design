@@ -69,6 +69,25 @@ export const useApp = defineStore('app', () => {
             style: {},
             list: [],
           },
+          {
+            _name: '图片',
+            _view: 'image',
+            _schema: 'image',
+            _inContainer: 'inner',
+            img: '/favicon.ico',
+            style: { width: 40, height: 40 },
+          },
+          {
+            _name: '文字',
+            _view: 'text',
+            _schema: 'text',
+            _inContainer: 'inner',
+            style: {
+              fontSize: 16,
+              color: '#000000'
+            },
+            content: '文字',
+          },
         ]
       },
     ]
