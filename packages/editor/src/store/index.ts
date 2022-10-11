@@ -60,16 +60,16 @@ export const useApp = defineStore('app', () => {
             style: {
               background: '#fff'
             }
-          }
+          },
+          {
+            "_name": "容器",
+            "_view": "container",
+            "_schema": "container",
+            grid: 2,
+            style: {},
+            list: [],
+          },
         ]
-      },
-      {
-        "_name": "容器",
-        "_view": "container",
-        "_schema": "container",
-        grid: 2,
-        style: {},
-        list: [],
       },
     ]
     currentRoute.value = config.value.tabbars.list[0].type

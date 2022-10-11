@@ -41,20 +41,23 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
-import { Rank } from '@element-plus/icons-vue'
 import { ref, computed, provide, reactive, toRefs } from 'vue'
 import { useApp } from '@/store';
 import containerView from '@/widgets/container.view.vue';
+// @ts-expect-error: from module federation
 import viewRender from 'widgets_side/viewRender'
-// const menuPreview = defineAsyncComponent(() => import('widgets_side/menu'))
 
 const props = defineProps({
   preview: Boolean,
 })
-
-provide('Editor', reactive({ ...toRefs(props), updateConfig }))
-
 const app = useApp()
+
+provide('Editor', reactive({
+  ...toRefs(props),
+  globalConfig: computed(() => app.config.globalConfig),
+  updateConfig,
+}))
+
 const mainRef = ref()
 
 const data = computed({
@@ -68,7 +71,7 @@ const data = computed({
 // const selected = ref({} as any)
 const selected = computed(() => app.selected)
 
-function onPut(_1, _2, dom: any) {
+function onPut(_1: any, _2: any, dom: any) {
   const { _inContainer } = dom.__draggable_context.element
   return !_inContainer || _inContainer === 'outer'
 }
