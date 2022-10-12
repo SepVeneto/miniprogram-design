@@ -7,6 +7,7 @@ interface ISchema {
   type: WidgetType
   label: string
   key: string
+  link?: Record<string, ISchema[]>
   [attr: string]: any
 }
 
@@ -145,7 +146,8 @@ export default defineComponent({
     }
   },
   render() {
-    const wrapper = (schema: ISchema) => {
+    const wrapper = (schema: ISchema): JSX.Element[] => {
+      let form: JSX.Element[] = []
       let node
       switch (schema.type) {
         case 'input':
@@ -168,6 +170,11 @@ export default defineComponent({
           break;
         case 'radioGroup':
           node = this.renderRadioGroup(schema)
+          if (schema.link) {
+            schema.link[this.modelValue[schema.key]]?.forEach(item => {
+              form.push(...wrapper(item))
+            })
+          }
           break;
         case 'editor':
           node = this.renderEditor(schema)
@@ -176,9 +183,8 @@ export default defineComponent({
           node = <div>暂不支持</div>
       }
       // console.log(schema._uuid)
-      return (
-        <el-form-item label={schema.label}>{node}</el-form-item>
-      )
+      return [<el-form-item label={schema.label}>{node}</el-form-item>, ...form]
+      
     }
     return (
       <el-form label-width="100px">

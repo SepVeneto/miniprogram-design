@@ -94,7 +94,7 @@ export const useApp = defineStore('app', () => {
             _schema: 'canvas',
             style: {},
             list: [],
-          }
+          },
         ]
       },
     ]

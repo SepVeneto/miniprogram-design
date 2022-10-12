@@ -191,9 +191,23 @@ const mine = [
 
 const container = [
   {
-    type: 'number',
-    label: '列',
-    key: 'grid',
+    type: 'radioGroup',
+    label: '布局类型',
+    key: 'layout',
+    link: {
+      grid: [
+        {
+          type: 'number',
+          label: '列',
+          key: 'grid',
+        },
+      ],
+      swiper: []
+    },
+    options: [
+      { label: '栅格布局', value: 'grid', },
+      { label: '轮播', value: 'swiper' },
+    ]
   }
 ]
 

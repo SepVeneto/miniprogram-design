@@ -48,7 +48,8 @@
     "free-dom": "^0.0.3",
     "fs-extra": "^10.1.0",
     "minimist": "^1.2.6",
-    "sortablejs": "^1.15.0"
+    "sortablejs": "^1.15.0",
+    "swiper": "^8.4.3"
   },
   "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor",
