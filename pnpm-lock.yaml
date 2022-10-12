@@ -63,6 +63,7 @@ importers:
       '@element-plus/icons-vue': ^2.0.9
       '@micro-zoe/micro-app': ^0.8.10
       '@mpd/schema': 'workspace: *'
+      '@types/sortablejs': ^1.15.0
       '@types/uuid': ^8.3.4
       '@typescript-eslint/eslint-plugin': ^5.4.0
       '@typescript-eslint/parser': ^5.4.0
@@ -84,15 +85,18 @@ importers:
       prettier: ^2.7.1
       sass: ^1.54.8
       sass-loader: ^13.0.2
+      sortablejs: ^1.15.0
       typescript: ~4.5.5
       uuid: ^8.3.2
       vue: ^3.2.13
       vuedraggable: ^4.1.0
       webpack: ^5.74.0
     dependencies:
+      '@types/sortablejs': 1.15.0
       free-dom: 0.0.3_vue@3.2.39
       fs-extra: 10.1.0
       minimist: 1.2.6
+      sortablejs: 1.15.0
     devDependencies:
       '@element-plus/icons-vue': 2.0.9_vue@3.2.39
       '@micro-zoe/micro-app': 0.8.10
@@ -1707,6 +1711,10 @@ packages:
     dependencies:
       '@types/node': 18.7.21
     dev: true
+
+  /@types/sortablejs/1.15.0:
+    resolution: {integrity: sha512-qrhtM7M41EhH4tZQTNw2/RJkxllBx3reiJpTbgWCM2Dx0U1sZ6LwKp9lfNln9uqE26ZMKUaPEYaD4rzvOWYtZw==}
+    dev: false
 
   /@types/uuid/8.3.4:
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
@@ -6924,6 +6932,10 @@ packages:
   /sortablejs/1.14.0:
     resolution: {integrity: sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==}
     dev: true
+
+  /sortablejs/1.15.0:
+    resolution: {integrity: sha512-bv9qgVMjUMf89wAvM6AxVvS/4MX3sPeN0+agqShejLU5z5GX4C75ow1O2e5k4L6XItUyAK3gH6AxSbXrOM5e8w==}
+    dev: false
 
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}

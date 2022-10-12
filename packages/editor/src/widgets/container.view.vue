@@ -1,50 +1,43 @@
 <template>
-  <free-scene move scale style="position: relative">
-    <draggable
-      v-model="_config.list"
-      item-key="_uuid"
-      handle=".operate"
-      :animation="200"
-      ghost-class="ghost"
-      :component-data="{
-        type: 'transition-group',
-        name: 'flip-list'
-      }"
-      :group="{name: 'widgets', pull: true, put: onPut}"
-      :class="['draggable-group', { 'is-preview': preview }]"
-      :style="viewStyle"
-    >
-      <template #item="{element}">
-        <view-render
-          v-if="['image', 'text'].includes(element._view)"
-          :type="element._view"
-          :config="element"
-          @click.stop="handleSelect(element)"
-        />
-        <draggable-wrapper
-          v-else-if="!preview"
-          dir="top"
-          :active="selected._uuid === element._uuid"
-          :hide="element.isShow != null && !element.isShow"
-          mask
-          @click.stop="handleSelect(element)"
-        >
-          <view-render v-if="element._view !== 'container'" :type="element._view" :config="element" />
-        </draggable-wrapper>
-        <view-render v-else :type="element._view" :config="element" />
-      </template>
-    </draggable>
-  </free-scene>
+  <draggable
+    v-model="_config.list"
+    item-key="_uuid"
+    handle=".operate"
+    :animation="200"
+    ghost-class="ghost"
+    :component-data="{
+      type: 'transition-group',
+      name: 'flip-list'
+    }"
+    :group="{name: 'widgets', pull: true, put: onPut}"
+    :class="['draggable-group', { 'is-preview': preview }]"
+    :style="viewStyle"
+  >
+    <template #item="{element}">
+      <draggable-wrapper
+        v-if="!preview"
+        dir="top"
+        :active="selected._uuid === element._uuid"
+        :hide="element.isShow != null && !element.isShow"
+        mask
+        @click.stop="handleSelect(element)"
+      >
+        <canvas-view v-if="element._view === 'canvas'" :config="element" />
+        <view-render v-if="element._view !== 'container' && element._view !== 'canvas'" :type="element._view" :config="element" />
+      </draggable-wrapper>
+      <view-render v-else :type="element._view" :config="element" />
+    </template>
+  </draggable>
 </template>
 
 <script lang="ts" setup>
-import { freeScene } from 'free-dom'
 import 'free-dom/dist/theme.css'
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
+import canvasView from './canvas.view.vue'
 // @ts-expect-error: from module federation
 import viewRender from 'widgets_side/viewRender'
-import { computed, inject, ref } from 'vue'
+import { computed, inject } from 'vue'
 import { useApp } from '@/store'
 import { useNormalizeStyle } from '@/hooks'
 const props = defineProps({
@@ -77,7 +70,7 @@ const preview = computed(() => {
 })
 function onPut(_1: any, _2: any, dom: any) {
   const { _inContainer } = dom.__draggable_context.element
-  return _inContainer === 'inner'
+  return !_inContainer || _inContainer === 'inner'
 }
 function handleSelect(data: any) {
   app.selected = data

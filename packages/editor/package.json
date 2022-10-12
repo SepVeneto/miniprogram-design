@@ -44,9 +44,11 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
+    "@types/sortablejs": "^1.15.0",
     "free-dom": "^0.0.3",
     "fs-extra": "^10.1.0",
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.6",
+    "sortablejs": "^1.15.0"
   },
   "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor",

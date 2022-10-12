@@ -73,7 +73,7 @@ export const useApp = defineStore('app', () => {
             _name: '图片',
             _view: 'image',
             _schema: 'image',
-            _inContainer: 'inner',
+            _inContainer: 'canvas',
             img: '/favicon.ico',
             style: { width: 40, height: 40 },
           },
@@ -81,13 +81,20 @@ export const useApp = defineStore('app', () => {
             _name: '文字',
             _view: 'text',
             _schema: 'text',
-            _inContainer: 'inner',
+            _inContainer: 'canvas',
             style: {
               fontSize: 16,
               color: '#000000'
             },
             content: '文字',
           },
+          {
+            _name: '画布',
+            _view: 'canvas',
+            _schema: 'canvas',
+            style: {},
+            list: [],
+          }
         ]
       },
     ]
