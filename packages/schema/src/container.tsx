@@ -170,17 +170,17 @@ export default defineComponent({
           break;
         case 'radioGroup':
           node = this.renderRadioGroup(schema)
-          if (schema.link) {
-            schema.link[this.modelValue[schema.key]]?.forEach(item => {
-              form.push(...wrapper(item))
-            })
-          }
           break;
         case 'editor':
           node = this.renderEditor(schema)
           break;
         default:
           node = <div>暂不支持</div>
+      }
+      if (schema.link) {
+        schema.link[this.modelValue[schema.key]]?.forEach(item => {
+          form.push(...wrapper(item))
+        })
       }
       // console.log(schema._uuid)
       return [<el-form-item label={schema.label}>{node}</el-form-item>, ...form]
