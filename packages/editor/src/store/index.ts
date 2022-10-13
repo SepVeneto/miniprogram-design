@@ -126,6 +126,9 @@ export const useApp = defineStore('app', () => {
   }
 
   function updateConfig() {
+    if (selected.value._view === 'tabbar') {
+      return;
+    }
     const parent = findParent(selected.value._uuid, currentConfig.value)
     const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid)
     parent[index] = { ...selected.value };
