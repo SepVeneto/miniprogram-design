@@ -114,17 +114,21 @@ export const useApp = defineStore('app', () => {
     window.microApp?.dispatch(val)
   }, { deep: true })
 
-  function updateConfig() {
-    const index = currentConfig.value.findIndex((item: any) => item._uuid === selected.value._uuid)
-    if (index === -1) {
-      const list = currentConfig.value.find((item: any) => item.list && item.list.length > 0)?.list ?? null
-      if (list) {
-        const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid)
-        list[tIndex] = { ...selected.value }
+  function findParent(uuid: string, root: any[]): any {
+    for (const item of root) {
+      if (item._uuid === uuid) return root
+      if (item.list) {
+        const res = findParent(uuid, item.list)
+        if (res) return res
       }
-      return;
     }
-    currentConfig.value[index] = { ...selected.value };
+    return null;
+  }
+
+  function updateConfig() {
+    const parent = findParent(selected.value._uuid, currentConfig.value)
+    const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid)
+    parent[index] = { ...selected.value };
   }
   const currentConfig = computed(() => {
     return config.value.body[currentRoute.value]
