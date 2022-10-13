@@ -1,15 +1,25 @@
 <script lang="tsx">
-import Swiper from 'swiper'
-import 'swiper/css'
-import { defineComponent, computed, inject, watch, nextTick, shallowRef, onMounted, onBeforeUnmount } from 'vue'
-import { useApp } from '@/store'
-import draggable from 'vuedraggable'
-import draggableWrapper from '@/components/draggableWrapper.vue'
-import { useNormalizeStyle } from '@/hooks'
+import Swiper from 'swiper';
+import 'swiper/css';
+import {
+  defineComponent,
+  computed,
+  inject,
+  watch,
+  nextTick,
+  shallowRef,
+  onMounted,
+  onBeforeUnmount,
+  withModifiers,
+} from 'vue';
+import { useApp } from '@/store';
+import draggable from 'vuedraggable';
+import draggableWrapper from '@/components/draggableWrapper.vue';
+import { useNormalizeStyle } from '@/hooks';
 
-import canvasView from './canvas.view.vue'
+import canvasView from './canvas.view.vue';
 // @ts-expect-error: from module federation
-import viewRender from 'widgets_side/viewRender'
+import viewRender from 'widgets_side/viewRender';
 
 export default defineComponent({
   components: {
@@ -19,75 +29,81 @@ export default defineComponent({
     viewRender,
   },
   emits: ['update:modelValue'],
-  props:{
+  props: {
     config: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup(props, { emit }) {
-    const app = useApp()
-    const editorContext = inject('Editor', { preview: false })
+    const app = useApp();
+    const editorContext = inject('Editor', { preview: false });
 
-    const previewComp = computed(() => editorContext.preview)
-    const configComp = computed({
+    const previewComp = computed(() => editorContext.preview);
+    const configComp = computed<any>({
       get() {
-        return props.config
+        return props.config;
       },
       set(val) {
-        emit('update:modelValue', val)
-      }
-    })
-    const selected = computed(() => app.selected)
-    const style = useNormalizeStyle(props.config.style)
-    const viewStyle = computed(() => (props.config.swiper
-      ? style.value
-      : {
-        display: 'grid',
-        gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`,
-        ...style.value
-      }
-    ))
-    const isSwiper = computed(() => props.config.layout === 'swiper')
-    const swiperRef = shallowRef()
+        emit('update:modelValue', val);
+      },
+    });
+    const selected = computed(() => app.selected);
+    const style = useNormalizeStyle(props.config.style);
 
-    const swiper = shallowRef()
-    watch(() => props.config.swiper, (val) => {
+    const isSwiper = computed(() => props.config.layout === 'swiper');
+    const swiperRef = shallowRef();
+
+    const viewStyle = computed(() => {
+      return isSwiper.value
+        ? style.value
+        : {
+            display: 'grid',
+            gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`,
+            ...style.value,
+          }
+        });
+
+    const swiper = shallowRef();
+    watch(isSwiper, (val) => {
       if (val) {
         nextTick().then(() => {
-          swiper.value = new Swiper(swiperRef.value, {})
-        })
+          swiper.value = new Swiper(swiperRef.value, {});
+        });
       } else {
-        swiper.value.destroy()
+        swiper.value.destroy();
       }
-    })
+    });
 
     onMounted(() => {
-      if (props.config.swiper) {
-        swiper.value = new Swiper(swiperRef.value, {})
+      if (isSwiper.value) {
+        swiper.value = new Swiper(swiperRef.value, {});
       }
-    })
+    });
     onBeforeUnmount(() => {
-      swiper.value.destroy()
-    })
+      swiper.value?.destroy();
+    });
 
     function onPut(_1: any, _2: any, dom: any) {
-      const { _inContainer } = dom.__draggable_context.element
-      return !_inContainer || _inContainer === 'inner'
+      const { _inContainer } = dom.__draggable_context.element;
+      return !_inContainer || _inContainer === 'inner';
     }
     function handleSelect(data: any) {
-      app.selected = data
-      app.updateConfig()
+      app.selected = data;
+      app.updateConfig();
     }
     function getRenderContent(element: any) {
-      switch(element._view) {
+      switch (element._view) {
         case 'canvas':
-          return (<canvas-view config={element} />)
-        case 'content':
+          return <canvas-view config={element} />;
+        case 'container':
           return;
         default:
-          return (<view-render type={element._view} config={element} />)
+          return <view-render type={element._view} config={element} />;
       }
+    }
+    function onAdd() {
+      swiper.value?.update()
     }
     return {
       configComp,
@@ -98,9 +114,10 @@ export default defineComponent({
       isSwiper,
 
       onPut,
+      onAdd,
       handleSelect,
       getRenderContent,
-    }
+    };
   },
   render() {
     const swiperWrap = (cont: any) => {
@@ -108,21 +125,25 @@ export default defineComponent({
         <div data-type="swiper" ref="swiperRef" class="swiper">
           {cont}
         </div>
-      )
-    }
-    const content = ({ element }: any) => (
-      !this.previewComp ? <draggable-wrapper
-        dir="top"
-        active={this.selected._uuid === element._uuid}
-        hide={element.isShow != null && !element.isShow}
-        mask
-        class={{'swiper-slide': this.isSwiper}}
-        onClickStop={() => this.handleSelect(element)}
-      >
-        {this.getRenderContent(element)}
-      </draggable-wrapper>
-      : (<div class={{'swiper-slide': this.isSwiper}}>{this.getRenderContent(element)}</div>)
-    )
+      );
+    };
+    const content = ({ element }: any) =>{
+      return !this.previewComp ? (
+        <draggable-wrapper
+          dir="top"
+          active={this.selected._uuid === element._uuid}
+          hide={element.isShow != null && !element.isShow}
+          mask
+          class={{ 'swiper-slide': this.isSwiper }}
+          onClick={withModifiers(() => this.handleSelect(element), ['stop'])}
+        >
+          {this.getRenderContent(element)}
+        </draggable-wrapper>
+      ) : (
+        <div class={{ 'swiper-slide': this.isSwiper }}>
+          {this.getRenderContent(element)}
+        </div>
+      )};
     const core = (
       <draggable
         v-model={this.configComp.list}
@@ -132,20 +153,25 @@ export default defineComponent({
         ghost-class="ghost"
         component-data={{
           type: 'transition-group',
-          name: 'flip-list'
+          name: 'flip-list',
         }}
         group={{ name: 'widgets', pull: true, put: this.onPut }}
-        class={['draggable-group', { 'is-preview': this.previewComp }, { 'swiper-wrapper': this.isSwiper }]}
+        class={[
+          'draggable-group',
+          { 'is-preview': this.previewComp },
+          { 'swiper-wrapper': this.isSwiper },
+        ]}
+        style={this.viewStyle}
+        onAdd={this.onAdd}
         v-slots={{
-          item: content
+          item: content,
         }}
       />
-    )
-    return this.isSwiper ? swiperWrap(core) : core
-  }
-})
+    );
+    return this.isSwiper ? swiperWrap(core) : core;
+  },
+});
 </script>
-
 
 <style scoped lang="scss">
 .draggable-group {
@@ -181,5 +207,3 @@ export default defineComponent({
   background: #c8ebfb;
 }
 </style>
-
-
