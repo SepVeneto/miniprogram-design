@@ -55,11 +55,12 @@ export default defineComponent({
       )
     }
     function renderInput(schema: ISchema) {
-      const { type, label, key, ...args } = schema
+      const { type, label, key, originType, ...args } = schema
       return (
         <el-input
           model-value={getData(prop.modelValue, key)}
           onUpdate:modelValue={(val: string) => updateData(key, val)}
+          type={originType}
           {...args}
         />
       )
