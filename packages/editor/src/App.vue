@@ -17,7 +17,9 @@
         <div
           style="padding: 20px; margin-bottom: 10px; border-bottom: 1px solid #ddd;"
         >组件</div>
-        <widget-wrap :list="app.widgetList" :preview="preview" />
+        <el-scrollbar wrap-style="height: 700px; padding: 20px;">
+          <widget-wrap :list="app.widgetList" :preview="preview" />
+        </el-scrollbar>
       </aside>
       <div class="mobile-frame">
         <div class="mobile-content">
@@ -38,7 +40,7 @@
           />
         </div>
       </div>
-      <aside style="background: #fff; width: 400px;">
+      <aside style="background: #fff; width: 400px; max-height: 810px">
         <div style="display: flex; justify-content: space-between; padding: 20px; align-items: center; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
           <span>{{selected._name || '配置'}}</span>
           <el-button
