@@ -133,11 +133,15 @@ export const useApp = defineStore('app', () => {
     const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid)
     parent[index] = { ...selected.value };
   }
+  function setSelected(data: any) {
+    selected.value = data
+  }
   const currentConfig = computed(() => {
     return config.value.body[currentRoute.value]
   })
   const selected = ref<any>({})
   return {
+    setSelected,
     updateConfig,
     setConfig,
     widgetList,

@@ -57,6 +57,7 @@ const app = useApp()
 provide('Editor', reactive({
   ...toRefs(props),
   globalConfig: computed(() => app.config.globalConfig),
+  selected: computed(() => app.selected),
 
   updateConfig,
 }))

@@ -1,6 +1,6 @@
 {
   "name": "@mpd/editor",
-  "version": "0.0.6-rc.1",
+  "version": "0.0.6-rc.2",
   "bin": {
     "mpd": "./scripts/bin.js"
   },
