@@ -11,8 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.9",
     "@wangeditor/editor": "^5.1.15",
     "@wangeditor/editor-for-vue": "^5.1.12",
+    "core-js": "^3.25.5",
+    "element-plus": "^2.2.16",
     "uuid": "^8.3.2",
     "vue": "^3.2.13"
   },
