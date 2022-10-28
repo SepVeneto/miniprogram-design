@@ -48,6 +48,9 @@ export default defineComponent({
         emit('update:modelValue', val);
       },
     });
+    watch(() => props.config.list.length, () => {
+      isSwiper.value && onUpdate()
+    })
     const selected = computed(() => app.selected);
     const style = useNormalizeStyle(props.config.style);
 
@@ -102,7 +105,8 @@ export default defineComponent({
           return <view-render type={element._view} config={element} />;
       }
     }
-    function onAdd() {
+    async function onUpdate() {
+      await nextTick()
       swiper.value?.update()
     }
     return {
@@ -114,7 +118,7 @@ export default defineComponent({
       isSwiper,
 
       onPut,
-      onAdd,
+      onUpdate,
       handleSelect,
       getRenderContent,
     };
@@ -162,7 +166,7 @@ export default defineComponent({
           { 'swiper-wrapper': this.isSwiper },
         ]}
         style={this.viewStyle}
-        onAdd={this.onAdd}
+        // onAdd={this.onUpdate}
         v-slots={{
           item: content,
         }}
