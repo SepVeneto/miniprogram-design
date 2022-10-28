@@ -33,7 +33,7 @@ defineProps({
 })
 
 function onClone(origin: Record<string, unknown>) {
-  const _data = { ...origin, _uuid: uuidv4() }
+  const _data = JSON.parse(JSON.stringify({ ...origin, _uuid: uuidv4() }))
   return _data
 }
 </script>
