@@ -1,6 +1,6 @@
 {
   "name": "@mpd/editor",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "bin": {
     "mpd": "./scripts/bin.js"
   },
@@ -44,8 +44,12 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
+    "@types/sortablejs": "^1.15.0",
+    "free-dom": "^0.0.3",
     "fs-extra": "^10.1.0",
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.6",
+    "sortablejs": "^1.15.0",
+    "swiper": "^8.4.3"
   },
   "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor",

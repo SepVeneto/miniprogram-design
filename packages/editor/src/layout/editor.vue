@@ -23,11 +23,12 @@
           :active="selected._uuid === item._uuid"
           :hide="item.isShow != null && !item.isShow"
           :container="item._view === 'container'"
-          :mask="item._view !== 'container'"
+          :mask="item._view !== 'container' && item._view !== 'canvas'"
           @click="handleSelect(item)"
         >
-          <view-render v-if="item._view !== 'container'" :type="item._view" :config="item" @update:config="updateConfig" />
           <container-view v-if="item._view === 'container'" :config="item" />
+          <canvas-view v-else-if="item._view === 'canvas'" :config="item" />
+          <view-render v-else :type="item._view" :config="item" @update:config="updateConfig" />
         </draggable-wrapper>
         <template v-else>
           <container-view v-if="item._view === 'container'" :config="item" />
@@ -41,20 +42,25 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import draggableWrapper from '@/components/draggableWrapper.vue'
-import { Rank } from '@element-plus/icons-vue'
 import { ref, computed, provide, reactive, toRefs } from 'vue'
 import { useApp } from '@/store';
 import containerView from '@/widgets/container.view.vue';
+// @ts-expect-error: from module federation
 import viewRender from 'widgets_side/viewRender'
-// const menuPreview = defineAsyncComponent(() => import('widgets_side/menu'))
+import canvasView from '@/widgets/canvas.view.vue'
 
 const props = defineProps({
   preview: Boolean,
 })
-
-provide('Editor', reactive({ ...toRefs(props), updateConfig }))
-
 const app = useApp()
+
+provide('Editor', reactive({
+  ...toRefs(props),
+  globalConfig: computed(() => app.config.globalConfig),
+
+  updateConfig,
+}))
+
 const mainRef = ref()
 
 const data = computed({
@@ -68,8 +74,9 @@ const data = computed({
 // const selected = ref({} as any)
 const selected = computed(() => app.selected)
 
-function onPut(_1, _2, dom: any) {
+function onPut(_1: any, _2: any, dom: any) {
   const { _inContainer } = dom.__draggable_context.element
+  // console.log(_1, _2, dom.__draggable_context.element, target)
   return !_inContainer || _inContainer === 'outer'
 }
 function handleSelect(data: any) {

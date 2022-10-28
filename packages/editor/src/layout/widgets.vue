@@ -1,6 +1,6 @@
 <template>
   <draggable
-    v-model="widgetList"
+    :model-value="list"
     item-key="type"
     :group="{ name: 'widgets', pull: preview ? false : 'clone', put: false }"
     :clone="onClone"
@@ -24,16 +24,16 @@
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
 import { v4 as uuidv4 } from 'uuid'
-import { useApp } from '@/store'
-import { computed } from 'vue'
 defineProps({
   preview: Boolean,
+  list: {
+    type: Array,
+    default: () => ([])
+  }
 })
-const app = useApp()
-const widgetList = computed(() => app.widgetList)
 
 function onClone(origin: Record<string, unknown>) {
-  const _data = { ...origin, _uuid: uuidv4() }
+  const _data = JSON.parse(JSON.stringify({ ...origin, _uuid: uuidv4() }))
   return _data
 }
 </script>

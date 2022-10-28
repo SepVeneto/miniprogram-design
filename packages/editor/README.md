@@ -54,3 +54,11 @@ root
     │
     └───js
 ```
+
+### 使用全局配置
+
+在开发组件时，可以通过`inject`使用`globalConfig`来获取全局配置
+
+```js
+const context = inject('Editor')
+```

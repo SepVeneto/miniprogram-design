@@ -191,9 +191,23 @@ const mine = [
 
 const container = [
   {
-    type: 'number',
-    label: '列',
-    key: 'grid',
+    type: 'radioGroup',
+    label: '布局类型',
+    key: 'layout',
+    link: {
+      grid: [
+        {
+          type: 'number',
+          label: '列',
+          key: 'grid',
+        },
+      ],
+      swiper: []
+    },
+    options: [
+      { label: '栅格布局', value: 'grid', },
+      { label: '轮播', value: 'swiper' },
+    ]
   }
 ]
 
@@ -261,7 +275,64 @@ const entry = [
   }
 ]
 
+const globalConfig = [
+  {
+    type: 'colorPicker',
+    label: '主题色',
+    key: 'color'
+  },
+  {
+    type: 'colorPicker',
+    label: '空记录背景色',
+    key: 'emptyColor',
+  },
+  {
+    type: 'colorPicker',
+    label: '气泡颜色',
+    key: 'bubbleColor',
+  },
+  {
+    type: 'image',
+    label: '登录背景图片',
+    key: 'loginBg',
+  }
+]
+
+const text = [
+  {
+    type: 'colorPicker',
+    label: '字体颜色',
+    key: 'style.color',
+  },
+  {
+    type: 'number',
+    label: '字体大小',
+    key: 'style.fontSize',
+  }
+]
+
+const image = [
+  // {
+  //   type: 'number',
+  //   label: '宽度',
+  //   key: 'style.width',
+  // },
+  // {
+  //   type: 'number',
+  //   label: '高度',
+  //   key: 'style.height',
+  // },
+  {
+    type: 'image',
+    label: '图片',
+    key: 'img',
+  }
+]
+
 export const schema = {
+  image,
+  text,
+  globalConfig,
   card: cardSchema,
   explain,
   shop,

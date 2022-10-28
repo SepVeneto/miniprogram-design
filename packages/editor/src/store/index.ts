@@ -41,31 +41,62 @@ export const useApp = defineStore('app', () => {
     schema.value = { ...schemaConfig }
     widgetList.value = [
       {
-        "_name": "容器",
-        "_view": "container",
-        "_schema": "container",
-        grid: 2,
-        style: {},
-        list: [],
+        name: '基本组件',
+        group: [
+          {
+            "_name": "菜单项",
+            "_view": "menuItem",
+            "_schema": "menuItem",
+            title: '标题',
+            style: {
+              background: '#fff',
+            }
+          },
+          {
+            "_name": "说明",
+            "_view": "menuItem",
+            "_schema": "desc",
+            title: '说明',
+            style: {
+              background: '#fff'
+            }
+          },
+          {
+            "_name": "容器",
+            "_view": "container",
+            "_schema": "container",
+            grid: 2,
+            style: {},
+            list: [],
+          },
+          {
+            _name: '图片',
+            _view: 'image',
+            _schema: 'image',
+            _inContainer: 'canvas',
+            img: '/favicon.ico',
+            style: { width: 40, height: 40 },
+          },
+          {
+            _name: '文字',
+            _view: 'text',
+            _schema: 'text',
+            _inContainer: 'canvas',
+            style: {
+              fontSize: 16,
+              color: '#000000'
+            },
+            content: '文字',
+          },
+          {
+            _name: '画布',
+            _view: 'canvas',
+            _schema: 'canvas',
+            style: {},
+            list: [],
+          },
+        ]
       },
-      {
-        "_name": "菜单项",
-        "_view": "menuItem",
-        "_schema": "menuItem",
-        title: '标题',
-        style: {
-          background: '#fff',
-        }
-      },
-      {
-        "_name": "说明",
-        "_view": "menuItem",
-        "_schema": "desc",
-        title: '说明',
-        style: {
-          background: '#fff'
-        }
-      }
     ]
     currentRoute.value = config.value.tabbars.list[0].type
   }
@@ -83,17 +114,24 @@ export const useApp = defineStore('app', () => {
     window.microApp?.dispatch(val)
   }, { deep: true })
 
-  function updateConfig() {
-    const index = currentConfig.value.findIndex((item: any) => item._uuid === selected.value._uuid)
-    if (index === -1) {
-      const list = currentConfig.value.find((item: any) => item.list && item.list.length > 0)?.list ?? null
-      if (list) {
-        const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid)
-        list[tIndex] = { ...selected.value }
+  function findParent(uuid: string, root: any[]): any {
+    for (const item of root) {
+      if (item._uuid === uuid) return root
+      if (item.list) {
+        const res = findParent(uuid, item.list)
+        if (res) return res
       }
+    }
+    return null;
+  }
+
+  function updateConfig() {
+    if (selected.value._view === 'tabbar') {
       return;
     }
-    currentConfig.value[index] = { ...selected.value };
+    const parent = findParent(selected.value._uuid, currentConfig.value)
+    const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid)
+    parent[index] = { ...selected.value };
   }
   const currentConfig = computed(() => {
     return config.value.body[currentRoute.value]
