@@ -3,9 +3,9 @@
     <div :class="['footer-container', { 'is-active': active }, { 'is-preview': preview }]">
       <ul>
         <li
-          class="bottom-nav-item"
           v-for="(item, index) in configList"
           :key="item._uuid"
+          class="bottom-nav-item"
           @click="handleSelect(index, item.type)"
         >
           <div class="li_content">
@@ -13,13 +13,12 @@
               <img
                 :src="tabbarIdx == index ? item.activeImage: item.inactiveImage"
                 alt=""
-              />
+              >
             </div>
             <span
               class="bottom-text1"
               :style="{ color: tabbarIdx == index ? item.activeColor : '' }"
-              >{{ item.text }}</span
-            >
+            >{{ item.text }}</span>
           </div>
         </li>
       </ul>
@@ -28,13 +27,13 @@
 </template>
 
 <script lang="ts" setup>
-import homeIconInactive from './assets/sy_icon_sy_sel.png'
-import homeIconActive from './assets/sy_icon_active_sy_sel.png'
-import myIconInactive from './assets/my_icon_sy_sel.png'
-import myIconActive from './assets/my_icon_active_sy_sel.png'
-import { ref, computed, PropType } from 'vue'
-import { TabbarWidgetConfig } from '../type'
-import { useApp } from '@/store'
+import homeIconInactive from './assets/sy_icon_sy_sel.png';
+import homeIconActive from './assets/sy_icon_active_sy_sel.png';
+import myIconInactive from './assets/my_icon_sy_sel.png';
+import myIconActive from './assets/my_icon_active_sy_sel.png';
+import { ref, computed, PropType } from 'vue';
+import { TabbarWidgetConfig } from '../type';
+import { useApp } from '@/store';
 const props = defineProps({
   preview: Boolean,
   active: Boolean,
@@ -42,13 +41,13 @@ const props = defineProps({
     type: Object as PropType<TabbarWidgetConfig>,
     default: () => ({
       list: [],
-    })
-  }
-})
-const app = useApp()
+    }),
+  },
+});
+const app = useApp();
 const configList = computed(() => {
-  const _list = props.config.list ?? []
-  return _list
+  const _list = props.config.list ?? [];
+  return _list;
   // return _list.map(item => {
   //   if (item.id === 1) {
   //     return {
@@ -66,12 +65,12 @@ const configList = computed(() => {
   //     return item;
   //   }
   // })
-})
-const tabbarIdx = ref(0)
-const tabbarType = ref()
-function handleSelect(index: number, type: string) {
-  app.currentRoute = type
-  app.currentTab = configList.value[index]
+});
+const tabbarIdx = ref(0);
+const tabbarType = ref();
+function handleSelect (index: number, type: string) {
+  app.currentRoute = type;
+  app.currentTab = configList.value[index];
   tabbarIdx.value = index;
   tabbarType.value = type;
 }

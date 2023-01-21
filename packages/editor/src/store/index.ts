@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { computed, ref, shallowRef, watch } from 'vue';
-import { v4 as uuidv4 } from 'uuid'
-import { TabbarWidgetConfig } from '@/layout/tabbar/type'
+import { v4 as uuidv4 } from 'uuid';
+import { TabbarWidgetConfig } from '@/layout/tabbar/type';
 
-import { schema as schemaConfig} from '@/mock.schema'
-import mock from '@/mock.json'
+import { schema as schemaConfig } from '@/mock.schema';
+import mock from '@/mock.json';
 
 export interface GlobalConfig {
   color: string
@@ -21,7 +21,7 @@ interface Config{
 }
 
 export const useApp = defineStore('app', () => {
-  const widgetList = ref<any[]>([])
+  const widgetList = ref<any[]>([]);
   const config = ref<any>({
     globalConfig: {},
     body: {},
@@ -29,42 +29,42 @@ export const useApp = defineStore('app', () => {
       uuid: uuidv4(),
       type: 'tabbar',
       list: [],
-    }
+    },
   });
-  const currentTab = ref({})
-  const currentRoute = ref()
-  const schema = shallowRef<Record<string, any>>({})
+  const currentTab = ref({});
+  const currentRoute = ref();
+  const schema = shallowRef<Record<string, any>>({});
 
   /** mock */
   if (!window.__MICRO_APP_ENVIRONMENT__) {
-    config.value = mock
-    schema.value = { ...schemaConfig }
+    config.value = mock;
+    schema.value = { ...schemaConfig };
     widgetList.value = [
       {
         name: '基本组件',
         group: [
           {
-            "_name": "菜单项",
-            "_view": "menuItem",
-            "_schema": "menuItem",
+            _name: '菜单项',
+            _view: 'menuItem',
+            _schema: 'menuItem',
             title: '标题',
             style: {
               background: '#fff',
-            }
+            },
           },
           {
-            "_name": "说明",
-            "_view": "menuItem",
-            "_schema": "desc",
+            _name: '说明',
+            _view: 'menuItem',
+            _schema: 'desc',
             title: '说明',
             style: {
-              background: '#fff'
-            }
+              background: '#fff',
+            },
           },
           {
-            "_name": "容器",
-            "_view": "container",
-            "_schema": "container",
+            _name: '容器',
+            _view: 'container',
+            _schema: 'container',
             grid: 2,
             style: {},
             list: [],
@@ -84,7 +84,7 @@ export const useApp = defineStore('app', () => {
             _inContainer: 'canvas',
             style: {
               fontSize: 16,
-              color: '#000000'
+              color: '#000000',
             },
             content: '文字',
           },
@@ -95,48 +95,48 @@ export const useApp = defineStore('app', () => {
             style: {},
             list: [],
           },
-        ]
+        ],
       },
-    ]
-    currentRoute.value = config.value.tabbars.list[0].type
+    ];
+    currentRoute.value = config.value.tabbars.list[0].type;
   }
 
-  function setConfig(data: Config, widgets: Record<string, any>, _schema: any) {
-    config.value = data
-    currentRoute.value = config.value.tabbars.list[0].type
+  function setConfig (data: Config, widgets: Record<string, any>, _schema: any) {
+    config.value = data;
+    currentRoute.value = config.value.tabbars.list[0].type;
     // currentTab.value = data.tabbars.list[currentRoute.value]
 
-    widgetList.value = Object.values(widgets)
+    widgetList.value = Object.values(widgets);
 
-    schema.value = _schema
+    schema.value = _schema;
   }
   watch(config, (val) => {
-    window.microApp?.dispatch(val)
-  }, { deep: true })
+    window.microApp?.dispatch(val);
+  }, { deep: true });
 
-  function findParent(uuid: string, root: any[]): any {
+  function findParent (uuid: string, root: any[]): any {
     for (const item of root) {
-      if (item._uuid === uuid) return root
+      if (item._uuid === uuid) return root;
       if (item.list) {
-        const res = findParent(uuid, item.list)
-        if (res) return res
+        const res = findParent(uuid, item.list);
+        if (res) return res;
       }
     }
     return null;
   }
 
-  function updateConfig() {
+  function updateConfig () {
     if (selected.value._view === 'tabbar') {
       return;
     }
-    const parent = findParent(selected.value._uuid, currentConfig.value)
-    const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid)
+    const parent = findParent(selected.value._uuid, currentConfig.value);
+    const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid);
     parent[index] = { ...selected.value };
   }
   const currentConfig = computed(() => {
-    return config.value.body[currentRoute.value]
-  })
-  const selected = ref<any>({})
+    return config.value.body[currentRoute.value];
+  });
+  const selected = ref<any>({});
   return {
     updateConfig,
     setConfig,
@@ -147,4 +147,4 @@ export const useApp = defineStore('app', () => {
     config,
     schema,
   };
-})
+});

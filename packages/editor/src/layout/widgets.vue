@@ -14,7 +14,9 @@
       >
         <div
           style="font-weight: bold; padding-left: 20px; border-left: 4px solid #4089ef;"
-        >{{element._name}}</div>
+        >
+          {{ element._name }}
+        </div>
         <!-- <el-image :src="element.img" /> -->
       </div>
     </template>
@@ -22,18 +24,18 @@
 </template>
 
 <script lang="ts" setup>
-import draggable from 'vuedraggable'
-import { v4 as uuidv4 } from 'uuid'
+import draggable from 'vuedraggable';
+import { v4 as uuidv4 } from 'uuid';
 defineProps({
   preview: Boolean,
   list: {
     type: Array,
-    default: () => ([])
-  }
-})
+    default: () => ([]),
+  },
+});
 
-function onClone(origin: Record<string, unknown>) {
-  const _data = JSON.parse(JSON.stringify({ ...origin, _uuid: uuidv4() }))
-  return _data
+function onClone (origin: Record<string, unknown>) {
+  const _data = JSON.parse(JSON.stringify({ ...origin, _uuid: uuidv4() }));
+  return _data;
 }
 </script>

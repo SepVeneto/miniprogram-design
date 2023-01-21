@@ -1,8 +1,7 @@
-import microApp from '@micro-zoe/micro-app'
-import { nextTick } from 'vue-demi'
-import { onMounted, getCurrentInstance } from 'vue-demi'
-export async function useDesign(dom, options) {
-  const { url, name = 'miniprogram-design' } = options
+import microApp from '@micro-zoe/micro-app';
+import { nextTick, onMounted, getCurrentInstance } from 'vue-demi';
+export async function useDesign (dom, options) {
+  const { url, name = 'miniprogram-design' } = options;
   await new Promise((resolve, reject) => {
     tryOnMounted(() => {
       microApp.renderApp({
@@ -14,27 +13,27 @@ export async function useDesign(dom, options) {
         'disable-patch-request': false, // 关闭对子应用请求的拦截
       }).then((result) => {
         if (result) {
-          resolve()
+          resolve();
         } else {
-          reject(new Error('应用加载失败'))
+          reject(new Error('应用加载失败'));
         }
-      })
-    })
-  })
+      });
+    });
+  });
 
-  function set(data) {
-    microApp.setData(name, data)
+  function set (data) {
+    microApp.setData(name, data);
   }
-  function get() {
-    return microApp.getData(name)
+  function get () {
+    return microApp.getData(name);
   }
-  return [get, set]
+  return [get, set];
 }
 
-function tryOnMounted(fn) {
+function tryOnMounted (fn) {
   if (getCurrentInstance()) {
-    onMounted(fn)
+    onMounted(fn);
   } else {
-    nextTick(fn)
+    nextTick(fn);
   }
 }

@@ -1,6 +1,6 @@
-const { defineConfig } = require('@vue/cli-service')
-const webpack = require('webpack')
-const isProduction = process.env.NODE_ENV === 'production'
+const { defineConfig } = require('@vue/cli-service');
+const webpack = require('webpack');
+const isProduction = process.env.NODE_ENV === 'production';
 // const htmlWebpackPlugin = require('html-webpack-plugin')
 // const path = require('path')
 
@@ -14,11 +14,11 @@ module.exports = defineConfig({
     proxy: {
       '/static': {
         target: 'http://localhost:8000',
-      }
+      },
     },
     headers: {
       'Access-Control-Allow-Origin': '*',
-    }
+    },
   },
   configureWebpack: {
     plugins: [
@@ -26,23 +26,23 @@ module.exports = defineConfig({
         name: 'editor_side',
         filename: 'remoteEntry.js',
         remotes: {
-          widgets_side: `widgets_side@${isProduction ? '/miniprogram-design' : 'http://localhost:8090'}/remoteEntry.js`
+          widgets_side: `widgets_side@${isProduction ? '/miniprogram-design' : 'http://localhost:8090'}/remoteEntry.js`,
         },
         shared: {
           vue: {
-            singleton: true
+            singleton: true,
           },
           '@vueuse/core': { singleton: true },
           'free-dom': { singleton: true },
-        }
-      })
-    ]
+        },
+      }),
+    ],
   },
   // configureWebpack: {
   //   target: 'es2020',
   //   experiments: {
   //     outputModule: true
-  //   }, 
+  //   },
   //   plugins: [
   //     new webpack.container.ModuleFederationPlugin({
   //       name: 'miniprogram-design',
@@ -64,5 +64,5 @@ module.exports = defineConfig({
   //     })
   //   ]
   // },
-  transpileDependencies: true
-})
+  transpileDependencies: true,
+});

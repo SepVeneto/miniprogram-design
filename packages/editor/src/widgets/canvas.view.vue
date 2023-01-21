@@ -1,5 +1,9 @@
 <template>
-  <free-scene move scale style="position: relative;">
+  <free-scene
+    move
+    scale
+    style="position: relative;"
+  >
     <draggable
       v-model="_config.list"
       item-key="_uuid"
@@ -18,34 +22,34 @@
 </template>
 
 <script lang="ts" setup>
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable';
 // import Sortable from 'sortablejs'
-import { freeScene } from 'free-dom'
-import 'free-dom/dist/theme.css'
+import { freeScene } from 'free-dom';
+import 'free-dom/dist/theme.css';
 // @ts-expect-error: from module federation
-import viewRender from 'widgets_side/viewRender'
-import { computed } from 'vue'
+import viewRender from 'widgets_side/viewRender';
+import { computed } from 'vue';
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   config: {
     type: Object,
-    default: () => ({})
-  }
-})
-const _config = computed({
-  get() {
-    return props.config
+    default: () => ({}),
   },
-  set(val) {
-    console.log('trigger')
-    emit('update:modelValue', val)
-  }
-})
+});
+const _config = computed({
+  get () {
+    return props.config;
+  },
+  set (val) {
+    console.log('trigger');
+    emit('update:modelValue', val);
+  },
+});
 
-function onPut(_1: any, _2: any, dom: any) {
-  const { _inContainer } = dom.__draggable_context.element
-  return _inContainer === 'canvas'
+function onPut (_1: any, _2: any, dom: any) {
+  const { _inContainer } = dom.__draggable_context.element;
+  return _inContainer === 'canvas';
 }
 </script>
 

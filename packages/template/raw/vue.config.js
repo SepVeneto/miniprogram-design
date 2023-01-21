@@ -1,5 +1,5 @@
-const { defineConfig } = require('@vue/cli-service')
-const webpack = require('webpack')
+const { defineConfig } = require('@vue/cli-service');
+const webpack = require('webpack');
 
 module.exports = defineConfig({
   publicPath: '/miniprogram-design',
@@ -7,8 +7,8 @@ module.exports = defineConfig({
   devServer: {
     port: 9999,
     headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   chainWebpack: (config) => {
     config.optimization.delete('splitChunks');
@@ -40,19 +40,19 @@ module.exports = defineConfig({
         filename: 'remoteEntry.js',
         library: {
           type: 'umd',
-          name: 'widgets_side'
+          name: 'widgets_side',
         },
         exposes: {
-          './viewRender': './src/components/viewRender.vue'
+          './viewRender': './src/components/viewRender.vue',
         },
         shared: {
           vue: {
-            singleton: true
+            singleton: true,
           },
           '@vueuse/core': { singleton: true },
-        }
-      })
-    ]
+        },
+      }),
+    ],
   },
-  transpileDependencies: true
-})
+  transpileDependencies: true,
+});

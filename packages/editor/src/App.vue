@@ -7,7 +7,9 @@
       <el-button
         :type="preview ? 'primary' : ''"
         @click="preview = !preview"
-      >预览</el-button>
+      >
+        预览
+      </el-button>
     </header>
     <main
       ref="mainRef"
@@ -16,16 +18,21 @@
       <aside style="width: 300px; background: #fff;">
         <div
           style="padding: 20px; margin-bottom: 10px; border-bottom: 1px solid #ddd;"
-        >组件</div>
+        >
+          组件
+        </div>
         <el-scrollbar wrap-style="height: 700px; padding: 20px;">
-          <widget-wrap :list="app.widgetList" :preview="preview" />
+          <widget-wrap
+            :list="app.widgetList"
+            :preview="preview"
+          />
         </el-scrollbar>
       </aside>
       <div class="mobile-frame">
         <div class="mobile-content">
           <header class="header">
-            <span>{{app.currentTab.text}}</span>
-            <span class="icon"></span>
+            <span>{{ app.currentTab.text }}</span>
+            <span class="icon" />
           </header>
           <el-scrollbar
             style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
@@ -42,13 +49,15 @@
       </div>
       <aside style="background: #fff; width: 400px; max-height: 810px">
         <div style="display: flex; justify-content: space-between; padding: 20px; align-items: center; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
-          <span>{{selected._name || '配置'}}</span>
+          <span>{{ selected._name || '配置' }}</span>
           <el-button
             type="primary"
             text
-            @click="handleDelete"
             :disabled="preview || !selected._schema || ['tabbar'].includes(selected._schema)"
-          >删除</el-button>
+            @click="handleDelete"
+          >
+            删除
+          </el-button>
         </div>
         <el-scrollbar wrap-style="height: 700px; padding: 20px;">
           <v-config />
@@ -59,39 +68,39 @@
 </template>
 
 <script lang="ts" setup>
-import VEditor from '@/layout/editor.vue'
-import widgetWrap from '@/layout/widgetWrap.vue'
-import VConfig from '@/layout/config.vue'
-import { tabbarPreview } from '@/layout/tabbar'
+import VEditor from '@/layout/editor.vue';
+import widgetWrap from '@/layout/widgetWrap.vue';
+import VConfig from '@/layout/config.vue';
+import { tabbarPreview } from '@/layout/tabbar';
 import { ref, computed } from 'vue';
-import { useApp } from '@/store'
-const app = useApp()
-const mainRef = ref()
-const tabbar = computed(() => app.config.tabbars)
-const selected = computed(() => app.selected)
-const preview = ref(false)
+import { useApp } from '@/store';
+const app = useApp();
+const mainRef = ref();
+const tabbar = computed(() => app.config.tabbars);
+const selected = computed(() => app.selected);
+const preview = ref(false);
 
-function handleDelete() {
-  const currentConfig = app.config.body[app.currentRoute]
-  const index = currentConfig.findIndex(item => item._uuid === selected.value._uuid)
+function handleDelete () {
+  const currentConfig = app.config.body[app.currentRoute];
+  const index = currentConfig.findIndex(item => item._uuid === selected.value._uuid);
   if (index === -1) {
-    const list = currentConfig.find((item: any) => item.list && item.list.length > 0)?.list ?? null
+    const list = currentConfig.find((item: any) => item.list && item.list.length > 0)?.list ?? null;
     if (list) {
-      const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid)
-      list.splice(tIndex, 1)
+      const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid);
+      list.splice(tIndex, 1);
     }
-    app.selected = {}
+    app.selected = {};
     return;
   }
-  currentConfig.splice(index, 1)
-  app.selected = {}
+  currentConfig.splice(index, 1);
+  app.selected = {};
 }
-function handleSelect(data: any) {
-  app.selected = data
+function handleSelect (data: any) {
+  app.selected = data;
 }
-function handleOutside({ target }: Event) {
+function handleOutside ({ target }: Event) {
   if (target === mainRef.value) {
-    app.selected = {}
+    app.selected = {};
   }
 }
 

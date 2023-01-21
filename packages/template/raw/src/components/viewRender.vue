@@ -1,5 +1,8 @@
 <template>
-  <component :is="compView" v-bind="$attrs" />
+  <component
+    :is="compView"
+    v-bind="$attrs"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -9,11 +12,11 @@ const props = defineProps({
   type: {
     type: String,
     required: true,
-  }
-})
-const compView = shallowRef()
+  },
+});
+const compView = shallowRef();
 watch(() => props.type, (val) => {
   if (!val) return;
-  compView.value = defineAsyncComponent(() => import(`@/widgets/${val}.view.vue`))
-}, { immediate: true })
+  compView.value = defineAsyncComponent(() => import(`@/widgets/${val}.view.vue`));
+}, { immediate: true });
 </script>

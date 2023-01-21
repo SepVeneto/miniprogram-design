@@ -40,23 +40,23 @@
 </template>
 
 <script lang="ts" setup>
-import draggable from 'vuedraggable'
-import draggableWrapper from '@/components/draggableWrapper.vue'
-import ossUpload from '@/components/ossUpload.vue'
-import { ref, watch, PropType } from 'vue'
-import { TabbarWidgetConfig } from '../type'
-const emit = defineEmits(['update:modelValue'])
+import draggable from 'vuedraggable';
+import draggableWrapper from '@/components/draggableWrapper.vue';
+import ossUpload from '@/components/ossUpload.vue';
+import { ref, watch, PropType } from 'vue';
+import { TabbarWidgetConfig } from '../type';
+const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   modelValue: {
     type: Object as PropType<TabbarWidgetConfig>,
-    default: () => ({})
-  }
-})
-const data = ref({} as TabbarWidgetConfig)
+    default: () => ({}),
+  },
+});
+const data = ref({} as TabbarWidgetConfig);
 watch(() => props.modelValue, (val) => {
   data.value = val;
-}, { deep: true, immediate: true })
+}, { deep: true, immediate: true });
 watch(data, (val) => {
-  emit('update:modelValue', val)
-}, { deep: true, immediate: true })
+  emit('update:modelValue', val);
+}, { deep: true, immediate: true });
 </script>

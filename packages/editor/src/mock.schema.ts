@@ -35,8 +35,8 @@ const cardSchema = [
     type: 'image',
     label: '背景图片',
     key: 'defaultImg',
-  }
-]
+  },
+];
 
 const explain = [
   {
@@ -75,8 +75,8 @@ const explain = [
     type: 'image',
     label: '背景图片',
     key: 'defaultImg',
-  }
-]
+  },
+];
 
 const shop = [
   {
@@ -115,8 +115,8 @@ const shop = [
     type: 'image',
     label: '背景图片',
     key: 'defaultImg',
-  }
-]
+  },
+];
 
 const reserve = [
   {
@@ -162,14 +162,14 @@ const reserve = [
   {
     type: 'input',
     label: '菜品预定描述',
-    key: 'desc.content'
+    key: 'desc.content',
   },
   {
     type: 'colorPicker',
     label: '字体颜色',
     key: 'desc.style.color',
   },
-]
+];
 
 const mine = [
   ...cardSchema,
@@ -186,8 +186,8 @@ const mine = [
     key: 'recharge',
     trueLabel: 1,
     falseLabel: 0,
-  }
-]
+  },
+];
 
 const container = [
   {
@@ -202,14 +202,14 @@ const container = [
           key: 'grid',
         },
       ],
-      swiper: []
+      swiper: [],
     },
     options: [
-      { label: '栅格布局', value: 'grid', },
+      { label: '栅格布局', value: 'grid' },
       { label: '轮播', value: 'swiper' },
-    ]
-  }
-]
+    ],
+  },
+];
 
 const menuItem = [
   {
@@ -221,8 +221,8 @@ const menuItem = [
     type: 'checkbox',
     label: '可见性',
     key: 'isShow',
-  }
-]
+  },
+];
 
 const desc = [
   {
@@ -235,20 +235,20 @@ const desc = [
     label: '可见性',
     key: 'isShow',
   },
-]
+];
 
 const link = [
   {
     type: 'checkbox',
     label: '可见性',
-    key: 'isShow'
+    key: 'isShow',
   },
   {
     type: 'input',
     label: '客服电话',
     key: 'phone',
   },
-]
+];
 
 const entry = [
   {
@@ -272,14 +272,14 @@ const entry = [
     type: 'image',
     label: '背景图片',
     key: 'defaultImg',
-  }
-]
+  },
+];
 
 const globalConfig = [
   {
     type: 'colorPicker',
     label: '主题色',
-    key: 'color'
+    key: 'color',
   },
   {
     type: 'colorPicker',
@@ -295,8 +295,8 @@ const globalConfig = [
     type: 'image',
     label: '登录背景图片',
     key: 'loginBg',
-  }
-]
+  },
+];
 
 const text = [
   {
@@ -308,8 +308,8 @@ const text = [
     type: 'number',
     label: '字体大小',
     key: 'style.fontSize',
-  }
-]
+  },
+];
 
 const image = [
   // {
@@ -326,8 +326,8 @@ const image = [
     type: 'image',
     label: '图片',
     key: 'img',
-  }
-]
+  },
+];
 
 export const schema = {
   image,
@@ -343,4 +343,4 @@ export const schema = {
   desc,
   link,
   entry,
-}
+};
