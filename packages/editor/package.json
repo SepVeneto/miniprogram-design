@@ -1,5 +1,5 @@
 {
-  "name": "@mpd/editor",
+  "name": "@sepveneto/mpd-editor",
   "version": "0.1.1",
   "bin": {
     "mpd": "./scripts/bin.js"
@@ -18,7 +18,7 @@
   "devDependencies": {
     "@element-plus/icons-vue": "^2.0.9",
     "@micro-zoe/micro-app": "^0.8.10",
-    "@mpd/schema": "workspace: *",
+    "@sepveneto/mpd-schema": "workspace: *",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@types/sortablejs": "^1.15.0",
-    "free-dom": "^0.0.3",
+    "@sepveneto/free-dom": "^0.0.6",
     "fs-extra": "^10.1.0",
     "minimist": "^1.2.6",
     "sortablejs": "^1.15.0",

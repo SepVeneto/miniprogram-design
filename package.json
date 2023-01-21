@@ -5,5 +5,10 @@
   "description": "",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["@babel/core"]
+    }
+  }
 }

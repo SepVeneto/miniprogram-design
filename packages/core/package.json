@@ -1,5 +1,5 @@
 {
-  "name": "@mpd/core",
+  "name": "@sepveneto/mpd-core",
   "version": "0.0.2",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,9 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path ."
   },
   "peerDependencies": {
-    "@micro-zoe/micro-app": "^1.0.0-alpha.9"
+    "@micro-zoe/micro-app": "^1.0.0-alpha.9",
+    "@vue/composition-api": "^1.0.0-rc.1",
+    "vue": "^2.0.0 || >=3.0.0"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@micro-zoe/micro-app": "^0.8.10",
+    "vue": "^3.2.13",
     "vue-demi": "^0.13.11"
   }
 }
