@@ -27,8 +27,14 @@ import { computed, PropType } from 'vue';
 import type { UploadRequestOptions } from 'element-plus';
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
-  width: String,
-  height: String,
+  width: {
+    type: String,
+    default: undefined,
+  },
+  height: {
+    type: String,
+    default: undefined,
+  },
   httpRequest: {
     type: Function as PropType<any>,
     default: undefined,
@@ -54,7 +60,7 @@ const imageUrl = computed({
 });
 const uploadRequest: any = window.microApp?.getData()?.upload ?? noop;
 function noop () {
-
+  /* empty */
 }
 async function customRequest (data: UploadRequestOptions) {
   const res = await uploadRequest(data);

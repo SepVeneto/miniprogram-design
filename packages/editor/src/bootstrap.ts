@@ -31,12 +31,9 @@ function unmount () {
   app = null;
   window.microApp?.clearDataListener();
 }
-mount();
-// if (window.__MICRO_APP_ENVIRONMENT__) {
-//   console.log('enter')
-//   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//   // @ts-ignore
-//   window[`micro-app-${window.__MICRO_APP_NAME__}`] = { mount, unmount }
-// } else {
-//   mount()
-// }
+
+window.mount = mount;
+window.unmount = unmount;
+if (window.__MICRO_APP_ENVIRONMENT__) {
+  window.mount();
+}

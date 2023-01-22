@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const fse = require('fs-extra');
 const path = require('path');

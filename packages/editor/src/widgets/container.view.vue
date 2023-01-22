@@ -1,4 +1,5 @@
 <script lang="tsx">
+// eslint-disable-next-line import/no-named-as-default
 import Swiper from 'swiper';
 import 'swiper/css';
 import {

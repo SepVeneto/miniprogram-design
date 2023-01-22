@@ -11,7 +11,7 @@
       :default-config="editorConfig"
       :mode="mode"
       v-bind="$attrs"
-      @onCreated="onCreated"
+      @on-created="onCreated"
     />
   </div>
 </template>
@@ -20,7 +20,7 @@
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import { IDomEditor, IToolbarConfig, DomEditor } from '@wangeditor/editor';
-import { shallowRef, onBeforeUnmount, nextTick } from 'vue';
+import { shallowRef, onBeforeUnmount } from 'vue';
 
 const editorRef = shallowRef<IDomEditor>();
 

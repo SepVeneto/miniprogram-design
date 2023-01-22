@@ -1,4 +1,4 @@
-import { defineComponent, PropType, defineAsyncComponent, computed, mergeProps } from 'vue';
+import { defineComponent, PropType, defineAsyncComponent } from 'vue';
 import ossUpload from './components/ossUpload.vue';
 // import rInput from './input.vue'
 // import rCheckbox from './'
@@ -47,6 +47,7 @@ export default defineComponent({
       }, data);
     }
     function renderCheckbox (schema: ISchema) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema;
       return (
         <el-checkbox
@@ -57,6 +58,7 @@ export default defineComponent({
       );
     }
     function renderInput (schema: ISchema) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, originType, ...args } = schema;
       return (
         <el-input
@@ -68,6 +70,7 @@ export default defineComponent({
       );
     }
     function renderNumber (schema: ISchema) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema;
       return (
         <el-input
@@ -80,6 +83,7 @@ export default defineComponent({
       );
     }
     function renderImage (schema: ISchema) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema;
       return (
         <oss-upload
@@ -90,6 +94,7 @@ export default defineComponent({
       );
     }
     function renderColorPicker (schema: ISchema) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema;
       return (
         <el-color-picker
@@ -100,6 +105,7 @@ export default defineComponent({
       );
     }
     function renderSelect (schema: ISchema) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, options, ...args } = schema;
       return (
         <el-select
@@ -112,6 +118,7 @@ export default defineComponent({
       );
     }
     function renderRadioGroup (schema: ISchema) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, options, ...args } = schema;
       return (
         <el-radio-group
@@ -124,6 +131,7 @@ export default defineComponent({
       );
     }
     function renderEditor (schema: ISchema) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema;
       return (
         <rich-text-editor

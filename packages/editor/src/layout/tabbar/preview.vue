@@ -27,12 +27,12 @@
 </template>
 
 <script lang="ts" setup>
-import homeIconInactive from './assets/sy_icon_sy_sel.png';
-import homeIconActive from './assets/sy_icon_active_sy_sel.png';
-import myIconInactive from './assets/my_icon_sy_sel.png';
-import myIconActive from './assets/my_icon_active_sy_sel.png';
+// import homeIconInactive from './assets/sy_icon_sy_sel.png';
+// import homeIconActive from './assets/sy_icon_active_sy_sel.png';
+// import myIconInactive from './assets/my_icon_sy_sel.png';
+// import myIconActive from './assets/my_icon_active_sy_sel.png';
 import { ref, computed, PropType } from 'vue';
-import { TabbarWidgetConfig } from '../type';
+import type { TabbarWidgetConfig } from './type';
 import { useApp } from '@/store';
 const props = defineProps({
   preview: Boolean,

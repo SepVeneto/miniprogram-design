@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { defineConfig } = require('@vue/cli-service');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const webpack = require('webpack');
 const isProduction = process.env.NODE_ENV === 'production';
 // const htmlWebpackPlugin = require('html-webpack-plugin')

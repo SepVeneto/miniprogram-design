@@ -9,12 +9,16 @@ export default defineComponent({
   },
   props: {
     container: Boolean,
-    dir: String,
+    dir: {
+      type: String,
+      default: 'top',
+    },
     active: Boolean,
     mask: Boolean,
     disabled: Boolean,
     hide: Boolean,
   },
+  emits: ['delete'],
   setup (props, { emit }) {
     function handleDelete () {
       emit('delete');
