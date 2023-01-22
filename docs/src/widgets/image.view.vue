@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { freeDom } from 'free-dom'
+import { freeDom } from '@sepveneto/free-dom'
 import { useNormalizeStyle, useState } from '@/hooks';
 
 const props = defineProps({

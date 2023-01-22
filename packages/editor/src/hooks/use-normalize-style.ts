@@ -8,8 +8,10 @@ export function useNormalizeStyle (
       (obj, _style) => {
         const [key, value] = _style;
         if (typeof value === 'number') {
+          // @ts-expect-error: value is not a number
           obj[key] = `${value}px`;
         } else {
+          // @ts-expect-error: value is not a number
           obj[key] = value;
         }
         return obj;

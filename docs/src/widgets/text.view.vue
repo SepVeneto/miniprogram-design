@@ -7,8 +7,8 @@
 
 <script lang="ts" setup>
 import { useNormalizeStyle, useState } from '@/hooks';
-import { freeDom } from 'free-dom'
-import 'free-dom/dist/theme.css'
+import { freeDom } from '@sepveneto/free-dom'
+import '@sepveneto/free-dom/css'
 const props = defineProps({
   config: {
     type: Object,

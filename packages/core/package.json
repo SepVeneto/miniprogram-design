@@ -23,7 +23,7 @@
     "url": "https://github.com/SepVeneto/miniprogram-design"
   },
   "devDependencies": {
-    "@micro-zoe/micro-app": "^0.8.10",
+    "@micro-zoe/micro-app": "^1.0.0-alpha.9",
     "vue": "^3.2.13",
     "vue-demi": "^0.13.11"
   }

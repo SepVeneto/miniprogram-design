@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useDesign } from '@mpd/core'
+import { useDesign } from '@sepveneto/mpd-core'
 import { config, widgets, schema } from './config'
 async function init() {
   const [getData, setData] = await useDesign(

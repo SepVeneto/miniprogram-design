@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import schemaRender from '@mpd/schema';
+import schemaRender from '@sepveneto/mpd-schema';
 import { tabbarConfig } from '@/layout/tabbar';
 import { useApp } from '@/store';
 import { computed } from 'vue';

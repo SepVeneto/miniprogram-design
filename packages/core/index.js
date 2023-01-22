@@ -1,10 +1,11 @@
-import microApp from '@micro-zoe/micro-app';
+import microApp, { renderApp } from '@micro-zoe/micro-app';
 import { nextTick, onMounted, getCurrentInstance } from 'vue-demi';
 export async function useDesign (dom, options) {
   const { url, name = 'miniprogram-design' } = options;
   await new Promise((resolve, reject) => {
     tryOnMounted(() => {
-      microApp.renderApp({
+      console.log(microApp)
+      renderApp({
         name,
         url,
         container: dom,

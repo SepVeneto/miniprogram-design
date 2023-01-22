@@ -34,6 +34,6 @@ function unmount () {
 
 window.mount = mount;
 window.unmount = unmount;
-if (window.__MICRO_APP_ENVIRONMENT__) {
+if (!window.__MICRO_APP_ENVIRONMENT__) {
   window.mount();
 }

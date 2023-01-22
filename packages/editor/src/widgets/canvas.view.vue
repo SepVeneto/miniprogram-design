@@ -24,8 +24,8 @@
 <script lang="ts" setup>
 import draggable from 'vuedraggable';
 // import Sortable from 'sortablejs'
-import { freeScene } from 'free-dom';
-import 'free-dom/dist/theme.css';
+import { freeScene } from '@sepveneto/free-dom';
+import '@sepveneto/free-dom/css';
 // @ts-expect-error: from module federation
 import viewRender from 'widgets_side/viewRender';
 import { computed } from 'vue';

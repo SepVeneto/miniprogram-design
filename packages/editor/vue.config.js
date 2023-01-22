@@ -35,7 +35,7 @@ module.exports = defineConfig({
             singleton: true,
           },
           '@vueuse/core': { singleton: true },
-          'free-dom': { singleton: true },
+          '@sepveneto/free-dom': { singleton: true },
         },
       }),
     ],
