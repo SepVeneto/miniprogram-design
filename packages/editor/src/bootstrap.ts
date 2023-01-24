@@ -5,6 +5,17 @@ import { createPinia, Pinia } from 'pinia';
 import { useApp } from './store';
 import ElementPlus from 'element-plus';
 import 'element-plus/theme-chalk/index.css';
+import { createRouter, createMemoryHistory } from 'vue-router';
+import Editor from './layout/editor.vue';
+
+const routes = [
+  { path: '/', component: Editor },
+];
+
+const router = createRouter({
+  history: createMemoryHistory(),
+  routes,
+});
 
 let app: App | null;
 let store: Pinia | null;
@@ -15,6 +26,7 @@ function mount () {
   store = createPinia();
   app.use(ElementPlus);
   app.use(store);
+  app.use(router);
   app.mount('#app');
 
   const appStore = useApp();

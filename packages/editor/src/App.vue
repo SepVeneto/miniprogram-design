@@ -37,7 +37,8 @@
           <el-scrollbar
             style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
           >
-            <v-editor :preview="preview" />
+            <router-view />
+            <!-- <v-editor :preview="preview" /> -->
           </el-scrollbar>
           <tabbar-preview
             :preview="preview"
