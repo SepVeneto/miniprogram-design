@@ -12,13 +12,8 @@
     "useDefineForClassFields": true,
     "resolveJsonModule": true,
 
-    "suppressImplicitAnyIndexErrors": true,
-
     "sourceMap": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
     "paths": {
       "@/*": [
         "src/*"
