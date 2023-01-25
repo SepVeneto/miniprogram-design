@@ -13,7 +13,7 @@ importers:
   docs:
     specifiers:
       '@micro-zoe/micro-app': ^1.0.0-alpha.9
-      '@sepveneto/free-dom': ^0.0.6
+      '@sepveneto/free-dom': 0.0.7
       '@sepveneto/mpd-core': 'workspace: *'
       '@sepveneto/mpd-editor': 'workspace: *'
       '@vue/cli-plugin-babel': ~5.0.0
@@ -27,7 +27,7 @@ importers:
       vue: ^3.2.13
       webpack: ^5.74.0
     dependencies:
-      '@sepveneto/free-dom': 0.0.6_vue@3.2.45
+      '@sepveneto/free-dom': 0.0.7_vue@3.2.45
       '@sepveneto/mpd-core': link:../packages/core
       '@sepveneto/mpd-editor': link:../packages/editor
       '@vueuse/core': 9.11.1_vue@3.2.45
@@ -57,7 +57,7 @@ importers:
     specifiers:
       '@element-plus/icons-vue': ^2.0.9
       '@micro-zoe/micro-app': ^0.8.10
-      '@sepveneto/free-dom': ^0.0.6
+      '@sepveneto/free-dom': ^0.0.7
       '@sepveneto/mpd-schema': 'workspace: *'
       '@types/sortablejs': ^1.15.0
       '@types/uuid': ^8.3.4
@@ -83,7 +83,7 @@ importers:
       vuedraggable: ^4.1.0
       webpack: ^5.74.0
     dependencies:
-      '@sepveneto/free-dom': 0.0.6_vue@3.2.45
+      '@sepveneto/free-dom': 0.0.7_vue@3.2.45
       '@types/sortablejs': 1.15.0
       fs-extra: 10.1.0
       minimist: 1.2.7
@@ -1832,8 +1832,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sepveneto/free-dom/0.0.6_vue@3.2.45:
-    resolution: {integrity: sha512-5MRdS67Kpq+9N9ISp8T6OPo12GtMh2NaS1pKR3RNsLPXdgMj1sVtyX/CZyXs/0mxbFRR6qnyWRev4Zthdz52CQ==}
+  /@sepveneto/free-dom/0.0.7_vue@3.2.45:
+    resolution: {integrity: sha512-yg2Yq/Qe5VKYf+ovIsc+U0RYax6l+bHr6nYh9eEjsBqtzBKzR2O6NKfmq8vLX3fxwxMbBdJWS1KKoV7HPELP4g==}
     peerDependencies:
       '@vue/composition-api': ^1.0.0-rc.1
       vue: ^2.0.0 || >=3.0.0
@@ -3315,7 +3315,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001447
+      caniuse-lite: 1.0.30001448
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3482,7 +3482,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001447
+      caniuse-lite: 1.0.30001448
       electron-to-chromium: 1.4.284
       node-releases: 2.0.8
       update-browserslist-db: 1.0.10_browserslist@4.21.4
@@ -3551,13 +3551,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001447
+      caniuse-lite: 1.0.30001448
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite/1.0.30001447:
-    resolution: {integrity: sha512-bdKU1BQDPeEXe9A39xJnGtY0uRq/z5osrnXUw0TcK+EYno45Y+U7QU9HhHEyzvMDffpYadFXi3idnSNkcwLkTw==}
+  /caniuse-lite/1.0.30001448:
+    resolution: {integrity: sha512-tq2YI+MJnooG96XpbTRYkBxLxklZPOdLmNIOdIhvf7SNJan6u5vCKum8iT7ZfCt70m1GPkuC7P3TtX6UuhupuA==}
 
   /case-sensitive-paths-webpack-plugin/2.4.0:
     resolution: {integrity: sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==}

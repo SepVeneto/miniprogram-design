@@ -8,11 +8,11 @@
     "editor:init": "mpd init --dir public"
   },
   "dependencies": {
+    "@sepveneto/free-dom": "0.0.7",
     "@sepveneto/mpd-core": "workspace: *",
     "@sepveneto/mpd-editor": "workspace: *",
     "@vueuse/core": "^9.1.1",
     "core-js": "^3.8.3",
-    "@sepveneto/free-dom": "^0.0.6",
     "vue": "^3.2.13",
     "webpack": "^5.74.0"
   },
