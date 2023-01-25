@@ -101,7 +101,11 @@ export const useApp = defineStore('app', () => {
     currentRoute.value = config.value.tabbars.list[0].type;
   }
 
-  function setConfig (data: Config, widgets: Record<string, any>, _schema: any) {
+  function setConfig (
+    data: Config,
+    widgets: Record<string, any>,
+    _schema: any,
+  ) {
     config.value = data;
     currentRoute.value = config.value.tabbars.list[0].type;
     // currentTab.value = data.tabbars.list[currentRoute.value]

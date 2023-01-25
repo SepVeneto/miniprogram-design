@@ -1,8 +1,17 @@
 import { defineComponent, PropType, defineAsyncComponent } from 'vue';
 import ossUpload from './components/ossUpload.vue';
+// @ts-expect-error: from mdf
+import ConfigRender from 'widgets_side/configRender';
 // import rInput from './input.vue'
 // import rCheckbox from './'
-type WidgetType = 'input' | 'number' | 'checkbox' | 'image' | 'colorPicker' | 'select' | 'radioGroup' | 'editor'
+type WidgetType = 'input'
+  | 'number'
+  | 'checkbox'
+  | 'image'
+  | 'colorPicker'
+  | 'select'
+  | 'radioGroup'
+  | 'editor'
 interface ISchema {
   type: WidgetType
   label: string
@@ -13,8 +22,11 @@ interface ISchema {
 
 export default defineComponent({
   components: {
-    ossUpload,
-    richTextEditor: defineAsyncComponent(() => import('./components/editor.vue')),
+    ConfigRender,
+    OssUpload: ossUpload,
+    RichTextEditor: defineAsyncComponent(
+      () => import('./components/editor.vue'),
+    ),
   },
   props: {
     modelValue: {
@@ -28,7 +40,6 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (prop, { emit }) {
-    // const schemaList = computed<Array<ISchema & { _uuid: string }>>(() => prop.schema.map(item => ({ ...item, _uuid: uuidv4() })))
     function updateData (key: string, val: string | number) {
       const path = key.split('.');
       const _path = path.slice(0, -1);
@@ -113,7 +124,9 @@ export default defineComponent({
           onUpdate:modelValue={(val: string) => updateData(key, val)}
           {...args}
         >
-          {options.map((option: any) => <el-option label={option.label} value={option.value} />)}
+          {options.map((option: any) => (
+            <el-option label={option.label} value={option.value} />
+          ))}
         </el-select>
       );
     }
@@ -126,7 +139,9 @@ export default defineComponent({
           onUpdate:modelValue={(val: string) => updateData(key, val)}
           {...args}
         >
-          {options.map((option: any) => <el-radio label={option.value}>{option.label}</el-radio>)}
+          {options.map((option: any) => (
+            <el-radio label={option.value}>{option.label}</el-radio>
+          ))}
         </el-radio-group>
       );
     }
@@ -138,6 +153,14 @@ export default defineComponent({
           model-value={getData(prop.modelValue, key)}
           onUpdate:modelValue={(val: string) => updateData(key, val)}
           {...args}
+        />
+      );
+    }
+    function renderCustom (schema: ISchema) {
+      console.log(schema);
+      return (
+        <ConfigRender
+          type={schema.type}
         />
       );
     }
@@ -154,6 +177,7 @@ export default defineComponent({
       renderSelect,
       renderRadioGroup,
       renderEditor,
+      renderCustom,
     };
   },
   render () {
@@ -186,7 +210,8 @@ export default defineComponent({
           node = this.renderEditor(schema);
           break;
         default:
-          node = <div>暂不支持</div>;
+          node = this.renderCustom(schema);
+          // node = <div>暂不支持</div>;
       }
       if (schema.link) {
         schema.link[this.modelValue[schema.key]]?.forEach(item => {
@@ -194,7 +219,10 @@ export default defineComponent({
         });
       }
       // console.log(schema._uuid)
-      return [<el-form-item label={schema.label}>{node}</el-form-item>, ...form];
+      return [
+        <el-form-item label={schema.label}>{node}</el-form-item>,
+        ...form,
+      ];
     };
     return (
       <el-form label-width="100px">

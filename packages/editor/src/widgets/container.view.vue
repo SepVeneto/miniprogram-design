@@ -24,10 +24,10 @@ import viewRender from 'widgets_side/viewRender';
 
 export default defineComponent({
   components: {
-    draggable,
-    draggableWrapper,
-    canvasView,
-    viewRender,
+    Draggable: draggable,
+    DraggableWrapper: draggableWrapper,
+    CanvasView: canvasView,
+    ViewRender: viewRender,
   },
   props: {
     config: {

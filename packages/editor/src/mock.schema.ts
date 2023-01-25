@@ -222,6 +222,11 @@ const menuItem = [
     label: '可见性',
     key: 'isShow',
   },
+  {
+    type: 'customImage',
+    label: '图片',
+    key: 'image',
+  },
 ];
 
 const desc = [
