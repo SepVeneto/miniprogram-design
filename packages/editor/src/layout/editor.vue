@@ -23,7 +23,7 @@
           :active="selected._uuid === item._uuid"
           :hide="item.isShow != null && !item.isShow"
           :container="item._view === 'container'"
-          :mask="item._view !== 'container' && item._view !== 'canvas'"
+          :mask="item._view !== 'container' && item._view !== 'canvas' && item._mask"
           @click="handleSelect(item)"
         >
           <container-view

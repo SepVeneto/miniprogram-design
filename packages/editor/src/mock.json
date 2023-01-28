@@ -6,27 +6,19 @@
     "loginBg": ""
   },
   "body": {
-    "home": [],
-    "personal": [
+    "Home": [
       {
-        "_uuid": "5",
-        "_name": "食堂卡",
-        "_view": "mine",
-        "_schema": "card",
-        "type": "mine",
-        "isShow": 1,
-        "defaultImg": "https://saas-oss-test.jsrxjt.com/image/20220902/1baab297eaaf5b18a3db145272e59aabaf5d023c.png",
-        "unbound": 1,
-        "recharge": 1,
-        "style": {
-          "height": 176,
-          "width": 345,
-          "margin": "0 auto",
-          "marginBottom": 12,
-          "marginTop": 12,
-          "borderRadius": 10
-        }
-      },
+        "_uuid": 13,
+        "_name": "菜单项",
+        "_view": "menuItem",
+        "_schema": "menuItem",
+        "_router": "canTeenOrder",
+        "isShow": true,
+        "title": "我的食堂订单",
+        "style": {}
+      }
+    ],
+    "Personal": [
       {
         "_uuid": 12,
         "_name": "菜单",
@@ -41,6 +33,7 @@
             "_name": "菜单项",
             "_view": "menuItem",
             "_schema": "menuItem",
+            "_router": "canTeenOrder",
             "isShow": true,
             "title": "我的食堂订单",
             "style": {}
@@ -121,14 +114,14 @@
     "list": [
       {
         "_uuid": "7",
-        "type": "home",
+        "type": "Home",
         "text": "首页",
         "activeImage": "https://saas-oss-test.jsrxjt.com/image/20220902/f43c86df716e7610bcc407795b7d034e507ade90.png",
         "inactiveImage": ""
       },
       {
         "_uuid": "8",
-        "type": "personal",
+        "type": "Personal",
         "text": "个人中心",
         "activeImage": "https://saas-oss-test.jsrxjt.com/image/20220902/16e719efb1344dc6f0ce9993d0fe66e8a19cbcb3.png",
         "inactiveImage": ""

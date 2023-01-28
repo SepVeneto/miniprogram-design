@@ -1,23 +1,26 @@
 <template>
   <footer class="tabbar">
-    <div :class="['footer-container', { 'is-active': active }, { 'is-preview': preview }]">
+    <div
+      class="footer-container"
+      :class="[{ 'is-active': active }, { 'is-preview': preview }]"
+    >
       <ul>
         <li
           v-for="(item, index) in configList"
           :key="item._uuid"
           class="bottom-nav-item"
-          @click="handleSelect(index, item.type)"
+          @click="handleSelect(item.type)"
         >
           <div class="li_content">
             <div class="bottom-cmg">
               <img
-                :src="tabbarIdx == index ? item.activeImage: item.inactiveImage"
+                :src="route.name === item.type ? item.activeImage : item.inactiveImage"
                 alt=""
               >
             </div>
             <span
               class="bottom-text1"
-              :style="{ color: tabbarIdx == index ? item.activeColor : '' }"
+              :style="{ color: route.name === item.type ? item.activeColor : '' }"
             >{{ item.text }}</span>
           </div>
         </li>
@@ -34,6 +37,9 @@
 import { ref, computed, PropType } from 'vue';
 import type { TabbarWidgetConfig } from './type';
 import { useApp } from '@/store';
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
 const props = defineProps({
   preview: Boolean,
   active: Boolean,
@@ -44,35 +50,18 @@ const props = defineProps({
     }),
   },
 });
-const app = useApp();
+// const app = useApp();
 const configList = computed(() => {
   const _list = props.config.list ?? [];
   return _list;
-  // return _list.map(item => {
-  //   if (item.id === 1) {
-  //     return {
-  //       ...item,
-  //       activeImage: item.activeImage || homeIconActive,
-  //       inactiveImage: item.inactiveImage || homeIconInactive,
-  //     }
-  //   } else if (item.id === 2) {
-  //     return {
-  //       ...item,
-  //       activeImage: item.activeImage || myIconActive,
-  //       inactiveImage: item.inactiveImage || myIconInactive,
-  //     }
-  //   } else {
-  //     return item;
-  //   }
-  // })
 });
-const tabbarIdx = ref(0);
-const tabbarType = ref();
-function handleSelect (index: number, type: string) {
-  app.currentRoute = type;
-  app.currentTab = configList.value[index];
-  tabbarIdx.value = index;
-  tabbarType.value = type;
+// const tabbarType = ref();
+function handleSelect (type: string) {
+  router.replace({ name: type });
+  // app.currentRoute = type;
+  // app.currentTab = configList.value[index];
+  // tabbarIdx.value = index;
+  // tabbarType.value = type;
 }
 </script>
 

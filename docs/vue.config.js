@@ -49,6 +49,11 @@ module.exports = defineConfig({
           './configRender': './src/components/configRender.vue',
         },
         shared: {
+          'vue-router': {
+            import: false,
+            requiredVersion: '^4.1.6',
+            strictVersion: true,
+          },
           vue: {
             singleton: true,
           },

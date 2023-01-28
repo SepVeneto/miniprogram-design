@@ -31,6 +31,9 @@ module.exports = defineConfig({
           widgets_side: `widgets_side@${isProduction ? '/miniprogram-design' : 'http://localhost:8090'}/remoteEntry.js`,
         },
         shared: {
+          'vue-router': {
+            singleton: true,
+          },
           vue: {
             singleton: true,
           },

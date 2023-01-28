@@ -2,6 +2,7 @@
   <div
     :style="style"
     class="menu-item-wrapper"
+    @click="handleClick"
   >
     <div>
       <img
@@ -11,7 +12,6 @@
       >
       <span
         v-else
-        foo="foo"
         style="display: inline-block; width: 22px; height: 22px; margin-right: 8px"
       />
       <span>{{ config.title }}</span>
@@ -23,7 +23,10 @@
 </template>
 
 <script lang="ts" setup>
+// @ts-expect-error: from mdf
+import { useRouter } from 'vue-router';
 import { useNormalizeStyle } from '@/hooks';
+const router = useRouter();
 
 const props = defineProps({
   config: {
@@ -32,6 +35,10 @@ const props = defineProps({
   },
 });
 const style = useNormalizeStyle(props.config.style);
+function handleClick () {
+  console.log('click');
+  router.push({ name: 'canteenOrder' });
+}
 </script>
 
 <style lang="scss" scoped>

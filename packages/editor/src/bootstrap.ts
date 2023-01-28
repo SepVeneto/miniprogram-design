@@ -5,17 +5,7 @@ import { createPinia, Pinia } from 'pinia';
 import { useApp } from './store';
 import ElementPlus from 'element-plus';
 import 'element-plus/theme-chalk/index.css';
-import { createRouter, createMemoryHistory } from 'vue-router';
-import Editor from './layout/editor.vue';
-
-const routes = [
-  { path: '/', component: Editor },
-];
-
-const router = createRouter({
-  history: createMemoryHistory(),
-  routes,
-});
+import { router } from './router';
 
 let app: App | null;
 let store: Pinia | null;
@@ -36,16 +26,14 @@ function mount () {
   }, true);
 }
 
-function unmount () {
-  console.log('trigger');
-  app?.unmount();
-  store = null;
-  app = null;
-  window.microApp?.clearDataListener();
-}
-
-window.mount = mount;
-window.unmount = unmount;
-if (!window.__MICRO_APP_ENVIRONMENT__) {
-  window.mount();
-}
+// function unmount () {
+//   console.log('trigger');
+//   app?.unmount();
+//   store = null;
+//   app = null;
+//   window.microApp?.clearDataListener();
+// }
+// micro-app 会在子应用创建之初就对window进行代理
+// 而mdf需要异步加载
+// 导致如果想使用umd模式，mount和unmount不会立即绑定到window上
+mount();

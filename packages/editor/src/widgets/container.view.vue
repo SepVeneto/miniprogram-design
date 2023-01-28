@@ -93,6 +93,7 @@ export default defineComponent({
       return !_inContainer || _inContainer === 'inner';
     }
     function handleSelect (data: any) {
+      console.log(data);
       app.selected = data;
       app.updateConfig();
     }
