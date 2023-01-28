@@ -1,28 +1,35 @@
 import microApp, { renderApp } from '@micro-zoe/micro-app';
 import { nextTick, onMounted, getCurrentInstance } from 'vue-demi';
-export async function useDesign (dom, options) {
-  const { url, name = 'miniprogram-design' } = options;
+export type DesignOptions = {
+  url: string
+  name: string
+  inline: boolean
+}
+export async function useDesign (
+  dom: string | Element,
+  options: DesignOptions,
+) {
+  const { url, inline, name = 'miniprogram-design' } = options;
   await new Promise((resolve, reject) => {
     tryOnMounted(() => {
-      console.log(microApp)
       renderApp({
         name,
         url,
         container: dom,
-        inline: true,
+        inline,
         'clear-data': true,
         'disable-patch-request': false, // 关闭对子应用请求的拦截
       }).then((result) => {
         if (result) {
-          resolve();
+          resolve(result);
         } else {
-          reject(new Error('应用加载失败'));
+          reject(new Error('[@sepveneto/mpd-core] 应用加载失败'));
         }
       });
     });
   });
 
-  function set (data) {
+  function set (data: Record<PropertyKey, unknown>) {
     microApp.setData(name, data);
   }
   function get () {
@@ -31,10 +38,10 @@ export async function useDesign (dom, options) {
   return [get, set];
 }
 
-function tryOnMounted (fn) {
+function tryOnMounted (fn: () => void) {
   if (getCurrentInstance()) {
     onMounted(fn);
   } else {
-    nextTick(fn);
+    nextTick().then(fn);
   }
 }
