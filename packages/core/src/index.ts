@@ -1,5 +1,7 @@
 import microApp, { renderApp } from '@micro-zoe/micro-app';
 import { nextTick, onMounted, getCurrentInstance } from 'vue-demi';
+
+export * from './upgrade';
 export type DesignOptions = {
   url: string
   name: string
