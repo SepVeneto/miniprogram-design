@@ -1,11 +1,45 @@
+import { VersionMachine } from './fsm';
 interface Upgrade {
   <T extends Record<PropertyKey, unknown>>(data: T): T
   VERSION: string
 }
-export const upgrade = <Upgrade>((data: Record<PropertyKey, unknown>) => {
-  const version = data.version;
-  console.log(version);
-  return data;
+
+type BaseConfig = {
+  _name: string
+  _view: string
+  _schema: string
+  isShow: boolean
+  style?: Record<string, number | string>
+  [key: string]: unknown
+}
+type TabbarRecord = {
+  list: {
+    text: string
+    type: string
+    _uuid: string
+    [key: string]: unknown
+  }[]
+} & BaseConfig
+
+export type CoreDataV1 = {
+  version?: string
+  globalConfig: {
+    color: string
+    emptyColor: string
+    bubbleColor: string
+    loginBg: string
+  }
+  body: Record<string, BaseConfig[]>
+  tabbars: TabbarRecord
+  mpGlobalConfig: Record<string, unknown>
+}
+
+export const upgrade = <Upgrade>((data: CoreDataV1) => {
+  const fsm = new VersionMachine(data);
+  while (fsm.getVersion() !== upgrade.VERSION) {
+    fsm.upgrade();
+  }
+  return fsm.data;
 });
 
-upgrade.VERSION = '2.0';
+upgrade.VERSION = '1.1';
