@@ -16,18 +16,17 @@ import {
 import { useApp } from '@/store';
 import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
-import { useNormalizeStyle } from '@/hooks';
+import { useFederatedComponent, useNormalizeStyle } from '@/hooks';
 
 import canvasView from './canvas.view.vue';
-// @ts-expect-error: from module federation
-import viewRender from 'widgets_side/viewRender';
+// import viewRender from 'widgets_side/viewRender';
 
 export default defineComponent({
   components: {
     Draggable: draggable,
     DraggableWrapper: draggableWrapper,
     CanvasView: canvasView,
-    ViewRender: viewRender,
+    // ViewRender: viewRender,
   },
   props: {
     config: {
@@ -79,6 +78,11 @@ export default defineComponent({
       }
     });
 
+    const { Component: ViewRender } = useFederatedComponent(
+      'widgets_side',
+      './viewRender',
+    );
+
     onMounted(() => {
       if (isSwiper.value) {
         swiper.value = new Swiper(swiperRef.value, {});
@@ -104,7 +108,12 @@ export default defineComponent({
         case 'container':
           return;
         default:
-          return <view-render type={element._view} config={element} />;
+          return (
+            <ViewRender.value
+              type={element._view}
+              config={element}
+            />
+          );
       }
     }
     async function onUpdate () {
@@ -118,6 +127,7 @@ export default defineComponent({
       viewStyle,
       swiperRef,
       isSwiper,
+      ViewRender,
 
       onPut,
       onUpdate,

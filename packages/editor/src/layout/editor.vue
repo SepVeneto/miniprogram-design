@@ -34,21 +34,13 @@
             v-else-if="item._view === 'canvas'"
             :config="item"
           />
-          <component
-            :is="Component"
+
+          <view-render
             v-else
             :type="item._view"
             :config="item"
             @update:config="updateConfig"
           />
-          <!--
- <view-render
-            v-else
-            :type="item._view"
-            :config="item"
-            @update:config="updateConfig"
-          />
--->
         </draggable-wrapper>
         <template v-else>
           <container-view
@@ -72,8 +64,8 @@ import draggableWrapper from '@/components/draggableWrapper.vue';
 import { ref, computed, provide, reactive, toRefs, shallowRef, watch } from 'vue';
 import { useApp } from '@/store';
 import containerView from '@/widgets/container.view.vue';
-// @ts-expect-error: from module federation
 // import viewRender from 'widgets_side/viewRender';
+import { useFederatedComponent } from '@/hooks';
 import canvasView from '@/widgets/canvas.view.vue';
 
 const props = defineProps({
@@ -101,8 +93,7 @@ const data = computed({
 // const selected = ref({} as any)
 const selected = computed(() => app.selected);
 
-const { Component, errorLoading } = useFederatedComponent(
-  'http://localhost:8090/remoteEntry.js',
+const { Component: ViewRender, errorLoading } = useFederatedComponent(
   'widgets_side',
   './viewRender',
 );
@@ -118,51 +109,6 @@ function handleSelect (data: any) {
 function updateConfig (data: any) {
   app.selected = data;
   app.updateConfig();
-}
-
-function useDynamicScript (url: string) {
-  const ready = ref(false);
-  const errorLoading = ref(false);
-
-  const element = document.createElement('script');
-  element.src = url;
-  element.type = 'text/javascript';
-  element.async = true;
-
-  element.onload = () => {
-    ready.value = true;
-    document.head.removeChild(element);
-  };
-  element.onerror = () => {
-    ready.value = false;
-    errorLoading.value = true;
-  };
-
-  document.head.appendChild(element);
-
-  return { ready, errorLoading };
-}
-
-function useFederatedComponent (remoteUrl, scope, module) {
-  const Component = shallowRef();
-  // const key = `${remoteUrl}-${scope}-${module}`;
-  const { ready, errorLoading } = useDynamicScript(remoteUrl);
-
-  watch(ready, async () => {
-    Component.value = await loadComponent(scope, module);
-  });
-  return { Component, errorLoading };
-}
-
-async function loadComponent (scope, module) {
-  // return async () => {
-  await __webpack_init_sharing__('default');
-  const container = window[scope];
-  await container.init(__webpack_init_sharing__.default);
-  const factor = await window[scope].get(module);
-  const Module = factory();
-  return Module;
-  // }
 }
 </script>
 

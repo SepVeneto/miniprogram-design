@@ -8,11 +8,12 @@
       v-model="_config.list"
       item-key="_uuid"
       handle=".operate"
-      :group="{name: 'widgets', pull: true, put: onPut}"
+      :group="{ name: 'widgets', pull: true, put: onPut }"
       class="canvas-wrap"
     >
-      <template #item="{element}">
-        <view-render
+      <template #item="{ element }">
+        <component
+          :is="Component"
           :type="element._view"
           :config="element"
         />
@@ -26,9 +27,9 @@ import draggable from 'vuedraggable';
 // import Sortable from 'sortablejs'
 import { freeScene } from '@sepveneto/free-dom';
 import '@sepveneto/free-dom/css';
-// @ts-expect-error: from module federation
-import viewRender from 'widgets_side/viewRender';
+// import viewRender from 'widgets_side/viewRender';
 import { computed } from 'vue';
+import { useFederatedComponent } from '@/hooks';
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -46,6 +47,10 @@ const _config = computed({
     emit('update:modelValue', val);
   },
 });
+const { Component } = useFederatedComponent(
+  'widgets_side',
+  './viewRender',
+);
 
 function onPut (_1: any, _2: any, dom: any) {
   const { _inContainer } = dom.__draggable_context.element;
