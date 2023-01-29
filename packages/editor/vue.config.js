@@ -26,10 +26,10 @@ module.exports = defineConfig({
     plugins: [
       new webpack.container.ModuleFederationPlugin({
         name: 'editor_side',
-        filename: 'remoteEntry.js',
-        remotes: {
-          widgets_side: `widgets_side@${isProduction ? '/miniprogram-design' : 'http://localhost:8090'}/remoteEntry.js`,
-        },
+        // filename: 'remoteEntry.js',
+        // remotes: {
+        //   widgets_side: `widgets_side@${isProduction ? '/miniprogram-design' : 'http://localhost:8090'}/remoteEntry.js`,
+        // },
         shared: {
           'vue-router': {
             singleton: true,
@@ -38,7 +38,7 @@ module.exports = defineConfig({
             singleton: true,
           },
           '@vueuse/core': { singleton: true },
-          '@sepveneto/free-dom': { singleton: true },
+          // '@sepveneto/free-dom': { singleton: true },
         },
       }),
     ],
