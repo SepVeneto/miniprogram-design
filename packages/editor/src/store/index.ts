@@ -119,6 +119,7 @@ export const useApp = defineStore('app', () => {
     data: Config,
     widgets: Record<string, any>,
     _schema: any,
+    _routes: any,
   ) {
     config.value = data;
     currentRoute.value = config.value.tabbars.list[0].type;
@@ -127,6 +128,8 @@ export const useApp = defineStore('app', () => {
     widgetList.value = Object.values(widgets);
 
     schema.value = _schema;
+    routes.value = _routes;
+    updateRouter();
   }
   watch(config, (val) => {
     window.microApp?.dispatch(val);
