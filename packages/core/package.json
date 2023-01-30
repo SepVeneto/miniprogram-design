@@ -18,14 +18,17 @@
       "require": "./dist/index.cjs"
     }
   },
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "@micro-zoe/micro-app": "^1.0.0-alpha.10",
     "@vue/composition-api": "^1.0.0-rc.1",
     "vue": "^2.0.0 || >=3.0.0"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "sepveneto",
+  "license": "MIT",
   "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/core/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/core",
   "repository": {
