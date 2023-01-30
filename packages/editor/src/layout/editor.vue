@@ -34,13 +34,14 @@
             v-else-if="item._view === 'canvas'"
             :config="item"
           />
-
-          <view-render
-            v-else
-            :type="item._view"
-            :config="item"
-            @update:config="updateConfig"
-          />
+          <template v-else>
+            <ViewRender
+              v-if="ViewRender"
+              :type="item._view"
+              :config="item"
+              @update:config="updateConfig"
+            />
+          </template>
         </draggable-wrapper>
         <template v-else>
           <container-view

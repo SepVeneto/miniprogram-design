@@ -108,12 +108,13 @@ export default defineComponent({
         case 'container':
           return;
         default:
-          return (
-            <ViewRender.value
+          return ViewRender.value
+            ? <ViewRender.value
               type={element._view}
               config={element}
             />
-          );
+            : null
+          ;
       }
     }
     async function onUpdate () {

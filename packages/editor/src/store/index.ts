@@ -39,6 +39,7 @@ export const useApp = defineStore('app', () => {
   const routes = shallowRef<any[]>([
     { name: 'Home', path: '/' },
   ]);
+  const remoteUrl = ref('');
 
   /** mock */
   if (!window.__MICRO_APP_ENVIRONMENT__) {
@@ -178,5 +179,6 @@ export const useApp = defineStore('app', () => {
     selected,
     config,
     schema,
+    remoteUrl,
   };
 });

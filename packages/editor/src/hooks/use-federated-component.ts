@@ -1,14 +1,16 @@
 import { shallowRef, watch } from 'vue';
 import { useDynamicScript } from './use-dynamic-script';
+import { useApp } from '@/store';
 
 export function useFederatedComponent (
   scope: string,
   module: string,
 ) {
+  const appStore = useApp();
   const Component = shallowRef();
   // const key = `${remoteUrl}-${scope}-${module}`;
-  const { ready, errorLoading } = useDynamicScript('http://localhost:8090/remoteEntry.js');
-
+  // const { ready, errorLoading } = useDynamicScript('http://localhost:8090/remoteEntry.js');
+  const { ready, errorLoading } = useDynamicScript(`${appStore.remoteUrl}/remoteEntry.js`);
   watch(ready, async () => {
     Component.value = (await loadComponent(scope, module)).default;
   });
