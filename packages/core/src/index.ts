@@ -6,12 +6,13 @@ export type DesignOptions = {
   url: string
   name: string
   inline: boolean
+  data: Record<PropertyKey, unknown>
 }
 export async function useDesign (
   dom: string | Element,
   options: DesignOptions,
 ) {
-  const { url, inline, name = 'miniprogram-design' } = options;
+  const { url, inline, data, name = 'miniprogram-design' } = options;
   await new Promise((resolve, reject) => {
     tryOnMounted(() => {
       renderApp({
@@ -19,6 +20,7 @@ export async function useDesign (
         url,
         container: dom,
         inline,
+        data,
         'clear-data': true,
         'disable-patch-request': false, // 关闭对子应用请求的拦截
       }).then((result) => {
