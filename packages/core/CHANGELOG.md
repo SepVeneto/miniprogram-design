@@ -1,3 +1,12 @@
+# [0.2.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.1.0...core@0.2.0) (2023-01-30)
+
+
+### Features
+
+* add options data ([f35422b](https://github.com/SepVeneto/miniprogram-design/commit/f35422be848327ef91d2d9361b304da01b2961d5))
+
+
+
 # [0.1.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.0.2...core@0.1.0) (2023-01-30)
 
 
