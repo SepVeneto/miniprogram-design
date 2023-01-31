@@ -38,7 +38,7 @@ importers:
       webpack: 5.75.0
     devDependencies:
       '@micro-zoe/micro-app': 1.0.0-alpha.10
-      '@vue/cli-plugin-babel': 5.0.8_zv3r53khrgh7vuaklrzhzxuxhq
+      '@vue/cli-plugin-babel': 5.0.8_ydkby3wwj3ied62d3e43gxwxkm
       '@vue/cli-plugin-typescript': 5.0.8_ofqlndzergwon5kl47tcsjspne
       '@vue/cli-service': 5.0.8_hkz3uqske2krtb4pptpliw7oda
       sass: 1.57.1
@@ -104,7 +104,7 @@ importers:
       '@micro-zoe/micro-app': 1.0.0-alpha.10
       '@sepveneto/mpd-schema': link:../schema
       '@types/uuid': 8.3.4
-      '@vue/cli-plugin-babel': 5.0.8_zv3r53khrgh7vuaklrzhzxuxhq
+      '@vue/cli-plugin-babel': 5.0.8_ydkby3wwj3ied62d3e43gxwxkm
       '@vue/cli-plugin-typescript': 5.0.8_ofqlndzergwon5kl47tcsjspne
       '@vue/cli-service': 5.0.8_hkz3uqske2krtb4pptpliw7oda
       '@vueuse/core': 9.12.0_vue@3.2.45
@@ -120,6 +120,23 @@ importers:
       vue: 3.2.45
       vuedraggable: 4.1.0_vue@3.2.45
       webpack: 5.75.0
+
+  packages/hooks:
+    specifiers:
+      '@micro-zoe/micro-app': 1.0.0-alpha.10
+      tsup: ^6.5.0
+      typescript: ~4.5.5
+      vitest: ^0.28.3
+      vue: ^3.2.13
+      vue-demi: ^0.13.11
+    dependencies:
+      vue-demi: 0.13.11_vue@3.2.45
+    devDependencies:
+      '@micro-zoe/micro-app': 1.0.0-alpha.10
+      tsup: 6.5.0_typescript@4.5.5
+      typescript: 4.5.5
+      vitest: 0.28.3
+      vue: 3.2.45
 
   packages/schema:
     specifiers:
@@ -2530,9 +2547,10 @@ packages:
       svg-tags: 1.0.0
     dev: true
 
-  /@vue/babel-preset-app/5.0.8_vue@3.2.45:
+  /@vue/babel-preset-app/5.0.8_core-js@3.27.2+vue@3.2.45:
     resolution: {integrity: sha512-yl+5qhpjd8e1G4cMXfORkkBlvtPCIgmRf3IYCWYDKIQ7m+PPa5iTm4feiNmCMD6yGqQWMhhK/7M3oWGL9boKwg==}
     peerDependencies:
+      core-js: ^3
       vue: ^2 || ^3.2.13
     peerDependenciesMeta:
       '@babel/core':
@@ -2669,13 +2687,13 @@ packages:
     resolution: {integrity: sha512-KmtievE/B4kcXp6SuM2gzsnSd8WebkQpg3XaB6GmFh1BJGRqa1UiW9up7L/Q67uOdTigHxr5Ar2lZms4RcDjwQ==}
     dev: true
 
-  /@vue/cli-plugin-babel/5.0.8_zv3r53khrgh7vuaklrzhzxuxhq:
+  /@vue/cli-plugin-babel/5.0.8_ydkby3wwj3ied62d3e43gxwxkm:
     resolution: {integrity: sha512-a4qqkml3FAJ3auqB2kN2EMPocb/iu0ykeELwed+9B1c1nQ1HKgslKMHMPavYx3Cd/QAx2mBD4hwKBqZXEI/CsQ==}
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
       '@babel/core': 7.20.12
-      '@vue/babel-preset-app': 5.0.8_vue@3.2.45
+      '@vue/babel-preset-app': 5.0.8_core-js@3.27.2+vue@3.2.45
       '@vue/cli-service': 5.0.8_hkz3uqske2krtb4pptpliw7oda
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.3.0_la66t7xldg4uecmyawueag5wkm
@@ -2683,6 +2701,7 @@ packages:
       webpack: 5.75.0
     transitivePeerDependencies:
       - '@swc/core'
+      - core-js
       - encoding
       - esbuild
       - supports-color

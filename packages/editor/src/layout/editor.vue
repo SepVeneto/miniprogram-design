@@ -62,11 +62,11 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
-import { ref, computed, provide, reactive, toRefs, shallowRef, watch } from 'vue';
+import { ref, computed, provide, reactive, toRefs } from 'vue';
 import { useApp } from '@/store';
 import containerView from '@/widgets/container.view.vue';
 // import viewRender from 'widgets_side/viewRender';
-import { useFederatedComponent } from '@/hooks';
+import { useFederatedComponent } from '@sepveneto/mpd-hooks';
 import canvasView from '@/widgets/canvas.view.vue';
 
 const props = defineProps({
@@ -94,7 +94,8 @@ const data = computed({
 // const selected = ref({} as any)
 const selected = computed(() => app.selected);
 
-const { Component: ViewRender, errorLoading } = useFederatedComponent(
+const { Component: ViewRender } = useFederatedComponent(
+  app.remoteUrl,
   'widgets_side',
   './viewRender',
 );
