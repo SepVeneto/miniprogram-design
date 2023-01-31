@@ -1,6 +1,6 @@
 {
   "name": "@sepveneto/mpd-core",
-  "version": "0.0.3",
+  "version": "0.2.0",
   "description": "",
   "types": "./dist/index.d.ts",
   "type": "module",
@@ -8,7 +8,7 @@
     "build": "tsup",
     "test": "vitest",
     "version": " pnpm changelog && git add CHANGELOG.md",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path ."
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path . --lerna-package core"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -18,14 +18,17 @@
       "require": "./dist/index.cjs"
     }
   },
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "@micro-zoe/micro-app": "^1.0.0-alpha.10",
     "@vue/composition-api": "^1.0.0-rc.1",
     "vue": "^2.0.0 || >=3.0.0"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "sepveneto",
+  "license": "MIT",
   "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/core/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/core",
   "repository": {
@@ -36,6 +39,7 @@
     "vue-demi": "^0.13.11"
   },
   "devDependencies": {
+    "@micro-zoe/micro-app": "1.0.0-alpha.10",
     "tsup": "^6.5.0",
     "typescript": "~4.5.5",
     "vitest": "^0.28.3",

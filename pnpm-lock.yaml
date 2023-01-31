@@ -4,10 +4,12 @@ importers:
 
   .:
     specifiers:
+      '@micro-zoe/micro-app': 1.0.0-alpha.10
       '@sepveneto/eslint-config': ^0.6.0
       eslint: ^8.32.0
     devDependencies:
-      '@sepveneto/eslint-config': 0.6.0_eslint@8.33.0
+      '@micro-zoe/micro-app': 1.0.0-alpha.10
+      '@sepveneto/eslint-config': 0.6.1_eslint@8.33.0
       eslint: 8.33.0
 
   docs:
@@ -45,6 +47,7 @@ importers:
 
   packages/core:
     specifiers:
+      '@micro-zoe/micro-app': 1.0.0-alpha.10
       tsup: ^6.5.0
       typescript: ~4.5.5
       vitest: ^0.28.3
@@ -53,6 +56,7 @@ importers:
     dependencies:
       vue-demi: 0.13.11_vue@3.2.45
     devDependencies:
+      '@micro-zoe/micro-app': 1.0.0-alpha.10
       tsup: 6.5.0_typescript@4.5.5
       typescript: 4.5.5
       vitest: 0.28.3
@@ -61,7 +65,7 @@ importers:
   packages/editor:
     specifiers:
       '@element-plus/icons-vue': ^2.0.9
-      '@micro-zoe/micro-app': ^0.8.10
+      '@micro-zoe/micro-app': 1.0.0-alpha.10
       '@sepveneto/free-dom': ^0.0.7
       '@sepveneto/mpd-schema': 'workspace: *'
       '@types/sortablejs': ^1.15.0
@@ -93,11 +97,11 @@ importers:
       fs-extra: 10.1.0
       minimist: 1.2.7
       sortablejs: 1.15.0
-      swiper: 8.4.6
+      swiper: 8.4.7
       vue-router: 4.1.6_vue@3.2.45
     devDependencies:
       '@element-plus/icons-vue': 2.0.10_vue@3.2.45
-      '@micro-zoe/micro-app': 0.8.10
+      '@micro-zoe/micro-app': 1.0.0-alpha.10
       '@sepveneto/mpd-schema': link:../schema
       '@types/uuid': 8.3.4
       '@vue/cli-plugin-babel': 5.0.8_zv3r53khrgh7vuaklrzhzxuxhq
@@ -229,7 +233,7 @@ packages:
     dependencies:
       '@babel/compat-data': 7.20.14
       '@babel/helper-validator-option': 7.18.6
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       lru-cache: 5.1.1
       semver: 6.3.0
     dev: true
@@ -246,7 +250,7 @@ packages:
       '@babel/compat-data': 7.20.14
       '@babel/core': 7.20.12
       '@babel/helper-validator-option': 7.18.6
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       lru-cache: 5.1.1
       semver: 6.3.0
     dev: true
@@ -1928,10 +1932,6 @@ packages:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
     dev: true
 
-  /@micro-zoe/micro-app/0.8.10:
-    resolution: {integrity: sha512-Zb1G5UrOAEHhiAlanzHJiBlRFHMd4+C/Q5jkwTM991R7blb1F6uGY47pmcunzHns48Kj6k9v2+CLsozGyhQmyw==}
-    dev: true
-
   /@micro-zoe/micro-app/1.0.0-alpha.10:
     resolution: {integrity: sha512-8pILuTZyoFOm0itZ6a78AkNqfsyZhGpNkH5oMk+22Bz3xyRlplRpvjujjtEgkg06rCFHWYwvttiV03UQ2aqh1Q==}
     dev: true
@@ -1968,8 +1968,8 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@sepveneto/eslint-config-basic/0.6.0_kf2q37rsxgsj6p2nz45hjttose:
-    resolution: {integrity: sha512-QbeObmn9CsJNOzmQV5+YCpBin5Tn4SWk08j379LGhpOZI8tRqBsbgXwQBfGYkLmKBgoEllVlBCY9qvtAa8BHYg==}
+  /@sepveneto/eslint-config-basic/0.6.1_kf2q37rsxgsj6p2nz45hjttose:
+    resolution: {integrity: sha512-GCOzsCvh+mLjk/9Gw6mx7R/pPB1hQT/yfwB3WF/LChIz6Y2a6pam1CvJzA2P5FslMxzKpm27PVbyfat7BQryXQ==}
     peerDependencies:
       eslint: '>=7.4.0'
     dependencies:
@@ -1982,21 +1982,21 @@ packages:
       - supports-color
     dev: true
 
-  /@sepveneto/eslint-config-mp/0.6.0_eslint@8.33.0:
-    resolution: {integrity: sha512-z4Tx9DDC1DO7VgOXTPdY9gUHDGl/fmAmEhldttESmqvMDaTmGtLyzrngodmiEE6b3wQ4KLV8CebMm87QkyMFew==}
+  /@sepveneto/eslint-config-mp/0.6.1_eslint@8.33.0:
+    resolution: {integrity: sha512-2pgFd6Wki3l5crCReI+3kPtRuGZelO2QalvxRI9ttqPsPbbZSc/WBf08BQ7+7R4EDWSvOcVN4KU9/VXoTh00dQ==}
     peerDependencies:
       eslint: '>=7.4.0'
     dependencies:
       eslint: 8.33.0
     dev: true
 
-  /@sepveneto/eslint-config-ts/0.6.0_zkdaqh7it7uc4cvz2haft7rc6u:
-    resolution: {integrity: sha512-rSzSFoyl8MhFwxkv4nS1N8WJba6ZAtT+4vQUUZOP+WwfsZbyhx0qaTXgE6djnEottPAdxVf21Wh6kHTXPgvhqA==}
+  /@sepveneto/eslint-config-ts/0.6.1_zkdaqh7it7uc4cvz2haft7rc6u:
+    resolution: {integrity: sha512-P5rOlu7gLjNc77bVMqtDBQQYKEBCmFRaOYkrOyWAf2lqrhnimPONUluEp5feizdWwwUsGn7izGVg+hERDZTWUg==}
     peerDependencies:
       eslint: '>=7.4.0'
       typescript: '>=3.9'
     dependencies:
-      '@sepveneto/eslint-config-basic': 0.6.0_kf2q37rsxgsj6p2nz45hjttose
+      '@sepveneto/eslint-config-basic': 0.6.1_kf2q37rsxgsj6p2nz45hjttose
       '@typescript-eslint/eslint-plugin': 5.49.0_rsaczafy73x3xqauzesvzbsgzy
       '@typescript-eslint/parser': 5.49.0_zkdaqh7it7uc4cvz2haft7rc6u
       eslint: 8.33.0
@@ -2007,14 +2007,14 @@ packages:
       - supports-color
     dev: true
 
-  /@sepveneto/eslint-config-vue/0.6.0_rsaczafy73x3xqauzesvzbsgzy:
-    resolution: {integrity: sha512-aFe+04vBc11/cBAUG0p4+9QISWyPhc1QIJhjSEOkgMH9vO0tQ+K2TvAYjW2rYppGm2p24/ACvOH2eglXs4n2ng==}
+  /@sepveneto/eslint-config-vue/0.6.1_rsaczafy73x3xqauzesvzbsgzy:
+    resolution: {integrity: sha512-CGgGXrO4/SJ4Xxje0a8t9AYAf/47zMj3ob873jgZBqbpW7k8uRtZJMO7wn8UKxL+LttMtxM/QGVs+0TACsc1gw==}
     peerDependencies:
       eslint: '>=7.4.0'
     dependencies:
-      '@sepveneto/eslint-config-basic': 0.6.0_kf2q37rsxgsj6p2nz45hjttose
-      '@sepveneto/eslint-config-mp': 0.6.0_eslint@8.33.0
-      '@sepveneto/eslint-config-ts': 0.6.0_zkdaqh7it7uc4cvz2haft7rc6u
+      '@sepveneto/eslint-config-basic': 0.6.1_kf2q37rsxgsj6p2nz45hjttose
+      '@sepveneto/eslint-config-mp': 0.6.1_eslint@8.33.0
+      '@sepveneto/eslint-config-ts': 0.6.1_zkdaqh7it7uc4cvz2haft7rc6u
       eslint: 8.33.0
       eslint-plugin-vue: 9.9.0_eslint@8.33.0
       local-pkg: 0.4.3
@@ -2026,12 +2026,12 @@ packages:
       - typescript
     dev: true
 
-  /@sepveneto/eslint-config/0.6.0_eslint@8.33.0:
-    resolution: {integrity: sha512-Gsca8e4E/7RQHTmy+Ps/+hJB6M4u+ajnisvi04/G41dUijsF073F0Ldwuz5ujuiYpg38e7RlxY+KMeQScIh5Gw==}
+  /@sepveneto/eslint-config/0.6.1_eslint@8.33.0:
+    resolution: {integrity: sha512-4HBzu7NSrK7QImkxOjVVqq3viJDeIC3T8SaOoqdYxOE6Yb1BK2jSsqO99Fyf6UMTlOITZqK4fQ1dbCbqADT0aw==}
     peerDependencies:
       eslint: '>=7.4.0'
     dependencies:
-      '@sepveneto/eslint-config-vue': 0.6.0_rsaczafy73x3xqauzesvzbsgzy
+      '@sepveneto/eslint-config-vue': 0.6.1_rsaczafy73x3xqauzesvzbsgzy
       '@typescript-eslint/eslint-plugin': 5.49.0_rsaczafy73x3xqauzesvzbsgzy
       '@typescript-eslint/parser': 5.49.0_zkdaqh7it7uc4cvz2haft7rc6u
       eslint: 8.33.0
@@ -2792,7 +2792,7 @@ packages:
       acorn-walk: 8.2.0
       address: 1.2.2
       autoprefixer: 10.4.13_postcss@8.4.21
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       case-sensitive-paths-webpack-plugin: 2.4.0
       cli-highlight: 2.1.11
       clipboardy: 2.3.0
@@ -3596,7 +3596,7 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       caniuse-lite: 1.0.30001449
       fraction.js: 4.2.0
       normalize-range: 0.1.2
@@ -3717,7 +3717,7 @@ packages:
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
     dependencies:
       bytes: 3.1.2
-      content-type: 1.0.4
+      content-type: 1.0.5
       debug: 2.6.9
       depd: 2.0.0
       destroy: 1.2.0
@@ -3759,15 +3759,15 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /browserslist/4.21.4:
-    resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}
+  /browserslist/4.21.5:
+    resolution: {integrity: sha512-tUkiguQGW7S3IhB7N+c2MV/HZPSCPAAiYBZXLsBhFB/PCy6ZKKsZrmBayHV9fdGV/ARIfJ14NkxKzRDjvp7L6w==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001449
       electron-to-chromium: 1.4.284
       node-releases: 2.0.8
-      update-browserslist-db: 1.0.10_browserslist@4.21.4
+      update-browserslist-db: 1.0.10_browserslist@4.21.5
 
   /buffer-from/1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
@@ -3847,7 +3847,7 @@ packages:
   /caniuse-api/3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       caniuse-lite: 1.0.30001449
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
@@ -4273,8 +4273,8 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /content-type/1.0.4:
-    resolution: {integrity: sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==}
+  /content-type/1.0.5:
+    resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
     engines: {node: '>= 0.6'}
     dev: true
 
@@ -4309,7 +4309,7 @@ packages:
   /core-js-compat/3.27.2:
     resolution: {integrity: sha512-welaYuF7ZtbYKGrIy7y3eb40d37rG1FvzEOfe7hSLd2iD6duMDqUhRfSvCGyC46HhR6Y8JXXdZ2lnRUMkPBpvg==}
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
     dev: true
 
   /core-js/3.27.2:
@@ -4575,8 +4575,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /deepmerge/4.2.2:
-    resolution: {integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==}
+  /deepmerge/4.3.0:
+    resolution: {integrity: sha512-z2wJZXrmeHdvYJp/Ux55wIjqo81G5Bp4c+oELTW+7ar6SogWHajt5a9gO3s3IDaGSAXjDk0vlQKN3rms8ab3og==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -5582,7 +5582,7 @@ packages:
       array-flatten: 1.1.1
       body-parser: 1.20.1
       content-disposition: 0.5.4
-      content-type: 1.0.4
+      content-type: 1.0.5
       cookie: 0.5.0
       cookie-signature: 1.0.6
       debug: 2.6.9
@@ -5763,7 +5763,7 @@ packages:
       chalk: 4.1.2
       chokidar: 3.5.3
       cosmiconfig: 6.0.0
-      deepmerge: 4.2.2
+      deepmerge: 4.3.0
       fs-extra: 9.1.0
       glob: 7.2.3
       memfs: 3.4.13
@@ -7461,7 +7461,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       caniuse-api: 3.0.0
       colord: 2.9.3
       postcss: 8.4.21
@@ -7474,7 +7474,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -7562,7 +7562,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       caniuse-api: 3.0.0
       cssnano-utils: 3.1.0_postcss@8.4.21
       postcss: 8.4.21
@@ -7597,7 +7597,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       cssnano-utils: 3.1.0_postcss@8.4.21
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
@@ -7719,7 +7719,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -7762,7 +7762,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       caniuse-api: 3.0.0
       postcss: 8.4.21
     dev: true
@@ -8684,7 +8684,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       postcss: 8.4.21
       postcss-selector-parser: 6.0.11
     dev: true
@@ -8745,8 +8745,8 @@ packages:
       stable: 0.1.8
     dev: true
 
-  /swiper/8.4.6:
-    resolution: {integrity: sha512-HACW035vBz2T6Kfut23EAzXhcDpgR8doX+wjq0ZUvJgS5SQApGrV885DAPLBFnmPUISsAhNSVxPKDxqroFvXvQ==}
+  /swiper/8.4.7:
+    resolution: {integrity: sha512-VwO/KU3i9IV2Sf+W2NqyzwWob4yX9Qdedq6vBtS0rFqJ6Fa5iLUJwxQkuD4I38w0WDJwmFl8ojkdcRFPHWD+2g==}
     engines: {node: '>= 4.7.0'}
     requiresBuild: true
     dependencies:
@@ -9075,13 +9075,13 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /update-browserslist-db/1.0.10_browserslist@4.21.4:
+  /update-browserslist-db/1.0.10_browserslist@4.21.5:
     resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       escalade: 3.1.1
       picocolors: 1.0.0
 
@@ -9557,7 +9557,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.1
       acorn: 8.8.2
       acorn-import-assertions: 1.8.0_acorn@8.8.2
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.12.0
       es-module-lexer: 0.9.3

@@ -17,7 +17,7 @@
   ],
   "devDependencies": {
     "@element-plus/icons-vue": "^2.0.9",
-    "@micro-zoe/micro-app": "^0.8.10",
+    "@micro-zoe/micro-app": "1.0.0-alpha.10",
     "@sepveneto/mpd-schema": "workspace: *",
     "@types/uuid": "^8.3.4",
     "@vue/cli-plugin-babel": "~5.0.0",
