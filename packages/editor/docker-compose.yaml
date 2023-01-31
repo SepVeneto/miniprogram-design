@@ -1,0 +1,6 @@
+services:
+  miniprogram-design:
+    image: mpd:latest
+    container_name: mpd-container
+    ports:
+      - '9087:8080'
