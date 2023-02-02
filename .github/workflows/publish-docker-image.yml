@@ -3,7 +3,7 @@ name: Build and Publish Docker Image
 # refer to https://github.com/actions/starter-workflows/blob/main/ci/docker-publish.yml 
 
 on:
-  pubsh:
+  push:
     tags:
       - editor@*
 
