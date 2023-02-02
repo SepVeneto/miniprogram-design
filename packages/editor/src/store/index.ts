@@ -111,6 +111,7 @@ export const useApp = defineStore('app', () => {
     ];
     updateRouter();
     currentRoute.value = config.value.tabbars.list[0].type;
+    remoteUrl.value = '//localhost:8090';
   }
 
   function getConfig (name: string) {

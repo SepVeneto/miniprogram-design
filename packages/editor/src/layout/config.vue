@@ -8,11 +8,13 @@
     :key="selected._uuid"
     v-model="selected"
     :schema="app.schema[selected._schema]"
+    :remote-url="app.remoteUrl"
   />
   <section v-else>
     <schema-render
       v-model="globalConfig"
       :schema="app.schema.globalConfig"
+      :remote-url="app.remoteUrl"
     />
   </section>
 </template>

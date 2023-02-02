@@ -16,7 +16,7 @@ import {
 import { useApp } from '@/store';
 import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
-import { useFederatedComponent, useNormalizeStyle } from '@/hooks';
+import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
 
 import canvasView from './canvas.view.vue';
 // import viewRender from 'widgets_side/viewRender';
@@ -79,6 +79,7 @@ export default defineComponent({
     });
 
     const { Component: ViewRender } = useFederatedComponent(
+      app.remoteUrl,
       'widgets_side',
       './viewRender',
     );

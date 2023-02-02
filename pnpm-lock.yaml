@@ -67,6 +67,7 @@ importers:
       '@element-plus/icons-vue': ^2.0.9
       '@micro-zoe/micro-app': 1.0.0-alpha.10
       '@sepveneto/free-dom': ^0.0.7
+      '@sepveneto/mpd-hooks': 'workspace: *'
       '@sepveneto/mpd-schema': 'workspace: *'
       '@types/sortablejs': ^1.15.0
       '@types/uuid': ^8.3.4
@@ -93,6 +94,7 @@ importers:
       webpack: ^5.74.0
     dependencies:
       '@sepveneto/free-dom': 0.0.7_vue@3.2.45
+      '@sepveneto/mpd-hooks': link:../hooks
       '@types/sortablejs': 1.15.0
       fs-extra: 10.1.0
       minimist: 1.2.7
@@ -140,12 +142,14 @@ importers:
 
   packages/schema:
     specifiers:
+      '@sepveneto/mpd-hooks': 'workspace: *'
       '@types/uuid': ^8.3.4
       '@wangeditor/editor': ^5.1.15
       '@wangeditor/editor-for-vue': ^5.1.12
       uuid: ^8.3.2
       vue: ^3.2.13
     dependencies:
+      '@sepveneto/mpd-hooks': link:../hooks
       '@wangeditor/editor': 5.1.23
       '@wangeditor/editor-for-vue': 5.1.12_3apfu3xbp6awzuex7ed3sbrv6y
       uuid: 8.3.2

@@ -1,5 +1,6 @@
 import { defineComponent, PropType, defineAsyncComponent } from 'vue';
 import ossUpload from './components/ossUpload.vue';
+import { useFederatedComponent } from '@sepveneto/mpd-hooks';
 // import ConfigRender from 'widgets_side/configRender';
 // import rInput from './input.vue'
 // import rCheckbox from './'
@@ -36,10 +37,18 @@ export default defineComponent({
       type: Array as PropType<ISchema[]>,
       default: () => ([]),
     },
+    remoteUrl: {
+      type: String,
+      required: true,
+    },
   },
   emits: ['update:modelValue'],
   setup (prop, { emit }) {
-    // const { Component } = useFe;
+    const { Component: ConfigRender } = useFederatedComponent(
+      prop.remoteUrl,
+      'widgets_side',
+      './configRender',
+    );
     function updateData (key: string, val: string | number) {
       const path = key.split('.');
       const _path = path.slice(0, -1);
@@ -158,11 +167,13 @@ export default defineComponent({
     }
     function renderCustom (schema: ISchema) {
       console.log(schema);
-      // return (
-      //   <ConfigRender
-      //     type={schema.type}
-      //   />
-      // );
+      return ConfigRender.value
+        ? (
+          <ConfigRender.value
+            type={schema.type}
+          />
+          )
+        : null;
     }
     return {
       // schemaList,

@@ -29,8 +29,10 @@ import { freeScene } from '@sepveneto/free-dom';
 import '@sepveneto/free-dom/css';
 // import viewRender from 'widgets_side/viewRender';
 import { computed } from 'vue';
-import { useFederatedComponent } from '@/hooks';
+import { useFederatedComponent } from '@sepveneto/mpd-hooks';
+import { useApp } from '@/store';
 
+const app = useApp();
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   config: {
@@ -48,6 +50,7 @@ const _config = computed({
   },
 });
 const { Component } = useFederatedComponent(
+  app.remoteUrl,
   'widgets_side',
   './viewRender',
 );
