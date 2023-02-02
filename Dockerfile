@@ -5,8 +5,8 @@ COPY . .
 
 RUN npm i -g pnpm\
     && pnpm i\
-    && pnpm build:editor\
-    && pnpm build:hooks
+    && pnpm build:hooks\
+    && pnpm build:editor
 
 FROM nginx as nginx
 
