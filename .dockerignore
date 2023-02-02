@@ -1,0 +1,8 @@
+*
+!packages/editor
+!packages/hooks
+!packages/schema
+!.browserslistrc
+!nginx.conf
+!package.json
+!pnpm-*
