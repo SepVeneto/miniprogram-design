@@ -51,5 +51,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}-${{ steps.time.outputs.time }}
+          tags: editor-${{ steps.time.outputs.time }}
           labels: ${{ steps.meta.outputs.labels }}
