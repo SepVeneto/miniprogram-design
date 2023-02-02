@@ -37,7 +37,7 @@
           <el-scrollbar
             style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
           >
-            <router-view />
+            <router-view :preview="preview" />
             <!-- <v-editor :preview="preview" /> -->
           </el-scrollbar>
           <tabbar-preview
@@ -104,7 +104,6 @@ function handleOutside ({ target }: Event) {
     app.selected = {};
   }
 }
-
 </script>
 
 <style lang="scss" scoped>
