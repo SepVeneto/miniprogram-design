@@ -5,7 +5,11 @@
   "description": "",
   "main": "index.js",
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "scripts": {
+    "build:editor": "pnpm -C packages/editor build && pnpm -C packages/editor build --mode development",
+    "build:hooks": "pnpm -C packages/hooks build"
+  },
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [

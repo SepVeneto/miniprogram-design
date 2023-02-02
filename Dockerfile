@@ -4,10 +4,9 @@ WORKDIR /app
 COPY . .
 
 RUN npm i -g pnpm\
-    && cd packages/editor\
     && pnpm i\
-    && pnpm build\
-    && pnpm build --mode development
+    && pnpm build:editor\
+    && pnpm build:hooks
 
 FROM nginx as nginx
 
