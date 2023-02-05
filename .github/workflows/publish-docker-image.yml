@@ -44,6 +44,9 @@ jobs:
       #   with:
       #     timeZone: 8
       #     format: 'YYYY-MM-DD-HH-mm-ss'
+
+      - name: Get version
+        run: echo "TAG_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
         
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -52,4 +55,4 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: sepveneto/editor
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: ${{ env.TAG_VERSION }}
