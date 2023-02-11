@@ -1,4 +1,5 @@
 <script lang="tsx">
+// eslint-disable-next-line import/no-named-as-default
 import Swiper from 'swiper';
 import 'swiper/css';
 import {
@@ -15,42 +16,41 @@ import {
 import { useApp } from '@/store';
 import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
-import { useNormalizeStyle } from '@/hooks';
+import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
 
 import canvasView from './canvas.view.vue';
-// @ts-expect-error: from module federation
-import viewRender from 'widgets_side/viewRender';
+// import viewRender from 'widgets_side/viewRender';
 
 export default defineComponent({
   components: {
-    draggable,
-    draggableWrapper,
-    canvasView,
-    viewRender,
+    Draggable: draggable,
+    DraggableWrapper: draggableWrapper,
+    CanvasView: canvasView,
+    // ViewRender: viewRender,
   },
-  emits: ['update:modelValue'],
   props: {
     config: {
       type: Object,
       default: () => ({}),
     },
   },
-  setup(props, { emit }) {
+  emits: ['update:modelValue'],
+  setup (props, { emit }) {
     const app = useApp();
     const editorContext = inject('Editor', { preview: false });
 
     const previewComp = computed(() => editorContext.preview);
     const configComp = computed<any>({
-      get() {
+      get () {
         return props.config;
       },
-      set(val) {
+      set (val) {
         emit('update:modelValue', val);
       },
     });
     watch(() => props.config.list.length, () => {
-      isSwiper.value && onUpdate()
-    })
+      isSwiper.value && onUpdate();
+    });
     const selected = computed(() => app.selected);
     const style = useNormalizeStyle(props.config.style);
 
@@ -64,8 +64,8 @@ export default defineComponent({
             display: 'grid',
             gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`,
             ...style.value,
-          }
-        });
+          };
+    });
 
     const swiper = shallowRef();
     watch(isSwiper, (val) => {
@@ -78,6 +78,12 @@ export default defineComponent({
       }
     });
 
+    const { Component: ViewRender } = useFederatedComponent(
+      app.remoteUrl,
+      'widgets_side',
+      './viewRender',
+    );
+
     onMounted(() => {
       if (isSwiper.value) {
         swiper.value = new Swiper(swiperRef.value, {});
@@ -87,27 +93,34 @@ export default defineComponent({
       swiper.value?.destroy();
     });
 
-    function onPut(_1: any, _2: any, dom: any) {
+    function onPut (_1: any, _2: any, dom: any) {
       const { _inContainer } = dom.__draggable_context.element;
       return !_inContainer || _inContainer === 'inner';
     }
-    function handleSelect(data: any) {
+    function handleSelect (data: any) {
+      console.log(data);
       app.selected = data;
       app.updateConfig();
     }
-    function getRenderContent(element: any) {
+    function getRenderContent (element: any) {
       switch (element._view) {
         case 'canvas':
           return <canvas-view config={element} />;
         case 'container':
           return;
         default:
-          return <view-render type={element._view} config={element} />;
+          return ViewRender.value
+            ? <ViewRender.value
+              type={element._view}
+              config={element}
+            />
+            : null
+          ;
       }
     }
-    async function onUpdate() {
-      await nextTick()
-      swiper.value?.update()
+    async function onUpdate () {
+      await nextTick();
+      swiper.value?.update();
     }
     return {
       configComp,
@@ -116,6 +129,7 @@ export default defineComponent({
       viewStyle,
       swiperRef,
       isSwiper,
+      ViewRender,
 
       onPut,
       onUpdate,
@@ -123,7 +137,7 @@ export default defineComponent({
       getRenderContent,
     };
   },
-  render() {
+  render () {
     const swiperWrap = (cont: any) => {
       return (
         <div data-type="swiper" ref="swiperRef" class="swiper">
@@ -131,8 +145,9 @@ export default defineComponent({
         </div>
       );
     };
-    const content = ({ element }: any) =>{
-      return !this.previewComp ? (
+    const content = ({ element }: any) => {
+      return !this.previewComp
+        ? (
         <draggable-wrapper
           dir="top"
           active={this.selected._uuid === element._uuid}
@@ -143,11 +158,13 @@ export default defineComponent({
         >
           {this.getRenderContent(element)}
         </draggable-wrapper>
-      ) : (
+          )
+        : (
         <div class={{ 'swiper-slide': this.isSwiper }}>
           {this.getRenderContent(element)}
         </div>
-      )};
+          );
+    };
     const core = (
       <draggable
         v-model={this.configComp.list}

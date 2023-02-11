@@ -1,4 +1,5 @@
 export interface Tabbar {
+  _uuid: string
   type: string
   text: string
   activeColor: string

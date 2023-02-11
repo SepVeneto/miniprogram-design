@@ -1,5 +1,5 @@
 {
-  "name": "@mpd/editor",
+  "name": "@sepveneto/mpd-editor",
   "version": "0.1.1",
   "bin": {
     "mpd": "./scripts/bin.js"
@@ -17,21 +17,15 @@
   ],
   "devDependencies": {
     "@element-plus/icons-vue": "^2.0.9",
-    "@micro-zoe/micro-app": "^0.8.10",
-    "@mpd/schema": "workspace: *",
+    "@micro-zoe/micro-app": "1.0.0-alpha.10",
+    "@sepveneto/mpd-schema": "workspace: *",
     "@types/uuid": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^5.4.0",
-    "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "@vue/eslint-config-typescript": "^9.1.0",
     "@vueuse/core": "^9.1.1",
     "core-js": "^3.8.3",
     "element-plus": "^2.2.16",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
     "html-webpack-plugin": "^5.5.0",
     "pinia": "^2.0.21",
     "prettier": "^2.7.1",
@@ -44,12 +38,14 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
+    "@sepveneto/mpd-hooks": "workspace: *",
+    "@sepveneto/free-dom": "^0.0.7",
     "@types/sortablejs": "^1.15.0",
-    "free-dom": "^0.0.3",
     "fs-extra": "^10.1.0",
     "minimist": "^1.2.6",
     "sortablejs": "^1.15.0",
-    "swiper": "^8.4.3"
+    "swiper": "^8.4.3",
+    "vue-router": "^4.1.6"
   },
   "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor",

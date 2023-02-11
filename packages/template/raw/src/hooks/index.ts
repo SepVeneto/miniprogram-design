@@ -1,2 +1,2 @@
-export * from './use-normalize-style'
-export * from './use-state'
+export * from './use-normalize-style';
+export * from './use-state';

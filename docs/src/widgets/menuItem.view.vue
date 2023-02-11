@@ -1,26 +1,44 @@
 <template>
-  <div :style="style" class="menu-item-wrapper">
+  <div
+    :style="style"
+    class="menu-item-wrapper"
+    @click="handleClick"
+  >
     <div>
-      <img v-if="config.icon" style="width: 22px; height: 22px; margin-right: 8px" :src="config.icon">
-      <span v-else style="display: inline-block; width: 22px; height: 22px; margin-right: 8px"></span>
-      <span>{{config.title}}</span>
+      <img
+        v-if="config.icon"
+        style="width: 22px; height: 22px; margin-right: 8px"
+        :src="config.icon"
+      >
+      <span
+        v-else
+        style="display: inline-block; width: 22px; height: 22px; margin-right: 8px"
+      />
+      <span>{{ config.title }}</span>
     </div>
     <div>
-      <span class="menu-item-pointer"></span>
+      <span class="menu-item-pointer" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+// @ts-expect-error: from mdf
+import { useRouter } from 'vue-router';
 import { useNormalizeStyle } from '@/hooks';
+const router = useRouter();
 
 const props = defineProps({
   config: {
     type: Object,
-    default: () => ({})
-  }
-})
-const style = useNormalizeStyle(props.config.style)
+    default: () => ({}),
+  },
+});
+const style = useNormalizeStyle(props.config.style);
+function handleClick () {
+  console.log('click');
+  router.push({ name: 'canteenOrder' });
+}
 </script>
 
 <style lang="scss" scoped>

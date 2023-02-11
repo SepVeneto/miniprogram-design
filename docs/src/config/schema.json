@@ -145,7 +145,7 @@
     },
     {
       "type": "checkbox",
-      "label": "可见性",
+      "label": "可见性1",
       "key": "isShow"
     },
     {

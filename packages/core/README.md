@@ -2,14 +2,14 @@
 
 ## 安装
 ```cmd
-pnpm i @mpd/core
-npm i @mpd/core
-yarn add @mpd/core
+pnpm i @sepveneto/mpd-core
+npm i @sepveneto/mpd-core
+yarn add @sepveneto/mpd-core
 ```
 
 ## 使用
 ```js
-import { useDesign } from '@mpd/core'
+import { useDesign } from '@sepveneto/mpd-core'
 
 const [getData, setData] = await useDesign('#mpd-container', {
   name: 'mpd-editor',

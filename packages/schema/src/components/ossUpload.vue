@@ -10,53 +10,61 @@
       :src="imageUrl"
       class="avatar"
       :style="imgStyle"
-    />
+    >
     <el-icon
       v-else
       class="avatar-uploader-icon"
       :style="imgStyle"
-    ><Plus /></el-icon>
+    >
+      <Plus />
+    </el-icon>
   </el-upload>
 </template>
 
 <script lang="ts" setup>
-import { Plus } from '@element-plus/icons-vue'
-import { computed, PropType } from 'vue'
-import type { UploadRequestOptions } from 'element-plus'
-const emit = defineEmits(['update:modelValue'])
+import { Plus } from '@element-plus/icons-vue';
+import { computed, PropType } from 'vue';
+import type { UploadRequestOptions } from 'element-plus';
+const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
-  width: String,
-  height: String,
+  width: {
+    type: String,
+    default: undefined,
+  },
+  height: {
+    type: String,
+    default: undefined,
+  },
   httpRequest: {
     type: Function as PropType<any>,
     default: undefined,
   },
   modelValue: {
     type: String,
-    default: ''
-  }
-})
+    default: '',
+  },
+});
 const imgStyle = computed(() => {
   return {
     width: props.width,
     height: props.height,
-  }
-})
+  };
+});
 const imageUrl = computed({
-  get() {
-    return props.modelValue
+  get () {
+    return props.modelValue;
   },
-  set(val) {
-    emit('update:modelValue', val)
-  }
-})
-const uploadRequest: any = window.microApp?.getData()?.upload ?? noop
-function noop() {
-  return;
+  set (val) {
+    emit('update:modelValue', val);
+  },
+});
+const uploadRequest: any = window.microApp?.getData()?.upload ?? noop;
+function noop () {
+  /* empty */
 }
-async function customRequest(data: UploadRequestOptions) {
-  const res = await uploadRequest(data)
-  imageUrl.value = res
+async function customRequest (data: UploadRequestOptions) {
+  const res = await uploadRequest(data);
+  imageUrl.value = res;
 }
 </script>
 

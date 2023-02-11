@@ -1,5 +1,7 @@
-const { defineConfig } = require('@vue/cli-service')
-const webpack = require('webpack')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { defineConfig } = require('@vue/cli-service');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const webpack = require('webpack');
 
 module.exports = defineConfig({
   outputDir: 'miniprogram-design',
@@ -7,8 +9,8 @@ module.exports = defineConfig({
   devServer: {
     port: 8090,
     headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   chainWebpack: (config) => {
     config.optimization.delete('splitChunks');
@@ -40,20 +42,26 @@ module.exports = defineConfig({
         filename: 'remoteEntry.js',
         library: {
           type: 'umd',
-          name: 'widgets_side'
+          name: 'widgets_side',
         },
         exposes: {
-          './viewRender': './src/components/viewRender.vue'
+          './viewRender': './src/components/viewRender.vue',
+          './configRender': './src/components/configRender.vue',
         },
         shared: {
+          'vue-router': {
+            import: false,
+            requiredVersion: '^4.1.6',
+            strictVersion: true,
+          },
           vue: {
-            singleton: true
+            singleton: true,
           },
           '@vueuse/core': { singleton: true },
-          'free-dom': { singleton: true },
-        }
-      })
-    ]
+          '@sepveneto/free-dom': { singleton: true },
+        },
+      }),
+    ],
   },
-  transpileDependencies: true
-})
+  transpileDependencies: true,
+});

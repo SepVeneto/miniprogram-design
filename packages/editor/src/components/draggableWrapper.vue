@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { defineComponent } from 'vue';
-import { Rank, CloseBold, Hide } from '@element-plus/icons-vue'
+import { Rank, CloseBold, Hide } from '@element-plus/icons-vue';
 
 export default defineComponent({
   components: {
@@ -9,43 +9,49 @@ export default defineComponent({
   },
   props: {
     container: Boolean,
-    dir: String,
+    dir: {
+      type: String,
+      default: 'top',
+    },
     active: Boolean,
     mask: Boolean,
     disabled: Boolean,
     hide: Boolean,
   },
-  setup(props, { emit }) {
-    function handleDelete() {
-      emit('delete')
+  emits: ['delete'],
+  setup (props, { emit }) {
+    function handleDelete () {
+      emit('delete');
     }
     return {
       handleDelete,
-    }
+    };
   },
-  render() {
+  render () {
     const operate = () => (
       <div class='operate'>
         <el-icon class="operate-icon operate-move" color="#fff" size={20}><Rank /></el-icon>
-        {this.$attrs.onDelete ? <el-icon
+        {this.$attrs.onDelete
+          ? <el-icon
           class="operate-icon"
           color="#fff"
           size={20}
           onClick={this.handleDelete}
-        ><close-bold /></el-icon> : null}
+        ><close-bold /></el-icon>
+          : null}
       </div>
-    )
+    );
     const hidden = () => (
       <div class="hide-mask"><el-icon size={40} color="#fff"><Hide /></el-icon></div>
-    )
+    );
     return (
       <div
         class={[
           'card',
-          {'is-active': this.active},
+          { 'is-active': this.active },
           `dir-${this.dir}`,
-          {'has-mask': this.mask},
-          {'is-container': this.container}
+          { 'has-mask': this.mask },
+          { 'is-container': this.container },
         ]}
       >
         {!this.disabled && operate()}
@@ -54,9 +60,9 @@ export default defineComponent({
         </div>
         {this.hide && hidden()}
       </div>
-    )
-  }
-})
+    );
+  },
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,12 +1,11 @@
 import { CSSProperties, ref, Ref, unref, watchEffect } from 'vue';
 type Style = Partial<Record<keyof CSSProperties, string | number>>
-export function useNormalizeStyle(
+export function useNormalizeStyle (
   style: Style | Ref<any>,
 ) {
-
   const _style = ref({
     transition: 'inherit',
-  })
+  });
   watchEffect(() => {
     const res = Object.entries(unref(style)).reduce<Partial<CSSProperties>>(
       (obj, _style) => {
@@ -17,11 +16,11 @@ export function useNormalizeStyle(
           obj[key] = value;
         }
         return obj;
-      }, {} as Partial<CSSProperties>)
-      _style.value = {
-        ..._style.value,
-        ...res,
-      }
-  })
-  return _style
+      }, {} as Partial<CSSProperties>);
+    _style.value = {
+      ..._style.value,
+      ...res,
+    };
+  });
+  return _style;
 }
