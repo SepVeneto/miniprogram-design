@@ -53,4 +53,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: sepveneto/editor:${{ env.TAG_VERSION }}
+          tags: sepveneto/editor:latest,sepveneto/editor:${{ env.TAG_VERSION }}
