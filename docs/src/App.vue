@@ -8,9 +8,16 @@
 import { useDesign } from '@sepveneto/mpd-core';
 import { config, widgets, schema } from './config';
 async function init () {
-  const [getData, setData] = await useDesign(
+  const [, setData] = await useDesign(
     '#design-container',
-    { port: 8090, url: window.location.origin + '/miniprogram-design/editor' },
+    {
+      name: 'resource',
+      inline: true,
+      url: window.location.origin + '/miniprogram-design/editor',
+      data: {
+        remoteUrl: '//localhost:8090',
+      },
+    },
   );
   setData({
     config,
