@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { computed, ref, shallowRef, watch } from 'vue';
+import { ref, shallowRef, watch } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 import { TabbarWidgetConfig } from '@/layout/tabbar/type';
 
@@ -18,23 +18,22 @@ export interface GlobalConfig {
 
 interface Config{
   globalConfig: Partial<GlobalConfig>
-  body: Record<string, any[]>
+  body: Record<PropertyKey, any[]>
   tabbars: TabbarWidgetConfig
 }
 
 export const useApp = defineStore('app', () => {
   const widgetList = ref<any[]>([]);
-  const config = ref<any>({
+  const config = ref<Config>({
     globalConfig: {},
     body: {},
     tabbars: {
-      uuid: uuidv4(),
-      type: 'tabbar',
+      _uuid: uuidv4(),
       list: [],
     },
   });
-  const currentTab = ref({});
-  const currentRoute = ref();
+  // const currentTab = ref({});
+  // const currentRoute = ref();
   const schema = shallowRef<Record<string, any>>({});
   const routes = shallowRef<any[]>([
     { name: 'Home', path: '/' },
@@ -105,12 +104,12 @@ export const useApp = defineStore('app', () => {
       },
     ];
     routes.value = [
-      { name: 'Home', path: '/' },
-      { name: 'Personal', path: '/personal' },
+      { name: 'Home', path: '/', meta: { title: '首页' } },
+      { name: 'Personal', path: '/personal', meta: { title: '个人中心' } },
       { name: 'canteenOrder', path: '/canteenOrder' },
     ];
     updateRouter();
-    currentRoute.value = config.value.tabbars.list[0].type;
+    // currentRoute.value = config.value.tabbars.list[0].type;
     remoteUrl.value = '//localhost:8090';
   }
 
@@ -124,7 +123,7 @@ export const useApp = defineStore('app', () => {
     _routes: any,
   ) {
     config.value = data;
-    currentRoute.value = config.value.tabbars.list[0].type;
+    // currentRoute.value = config.value.tabbars.list[0].type;
     // currentTab.value = data.tabbars.list[currentRoute.value]
 
     widgetList.value = Object.values(widgets);
@@ -144,39 +143,39 @@ export const useApp = defineStore('app', () => {
       routes.value.forEach(raw => {
         router.addRoute({ ...raw, component: Editor });
       });
-      router.replace({ name: 'Home' });
+      router.isReady().then(() => {
+        router.replace({ name: routes.value[0].name });
+      });
     }
   }
-  function findParent (uuid: string, root: any[]): any {
-    for (const item of root) {
-      if (item._uuid === uuid) return root;
-      if (item.list) {
-        const res = findParent(uuid, item.list);
-        if (res) return res;
-      }
-    }
-    return null;
-  }
+  // function findParent (uuid: string, root: any[]): any {
+  //   for (const item of root) {
+  //     if (item._uuid === uuid) return root;
+  //     if (item.list) {
+  //       const res = findParent(uuid, item.list);
+  //       if (res) return res;
+  //     }
+  //   }
+  //   return null;
+  // }
 
-  function updateConfig () {
-    if (selected.value._view === 'tabbar') {
-      return;
-    }
-    const parent = findParent(selected.value._uuid, currentConfig.value);
-    const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid);
-    parent[index] = { ...selected.value };
-  }
-  const currentConfig = computed(() => {
-    return config.value.body[currentRoute.value];
-  });
+  // function updateConfig () {
+  //   if (selected.value._view === 'tabbar') {
+  //     return;
+  //   }
+  //   const parent = findParent(selected.value._uuid, currentConfig.value);
+  //   const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid);
+  //   parent[index] = { ...selected.value };
+  // }
+
   const selected = ref<any>({});
   return {
-    updateConfig,
+    // updateConfig,
     setConfig,
     getConfig,
     widgetList,
-    currentTab,
-    currentRoute,
+    // currentTab,
+    // currentRoute,
     selected,
     config,
     schema,

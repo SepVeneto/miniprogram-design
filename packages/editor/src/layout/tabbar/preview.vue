@@ -6,21 +6,21 @@
     >
       <ul>
         <li
-          v-for="(item, index) in configList"
+          v-for="(item) in configList"
           :key="item._uuid"
           class="bottom-nav-item"
-          @click="handleSelect(item.type)"
+          @click="handleSelect(item.name)"
         >
           <div class="li_content">
             <div class="bottom-cmg">
               <img
-                :src="route.name === item.type ? item.activeImage : item.inactiveImage"
+                :src="route.name === item.name ? item.activeImage : item.inactiveImage"
                 alt=""
               >
             </div>
             <span
               class="bottom-text1"
-              :style="{ color: route.name === item.type ? item.activeColor : '' }"
+              :style="{ color: route.name === item.name ? item.activeColor : '' }"
             >{{ item.text }}</span>
           </div>
         </li>
@@ -30,13 +30,8 @@
 </template>
 
 <script lang="ts" setup>
-// import homeIconInactive from './assets/sy_icon_sy_sel.png';
-// import homeIconActive from './assets/sy_icon_active_sy_sel.png';
-// import myIconInactive from './assets/my_icon_sy_sel.png';
-// import myIconActive from './assets/my_icon_active_sy_sel.png';
-import { ref, computed, PropType } from 'vue';
+import { computed, PropType } from 'vue';
 import type { TabbarWidgetConfig } from './type';
-import { useApp } from '@/store';
 import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
@@ -50,18 +45,12 @@ const props = defineProps({
     }),
   },
 });
-// const app = useApp();
 const configList = computed(() => {
   const _list = props.config.list ?? [];
   return _list;
 });
-// const tabbarType = ref();
 function handleSelect (type: string) {
   router.replace({ name: type });
-  // app.currentRoute = type;
-  // app.currentTab = configList.value[index];
-  // tabbarIdx.value = index;
-  // tabbarType.value = type;
 }
 </script>
 

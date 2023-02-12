@@ -1,15 +1,14 @@
 export interface Tabbar {
   _uuid: string
-  type: string
+  name: string
   text: string
-  activeColor: string
-  activeImage: string
-  inactiveImage: string
-  subTitle: string
+  activeColor?: string
+  inactiveColor?: string
+  activeImage?: string
+  inactiveImage?: string
 }
 
 export interface TabbarWidgetConfig {
-  uuid: string
-  type: string
+  _uuid: string
   list: Tabbar[]
 }

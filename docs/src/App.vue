@@ -15,7 +15,7 @@ async function init () {
       inline: true,
       url: window.location.origin + '/miniprogram-design/editor',
       data: {
-        remoteUrl: '//localhost:8090',
+        remoteUrl: '//localhost:8082',
       },
     },
   );
