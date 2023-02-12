@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, shallowRef, watch } from 'vue';
+import { ref, shallowRef, watch, computed } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 import { TabbarWidgetConfig } from '@/layout/tabbar/type';
 
@@ -32,13 +32,13 @@ export const useApp = defineStore('app', () => {
       list: [],
     },
   });
-  // const currentTab = ref({});
-  // const currentRoute = ref();
   const schema = shallowRef<Record<string, any>>({});
   const routes = shallowRef<any[]>([
-    { name: 'Home', path: '/' },
+    { name: 'Home', path: '' },
   ]);
   const remoteUrl = ref('');
+  const history = ref<string[]>([]);
+  const hasHistory = computed(() => history.value.length > 1);
 
   /** mock */
   if (!window.__MICRO_APP_ENVIRONMENT__) {
@@ -106,7 +106,7 @@ export const useApp = defineStore('app', () => {
     routes.value = [
       { name: 'Home', path: '/', meta: { title: '首页' } },
       { name: 'Personal', path: '/personal', meta: { title: '个人中心' } },
-      { name: 'canteenOrder', path: '/canteenOrder' },
+      { name: 'canteenOrder', path: '/canteenOrder', meta: { title: '订单中心' } },
     ];
     updateRouter();
     // currentRoute.value = config.value.tabbars.list[0].type;
@@ -167,9 +167,16 @@ export const useApp = defineStore('app', () => {
   //   const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid);
   //   parent[index] = { ...selected.value };
   // }
+  function toHome () {
+    history.value = [];
+    const home = routes.value[0];
+    console.log(home);
+    router.replace({ name: home.name });
+  }
 
   const selected = ref<any>({});
   return {
+    toHome,
     // updateConfig,
     setConfig,
     getConfig,
@@ -180,5 +187,7 @@ export const useApp = defineStore('app', () => {
     config,
     schema,
     remoteUrl,
+    history,
+    hasHistory,
   };
 });

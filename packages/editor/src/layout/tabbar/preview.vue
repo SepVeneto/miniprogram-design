@@ -33,6 +33,8 @@
 import { computed, PropType } from 'vue';
 import type { TabbarWidgetConfig } from './type';
 import { useRoute, useRouter } from 'vue-router';
+import { useApp } from '@/store';
+const store = useApp();
 const route = useRoute();
 const router = useRouter();
 const props = defineProps({
@@ -50,6 +52,10 @@ const configList = computed(() => {
   return _list;
 });
 function handleSelect (type: string) {
+  /**
+   * TODO 全局拦截replace修改history
+   */
+  store.history = [];
   router.replace({ name: type });
 }
 </script>

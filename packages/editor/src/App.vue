@@ -31,6 +31,23 @@
       <div class="mobile-frame">
         <div class="mobile-content">
           <header class="header">
+            <div style="cursor: pointer;">
+              <el-icon
+                v-if="app.hasHistory"
+                @click="router.back()"
+              >
+                <ArrowLeftBold />
+              </el-icon>
+              <el-icon
+                v-else
+                @click="app.toHome()"
+              >
+                <img
+                  style="width: 100%; height: 100%;"
+                  src="@/assets/home.svg"
+                >
+              </el-icon>
+            </div>
             <span>{{ title }}</span>
             <span class="icon" />
           </header>
@@ -74,14 +91,17 @@ import VConfig from '@/layout/config.vue';
 import { tabbarPreview } from '@/layout/tabbar';
 import { ref, computed } from 'vue';
 import { useApp } from '@/store';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { ArrowLeftBold } from '@element-plus/icons-vue';
 const route = useRoute();
+const router = useRouter();
 const app = useApp();
 const mainRef = ref();
 const tabbar = computed(() => app.config.tabbars);
 const selected = computed(() => app.selected);
 const preview = ref(false);
 const title = computed(() => route.meta.title);
+// const needBack = computed(() => route.)
 
 function handleDelete () {
   const currentConfig = app.config.body[route.name!];
