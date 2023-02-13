@@ -21,6 +21,7 @@ interface ISchema {
 }
 
 export default defineComponent({
+  name: 'SchemaContainer',
   components: {
     // ConfigRender,
     OssUpload: ossUpload,
@@ -58,7 +59,7 @@ export default defineComponent({
           return obj[curr];
         }, prop.modelValue);
       parent[path.slice(-1)[0]] = val;
-      emit('update:modelValue', { ...prop.modelValue });
+      emit('update:modelValue', prop.modelValue);
     }
     function getData (data: Record<string, any>, key: string) {
       const path = key.split('.');
