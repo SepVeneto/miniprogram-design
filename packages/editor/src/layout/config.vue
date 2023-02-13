@@ -37,7 +37,6 @@ const selected = computed({
   },
   set (val) {
     app.selected = val;
-    app.updateConfig();
   },
 });
 const globalConfig = computed({

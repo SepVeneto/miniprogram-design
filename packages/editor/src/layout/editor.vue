@@ -68,6 +68,9 @@ import containerView from '@/widgets/container.view.vue';
 // import viewRender from 'widgets_side/viewRender';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks';
 import canvasView from '@/widgets/canvas.view.vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 
 const props = defineProps({
   preview: Boolean,
@@ -85,10 +88,10 @@ const mainRef = ref();
 
 const data = computed({
   get () {
-    return app.config.body[app.currentRoute] ?? [];
+    return app.config.body[route.name!] ?? [];
   },
   set (val) {
-    app.config.body[app.currentRoute] = val;
+    app.config.body[route.name!] = val;
   },
 });
 // const selected = ref({} as any)
@@ -110,7 +113,7 @@ function handleSelect (data: any) {
 }
 function updateConfig (data: any) {
   app.selected = data;
-  app.updateConfig();
+  // app.updateConfig();
 }
 </script>
 
