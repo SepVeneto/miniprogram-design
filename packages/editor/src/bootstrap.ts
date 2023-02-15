@@ -11,7 +11,6 @@ let app: App | null;
 let store: Pinia | null;
 
 function mount () {
-  console.log('mount');
   app = createApp(AppVue);
   store = createPinia();
   app.use(ElementPlus);

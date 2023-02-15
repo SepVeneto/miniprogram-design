@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = defineConfig({
+  lintOnSave: false,
   assetsDir: 'deign-static',
   publicPath: '',
   outputDir: `dist/${isProduction ? 'prod' : 'dev'}`,
