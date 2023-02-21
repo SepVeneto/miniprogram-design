@@ -59,9 +59,5 @@ onBeforeUnmount(() => {
 
 async function onCreated (editor: IDomEditor) {
   editorRef.value = editor;
-  setTimeout(() => {
-    const toolbar = DomEditor.getToolbar(editor);
-    console.log(toolbar?.getConfig());
-  }, 10 * 1000);
 }
 </script>

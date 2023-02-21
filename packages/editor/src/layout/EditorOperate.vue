@@ -37,7 +37,7 @@ export default defineComponent({
         >
           <ElIcon
             class={['bar-operate', { 'is-active': this.isPreview }]}
-            onClick={() => this.$emit('update:modelValue', 'preview')}
+            {...{ onClick: () => this.$emit('update:modelValue', 'preview') }}
           >
             <IconIphone />
           </ElIcon>
@@ -52,7 +52,7 @@ export default defineComponent({
       >
         <ElIcon
           class={['bar-operate', { 'is-active': this.isEdit }]}
-          onClick={() => this.$emit('update:modelValue', 'edit')}
+          {...{ onClick: () => this.$emit('update:modelValue', 'edit') }}
         >
           <IconEdit />
         </ElIcon>

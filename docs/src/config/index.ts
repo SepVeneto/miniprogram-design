@@ -1,4 +1,4 @@
-import config from './default.json';
+import config from './default';
 import schema from './schema.json';
 import widgets from './widgets.json';
 

@@ -1,4 +1,4 @@
-import { defineComponent, PropType, defineAsyncComponent } from 'vue';
+import { defineComponent, PropType, defineAsyncComponent, watch, shallowRef } from 'vue';
 import ossUpload from './components/ossUpload.vue';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks';
 // import ConfigRender from 'widgets_side/configRender';
@@ -45,11 +45,17 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (prop, { emit }) {
-    const { Component: ConfigRender } = useFederatedComponent(
-      prop.remoteUrl,
-      'widgets_side',
-      './configRender',
-    );
+    const ConfigRender = shallowRef();
+    watch(() => prop.remoteUrl, (url) => {
+      if (!url) return;
+      const { Component } = useFederatedComponent(
+        url,
+        'widgets_side',
+        './configRender',
+      );
+      ConfigRender.value = Component;
+    }, { immediate: true });
+
     function updateData (key: string, val: string | number) {
       const path = key.split('.');
       const _path = path.slice(0, -1);
@@ -167,7 +173,6 @@ export default defineComponent({
       );
     }
     function renderCustom (schema: ISchema) {
-      console.log(schema);
       return ConfigRender.value
         ? (
           <ConfigRender.value

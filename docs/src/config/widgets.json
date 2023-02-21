@@ -1,5 +1,8 @@
 [
   {
+  "name": "基本组件",
+  "group": [
+  {
     "_name": "容器",
     "_view": "container",
     "_schema": "container",
@@ -39,4 +42,6 @@
     "isShow": true,
     "style": {}
   }
+  ]
+}
 ]
