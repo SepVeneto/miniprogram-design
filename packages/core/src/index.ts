@@ -6,7 +6,7 @@ export type DesignOptions = {
   url: string
   name: string
   inline: boolean
-  data: Record<PropertyKey, unknown>
+  data?: Record<PropertyKey, unknown>
 }
 export async function useDesign (
   dom: string | Element,
