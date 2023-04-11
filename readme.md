@@ -122,3 +122,12 @@ interface ISchema {
 | select | 选择器 |
 | radioGroup | 单选框组|
 | editor | 富文本编辑器（wangeditor）|
+
+## 开发
+
+```bash
+pnpm i
+
+pnpm dev:editor
+pnpm dev:docs
+```

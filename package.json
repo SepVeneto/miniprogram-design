@@ -7,6 +7,8 @@
   "author": "",
   "license": "MIT",
   "scripts": {
+    "dev:editor": "pnpm -C packages/editor dev",
+    "dev:docs": "pnpm -C docs dev",
     "build:editor": "pnpm -C packages/editor build && pnpm -C packages/editor build --mode development",
     "build:hooks": "pnpm -C packages/hooks build"
   },
