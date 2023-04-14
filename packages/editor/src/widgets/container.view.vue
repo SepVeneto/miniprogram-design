@@ -68,14 +68,20 @@ export default defineComponent({
         : {
             display: 'flex',
             flexWrap: 'wrap',
-            // gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`,
             ...style.value,
           };
     });
     const containerRect = useElementBounding(draggableRef);
-    const cellWidth = computed(() => Math.floor(containerRect.width.value / props.config.grid));
+    const cellWidth = computed(() => containerRect.width.value / props.config.grid);
 
     const swiper = shallowRef();
+    watch(cellWidth, (newCell, oldCell) => {
+      if (!oldCell) return;
+      props.config.list.forEach((item: any) => {
+        const rate = item.width / oldCell;
+        item.width = rate * newCell;
+      });
+    });
     watch(isSwiper, (val) => {
       if (val) {
         nextTick().then(() => {
@@ -190,14 +196,13 @@ export default defineComponent({
               active={this.selected._uuid === element._uuid}
               hide={element.isShow != null && !element.isShow}
               mask
-              class={{ 'swiper-slide': this.isSwiper }}
               onClick={withModifiers(() => this.handleSelect(element), ['stop'])}
             >
               {this.getRenderContent(element)}
             </draggable-wrapper>
           )
         : (
-        <div class={{ 'swiper-slide': this.isSwiper }}>
+        <div>
           {this.getRenderContent(element)}
         </div>
           ), element);
@@ -268,6 +273,7 @@ export default defineComponent({
 .free-dom__widget-wrapper {
   position: relative;
   box-sizing: border-box;
-  border: none;
+  border: none !important;
+  cursor: auto;
 }
 </style>
