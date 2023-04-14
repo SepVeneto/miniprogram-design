@@ -38,8 +38,8 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
+    "@sepveneto/free-dom": "^0.3.0",
     "@sepveneto/mpd-hooks": "workspace: *",
-    "@sepveneto/free-dom": "^0.0.7",
     "@types/sortablejs": "^1.15.0",
     "fs-extra": "^10.1.0",
     "minimist": "^1.2.6",

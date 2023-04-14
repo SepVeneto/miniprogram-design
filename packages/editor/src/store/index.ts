@@ -53,6 +53,8 @@ export const useApp = defineStore('app', () => {
             _view: 'menuItem',
             _schema: 'menuItem',
             title: '标题',
+            width: 0,
+            height: 0,
             style: {
               background: '#fff',
             },

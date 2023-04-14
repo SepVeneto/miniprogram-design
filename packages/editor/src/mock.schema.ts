@@ -223,6 +223,16 @@ const menuItem = [
     key: 'isShow',
   },
   {
+    type: 'number',
+    label: '宽度',
+    key: 'width',
+  },
+  {
+    type: 'number',
+    label: '高度',
+    key: 'height',
+  },
+  {
     type: 'customImage',
     label: '图片',
     key: 'image',

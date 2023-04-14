@@ -1,4 +1,5 @@
 <script lang="tsx">
+import { freeDom as FreeDom } from '@sepveneto/free-dom';
 // eslint-disable-next-line import/no-named-as-default
 import Swiper from 'swiper';
 import 'swiper/css';
@@ -12,17 +13,20 @@ import {
   onMounted,
   onBeforeUnmount,
   withModifiers,
+  ref,
 } from 'vue';
 import { useApp } from '@/store';
 import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
+import { useElementBounding } from '@vueuse/core';
 
 import canvasView from './canvas.view.vue';
 // import viewRender from 'widgets_side/viewRender';
 
 export default defineComponent({
   components: {
+    FreeDom,
     Draggable: draggable,
     DraggableWrapper: draggableWrapper,
     CanvasView: canvasView,
@@ -38,6 +42,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const app = useApp();
     const editorContext = inject('Editor', { preview: false });
+    const draggableRef = ref();
 
     const previewComp = computed(() => editorContext.preview);
     const configComp = computed<any>({
@@ -61,11 +66,14 @@ export default defineComponent({
       return isSwiper.value
         ? style.value
         : {
-            display: 'grid',
-            gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`,
+            display: 'flex',
+            flexWrap: 'wrap',
+            // gridTemplateColumns: `repeat(${props.config.grid}, 1fr)`,
             ...style.value,
           };
     });
+    const containerRect = useElementBounding(draggableRef);
+    const cellWidth = computed(() => Math.floor(containerRect.width.value / props.config.grid));
 
     const swiper = shallowRef();
     watch(isSwiper, (val) => {
@@ -77,6 +85,12 @@ export default defineComponent({
         swiper.value.destroy();
       }
     });
+    watch(() => props.config.list.length, () => {
+      props.config.list.forEach((item: any) => {
+        item.width = item.width || cellWidth.value;
+        item.height = item.height || 60;
+      });
+    }, { immediate: true });
 
     const { Component: ViewRender } = useFederatedComponent(
       app.remoteUrl,
@@ -100,6 +114,28 @@ export default defineComponent({
     function handleSelect (data: any) {
       app.selected = data;
       // app.updateConfig();
+    }
+    function wrapResizable (node: any, element: any) {
+      return (
+        <FreeDom
+          width={element.width}
+          height={element.height}
+          x={element.x}
+          y={element.y}
+          preview={previewComp.value}
+          scale={['rb']}
+          absolute={false}
+          diagonal={false}
+          grid={[cellWidth.value, 1]}
+          handler="mark"
+          onUpdate:width={(val: number) => { element.width = val; }}
+          onUpdate:height={(val: number) => { element.height = val; }}
+          onUpdate:x={(val: number) => { element.x = val; }}
+          onUpdate:y={(val: number) => { element.y = val; }}
+        >
+          {node}
+        </FreeDom>
+      );
     }
     function getRenderContent (element: any) {
       switch (element._view) {
@@ -127,6 +163,7 @@ export default defineComponent({
       previewComp,
       viewStyle,
       swiperRef,
+      draggableRef,
       isSwiper,
       ViewRender,
 
@@ -134,6 +171,7 @@ export default defineComponent({
       onUpdate,
       handleSelect,
       getRenderContent,
+      wrapResizable,
     };
   },
   render () {
@@ -145,27 +183,28 @@ export default defineComponent({
       );
     };
     const content = ({ element }: any) => {
-      return !this.previewComp
+      return this.wrapResizable(!this.previewComp
         ? (
-        <draggable-wrapper
-          dir="top"
-          active={this.selected._uuid === element._uuid}
-          hide={element.isShow != null && !element.isShow}
-          mask
-          class={{ 'swiper-slide': this.isSwiper }}
-          onClick={withModifiers(() => this.handleSelect(element), ['stop'])}
-        >
-          {this.getRenderContent(element)}
-        </draggable-wrapper>
+            <draggable-wrapper
+              dir="top"
+              active={this.selected._uuid === element._uuid}
+              hide={element.isShow != null && !element.isShow}
+              mask
+              class={{ 'swiper-slide': this.isSwiper }}
+              onClick={withModifiers(() => this.handleSelect(element), ['stop'])}
+            >
+              {this.getRenderContent(element)}
+            </draggable-wrapper>
           )
         : (
         <div class={{ 'swiper-slide': this.isSwiper }}>
           {this.getRenderContent(element)}
         </div>
-          );
+          ), element);
     };
     const core = (
       <draggable
+        ref="draggableRef"
         v-model={this.configComp.list}
         item-key="_uuid"
         handle=".operate"
@@ -225,5 +264,10 @@ export default defineComponent({
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
+}
+.free-dom__widget-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  border: none;
 }
 </style>
