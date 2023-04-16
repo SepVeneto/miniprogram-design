@@ -56,7 +56,7 @@ export default defineComponent({
       ConfigRender = Component;
     }, { immediate: true });
 
-    function updateData (key: string, val: string | number) {
+    function updateData (key: string, val: unknown) {
       const path = key.split('.');
       const _path = path.slice(0, -1);
       const parent = path.length === 1
@@ -173,10 +173,13 @@ export default defineComponent({
       );
     }
     function renderCustom (schema: ISchema) {
+      const { type, key } = schema;
       return ConfigRender.value
         ? (
           <ConfigRender.value
-            type={schema.type}
+            type={type}
+            modelValue={getData(prop.modelValue, key)}
+            onUpdate:modelValue={(val: unknown) => updateData(key, val)}
           />
           )
         : null;
