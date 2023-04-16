@@ -1,5 +1,5 @@
 import microApp, { renderApp } from '@micro-zoe/micro-app';
-import { nextTick, onMounted, getCurrentInstance } from 'vue-demi';
+import { nextTick, onMounted, getCurrentInstance, CSSProperties } from 'vue-demi';
 
 export * from './upgrade';
 export type DesignOptions = {
@@ -8,11 +8,72 @@ export type DesignOptions = {
   inline: boolean
   data?: Record<PropertyKey, unknown>
 }
+export type EditorConfig = {
+  globalConfig: Record<PropertyKey, unknown>
+  body: Record<PropertyKey, unknown>
+  tabbars?: Record<PropertyKey, unknown>
+}
+type WidgetType = 'input'
+  | 'number'
+  | 'checkbox'
+  | 'image'
+  | 'colorPicker'
+  | 'select'
+  | 'radioGroup'
+  | 'editor'
+interface ISchema {
+  type: WidgetType
+  label: string
+  key: string
+  link?: Record<string, ISchema[]>
+  [attr: string]: any
+}
+export type EditorSchema = {
+  globalConfig: ISchema[]
+  [key: string]: ISchema[]
+}
+export type EditorWidget = {
+  _name: string
+  _view: string
+  _schema: string
+  _inContainer?: 'outer' | 'inner'
+  style?: Partial<CSSProperties>
+  [key: string]: unknown
+}
+export type EditorRoute = {
+  name: string
+  path: string
+  meta?: Record<PropertyKey, unknown> & { title?: string }
+}
+export type EditorData = {
+  /**
+   * 组件视图的可访问地址
+   */
+  remoteUrl: string
+  /**
+   * 编辑器数据
+   */
+  config: EditorConfig
+  /**
+   * 组件的配置项
+   */
+  schema: EditorSchema
+  /**
+   * 可配置的组件列表
+   */
+  widgets: {
+    [key: string]: EditorWidget[]
+  }
+  /**
+   * 编辑器的路由
+   */
+  routes?: EditorRoute[]
+}
 export async function useDesign (
   dom: string | Element,
   options: DesignOptions,
 ) {
-  const { url, inline, data, name = 'miniprogram-design' } = options;
+  const { url, inline, name = 'miniprogram-design' } = options;
   await new Promise((resolve, reject) => {
     tryOnMounted(() => {
       renderApp({
@@ -20,7 +81,6 @@ export async function useDesign (
         url,
         container: dom,
         inline,
-        data,
         'clear-data': true,
         'disable-patch-request': false, // 关闭对子应用请求的拦截
       }).then((result) => {
