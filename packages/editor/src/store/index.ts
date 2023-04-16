@@ -177,7 +177,18 @@ export const useApp = defineStore('app', () => {
   }
 
   const selected = ref<any>({});
+  const activeUuids = ref<string[]>([]);
+  const active = {
+    enter (uuid: string) {
+      activeUuids.value.push(uuid);
+    },
+    leave () {
+      activeUuids.value.pop();
+    },
+  };
   return {
+    activeUuids,
+    active,
     toHome,
     // updateConfig,
     setConfig,

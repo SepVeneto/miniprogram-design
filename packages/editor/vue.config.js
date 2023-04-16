@@ -24,6 +24,9 @@ module.exports = defineConfig({
       'Access-Control-Allow-Origin': '*',
     },
   },
+  chainWebpack: config => {
+    config.plugins.delete('fork-ts-checker');
+  },
   configureWebpack: {
     plugins: [
       new webpack.container.ModuleFederationPlugin({

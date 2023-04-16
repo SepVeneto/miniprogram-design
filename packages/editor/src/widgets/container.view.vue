@@ -20,6 +20,7 @@ import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
 import { useElementBounding } from '@vueuse/core';
+import { useHoverActive } from './useHoverActive';
 
 import canvasView from './canvas.view.vue';
 // import viewRender from 'widgets_side/viewRender';
@@ -40,6 +41,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
+    const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive();
     const app = useApp();
     const editorContext = inject('Editor', { preview: false });
     const draggableRef = ref();
@@ -134,10 +136,15 @@ export default defineComponent({
           diagonal={false}
           grid={[cellWidth.value, 1]}
           handler="mark"
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+          onClick={withModifiers(() => handleSelect(element), ['stop'])}
           onUpdate:width={(val: number) => { element.width = val; }}
           onUpdate:height={(val: number) => { element.height = val; }}
           onUpdate:x={(val: number) => { element.x = val; }}
           onUpdate:y={(val: number) => { element.y = val; }}
+          onMouseenter={withModifiers(() => onEnter(element._uuid), ['stop'])}
+          onMouseleave={withModifiers(() => onLeave(), ['stop'])}
         >
           {node}
         </FreeDom>
@@ -172,7 +179,10 @@ export default defineComponent({
       draggableRef,
       isSwiper,
       ViewRender,
+      activeUuid,
 
+      onEnter,
+      onLeave,
       onPut,
       onUpdate,
       handleSelect,
@@ -193,10 +203,9 @@ export default defineComponent({
         ? (
             <draggable-wrapper
               dir="top"
-              active={this.selected._uuid === element._uuid}
+              active={this.selected._uuid === element._uuid || this.activeUuid === element._uuid}
               hide={element.isShow != null && !element.isShow}
               mask
-              onClick={withModifiers(() => this.handleSelect(element), ['stop'])}
             >
               {this.getRenderContent(element)}
             </draggable-wrapper>

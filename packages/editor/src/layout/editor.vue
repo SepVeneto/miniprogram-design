@@ -20,10 +20,12 @@
         <draggable-wrapper
           v-if="!preview"
           dir="top"
-          :active="selected._uuid === item._uuid"
+          :active="activeUuid === item._uuid || selected._uuid === item._uuid"
           :hide="item.isShow != null && !item.isShow"
           :container="item._view === 'container'"
           :mask="item._view !== 'container' && item._view !== 'canvas' && item._mask"
+          @mouseenter.stop="onEnter(item._uuid)"
+          @mouseleave.stop="onLeave()"
           @click="handleSelect(item)"
         >
           <container-view
@@ -69,6 +71,7 @@ import containerView from '@/widgets/container.view.vue';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks';
 import canvasView from '@/widgets/canvas.view.vue';
 import { useRoute } from 'vue-router';
+import { useHoverActive } from '@/widgets/useHoverActive';
 
 const route = useRoute();
 
@@ -76,6 +79,7 @@ const props = defineProps({
   preview: Boolean,
 });
 const app = useApp();
+const { activeUuid, onEnter, onLeave } = useHoverActive();
 
 provide('Editor', reactive({
   ...toRefs(props),

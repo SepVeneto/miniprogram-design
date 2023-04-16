@@ -67,10 +67,24 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
+  &:first-child.is-container {
+    margin-top: 18px;
+  }
   position: relative;
-  // &.is-container > .container {
-  //   padding: 10px;
-  // }
+  &.is-active > .container {
+    &::after {
+      top: 0;
+      position: absolute;
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: 1px dashed #4089ef;
+      z-index: 1;
+      pointer-events: none;
+    }
+  }
   &.dir-top {
     .operate {
       top: 0;
@@ -107,11 +121,9 @@ export default defineComponent({
     border-bottom: none;
     transform: translateY(-100%);
   }
-  &.is-container > .container {
-    // border: 1px dashed transparent;
-  }
-  &.is-active.is-container > .container, &.is-container:hover > .container {
-    &::before {
+  &.is-active.is-container > .container {
+    &::after {
+      top: 0;
       position: absolute;
       content: '';
       width: 100%;
@@ -134,17 +146,9 @@ export default defineComponent({
         z-index: 1;
       }
     }
-    // right: -50%;
   }
   .container {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
     transition: all 0.3s;
-    overflow: hidden;
-    &.is-container {
-      // z-index: 1;
-    }
   }
   &.dir-right:not(:last-child) {
     margin-bottom: 20px;
@@ -154,14 +158,7 @@ export default defineComponent({
     padding: 10px;
   }
   &.has-mask {
-    &.is-active > .container, &:hover > .container{
-      &::before {
-        border: 1px dashed #4089ef;
-        // z-index: 2;
-        pointer-events: none;
-      }
-    }
-    .container::before {
+    &::before {
       position: absolute;
       content: '';
       display: block;
