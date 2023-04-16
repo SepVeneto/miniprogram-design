@@ -14,7 +14,6 @@ const props = defineProps({
 const configView = shallowRef();
 
 watch(() => props.type, (type) => {
-  console.log(type);
   configView.value = defineAsyncComponent(
     () => import(`@/config/${type}.view.vue`),
   );

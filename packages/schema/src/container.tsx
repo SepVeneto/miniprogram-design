@@ -1,4 +1,4 @@
-import { defineComponent, PropType, defineAsyncComponent, watch, shallowRef } from 'vue';
+import { defineComponent, PropType, defineAsyncComponent, watch, ShallowRef } from 'vue';
 import ossUpload from './components/ossUpload.vue';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks';
 // import ConfigRender from 'widgets_side/configRender';
@@ -45,7 +45,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (prop, { emit }) {
-    const ConfigRender = shallowRef();
+    let ConfigRender: ShallowRef<any>;
     watch(() => prop.remoteUrl, (url) => {
       if (!url) return;
       const { Component } = useFederatedComponent(
@@ -53,7 +53,7 @@ export default defineComponent({
         'widgets_side',
         './configRender',
       );
-      ConfigRender.value = Component;
+      ConfigRender = Component;
     }, { immediate: true });
 
     function updateData (key: string, val: string | number) {
