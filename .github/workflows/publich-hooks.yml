@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - 'hooks@*'
+      - hooks@*
 
 jobs:
   publish:
