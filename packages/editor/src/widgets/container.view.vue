@@ -1,17 +1,10 @@
 <script lang="tsx">
 import { freeDom as FreeDom } from '@sepveneto/free-dom';
-// eslint-disable-next-line import/no-named-as-default
-import Swiper from 'swiper';
-import 'swiper/css';
 import {
   defineComponent,
   computed,
   inject,
   watch,
-  nextTick,
-  shallowRef,
-  onMounted,
-  onBeforeUnmount,
   withModifiers,
   ref,
 } from 'vue';
@@ -22,16 +15,11 @@ import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
 import { useElementBounding } from '@vueuse/core';
 import { useHoverActive } from './useHoverActive';
 
-import canvasView from './canvas.view.vue';
-// import viewRender from 'widgets_side/viewRender';
-
 export default defineComponent({
   components: {
     FreeDom,
     Draggable: draggable,
     DraggableWrapper: draggableWrapper,
-    CanvasView: canvasView,
-    // ViewRender: viewRender,
   },
   props: {
     config: {
@@ -55,43 +43,25 @@ export default defineComponent({
         emit('update:modelValue', val);
       },
     });
-    watch(() => props.config.list.length, () => {
-      isSwiper.value && onUpdate();
-    });
     const selected = computed(() => app.selected);
     const style = useNormalizeStyle(props.config.style);
 
-    const isSwiper = computed(() => props.config.layout === 'swiper');
-    const swiperRef = shallowRef();
-
     const viewStyle = computed(() => {
-      return isSwiper.value
-        ? style.value
-        : {
-            display: 'flex',
-            flexWrap: 'wrap',
-            ...style.value,
-          };
+      return {
+        display: 'flex',
+        flexWrap: 'wrap',
+        ...style.value,
+      };
     });
     const containerRect = useElementBounding(draggableRef);
     const cellWidth = computed(() => containerRect.width.value / props.config.grid);
 
-    const swiper = shallowRef();
     watch(cellWidth, (newCell, oldCell) => {
       if (!oldCell) return;
       props.config.list.forEach((item: any) => {
         const rate = item.width / oldCell;
         item.width = rate * newCell;
       });
-    });
-    watch(isSwiper, (val) => {
-      if (val) {
-        nextTick().then(() => {
-          swiper.value = new Swiper(swiperRef.value, {});
-        });
-      } else {
-        swiper.value.destroy();
-      }
     });
     watch(() => props.config.list.length, () => {
       props.config.list.forEach((item: any) => {
@@ -105,15 +75,6 @@ export default defineComponent({
       'widgets_side',
       './viewRender',
     );
-
-    onMounted(() => {
-      if (isSwiper.value) {
-        swiper.value = new Swiper(swiperRef.value, {});
-      }
-    });
-    onBeforeUnmount(() => {
-      swiper.value?.destroy();
-    });
 
     function onPut (_1: any, _2: any, dom: any) {
       const { _inContainer } = dom.__draggable_context.element;
@@ -152,8 +113,6 @@ export default defineComponent({
     }
     function getRenderContent (element: any) {
       switch (element._view) {
-        case 'canvas':
-          return <canvas-view config={element} />;
         case 'container':
           return;
         default:
@@ -166,38 +125,25 @@ export default defineComponent({
           ;
       }
     }
-    async function onUpdate () {
-      await nextTick();
-      swiper.value?.update();
-    }
+
     return {
       configComp,
       selected,
       previewComp,
       viewStyle,
-      swiperRef,
       draggableRef,
-      isSwiper,
       ViewRender,
       activeUuid,
 
       onEnter,
       onLeave,
       onPut,
-      onUpdate,
       handleSelect,
       getRenderContent,
       wrapResizable,
     };
   },
   render () {
-    const swiperWrap = (cont: any) => {
-      return (
-        <div data-type="swiper" ref="swiperRef" class="swiper">
-          {cont}
-        </div>
-      );
-    };
     const content = ({ element }: any) => {
       return this.wrapResizable(!this.previewComp
         ? (
@@ -232,16 +178,14 @@ export default defineComponent({
         class={[
           'draggable-group',
           { 'is-preview': this.previewComp },
-          { 'swiper-wrapper': this.isSwiper },
         ]}
         style={this.viewStyle}
-        // onAdd={this.onUpdate}
         v-slots={{
           item: content,
         }}
       />
     );
-    return this.isSwiper ? swiperWrap(core) : core;
+    return core;
   },
 });
 </script>
