@@ -1,4 +1,4 @@
-import { defineComponent, PropType, defineAsyncComponent } from 'vue';
+import { defineComponent, PropType, defineAsyncComponent, watch, ShallowRef } from 'vue';
 import ossUpload from './components/ossUpload.vue';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks';
 // import ConfigRender from 'widgets_side/configRender';
@@ -45,12 +45,18 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (prop, { emit }) {
-    const { Component: ConfigRender } = useFederatedComponent(
-      prop.remoteUrl,
-      'widgets_side',
-      './configRender',
-    );
-    function updateData (key: string, val: string | number) {
+    let ConfigRender: ShallowRef<any>;
+    watch(() => prop.remoteUrl, (url) => {
+      if (!url) return;
+      const { Component } = useFederatedComponent(
+        url,
+        'widgets_side',
+        './configRender',
+      );
+      ConfigRender = Component;
+    }, { immediate: true });
+
+    function updateData (key: string, val: unknown) {
       const path = key.split('.');
       const _path = path.slice(0, -1);
       const parent = path.length === 1
@@ -92,13 +98,13 @@ export default defineComponent({
     }
     function renderNumber (schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, ...args } = schema;
+      const { type, label, key, unit, ...args } = schema;
       return (
         <el-input
           model-value={getData(prop.modelValue, key)}
           type="number"
           onUpdate:modelValue={(val: string) => updateData(key, Number(val))}
-          v-slots={{ suffix: () => (<div>px</div>) }}
+          v-slots={{ suffix: () => (<div>{unit || 'px'}</div>) }}
           {...args}
         />
       );
@@ -167,11 +173,13 @@ export default defineComponent({
       );
     }
     function renderCustom (schema: ISchema) {
-      console.log(schema);
+      const { type, key } = schema;
       return ConfigRender.value
         ? (
           <ConfigRender.value
-            type={schema.type}
+            type={type}
+            modelValue={getData(prop.modelValue, key)}
+            onUpdate:modelValue={(val: unknown) => updateData(key, val)}
           />
           )
         : null;

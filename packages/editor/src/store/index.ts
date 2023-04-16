@@ -34,7 +34,7 @@ export const useApp = defineStore('app', () => {
   });
   const schema = shallowRef<Record<string, any>>({});
   const routes = shallowRef<any[]>([
-    { name: 'Home', path: '' },
+    { path: '/' },
   ]);
   const remoteUrl = ref('');
   const history = ref<string[]>([]);
@@ -53,6 +53,8 @@ export const useApp = defineStore('app', () => {
             _view: 'menuItem',
             _schema: 'menuItem',
             title: '标题',
+            width: 0,
+            height: 0,
             style: {
               background: '#fff',
             },
@@ -120,7 +122,7 @@ export const useApp = defineStore('app', () => {
     data: Config,
     widgets: Record<string, any>,
     _schema: any,
-    _routes: any,
+    _routes?: any,
   ) {
     config.value = data;
     // currentRoute.value = config.value.tabbars.list[0].type;
@@ -130,7 +132,11 @@ export const useApp = defineStore('app', () => {
 
     schema.value = _schema;
     routes.value = _routes;
-    updateRouter();
+    if (_routes) {
+      updateRouter();
+    } else {
+      router.replace({ path: '/' });
+    }
   }
   watch(config, (val) => {
     window.microApp?.dispatch(val);
@@ -175,7 +181,18 @@ export const useApp = defineStore('app', () => {
   }
 
   const selected = ref<any>({});
+  const activeUuids = ref<string[]>([]);
+  const active = {
+    enter (uuid: string) {
+      activeUuids.value.push(uuid);
+    },
+    leave () {
+      activeUuids.value.pop();
+    },
+  };
   return {
+    activeUuids,
+    active,
     toHome,
     // updateConfig,
     setConfig,

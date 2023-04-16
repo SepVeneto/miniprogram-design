@@ -13,16 +13,20 @@ async function init () {
     {
       name: 'resource',
       inline: true,
-      url: window.location.origin + '/miniprogram-design/editor',
-      data: {
-        remoteUrl: '//localhost:8082',
-      },
+      url: '//localhost:8082',
+      data: {},
     },
   );
   setData({
+    remoteUrl: 'http://localhost:8090',
     config,
     schema,
     widgets,
+    // routes: [
+    //   { name: 'Home', path: '/', meta: { title: '首页' } },
+    //   { name: 'Personal', path: '/personal', meta: { title: '个人中心' } },
+    //   { name: 'canteenOrder', path: '/canteenOrder', meta: { title: '订单中心' } },
+    // ],
   });
 }
 init();

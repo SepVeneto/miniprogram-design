@@ -191,23 +191,15 @@ const mine = [
 
 const container = [
   {
-    type: 'radioGroup',
-    label: '布局类型',
-    key: 'layout',
-    link: {
-      grid: [
-        {
-          type: 'number',
-          label: '列',
-          key: 'grid',
-        },
-      ],
-      swiper: [],
-    },
-    options: [
-      { label: '栅格布局', value: 'grid' },
-      { label: '轮播', value: 'swiper' },
-    ],
+    type: 'number',
+    label: '栅格',
+    key: 'grid',
+    unit: '列',
+  },
+  {
+    type: 'number',
+    label: '宽度',
+    key: 'style.width',
   },
 ];
 
@@ -221,6 +213,16 @@ const menuItem = [
     type: 'checkbox',
     label: '可见性',
     key: 'isShow',
+  },
+  {
+    type: 'number',
+    label: '宽度',
+    key: 'width',
+  },
+  {
+    type: 'number',
+    label: '高度',
+    key: 'height',
   },
   {
     type: 'customImage',

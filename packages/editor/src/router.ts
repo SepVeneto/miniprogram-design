@@ -1,13 +1,12 @@
 import { createRouter, createMemoryHistory } from 'vue-router';
 import { useApp } from '@/store';
-// import Editor from '@/layout/editor.vue';
+import Editor from '@/layout/editor.vue';
 
 export const router = createRouter({
   history: createMemoryHistory(),
-  /**
-   * TODO: add default route to clonse the warning message
-   */
-  routes: [],
+  routes: [
+    { name: 'default', path: '/', component: Editor },
+  ],
 });
 
 router.beforeEach((to) => {

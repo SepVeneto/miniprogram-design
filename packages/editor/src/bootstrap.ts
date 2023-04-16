@@ -11,7 +11,6 @@ let app: App | null;
 let store: Pinia | null;
 
 function mount () {
-  console.log('mount');
   app = createApp(AppVue);
   store = createPinia();
   app.use(ElementPlus);
@@ -21,7 +20,7 @@ function mount () {
 
   const appStore = useApp();
   window.microApp?.addDataListener((data: any) => {
-    appStore.remoteUrl = data.remoteUrl;
+    data.remoteUrl && (appStore.remoteUrl = data.remoteUrl);
     if (!data.config) return;
     appStore.setConfig(data.config, data.widgets, data.schema, data.routes);
   }, true);

@@ -1,4 +1,26 @@
 {
+  "globalConfig": [
+    {
+      "type": "colorPicker",
+      "label": "主题色",
+      "key": "color"
+    },
+    {
+      "type": "colorPicker",
+      "label": "空记录背景色",
+      "key": "emptyColor"
+    },
+    {
+      "type": "colorPicker",
+      "label": "气泡颜色",
+      "key": "bubbleColor"
+    },
+    {
+      "type": "image",
+      "label": "登录背景图片",
+      "key": "loginBg"
+    }
+  ],
   "reserve": [
     {
       "type": "number",
@@ -149,7 +171,7 @@
       "key": "isShow"
     },
     {
-      "type": "image",
+      "type": "customImage",
       "label": "图标",
       "key": "icon"
     },
@@ -158,15 +180,42 @@
       "label": "行为",
       "key": "type",
       "options": [
-        { "label": "我的食堂订单", "value": "canteenOrder" },
-        { "label": "交易明细", "value": "tradeDetail" },
-        { "label": "充值明细", "value": "rechargeDetail" },
-        { "label": "扣减记录", "value": "record" },
-        { "label": "刷脸信息", "value": "faceInfo" },
-        { "label": "清除缓存", "value": "clearCache" },
-        { "label": "我的预订订单", "value": "reserveOrder" },
-        { "label": "送餐预订订单", "value": "delivery" },
-        { "label": "团餐预约", "value": "reserveGroup" }
+        {
+          "label": "我的食堂订单",
+          "value": "canteenOrder"
+        },
+        {
+          "label": "交易明细",
+          "value": "tradeDetail"
+        },
+        {
+          "label": "充值明细",
+          "value": "rechargeDetail"
+        },
+        {
+          "label": "扣减记录",
+          "value": "record"
+        },
+        {
+          "label": "刷脸信息",
+          "value": "faceInfo"
+        },
+        {
+          "label": "清除缓存",
+          "value": "clearCache"
+        },
+        {
+          "label": "我的预订订单",
+          "value": "reserveOrder"
+        },
+        {
+          "label": "送餐预订订单",
+          "value": "delivery"
+        },
+        {
+          "label": "团餐预约",
+          "value": "reserveGroup"
+        }
       ]
     }
   ]

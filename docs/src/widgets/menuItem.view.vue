@@ -2,8 +2,8 @@
   <div
     :style="style"
     class="menu-item-wrapper"
-    @click="handleClick"
   >
+    <pre>{{ config }}</pre>
     <div>
       <img
         v-if="config.icon"

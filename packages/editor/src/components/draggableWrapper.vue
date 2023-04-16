@@ -30,12 +30,12 @@ export default defineComponent({
   render () {
     const operate = () => (
       <div class='operate'>
-        <el-icon class="operate-icon operate-move" color="#fff" size={20}><Rank /></el-icon>
+        <el-icon class="operate-icon operate-move" color="#fff" size={18}><Rank /></el-icon>
         {this.$attrs.onDelete
           ? <el-icon
           class="operate-icon"
           color="#fff"
-          size={20}
+          size={18}
           onClick={this.handleDelete}
         ><close-bold /></el-icon>
           : null}
@@ -67,31 +67,30 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
+  &:first-child.is-container {
+    margin-top: 18px;
+  }
   position: relative;
-  &.is-container > .container {
-    padding: 10px;
+  &.is-active > .container {
+    &::after {
+      top: 0;
+      position: absolute;
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: 1px dashed #4089ef;
+      z-index: 1;
+      pointer-events: none;
+    }
   }
   &.dir-top {
-    overflow: hidden;
     .operate {
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
       .operate-icon {
         color: #222;
-        &::before {
-          content: '';
-          display: block;
-          width: 40px;
-          height: 32px;
-          border-radius: 50%;
-          box-shadow: 0 0 4px;
-          background: #fff;
-          position: absolute;
-          top: -50%;
-          left: 50%;
-          transform: translateX(-50%);
-        }
       }
     }
   }
@@ -117,11 +116,23 @@ export default defineComponent({
   &.is-active > .operate, &:hover > .operate {
     display: flex;
   }
-  &.is-active > .container, &:hover > .container{
-    border: 1px dashed #4089ef;
-  }
-  &.is-active.is-container > .container, &.is-container:hover > .container {
+  &.is-container > .operate {
     border: 1px dashed #E6A23C;
+    border-bottom: none;
+    transform: translateY(-100%);
+  }
+  &.is-active.is-container > .container {
+    &::after {
+      top: 0;
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      border: 1px dashed #E6A23C;
+      box-sizing: border-box;
+      // z-index: 1;
+      pointer-events: none;
+    }
   }
   .operate {
     display: none;
@@ -135,18 +146,9 @@ export default defineComponent({
         z-index: 1;
       }
     }
-    // right: -50%;
   }
   .container {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    border: 1px dashed transparent;
     transition: all 0.3s;
-    overflow: hidden;
-    // &.is-container {
-    //   display: grid;
-    // }
   }
   &.dir-right:not(:last-child) {
     margin-bottom: 20px;
@@ -156,12 +158,13 @@ export default defineComponent({
     padding: 10px;
   }
   &.has-mask {
-    .container::before {
+    &::before {
       position: absolute;
       content: '';
       display: block;
       width: 100%;
       height: 100%;
+      box-sizing: border-box;
     }
   }
 }
@@ -175,5 +178,15 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
+}
+</style>
+
+<style lang="scss">
+.free-dom__widget-wrapper {
+  > .card, .container {
+    width: 100%;
+    height: 100%;
+  }
+
 }
 </style>

@@ -3,83 +3,82 @@
     class="main-container"
     @click="handleOutside"
   >
-    <header style="margin-bottom: 10px;">
-      <el-button
-        :type="preview ? 'primary' : ''"
-        @click="preview = !preview"
-      >
-        预览
-      </el-button>
-    </header>
     <main
       ref="mainRef"
       style="display: flex; justify-content: space-between;"
     >
       <aside style="width: 300px; background: #fff;">
-        <div
-          style="padding: 20px; margin-bottom: 10px; border-bottom: 1px solid #ddd;"
-        >
-          组件
-        </div>
-        <el-scrollbar wrap-style="height: 700px; padding: 20px;">
-          <widget-wrap
-            :list="app.widgetList"
-            :preview="preview"
-          />
-        </el-scrollbar>
-      </aside>
-      <div class="mobile-frame">
-        <div class="mobile-content">
-          <header class="header">
-            <div style="cursor: pointer;">
-              <el-icon
-                v-if="app.hasHistory"
-                @click="router.back()"
-              >
-                <ArrowLeftBold />
-              </el-icon>
-              <el-icon
-                v-else
-                @click="app.toHome()"
-              >
-                <img
-                  style="width: 100%; height: 100%;"
-                  src="@/assets/home.svg"
-                >
-              </el-icon>
-            </div>
-            <span>{{ title }}</span>
-            <span class="icon" />
-          </header>
-          <el-scrollbar
-            style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
-          >
-            <router-view :preview="preview" />
-            <!-- <v-editor :preview="preview" /> -->
+        <ElCard>
+          <template #header>
+            <span>组件</span>
+          </template>
+          <el-scrollbar wrap-style="height: 700px;">
+            <widget-wrap
+              :list="app.widgetList"
+              :preview="isPreview"
+            />
           </el-scrollbar>
-          <tabbarPreview
-            :preview="preview"
-            :config="tabbar"
-            :active="tabbar._uuid === selected._uuid"
-            @click="handleSelect(tabbar)"
-          />
+        </ElCard>
+      </aside>
+      <div>
+        <div class="mobile-frame">
+          <div class="mobile-content">
+            <header class="header">
+              <div style="cursor: pointer;">
+                <el-icon
+                  v-if="app.hasHistory"
+                  @click="router.back()"
+                >
+                  <ArrowLeftBold />
+                </el-icon>
+                <el-icon
+                  v-else
+                  @click="app.toHome()"
+                >
+                  <img
+                    style="width: 100%; height: 100%;"
+                    src="@/assets/home.svg"
+                  >
+                </el-icon>
+              </div>
+              <span>{{ title }}</span>
+              <span class="icon" />
+            </header>
+            <el-scrollbar
+              style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
+            >
+              <router-view :preview="isPreview" />
+            </el-scrollbar>
+            <tabbarPreview
+              v-if="tabbar"
+              :preview="isPreview"
+              :config="tabbar"
+              :active="tabbar._uuid === selected._uuid"
+              @click="handleSelect(tabbar)"
+            />
+          </div>
         </div>
+        <EditorOperate v-model="mode" />
       </div>
       <aside style="background: #fff; width: 400px; max-height: 810px">
-        <div style="display: flex; justify-content: space-between; padding: 20px; align-items: center; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
-          <span>{{ selected._name || '配置' }}</span>
-          <el-button
-            type="primary"
-            text
-            :disabled="preview || !selected._schema || ['tabbar'].includes(selected._schema)"
-            @click="handleDelete"
-          >
-            删除
-          </el-button>
-        </div>
-        <el-scrollbar wrap-style="height: 700px; padding: 20px;">
-          <v-config />
-        </el-scrollbar>
+        <ElCard>
+          <template #header>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span>{{ selected._name || '配置' }}</span>
+              <el-button
+                type="primary"
+                text
+                :disabled="isPreview || !selected._schema || ['tabbar'].includes(selected._schema)"
+                @click="handleDelete"
+              >
+                删除
+              </el-button>
+            </div>
+          </template>
+          <el-scrollbar wrap-style="height: 700px;">
+            <v-config />
+          </el-scrollbar>
+        </ElCard>
       </aside>
     </main>
   </section>
@@ -93,14 +92,18 @@ import { ref, computed } from 'vue';
 import { useApp } from '@/store';
 import { useRoute, useRouter } from 'vue-router';
 import { ArrowLeftBold } from '@element-plus/icons-vue';
+import EditorOperate, { Mode } from '@/layout/EditorOperate.vue';
+
 const route = useRoute();
 const router = useRouter();
 const app = useApp();
 const mainRef = ref();
+const mode = ref<Mode>('edit');
+
 const tabbar = computed(() => app.config.tabbars);
 const selected = computed(() => app.selected);
-const preview = ref(false);
 const title = computed(() => route.meta.title);
+const isPreview = computed(() => mode.value === 'preview');
 // const needBack = computed(() => route.)
 
 function handleDelete () {
@@ -142,6 +145,7 @@ function handleOutside ({ target }: Event) {
   --tabbar-height: 50px;
   --header-height: 44px;
   --safe-bottom: 40px;
+  float: left;
   background: url('./assets/iPhone13.png');
   width: 375px;
   height: 720px;
