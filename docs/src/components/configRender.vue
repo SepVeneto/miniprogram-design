@@ -1,21 +1,30 @@
 <template>
-  <component :is="configView" />
+  <component
+    :is="configView"
+    v-bind="$attrs"
+  />
 </template>
 
-<script setup lang="ts">
-import { defineAsyncComponent, shallowRef, watch } from 'vue';
+<script lang="ts">
+import { defineComponent, defineAsyncComponent, shallowRef, watch } from 'vue';
+export default defineComponent({
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+  },
+  setup (props) {
+    const configView = shallowRef();
 
-const props = defineProps({
-  type: {
-    type: String,
-    required: true,
+    watch(() => props.type, (type) => {
+      configView.value = defineAsyncComponent(
+        () => import(`@/config/${type}.view.vue`),
+      );
+    }, { immediate: true });
+    return {
+      configView,
+    };
   },
 });
-const configView = shallowRef();
-
-watch(() => props.type, (type) => {
-  configView.value = defineAsyncComponent(
-    () => import(`@/config/${type}.view.vue`),
-  );
-}, { immediate: true });
 </script>
