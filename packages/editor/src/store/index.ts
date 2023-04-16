@@ -34,7 +34,7 @@ export const useApp = defineStore('app', () => {
   });
   const schema = shallowRef<Record<string, any>>({});
   const routes = shallowRef<any[]>([
-    { name: 'Home', path: '' },
+    { path: '/' },
   ]);
   const remoteUrl = ref('');
   const history = ref<string[]>([]);
@@ -122,7 +122,7 @@ export const useApp = defineStore('app', () => {
     data: Config,
     widgets: Record<string, any>,
     _schema: any,
-    _routes: any,
+    _routes?: any,
   ) {
     config.value = data;
     // currentRoute.value = config.value.tabbars.list[0].type;
@@ -132,7 +132,11 @@ export const useApp = defineStore('app', () => {
 
     schema.value = _schema;
     routes.value = _routes;
-    updateRouter();
+    if (_routes) {
+      updateRouter();
+    } else {
+      router.replace({ path: '/' });
+    }
   }
   watch(config, (val) => {
     window.microApp?.dispatch(val);

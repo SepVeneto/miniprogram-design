@@ -50,6 +50,7 @@
               <router-view :preview="isPreview" />
             </el-scrollbar>
             <tabbarPreview
+              v-if="tabbar"
               :preview="isPreview"
               :config="tabbar"
               :active="tabbar._uuid === selected._uuid"
