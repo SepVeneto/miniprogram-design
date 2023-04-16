@@ -3,6 +3,7 @@ name: Build and Publish Editor Docker Image
 # refer to https://github.com/actions/starter-workflows/blob/main/ci/docker-publish.yml 
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - editor@*

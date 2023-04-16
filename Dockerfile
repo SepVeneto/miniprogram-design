@@ -3,7 +3,7 @@ FROM node:16.11.0 as build
 WORKDIR /app
 COPY . .
 
-RUN npm i -g pnpm\
+RUN npm i -g pnpm@7\
     && pnpm i\
     && pnpm build:hooks\
     && pnpm build:editor
