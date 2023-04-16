@@ -1,6 +1,6 @@
 services:
   miniprogram-design:
-    image: sepveneto/editor:0.3.0-alpha.2
+    image: sepveneto/editor
     container_name: mpd-container
     ports:
       - '9087:8080'

@@ -10,7 +10,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    setps:
+    steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
