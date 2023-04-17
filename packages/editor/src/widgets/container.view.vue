@@ -55,8 +55,9 @@ export default defineComponent({
     });
     const containerRect = useElementBounding(draggableRef);
     const containerWidth = computed(() => {
-      const { paddingLeft = 0, paddingRight = 0 } = props.config.style;
-      return containerRect.width.value - paddingLeft - paddingRight;
+      const { paddingLeft = 0, paddingRight = 0, columnGap = 0 } = props.config.style;
+      if (!containerRect.width.value) return 0;
+      return containerRect.width.value - paddingLeft - paddingRight - columnGap * (props.config.grid - 1);
     });
     const cellWidth = computed(() => containerWidth.value / props.config.grid);
 
@@ -70,7 +71,7 @@ export default defineComponent({
     watch([() => props.config.list.length, cellWidth], () => {
       props.config.list.forEach((item: any) => {
         item.width = item.width || cellWidth.value;
-        item.height = item.height || 60;
+        item.height = item.height || undefined;
       });
     }, { immediate: true });
 
