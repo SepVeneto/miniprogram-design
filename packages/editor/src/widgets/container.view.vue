@@ -94,8 +94,8 @@ export default defineComponent({
         <FreeDom
           width={element.width}
           height={element.height}
-          x={element.x}
-          y={element.y}
+          x={0}
+          y={0}
           preview={previewComp.value}
           scale={['rb']}
           absolute={false}
@@ -107,8 +107,6 @@ export default defineComponent({
           onClick={withModifiers(() => handleSelect(element), ['stop'])}
           onUpdate:width={(val: number) => { element.width = val; }}
           onUpdate:height={(val: number) => { element.height = val; }}
-          onUpdate:x={(val: number) => { element.x = val; }}
-          onUpdate:y={(val: number) => { element.y = val; }}
           onMouseenter={withModifiers(() => onEnter(element._uuid), ['stop'])}
           onMouseleave={withModifiers(() => onLeave(), ['stop'])}
         >
