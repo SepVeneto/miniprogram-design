@@ -123,7 +123,6 @@ function updateConfig (data: any) {
 
 <style lang="scss" scoped>
 .draggable-box {
-  padding: 2px;
   height: 400px;
 }
 </style>

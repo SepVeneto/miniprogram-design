@@ -56,6 +56,10 @@
               :active="tabbar._uuid === selected._uuid"
               @click="handleSelect(tabbar)"
             />
+            <div
+              v-else
+              style="background: #fff; height: var(--tabbar-height)"
+            />
           </div>
         </div>
         <EditorOperate v-model="mode" />
@@ -192,7 +196,6 @@ function handleOutside ({ target }: Event) {
 //   border-radius: 6px;
 // }
 .draggable-box {
-  padding: 2px;
   min-height: 400px;
 }
 </style>

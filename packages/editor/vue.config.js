@@ -38,8 +38,6 @@ module.exports = defineConfig({
           vue: {
             singleton: true,
           },
-          '@vueuse/core': { singleton: true },
-          // '@sepveneto/free-dom': { singleton: true },
         },
       }),
     ],
