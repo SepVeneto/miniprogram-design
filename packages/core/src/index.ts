@@ -82,7 +82,7 @@ export async function useDesign (
         container: dom,
         inline,
         'clear-data': true,
-        'disable-patch-request': false, // 关闭对子应用请求的拦截
+        'disable-patch-request': true, // 关闭对子应用请求的拦截
       }).then((result) => {
         if (result) {
           resolve(result);
