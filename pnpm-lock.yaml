@@ -66,7 +66,7 @@ importers:
 
   packages/editor:
     specifiers:
-      '@element-plus/icons-vue': ^2.0.9
+      '@element-plus/icons-vue': ^2.1.0
       '@micro-zoe/micro-app': 1.0.0-alpha.10
       '@sepveneto/basic-comp': ^0.1.7
       '@sepveneto/free-dom': ^0.5.1
@@ -79,7 +79,7 @@ importers:
       '@vue/cli-service': ~5.0.0
       '@vueuse/core': ^9.1.1
       core-js: ^3.8.3
-      element-plus: ^2.2.16
+      element-plus: ^2.3.3
       fs-extra: ^10.1.0
       html-webpack-plugin: ^5.5.0
       minimist: ^1.2.6
@@ -96,7 +96,7 @@ importers:
       vuedraggable: ^4.1.0
       webpack: ^5.74.0
     dependencies:
-      '@sepveneto/basic-comp': 0.1.7_zzj24xfzl6teqwibqh6ecclive
+      '@sepveneto/basic-comp': 0.1.7_d64kz7v5yvqajjkgqn5locfb3i
       '@sepveneto/free-dom': 0.5.1_vue@3.2.45
       '@sepveneto/mpd-hooks': link:../hooks
       '@types/sortablejs': 1.15.0
@@ -106,7 +106,7 @@ importers:
       swiper: 8.4.7
       vue-router: 4.1.6_vue@3.2.45
     devDependencies:
-      '@element-plus/icons-vue': 2.0.10_vue@3.2.45
+      '@element-plus/icons-vue': 2.1.0_vue@3.2.45
       '@micro-zoe/micro-app': 1.0.0-alpha.10
       '@sepveneto/mpd-schema': link:../schema
       '@types/uuid': 8.3.4
@@ -115,7 +115,7 @@ importers:
       '@vue/cli-service': 5.0.8_hkz3uqske2krtb4pptpliw7oda
       '@vueuse/core': 9.12.0_vue@3.2.45
       core-js: 3.27.2
-      element-plus: 2.2.28_vue@3.2.45
+      element-plus: 2.3.3_vue@3.2.45
       html-webpack-plugin: 5.5.0_webpack@5.75.0
       pinia: 2.0.29_oankqy72ltdeevri3bqxeckw3m
       prettier: 2.8.3
@@ -1622,8 +1622,8 @@ packages:
     resolution: {integrity: sha512-tlJpwF40DEQcfR/QF+wNMVyGMaO9FQp6Z1Wahj4Gk3CJQYHwA2xVG7iKDFdW6zuxZY9XWOpGcfNCTsX4McOsOg==}
     engines: {node: '>=10'}
 
-  /@element-plus/icons-vue/2.0.10_vue@3.2.45:
-    resolution: {integrity: sha512-ygEZ1mwPjcPo/OulhzLE7mtDrQBWI8vZzEWSNB2W/RNCRjoQGwbaK4N8lV4rid7Ts4qvySU3njMN7YCiSlSaTQ==}
+  /@element-plus/icons-vue/2.1.0_vue@3.2.45:
+    resolution: {integrity: sha512-PSBn3elNoanENc1vnCfh+3WA9fimRC7n+fWkf3rE5jvv+aBohNHABC/KAR5KWPecxWxDTVT1ERpRbOMRcOV/vA==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -1999,15 +1999,15 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@sepveneto/basic-comp/0.1.7_zzj24xfzl6teqwibqh6ecclive:
+  /@sepveneto/basic-comp/0.1.7_d64kz7v5yvqajjkgqn5locfb3i:
     resolution: {integrity: sha512-MoHlizgzO16MJYfjjmQOTB5/XsPS+g4r1w+GE+Nq5p7Xcr5UhV5kLzjd+Ve8zN1nSp5C5e8qx9W2qv1ihupCIw==}
     peerDependencies:
       '@element-plus/icons-vue': ^2.0.0
       element-plus: ^2.0.0
       vue: ^3.2.20
     dependencies:
-      '@element-plus/icons-vue': 2.0.10_vue@3.2.45
-      element-plus: 2.2.28_vue@3.2.45
+      '@element-plus/icons-vue': 2.1.0_vue@3.2.45
+      element-plus: 2.3.3_vue@3.2.45
       vue: 3.2.45
     dev: false
 
@@ -3021,7 +3021,7 @@ packages:
       source-map: 0.6.1
       vue-template-es2015-compiler: 1.9.1
     optionalDependencies:
-      prettier: 2.8.3
+      prettier: 2.8.7
     transitivePeerDependencies:
       - arc-templates
       - atpl
@@ -4881,13 +4881,13 @@ packages:
   /electron-to-chromium/1.4.284:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
 
-  /element-plus/2.2.28_vue@3.2.45:
-    resolution: {integrity: sha512-BsxF7iEaBydmRfw1Tt++EO9jRBjbtJr7ZRIrnEwz4J3Cwa1IzHCNCcx3ZwcYTlJq9CYFxv94JnbNr1EbkTou3A==}
+  /element-plus/2.3.3_vue@3.2.45:
+    resolution: {integrity: sha512-Zy61OXrG6b4FF3h29A9ZOUkaEQXjCuFwNa7DlpB3Vo+42Tw5zBbHe5a4BY7i56TVJG5xTbS9UQyA726J91pDqg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       '@ctrl/tinycolor': 3.5.0
-      '@element-plus/icons-vue': 2.0.10_vue@3.2.45
+      '@element-plus/icons-vue': 2.1.0_vue@3.2.45
       '@floating-ui/dom': 1.1.1
       '@popperjs/core': /@sxzz/popperjs-es/2.11.7
       '@types/lodash': 4.14.191
@@ -6740,7 +6740,7 @@ packages:
     resolution: {integrity: sha512-g1MWMLBiz8FKi1e4w0UyVL3w+iJceWAFBAaBnnGKOpNa5f8TLktkbre1+s6oICydWAm+HRUGTmI+//xv2hvXYA==}
     hasBin: true
     dependencies:
-      minimist: 1.2.7
+      minimist: 1.2.8
     dev: true
 
   /json5/2.2.3:
@@ -7107,6 +7107,10 @@ packages:
   /minimist/1.2.7:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
 
+  /minimist/1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
+    dev: true
+
   /minipass/3.3.6:
     resolution: {integrity: sha512-DxiNidxSEK+tHG6zOIklvNOwm3hvCrbUrdtzY74U6HKTJxvIDfOUL5W5P2Ghd3DTkhhKPYGqeNUIh5qcM4YBfw==}
     engines: {node: '>=8'}
@@ -7131,7 +7135,7 @@ packages:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
     hasBin: true
     dependencies:
-      minimist: 1.2.7
+      minimist: 1.2.8
     dev: true
 
   /mkdirp/1.0.4:
@@ -8042,6 +8046,13 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
+
+  /prettier/2.8.7:
+    resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+    optional: true
 
   /pretty-error/4.0.0:
     resolution: {integrity: sha512-AoJ5YMAcXKYxKhuJGdcvse+Voc6v1RgnsR3nWcYU7q4t6z0Q6T86sv5Zq8VIRbOWWFpvdGE83LtdSMNd+6Y0xw==}

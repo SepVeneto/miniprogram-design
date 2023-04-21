@@ -80,7 +80,9 @@
             </div>
           </template>
           <el-scrollbar wrap-style="height: 700px;">
-            <v-config />
+            <ElConfigProvider :locale="zhCn">
+              <v-config />
+            </ElConfigProvider>
           </el-scrollbar>
         </ElCard>
       </aside>
@@ -97,6 +99,8 @@ import { useApp } from '@/store';
 import { useRoute, useRouter } from 'vue-router';
 import { ArrowLeftBold } from '@element-plus/icons-vue';
 import EditorOperate, { Mode } from '@/layout/EditorOperate.vue';
+// @ts-expect-error: no def
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 const route = useRoute();
 const router = useRouter();
