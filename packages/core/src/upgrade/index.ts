@@ -43,3 +43,4 @@ export const upgrade = <Upgrade>((data: CoreDataV1) => {
 });
 
 upgrade.VERSION = '1.1';
+console.log(`数据版本：${upgrade.VERSION}`);
