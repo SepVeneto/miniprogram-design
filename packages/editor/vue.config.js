@@ -29,6 +29,10 @@ module.exports = defineConfig({
   },
   configureWebpack: {
     plugins: [
+      new webpack.DefinePlugin({
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        __VERSION__: `"${require('./package.json').version}"`,
+      }),
       new webpack.container.ModuleFederationPlugin({
         name: 'editor_side',
         shared: {

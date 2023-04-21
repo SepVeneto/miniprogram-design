@@ -6,3 +6,5 @@ interface Window {
   mount: () => void
   unmount: () => void
 }
+
+declare var __VERSION__: string

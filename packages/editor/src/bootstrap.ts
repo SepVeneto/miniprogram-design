@@ -44,3 +44,5 @@ function mount () {
 // 而mdf需要异步加载
 // 导致如果想使用umd模式，mount和unmount不会立即绑定到window上
 mount();
+
+console.log(`编辑器版本：v${__VERSION__}`);
