@@ -11,7 +11,7 @@
     "dev:docs": "pnpm -C docs dev",
     "build:editor": "pnpm -C packages/editor build && pnpm -C packages/editor build --mode development",
     "build:hooks": "pnpm -C packages/hooks build",
-    "release:editor": "cd packages/editor && bumpp --tag editor@X.X.X --commit"
+    "release:editor": "cd packages/editor && bumpp --tag editor@ --commit --push"
   },
   "pnpm": {
     "peerDependencyRules": {
