@@ -1,3 +1,18 @@
+# [0.3.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.2.0...core@0.3.0) (2023-04-21)
+
+
+### Bug Fixes
+
+* **core:** 子应用请求被拦截 ([345e5fb](https://github.com/SepVeneto/miniprogram-design/commit/345e5fb61481b0cb3fb829fc498ef0458248bdc3))
+* data可选 ([424b01a](https://github.com/SepVeneto/miniprogram-design/commit/424b01a2319e19c8381d5167248b8dca586b58ef))
+
+
+### Features
+
+* **core:** log version ([101726a](https://github.com/SepVeneto/miniprogram-design/commit/101726a893e5136b42b07e16047aeebf4150844d))
+
+
+
 # [0.2.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.1.0...core@0.2.0) (2023-01-30)
 
 
