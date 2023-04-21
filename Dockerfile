@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm i -g pnpm@7\
-    && pnpm i\
+    && pnpm i --registry=https://registry.npmmirror.com\
     && pnpm build:hooks\
     && pnpm build:editor
 
