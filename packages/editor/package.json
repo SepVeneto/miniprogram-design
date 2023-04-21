@@ -38,6 +38,7 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
+    "@sepveneto/basic-comp": "^0.1.7",
     "@sepveneto/free-dom": "^0.5.1",
     "@sepveneto/mpd-hooks": "workspace: *",
     "@types/sortablejs": "^1.15.0",

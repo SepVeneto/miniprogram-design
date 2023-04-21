@@ -8,6 +8,8 @@ import 'element-plus/theme-chalk/index.css';
 import { router } from './router';
 // @ts-expect-error: no def
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import BasicComp from '@sepveneto/basic-comp';
+import '@sepveneto/basic-comp/css';
 
 let app: App | null;
 let store: Pinia | null;
@@ -18,6 +20,7 @@ function mount () {
   app.use(ElementPlus, {
     locale: zhCn,
   });
+  app.use(BasicComp);
   app.use(store);
   app.use(router);
   app.mount('#app');

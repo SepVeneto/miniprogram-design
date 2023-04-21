@@ -68,6 +68,7 @@ importers:
     specifiers:
       '@element-plus/icons-vue': ^2.0.9
       '@micro-zoe/micro-app': 1.0.0-alpha.10
+      '@sepveneto/basic-comp': ^0.1.7
       '@sepveneto/free-dom': ^0.5.1
       '@sepveneto/mpd-hooks': 'workspace: *'
       '@sepveneto/mpd-schema': 'workspace: *'
@@ -95,6 +96,7 @@ importers:
       vuedraggable: ^4.1.0
       webpack: ^5.74.0
     dependencies:
+      '@sepveneto/basic-comp': 0.1.7_zzj24xfzl6teqwibqh6ecclive
       '@sepveneto/free-dom': 0.5.1_vue@3.2.45
       '@sepveneto/mpd-hooks': link:../hooks
       '@types/sortablejs': 1.15.0
@@ -1714,7 +1716,6 @@ packages:
   /@ctrl/tinycolor/3.5.0:
     resolution: {integrity: sha512-tlJpwF40DEQcfR/QF+wNMVyGMaO9FQp6Z1Wahj4Gk3CJQYHwA2xVG7iKDFdW6zuxZY9XWOpGcfNCTsX4McOsOg==}
     engines: {node: '>=10'}
-    dev: true
 
   /@element-plus/icons-vue/2.0.10_vue@3.2.45:
     resolution: {integrity: sha512-ygEZ1mwPjcPo/OulhzLE7mtDrQBWI8vZzEWSNB2W/RNCRjoQGwbaK4N8lV4rid7Ts4qvySU3njMN7YCiSlSaTQ==}
@@ -1722,7 +1723,6 @@ packages:
       vue: ^3.2.0
     dependencies:
       vue: 3.2.45
-    dev: true
 
   /@esbuild/android-arm/0.15.18:
     resolution: {integrity: sha512-5GT+kcs2WVGjVs7+boataCkO5Fg0y4kCjzkB5bAip7H4jfnOS3dA6KPiww9W1OEKTKeAcUVhdZGvgI65OXmUnw==}
@@ -1969,13 +1969,11 @@ packages:
 
   /@floating-ui/core/1.1.1:
     resolution: {integrity: sha512-PL7g3dhA4dHgZfujkuD8Q+tfJJynEtnNQSPzmucCnxMvkxf4cLBJw/ZYqZUn4HCh33U3WHrAfv2R2tbi9UCSmw==}
-    dev: true
 
   /@floating-ui/dom/1.1.1:
     resolution: {integrity: sha512-TpIO93+DIujg3g7SykEAGZMDtbJRrmnYRCNYSjJlvIbGhBjRSNTLVbNeDQBrzy9qDgUbiWdc7KA0uZHZ2tJmiw==}
     dependencies:
       '@floating-ui/core': 1.1.1
-    dev: true
 
   /@hapi/hoek/9.3.0:
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -2085,6 +2083,18 @@ packages:
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
+
+  /@sepveneto/basic-comp/0.1.7_zzj24xfzl6teqwibqh6ecclive:
+    resolution: {integrity: sha512-MoHlizgzO16MJYfjjmQOTB5/XsPS+g4r1w+GE+Nq5p7Xcr5UhV5kLzjd+Ve8zN1nSp5C5e8qx9W2qv1ihupCIw==}
+    peerDependencies:
+      '@element-plus/icons-vue': ^2.0.0
+      element-plus: ^2.0.0
+      vue: ^3.2.20
+    dependencies:
+      '@element-plus/icons-vue': 2.0.10_vue@3.2.45
+      element-plus: 2.2.28_vue@3.2.45
+      vue: 3.2.45
+    dev: false
 
   /@sepveneto/eslint-config-basic/0.6.1_kf2q37rsxgsj6p2nz45hjttose:
     resolution: {integrity: sha512-GCOzsCvh+mLjk/9Gw6mx7R/pPB1hQT/yfwB3WF/LChIz6Y2a6pam1CvJzA2P5FslMxzKpm27PVbyfat7BQryXQ==}
@@ -2230,7 +2240,6 @@ packages:
 
   /@sxzz/popperjs-es/2.11.7:
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
-    dev: true
 
   /@transloadit/prettier-bytes/0.0.7:
     resolution: {integrity: sha512-VeJbUb0wEKbcwaSlj5n+LscBl9IPgLPkHVGBkh00cztv6X4L/TJXK58LzFuBKX7/GAfiGhIwH67YTLTlzvIzBA==}
@@ -2334,11 +2343,9 @@ packages:
     resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
     dependencies:
       '@types/lodash': 4.14.191
-    dev: true
 
   /@types/lodash/4.14.191:
     resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
-    dev: true
 
   /@types/mdast/3.0.10:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
@@ -3883,7 +3890,6 @@ packages:
 
   /async-validator/4.2.5:
     resolution: {integrity: sha512-7HhHjtERjqlNbZtqNqy2rckN/SpOOlmDliet+lP7k+eKZEjPk3DgyeU9lIXLdeLz0uBbbVp+9Qdow9wJWgwwfg==}
-    dev: true
 
   /async/2.6.4:
     resolution: {integrity: sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==}
@@ -4842,7 +4848,6 @@ packages:
 
   /dayjs/1.11.7:
     resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
-    dev: true
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -5108,7 +5113,6 @@ packages:
       vue: 3.2.45
     transitivePeerDependencies:
       - '@vue/composition-api'
-    dev: true
 
   /emoji-regex/8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -5499,7 +5503,6 @@ packages:
 
   /escape-html/1.0.3:
     resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
-    dev: true
 
   /escape-string-regexp/1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
@@ -7180,7 +7183,6 @@ packages:
 
   /lodash-es/4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: true
 
   /lodash-unified/1.0.3_3ib2ivapxullxkx3xftsimdk7u:
     resolution: {integrity: sha512-WK9qSozxXOD7ZJQlpSqOT+om2ZfcT4yO+03FuzAHD0wF6S0l0090LRPDx3vhTTLZ8cFKpBn+IOcVXK6qOcIlfQ==}
@@ -7192,7 +7194,6 @@ packages:
       '@types/lodash-es': 4.17.6
       lodash: 4.17.21
       lodash-es: 4.17.21
-    dev: true
 
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
@@ -7251,7 +7252,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-symbols/4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -7348,7 +7348,6 @@ packages:
 
   /memoize-one/6.0.0:
     resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
-    dev: true
 
   /merge-descriptors/1.0.1:
     resolution: {integrity: sha512-cCi6g3/Zr1iqQi6ySbseM1Xvooa98N0w31jzUYrXPX2xqObmFGHJ0tQ5u74H3mVh7wLouTseZyYIq39g8cNp1w==}
@@ -7596,7 +7595,6 @@ packages:
 
   /normalize-wheel-es/1.2.0:
     resolution: {integrity: sha512-Wj7+EJQ8mSuXr2iWfnujrimU35R2W4FAErEyTmJoJ7ucwTn2hOUSsRehMb5RSYkxXGTM7Y9QpvPmp++w5ftoJw==}
-    dev: true
 
   /npm-run-path/2.0.2:
     resolution: {integrity: sha512-lJxZYlT4DW/bRUtFh1MQIWqmLwQfAxnqWG4HhEdjMlkrJYnJn0Jrr2u3mgxqaWsdiBc76TYkTG/mhrnYTuzfHw==}
