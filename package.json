@@ -10,7 +10,8 @@
     "dev:editor": "pnpm -C packages/editor dev",
     "dev:docs": "pnpm -C docs dev",
     "build:editor": "pnpm -C packages/editor build && pnpm -C packages/editor build --mode development",
-    "build:hooks": "pnpm -C packages/hooks build"
+    "build:hooks": "pnpm -C packages/hooks build",
+    "release:editor": "cd packages/editor && bumpp --tag editor@X.X.X --commit"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -20,9 +21,9 @@
     }
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.35.2",
     "@micro-zoe/micro-app": "1.0.0-alpha.10",
     "@sepveneto/eslint-config": "^0.6.0",
+    "bumpp": "^9.1.0",
     "eslint": "^8.32.0"
   }
 }
