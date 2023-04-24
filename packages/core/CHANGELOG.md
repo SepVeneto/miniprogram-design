@@ -1,3 +1,7 @@
+# [0.5.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.4.0...core@0.5.0) (2023-04-24)
+
+
+
 # [0.4.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.3.0...core@0.4.0) (2023-04-24)
 
 
