@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.3.0...core@0.4.0) (2023-04-24)
+
+
+### Features
+
+* **upgrade:** tabbars可选 ([f46c883](https://github.com/SepVeneto/miniprogram-design/commit/f46c8837ad3c96133966543d16cd0992b1c34e9c))
+
+
+
 # [0.3.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.2.0...core@0.3.0) (2023-04-21)
 
 
