@@ -42,5 +42,5 @@ export const upgrade = <Upgrade>((data: CoreDataV1) => {
   return fsm.data;
 });
 
-upgrade.VERSION = '1.1';
+upgrade.VERSION = '1.0';
 console.log(`数据版本：${upgrade.VERSION}`);
