@@ -1,4 +1,4 @@
-import { CoreDataV1, TabbarRecord } from '.';
+import { CoreDataV1 } from '.';
 abstract class Context {
   abstract setVersion(state: any): void
   abstract data: Record<PropertyKey, unknown>
@@ -21,7 +21,7 @@ class StateV1 implements State {
 
   public updateVersion () {
     this.upgrade();
-    this.context.setVersion(new StateV11(this.context));
+    // this.context.setVersion(new StateV11(this.context));
   }
 
   @shouldUpdate
@@ -30,53 +30,53 @@ class StateV1 implements State {
   }
 }
 
-class StateV11 implements State {
-  private context: Context;
-  readonly VERSION = '1.1';
-  origin: CoreDataV1;
-  constructor (context: Context) {
-    this.context = context;
-    this.origin = this.context.data as CoreDataV1;
-  }
+// class StateV11 implements State {
+//   private context: Context;
+//   readonly VERSION = '1.1';
+//   origin: CoreDataV1;
+//   constructor (context: Context) {
+//     this.context = context;
+//     this.origin = this.context.data as CoreDataV1;
+//   }
 
-  @shouldUpdate
-  private upgrade () {
-    const body = this.bodyLetterToUpper();
-    if (this.origin.tabbars) {
-      const tabbarList = this.tabbarTypeName();
-      this.origin.tabbars.list = tabbarList;
-    }
-    this.origin.body = body;
-    this.origin.version = '1.1';
-  }
+//   @shouldUpdate
+//   private upgrade () {
+//     const body = this.bodyLetterToUpper();
+//     if (this.origin.tabbars) {
+//       const tabbarList = this.tabbarTypeName();
+//       this.origin.tabbars.list = tabbarList;
+//     }
+//     this.origin.body = body;
+//     this.origin.version = '1.1';
+//   }
 
-  public updateVersion () {
-    this.upgrade();
-  }
+//   public updateVersion () {
+//     this.upgrade();
+//   }
 
-  private firstLetterToUppercase (letter: string) {
-    return letter.replace(/^[a-zA-Z]/, (letter) => letter.toUpperCase());
-  }
+//   private firstLetterToUppercase (letter: string) {
+//     return letter.replace(/^[a-zA-Z]/, (letter) => letter.toUpperCase());
+//   }
 
-  private bodyLetterToUpper () {
-    const body: CoreDataV1['body'] = {};
-    Object.entries(this.origin.body).forEach(([key, value]) => {
-      body[this.firstLetterToUppercase(key)] = value;
-    });
-    return body;
-  }
+//   private bodyLetterToUpper () {
+//     const body: CoreDataV1['body'] = {};
+//     Object.entries(this.origin.body).forEach(([key, value]) => {
+//       body[this.firstLetterToUppercase(key)] = value;
+//     });
+//     return body;
+//   }
 
-  private tabbarTypeName () {
-    if (!this.origin.tabbars) {
-      return [];
-    }
-    const list: TabbarRecord['list'] = [];
-    this.origin.tabbars.list.forEach(item => {
-      list.push({ ...item, type: this.firstLetterToUppercase(item.type) });
-    });
-    return list;
-  }
-}
+//   private tabbarTypeName () {
+//     if (!this.origin.tabbars) {
+//       return [];
+//     }
+//     const list: TabbarRecord['list'] = [];
+//     this.origin.tabbars.list.forEach(item => {
+//       list.push({ ...item, type: this.firstLetterToUppercase(item.type) });
+//     });
+//     return list;
+//   }
+// }
 
 export class VersionMachine implements Context {
   public data: Record<PropertyKey, unknown>;
