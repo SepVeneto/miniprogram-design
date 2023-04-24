@@ -1,3 +1,12 @@
+## [0.5.1](https://github.com/SepVeneto/miniprogram-design/compare/core@0.5.0...core@0.5.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* **upgrade:** version not update ([f383042](https://github.com/SepVeneto/miniprogram-design/commit/f3830426cdc892f3e5111818abb7b4bd3d2d67c1))
+
+
+
 # [0.5.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.4.0...core@0.5.0) (2023-04-24)
 
 
