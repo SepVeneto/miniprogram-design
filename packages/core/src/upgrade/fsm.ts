@@ -1,4 +1,4 @@
-import { CoreDataV1 } from '.';
+import { CoreDataV1, TabbarRecord } from '.';
 abstract class Context {
   abstract setVersion(state: any): void
   abstract data: Record<PropertyKey, unknown>
@@ -42,9 +42,11 @@ class StateV11 implements State {
   @shouldUpdate
   private upgrade () {
     const body = this.bodyLetterToUpper();
-    const tabbarList = this.tabbarTypeName();
+    if (this.origin.tabbars) {
+      const tabbarList = this.tabbarTypeName();
+      this.origin.tabbars.list = tabbarList;
+    }
     this.origin.body = body;
-    this.origin.tabbars.list = tabbarList;
     this.origin.version = '1.1';
   }
 
@@ -65,7 +67,10 @@ class StateV11 implements State {
   }
 
   private tabbarTypeName () {
-    const list: CoreDataV1['tabbars']['list'] = [];
+    if (!this.origin.tabbars) {
+      return [];
+    }
+    const list: TabbarRecord['list'] = [];
     this.origin.tabbars.list.forEach(item => {
       list.push({ ...item, type: this.firstLetterToUppercase(item.type) });
     });

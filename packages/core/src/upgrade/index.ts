@@ -12,7 +12,7 @@ type BaseConfig = {
   style?: Record<string, number | string>
   [key: string]: unknown
 }
-type TabbarRecord = {
+export type TabbarRecord = {
   list: {
     text: string
     type: string
@@ -30,7 +30,7 @@ export type CoreDataV1 = {
     loginBg: string
   }
   body: Record<string, BaseConfig[]>
-  tabbars: TabbarRecord
+  tabbars?: TabbarRecord
   mpGlobalConfig: Record<string, unknown>
 }
 

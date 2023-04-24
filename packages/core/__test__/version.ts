@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { mockWithV1, mockWithV11, mockWithNoVersion } from './mock';
+import {
+  mockWithV1,
+  mockWithV11,
+  mockWithNoVersion,
+  mockWithV1NoTabbars,
+  mockWithV11NoTabbars,
+} from './mock';
 import { upgrade } from 'src/upgrade';
 
 describe('version', () => {
@@ -18,5 +24,11 @@ describe('upgrade', () => {
   });
   it('from 1.0 to 1.1', () => {
     expect(upgrade(mockWithV1)).toStrictEqual(mockWithV11);
+  });
+});
+
+describe('with no tabbars', () => {
+  it('from 1.0 to 1.1', () => {
+    expect(upgrade(mockWithV1NoTabbars)).toStrictEqual(mockWithV11NoTabbars);
   });
 });

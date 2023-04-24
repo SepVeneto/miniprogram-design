@@ -1,0 +1,344 @@
+{
+  "version": "1.1",
+  "globalConfig": {
+    "color": "rgba(126,211,33,1)",
+    "emptyColor": "rgba(228, 205, 249, 1)",
+    "bubbleColor": "rgba(80,227,194,1)",
+    "loginBg": ""
+  },
+  "body": {
+    "Home": [
+      {
+        "_name": "name",
+        "_view": "container",
+        "_schema": "container",
+        "isShow": true,
+        "layout": "swiper",
+        "style": {
+          "width": 345,
+          "height": 210,
+          "backgroundColor": "#fff",
+          "marginTop": 60
+        },
+        "list": [
+          {
+            "_uuid": "8419074c-7369-4a13-9261-dc0a3186657b",
+            "_name": "name",
+            "_view": "card",
+            "_schema": "card",
+            "type": "canteenCard",
+            "isShow": 1,
+            "style": {
+              "height": 176,
+              "width": 345,
+              "marginBottom": 12,
+              "marginTop": 10,
+              "borderRadius": 10
+            },
+            "showOwner": true,
+            "showType": true
+          },
+          {
+            "_uuid": "eeb42ddc-6f32-47aa-af58-4b724bb50d77",
+            "_name": "name",
+            "_view": "card",
+            "_schema": "card",
+            "type": "accountCard",
+            "isShow": 1,
+            "style": {
+              "height": 176,
+              "width": 345,
+              "marginBottom": 12,
+              "marginTop": 12,
+              "borderRadius": 10
+            },
+            "showOwner": true,
+            "showType": true
+          },
+          {
+            "_uuid": "26dc5773-59c0-472e-b3b4-275a92639625",
+            "_name": "name",
+            "_view": "card",
+            "_schema": "card",
+            "type": "accountCard",
+            "isShow": 1,
+            "style": {
+              "height": 176,
+              "width": 345,
+              "marginBottom": 12,
+              "marginTop": 12,
+              "borderRadius": 10
+            },
+            "showOwner": true,
+            "showType": true
+          }
+        ],
+        "_uuid": "6ca3dbc4-a69e-4a0a-bdb9-600b9df86b5c"
+      },
+      {
+        "_uuid": "7905246d-fee8-474c-a245-58861cf1d90b",
+        "_name": "name",
+        "_view": "container",
+        "_schema": "container",
+        "_inContainer": "outer",
+        "type": "menu",
+        "isShow": 1,
+        "grid": 2,
+        "style": {
+          "marginBottom": 1,
+          "marginTop": 12,
+          "backgroundColor": "#fff",
+          "borderRadius": 10
+        },
+        "list": [
+          {
+            "_uuid": "11",
+            "_name": "name",
+            "_view": "entry",
+            "_schema": "entry",
+            "_inContainer": "inner",
+            "type": "reserve",
+            "style": {
+              "width": 170,
+              "height": 180,
+              "boxSizing": "border-box",
+              "backgroundColor": ""
+            },
+            "isShow": 1
+          },
+          {
+            "_uuid": "12",
+            "_name": "name",
+            "_view": "entry",
+            "_schema": "entry",
+            "_inContainer": "inner",
+            "type": "special",
+            "style": {
+              "width": 170,
+              "height": 180,
+              "boxSizing": "border-box",
+              "backgroundColor": ""
+            },
+            "isShow": 1
+          }
+        ],
+        "layout": "grid"
+      },
+      {
+        "_name": "name",
+        "_view": "container",
+        "_schema": "container",
+        "_inContainer": "outer",
+        "grid": 2,
+        "style": {
+          "width": 345,
+          "columnGap": 20,
+          "marginTop": 0,
+          "marginBottom": 0,
+          "paddingTop": 10,
+          "paddingBottom": 10,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "borderRadius": 12,
+          "backgroundColor": "#FFFFFF"
+        },
+        "list": [
+          {
+            "_name": "name",
+            "_view": "imageDesc",
+            "_schema": "payEntry",
+            "style": {
+              "width": "100%",
+              "height": "100%",
+              "borderRadius": 12,
+              "backgroundColor": "#FCECE6"
+            },
+            "isShow": true,
+            "_uuid": "a6e7cc84-2ffd-469e-8c18-0fcd8e071180",
+            "type": "canteen"
+          },
+          {
+            "_name": "name",
+            "_view": "imageDesc",
+            "_schema": "payEntry",
+            "style": {
+              "width": "100%",
+              "height": "100%",
+              "backgroundColor": "#FCECE6",
+              "borderRadius": 12
+            },
+            "isShow": true,
+            "_uuid": "76a84ca0-abda-4281-a91e-51a0530f66c4",
+            "type": "shop"
+          }
+        ],
+        "_uuid": "2c59d95c-de73-48b4-bca2-0ccb87506e76",
+        "layout": "grid"
+      },
+      {
+        "_uuid": "fdc42669-73bd-4a79-942d-1d435895282e",
+        "_name": "name",
+        "_view": "reserve",
+        "_schema": "reserve",
+        "_inContainer": "outer",
+        "type": "reserve",
+        "isShow": true,
+        "title": {
+          "content": "content",
+          "style": {
+            "transform": "translate(245px, 16px)",
+            "color": "#FF9171",
+            "fontSize": 16
+          }
+        },
+        "desc": {
+          "content": "GO>",
+          "style": {
+            "transform": "translate(261px, 39px)",
+            "fontSize": 13,
+            "color": "#848484"
+          }
+        },
+        "style": {
+          "width": 343,
+          "height": 80,
+          "borderRadius": 10,
+          "marginTop": 12,
+          "marginBottom": 1
+        }
+      },
+      {
+        "_name": "name",
+        "_view": "delivery",
+        "_schema": "delivery",
+        "_inContainer": "outer",
+        "type": "delivery",
+        "style": [],
+        "isShow": true,
+        "title": {
+          "content": "title"
+        },
+        "desc": {
+          "content": "desc"
+        },
+        "_uuid": "8c087788-5bb8-49cf-99dc-aa68abc21207"
+      },
+      {
+        "_uuid": "0391fad5-177d-412b-af33-01102be9d0f4",
+        "_name": "name",
+        "_view": "card",
+        "_schema": "card",
+        "_inContainer": "outer",
+        "type": "explain",
+        "isShow": 1,
+        "style": {
+          "backgroundColor": "#fff",
+          "width": 343,
+          "height": 80,
+          "borderRadius": 10,
+          "marginTop": 12,
+          "marginBottom": 1
+        }
+      },
+      {
+        "_uuid": "7fab76fe-ec2e-4a1b-9c6e-79bcdf89c20d",
+        "_name": "name",
+        "_view": "card",
+        "_schema": "shop",
+        "_disabled": true,
+        "style": {
+          "width": 343,
+          "height": 100,
+          "marginTop": 12,
+          "marginBottom": 12
+        },
+        "uuid": "525e2dfa-660b-4414-a75d-12a17c1a32c5",
+        "order": 4,
+        "isShow": 1,
+        "type": "shop"
+      }
+    ],
+    "Personal": [
+      {
+        "_name": "name",
+        "_view": "container",
+        "_schema": "container",
+        "isShow": true,
+        "layout": "swiper",
+        "style": {
+          "width": 345,
+          "height": 210,
+          "backgroundColor": "#fff"
+        },
+        "list": [
+          {
+            "_uuid": "656835ec-0d5d-45b8-b4d3-3026ff528f46",
+            "_name": "name",
+            "_view": "card",
+            "_schema": "mine",
+            "type": "canteenCard",
+            "isShow": 1,
+            "unbound": 1,
+            "recharge": 1,
+            "style": {
+              "height": 176,
+              "width": 345,
+              "marginBottom": 12,
+              "marginTop": 12,
+              "borderRadius": 10
+            },
+            "showOwner": true,
+            "showType": true
+          }
+        ],
+        "_uuid": "e02f375c-6148-4a38-bb95-d70071624c38"
+      },
+      {
+        "_name": "name",
+        "_view": "container",
+        "_schema": "container",
+        "_uuid": "b0322fae-929f-4813-9627-25d324a64a88",
+        "_inContainer": "outer",
+        "grid": 1,
+        "style": {
+          "paddingTop": 4,
+          "paddingBottom": 4,
+          "paddingLeft": 20,
+          "paddingRight": 16,
+          "borderRadius": 10,
+          "backgroundColor": "#fff"
+        },
+        "list": [
+          {
+            "_name": "name",
+            "_uuid": "ce0e11a6-df8c-4613-ad53-455a6983afe2",
+            "_schema": "menuItem",
+            "_view": "menuItem",
+            "_inContainer": "inner",
+            "type": "canteenOrder",
+            "isShow": true,
+            "style": {
+              "backgroundColor": "#fff"
+            }
+          },
+          {
+            "_name": "name",
+            "_uuid": "b61dc8a9-30f7-4882-9d47-f40ecaeaa724",
+            "_schema": "menuItem",
+            "_view": "menuItem",
+            "_inContainer": "inner",
+            "type": "tradeDetail",
+            "isShow": true,
+            "style": {
+              "backgroundColor": "#fff"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "mpGlobalConfig": {
+    "canRecharge": true,
+    "isSupportStore": true
+  }
+}
