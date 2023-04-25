@@ -1,3 +1,12 @@
+## [0.6.2](https://github.com/SepVeneto/miniprogram-design/compare/core@0.6.1...core@0.6.2) (2023-04-25)
+
+
+### Bug Fixes
+
+* upload return miss promise ([7cb4cd1](https://github.com/SepVeneto/miniprogram-design/commit/7cb4cd13c0232300597b40c3d16be534bc8e5d4f))
+
+
+
 ## [0.6.1](https://github.com/SepVeneto/miniprogram-design/compare/core@0.6.0...core@0.6.1) (2023-04-25)
 
 
