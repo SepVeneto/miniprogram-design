@@ -1,3 +1,12 @@
+# [0.6.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.5.1...core@0.6.0) (2023-04-25)
+
+
+### Features
+
+* 设置配置数据时默认添加当前数据版本 ([7a1861d](https://github.com/SepVeneto/miniprogram-design/commit/7a1861d1315907f89f824a95535964ea3b6ea0c0))
+
+
+
 ## [0.5.1](https://github.com/SepVeneto/miniprogram-design/compare/core@0.5.0...core@0.5.1) (2023-04-24)
 
 
