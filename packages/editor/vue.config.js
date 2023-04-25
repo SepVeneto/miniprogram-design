@@ -45,6 +45,9 @@ module.exports = defineConfig({
           'element-plus': {
             singleton: true,
           },
+          '@sepveneto/basic-comp': {
+            singleton: true,
+          },
         },
       }),
     ],
