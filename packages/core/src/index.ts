@@ -1,6 +1,7 @@
 import microApp, { renderApp } from '@micro-zoe/micro-app';
 import { nextTick, onMounted, getCurrentInstance, CSSProperties } from 'vue-demi';
 import { upgrade } from './upgrade';
+import type { UploadRequestOptions } from 'element-plus';
 
 export * from './upgrade';
 
@@ -20,7 +21,7 @@ type WidgetType = 'input'
   | 'radioGroup'
   | 'editor'
 interface ISchema {
-  type: WidgetType
+  type: WidgetType | string
   label: string
   key: string
   link?: Record<string, ISchema[]>
@@ -44,6 +45,7 @@ export type EditorRoute = {
   meta?: Record<PropertyKey, unknown> & { title?: string }
 }
 export type EditorData = {
+  upload: (data: UploadRequestOptions) => string
   /**
    * 组件视图的可访问地址
    */
@@ -60,8 +62,9 @@ export type EditorData = {
    * 可配置的组件列表
    */
   widgets?: {
-    [key: string]: EditorWidget[]
-  }
+    name: string
+    group: EditorWidget[]
+  }[]
   /**
    * 编辑器的路由
    */

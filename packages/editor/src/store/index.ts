@@ -8,16 +8,8 @@ import mock from '@/mock';
 import { router } from '@/router';
 import Editor from '@/layout/editor.vue';
 
-export interface GlobalConfig {
-  color: string
-  emptyColor: string
-  bubbleColor: string
-  loginBg: string
-  title: string
-}
-
 interface Config{
-  globalConfig: Partial<GlobalConfig>
+  globalConfig: Record<string, unknown>
   body: Record<PropertyKey, any[]>
   tabbars: TabbarWidgetConfig
 }
