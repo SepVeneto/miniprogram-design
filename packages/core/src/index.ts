@@ -1,18 +1,16 @@
 import microApp, { renderApp } from '@micro-zoe/micro-app';
 import { nextTick, onMounted, getCurrentInstance, CSSProperties } from 'vue-demi';
+import { upgrade } from './upgrade';
 
 export * from './upgrade';
-export type DesignOptions = {
-  url: string
-  name: string
-  inline: boolean
-  data?: Record<PropertyKey, unknown>
-}
+
 export type EditorConfig = {
+  version?: string
   globalConfig: Record<PropertyKey, unknown>
   body: Record<PropertyKey, unknown>
   tabbars?: Record<PropertyKey, unknown>
 }
+
 type WidgetType = 'input'
   | 'number'
   | 'checkbox'
@@ -49,7 +47,7 @@ export type EditorData = {
   /**
    * 组件视图的可访问地址
    */
-  remoteUrl: string
+  remoteUrl?: string
   /**
    * 编辑器数据
    */
@@ -57,11 +55,11 @@ export type EditorData = {
   /**
    * 组件的配置项
    */
-  schema: EditorSchema
+  schema?: EditorSchema
   /**
    * 可配置的组件列表
    */
-  widgets: {
+  widgets?: {
     [key: string]: EditorWidget[]
   }
   /**
@@ -69,11 +67,18 @@ export type EditorData = {
    */
   routes?: EditorRoute[]
 }
+
+export type DesignOptions = {
+  url: string
+  name: string
+  inline: boolean
+  data?: EditorData
+}
 export async function useDesign (
   dom: string | Element,
   options: DesignOptions,
 ) {
-  const { url, inline, name = 'miniprogram-design' } = options;
+  const { url, inline, name = 'miniprogram-design', data } = options;
   await new Promise((resolve, reject) => {
     tryOnMounted(() => {
       renderApp({
@@ -81,6 +86,7 @@ export async function useDesign (
         url,
         container: dom,
         inline,
+        data,
         'clear-data': true,
         'disable-patch-request': true, // 关闭对子应用请求的拦截
       }).then((result) => {
@@ -93,11 +99,15 @@ export async function useDesign (
     });
   });
 
-  function set (data: Record<PropertyKey, unknown>) {
-    microApp.setData(name, data);
+  function set (data: EditorData) {
+    const { config } = data;
+    if (!config.version) {
+      config.version = upgrade.VERSION;
+    }
+    microApp.setData(name, { ...data, config });
   }
-  function get () {
-    return microApp.getData(name);
+  function get (): EditorConfig | null {
+    return microApp.getData(name) as EditorConfig | null;
   }
   return [get, set];
 }
