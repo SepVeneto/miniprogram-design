@@ -1,3 +1,12 @@
+## [0.6.1](https://github.com/SepVeneto/miniprogram-design/compare/core@0.6.0...core@0.6.1) (2023-04-25)
+
+
+### Bug Fixes
+
+* update types ([1abb222](https://github.com/SepVeneto/miniprogram-design/commit/1abb222478e4876dcd273832337de9786f4edb26))
+
+
+
 # [0.6.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.5.1...core@0.6.0) (2023-04-25)
 
 
