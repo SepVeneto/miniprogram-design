@@ -45,7 +45,7 @@ export type EditorRoute = {
   meta?: Record<PropertyKey, unknown> & { title?: string }
 }
 export type EditorData = {
-  upload: (data: UploadRequestOptions) => Promise<string>
+  upload?: (data: UploadRequestOptions) => Promise<string>
   /**
    * 组件视图的可访问地址
    */
