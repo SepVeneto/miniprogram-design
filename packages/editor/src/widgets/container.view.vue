@@ -47,11 +47,17 @@ export default defineComponent({
     const style = useNormalizeStyle(props.config.style);
 
     const viewStyle = computed(() => {
-      return {
+      const styles = {
         display: 'flex',
         flexWrap: 'wrap',
         ...style.value,
       };
+      if (props.config.image?.startsWith('http')) {
+        styles.backgroundSize = '100%';
+        styles.backgroundRepeat = 'no-repeat';
+        styles.background = `url(${props.config.image})`;
+      }
+      return styles;
     });
     const containerRect = useElementBounding(draggableRef);
     const containerWidth = computed(() => {
