@@ -5,12 +5,28 @@
     :show-file-list="false"
     :http-request="customRequest"
   >
-    <img
+    <div
       v-if="imageUrl"
-      :src="imageUrl"
-      class="avatar"
-      :style="imgStyle"
+      class="image-preview"
     >
+      <img
+        :src="imageUrl"
+        class="avatar"
+        :style="imgStyle"
+      >
+      <div class="image-operate">
+        <ElIcon
+          @click.stop="handlePreview"
+        >
+          <IconZoomIn />
+        </ElIcon>
+        <ElIcon
+          @click.stop="handleRemove"
+        >
+          <IconDelete />
+        </ElIcon>
+      </div>
+    </div>
     <el-icon
       v-else
       class="avatar-uploader-icon"
@@ -19,11 +35,18 @@
       <Plus />
     </el-icon>
   </el-upload>
+  <el-dialog v-model="show">
+    <img
+      style="width: 100%;"
+      :src="previewUrl"
+      alt="Preview Image"
+    >
+  </el-dialog>
 </template>
 
 <script lang="ts" setup>
-import { Plus } from '@element-plus/icons-vue';
-import { computed, PropType } from 'vue';
+import { Plus, ZoomIn as IconZoomIn, Delete as IconDelete } from '@element-plus/icons-vue';
+import { computed, PropType, ref } from 'vue';
 import type { UploadRequestOptions } from 'element-plus';
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -44,13 +67,15 @@ const props = defineProps({
     default: '',
   },
 });
+const show = ref(false);
+const previewUrl = ref('');
 const imgStyle = computed(() => {
   return {
     width: props.width,
     height: props.height,
   };
 });
-const imageUrl = computed({
+const imageUrl = computed<string>({
   get () {
     return props.modelValue;
   },
@@ -66,14 +91,43 @@ async function customRequest (data: UploadRequestOptions) {
   const res = await uploadRequest(data);
   imageUrl.value = res;
 }
+const handlePreview = () => {
+  show.value = true;
+  previewUrl.value = imageUrl.value;
+};
+const handleRemove = () => {
+  imageUrl.value = '';
+};
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .avatar-uploader .avatar {
   width: 178px;
   height: 178px;
   display: block;
   object-fit: contain;
+}
+.image-preview {
+  position: relative;
+  &:hover .image-operate {
+    opacity: 1;
+  }
+}
+.image-operate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  column-gap: 20px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 34px;
 }
 </style>
 
