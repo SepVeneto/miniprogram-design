@@ -1,6 +1,6 @@
 {
   "name": "@sepveneto/mpd-editor",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "bin": {
     "mpd": "./scripts/bin.js"
   },
