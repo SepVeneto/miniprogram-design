@@ -35,7 +35,7 @@
     "uuid": "^8.3.2",
     "vue": "^3.2.47",
     "vuedraggable": "^4.1.0",
-    "webpack": "^5.82.0"
+    "webpack": "5.75.0"
   },
   "dependencies": {
     "@sepveneto/basic-comp": "^0.2.0",
