@@ -72,7 +72,7 @@ importers:
     specifiers:
       '@element-plus/icons-vue': ^2.1.0
       '@micro-zoe/micro-app': 1.0.0-alpha.10
-      '@sepveneto/basic-comp': ^0.2.0
+      '@sepveneto/basic-comp': ^0.2.1
       '@sepveneto/free-dom': ^0.5.1
       '@sepveneto/mpd-hooks': workspace:^0.1.0
       '@sepveneto/mpd-schema': workspace:^1.0.0
@@ -100,7 +100,7 @@ importers:
       vuedraggable: ^4.1.0
       webpack: 5.75.0
     dependencies:
-      '@sepveneto/basic-comp': 0.2.0_n3hpuedfbpr7xftjvp3phq2ela
+      '@sepveneto/basic-comp': 0.2.1_n3hpuedfbpr7xftjvp3phq2ela
       '@sepveneto/free-dom': 0.5.1_vue@3.2.47
       '@sepveneto/mpd-hooks': link:../hooks
       '@types/sortablejs': 1.15.1
@@ -2126,8 +2126,8 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@sepveneto/basic-comp/0.2.0_n3hpuedfbpr7xftjvp3phq2ela:
-    resolution: {integrity: sha512-8pBSx1Dwec38PlMqUABp0Itb2sPRKGTRs5fP8cJSpZxHjNjvTbgXzF3y3wOz/mWsoye7TPkyUei9+8JJPRlfGA==}
+  /@sepveneto/basic-comp/0.2.1_n3hpuedfbpr7xftjvp3phq2ela:
+    resolution: {integrity: sha512-8jijQr60xNJYvTfYpV1S7OJmoPWAMcbTuXrWvbrBealkJo1lij7qAvGOqprL4iTEI+xCpNOJ4Wn0vfKidNOI2Q==}
     peerDependencies:
       '@element-plus/icons-vue': ^2.0.0
       element-plus: ^2.0.0
