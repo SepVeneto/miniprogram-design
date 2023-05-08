@@ -32,7 +32,7 @@ export default defineComponent({
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive();
     const app = useApp();
     const editorContext = inject('Editor', { preview: false });
-    const draggableRef = ref();
+    const draggableRef = ref<InstanceType<typeof draggable>>();
 
     const previewComp = computed(() => editorContext.preview);
     const configComp = computed<any>({
@@ -53,9 +53,9 @@ export default defineComponent({
         ...style.value,
       };
       if (props.config.image?.startsWith('http')) {
+        styles.background = `url(${props.config.image})`;
         styles.backgroundSize = '100%';
         styles.backgroundRepeat = 'no-repeat';
-        styles.background = `url(${props.config.image})`;
       }
       return styles;
     });
