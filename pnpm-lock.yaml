@@ -73,7 +73,7 @@ importers:
       '@element-plus/icons-vue': ^2.1.0
       '@micro-zoe/micro-app': 1.0.0-alpha.10
       '@sepveneto/basic-comp': ^0.2.1
-      '@sepveneto/free-dom': ^0.5.1
+      '@sepveneto/free-dom': ^0.6.0
       '@sepveneto/mpd-hooks': workspace:^0.1.0
       '@sepveneto/mpd-schema': workspace:^1.0.0
       '@types/sortablejs': ^1.15.1
@@ -101,7 +101,7 @@ importers:
       webpack: 5.75.0
     dependencies:
       '@sepveneto/basic-comp': 0.2.1_n3hpuedfbpr7xftjvp3phq2ela
-      '@sepveneto/free-dom': 0.5.1_vue@3.2.47
+      '@sepveneto/free-dom': 0.6.0_vue@3.2.47
       '@sepveneto/mpd-hooks': link:../hooks
       '@types/sortablejs': 1.15.1
       fs-extra: 10.1.0
@@ -2238,12 +2238,12 @@ packages:
       vue-demi: 0.14.0_vue@3.2.45
     dev: false
 
-  /@sepveneto/free-dom/0.5.1_vue@3.2.47:
-    resolution: {integrity: sha512-SGxw53VzkW2pt704Db24NJQJt1eY/+Vl6D4FRcZLF6aGL8VjCCZUmqSPxxm23kXMXqVbU52s6MZ5GSurEITvug==}
+  /@sepveneto/free-dom/0.6.0_vue@3.2.47:
+    resolution: {integrity: sha512-K/nkyWxKbXdQvUCY2Bvp5hkjsH4/63oeVWTShNEDCkoA/DTwZTzrM86adPb4bxgBc6phV9TQBcvKoOq1sKeGXQ==}
     dependencies:
       '@vueuse/core': 9.13.0_vue@3.2.47
       uuid: 9.0.0
-      vue-demi: 0.14.0_vue@3.2.47
+      vue-demi: 0.14.5_vue@3.2.47
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -10669,6 +10669,21 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.47
+
+  /vue-demi/0.14.5_vue@3.2.47:
+    resolution: {integrity: sha512-o9NUVpl/YlsGJ7t+xuqJKx8EBGf1quRhCiT6D/J0pfwmk9zUwYkC7yrF4SZCe6fETvSM3UNL2edcbYrSyc4QHA==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.47
+    dev: false
 
   /vue-eslint-parser/9.1.0_eslint@8.33.0:
     resolution: {integrity: sha512-NGn/iQy8/Wb7RrRa4aRkokyCZfOUWk19OP5HP6JEozQFX5AoS/t+Z0ZN7FY4LlmWc4FNI922V7cvX28zctN8dQ==}
