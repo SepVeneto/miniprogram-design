@@ -221,6 +221,12 @@ export default defineComponent({
   &.is-preview::before {
     display: none;
   }
+  &:deep(.free-dom__widget-wrapper) {
+    position: relative;
+    box-sizing: border-box;
+    border: none !important;
+    cursor: auto;
+  }
 }
 </style>
 
@@ -231,11 +237,5 @@ export default defineComponent({
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
-}
-.free-dom__widget-wrapper {
-  position: relative;
-  box-sizing: border-box;
-  border: none !important;
-  cursor: auto;
 }
 </style>
