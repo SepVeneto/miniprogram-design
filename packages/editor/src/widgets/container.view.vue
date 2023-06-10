@@ -76,8 +76,11 @@ export default defineComponent({
     });
     watch([() => props.config.list.length, cellWidth], () => {
       props.config.list.forEach((item: any) => {
-        item.width = item.width || cellWidth.value;
         item.height = item.height || undefined;
+        if (!cellWidth.value) {
+          return;
+        }
+        reOffset(item);
       });
     }, { immediate: true });
 
@@ -95,6 +98,20 @@ export default defineComponent({
       app.selected = data;
       // app.updateConfig();
     }
+    function reOffsetAll () {
+      configComp.value.list.forEach(reOffset);
+      // configComp.value = props.config;
+    }
+    function reOffset (item: any) {
+      if (!item.width) {
+        item.width = cellWidth.value;
+        return;
+      }
+      const cellNum = Math.floor(item.width / cellWidth.value);
+      const { columnGap = 0 } = props.config.style;
+      const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap;
+      item.width = cellNum * cellWidth.value + offset;
+    }
     function wrapResizable (node: any, element: any) {
       return (
         <FreeDom
@@ -109,9 +126,9 @@ export default defineComponent({
           grid={[cellWidth.value, 1]}
           handler="mark"
           onDragStart={onDragStart}
-          onDragEnd={onDragEnd}
+          onDragEnd={() => onDragEnd()}
           onClick={withModifiers(() => handleSelect(element), ['stop'])}
-          onUpdate:width={(val: number) => { element.width = val; }}
+          onUpdate:width={(val: number) => { element.width = val; reOffsetAll(); }}
           onUpdate:height={(val: number) => { element.height = val; }}
           onMouseenter={withModifiers(() => onEnter(element._uuid), ['stop'])}
           onMouseleave={withModifiers(() => onLeave(), ['stop'])}
@@ -237,5 +254,6 @@ export default defineComponent({
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
+  color: #153EBA
 }
 </style>

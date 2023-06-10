@@ -16,9 +16,10 @@ export function useHoverActive () {
     console.log('start');
     isDrag = true;
   }
-  function onDragEnd () {
+  function onDragEnd (fn?: any) {
     console.log('end');
     isDrag = false;
+    fn?.();
   }
   return {
     activeUuid,
