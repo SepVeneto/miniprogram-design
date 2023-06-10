@@ -1,6 +1,8 @@
 import { defineComponent, PropType, defineAsyncComponent, watch, ShallowRef } from 'vue';
 import ossUpload from './components/ossUpload.vue';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks';
+import { QuestionFilled } from '@element-plus/icons-vue';
+
 // import ConfigRender from 'widgets_side/configRender';
 // import rInput from './input.vue'
 // import rCheckbox from './'
@@ -16,6 +18,7 @@ interface ISchema {
   type: WidgetType
   label: string
   key: string
+  tips?: string
   link?: Record<string, ISchema[]>
   [attr: string]: any
 }
@@ -24,6 +27,7 @@ export default defineComponent({
   name: 'SchemaContainer',
   components: {
     // ConfigRender,
+    QuestionFilled,
     OssUpload: ossUpload,
     RichTextEditor: defineAsyncComponent(
       () => import('./components/editor.vue'),
@@ -184,6 +188,19 @@ export default defineComponent({
           )
         : null;
     }
+    function renderLabel (schema: ISchema) {
+      if (schema.tips) {
+        return (
+          <span style="display: flex; align-items: center;">{schema.label}
+            <el-tooltip content={schema.tips}>
+              <el-icon style="margin-left: 6px;"><QuestionFilled /></el-icon>
+            </el-tooltip>
+          </span>
+        );
+      } else {
+        return <span>{schema.label}</span>;
+      }
+    }
     return {
       // schemaList,
       updateData,
@@ -198,6 +215,7 @@ export default defineComponent({
       renderRadioGroup,
       renderEditor,
       renderCustom,
+      renderLabel,
     };
   },
   render () {
@@ -240,7 +258,11 @@ export default defineComponent({
       }
       // console.log(schema._uuid)
       return [
-        <el-form-item label={schema.label}>{node}</el-form-item>,
+        <el-form-item
+          v-slots={{
+            label: this.renderLabel(schema),
+          }}
+        >{node}</el-form-item>,
         ...form,
       ];
     };
