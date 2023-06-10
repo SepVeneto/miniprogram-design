@@ -104,11 +104,10 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, unit, ...args } = schema;
       return (
-        <el-input
+        <el-input-number
           model-value={getData(prop.modelValue, key)}
-          type="number"
+          value-on-clear={null}
           onUpdate:modelValue={(val: string) => updateData(key, Number(val))}
-          v-slots={{ suffix: () => (<div>{unit || 'px'}</div>) }}
           {...args}
         />
       );
