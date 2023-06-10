@@ -259,7 +259,7 @@ export default defineComponent({
       return [
         <el-form-item
           v-slots={{
-            label: this.renderLabel(schema),
+            label: () => this.renderLabel(schema),
           }}
         >{node}</el-form-item>,
         ...form,

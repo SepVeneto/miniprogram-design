@@ -50,6 +50,8 @@ export default defineComponent({
       const styles = {
         display: 'flex',
         flexWrap: 'wrap',
+        rowGap: 0,
+        columnGap: 0,
         ...style.value,
       };
       if (props.config.image?.startsWith('http')) {
@@ -67,13 +69,15 @@ export default defineComponent({
     });
     const cellWidth = computed(() => containerWidth.value / props.config.grid);
 
-    watch(cellWidth, (newCell, oldCell) => {
-      if (!oldCell) return;
-      props.config.list.forEach((item: any) => {
-        const rate = item.width / oldCell;
-        item.width = rate * newCell;
-      });
-    });
+    // watch(cellWidth, (newCell, oldCell) => {
+    //   if (!oldCell) return;
+    //   props.config.list.forEach((item: any) => {
+    //     reOffset(item);
+    //     const rate = item.width / oldCell;
+    //     item.width = rate * newCell;
+    //     console.log(item.width);
+    //   });
+    // });
     watch([() => props.config.list.length, cellWidth], () => {
       props.config.list.forEach((item: any) => {
         item.height = item.height || undefined;
@@ -107,7 +111,7 @@ export default defineComponent({
         item.width = cellWidth.value;
         return;
       }
-      const cellNum = Math.floor(item.width / cellWidth.value);
+      const cellNum = Math.round(item.width / cellWidth.value);
       const { columnGap = 0 } = props.config.style;
       const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap;
       item.width = cellNum * cellWidth.value + offset;
@@ -183,7 +187,7 @@ export default defineComponent({
             </draggable-wrapper>
           )
         : (
-        <div>
+        <div style="height: 100%;">
           {this.getRenderContent(element)}
         </div>
           ), element);
