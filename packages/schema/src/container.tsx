@@ -200,6 +200,14 @@ export default defineComponent({
         return <span>{schema.label}</span>;
       }
     }
+    function allowContainer (item) {
+      const { _fromContainer } = prop.modelValue;
+      if (_fromContainer) {
+        return item._inContainer === 'inner' || !item._inContainer;
+      } else {
+        return item._inContainer === 'outer' || !_fromContainer;
+      }
+    }
     return {
       // schemaList,
       updateData,
@@ -215,6 +223,7 @@ export default defineComponent({
       renderEditor,
       renderCustom,
       renderLabel,
+      allowContainer,
     };
   },
   render () {
@@ -267,7 +276,7 @@ export default defineComponent({
     };
     return (
       <el-form label-width="100px">
-        {this.schema.map(item => {
+        {this.schema.filter(item => this.allowContainer(item)).map(item => {
           return wrapper(item);
         })}
       </el-form>

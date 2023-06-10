@@ -99,7 +99,7 @@ export default defineComponent({
       return !_inContainer || _inContainer === 'inner';
     }
     function handleSelect (data: any) {
-      app.selected = data;
+      app.selected = { ...data, _fromContainer: true };
       // app.updateConfig();
     }
     function reOffsetAll () {

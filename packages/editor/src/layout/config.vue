@@ -24,12 +24,7 @@ import schemaRender from '@sepveneto/mpd-schema';
 import { tabbarConfig } from '@/layout/tabbar';
 import { useApp } from '@/store';
 import { computed } from 'vue';
-defineProps({
-  config: {
-    type: Object,
-    default: () => ({}),
-  },
-});
+
 const app = useApp();
 const selected = computed({
   get () {
