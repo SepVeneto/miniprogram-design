@@ -95,6 +95,7 @@ export default defineComponent({
     );
 
     function onPut (_1: any, _2: any, dom: any) {
+      // TODO: 应该在这里把所有容器内不适用的属性全部剔除
       const { _inContainer } = dom.__draggable_context.element;
       return !_inContainer || _inContainer === 'inner';
     }

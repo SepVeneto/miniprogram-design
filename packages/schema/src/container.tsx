@@ -202,11 +202,13 @@ export default defineComponent({
     }
     function allowContainer (item) {
       const { _fromContainer } = prop.modelValue;
+      let flag;
       if (_fromContainer) {
-        return item._inContainer === 'inner' || !item._inContainer;
+        flag = item._inContainer === 'inner' || !item._inContainer;
       } else {
-        return item._inContainer === 'outer' || !_fromContainer;
+        flag = item._inContainer === 'outer' || !_fromContainer;
       }
+      return flag;
     }
     return {
       // schemaList,
