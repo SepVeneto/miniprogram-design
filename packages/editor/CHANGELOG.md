@@ -1,3 +1,16 @@
+## [0.9.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.9.1...editor@0.9.1) (2023-06-12)
+
+
+
+## [0.9.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.9.0...editor@0.9.1) (2023-06-12)
+
+
+### Bug Fixes
+
+* **editor:** 参数编辑无法生效 ([bf2bace](https://github.com/SepVeneto/miniprogram-design/commit/bf2bace2352f7b3e24d2b5279db565ea797afa1b))
+
+
+
 # [0.9.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.8.1...editor@0.9.0) (2023-06-10)
 
 
