@@ -99,7 +99,10 @@ export default defineComponent({
       return !_inContainer || _inContainer === 'inner';
     }
     function handleSelect (data: any) {
-      app.selected = { ...data, _fromContainer: true };
+      // 不能使用运算展开符，需要确保selected与editor指向同一地址
+      // 否则选择后的配置结果无法反应到编辑器和store里
+      app.selected = data;
+      app.selected._fromContainer = true;
       // app.updateConfig();
     }
     function reOffsetAll () {

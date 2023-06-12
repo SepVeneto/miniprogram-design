@@ -113,10 +113,14 @@ function onPut (_1: any, _2: any, dom: any) {
   return !_inContainer || _inContainer === 'outer';
 }
 function handleSelect (data: any) {
+  // 不能使用运算展开符，需要确保selected与editor指向同一地址
+  // 否则选择后的配置结果无法反应到编辑器和store里
   app.selected = data;
+  app.selected._fromContainer = false;
 }
 function updateConfig (data: any) {
   app.selected = data;
+  app.selected._fromContainer = false;
   // app.updateConfig();
 }
 </script>
