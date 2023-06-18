@@ -1,0 +1,33 @@
+name: Publish Docs Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Build
+        run: |
+          pnpm i --registry=https://registry.npmmirror.com\
+          pnpm build:hooks\
+          pnpm -C packages/editor build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: docs
+          folder: packages/editor/dist/prod
