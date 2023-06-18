@@ -22,8 +22,8 @@ jobs:
 
       - name: Build
         run: |
-          pnpm i --registry=https://registry.npmmirror.com\
-          pnpm build:hooks\
+          pnpm i --registry=https://registry.npmmirror.com
+          pnpm build:hooks
           pnpm -C packages/editor build
 
       - name: Deploy
