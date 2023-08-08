@@ -80,7 +80,7 @@ export default defineComponent({
     // });
     watch([() => props.config.list.length, cellWidth], () => {
       props.config.list.forEach((item: any) => {
-        item.height = item.height || undefined;
+        item.style.height = item.style.height || undefined;
         if (!cellWidth.value) {
           return;
         }
@@ -111,20 +111,20 @@ export default defineComponent({
       // configComp.value = props.config;
     }
     function reOffset (item: any) {
-      if (!item.width) {
-        item.width = cellWidth.value;
+      if (!item.style.width) {
+        item.style.width = cellWidth.value;
         return;
       }
-      const cellNum = Math.round(item.width / cellWidth.value);
+      const cellNum = Math.round(normalizeSize(item.style.width, 'width') / cellWidth.value);
       const { columnGap = 0 } = props.config.style;
       const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap;
-      item.width = cellNum * cellWidth.value + offset;
+      item.style.width = cellNum * cellWidth.value + offset;
     }
     function wrapResizable (node: any, element: any) {
       return (
         <FreeDom
-          width={element.width}
-          height={element.height}
+          width={normalizeSize(element.style.width, 'width')}
+          height={normalizeSize(element.style.height, 'height')}
           x={0}
           y={0}
           preview={previewComp.value}
@@ -136,8 +136,8 @@ export default defineComponent({
           onDragStart={onDragStart}
           onDragEnd={() => onDragEnd()}
           onClick={withModifiers(() => handleSelect(element), ['stop'])}
-          onUpdate:width={(val: number) => { element.width = val; reOffsetAll(); }}
-          onUpdate:height={(val: number) => { element.height = val; }}
+          onUpdate:width={(val: number) => { element.style.width = normalizeSize(val, 'width'); reOffsetAll(); }}
+          onUpdate:height={(val: number) => { element.style.height = normalizeSize(val, 'height'); }}
           onMouseenter={withModifiers(() => onEnter(element._uuid), ['stop'])}
           onMouseleave={withModifiers(() => onLeave(), ['stop'])}
         >
@@ -157,6 +157,17 @@ export default defineComponent({
             />
             : null
           ;
+      }
+    }
+    function normalizeSize (val: number | string, type: 'width' | 'height'): number {
+      if (typeof val === 'string') {
+        if (type === 'width') {
+          return containerRect.width.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1);
+        } else {
+          return containerRect.height.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1);
+        }
+      } else {
+        return val;
       }
     }
 
