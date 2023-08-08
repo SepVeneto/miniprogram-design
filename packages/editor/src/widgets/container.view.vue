@@ -9,16 +9,15 @@ import {
   ref,
 } from 'vue';
 import { useApp } from '@/store';
-import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
 import { useElementBounding } from '@vueuse/core';
 import { useHoverActive } from './useHoverActive';
+import { useSortable } from '@vueuse/integrations/useSortable';
 
 export default defineComponent({
   components: {
     FreeDom,
-    Draggable: draggable,
     DraggableWrapper: draggableWrapper,
   },
   props: {
@@ -32,7 +31,7 @@ export default defineComponent({
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive();
     const app = useApp();
     const editorContext = inject('Editor', { preview: false });
-    const draggableRef = ref<InstanceType<typeof draggable>>();
+    const draggableRef = ref();
 
     const previewComp = computed(() => editorContext.preview);
     const configComp = computed<any>({
@@ -94,10 +93,26 @@ export default defineComponent({
       './viewRender',
     );
 
+    useSortable(draggableRef, configComp.value.list, {
+      handle: '.operate',
+      animation: 200,
+      ghostClass: 'ghost',
+      group: { name: 'widgets', pull: true, put: onPut },
+      onAdd (evt) {
+        // @ts-expect-error: extend field
+        const element = evt.item._underlying_vm_;
+        if (!element) return;
+
+        evt.item.parentElement?.removeChild(evt.item);
+        configComp.value.list.splice(evt.newIndex, 0, element);
+      },
+    });
+
     function onPut (_1: any, _2: any, dom: any) {
       // TODO: 应该在这里把所有容器内不适用的属性全部剔除
-      const { _inContainer } = dom.__draggable_context.element;
-      return !_inContainer || _inContainer === 'inner';
+      // const { _inContainer } = dom.__draggable_context.element;
+      // return !_inContainer || _inContainer === 'inner';
+      return true;
     }
     function handleSelect (data: any) {
       // 不能使用运算展开符，需要确保selected与editor指向同一地址
@@ -189,7 +204,7 @@ export default defineComponent({
     };
   },
   render () {
-    const content = ({ element }: any) => {
+    const content = (element: any) => {
       return this.wrapResizable(!this.previewComp
         ? (
             <draggable-wrapper
@@ -208,27 +223,16 @@ export default defineComponent({
           ), element);
     };
     const core = (
-      <draggable
+      <div
         ref="draggableRef"
-        v-model={this.configComp.list}
-        item-key="_uuid"
-        handle=".operate"
-        animation={200}
-        ghost-class="ghost"
-        component-data={{
-          type: 'transition-group',
-          name: 'flip-list',
-        }}
-        group={{ name: 'widgets', pull: true, put: this.onPut }}
         class={[
           'draggable-group',
           { 'is-preview': this.previewComp },
         ]}
         style={this.viewStyle}
-        v-slots={{
-          item: content,
-        }}
-      />
+      >
+        {this.configComp.list.map(item => content(item))}
+      </div>
     );
     return core;
   },
