@@ -1,6 +1,7 @@
 <script lang="tsx">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { Rank, CloseBold, Hide } from '@element-plus/icons-vue';
+import { useNormalizeStyle } from '@sepveneto/mpd-hooks';
 
 export default defineComponent({
   components: {
@@ -8,6 +9,10 @@ export default defineComponent({
     CloseBold,
   },
   props: {
+    customStyle: {
+      type: Object,
+      default: () => ({}),
+    },
     container: Boolean,
     dir: {
       type: String,
@@ -20,10 +25,12 @@ export default defineComponent({
   },
   emits: ['delete'],
   setup (props, { emit }) {
+    const wrapStyle = useNormalizeStyle(props.customStyle);
     function handleDelete () {
       emit('delete');
     }
     return {
+      wrapStyle,
       handleDelete,
     };
   },
@@ -53,6 +60,7 @@ export default defineComponent({
           { 'has-mask': this.mask },
           { 'is-container': this.container },
         ]}
+        style={this.wrapStyle}
       >
         {!this.disabled && operate()}
         <div class="container">
@@ -74,6 +82,7 @@ export default defineComponent({
   &.is-active > .container {
     &::after {
       top: 0;
+      left: 0;
       position: absolute;
       content: '';
       display: block;
@@ -148,6 +157,8 @@ export default defineComponent({
     }
   }
   .container {
+    width: 100%;
+    height: 100%;
     transition: all 0.3s;
   }
   &.dir-right:not(:last-child) {

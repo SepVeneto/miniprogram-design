@@ -13,6 +13,7 @@
         :hide="item.isShow != null && !item.isShow"
         :container="item._view === 'container'"
         :mask="item._view !== 'container' && item._view !== 'canvas' && item._mask"
+        :custom-style="item.style"
         @mouseenter.stop="onEnter(item._uuid)"
         @mouseleave.stop="onLeave()"
         @click="handleSelect(item)"
@@ -48,6 +49,7 @@
           v-else
           :type="item._view"
           :config="item"
+          :style="normalizeStyle(item.style)"
         />
       </template>
     </template>
@@ -60,7 +62,7 @@ import { ref, computed, provide, reactive, toRefs } from 'vue';
 import { useApp } from '@/store';
 import containerView from '@/widgets/container.view.vue';
 // import viewRender from 'widgets_side/viewRender';
-import { useFederatedComponent } from '@sepveneto/mpd-hooks';
+import { useFederatedComponent, normalizeStyle } from '@sepveneto/mpd-hooks';
 import canvasView from '@/widgets/canvas.view.vue';
 import { useRoute } from 'vue-router';
 import { useHoverActive } from '@/widgets/useHoverActive';
@@ -125,7 +127,10 @@ function updateConfig (data: any) {
 
 <style lang="scss" scoped>
 .draggable-box {
-  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: max-content;
 }
 </style>
 

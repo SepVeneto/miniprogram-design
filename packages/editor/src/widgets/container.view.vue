@@ -6,12 +6,12 @@ import {
   inject,
   watch,
   withModifiers,
-  ref,
+  shallowRef,
 } from 'vue';
 import { useApp } from '@/store';
 import draggableWrapper from '@/components/draggableWrapper.vue';
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
-import { useElementBounding } from '@vueuse/core';
+import { useElementSize } from '@vueuse/core';
 import { useHoverActive } from './useHoverActive';
 import { useSortable } from '@/layout/useSortable';
 
@@ -31,7 +31,7 @@ export default defineComponent({
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive();
     const app = useApp();
     const editorContext = inject('Editor', { preview: false });
-    const draggableRef = ref();
+    const draggableRef = shallowRef();
 
     const previewComp = computed(() => editorContext.preview);
     const configComp = computed<any>({
@@ -60,11 +60,12 @@ export default defineComponent({
       }
       return styles;
     });
-    const containerRect = useElementBounding(draggableRef);
+    const containerRect = useElementSize(draggableRef);
+
     const containerWidth = computed(() => {
-      const { paddingLeft = 0, paddingRight = 0, columnGap = 0 } = props.config.style;
+      const { columnGap = 0 } = props.config.style;
       if (!containerRect.width.value) return 0;
-      return containerRect.width.value - paddingLeft - paddingRight - columnGap * (props.config.grid - 1);
+      return containerRect.width.value - columnGap * (props.config.grid - 1);
     });
     const cellWidth = computed(() => containerWidth.value / props.config.grid);
 
@@ -218,9 +219,8 @@ export default defineComponent({
           'draggable-group',
           { 'is-preview': this.previewComp },
         ]}
-        style={this.viewStyle}
       >
-        {this.configComp.list.map(item => content(item))}
+        {this.configComp.list.map((item: any) => content(item))}
       </div>
     );
     return core;
@@ -246,6 +246,9 @@ export default defineComponent({
     align-items: center;
     width: 100%;
     height: 100%;
+  }
+  &.is-preview {
+    min-height: initial;
   }
   &.is-preview::before {
     display: none;

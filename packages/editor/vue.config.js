@@ -14,6 +14,12 @@ module.exports = defineConfig({
   outputDir: `dist/${isProduction ? 'prod' : 'dev'}`,
   productionSourceMap: false,
   devServer: {
+    client: {
+      overlay: {
+        errors: false,
+        warnings: false,
+      },
+    },
     port: 8082,
     proxy: {
       '/static': {

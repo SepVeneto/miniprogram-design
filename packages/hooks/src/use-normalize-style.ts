@@ -6,22 +6,26 @@ export function useNormalizeStyle<T extends Style> (
   style: T,
 ): ComputedRef<ReturnStyle<T>> {
   return computed(() => {
-    const _style = Object.entries(style).reduce<Partial<CSSProperties>>(
-      (obj, _style) => {
-        const [key, value] = _style;
-        if (typeof value === 'number') {
-          // @ts-expect-error: value is not a number
-          obj[key] = `${value}px`;
-        } else {
-          // @ts-expect-error: value is not a number
-          obj[key] = value;
-        }
-        return obj;
-      }, {} as Partial<CSSProperties>);
+    const _style = normalizeStyle(style);
 
     return {
       transition: 'inherit',
       ..._style,
     } as ReturnStyle<T>;
   });
+}
+
+export function normalizeStyle (style: Style) {
+  return Object.entries(style).reduce<Partial<CSSProperties>>(
+    (obj, _style) => {
+      const [key, value] = _style;
+      if (typeof value === 'number') {
+        // @ts-expect-error: value is not a number
+        obj[key] = `${value}px`;
+      } else {
+        // @ts-expect-error: value is not a number
+        obj[key] = value;
+      }
+      return obj;
+    }, {} as Partial<CSSProperties>);
 }
