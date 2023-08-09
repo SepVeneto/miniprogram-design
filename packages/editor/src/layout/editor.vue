@@ -4,12 +4,10 @@
     class="draggable-box"
     style="min-height: calc(667px - 60px); position: relative;"
   >
-    <template
-      v-for="item in data"
-      :key="item._uuid"
-    >
+    <template v-if="!preview">
       <draggable-wrapper
-        v-if="!preview"
+        v-for="item in data"
+        :key="item._uuid"
         dir="top"
         :active="activeUuid === item._uuid || selected._uuid === item._uuid"
         :hide="item.isShow != null && !item.isShow"
@@ -36,7 +34,12 @@
           />
         </template>
       </draggable-wrapper>
-      <template v-else>
+    </template>
+    <template v-else>
+      <template
+        v-for="item in data"
+        :key="item._uuid"
+      >
         <container-view
           v-if="item._view === 'container'"
           :config="item"
@@ -61,7 +64,7 @@ import { useFederatedComponent } from '@sepveneto/mpd-hooks';
 import canvasView from '@/widgets/canvas.view.vue';
 import { useRoute } from 'vue-router';
 import { useHoverActive } from '@/widgets/useHoverActive';
-import { useSortable } from '@vueuse/integrations/useSortable';
+import { useSortable } from './useSortable';
 
 const route = useRoute();
 
@@ -89,19 +92,9 @@ const data = computed({
   },
 });
 useSortable(mainRef, data, {
-  animation: 200,
-  ghostClass: 'ghost',
-  handle: '.operate',
   group: { name: 'widgets', pull: true, put: onPut },
-  onAdd (evt) {
-    // @ts-expect-error: extend field
-    const element = evt.item._underlying_vm_;
-    if (!element) return;
-
-    evt.item.parentElement?.removeChild(evt.item);
-    data.value.splice(evt.newIndex, 0, element);
-  },
 });
+
 // const selected = ref({} as any)
 const selected = computed(() => app.selected);
 

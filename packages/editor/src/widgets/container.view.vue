@@ -13,7 +13,7 @@ import draggableWrapper from '@/components/draggableWrapper.vue';
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
 import { useElementBounding } from '@vueuse/core';
 import { useHoverActive } from './useHoverActive';
-import { useSortable } from '@vueuse/integrations/useSortable';
+import { useSortable } from '@/layout/useSortable';
 
 export default defineComponent({
   components: {
@@ -94,18 +94,7 @@ export default defineComponent({
     );
 
     useSortable(draggableRef, configComp.value.list, {
-      handle: '.operate',
-      animation: 200,
-      ghostClass: 'ghost',
       group: { name: 'widgets', pull: true, put: onPut },
-      onAdd (evt) {
-        // @ts-expect-error: extend field
-        const element = evt.item._underlying_vm_;
-        if (!element) return;
-
-        evt.item.parentElement?.removeChild(evt.item);
-        configComp.value.list.splice(evt.newIndex, 0, element);
-      },
     });
 
     function onPut (_1: any, _2: any, dom: any) {

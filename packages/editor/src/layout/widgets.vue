@@ -21,10 +21,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useSortable } from '@vueuse/integrations/useSortable';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, computed } from 'vue';
-import type { Sortable } from 'sortablejs';
+import { useSortable } from './useSortable';
 
 const props = defineProps({
   preview: Boolean,
@@ -39,20 +38,16 @@ const list = computed<any[]>(() => props.list);
 
 useSortable(widgetsRef, list, {
   group: { name: 'widgets', pull: onClone, put: false },
-  // clone: onClone,
   sort: false,
-  onStart: (evt: any) => {
-    console.log('start', evt);
-    const index = evt.item.dataset.index;
-    evt.item._underlying_vm_ = JSON.parse(JSON.stringify(list.value[index]));
-  },
+  handle: undefined,
+  clone: (original) => JSON.parse(JSON.stringify({
+    ...original,
+    _uuid: uuidv4(),
+  })),
 });
 
-function onClone (to: Sortable, from: Sortable) {
+function onClone () {
   if (props.preview) return false;
-  console.log(to, from);
-  // const _data = JSON.parse(JSON.stringify({ ...origin, _uuid: uuidv4() }));
-  // return _data;
   return 'clone' as const;
 }
 </script>
