@@ -5,20 +5,20 @@ import {
   computed,
   inject,
   watch,
-  withModifiers,
   ref,
+  withModifiers,
+  shallowRef,
+  onMounted,
 } from 'vue';
 import { useApp } from '@/store';
-import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
-import { useElementBounding } from '@vueuse/core';
 import { useHoverActive } from './useHoverActive';
+import { useSortable } from '@/layout/useSortable';
 
 export default defineComponent({
   components: {
     FreeDom,
-    Draggable: draggable,
     DraggableWrapper: draggableWrapper,
   },
   props: {
@@ -32,7 +32,7 @@ export default defineComponent({
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive();
     const app = useApp();
     const editorContext = inject('Editor', { preview: false });
-    const draggableRef = ref<InstanceType<typeof draggable>>();
+    const draggableRef = shallowRef<HTMLElement>();
 
     const previewComp = computed(() => editorContext.preview);
     const configComp = computed<any>({
@@ -47,25 +47,30 @@ export default defineComponent({
     const style = useNormalizeStyle(props.config.style);
 
     const viewStyle = computed(() => {
-      const styles = {
-        display: 'flex',
-        flexWrap: 'wrap',
-        rowGap: 0,
-        columnGap: 0,
-        ...style.value,
-      };
+      const { rowGap, columnGap, ...styles } = style.value;
       if (props.config.image?.startsWith('http')) {
         styles.background = `url(${props.config.image})`;
         styles.backgroundSize = '100%';
         styles.backgroundRepeat = 'no-repeat';
       }
-      return styles;
+      return [styles, {
+        display: 'flex',
+        flexWrap: 'wrap',
+        rowGap,
+        columnGap,
+      }];
     });
-    const containerRect = useElementBounding(draggableRef);
+
+    // const containerRect = useElementSize(draggableRef);
+    const containerRect = {
+      width: ref(375),
+      height: ref(0),
+    };
+
     const containerWidth = computed(() => {
-      const { paddingLeft = 0, paddingRight = 0, columnGap = 0 } = props.config.style;
+      const { columnGap = 0 } = props.config.style;
       if (!containerRect.width.value) return 0;
-      return containerRect.width.value - paddingLeft - paddingRight - columnGap * (props.config.grid - 1);
+      return containerRect.width.value - columnGap * (props.config.grid - 1);
     });
     const cellWidth = computed(() => containerWidth.value / props.config.grid);
 
@@ -87,6 +92,20 @@ export default defineComponent({
         reOffset(item);
       });
     }, { immediate: true });
+    watch([() => props.config.style.width, () => props.config.style.height], () => {
+      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
+      containerRect.width.value = width ?? 375;
+      containerRect.height.value = height ?? 0;
+    }, { flush: 'post' });
+
+    onMounted(() => {
+      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
+      containerRect.width.value = width ?? 375;
+      containerRect.height.value = height ?? 0;
+
+      // 如果容器没有默认宽度，自动设定为375
+      if (!props.config.style.width) configComp.value.style.width = 375;
+    });
 
     const { Component: ViewRender } = useFederatedComponent(
       app.remoteUrl,
@@ -94,10 +113,13 @@ export default defineComponent({
       './viewRender',
     );
 
-    function onPut (_1: any, _2: any, dom: any) {
-      // TODO: 应该在这里把所有容器内不适用的属性全部剔除
-      const { _inContainer } = dom.__draggable_context.element;
-      return !_inContainer || _inContainer === 'inner';
+    useSortable(draggableRef, configComp.value.list, {
+      group: { name: 'widgets', pull: true, put: onPut },
+    });
+
+    function onPut (_1: any, _2: any, dom: HTMLElement) {
+      const { container } = dom.dataset;
+      return !container || container === 'inner';
     }
     function handleSelect (data: any) {
       // 不能使用运算展开符，需要确保selected与editor指向同一地址
@@ -189,7 +211,7 @@ export default defineComponent({
     };
   },
   render () {
-    const content = ({ element }: any) => {
+    const content = (element: any) => {
       return this.wrapResizable(!this.previewComp
         ? (
             <draggable-wrapper
@@ -208,27 +230,16 @@ export default defineComponent({
           ), element);
     };
     const core = (
-      <draggable
+      <div
         ref="draggableRef"
-        v-model={this.configComp.list}
-        item-key="_uuid"
-        handle=".operate"
-        animation={200}
-        ghost-class="ghost"
-        component-data={{
-          type: 'transition-group',
-          name: 'flip-list',
-        }}
-        group={{ name: 'widgets', pull: true, put: this.onPut }}
         class={[
           'draggable-group',
           { 'is-preview': this.previewComp },
         ]}
-        style={this.viewStyle}
-        v-slots={{
-          item: content,
-        }}
-      />
+        style={this.viewStyle[1]}
+      >
+        {this.configComp.list.map((item: any) => content(item))}
+      </div>
     );
     return core;
   },
@@ -253,6 +264,9 @@ export default defineComponent({
     align-items: center;
     width: 100%;
     height: 100%;
+  }
+  &.is-preview {
+    min-height: initial;
   }
   &.is-preview::before {
     display: none;

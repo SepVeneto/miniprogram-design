@@ -26,10 +26,22 @@
         </li>
       </ul>
     </div>
+    <div
+      v-if="config.hidden"
+      class="hide-mask"
+    >
+      <el-icon
+        :size="40"
+        color="#fff"
+      >
+        <Hide />
+      </el-icon>
+    </div>
   </footer>
 </template>
 
 <script lang="ts" setup>
+import { Hide } from '@element-plus/icons-vue';
 import { computed, PropType } from 'vue';
 import type { TabbarWidgetConfig } from './type';
 import { useRoute, useRouter } from 'vue-router';
@@ -62,6 +74,7 @@ function handleSelect (type: string) {
 
 <style lang="scss" scoped>
 .tabbar {
+  position: relative;
   width: 375px;
   height: 50px;
   // padding: 0px 2px 2px 2px;
@@ -132,5 +145,17 @@ function handleSelect (type: string) {
     &.is-preview:hover::before, &.is-active.is-preview::before {
       display: none;
     }
+}
+.hide-mask {
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgb(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

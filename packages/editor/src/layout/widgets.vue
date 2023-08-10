@@ -1,32 +1,32 @@
 <template>
-  <draggable
-    :model-value="list"
-    item-key="type"
-    :group="{ name: 'widgets', pull: preview ? false : 'clone', put: false }"
-    :clone="onClone"
+  <section
+    ref="widgetsRef"
     style="padding: 0 10px;"
-    :sort="false"
   >
-    <template #item="{element}">
+    <div
+      v-for="(element, index) in list"
+      :key="index"
+      style="border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; cursor: move"
+      :class="{ disabled: element._disabled }"
+      :data-index="index"
+      :data-container="element._inContainer"
+    >
       <div
-        style="border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; cursor: move"
-        :class="{ disabled: element._disabled }"
+        style="font-weight: bold; padding-left: 20px; border-left: 4px solid #4089ef;"
       >
-        <div
-          style="font-weight: bold; padding-left: 20px; border-left: 4px solid #4089ef;"
-        >
-          {{ element._name }}
-        </div>
-        <!-- <el-image :src="element.img" /> -->
+        {{ element._name }}{{ element }}
       </div>
-    </template>
-  </draggable>
+      <!-- <el-image :src="element.img" /> -->
+    </div>
+  </section>
 </template>
 
 <script lang="ts" setup>
-import draggable from 'vuedraggable';
 import { v4 as uuidv4 } from 'uuid';
-defineProps({
+import { ref, computed } from 'vue';
+import { useSortable } from './useSortable';
+
+const props = defineProps({
   preview: Boolean,
   list: {
     type: Array,
@@ -34,8 +34,21 @@ defineProps({
   },
 });
 
-function onClone (origin: Record<string, unknown>) {
-  const _data = JSON.parse(JSON.stringify({ ...origin, _uuid: uuidv4() }));
-  return _data;
+const widgetsRef = ref();
+const list = computed<any[]>(() => props.list);
+
+useSortable(widgetsRef, list, {
+  group: { name: 'widgets', pull: onClone, put: false },
+  sort: false,
+  handle: undefined,
+  clone: (original) => JSON.parse(JSON.stringify({
+    ...original,
+    _uuid: uuidv4(),
+  })),
+});
+
+function onClone () {
+  if (props.preview) return false;
+  return 'clone' as const;
 }
 </script>

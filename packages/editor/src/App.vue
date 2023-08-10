@@ -49,13 +49,16 @@
             >
               <router-view :preview="isPreview" />
             </el-scrollbar>
-            <tabbarPreview
+            <template
               v-if="tabbar"
-              :preview="isPreview"
-              :config="tabbar"
-              :active="tabbar._uuid === selected._uuid"
-              @click="handleSelect(tabbar)"
-            />
+            >
+              <tabbarPreview
+                :preview="isPreview"
+                :config="tabbar"
+                :active="tabbar._uuid === selected._uuid"
+                @click="handleSelect(tabbar)"
+              />
+            </template>
             <div
               v-else
               style="background: #fff; height: var(--tabbar-height)"

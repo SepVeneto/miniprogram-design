@@ -84,6 +84,7 @@ export default defineComponent({
   cursor: pointer;
   position: relative;
   transition: all 0.3s;
+  box-sizing: content-box;
   &.is-active {
     background: #4089ef;
     color: #fff;
