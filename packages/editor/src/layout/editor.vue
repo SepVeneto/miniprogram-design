@@ -107,11 +107,9 @@ const { Component: ViewRender } = useFederatedComponent(
   './viewRender',
 );
 
-function onPut (_1: any, _2: any, dom: any) {
-  // const { _inContainer } = dom.__draggable_context.element;
-  // // console.log(_1, _2, dom.__draggable_context.element, target)
-  // return !_inContainer || _inContainer === 'outer';
-  return true;
+function onPut (_1: any, _2: any, dom: HTMLElement) {
+  const { container } = dom.dataset;
+  return !container || container === 'outer';
 }
 function handleSelect (data: any) {
   // 不能使用运算展开符，需要确保selected与editor指向同一地址

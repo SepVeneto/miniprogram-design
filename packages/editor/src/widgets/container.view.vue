@@ -92,16 +92,19 @@ export default defineComponent({
         reOffset(item);
       });
     }, { immediate: true });
-    watch(() => props.config.style.width, () => {
+    watch([() => props.config.style.width, () => props.config.style.height], () => {
       const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
-      containerRect.width.value = width ?? 0;
+      containerRect.width.value = width ?? 375;
       containerRect.height.value = height ?? 0;
     }, { flush: 'post' });
 
     onMounted(() => {
       const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
-      containerRect.width.value = width ?? 0;
+      containerRect.width.value = width ?? 375;
       containerRect.height.value = height ?? 0;
+
+      // 如果容器没有默认宽度，自动设定为375
+      if (!props.config.style.width) configComp.value.style.width = 375;
     });
 
     const { Component: ViewRender } = useFederatedComponent(
@@ -114,11 +117,9 @@ export default defineComponent({
       group: { name: 'widgets', pull: true, put: onPut },
     });
 
-    function onPut (_1: any, _2: any, dom: any) {
-      // TODO: 应该在这里把所有容器内不适用的属性全部剔除
-      // const { _inContainer } = dom.__draggable_context.element;
-      // return !_inContainer || _inContainer === 'inner';
-      return true;
+    function onPut (_1: any, _2: any, dom: HTMLElement) {
+      const { container } = dom.dataset;
+      return !container || container === 'inner';
     }
     function handleSelect (data: any) {
       // 不能使用运算展开符，需要确保selected与editor指向同一地址

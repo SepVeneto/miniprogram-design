@@ -26,7 +26,7 @@ import { useApp } from '@/store';
 import { computed } from 'vue';
 
 const app = useApp();
-const selected = computed({
+const selected = computed<any>({
   get () {
     return app.selected;
   },
@@ -34,7 +34,7 @@ const selected = computed({
     app.selected = val;
   },
 });
-const globalConfig = computed({
+const globalConfig = computed<any>({
   get () {
     return app.config.globalConfig;
   },

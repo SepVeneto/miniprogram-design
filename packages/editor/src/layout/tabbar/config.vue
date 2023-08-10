@@ -1,11 +1,17 @@
 <template>
-  <draggable
-    v-model="data.list"
-    item-key="id"
-    handle=".operate-move"
-  >
-    <template #item="{element }">
+  <section>
+    <div>
+      <el-checkbox v-model="data.hidden">
+        隐藏
+      </el-checkbox>
+    </div>
+    <div
+      ref="draggableRef"
+      handle=".operate-move"
+    >
       <draggable-wrapper
+        v-for="element in data.list"
+        :key="element.id"
         dir="right"
         style="background: #f8f8f8"
         disabled
@@ -35,16 +41,17 @@
           <el-input v-model="element.subTitle" />
         </div>
       </draggable-wrapper>
-    </template>
-  </draggable>
+    </div>
+  </section>
 </template>
 
 <script lang="ts" setup>
-import draggable from 'vuedraggable';
 import draggableWrapper from '@/components/draggableWrapper.vue';
 import ossUpload from '@/components/ossUpload.vue';
 import { ref, watch, PropType } from 'vue';
-import { TabbarWidgetConfig } from '../type';
+import { TabbarWidgetConfig } from './type';
+import { useSortable } from '@/layout/useSortable';
+
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   modelValue: {
@@ -52,7 +59,12 @@ const props = defineProps({
     default: () => ({}),
   },
 });
+
+const draggableRef = ref<HTMLElement>();
 const data = ref({} as TabbarWidgetConfig);
+useSortable(draggableRef, data.value.list, {
+  handle: '.operate-move',
+});
 watch(() => props.modelValue, (val) => {
   data.value = val;
 }, { deep: true, immediate: true });
