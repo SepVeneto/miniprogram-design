@@ -5,13 +5,14 @@ import {
   computed,
   inject,
   watch,
+  ref,
   withModifiers,
   shallowRef,
+  onMounted,
 } from 'vue';
 import { useApp } from '@/store';
 import draggableWrapper from '@/components/draggableWrapper.vue';
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
-import { useElementSize } from '@vueuse/core';
 import { useHoverActive } from './useHoverActive';
 import { useSortable } from '@/layout/useSortable';
 
@@ -31,7 +32,7 @@ export default defineComponent({
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive();
     const app = useApp();
     const editorContext = inject('Editor', { preview: false });
-    const draggableRef = shallowRef();
+    const draggableRef = shallowRef<HTMLElement>();
 
     const previewComp = computed(() => editorContext.preview);
     const configComp = computed<any>({
@@ -46,21 +47,25 @@ export default defineComponent({
     const style = useNormalizeStyle(props.config.style);
 
     const viewStyle = computed(() => {
-      const styles = {
-        display: 'flex',
-        flexWrap: 'wrap',
-        rowGap: 0,
-        columnGap: 0,
-        ...style.value,
-      };
+      const { rowGap, columnGap, ...styles } = style.value;
       if (props.config.image?.startsWith('http')) {
         styles.background = `url(${props.config.image})`;
         styles.backgroundSize = '100%';
         styles.backgroundRepeat = 'no-repeat';
       }
-      return styles;
+      return [styles, {
+        display: 'flex',
+        flexWrap: 'wrap',
+        rowGap,
+        columnGap,
+      }];
     });
-    const containerRect = useElementSize(draggableRef);
+
+    // const containerRect = useElementSize(draggableRef);
+    const containerRect = {
+      width: ref(375),
+      height: ref(0),
+    };
 
     const containerWidth = computed(() => {
       const { columnGap = 0 } = props.config.style;
@@ -87,6 +92,17 @@ export default defineComponent({
         reOffset(item);
       });
     }, { immediate: true });
+    watch(() => props.config.style.width, () => {
+      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
+      containerRect.width.value = width ?? 0;
+      containerRect.height.value = height ?? 0;
+    }, { flush: 'post' });
+
+    onMounted(() => {
+      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
+      containerRect.width.value = width ?? 0;
+      containerRect.height.value = height ?? 0;
+    });
 
     const { Component: ViewRender } = useFederatedComponent(
       app.remoteUrl,
@@ -219,6 +235,7 @@ export default defineComponent({
           'draggable-group',
           { 'is-preview': this.previewComp },
         ]}
+        style={this.viewStyle[1]}
       >
         {this.configComp.list.map((item: any) => content(item))}
       </div>

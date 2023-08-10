@@ -44,6 +44,7 @@
         <container-view
           v-if="item._view === 'container'"
           :config="item"
+          :style="normalizeStyle(item.style)"
         />
         <view-render
           v-else
