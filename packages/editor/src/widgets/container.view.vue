@@ -1,20 +1,20 @@
 <script lang="tsx">
-import { freeDom as FreeDom } from '@sepveneto/free-dom';
+import { freeDom as FreeDom } from '@sepveneto/free-dom'
 import {
-  defineComponent,
   computed,
+  defineComponent,
   inject,
-  watch,
-  ref,
-  withModifiers,
-  shallowRef,
   onMounted,
-} from 'vue';
-import { useApp } from '@/store';
-import draggableWrapper from '@/components/draggableWrapper.vue';
-import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
-import { useHoverActive } from './useHoverActive';
-import { useSortable } from '@/layout/useSortable';
+  ref,
+  shallowRef,
+  watch,
+  withModifiers,
+} from 'vue'
+import { useApp } from '@/store'
+import draggableWrapper from '@/components/draggableWrapper.vue'
+import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks'
+import { useHoverActive } from './useHoverActive'
+import { useSortable } from '@/layout/useSortable'
 
 export default defineComponent({
   components: {
@@ -28,51 +28,51 @@ export default defineComponent({
     },
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
-    const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive();
-    const app = useApp();
-    const editorContext = inject('Editor', { preview: false });
-    const draggableRef = shallowRef<HTMLElement>();
+  setup(props, { emit }) {
+    const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
+    const app = useApp()
+    const editorContext = inject('Editor', { preview: false })
+    const draggableRef = shallowRef<HTMLElement>()
 
-    const previewComp = computed(() => editorContext.preview);
+    const previewComp = computed(() => editorContext.preview)
     const configComp = computed<any>({
-      get () {
-        return props.config;
+      get() {
+        return props.config
       },
-      set (val) {
-        emit('update:modelValue', val);
+      set(val) {
+        emit('update:modelValue', val)
       },
-    });
-    const selected = computed(() => app.selected);
-    const style = useNormalizeStyle(props.config.style);
+    })
+    const selected = computed(() => app.selected)
+    const style = useNormalizeStyle(props.config.style)
 
     const viewStyle = computed(() => {
-      const { rowGap, columnGap, ...styles } = style.value;
+      const { rowGap, columnGap, ...styles } = style.value
       if (props.config.image?.startsWith('http')) {
-        styles.background = `url(${props.config.image})`;
-        styles.backgroundSize = '100%';
-        styles.backgroundRepeat = 'no-repeat';
+        styles.background = `url(${props.config.image})`
+        styles.backgroundSize = '100%'
+        styles.backgroundRepeat = 'no-repeat'
       }
       return [styles, {
         display: 'flex',
         flexWrap: 'wrap',
         rowGap,
         columnGap,
-      }];
-    });
+      }]
+    })
 
     // const containerRect = useElementSize(draggableRef);
     const containerRect = {
       width: ref(375),
       height: ref(0),
-    };
+    }
 
     const containerWidth = computed(() => {
-      const { columnGap = 0 } = props.config.style;
-      if (!containerRect.width.value) return 0;
-      return containerRect.width.value - columnGap * (props.config.grid - 1);
-    });
-    const cellWidth = computed(() => containerWidth.value / props.config.grid);
+      const { columnGap = 0 } = props.config.style
+      if (!containerRect.width.value) return 0
+      return containerRect.width.value - columnGap * (props.config.grid - 1)
+    })
+    const cellWidth = computed(() => containerWidth.value / props.config.grid)
 
     // watch(cellWidth, (newCell, oldCell) => {
     //   if (!oldCell) return;
@@ -85,64 +85,64 @@ export default defineComponent({
     // });
     watch([() => props.config.list.length, cellWidth], () => {
       props.config.list.forEach((item: any) => {
-        item.style.height = item.style.height || undefined;
+        item.style.height = item.style.height || undefined
         if (!cellWidth.value) {
-          return;
+          return
         }
-        reOffset(item);
-      });
-    }, { immediate: true });
+        reOffset(item)
+      })
+    }, { immediate: true })
     watch([() => props.config.style.width, () => props.config.style.height], () => {
-      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
-      containerRect.width.value = width ?? 375;
-      containerRect.height.value = height ?? 0;
-    }, { flush: 'post' });
+      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {}
+      containerRect.width.value = width ?? 375
+      containerRect.height.value = height ?? 0
+    }, { flush: 'post' })
 
     onMounted(() => {
-      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
-      containerRect.width.value = width ?? 375;
-      containerRect.height.value = height ?? 0;
+      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {}
+      containerRect.width.value = width ?? 375
+      containerRect.height.value = height ?? 0
 
       // 如果容器没有默认宽度，自动设定为375
-      if (!props.config.style.width) configComp.value.style.width = 375;
-    });
+      if (!props.config.style.width) configComp.value.style.width = 375
+    })
 
     const { Component: ViewRender } = useFederatedComponent(
       app.remoteUrl,
       'widgets_side',
       './viewRender',
-    );
+    )
 
     useSortable(draggableRef, configComp.value.list, {
       group: { name: 'widgets', pull: true, put: onPut },
-    });
+    })
 
-    function onPut (_1: any, _2: any, dom: HTMLElement) {
-      const { container } = dom.dataset;
-      return !container || container === 'inner';
+    function onPut(_1: any, _2: any, dom: HTMLElement) {
+      const { container } = dom.dataset
+      return !container || container === 'inner'
     }
-    function handleSelect (data: any) {
+    function handleSelect(data: any) {
       // 不能使用运算展开符，需要确保selected与editor指向同一地址
       // 否则选择后的配置结果无法反应到编辑器和store里
-      app.selected = data;
-      app.selected._fromContainer = true;
+      app.selected = data
+      app.selected._fromContainer = true
       // app.updateConfig();
     }
-    function reOffsetAll () {
-      configComp.value.list.forEach(reOffset);
+    function reOffsetAll() {
+      configComp.value.list.forEach(reOffset)
       // configComp.value = props.config;
     }
-    function reOffset (item: any) {
+    function reOffset(item: any) {
       if (!item.style.width) {
-        item.style.width = cellWidth.value;
-        return;
+        item.style.width = cellWidth.value
+        return
       }
-      const cellNum = Math.round(normalizeSize(item.style.width, 'width') / cellWidth.value);
-      const { columnGap = 0 } = props.config.style;
-      const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap;
-      item.style.width = cellNum * cellWidth.value + offset;
+      const cellNum = Math.round(normalizeSize(item.style.width, 'width') / cellWidth.value)
+      const { columnGap = 0 } = props.config.style
+      const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap
+      item.style.width = cellNum * cellWidth.value + offset
     }
-    function wrapResizable (node: any, element: any) {
+    function wrapResizable(node: any, element: any) {
       return (
         <FreeDom
           width={normalizeSize(element.style.width, 'width')}
@@ -158,19 +158,19 @@ export default defineComponent({
           onDragStart={onDragStart}
           onDragEnd={() => onDragEnd()}
           onClick={withModifiers(() => handleSelect(element), ['stop'])}
-          onUpdate:width={(val: number) => { element.style.width = normalizeSize(val, 'width'); reOffsetAll(); }}
-          onUpdate:height={(val: number) => { element.style.height = normalizeSize(val, 'height'); }}
+          onUpdate:width={(val: number) => { element.style.width = normalizeSize(val, 'width'); reOffsetAll() }}
+          onUpdate:height={(val: number) => { element.style.height = normalizeSize(val, 'height') }}
           onMouseenter={withModifiers(() => onEnter(element._uuid), ['stop'])}
           onMouseleave={withModifiers(() => onLeave(), ['stop'])}
         >
           {node}
         </FreeDom>
-      );
+      )
     }
-    function getRenderContent (element: any) {
+    function getRenderContent(element: any) {
       switch (element._view) {
         case 'container':
-          return;
+          return
         default:
           return ViewRender.value
             ? <ViewRender.value
@@ -178,18 +178,17 @@ export default defineComponent({
               config={element}
             />
             : null
-          ;
       }
     }
-    function normalizeSize (val: number | string, type: 'width' | 'height'): number {
+    function normalizeSize(val: number | string, type: 'width' | 'height'): number {
       if (typeof val === 'string') {
         if (type === 'width') {
-          return containerRect.width.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1);
+          return containerRect.width.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1)
         } else {
-          return containerRect.height.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1);
+          return containerRect.height.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1)
         }
       } else {
-        return val;
+        return val
       }
     }
 
@@ -208,9 +207,9 @@ export default defineComponent({
       handleSelect,
       getRenderContent,
       wrapResizable,
-    };
+    }
   },
-  render () {
+  render() {
     const content = (element: any) => {
       return this.wrapResizable(!this.previewComp
         ? (
@@ -227,8 +226,8 @@ export default defineComponent({
         <div style="height: 100%;">
           {this.getRenderContent(element)}
         </div>
-          ), element);
-    };
+          ), element)
+    }
     const core = (
       <div
         ref="draggableRef"
@@ -240,10 +239,10 @@ export default defineComponent({
       >
         {this.configComp.list.map((item: any) => content(item))}
       </div>
-    );
-    return core;
+    )
+    return core
   },
-});
+})
 </script>
 
 <style scoped lang="scss">

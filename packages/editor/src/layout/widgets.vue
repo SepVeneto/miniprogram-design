@@ -14,7 +14,7 @@
       <div
         style="font-weight: bold; padding-left: 20px; border-left: 4px solid #4089ef;"
       >
-        {{ element._name }}{{ element }}
+        {{ element._name }}
       </div>
       <!-- <el-image :src="element.img" /> -->
     </div>
@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts" setup>
-import { v4 as uuidv4 } from 'uuid';
-import { ref, computed } from 'vue';
-import { useSortable } from './useSortable';
+import { v4 as uuidv4 } from 'uuid'
+import { computed, ref } from 'vue'
+import { useSortable } from './useSortable'
 
 const props = defineProps({
   preview: Boolean,
@@ -32,10 +32,10 @@ const props = defineProps({
     type: Array,
     default: () => ([]),
   },
-});
+})
 
-const widgetsRef = ref();
-const list = computed<any[]>(() => props.list);
+const widgetsRef = ref()
+const list = computed<any[]>(() => props.list)
 
 useSortable(widgetsRef, list, {
   group: { name: 'widgets', pull: onClone, put: false },
@@ -45,10 +45,10 @@ useSortable(widgetsRef, list, {
     ...original,
     _uuid: uuidv4(),
   })),
-});
+})
 
-function onClone () {
-  if (props.preview) return false;
-  return 'clone' as const;
+function onClone() {
+  if (props.preview) return false
+  return 'clone' as const
 }
 </script>

@@ -1,7 +1,8 @@
-import { defineComponent, PropType, defineAsyncComponent, watch, ShallowRef } from 'vue';
-import ossUpload from './components/ossUpload.vue';
-import { useFederatedComponent } from '@sepveneto/mpd-hooks';
-import { QuestionFilled } from '@element-plus/icons-vue';
+import type { PropType, ShallowRef } from 'vue'
+import { defineAsyncComponent, defineComponent, watch } from 'vue'
+import ossUpload from './components/ossUpload.vue'
+import { useFederatedComponent } from '@sepveneto/mpd-hooks'
+import { QuestionFilled } from '@element-plus/icons-vue'
 
 // import ConfigRender from 'widgets_side/configRender';
 // import rInput from './input.vue'
@@ -48,49 +49,49 @@ export default defineComponent({
     },
   },
   emits: ['update:modelValue'],
-  setup (prop, { emit }) {
-    let ConfigRender: ShallowRef<any>;
+  setup(prop, { emit }) {
+    let ConfigRender: ShallowRef<any>
     watch(() => prop.remoteUrl, (url) => {
-      if (!url) return;
+      if (!url) return
       const { Component } = useFederatedComponent(
         url,
         'widgets_side',
         './configRender',
-      );
-      ConfigRender = Component;
-    }, { immediate: true });
+      )
+      ConfigRender = Component
+    }, { immediate: true })
 
-    function updateData (key: string, val: unknown) {
-      const path = key.split('.');
-      const _path = path.slice(0, -1);
+    function updateData(key: string, val: unknown) {
+      const path = key.split('.')
+      const _path = path.slice(0, -1)
       const parent = path.length === 1
         ? prop.modelValue
         : _path.reduce((obj, curr) => {
-          return obj[curr];
-        }, prop.modelValue);
-      parent[path.slice(-1)[0]] = val;
-      emit('update:modelValue', prop.modelValue);
+          return obj[curr]
+        }, prop.modelValue)
+      parent[path.slice(-1)[0]] = val
+      emit('update:modelValue', prop.modelValue)
     }
-    function getData (data: Record<string, any>, key: string) {
-      const path = key.split('.');
+    function getData(data: Record<string, any>, key: string) {
+      const path = key.split('.')
       return path.reduce((obj, curr) => {
-        return obj[curr];
-      }, data);
+        return obj[curr]
+      }, data)
     }
-    function renderCheckbox (schema: ISchema) {
+    function renderCheckbox(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, ...args } = schema;
+      const { type, label, key, ...args } = schema
       return (
         <el-checkbox
           model-value={getData(prop.modelValue, key)}
           onUpdate:modelValue={(val: string) => updateData(key, val)}
           {...args}
         />
-      );
+      )
     }
-    function renderInput (schema: ISchema) {
+    function renderInput(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, originType, ...args } = schema;
+      const { type, label, key, originType, ...args } = schema
       return (
         <el-input
           model-value={getData(prop.modelValue, key)}
@@ -98,11 +99,11 @@ export default defineComponent({
           type={originType}
           {...args}
         />
-      );
+      )
     }
-    function renderNumber (schema: ISchema) {
+    function renderNumber(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, unit, ...args } = schema;
+      const { type, label, key, unit, ...args } = schema
       return (
         <el-input-number
           model-value={getData(prop.modelValue, key)}
@@ -110,33 +111,33 @@ export default defineComponent({
           onUpdate:modelValue={(val: string) => updateData(key, Number(val))}
           {...args}
         />
-      );
+      )
     }
-    function renderImage (schema: ISchema) {
+    function renderImage(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, ...args } = schema;
+      const { type, label, key, ...args } = schema
       return (
         <oss-upload
           model-value={getData(prop.modelValue, key)}
           onUpdate:modelValue={(val: string) => updateData(key, val)}
           {...args}
         />
-      );
+      )
     }
-    function renderColorPicker (schema: ISchema) {
+    function renderColorPicker(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, ...args } = schema;
+      const { type, label, key, ...args } = schema
       return (
         <el-color-picker
           model-value={getData(prop.modelValue, key)}
           onUpdate:modelValue={(val: string) => updateData(key, val)}
           {...args}
         />
-      );
+      )
     }
-    function renderSelect (schema: ISchema) {
+    function renderSelect(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, options, ...args } = schema;
+      const { type, label, key, options, ...args } = schema
       return (
         <el-select
           model-value={getData(prop.modelValue, key)}
@@ -147,11 +148,11 @@ export default defineComponent({
             <el-option label={option.label} value={option.value} />
           ))}
         </el-select>
-      );
+      )
     }
-    function renderRadioGroup (schema: ISchema) {
+    function renderRadioGroup(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, options, ...args } = schema;
+      const { type, label, key, options, ...args } = schema
       return (
         <el-radio-group
           model-value={getData(prop.modelValue, key)}
@@ -162,21 +163,21 @@ export default defineComponent({
             <el-radio label={option.value}>{option.label}</el-radio>
           ))}
         </el-radio-group>
-      );
+      )
     }
-    function renderEditor (schema: ISchema) {
+    function renderEditor(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, ...args } = schema;
+      const { type, label, key, ...args } = schema
       return (
         <rich-text-editor
           model-value={getData(prop.modelValue, key)}
           onUpdate:modelValue={(val: string) => updateData(key, val)}
           {...args}
         />
-      );
+      )
     }
-    function renderCustom (schema: ISchema) {
-      const { type, key } = schema;
+    function renderCustom(schema: ISchema) {
+      const { type, key } = schema
       return ConfigRender.value
         ? (
           <ConfigRender.value
@@ -185,9 +186,9 @@ export default defineComponent({
             onUpdate:modelValue={(val: unknown) => updateData(key, val)}
           />
           )
-        : null;
+        : null
     }
-    function renderLabel (schema: ISchema) {
+    function renderLabel(schema: ISchema) {
       if (schema.tips) {
         return (
           <span style="display: flex; align-items: center;">{schema.label}
@@ -195,20 +196,20 @@ export default defineComponent({
               <el-icon style="margin-left: 6px;"><QuestionFilled /></el-icon>
             </el-tooltip>
           </span>
-        );
+        )
       } else {
-        return <span>{schema.label}</span>;
+        return schema.label ? <span>{schema.label}</span> : null
       }
     }
-    function allowContainer (item) {
-      const { _fromContainer } = prop.modelValue;
-      let flag;
+    function allowContainer(item) {
+      const { _fromContainer } = prop.modelValue
+      let flag
       if (_fromContainer) {
-        flag = item._inContainer === 'inner' || !item._inContainer;
+        flag = item._inContainer === 'inner' || !item._inContainer
       } else {
-        flag = item._inContainer === 'outer' || !_fromContainer;
+        flag = item._inContainer === 'outer' || !_fromContainer
       }
-      return flag;
+      return flag
     }
     return {
       // schemaList,
@@ -226,62 +227,63 @@ export default defineComponent({
       renderCustom,
       renderLabel,
       allowContainer,
-    };
+    }
   },
-  render () {
+  render() {
     const wrapper = (schema: ISchema): JSX.Element[] => {
-      const form: JSX.Element[] = [];
-      let node;
+      const form: JSX.Element[] = []
+      let node
       switch (schema.type) {
         case 'input':
-          node = this.renderInput(schema);
-          break;
+          node = this.renderInput(schema)
+          break
         case 'number':
-          node = this.renderNumber(schema);
-          break;
+          node = this.renderNumber(schema)
+          break
         case 'checkbox':
-          node = this.renderCheckbox(schema);
-          break;
+          node = this.renderCheckbox(schema)
+          break
         case 'image':
-          node = this.renderImage(schema);
-          break;
+          node = this.renderImage(schema)
+          break
         case 'colorPicker':
-          node = this.renderColorPicker(schema);
-          break;
+          node = this.renderColorPicker(schema)
+          break
         case 'select':
-          node = this.renderSelect(schema);
-          break;
+          node = this.renderSelect(schema)
+          break
         case 'radioGroup':
-          node = this.renderRadioGroup(schema);
-          break;
+          node = this.renderRadioGroup(schema)
+          break
         case 'editor':
-          node = this.renderEditor(schema);
-          break;
+          node = this.renderEditor(schema)
+          break
         default:
-          node = this.renderCustom(schema);
+          node = this.renderCustom(schema)
           // node = <div>暂不支持</div>;
       }
       if (schema.link) {
         schema.link[this.modelValue[schema.key]]?.forEach(item => {
-          form.push(...wrapper(item));
-        });
+          form.push(...wrapper(item))
+        })
       }
       // console.log(schema._uuid)
       return [
         <el-form-item
+          label-width={schema.label ? undefined : '0px'}
           v-slots={{
             label: () => this.renderLabel(schema),
           }}
         >{node}</el-form-item>,
         ...form,
-      ];
-    };
+      ]
+    }
     return (
       <el-form label-width="100px">
         {this.schema.filter(item => this.allowContainer(item)).map(item => {
-          return wrapper(item);
+          return wrapper(item)
         })}
       </el-form>
-    );
+    )
   },
-});
+})
