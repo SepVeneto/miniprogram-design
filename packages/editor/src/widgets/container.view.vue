@@ -4,17 +4,14 @@ import {
   computed,
   defineComponent,
   inject,
-  onMounted,
-  ref,
+  reactive,
   shallowRef,
-  watch,
-  withModifiers,
 } from 'vue'
 import { useApp } from '@/store'
 import draggableWrapper from '@/components/draggableWrapper.vue'
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks'
-import { useHoverActive } from './useHoverActive'
 import { useSortable } from '@/layout/useSortable'
+import { useContainer, useGrid, useHoverActive } from './hooks'
 
 export default defineComponent({
   components: {
@@ -29,12 +26,12 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
+    const editorContext = inject('Editor', { preview: false })
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
     const app = useApp()
-    const editorContext = inject('Editor', { preview: false })
-    const draggableRef = shallowRef<HTMLElement>()
-
     const previewComp = computed(() => editorContext.preview)
+    const selected = computed(() => app.selected)
+    const itemList = computed(() => props.config.list)
     const configComp = computed<any>({
       get() {
         return props.config
@@ -43,7 +40,32 @@ export default defineComponent({
         emit('update:modelValue', val)
       },
     })
-    const selected = computed(() => app.selected)
+
+    const draggableRef = shallowRef<HTMLElement>()
+    const { cellWidth, containerRect } = useContainer(draggableRef, configComp)
+
+    const { Component: ViewRender } = useFederatedComponent(
+      app.remoteUrl,
+      'widgets_side',
+      './viewRender',
+    )
+
+    const options = reactive({
+      list: itemList,
+      preview: previewComp,
+      selected,
+      activeUuid,
+      cellWidth,
+      containerRect,
+      ViewRender,
+      onEnter,
+      onLeave,
+      onDragEnd,
+      onDragStart,
+      handleSelect,
+    })
+    const grid = useGrid(options)
+
     const style = useNormalizeStyle(props.config.style)
 
     const viewStyle = computed(() => {
@@ -61,58 +83,6 @@ export default defineComponent({
       }]
     })
 
-    // const containerRect = useElementSize(draggableRef);
-    const containerRect = {
-      width: ref(375),
-      height: ref(0),
-    }
-
-    const containerWidth = computed(() => {
-      const { columnGap = 0 } = props.config.style
-      if (!containerRect.width.value) return 0
-      return containerRect.width.value - columnGap * (props.config.grid - 1)
-    })
-    const cellWidth = computed(() => containerWidth.value / props.config.grid)
-
-    // watch(cellWidth, (newCell, oldCell) => {
-    //   if (!oldCell) return;
-    //   props.config.list.forEach((item: any) => {
-    //     reOffset(item);
-    //     const rate = item.width / oldCell;
-    //     item.width = rate * newCell;
-    //     console.log(item.width);
-    //   });
-    // });
-    watch([() => props.config.list.length, cellWidth], () => {
-      props.config.list.forEach((item: any) => {
-        item.style.height = item.style.height || undefined
-        if (!cellWidth.value) {
-          return
-        }
-        reOffset(item)
-      })
-    }, { immediate: true })
-    watch([() => props.config.style.width, () => props.config.style.height], () => {
-      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {}
-      containerRect.width.value = width ?? 375
-      containerRect.height.value = height ?? 0
-    }, { flush: 'post' })
-
-    onMounted(() => {
-      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {}
-      containerRect.width.value = width ?? 375
-      containerRect.height.value = height ?? 0
-
-      // 如果容器没有默认宽度，自动设定为375
-      if (!props.config.style.width) configComp.value.style.width = 375
-    })
-
-    const { Component: ViewRender } = useFederatedComponent(
-      app.remoteUrl,
-      'widgets_side',
-      './viewRender',
-    )
-
     useSortable(draggableRef, configComp.value.list, {
       group: { name: 'widgets', pull: true, put: onPut },
     })
@@ -128,106 +98,16 @@ export default defineComponent({
       app.selected._fromContainer = true
       // app.updateConfig();
     }
-    function reOffsetAll() {
-      configComp.value.list.forEach(reOffset)
-      // configComp.value = props.config;
-    }
-    function reOffset(item: any) {
-      if (!item.style.width) {
-        item.style.width = cellWidth.value
-        return
-      }
-      const cellNum = Math.round(normalizeSize(item.style.width, 'width') / cellWidth.value)
-      const { columnGap = 0 } = props.config.style
-      const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap
-      item.style.width = cellNum * cellWidth.value + offset
-    }
-    function wrapResizable(node: any, element: any) {
-      return (
-        <FreeDom
-          width={normalizeSize(element.style.width, 'width')}
-          height={normalizeSize(element.style.height, 'height')}
-          x={0}
-          y={0}
-          preview={previewComp.value}
-          scale={['rb']}
-          absolute={false}
-          diagonal={false}
-          grid={[cellWidth.value, 1]}
-          handler="mark"
-          onDragStart={onDragStart}
-          onDragEnd={() => onDragEnd()}
-          onClick={withModifiers(() => handleSelect(element), ['stop'])}
-          onUpdate:width={(val: number) => { element.style.width = normalizeSize(val, 'width'); reOffsetAll() }}
-          onUpdate:height={(val: number) => { element.style.height = normalizeSize(val, 'height') }}
-          onMouseenter={withModifiers(() => onEnter(element._uuid), ['stop'])}
-          onMouseleave={withModifiers(() => onLeave(), ['stop'])}
-        >
-          {node}
-        </FreeDom>
-      )
-    }
-    function getRenderContent(element: any) {
-      switch (element._view) {
-        case 'container':
-          return
-        default:
-          return ViewRender.value
-            ? <ViewRender.value
-              type={element._view}
-              config={element}
-            />
-            : null
-      }
-    }
-    function normalizeSize(val: number | string, type: 'width' | 'height'): number {
-      if (typeof val === 'string') {
-        if (type === 'width') {
-          return containerRect.width.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1)
-        } else {
-          return containerRect.height.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1)
-        }
-      } else {
-        return val
-      }
-    }
 
     return {
-      configComp,
-      selected,
+      itemList,
       previewComp,
       viewStyle,
       draggableRef,
-      ViewRender,
-      activeUuid,
-
-      onEnter,
-      onLeave,
-      onPut,
-      handleSelect,
-      getRenderContent,
-      wrapResizable,
+      grid,
     }
   },
   render() {
-    const content = (element: any) => {
-      return this.wrapResizable(!this.previewComp
-        ? (
-            <draggable-wrapper
-              dir="top"
-              active={this.selected._uuid === element._uuid || this.activeUuid === element._uuid}
-              hide={element.isShow != null && !element.isShow}
-              mask
-            >
-              {this.getRenderContent(element)}
-            </draggable-wrapper>
-          )
-        : (
-        <div style="height: 100%;">
-          {this.getRenderContent(element)}
-        </div>
-          ), element)
-    }
     const core = (
       <div
         ref="draggableRef"
@@ -237,7 +117,7 @@ export default defineComponent({
         ]}
         style={this.viewStyle[1]}
       >
-        {this.configComp.list.map((item: any) => content(item))}
+        {this.itemList.map((item: any) => this.grid.renderItem(item))}
       </div>
     )
     return core

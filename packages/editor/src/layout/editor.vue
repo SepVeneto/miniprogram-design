@@ -33,6 +33,9 @@
             :config="item"
             @update:config="updateConfig"
           />
+          <div v-else>
+            {{ item._view }}
+          </div>
         </template>
       </draggable-wrapper>
     </template>
@@ -46,7 +49,7 @@
           :config="item"
           :style="normalizeStyle(item.style)"
         />
-        <view-render
+        <ViewRender
           v-else
           :type="item._view"
           :config="item"
@@ -58,68 +61,68 @@
 </template>
 
 <script setup lang="ts">
-import draggableWrapper from '@/components/draggableWrapper.vue';
-import { ref, computed, provide, reactive, toRefs } from 'vue';
-import { useApp } from '@/store';
-import containerView from '@/widgets/container.view.vue';
+import draggableWrapper from '@/components/draggableWrapper.vue'
+import { computed, provide, reactive, ref, toRefs } from 'vue'
+import { useApp } from '@/store'
+import containerView from '@/widgets/container.view.vue'
 // import viewRender from 'widgets_side/viewRender';
-import { useFederatedComponent, normalizeStyle } from '@sepveneto/mpd-hooks';
-import canvasView from '@/widgets/canvas.view.vue';
-import { useRoute } from 'vue-router';
-import { useHoverActive } from '@/widgets/useHoverActive';
-import { useSortable } from './useSortable';
+import { normalizeStyle, useFederatedComponent } from '@sepveneto/mpd-hooks'
+import canvasView from '@/widgets/canvas.view.vue'
+import { useRoute } from 'vue-router'
+import { useHoverActive } from '@/widgets/hooks'
+import { useSortable } from './useSortable'
 
-const route = useRoute();
+const route = useRoute()
 
 const props = defineProps({
   preview: Boolean,
-});
-const app = useApp();
-const { activeUuid, onEnter, onLeave } = useHoverActive();
+})
+const app = useApp()
+const { activeUuid, onEnter, onLeave } = useHoverActive()
 
 provide('Editor', reactive({
   ...toRefs(props),
   globalConfig: computed(() => app.config.globalConfig),
 
   updateConfig,
-}));
+}))
 
-const mainRef = ref();
+const mainRef = ref()
 
 const data = computed({
-  get () {
-    return app.config.body[route.name!] ?? [];
+  get() {
+    return app.config.body[route.name!] ?? []
   },
-  set (val: any) {
-    app.config.body[route.name!] = val;
+  set(val: any) {
+    app.config.body[route.name!] = val
   },
-});
+})
 useSortable(mainRef, data, {
   group: { name: 'widgets', pull: true, put: onPut },
-});
+})
 
 // const selected = ref({} as any)
-const selected = computed(() => app.selected);
+const selected = computed(() => app.selected)
 
 const { Component: ViewRender } = useFederatedComponent(
   app.remoteUrl,
   'widgets_side',
   './viewRender',
-);
+)
 
-function onPut (_1: any, _2: any, dom: HTMLElement) {
-  const { container } = dom.dataset;
-  return !container || container === 'outer';
+function onPut(_1: any, _2: any, dom: HTMLElement) {
+  const { container } = dom.dataset
+  return !container || container === 'outer'
 }
-function handleSelect (data: any) {
+function handleSelect(data: any) {
   // 不能使用运算展开符，需要确保selected与editor指向同一地址
   // 否则选择后的配置结果无法反应到编辑器和store里
-  app.selected = data;
-  app.selected._fromContainer = false;
+  app.selected = data
+  app.selected._fromContainer = false
 }
-function updateConfig (data: any) {
-  app.selected = data;
-  app.selected._fromContainer = false;
+function updateConfig(data: any) {
+  app.selected = data
+  app.selected._fromContainer = false
   // app.updateConfig();
 }
 </script>

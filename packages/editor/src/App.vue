@@ -84,7 +84,7 @@
           </template>
           <el-scrollbar wrap-style="height: 700px;">
             <ElConfigProvider :locale="zhCn">
-              <v-config />
+              <VConfig />
             </ElConfigProvider>
           </el-scrollbar>
         </ElCard>
@@ -94,50 +94,51 @@
 </template>
 
 <script lang="ts" setup>
-import widgetWrap from '@/layout/widgetWrap.vue';
-import VConfig from '@/layout/config.vue';
-import { tabbarPreview } from '@/layout/tabbar';
-import { ref, computed } from 'vue';
-import { useApp } from '@/store';
-import { useRoute, useRouter } from 'vue-router';
-import { ArrowLeftBold } from '@element-plus/icons-vue';
-import EditorOperate, { Mode } from '@/layout/EditorOperate.vue';
+import widgetWrap from '@/layout/widgetWrap.vue'
+import VConfig from '@/layout/config.vue'
+import { tabbarPreview } from '@/layout/tabbar'
+import { computed, ref } from 'vue'
+import { useApp } from '@/store'
+import { useRoute, useRouter } from 'vue-router'
+import { ArrowLeftBold } from '@element-plus/icons-vue'
+import type { Mode } from '@/layout/EditorOperate.vue'
+import EditorOperate from '@/layout/EditorOperate.vue'
 // @ts-expect-error: no def
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
-const route = useRoute();
-const router = useRouter();
-const app = useApp();
-const mainRef = ref();
-const mode = ref<Mode>('edit');
+const route = useRoute()
+const router = useRouter()
+const app = useApp()
+const mainRef = ref()
+const mode = ref<Mode>('edit')
 
-const tabbar = computed(() => app.config.tabbars);
-const selected = computed(() => app.selected);
-const title = computed(() => route.meta.title);
-const isPreview = computed(() => mode.value === 'preview');
+const tabbar = computed(() => app.config.tabbars)
+const selected = computed(() => app.selected)
+const title = computed(() => route.meta.title)
+const isPreview = computed(() => mode.value === 'preview')
 // const needBack = computed(() => route.)
 
-function handleDelete () {
-  const currentConfig = app.config.body[route.name!];
-  const index = currentConfig.findIndex(item => item._uuid === selected.value._uuid);
+function handleDelete() {
+  const currentConfig = app.config.body[route.name!]
+  const index = currentConfig.findIndex(item => item._uuid === selected.value._uuid)
   if (index === -1) {
-    const list = currentConfig.find((item: any) => item.list && item.list.length > 0)?.list ?? null;
+    const list = currentConfig.find((item: any) => item.list && item.list.length > 0)?.list ?? null
     if (list) {
-      const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid);
-      list.splice(tIndex, 1);
+      const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid)
+      list.splice(tIndex, 1)
     }
-    app.selected = {};
-    return;
+    app.selected = {}
+    return
   }
-  currentConfig.splice(index, 1);
-  app.selected = {};
+  currentConfig.splice(index, 1)
+  app.selected = {}
 }
-function handleSelect (data: any) {
-  app.selected = data;
+function handleSelect(data: any) {
+  app.selected = data
 }
-function handleOutside ({ target }: Event) {
+function handleOutside({ target }: Event) {
   if (target === mainRef.value) {
-    app.selected = {};
+    app.selected = {}
   }
 }
 </script>
