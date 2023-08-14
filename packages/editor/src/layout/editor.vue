@@ -17,6 +17,7 @@ import { normalizeStyle, useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import { useSortable } from './useSortable'
+import VueDraggable from 'vuedraggable'
 
 export default defineComponent({
   props: {
@@ -45,9 +46,6 @@ export default defineComponent({
         app.config.body[route.name!] = val
       },
     })
-    useSortable(mainRef, data, {
-      group: { name: 'widgets', pull: true, put: onPut },
-    })
 
     // const selected = ref({} as any)
     const selected = computed(() => app.selected)
@@ -74,15 +72,14 @@ export default defineComponent({
       // app.updateConfig();
     }
 
-    function renderWrapper(item: any, index: number) {
+    function renderWrapper(item: any) {
       return h(DraggableWrapper, {
         key: item._uuid,
-        'data-index': index,
         dir: 'top',
         active: activeUuid.value === item._uuid || selected.value._uuid === item._uuid,
         hide: item.isShow != null && !item.isShow,
-        container: item._view === 'container',
-        mask: item._view !== 'container' && item._view !== 'canvas' && item._mask,
+        container: ['container', 'swiper'].includes(item._view),
+        mask: item._view !== 'container' && item._view !== 'swiper' && item._mask,
         customStyle: item.style,
         onMouseenter: withModifiers(() => onEnter(item._uuid), ['stop']),
         onMouseleave: withModifiers(onLeave, ['stop']),
@@ -91,6 +88,8 @@ export default defineComponent({
     }
     function renderChild(item: any) {
       switch (item._view) {
+        case 'swiper':
+          return h(ContainerView, { config: item, type: 'swiper' })
         case 'container':
           return h(ContainerView, { config: item })
         default:
@@ -107,18 +106,28 @@ export default defineComponent({
     return {
       renderWrapper,
       data,
+      onPut,
       mainRef,
     }
   },
   render() {
-    return h('main', {
+    return h(VueDraggable, {
       ref: 'mainRef',
       class: 'draggable-box',
       style: 'min-height: calc(667px - 60px); position: relative;',
-    }, this.data.map((item, index) => {
-      const node = this.renderWrapper(item, index)
-      return node
-    }))
+      modelValue: this.data,
+      group: { name: 'widgets', pull: true, put: true },
+      componentData: {
+        type: 'transition-group',
+        name: 'flip-list',
+      },
+      animation: 200,
+      handle: '.operate',
+      itemKey: '_uuid',
+      'onUpdate:modelValue': val => { this.data = val },
+    }, {
+      item: (item) => this.renderWrapper(item.element),
+    })
   },
 })
 </script>

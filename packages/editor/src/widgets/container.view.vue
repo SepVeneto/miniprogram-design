@@ -12,12 +12,18 @@ import { useApp } from '@/store'
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks'
 import { useSortable } from '@/layout/useSortable'
 import { useContainer, useGrid, useHoverActive } from './hooks'
+import type { PropType } from 'vue'
+import VueDraggable from 'vuedraggable'
 
 export default defineComponent({
   props: {
     config: {
       type: Object,
       default: () => ({}),
+    },
+    type: {
+      type: String as PropType<'swiper' | 'grid'>,
+      default: 'grid',
     },
   },
   emits: ['update:modelValue'],
@@ -28,6 +34,7 @@ export default defineComponent({
     const previewComp = computed(() => editorContext.preview)
     const selected = computed(() => app.selected)
     const itemList = computed(() => props.config.list)
+    const type = computed(() => props.type)
     const configComp = computed<any>({
       get() {
         return props.config
@@ -38,7 +45,7 @@ export default defineComponent({
     })
 
     const draggableRef = shallowRef<HTMLElement>()
-    const { cellWidth, containerRect } = useContainer(draggableRef, configComp)
+    const { cellWidth, containerRect } = useContainer(draggableRef, configComp, props.type)
 
     const { Component: ViewRender } = useFederatedComponent(
       app.remoteUrl,
@@ -54,6 +61,7 @@ export default defineComponent({
       cellWidth,
       containerRect,
       ViewRender,
+      type,
       onEnter,
       onLeave,
       onDragEnd,
@@ -65,23 +73,20 @@ export default defineComponent({
     const style = useNormalizeStyle(props.config.style)
 
     const viewStyle = computed(() => {
-      const { rowGap, columnGap, ...styles } = style.value
-      if (props.config.image?.startsWith('http')) {
-        styles.background = `url(${props.config.image})`
-        styles.backgroundSize = '100%'
-        styles.backgroundRepeat = 'no-repeat'
-      }
-      return [styles, {
-        display: 'flex',
-        flexWrap: 'wrap',
-        rowGap,
-        columnGap,
-      }]
+      const { rowGap, columnGap } = style.value
+      return type.value === 'swiper'
+        ? {}
+        : {
+            display: 'flex',
+            flexWrap: 'wrap',
+            rowGap,
+            columnGap,
+          }
     })
 
-    useSortable(draggableRef, configComp.value.list, {
-      group: { name: 'widgets', pull: true, put: onPut },
-    })
+    // useSortable(draggableRef, configComp.value.list, {
+    //   group: { name: 'widgets', pull: true, put: onPut },
+    // })
 
     function onPut(_1: any, _2: any, dom: HTMLElement) {
       const { container } = dom.dataset
@@ -97,6 +102,7 @@ export default defineComponent({
 
     return {
       itemList,
+      configComp,
       previewComp,
       viewStyle,
       draggableRef,
@@ -104,18 +110,27 @@ export default defineComponent({
     }
   },
   render() {
-    return h('div', {
-      ref: 'draggableRef',
+    const core = h(VueDraggable, {
       class: [
         'draggable-group',
         { 'is-preview': this.previewComp },
+        this.type === 'swiper' && 'swiper-wrapper',
       ],
-      style: this.viewStyle[1],
-    }, this.itemList.map((item: any, index: number) => {
-      const node = this.grid.renderItem(item)
-      node.props && (node.props['data-index'] = index)
-      return node
-    }))
+      style: this.viewStyle,
+      modelValue: this.configComp.list,
+      'onUpdate:modelValue': (value) => { this.configComp.list = value },
+      group: { name: 'widgets', pull: true, put: true },
+      componentData: {
+        type: 'transition-group',
+        name: 'flip-list',
+      },
+      animation: 200,
+      handle: '.operate',
+      itemKey: '_uuid',
+    }, {
+      item: ({ element }) => this.grid.renderItem(element),
+    })
+    return this.type === 'swiper' ? this.grid.wrapSwiper(core) : core
   },
 })
 </script>

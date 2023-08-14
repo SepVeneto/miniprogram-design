@@ -7,6 +7,7 @@ const DEFAULT_HEIGHT = 0
 export function useContainer(
   containerRef: Ref<HTMLElement | undefined>,
   config: Ref<Record<string, any>>,
+  type: 'grid' | 'swiper',
 ) {
   const { style, grid } = toRefs(config.value)
   const containerRect = reactive({
@@ -17,9 +18,10 @@ export function useContainer(
   const containerWidth = computed(() => {
     const { columnGap = 0 } = style.value
     if (!containerRect.width) return 0
+    if (type === 'swiper') return containerRect.width
     return containerRect.width - columnGap * (grid.value - 1)
   })
-  const cellWidth = computed(() => containerWidth.value / grid.value)
+  const cellWidth = computed(() => type === 'swiper' ? 0 : containerWidth.value / grid.value)
 
   watch([() => style.value.width, () => style.value.height], () => {
     syncSize()

@@ -33,6 +33,9 @@ export function useSortable<T>(
     },
     onRemove(evt) {
       const data = toValue(list)
+      if (evt.pullMode === 'clone') {
+        return
+      }
       data.splice(evt.oldIndex!, 1)
     },
     onAdd(evt) {

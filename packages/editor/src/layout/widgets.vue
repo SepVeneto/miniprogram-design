@@ -1,30 +1,32 @@
 <template>
-  <section
-    ref="widgetsRef"
+  <VueDraggable
+    :model-value="list"
+    :group="{ name: 'widgets', pull: 'clone', put: false }"
+    :clone="onClone"
+    :sort="false"
+    item-key="type"
     style="padding: 0 10px;"
   >
-    <div
-      v-for="(element, index) in list"
-      :key="index"
-      style="border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; cursor: move"
-      :class="{ disabled: element._disabled }"
-      :data-index="index"
-      :data-container="element._inContainer"
-    >
+    <template #item="{ element }">
       <div
-        style="font-weight: bold; padding-left: 20px; border-left: 4px solid #4089ef;"
+        style="border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; cursor: move"
+        :class="{ disabled: element._disabled }"
       >
-        {{ element._name }}
+        <div
+          style="font-weight: bold; padding-left: 20px; border-left: 4px solid #4089ef;"
+        >
+          {{ element._name }}
+        </div>
+        <!-- <el-image :src="element.img" /> -->
       </div>
-      <!-- <el-image :src="element.img" /> -->
-    </div>
-  </section>
+    </template>
+  </VueDraggable>
 </template>
 
 <script lang="ts" setup>
 import { v4 as uuidv4 } from 'uuid'
-import { computed, ref } from 'vue'
-import { useSortable } from './useSortable'
+import { computed } from 'vue'
+import VueDraggable from 'vuedraggable'
 
 const props = defineProps({
   preview: Boolean,
@@ -34,21 +36,12 @@ const props = defineProps({
   },
 })
 
-const widgetsRef = ref()
 const list = computed<any[]>(() => props.list)
 
-useSortable(widgetsRef, list, {
-  group: { name: 'widgets', pull: onClone, put: false },
-  sort: false,
-  handle: undefined,
-  clone: (original) => JSON.parse(JSON.stringify({
+function onClone(original: any) {
+  return JSON.parse(JSON.stringify({
     ...original,
     _uuid: uuidv4(),
-  })),
-})
-
-function onClone() {
-  if (props.preview) return false
-  return 'clone' as const
+  }))
 }
 </script>

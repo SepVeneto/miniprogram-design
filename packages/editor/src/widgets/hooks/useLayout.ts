@@ -1,8 +1,10 @@
-import { h, watch, withModifiers } from 'vue'
+import { h, nextTick, onMounted, shallowRef, watch, withModifiers } from 'vue'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { freeDom as FreeDom } from '@sepveneto/free-dom'
 import DraggableWrapper from '@/components/draggableWrapper.vue'
 import type { HoverActiveReturn } from './useHoverActive'
+import Swiper from 'swiper'
+import 'swiper/css'
 
 type GridItem = Record<string, any>
 type GridOptions = UnwrapNestedRefs<{
@@ -12,9 +14,13 @@ type GridOptions = UnwrapNestedRefs<{
   containerRect: { width: number, height: number }
   selected: Ref<GridItem>
   ViewRender: any
+  type: 'swiper' | 'grid'
   handleSelect: (item: GridItem) => void
 } & HoverActiveReturn>
 export function useGrid(options: GridOptions) {
+  const swiperRef = shallowRef<HTMLElement>()
+  const swiper = shallowRef()
+
   watch([() => options.list.length, () => options.cellWidth], () => {
     options.list.forEach((item: any) => {
       item.style.height = item.style.height || undefined
@@ -24,6 +30,15 @@ export function useGrid(options: GridOptions) {
       reOffset(item, options.containerRect, options.cellWidth)
     })
   }, { immediate: true })
+
+  onMounted(() => {
+    if (options.type === 'swiper' && swiperRef.value) {
+      swiper.value = new Swiper(swiperRef.value, {})
+      watch(() => options.list.length, () => {
+        nextTick().then(swiper.value?.update)
+      })
+    }
+  })
 
   function wrapResizable(node: any, element: any) {
     const { containerRect, preview, cellWidth, onDragEnd, onDragStart, onEnter, onLeave, list, handleSelect } = options
@@ -52,9 +67,10 @@ export function useGrid(options: GridOptions) {
     }, () => node)
   }
   function renderItem(element: GridItem) {
-    const { preview, activeUuid } = options
+    const { preview, activeUuid, onEnter, onLeave, handleSelect } = options
     return !preview
       ? h(DraggableWrapper, {
+        class: [options.type === 'swiper' && 'swiper-slide'],
         dir: 'top',
         active: options.selected._uuid === element._uuid || activeUuid === element._uuid,
         hide: element.isShow != null && !element.isShow,
@@ -75,9 +91,18 @@ export function useGrid(options: GridOptions) {
           : h('div', element._view)
     }
   }
+  function wrapSwiper(content: any) {
+    return h('div', {
+      class: 'swiper',
+      ref: (el: HTMLElement) => swiperRef.value = el,
+      'data-type': 'swiper',
+    }, content)
+  }
 
+  console.log(options.type)
   return {
-    renderItem: (item: GridItem) => wrapResizable(renderItem(item), item),
+    wrapSwiper,
+    renderItem: (item: GridItem) => options.type === 'swiper' ? renderItem(item) : wrapResizable(renderItem(item), item),
   }
 }
 
