@@ -50,7 +50,7 @@ export default defineComponent({
     // const selected = ref({} as any)
     const selected = computed(() => app.selected)
 
-    const { Component: ViewRender } = useFederatedComponent(
+    const { Component: ViewRender, errorLoading } = useFederatedComponent(
       app.remoteUrl,
       'widgets_side',
       './viewRender',
@@ -73,7 +73,7 @@ export default defineComponent({
     }
 
     function renderWrapper(item: any) {
-      return h(DraggableWrapper, {
+      const operate = h(DraggableWrapper, {
         key: item._uuid,
         dir: 'top',
         active: activeUuid.value === item._uuid || selected.value._uuid === item._uuid,
@@ -85,6 +85,24 @@ export default defineComponent({
         onMouseleave: withModifiers(onLeave, ['stop']),
         onClick: () => handleSelect(item),
       }, () => renderChild(item))
+      return props.preview ? renderPreview(item) : operate
+    }
+    function renderPreview(item: any) {
+      switch (item._view) {
+        case 'swiper':
+          return h(ContainerView, { config: item, type: 'swiper', style: normalizeStyle(item.style) })
+        case 'container':
+          return h(ContainerView, { config: item, style: normalizeStyle(item.style) })
+        default:
+          return ViewRender.value
+            ? h(ViewRender.value, {
+              type: item._view,
+              config: item,
+              style: normalizeStyle(item.style),
+              'onUpdate:config': updateConfig,
+            })
+            : h('div', errorLoading.value ? '加载失败!' : '加载中...')
+      }
     }
     function renderChild(item: any) {
       switch (item._view) {
@@ -99,7 +117,7 @@ export default defineComponent({
               config: item,
               'onUpdate:config': updateConfig,
             })
-            : h('div', 'loading...')
+            : h('div', errorLoading.value ? '加载失败!' : '加载中...')
       }
     }
 

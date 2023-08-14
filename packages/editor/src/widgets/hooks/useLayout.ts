@@ -35,7 +35,7 @@ export function useGrid(options: GridOptions) {
     if (options.type === 'swiper' && swiperRef.value) {
       swiper.value = new Swiper(swiperRef.value, {})
       watch(() => options.list.length, () => {
-        nextTick().then(swiper.value?.update)
+        nextTick().then(() => swiper.value?.update())
       })
     }
   })
@@ -68,15 +68,26 @@ export function useGrid(options: GridOptions) {
   }
   function renderItem(element: GridItem) {
     const { preview, activeUuid, onEnter, onLeave, handleSelect } = options
+    const base = {
+      dir: 'top',
+      active: options.selected._uuid === element._uuid || activeUuid === element._uuid,
+      hide: element.isShow != null && !element.isShow,
+      mask: true,
+    }
+    const swiper = {
+      ...base,
+      class: [options.type === 'swiper' && 'swiper-slide'],
+      onMouseenter: withModifiers(() => onEnter(element._uuid), ['stop']),
+      onMouseleave: withModifiers(onLeave, ['stop']),
+      onClick: withModifiers(() => handleSelect(element), ['stop']),
+    }
+    const props = options.type === 'swiper' ? swiper : base
     return !preview
-      ? h(DraggableWrapper, {
+      ? h(DraggableWrapper, props, () => getRenderContent(element))
+      : h('div', {
         class: [options.type === 'swiper' && 'swiper-slide'],
-        dir: 'top',
-        active: options.selected._uuid === element._uuid || activeUuid === element._uuid,
-        hide: element.isShow != null && !element.isShow,
-        mask: true,
-      }, () => getRenderContent(element))
-      : h('div', { style: { height: '100%' } }, getRenderContent(element))
+        style: { height: '100%' },
+      }, getRenderContent(element))
   }
   function getRenderContent(element: any) {
     switch (element._view) {
@@ -99,7 +110,6 @@ export function useGrid(options: GridOptions) {
     }, content)
   }
 
-  console.log(options.type)
   return {
     wrapSwiper,
     renderItem: (item: GridItem) => options.type === 'swiper' ? renderItem(item) : wrapResizable(renderItem(item), item),

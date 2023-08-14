@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { CloseBold, Hide, Rank } from '@element-plus/icons-vue'
 import { useNormalizeStyle } from '@sepveneto/mpd-hooks'
 
@@ -99,6 +99,7 @@ export default defineComponent({
       top: 0;
       left: 0;
       .operate-icon {
+        background: #f4f5f7;
         color: #222;
       }
     }
