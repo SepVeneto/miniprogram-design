@@ -31,11 +31,14 @@ export function useSortable<T>(
       const index = evt.item.dataset.index
       evt.item._underlying_vm_ = clone(data[index])
     },
+    onRemove(evt) {
+      const data = toValue(list)
+      data.splice(evt.oldIndex!, 1)
+    },
     onAdd(evt) {
       const data = toValue(list)
       // @ts-expect-error: extend field
       const element = evt.item._underlying_vm_
-      console.log(element)
       if (!element) return
 
       removeNode(evt.item)

@@ -28,6 +28,7 @@ export function useGrid(options: GridOptions) {
   function wrapResizable(node: any, element: any) {
     const { containerRect, preview, cellWidth, onDragEnd, onDragStart, onEnter, onLeave, list, handleSelect } = options
     return h(FreeDom, {
+      key: element._uuid,
       width: normalizeSize(element.style.width, 'width', containerRect),
       height: normalizeSize(element.style.height, 'height', containerRect),
       x: 0,

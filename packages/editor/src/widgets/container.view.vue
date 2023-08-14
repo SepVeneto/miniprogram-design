@@ -116,9 +116,9 @@ export default defineComponent({
         { 'is-preview': this.previewComp },
       ],
       style: this.viewStyle[1],
-    }, this.itemList.map((item: any) => {
+    }, this.itemList.map((item: any, index: number) => {
       const node = this.grid.renderItem(item)
-      node.key = item._uuid
+      node.props && (node.props['data-index'] = index)
       return node
     }))
   },
