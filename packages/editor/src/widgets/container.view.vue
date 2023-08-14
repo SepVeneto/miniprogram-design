@@ -3,6 +3,7 @@ import { freeDom as FreeDom } from '@sepveneto/free-dom'
 import {
   computed,
   defineComponent,
+  h,
   inject,
   reactive,
   shallowRef,
@@ -108,19 +109,18 @@ export default defineComponent({
     }
   },
   render() {
-    const core = (
-      <div
-        ref="draggableRef"
-        class={[
-          'draggable-group',
-          { 'is-preview': this.previewComp },
-        ]}
-        style={this.viewStyle[1]}
-      >
-        {this.itemList.map((item: any) => this.grid.renderItem(item))}
-      </div>
-    )
-    return core
+    return h('div', {
+      ref: 'draggableRef',
+      class: [
+        'draggable-group',
+        { 'is-preview': this.previewComp },
+      ],
+      style: this.viewStyle[1],
+    }, this.itemList.map((item: any) => {
+      const node = this.grid.renderItem(item)
+      node.key = item._uuid
+      return node
+    }))
   },
 })
 </script>
