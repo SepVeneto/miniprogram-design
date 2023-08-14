@@ -1,5 +1,5 @@
-<script lang="tsx">
-import { freeDom as FreeDom } from '@sepveneto/free-dom'
+<script lang="ts">
+import '@sepveneto/free-dom/css'
 import {
   computed,
   defineComponent,
@@ -9,16 +9,11 @@ import {
   shallowRef,
 } from 'vue'
 import { useApp } from '@/store'
-import draggableWrapper from '@/components/draggableWrapper.vue'
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks'
 import { useSortable } from '@/layout/useSortable'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 
 export default defineComponent({
-  components: {
-    FreeDom,
-    DraggableWrapper: draggableWrapper,
-  },
   props: {
     config: {
       type: Object,
