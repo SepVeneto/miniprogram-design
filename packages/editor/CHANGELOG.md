@@ -1,3 +1,17 @@
+## [0.10.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.10.0...editor@0.10.1) (2023-08-15)
+
+
+### Bug Fixes
+
+* container尺寸计算错误 ([f2640fc](https://github.com/SepVeneto/miniprogram-design/commit/f2640fc6f53eee81204d597ed5a83651536683d5))
+
+
+### Features
+
+* update element-plus to 2.3.9 ([8b48f57](https://github.com/SepVeneto/miniprogram-design/commit/8b48f573e6933cd6789370e1ec3bff4df8b522f3))
+
+
+
 # [0.10.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.9.1...editor@0.10.0) (2023-08-15)
 
 
