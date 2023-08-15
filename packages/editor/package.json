@@ -40,7 +40,7 @@
   "dependencies": {
     "@sepveneto/basic-comp": "^0.2.1",
     "@sepveneto/free-dom": "^0.6.0",
-    "@sepveneto/mpd-hooks": "workspace:^0.1.0",
+    "@sepveneto/mpd-hooks": "workspace:*",
     "@types/sortablejs": "^1.15.1",
     "@vueuse/integrations": "^10.3.0",
     "fs-extra": "^10.1.0",
