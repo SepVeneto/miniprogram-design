@@ -1,8 +1,9 @@
 import { h, nextTick, onMounted, shallowRef, watch, withModifiers } from 'vue'
-import type { Ref, UnwrapNestedRefs } from 'vue'
+import type { Ref, UnwrapNestedRefs, VNode } from 'vue'
 import { freeDom as FreeDom } from '@sepveneto/free-dom'
 import DraggableWrapper from '@/components/draggableWrapper.vue'
 import type { HoverActiveReturn } from './useHoverActive'
+// eslint-disable-next-line import/no-named-as-default
 import Swiper from 'swiper'
 import 'swiper/css'
 
@@ -32,7 +33,7 @@ export function useGrid(options: GridOptions) {
   }, { immediate: true })
 
   onMounted(() => {
-    if (options.type === 'swiper' && swiperRef.value) {
+    if (options.type === 'swiper' && swiperRef.value && options.preview) {
       swiper.value = new Swiper(swiperRef.value, {})
       watch(() => options.list.length, () => {
         nextTick().then(() => swiper.value?.update())
@@ -102,10 +103,10 @@ export function useGrid(options: GridOptions) {
           : h('div', element._view)
     }
   }
-  function wrapSwiper(content: any) {
+  function wrapSwiper(content: VNode) {
     return h('div', {
       class: 'swiper',
-      ref: (el: HTMLElement) => swiperRef.value = el,
+      ref: swiperRef,
       'data-type': 'swiper',
     }, content)
   }
