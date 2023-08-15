@@ -16,7 +16,6 @@ import ContainerView from '@/widgets/container.view.vue'
 import { normalizeStyle, useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
-import { useSortable } from './useSortable'
 import VueDraggable from 'vuedraggable'
 
 export default defineComponent({
@@ -57,8 +56,9 @@ export default defineComponent({
     )
 
     function onPut(_1: any, _2: any, dom: HTMLElement) {
-      const { container } = dom.dataset
-      return !container || container === 'outer'
+      // @ts-expect-error: vuedraggable extends dom
+      const { _inContainer } = dom.__draggable_context.element
+      return !_inContainer || _inContainer === 'outer'
     }
     function handleSelect(data: any) {
       // 不能使用运算展开符，需要确保selected与editor指向同一地址

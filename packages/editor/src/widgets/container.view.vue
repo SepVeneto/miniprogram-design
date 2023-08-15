@@ -10,7 +10,6 @@ import {
 } from 'vue'
 import { useApp } from '@/store'
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks'
-import { useSortable } from '@/layout/useSortable'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 import type { PropType } from 'vue'
 import VueDraggable from 'vuedraggable'
@@ -84,13 +83,10 @@ export default defineComponent({
           }
     })
 
-    // useSortable(draggableRef, configComp.value.list, {
-    //   group: { name: 'widgets', pull: true, put: onPut },
-    // })
-
     function onPut(_1: any, _2: any, dom: HTMLElement) {
-      const { container } = dom.dataset
-      return !container || container === 'inner'
+      // @ts-expect-error: vuedraggable extends dom
+      const { _inContainer } = dom.__draggable_context.element
+      return !_inContainer || _inContainer === 'inner'
     }
     function handleSelect(data: any) {
       // 不能使用运算展开符，需要确保selected与editor指向同一地址
@@ -107,6 +103,7 @@ export default defineComponent({
       viewStyle,
       draggableRef,
       grid,
+      onPut,
     }
   },
   render() {
@@ -119,7 +116,7 @@ export default defineComponent({
       style: this.viewStyle,
       modelValue: this.configComp.list,
       'onUpdate:modelValue': (value) => { this.configComp.list = value },
-      group: { name: 'widgets', pull: true, put: true },
+      group: { name: 'widgets', pull: true, put: this.onPut },
       componentData: {
         type: 'transition-group',
         name: 'flip-list',
