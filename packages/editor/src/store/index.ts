@@ -1,12 +1,12 @@
-import { defineStore } from 'pinia';
-import { ref, shallowRef, watch, computed } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
-import { TabbarWidgetConfig } from '@/layout/tabbar/type';
+import { defineStore } from 'pinia'
+import { computed, ref, shallowRef, watch } from 'vue'
+import { v4 as uuidv4 } from 'uuid'
+import type { TabbarWidgetConfig } from '@/layout/tabbar/type'
 
-import { schema as schemaConfig } from '@/mock.schema';
-import mock from '@/mock';
-import { router } from '@/router';
-import Editor from '@/layout/editor.vue';
+import { schema as schemaConfig } from '@/mock.schema'
+import mock from '@/mock'
+import { router } from '@/router'
+import Editor from '@/layout/editor.vue'
 
 interface Config{
   globalConfig: Record<string, unknown>
@@ -15,7 +15,7 @@ interface Config{
 }
 
 export const useApp = defineStore('app', () => {
-  const widgetList = ref<any[]>([]);
+  const widgetList = ref<any[]>([])
   const config = ref<Config>({
     globalConfig: {},
     body: {},
@@ -23,19 +23,19 @@ export const useApp = defineStore('app', () => {
       _uuid: uuidv4(),
       list: [],
     },
-  });
-  const schema = shallowRef<Record<string, any>>({});
+  })
+  const schema = shallowRef<Record<string, any>>({})
   const routes = shallowRef<any[]>([
     { path: '/' },
-  ]);
-  const remoteUrl = ref('');
-  const history = ref<string[]>([]);
-  const hasHistory = computed(() => history.value.length > 1);
+  ])
+  const remoteUrl = ref('')
+  const history = ref<string[]>([])
+  const hasHistory = computed(() => history.value.length > 1)
 
   /** mock */
   if (!window.__MICRO_APP_ENVIRONMENT__) {
-    config.value = mock;
-    schema.value = { ...schemaConfig };
+    config.value = mock
+    schema.value = { ...schemaConfig }
     widgetList.value = [
       {
         name: '基本组件',
@@ -69,6 +69,13 @@ export const useApp = defineStore('app', () => {
             list: [],
           },
           {
+            _name: '轮播',
+            _view: 'swiper',
+            _schema: 'swiper',
+            style: {},
+            list: [],
+          },
+          {
             _name: '图片',
             _view: 'image',
             _schema: 'image',
@@ -96,54 +103,54 @@ export const useApp = defineStore('app', () => {
           },
         ],
       },
-    ];
+    ]
     routes.value = [
       { name: 'Home', path: '/', meta: { title: '首页' } },
       { name: 'Personal', path: '/personal', meta: { title: '个人中心' } },
       { name: 'canteenOrder', path: '/canteenOrder', meta: { title: '订单中心' } },
-    ];
-    updateRouter();
+    ]
+    updateRouter()
     // currentRoute.value = config.value.tabbars.list[0].type;
-    remoteUrl.value = '//localhost:8090';
+    remoteUrl.value = '//localhost:8090'
   }
 
-  function getConfig (name: string) {
-    return config.value.body[name];
+  function getConfig(name: string) {
+    return config.value.body[name]
   }
-  function setConfig (
+  function setConfig(
     data: Config,
     widgets: Record<string, any>,
     _schema: any,
     _routes?: any,
   ) {
-    config.value = data;
+    config.value = data
     // currentRoute.value = config.value.tabbars.list[0].type;
     // currentTab.value = data.tabbars.list[currentRoute.value]
 
-    widgetList.value = Object.values(widgets);
+    widgetList.value = Object.values(widgets)
 
-    schema.value = _schema;
-    routes.value = _routes;
+    schema.value = _schema
+    routes.value = _routes
     if (_routes) {
-      updateRouter();
+      updateRouter()
     } else {
-      router.replace({ path: '/' });
+      router.replace({ path: '/' })
     }
   }
   watch(config, (val) => {
-    window.microApp?.dispatch(val);
-  }, { deep: true });
+    window.microApp?.dispatch(val)
+  }, { deep: true })
 
-  function updateRouter (route?: any) {
+  function updateRouter(route?: any) {
     if (route) {
-      router.addRoute({ ...route, component: Editor });
+      router.addRoute({ ...route, component: Editor })
     } else {
       routes.value.forEach(raw => {
-        router.addRoute({ ...raw, component: Editor });
-      });
+        router.addRoute({ ...raw, component: Editor })
+      })
       router.isReady().then(() => {
-        router.replace({ name: routes.value[0].name });
-      });
+        router.replace({ name: routes.value[0].name })
+      })
     }
   }
   // function findParent (uuid: string, root: any[]): any {
@@ -165,23 +172,23 @@ export const useApp = defineStore('app', () => {
   //   const index = parent.findIndex((item: any) => item._uuid === selected.value._uuid);
   //   parent[index] = { ...selected.value };
   // }
-  function toHome () {
-    history.value = [];
-    const home = routes.value[0];
-    console.log(home);
-    router.replace({ name: home.name });
+  function toHome() {
+    history.value = []
+    const home = routes.value[0]
+    console.log(home)
+    router.replace({ name: home.name })
   }
 
-  const selected = ref<any>({});
-  const activeUuids = ref<string[]>([]);
+  const selected = ref<any>({})
+  const activeUuids = ref<string[]>([])
   const active = {
-    enter (uuid: string) {
-      activeUuids.value.push(uuid);
+    enter(uuid: string) {
+      activeUuids.value.push(uuid)
     },
-    leave () {
-      activeUuids.value.pop();
+    leave() {
+      activeUuids.value.pop()
     },
-  };
+  }
   return {
     activeUuids,
     active,
@@ -198,5 +205,5 @@ export const useApp = defineStore('app', () => {
     remoteUrl,
     history,
     hasHistory,
-  };
-});
+  }
+})

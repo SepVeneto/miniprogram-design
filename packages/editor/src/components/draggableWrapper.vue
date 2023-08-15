@@ -1,7 +1,7 @@
 <script lang="tsx">
-import { defineComponent, computed } from 'vue';
-import { Rank, CloseBold, Hide } from '@element-plus/icons-vue';
-import { useNormalizeStyle } from '@sepveneto/mpd-hooks';
+import { defineComponent } from 'vue'
+import { CloseBold, Hide, Rank } from '@element-plus/icons-vue'
+import { useNormalizeStyle } from '@sepveneto/mpd-hooks'
 
 export default defineComponent({
   components: {
@@ -24,17 +24,17 @@ export default defineComponent({
     hide: Boolean,
   },
   emits: ['delete'],
-  setup (props, { emit }) {
-    const wrapStyle = useNormalizeStyle(props.customStyle);
-    function handleDelete () {
-      emit('delete');
+  setup(props, { emit }) {
+    const wrapStyle = useNormalizeStyle(props.customStyle)
+    function handleDelete() {
+      emit('delete')
     }
     return {
       wrapStyle,
       handleDelete,
-    };
+    }
   },
-  render () {
+  render() {
     const operate = () => (
       <div class='operate'>
         <el-icon class="operate-icon operate-move" color="#fff" size={18}><Rank /></el-icon>
@@ -47,10 +47,10 @@ export default defineComponent({
         ><close-bold /></el-icon>
           : null}
       </div>
-    );
+    )
     const hidden = () => (
       <div class="hide-mask"><el-icon size={40} color="#fff"><Hide /></el-icon></div>
-    );
+    )
     return (
       <div
         class={[
@@ -68,9 +68,9 @@ export default defineComponent({
         </div>
         {this.hide && hidden()}
       </div>
-    );
+    )
   },
-});
+})
 </script>
 
 <style lang="scss" scoped>
@@ -99,6 +99,7 @@ export default defineComponent({
       top: 0;
       left: 0;
       .operate-icon {
+        background: #f4f5f7;
         color: #222;
       }
     }
@@ -152,7 +153,7 @@ export default defineComponent({
     .operate-icon {
       cursor: move;
       & > svg {
-        z-index: 1;
+        z-index: 2;
       }
     }
   }

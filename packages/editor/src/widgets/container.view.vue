@@ -1,249 +1,135 @@
-<script lang="tsx">
-import { freeDom as FreeDom } from '@sepveneto/free-dom';
+<script lang="ts">
+import '@sepveneto/free-dom/css'
 import {
-  defineComponent,
   computed,
+  defineComponent,
+  h,
   inject,
-  watch,
-  ref,
-  withModifiers,
+  reactive,
   shallowRef,
-  onMounted,
-} from 'vue';
-import { useApp } from '@/store';
-import draggableWrapper from '@/components/draggableWrapper.vue';
-import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks';
-import { useHoverActive } from './useHoverActive';
-import { useSortable } from '@/layout/useSortable';
+} from 'vue'
+import { useApp } from '@/store'
+import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks'
+import { useContainer, useGrid, useHoverActive } from './hooks'
+import type { PropType } from 'vue'
+import VueDraggable from 'vuedraggable'
 
 export default defineComponent({
-  components: {
-    FreeDom,
-    DraggableWrapper: draggableWrapper,
-  },
   props: {
     config: {
       type: Object,
       default: () => ({}),
     },
+    type: {
+      type: String as PropType<'swiper' | 'grid'>,
+      default: 'grid',
+    },
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
-    const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive();
-    const app = useApp();
-    const editorContext = inject('Editor', { preview: false });
-    const draggableRef = shallowRef<HTMLElement>();
-
-    const previewComp = computed(() => editorContext.preview);
+  setup(props, { emit }) {
+    const editorContext = inject('Editor', { preview: false })
+    const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
+    const app = useApp()
+    const previewComp = computed(() => editorContext.preview)
+    const selected = computed(() => app.selected)
+    const itemList = computed(() => props.config.list)
+    const type = computed(() => props.type)
     const configComp = computed<any>({
-      get () {
-        return props.config;
+      get() {
+        return props.config
       },
-      set (val) {
-        emit('update:modelValue', val);
+      set(val) {
+        emit('update:modelValue', val)
       },
-    });
-    const selected = computed(() => app.selected);
-    const style = useNormalizeStyle(props.config.style);
+    })
 
-    const viewStyle = computed(() => {
-      const { rowGap, columnGap, ...styles } = style.value;
-      if (props.config.image?.startsWith('http')) {
-        styles.background = `url(${props.config.image})`;
-        styles.backgroundSize = '100%';
-        styles.backgroundRepeat = 'no-repeat';
-      }
-      return [styles, {
-        display: 'flex',
-        flexWrap: 'wrap',
-        rowGap,
-        columnGap,
-      }];
-    });
-
-    // const containerRect = useElementSize(draggableRef);
-    const containerRect = {
-      width: ref(375),
-      height: ref(0),
-    };
-
-    const containerWidth = computed(() => {
-      const { columnGap = 0 } = props.config.style;
-      if (!containerRect.width.value) return 0;
-      return containerRect.width.value - columnGap * (props.config.grid - 1);
-    });
-    const cellWidth = computed(() => containerWidth.value / props.config.grid);
-
-    // watch(cellWidth, (newCell, oldCell) => {
-    //   if (!oldCell) return;
-    //   props.config.list.forEach((item: any) => {
-    //     reOffset(item);
-    //     const rate = item.width / oldCell;
-    //     item.width = rate * newCell;
-    //     console.log(item.width);
-    //   });
-    // });
-    watch([() => props.config.list.length, cellWidth], () => {
-      props.config.list.forEach((item: any) => {
-        item.style.height = item.style.height || undefined;
-        if (!cellWidth.value) {
-          return;
-        }
-        reOffset(item);
-      });
-    }, { immediate: true });
-    watch([() => props.config.style.width, () => props.config.style.height], () => {
-      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
-      containerRect.width.value = width ?? 375;
-      containerRect.height.value = height ?? 0;
-    }, { flush: 'post' });
-
-    onMounted(() => {
-      const { width, height } = draggableRef.value?.getBoundingClientRect() ?? {};
-      containerRect.width.value = width ?? 375;
-      containerRect.height.value = height ?? 0;
-
-      // 如果容器没有默认宽度，自动设定为375
-      if (!props.config.style.width) configComp.value.style.width = 375;
-    });
+    const draggableRef = shallowRef<HTMLElement>()
+    const { cellWidth, containerRect } = useContainer(draggableRef, configComp, props.type)
 
     const { Component: ViewRender } = useFederatedComponent(
       app.remoteUrl,
       'widgets_side',
       './viewRender',
-    );
+    )
 
-    useSortable(draggableRef, configComp.value.list, {
-      group: { name: 'widgets', pull: true, put: onPut },
-    });
+    const options = reactive({
+      list: itemList,
+      preview: previewComp,
+      selected,
+      activeUuid,
+      cellWidth,
+      containerRect,
+      ViewRender,
+      type,
+      onEnter,
+      onLeave,
+      onDragEnd,
+      onDragStart,
+      handleSelect,
+    })
+    const grid = useGrid(options)
 
-    function onPut (_1: any, _2: any, dom: HTMLElement) {
-      const { container } = dom.dataset;
-      return !container || container === 'inner';
+    const style = useNormalizeStyle(props.config.style)
+
+    const viewStyle = computed(() => {
+      const { rowGap, columnGap } = style.value
+      return type.value === 'swiper'
+        ? {}
+        : {
+            display: 'flex',
+            flexWrap: 'wrap',
+            rowGap,
+            columnGap,
+          }
+    })
+
+    function onPut(_1: any, _2: any, dom: HTMLElement) {
+      // @ts-expect-error: vuedraggable extends dom
+      const { _inContainer } = dom.__draggable_context.element
+      return !_inContainer || _inContainer === 'inner'
     }
-    function handleSelect (data: any) {
+    function handleSelect(data: any) {
       // 不能使用运算展开符，需要确保selected与editor指向同一地址
       // 否则选择后的配置结果无法反应到编辑器和store里
-      app.selected = data;
-      app.selected._fromContainer = true;
+      app.selected = data
+      app.selected._fromContainer = true
       // app.updateConfig();
-    }
-    function reOffsetAll () {
-      configComp.value.list.forEach(reOffset);
-      // configComp.value = props.config;
-    }
-    function reOffset (item: any) {
-      if (!item.style.width) {
-        item.style.width = cellWidth.value;
-        return;
-      }
-      const cellNum = Math.round(normalizeSize(item.style.width, 'width') / cellWidth.value);
-      const { columnGap = 0 } = props.config.style;
-      const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap;
-      item.style.width = cellNum * cellWidth.value + offset;
-    }
-    function wrapResizable (node: any, element: any) {
-      return (
-        <FreeDom
-          width={normalizeSize(element.style.width, 'width')}
-          height={normalizeSize(element.style.height, 'height')}
-          x={0}
-          y={0}
-          preview={previewComp.value}
-          scale={['rb']}
-          absolute={false}
-          diagonal={false}
-          grid={[cellWidth.value, 1]}
-          handler="mark"
-          onDragStart={onDragStart}
-          onDragEnd={() => onDragEnd()}
-          onClick={withModifiers(() => handleSelect(element), ['stop'])}
-          onUpdate:width={(val: number) => { element.style.width = normalizeSize(val, 'width'); reOffsetAll(); }}
-          onUpdate:height={(val: number) => { element.style.height = normalizeSize(val, 'height'); }}
-          onMouseenter={withModifiers(() => onEnter(element._uuid), ['stop'])}
-          onMouseleave={withModifiers(() => onLeave(), ['stop'])}
-        >
-          {node}
-        </FreeDom>
-      );
-    }
-    function getRenderContent (element: any) {
-      switch (element._view) {
-        case 'container':
-          return;
-        default:
-          return ViewRender.value
-            ? <ViewRender.value
-              type={element._view}
-              config={element}
-            />
-            : null
-          ;
-      }
-    }
-    function normalizeSize (val: number | string, type: 'width' | 'height'): number {
-      if (typeof val === 'string') {
-        if (type === 'width') {
-          return containerRect.width.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1);
-        } else {
-          return containerRect.height.value * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1);
-        }
-      } else {
-        return val;
-      }
     }
 
     return {
+      itemList,
       configComp,
-      selected,
       previewComp,
       viewStyle,
       draggableRef,
-      ViewRender,
-      activeUuid,
-
-      onEnter,
-      onLeave,
+      grid,
       onPut,
-      handleSelect,
-      getRenderContent,
-      wrapResizable,
-    };
+    }
   },
-  render () {
-    const content = (element: any) => {
-      return this.wrapResizable(!this.previewComp
-        ? (
-            <draggable-wrapper
-              dir="top"
-              active={this.selected._uuid === element._uuid || this.activeUuid === element._uuid}
-              hide={element.isShow != null && !element.isShow}
-              mask
-            >
-              {this.getRenderContent(element)}
-            </draggable-wrapper>
-          )
-        : (
-        <div style="height: 100%;">
-          {this.getRenderContent(element)}
-        </div>
-          ), element);
-    };
-    const core = (
-      <div
-        ref="draggableRef"
-        class={[
-          'draggable-group',
-          { 'is-preview': this.previewComp },
-        ]}
-        style={this.viewStyle[1]}
-      >
-        {this.configComp.list.map((item: any) => content(item))}
-      </div>
-    );
-    return core;
+  render() {
+    const core = h(VueDraggable, {
+      class: [
+        'draggable-group',
+        { 'is-preview': this.previewComp },
+        this.type === 'swiper' && 'swiper-wrapper',
+      ],
+      style: this.viewStyle,
+      modelValue: this.configComp.list,
+      'onUpdate:modelValue': (value) => { this.configComp.list = value },
+      group: { name: 'widgets', pull: true, put: this.onPut },
+      componentData: {
+        type: 'transition-group',
+        name: 'flip-list',
+      },
+      animation: 200,
+      handle: '.operate',
+      itemKey: '_uuid',
+    }, {
+      item: ({ element }) => this.grid.renderItem(element),
+    })
+    return this.type === 'swiper' ? this.grid.wrapSwiper(core) : core
   },
-});
+})
 </script>
 
 <style scoped lang="scss">

@@ -1,11 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { defineConfig } = require('@vue/cli-service');
+const { defineConfig } = require('@vue/cli-service')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const webpack = require('webpack');
+const webpack = require('webpack')
 // const htmlWebpackPlugin = require('html-webpack-plugin')
 // const path = require('path')
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = defineConfig({
   lintOnSave: false,
@@ -31,7 +31,7 @@ module.exports = defineConfig({
     },
   },
   chainWebpack: config => {
-    config.plugins.delete('fork-ts-checker');
+    config.plugins.delete('fork-ts-checker')
   },
   configureWebpack: {
     plugins: [
@@ -41,6 +41,10 @@ module.exports = defineConfig({
       }),
       new webpack.container.ModuleFederationPlugin({
         name: 'editor_side',
+        filename: 'remoteEntry.js',
+        exposes: {
+          './store': './src/store/index.ts',
+        },
         shared: {
           'vue-router': {
             singleton: true,
@@ -51,6 +55,7 @@ module.exports = defineConfig({
           'element-plus': {
             singleton: true,
           },
+          '@element-plus/icons-vue': { singleton: true },
           '@sepveneto/basic-comp': {
             singleton: true,
           },
@@ -59,4 +64,4 @@ module.exports = defineConfig({
     ],
   },
   transpileDependencies: true,
-});
+})
