@@ -51,7 +51,7 @@ export function useGrid(options: GridOptions) {
       y: 0,
       preview,
       scale: ['rb'],
-      absolute: true,
+      absolute: false,
       diagonal: false,
       grid: [cellWidth, 1],
       handler: 'mark',
@@ -133,6 +133,7 @@ function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], c
   const cellNum = Math.round(normalizeSize(item.style.width, 'width', containerSize) / cellWidth)
   const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap
   item.style.width = cellNum * cellWidth + offset
+  console.log(cellNum, cellWidth, item.style.width, 'offset')
 }
 function normalizeSize(
   val: number | string,

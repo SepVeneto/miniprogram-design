@@ -5,7 +5,7 @@ const DEFAULT_WIDTH = 375
 const DEFAULT_HEIGHT = 0
 
 export function useContainer(
-  containerRef: Ref<HTMLElement | undefined>,
+  containerRef: Ref<any>,
   config: Ref<Record<string, any>>,
   type: 'grid' | 'swiper',
 ) {
@@ -35,7 +35,7 @@ export function useContainer(
   })
 
   function syncSize() {
-    const { width, height } = containerRef.value?.getBoundingClientRect() ?? {}
+    const { width, height } = containerRef.value?.$el?.getBoundingClientRect() ?? {}
     containerRect.width = width ?? 375
     containerRect.height = height ?? 0
   }

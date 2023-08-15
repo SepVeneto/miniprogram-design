@@ -108,6 +108,7 @@ export default defineComponent({
   },
   render() {
     const core = h(VueDraggable, {
+      ref: 'draggableRef',
       class: [
         'draggable-group',
         { 'is-preview': this.previewComp },
