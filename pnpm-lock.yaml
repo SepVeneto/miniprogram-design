@@ -104,7 +104,7 @@ importers:
     dependencies:
       '@sepveneto/basic-comp':
         specifier: ^0.2.1
-        version: 0.2.1(@element-plus/icons-vue@2.1.0)(element-plus@2.3.4)(vue@3.2.47)
+        version: 0.2.1(@element-plus/icons-vue@2.1.0)(element-plus@2.3.9)(vue@3.2.47)
       '@sepveneto/free-dom':
         specifier: ^0.6.0
         version: 0.6.0(vue@3.2.47)
@@ -161,8 +161,8 @@ importers:
         specifier: ^3.30.1
         version: 3.30.1
       element-plus:
-        specifier: ^2.3.4
-        version: 2.3.4(vue@3.2.47)
+        specifier: ^2.3.9
+        version: 2.3.9(vue@3.2.47)
       html-webpack-plugin:
         specifier: ^5.5.1
         version: 5.5.1(webpack@5.75.0)
@@ -2034,16 +2034,13 @@ packages:
       - supports-color
     dev: true
 
-  /@floating-ui/core@1.1.1:
-    resolution: {integrity: sha512-PL7g3dhA4dHgZfujkuD8Q+tfJJynEtnNQSPzmucCnxMvkxf4cLBJw/ZYqZUn4HCh33U3WHrAfv2R2tbi9UCSmw==}
-
   /@floating-ui/core@1.2.6:
     resolution: {integrity: sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==}
 
   /@floating-ui/dom@1.1.1:
     resolution: {integrity: sha512-TpIO93+DIujg3g7SykEAGZMDtbJRrmnYRCNYSjJlvIbGhBjRSNTLVbNeDQBrzy9qDgUbiWdc7KA0uZHZ2tJmiw==}
     dependencies:
-      '@floating-ui/core': 1.1.1
+      '@floating-ui/core': 1.2.6
 
   /@floating-ui/dom@1.2.7:
     resolution: {integrity: sha512-DyqylONj1ZaBnzj+uBnVfzdjjCkFCL2aA9ESHLyUOGSqb03RpbLMImP1ekIQXYs4KLk9jAjJfZAU8hXfWSahEg==}
@@ -2200,7 +2197,7 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@sepveneto/basic-comp@0.2.1(@element-plus/icons-vue@2.1.0)(element-plus@2.3.4)(vue@3.2.47):
+  /@sepveneto/basic-comp@0.2.1(@element-plus/icons-vue@2.1.0)(element-plus@2.3.9)(vue@3.2.47):
     resolution: {integrity: sha512-8jijQr60xNJYvTfYpV1S7OJmoPWAMcbTuXrWvbrBealkJo1lij7qAvGOqprL4iTEI+xCpNOJ4Wn0vfKidNOI2Q==}
     peerDependencies:
       '@element-plus/icons-vue': ^2.0.0
@@ -2208,7 +2205,7 @@ packages:
       vue: ^3.2.20
     dependencies:
       '@element-plus/icons-vue': 2.1.0(vue@3.2.47)
-      element-plus: 2.3.4(vue@3.2.47)
+      element-plus: 2.3.9(vue@3.2.47)
       vue: 3.2.47
     dev: false
 
@@ -2482,7 +2479,7 @@ packages:
   /@types/lodash-es@4.17.6:
     resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
     dependencies:
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.194
 
   /@types/lodash-es@4.17.7:
     resolution: {integrity: sha512-z0ptr6UI10VlU6l5MYhGwS4mC8DZyYer2mCoyysZtSF7p26zOX8UpbrV0YpNYLGS8K4PUFIyEr62IMFFjveSiQ==}
@@ -5822,8 +5819,8 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  /element-plus@2.3.4(vue@3.2.47):
-    resolution: {integrity: sha512-SQr0J9z7N4z48WYk/l9NE2tizl8Q7j2OhqlpTc42k4pGncry3+rVX6dsmcsglFynn6vt3NzYxWJqmLFyDKQq+g==}
+  /element-plus@2.3.9(vue@3.2.47):
+    resolution: {integrity: sha512-TIOLnPl4cnoCPXqK3QYh+jpkthUBQnAM21O7o3Lhbse8v9pfrRXRTaBJtoEKnYNa8GZ4lZptUfH0PeZgDCNLUg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
