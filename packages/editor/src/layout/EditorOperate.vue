@@ -1,12 +1,15 @@
 <script lang="tsx">
-import { PropType, defineComponent, ref, computed } from 'vue';
-import { ElTooltip, ElIcon } from 'element-plus';
+import ComponentTree from '@/components/ComponentTree.vue'
+import type { PropType } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
+import { ElIcon, ElTooltip } from 'element-plus'
 import {
   Edit as IconEdit,
   Iphone as IconIphone,
-} from '@element-plus/icons-vue';
+} from '@element-plus/icons-vue'
+import IconTreeTable from '@/assets/tree-table.vue'
 
-export type Mode = 'edit' | 'preview';
+export type Mode = 'edit' | 'preview' | 'tree'
 
 export default defineComponent({
   props: {
@@ -14,20 +17,25 @@ export default defineComponent({
       type: String as PropType<Mode>,
       required: true,
     },
+    tree: {
+      type: Boolean,
+    },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'update:tree'],
   // ['update:modelValue'],
-  setup (props) {
-    const operateList = ref([]);
-    const isPreview = computed(() => props.modelValue === 'preview');
-    const isEdit = computed(() => props.modelValue === 'edit');
+  setup(props) {
+    const operateList = ref([])
+    const isPreview = computed(() => props.modelValue === 'preview')
+    const isEdit = computed(() => props.modelValue === 'edit')
+    const showTree = ref(true)
     return {
       operateList,
       isPreview,
       isEdit,
-    };
+      showTree,
+    }
   },
-  render () {
+  render() {
     const preview = () => {
       return (
         <ElTooltip
@@ -42,8 +50,8 @@ export default defineComponent({
             <IconIphone />
           </ElIcon>
         </ElTooltip>
-      );
-    };
+      )
+    }
     const edit = () => (
       <ElTooltip
         effect="dark"
@@ -57,15 +65,33 @@ export default defineComponent({
           <IconEdit />
         </ElIcon>
       </ElTooltip>
-    );
+    )
+    const tree = () => (
+      <ElTooltip
+        effect="dark"
+        content="组件树"
+        placement="right"
+      >
+        <ElIcon
+          class={['bar-operate', { 'is-active': this.showTree }]}
+          {...{ onClick: () => { this.showTree = !this.showTree } }}
+        >
+          <IconTreeTable />
+        </ElIcon>
+      </ElTooltip>
+    )
     return (
-      <div class="operate-container">
-        {edit()}
-        {preview()}
-      </div>
-    );
+      <section style="float: left; position: relative;">
+        <div class="operate-container">
+          {edit()}
+          {preview()}
+          {tree()}
+        </div>
+      {this.showTree && <ComponentTree />}
+      </section>
+    )
   },
-});
+})
 </script>
 
 <style lang="scss">
@@ -75,7 +101,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
-  float: left;
   border-radius: 10px;
   overflow: hidden;
 }
