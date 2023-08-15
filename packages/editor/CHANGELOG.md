@@ -1,4 +1,26 @@
-## [0.9.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.9.1...editor@0.9.1) (2023-06-12)
+# [0.10.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.9.1...editor@0.10.0) (2023-08-15)
+
+
+### Bug Fixes
+
+* 操作按钮尺寸受宿主环境的box-sizing影响 ([af48aaf](https://github.com/SepVeneto/miniprogram-design/commit/af48aaf38afef638cffd1774c94136edacd878ee))
+* 跨组件拖曳无效 ([853807f](https://github.com/SepVeneto/miniprogram-design/commit/853807f7efd650f921ffe9e500418fe983b8158d))
+* 容器内丢失部分样式 ([53b3d63](https://github.com/SepVeneto/miniprogram-design/commit/53b3d63c1aa27fb1bb011b58044118e3ec91c485))
+* container move no effect ([29c6d2e](https://github.com/SepVeneto/miniprogram-design/commit/29c6d2ebea89e25afa4d99d606471bad71f9eff2))
+
+
+### Features
+
+* 轮播效果仅预览 ([aa5eb1a](https://github.com/SepVeneto/miniprogram-design/commit/aa5eb1af6a361f394d399b4f5c7efdb7b21f255c))
+* 主要功能弃用vuedraggable ([2993ea1](https://github.com/SepVeneto/miniprogram-design/commit/2993ea15bba0c4ff21086012e1f372fba90570ff))
+* 组件树 ([7b03ca1](https://github.com/SepVeneto/miniprogram-design/commit/7b03ca1b19ee92af7f6ca80ca80db28b4d213c6a))
+* tabbar支持隐藏 ([bca88ff](https://github.com/SepVeneto/miniprogram-design/commit/bca88ffe30d9427a4c86061379f7c5b5f4782c84))
+
+
+### Performance Improvements
+
+* 优化拖曳的流畅度 ([da9814c](https://github.com/SepVeneto/miniprogram-design/commit/da9814c7d859bf98815f7fabe481216817c2e01f))
+* ResizeObserver loop completed with undelivered notifications ([e0eeb91](https://github.com/SepVeneto/miniprogram-design/commit/e0eeb9199559d463f10e4a45bcd8fc26b9adc126))
 
 
 
