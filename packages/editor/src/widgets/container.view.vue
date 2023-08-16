@@ -34,6 +34,7 @@ export default defineComponent({
     const selected = computed(() => app.selected)
     const itemList = computed(() => props.config.list)
     const type = computed(() => props.type)
+    const columnGap = computed(() => props.config.style.columnGap ?? 0)
     const configComp = computed<any>({
       get() {
         return props.config
@@ -60,6 +61,7 @@ export default defineComponent({
       cellWidth,
       containerRect,
       ViewRender,
+      columnGap,
       type,
       onEnter,
       onLeave,

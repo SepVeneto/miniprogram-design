@@ -16,16 +16,19 @@ export function useContainer(
   })
 
   const containerWidth = computed(() => {
-    const { columnGap = 0 } = style.value
     if (!containerRect.width) return 0
-    if (type === 'swiper') return containerRect.width
-    return containerRect.width - columnGap * (grid.value - 1)
+    // 计算的是容器内部的尺寸，所以不需要额外计算padding
+    return containerRect.width
   })
-  const cellWidth = computed(() => type === 'swiper' ? 0 : containerWidth.value / grid.value)
+  const cellWidth = computed(() => {
+    const { columnGap = 0 } = style.value
+    const width = containerWidth.value - columnGap * (grid.value - 1)
+    return type === 'swiper' ? 0 : width / grid.value
+  })
 
-  watch([() => style.value.width, () => style.value.height], () => {
+  watch(style, () => {
     syncSize()
-  }, { flush: 'post' })
+  }, { flush: 'post', deep: true })
 
   onMounted(() => {
     syncSize()

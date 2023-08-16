@@ -16,6 +16,7 @@ type GridOptions = UnwrapNestedRefs<{
   selected: Ref<GridItem>
   ViewRender: any
   type: 'swiper' | 'grid'
+  columnGap: number,
   handleSelect: (item: GridItem) => void
 } & HoverActiveReturn>
 export function useGrid(options: GridOptions) {
@@ -28,7 +29,7 @@ export function useGrid(options: GridOptions) {
       if (!options.cellWidth) {
         return
       }
-      reOffset(item, options.containerRect, options.cellWidth)
+      reOffset(item, options.containerRect, options.cellWidth, options.columnGap)
     })
   }, { immediate: true })
 
@@ -62,7 +63,7 @@ export function useGrid(options: GridOptions) {
       onClick: withModifiers(() => handleSelect(element), ['stop']),
       'onUpdate:width': (val: number) => {
         element.style.width = normalizeSize(val, 'width', containerRect)
-        reOffsetAll(list, containerRect, cellWidth)
+        reOffsetAll(list, containerRect, cellWidth, options.columnGap)
       },
       'onUpdate:height': (val: number) => { element.style.height = normalizeSize(val, 'height', containerRect) },
     }, () => node)
@@ -131,9 +132,8 @@ function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], c
     return
   }
   const cellNum = Math.round(normalizeSize(item.style.width, 'width', containerSize) / cellWidth)
-  const offset = (cellNum - 1 ? cellNum - 1 : 0) * columnGap
+  const offset = Math.max((cellNum - 1), 0) * columnGap
   item.style.width = cellNum * cellWidth + offset
-  console.log(cellNum, cellWidth, item.style.width, 'offset')
 }
 function normalizeSize(
   val: number | string,
