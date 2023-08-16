@@ -17,6 +17,7 @@ type GridOptions = UnwrapNestedRefs<{
   ViewRender: any
   type: 'swiper' | 'grid'
   columnGap: number,
+  errorLoading: boolean,
   handleSelect: (item: GridItem) => void
 } & HoverActiveReturn>
 export function useGrid(options: GridOptions) {
@@ -101,7 +102,7 @@ export function useGrid(options: GridOptions) {
             type: element._view,
             config: element,
           })
-          : h('div', element._view)
+          : h('div', options.errorLoading ? '加载失败!' : '加载中...')
     }
   }
   function wrapSwiper(content: VNode) {

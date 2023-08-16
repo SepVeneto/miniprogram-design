@@ -47,7 +47,7 @@ export default defineComponent({
     const draggableRef = shallowRef<HTMLElement>()
     const { cellWidth, containerRect } = useContainer(draggableRef, configComp, props.type)
 
-    const { Component: ViewRender } = useFederatedComponent(
+    const { Component: ViewRender, errorLoading } = useFederatedComponent(
       app.remoteUrl,
       'widgets_side',
       './viewRender',
@@ -61,6 +61,7 @@ export default defineComponent({
       cellWidth,
       containerRect,
       ViewRender,
+      errorLoading,
       columnGap,
       type,
       onEnter,
