@@ -97,7 +97,7 @@
 import widgetWrap from '@/layout/widgetWrap.vue'
 import VConfig from '@/layout/config.vue'
 import { tabbarPreview } from '@/layout/tabbar'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useApp } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
@@ -117,6 +117,13 @@ const selected = computed(() => app.selected)
 const title = computed(() => route.meta.title)
 const isPreview = computed(() => mode.value === 'preview')
 // const needBack = computed(() => route.)
+
+onMounted(() => {
+  window.microApp?.dispatch({
+    type: 'event',
+    data: 'mounted',
+  })
+})
 
 function handleDelete() {
   const currentConfig = app.config.body[route.name!]
