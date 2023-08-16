@@ -1,9 +1,10 @@
-import microApp, { renderApp } from '@micro-zoe/micro-app';
-import { nextTick, onMounted, getCurrentInstance, CSSProperties } from 'vue-demi';
-import { upgrade } from './upgrade';
-import type { UploadRequestOptions } from 'element-plus';
+import microApp, { renderApp } from '@micro-zoe/micro-app'
+import type { CSSProperties } from 'vue-demi'
+import { getCurrentInstance, nextTick, onMounted } from 'vue-demi'
+import { upgrade } from './upgrade'
+import type { UploadRequestOptions } from 'element-plus'
 
-export * from './upgrade';
+export * from './upgrade'
 
 export type EditorConfig = {
   version?: string
@@ -76,12 +77,26 @@ export type DesignOptions = {
   name: string
   inline: boolean
   data?: EditorData
+  mounted?: () => void
 }
-export async function useDesign (
+type DataListener = {
+  type: 'event',
+  data: 'mounted',
+}
+export async function useDesign(
   dom: string | Element,
   options: DesignOptions,
 ) {
-  const { url, inline, name = 'miniprogram-design', data } = options;
+  const { url, inline, name = 'miniprogram-design', data, mounted } = options
+  microApp.addDataListener(name, (val: DataListener) => {
+    const { type, data } = val
+    if (type === 'event') {
+      switch (data) {
+        case 'mounted':
+          mounted?.()
+      }
+    }
+  })
   await new Promise((resolve, reject) => {
     tryOnMounted(() => {
       renderApp({
@@ -94,31 +109,31 @@ export async function useDesign (
         'disable-patch-request': true, // 关闭对子应用请求的拦截
       }).then((result) => {
         if (result) {
-          resolve(result);
+          resolve(result)
         } else {
-          reject(new Error('[@sepveneto/mpd-core] 应用加载失败'));
+          reject(new Error('[@sepveneto/mpd-core] 应用加载失败'))
         }
-      });
-    });
-  });
+      })
+    })
+  })
 
-  function set (data: EditorData) {
-    const { config } = data;
+  function set(data: EditorData) {
+    const { config } = data
     if (!config.version) {
-      config.version = upgrade.VERSION;
+      config.version = upgrade.VERSION
     }
-    microApp.setData(name, { ...data, config });
+    microApp.setData(name, { ...data, config })
   }
-  function get (): EditorConfig | null {
-    return microApp.getData(name) as EditorConfig | null;
+  function get(): EditorConfig | null {
+    return microApp.getData(name) as EditorConfig | null
   }
-  return [get, set];
+  return [get, set]
 }
 
-function tryOnMounted (fn: () => void) {
+function tryOnMounted(fn: () => void) {
   if (getCurrentInstance()) {
-    onMounted(fn);
+    onMounted(fn)
   } else {
-    nextTick().then(fn);
+    nextTick().then(fn)
   }
 }
