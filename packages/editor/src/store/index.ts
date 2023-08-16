@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import type { TabbarWidgetConfig } from '@/layout/tabbar/type'
 
@@ -137,9 +137,6 @@ export const useApp = defineStore('app', () => {
       router.replace({ path: '/' })
     }
   }
-  watch(config, (val) => {
-    window.microApp?.dispatch(val)
-  }, { deep: true })
 
   function updateRouter(route?: any) {
     if (route) {
