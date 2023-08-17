@@ -79,22 +79,19 @@ export type DesignOptions = {
   data?: EditorData
   mounted?: () => void
 }
-type DataListener<T> = {
-  type: 'event' | 'action',
-  data: T,
+type DataListener = {
+  event?: 'mounted'
+  config?: EditorConfig
 }
 export async function useDesign(
   dom: string | Element,
   options: DesignOptions,
 ) {
   const { url, inline, name = 'miniprogram-design', data, mounted } = options
-  microApp.addDataListener(name, (val: DataListener<'mounted'>) => {
-    const { type, data } = val
-    if (type === 'event') {
-      switch (data) {
-        case 'mounted':
-          mounted?.()
-      }
+  microApp.addDataListener(name, (val: DataListener) => {
+    const { event } = val
+    if (event === 'mounted') {
+      mounted?.()
     }
   })
   await new Promise((resolve, reject) => {
@@ -125,11 +122,11 @@ export async function useDesign(
     microApp.setData(name, { ...data, config })
   }
   function get(): EditorConfig | null {
-    const data = microApp.getData(name) as DataListener<EditorConfig | null>
-    if (data.type === 'action') {
-      return data.data
+    const data = microApp.getData(name) as DataListener
+    if (!data.config) {
+      return null
     }
-    return null
+    return data.config
   }
   return [get, set]
 }
