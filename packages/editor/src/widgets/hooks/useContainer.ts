@@ -8,6 +8,7 @@ export function useContainer(
   containerRef: Ref<any>,
   config: Ref<Record<string, any>>,
   type: 'grid' | 'swiper',
+  preview: Ref<boolean>,
 ) {
   const { style, grid } = toRefs(config.value)
   const containerRect = reactive({
@@ -17,7 +18,13 @@ export function useContainer(
 
   const containerWidth = computed(() => {
     if (!containerRect.width) return 0
-    // 计算的是容器内部的尺寸，所以不需要额外计算padding
+    // 对于编辑模式，计算的是容器内部的尺寸，所以不需要额外计算padding
+    // 对于预览模式，没有套一个container，所以padding是直接应用在容器本身的
+    // 需要额外计算padding
+    if (preview.value) {
+      const { paddingLeft, paddingRight } = style.value
+      return containerRect.width - paddingLeft - paddingRight
+    }
     return containerRect.width
   })
   const cellWidth = computed(() => {

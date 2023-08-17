@@ -45,7 +45,12 @@ export default defineComponent({
     })
 
     const draggableRef = shallowRef<HTMLElement>()
-    const { cellWidth, containerRect } = useContainer(draggableRef, configComp, props.type)
+    const { cellWidth, containerRect } = useContainer(
+      draggableRef,
+      configComp,
+      props.type,
+      previewComp,
+    )
 
     const { Component: ViewRender, errorLoading } = useFederatedComponent(
       app.remoteUrl,
