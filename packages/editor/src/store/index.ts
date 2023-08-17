@@ -139,7 +139,7 @@ export const useApp = defineStore('app', () => {
   }
 
   watch(config, (val) => {
-    window.microApp?.dispatch({ type: 'action', data: val })
+    window.microApp?.dispatch({ config: val })
   }, { deep: true })
   function updateRouter(route?: any) {
     if (route) {

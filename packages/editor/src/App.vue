@@ -120,8 +120,7 @@ const isPreview = computed(() => mode.value === 'preview')
 
 onMounted(() => {
   window.microApp?.dispatch({
-    type: 'event',
-    data: 'mounted',
+    event: 'mounted',
   })
 })
 
