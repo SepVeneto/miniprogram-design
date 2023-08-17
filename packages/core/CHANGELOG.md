@@ -1,3 +1,17 @@
+# [0.7.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.7.0...core@0.7.0) (2023-08-17)
+
+
+
+# [0.7.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.6.3...core@0.7.0) (2023-08-17)
+
+
+### Features
+
+* **core:** add event mounted ([fdb9f1c](https://github.com/SepVeneto/miniprogram-design/commit/fdb9f1c16a3b70b1426c49a90e8f7639c716297f))
+* **core:** modify struct ([28c609b](https://github.com/SepVeneto/miniprogram-design/commit/28c609b36da454dde420bffe61ebe2b5909dfa95))
+
+
+
 ## [0.6.3](https://github.com/SepVeneto/miniprogram-design/compare/core@0.6.2...core@0.6.3) (2023-04-25)
 
 
@@ -90,7 +104,7 @@
 
 
 
-## [0.0.2](https://github.com/SepVeneto/miniprogram-design/compare/0.0.1-alpha.2...0.0.2) (2022-10-10)
+## [0.0.2](https://github.com/SepVeneto/miniprogram-design/compare/core@0.0.1...core@0.0.2) (2022-10-10)
 
 
 ### Bug Fixes
