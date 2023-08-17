@@ -22,8 +22,9 @@ export function useContainer(
   })
   const cellWidth = computed(() => {
     const { columnGap = 0 } = style.value
+    if (type === 'swiper') return containerRect.width
     const width = containerWidth.value - columnGap * (grid.value - 1)
-    return type === 'swiper' ? 0 : width / grid.value
+    return width / grid.value
   })
 
   watch(style, () => {
