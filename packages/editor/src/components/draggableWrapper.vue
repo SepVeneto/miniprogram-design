@@ -1,7 +1,7 @@
 <script lang="tsx">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { CloseBold, Hide, Rank } from '@element-plus/icons-vue'
-import { useNormalizeStyle } from '@sepveneto/mpd-hooks'
+import { normalizeStyle } from '@/utils'
 
 export default defineComponent({
   components: {
@@ -25,7 +25,9 @@ export default defineComponent({
   },
   emits: ['delete'],
   setup(props, { emit }) {
-    const wrapStyle = useNormalizeStyle(props.customStyle)
+    const wrapStyle = computed(() => {
+      return normalizeStyle(props.customStyle)
+    })
     function handleDelete() {
       emit('delete')
     }

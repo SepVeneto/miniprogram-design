@@ -22,6 +22,9 @@ export function normalizeStyle(style: Style) {
       if (typeof value === 'number') {
         // @ts-expect-error: value is not a number
         obj[key] = `${value}px`
+      } else if (value?.startsWith('http')) {
+        // @ts-expect-error: value is not a number
+        obj[key] = `url(${value})`
       } else {
         // @ts-expect-error: value is not a number
         obj[key] = value

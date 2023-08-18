@@ -13,7 +13,8 @@ import {
 import { useApp } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
 // import viewRender from 'widgets_side/viewRender';
-import { normalizeStyle, useFederatedComponent } from '@sepveneto/mpd-hooks'
+import { useFederatedComponent } from '@sepveneto/mpd-hooks'
+import { normalizeStyle } from '@/utils'
 import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'

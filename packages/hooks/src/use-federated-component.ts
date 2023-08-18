@@ -17,7 +17,6 @@ export function useFederatedComponent(
 }
 
 async function loadComponent(scope: string, module: string) {
-  // @ts-expect-error: mdf
   await __webpack_init_sharing__('default')
   // @ts-expect-error: mdf
   const container = window[scope]
