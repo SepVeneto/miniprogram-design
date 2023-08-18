@@ -36,7 +36,7 @@ const cardSchema = [
     label: '背景图片',
     key: 'defaultImg',
   },
-];
+]
 
 const explain = [
   {
@@ -76,7 +76,7 @@ const explain = [
     label: '背景图片',
     key: 'defaultImg',
   },
-];
+]
 
 const shop = [
   {
@@ -116,7 +116,7 @@ const shop = [
     label: '背景图片',
     key: 'defaultImg',
   },
-];
+]
 
 const reserve = [
   {
@@ -169,7 +169,7 @@ const reserve = [
     label: '字体颜色',
     key: 'desc.style.color',
   },
-];
+]
 
 const mine = [
   ...cardSchema,
@@ -187,7 +187,7 @@ const mine = [
     trueLabel: 1,
     falseLabel: 0,
   },
-];
+]
 
 const container = [
   {
@@ -201,9 +201,10 @@ const container = [
     label: '宽度',
     key: 'style.width',
   },
-];
+]
 
 const menuItem = [
+  { type: 'box' },
   {
     type: 'input',
     label: '标题',
@@ -229,7 +230,7 @@ const menuItem = [
     label: '图片',
     key: 'image',
   },
-];
+]
 
 const desc = [
   {
@@ -242,7 +243,7 @@ const desc = [
     label: '可见性',
     key: 'isShow',
   },
-];
+]
 
 const link = [
   {
@@ -255,7 +256,7 @@ const link = [
     label: '客服电话',
     key: 'phone',
   },
-];
+]
 
 const entry = [
   {
@@ -280,7 +281,7 @@ const entry = [
     label: '背景图片',
     key: 'defaultImg',
   },
-];
+]
 
 const globalConfig = [
   {
@@ -303,7 +304,7 @@ const globalConfig = [
     label: '登录背景图片',
     key: 'loginBg',
   },
-];
+]
 
 const text = [
   {
@@ -316,7 +317,7 @@ const text = [
     label: '字体大小',
     key: 'style.fontSize',
   },
-];
+]
 
 const image = [
   // {
@@ -334,7 +335,7 @@ const image = [
     label: '图片',
     key: 'img',
   },
-];
+]
 
 export const schema = {
   image,
@@ -350,4 +351,4 @@ export const schema = {
   desc,
   link,
   entry,
-};
+}

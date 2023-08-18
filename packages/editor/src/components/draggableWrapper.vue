@@ -75,6 +75,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
+  box-sizing: border-box;
   &:first-child.is-container {
     margin-top: 18px;
   }
