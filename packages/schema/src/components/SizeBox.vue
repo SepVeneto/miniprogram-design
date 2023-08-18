@@ -147,7 +147,7 @@ export default defineComponent({
     })
     const marginTop = computed<number>({
       get() {
-        return props.margin[DIRECT.TOP] || 0
+        return props.margin[DIRECT.TOP] ?? '-'
       },
       set(val) {
         const list = [...props.margin]
@@ -157,7 +157,7 @@ export default defineComponent({
     })
     const marginRight = computed<number>({
       get() {
-        return props.margin[DIRECT.RIGHT] || 0
+        return props.margin[DIRECT.RIGHT] ?? '-'
       },
       set(val) {
         const list = [...props.margin]
@@ -167,7 +167,7 @@ export default defineComponent({
     })
     const marginBottom = computed<number>({
       get() {
-        return props.margin[DIRECT.BOTTOM] || 0
+        return props.margin[DIRECT.BOTTOM] ?? '-'
       },
       set(val) {
         const list = [...props.margin]
@@ -177,7 +177,7 @@ export default defineComponent({
     })
     const marginLeft = computed<number>({
       get() {
-        return props.margin[DIRECT.LEFT] || 0
+        return props.margin[DIRECT.LEFT] ?? '-'
       },
       set(val) {
         const list = [...props.margin]
@@ -187,7 +187,7 @@ export default defineComponent({
     })
     const paddingTop = computed<number>({
       get() {
-        return props.padding[DIRECT.TOP] || 0
+        return props.padding[DIRECT.TOP] ?? '-'
       },
       set(val) {
         const list = [...props.padding]
@@ -197,7 +197,7 @@ export default defineComponent({
     })
     const paddingRight = computed<number>({
       get() {
-        return props.padding[DIRECT.RIGHT] || 0
+        return props.padding[DIRECT.RIGHT] ?? '-'
       },
       set(val) {
         const list = [...props.padding]
@@ -207,7 +207,7 @@ export default defineComponent({
     })
     const paddingBottom = computed<number>({
       get() {
-        return props.padding[DIRECT.BOTTOM] || 0
+        return props.padding[DIRECT.BOTTOM] ?? '-'
       },
       set(val) {
         const list = [...props.padding]
@@ -217,7 +217,7 @@ export default defineComponent({
     })
     const paddingLeft = computed<number>({
       get() {
-        return props.padding[DIRECT.LEFT] || 0
+        return props.padding[DIRECT.LEFT] ?? '-'
       },
       set(val) {
         const list = [...props.padding]
@@ -227,7 +227,7 @@ export default defineComponent({
     })
     const borderTop = computed<number>({
       get() {
-        return props.border[DIRECT.TOP] || 0
+        return props.border[DIRECT.TOP] ?? '-'
       },
       set(val) {
         const list = [...props.border]
@@ -237,7 +237,7 @@ export default defineComponent({
     })
     const borderRight = computed<number>({
       get() {
-        return props.border[DIRECT.RIGHT] || 0
+        return props.border[DIRECT.RIGHT] ?? '-'
       },
       set(val) {
         const list = [...props.border]
@@ -247,7 +247,7 @@ export default defineComponent({
     })
     const borderBottom = computed<number>({
       get() {
-        return props.border[DIRECT.BOTTOM] || 0
+        return props.border[DIRECT.BOTTOM] ?? '-'
       },
       set(val) {
         const list = [...props.border]
@@ -257,7 +257,7 @@ export default defineComponent({
     })
     const borderLeft = computed<number>({
       get() {
-        return props.border[DIRECT.LEFT] || 0
+        return props.border[DIRECT.LEFT] ?? '-'
       },
       set(val) {
         const list = [...props.border]

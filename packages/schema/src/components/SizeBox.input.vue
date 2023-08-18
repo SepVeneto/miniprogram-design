@@ -1,5 +1,7 @@
 <template>
+  <!-- 将编辑状态作为key，可以在编辑结束后更新dom，防止删除所有内容导致无法再次编辑 -->
   <div
+    :key="Number(editing)"
     ref="inputRef"
     :contenteditable="editing"
     class="box-num--input"
@@ -15,10 +17,11 @@
 
 <script lang="ts" setup>
 import { nextTick, ref } from 'vue'
+import type { PropType } from 'vue'
 
 defineProps({
   modelValue: {
-    type: Number,
+    type: [Number, String] as PropType<number | '-'>,
     default: undefined,
   },
   placeholder: {
@@ -35,6 +38,10 @@ const inputRef = ref<HTMLElement>()
 function handleInput(evt: Event) {
   const target = evt.target as HTMLElement
   const val = Number(target.textContent)
+  updateVal(val)
+}
+function updateVal(num: number) {
+  const val = (typeof num === 'number' && !isNaN(num)) ? num : undefined
   emit('update:modelValue', val)
 }
 function handleDown(evt: KeyboardEvent) {
@@ -43,15 +50,16 @@ function handleDown(evt: KeyboardEvent) {
   switch (evt.key) {
     case 'ArrowUp':
       current += 1
+      updateVal(current)
       break
     case 'ArrowDown':
       current -= 1
+      updateVal(current)
       break
     case 'Enter':
       editing.value = false
       break
   }
-  emit('update:modelValue', current)
 }
 async function handleDblclick() {
   editing.value = true
@@ -71,11 +79,13 @@ function selectAll(node: Element) {
 }
 </script>
 
-<style scoped>
-.box-num--input.editing {
+<style scoped lang="scss">
+.box-num--input {
   padding: 0 2px;
-  outline: none;
-  border: none;
-  box-shadow: 0 0 6px 0;
+  &.editing {
+    outline: none;
+    border: none;
+    box-shadow: 0 0 6px 0;
+  }
 }
 </style>
