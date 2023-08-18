@@ -1,94 +1,5 @@
-<template>
-  <div class="box-model margin-box">
-    <span class="box-label">外边距</span>
-    <span class="box-num box-num--top">
-      <SizeBoxInput
-        v-model="marginTop"
-        placeholder="-"
-      />
-    </span>
-    <span class="box-num box-num--right">
-      <SizeBoxInput
-        v-model="marginRight"
-        placeholder="-"
-      />
-    </span>
-    <span class="box-num box-num--bottom">
-      <SizeBoxInput
-        v-model="marginBottom"
-        placeholder="-"
-      />
-    </span>
-    <span class="box-num box-num--left">
-      <SizeBoxInput
-        v-model="marginLeft"
-        placeholder="-"
-      />
-    </span>
-    <div class="box-model border-box">
-      <span class="box-label">边框</span>
-      <span class="box-num box-num--top">
-        <SizeBoxInput
-          v-model="borderTop"
-          placeholder="-"
-        />
-      </span>
-      <span class="box-num box-num--right">
-        <SizeBoxInput
-          v-model="borderRight"
-          placeholder="-"
-        />
-      </span>
-      <span class="box-num box-num--bottom">
-        <SizeBoxInput
-          v-model="borderBottom"
-          placeholder="-"
-        />
-      </span>
-      <span class="box-num box-num--left">
-        <SizeBoxInput
-          v-model="borderLeft"
-          placeholder="-"
-        />
-      </span>
-      <div class="box-model padding-box">
-        <span class="box-label">内边距</span>
-        <span class="box-num box-num--top">
-          <SizeBoxInput
-            v-model="paddingTop"
-            placeholder="-"
-          />
-        </span>
-        <span class="box-num box-num--right">
-          <SizeBoxInput
-            v-model="paddingRight"
-            placeholder="-"
-          />
-        </span>
-        <span class="box-num box-num--bottom">
-          <SizeBoxInput
-            v-model="paddingBottom"
-            placeholder="-"
-          />
-        </span>
-        <span class="box-num box-num--left">
-          <SizeBoxInput
-            v-model="paddingLeft"
-            placeholder="-"
-          />
-        </span>
-        <div class="box-model size-box">
-          <SizeBoxInput v-model="boxWidth" />
-          <span>x</span>
-          <SizeBoxInput v-model="boxHeight" />
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import type { PropType } from 'vue'
 import SizeBoxInput from './SizeBox.input.vue'
 
@@ -112,6 +23,14 @@ export default defineComponent({
     },
   },
   props: {
+    include: {
+      type: Array as PropType<string[]>,
+      default: () => ([]),
+    },
+    exclude: {
+      type: Array as PropType<string[]>,
+      default: () => ([]),
+    },
     margin: {
       type: Array as PropType<number[]>,
       default: () => ([]),
@@ -283,6 +202,111 @@ export default defineComponent({
       DIRECT,
     }
   },
+
+  render() {
+    const MARGIN = ['marginTop', 'marginRight', 'marginBottom', 'marginLeft']
+    const dirs = [DIRECT.TOP, DIRECT.RIGHT, DIRECT.BOTTOM, DIRECT.LEFT]
+    const marginList = dirs.filter(item =>
+      (!this.exclude.includes('margin') && !this.exclude.includes(MARGIN[item]))
+      || this.include.length === 0
+      || this.include.includes('margin')
+      || this.include.includes(MARGIN[item])
+    )
+    const marginBox = () => h('div', {
+      class: ['box-model', 'margin-box']
+    }, [
+      h('span', { class: 'box-label' }, '外边距'),
+      marginList.map(item => h('span', {
+        class: ['box-num', 'box-num--']
+      }))
+    ])
+  <div class="box-model margin-box">
+    <span class="box-label">外边距</span>
+    <span class="box-num box-num--top">
+      <SizeBoxInput
+        v-model="marginTop"
+        placeholder="-"
+      />
+    </span>
+    <span class="box-num box-num--right">
+      <SizeBoxInput
+        v-model="marginRight"
+        placeholder="-"
+      />
+    </span>
+    <span class="box-num box-num--bottom">
+      <SizeBoxInput
+        v-model="marginBottom"
+        placeholder="-"
+      />
+    </span>
+    <span class="box-num box-num--left">
+      <SizeBoxInput
+        v-model="marginLeft"
+        placeholder="-"
+      />
+    </span>
+    <div class="box-model border-box">
+      <span class="box-label">边框</span>
+      <span class="box-num box-num--top">
+        <SizeBoxInput
+          v-model="borderTop"
+          placeholder="-"
+        />
+      </span>
+      <span class="box-num box-num--right">
+        <SizeBoxInput
+          v-model="borderRight"
+          placeholder="-"
+        />
+      </span>
+      <span class="box-num box-num--bottom">
+        <SizeBoxInput
+          v-model="borderBottom"
+          placeholder="-"
+        />
+      </span>
+      <span class="box-num box-num--left">
+        <SizeBoxInput
+          v-model="borderLeft"
+          placeholder="-"
+        />
+      </span>
+      <div class="box-model padding-box">
+        <span class="box-label">内边距</span>
+        <span class="box-num box-num--top">
+          <SizeBoxInput
+            v-model="paddingTop"
+            placeholder="-"
+          />
+        </span>
+        <span class="box-num box-num--right">
+          <SizeBoxInput
+            v-model="paddingRight"
+            placeholder="-"
+          />
+        </span>
+        <span class="box-num box-num--bottom">
+          <SizeBoxInput
+            v-model="paddingBottom"
+            placeholder="-"
+          />
+        </span>
+        <span class="box-num box-num--left">
+          <SizeBoxInput
+            v-model="paddingLeft"
+            placeholder="-"
+          />
+        </span>
+        <div class="box-model size-box">
+          <SizeBoxInput v-model="boxWidth" />
+          <span>x</span>
+          <SizeBoxInput v-model="boxHeight" />
+        </div>
+      </div>
+    </div>
+  </div>
+  }
 })
 </script>
 

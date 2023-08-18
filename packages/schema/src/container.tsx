@@ -210,7 +210,8 @@ export default defineComponent({
         return schema.label ? <span>{schema.label}</span> : null
       }
     }
-    function renderBox(_schema: ISchema) {
+    function renderBox(schema: ISchema) {
+      const { include, exclude } = schema
       const {
         marginLeft,
         marginTop,
@@ -229,6 +230,8 @@ export default defineComponent({
       } = getData(prop.modelValue, 'style')
       return (
         <SizeBox
+          include={include}
+          exclude={exclude}
           margin={[marginTop, marginRight, marginBottom, marginLeft]}
           onUpdate:margin={val => normalizeStyle('margin', val)}
           padding={[paddingTop, paddingRight, paddingBottom, paddingLeft]}
