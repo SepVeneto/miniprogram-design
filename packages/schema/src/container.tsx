@@ -3,11 +3,13 @@ import { defineAsyncComponent, defineComponent, watch } from 'vue'
 import ossUpload from './components/ossUpload.vue'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { QuestionFilled } from '@element-plus/icons-vue'
+import SizeBox from './components/SizeBox.vue'
 
 // import ConfigRender from 'widgets_side/configRender';
 // import rInput from './input.vue'
 // import rCheckbox from './'
 type WidgetType = 'input'
+  | 'box'
   | 'number'
   | 'checkbox'
   | 'image'
@@ -77,6 +79,13 @@ export default defineComponent({
       return path.reduce((obj, curr) => {
         return obj[curr]
       }, data)
+    }
+    function normalizeStyle(type: 'margin' | 'padding' | 'border', list: number[]) {
+      const [top, right, bottom, left] = list
+      updateData(`style.${type}Top`, top)
+      updateData(`style.${type}Right`, right)
+      updateData(`style.${type}Bottom`, bottom)
+      updateData(`style.${type}Left`, left)
     }
     function renderCheckbox(schema: ISchema) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -201,6 +210,38 @@ export default defineComponent({
         return schema.label ? <span>{schema.label}</span> : null
       }
     }
+    function renderBox(_schema: ISchema) {
+      const {
+        marginLeft,
+        marginTop,
+        marginBottom,
+        marginRight,
+        paddingLeft,
+        paddingTop,
+        paddingBottom,
+        paddingRight,
+        borderLeft,
+        borderTop,
+        borderBottom,
+        borderRight,
+        width,
+        height,
+      } = getData(prop.modelValue, 'style')
+      return (
+        <SizeBox
+          margin={[marginTop, marginRight, marginBottom, marginLeft]}
+          onUpdate:margin={val => normalizeStyle('margin', val)}
+          padding={[paddingTop, paddingRight, paddingBottom, paddingLeft]}
+          onUpdate:padding={val => normalizeStyle('padding', val)}
+          border={[borderTop, borderRight, borderBottom, borderLeft]}
+          onUpdate:border={val => normalizeStyle('border', val)}
+          width={width}
+          onUpdate:width={val => updateData('style.width', val)}
+          height={height}
+          onUpdate:height={val => updateData('style.height', val)}
+        />
+      )
+    }
     function allowContainer(item) {
       const { _fromContainer } = prop.modelValue
       let flag
@@ -216,6 +257,7 @@ export default defineComponent({
       updateData,
       getData,
 
+      renderBox,
       renderInput,
       renderNumber,
       renderCheckbox,
@@ -234,6 +276,9 @@ export default defineComponent({
       const form: JSX.Element[] = []
       let node
       switch (schema.type) {
+        case 'box':
+          node = this.renderBox(schema)
+          break
         case 'input':
           node = this.renderInput(schema)
           break
