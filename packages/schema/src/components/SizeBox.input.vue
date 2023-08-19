@@ -11,7 +11,7 @@
     @keydown="handleDown"
     @blur="editing = false"
   >
-    {{ modelValue || placeholder }}
+    {{ editing ? modelValue : (modelValue || placeholder) }}
   </div>
 </template>
 
@@ -19,7 +19,7 @@
 import { nextTick, ref } from 'vue'
 import type { PropType } from 'vue'
 
-defineProps({
+const props = defineProps({
   modelValue: {
     type: [Number, String] as PropType<number | '-'>,
     default: undefined,
@@ -28,6 +28,7 @@ defineProps({
     type: String,
     default: '0',
   },
+  disabled: Boolean,
 })
 const emit = defineEmits(['update:modelValue'])
 
@@ -47,6 +48,7 @@ function updateVal(num: number) {
 function handleDown(evt: KeyboardEvent) {
   const el = evt.target as HTMLElement
   let current = Number(el.textContent)
+  current = isNaN(current) ? 0 : current
   switch (evt.key) {
     case 'ArrowUp':
       current += 1
@@ -62,6 +64,7 @@ function handleDown(evt: KeyboardEvent) {
   }
 }
 async function handleDblclick() {
+  if (props.disabled) return
   editing.value = true
   await nextTick()
   const el = inputRef.value
@@ -81,7 +84,7 @@ function selectAll(node: Element) {
 
 <style scoped lang="scss">
 .box-num--input {
-  padding: 0 2px;
+  padding: 0 4px;
   &.editing {
     outline: none;
     border: none;

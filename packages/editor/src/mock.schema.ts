@@ -204,7 +204,9 @@ const container = [
 ]
 
 const menuItem = [
-  { type: 'box' },
+  {
+    type: 'box',
+  },
   {
     type: 'input',
     label: '标题',

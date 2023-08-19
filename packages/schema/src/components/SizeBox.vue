@@ -1,6 +1,6 @@
 <script lang="ts">
 import { computed, defineComponent, h } from 'vue'
-import type { PropType } from 'vue'
+import type { PropType, VNode } from 'vue'
 import SizeBoxInput from './SizeBox.input.vue'
 
 const numberType = {
@@ -184,7 +184,25 @@ export default defineComponent({
         emit('update:border', list)
       },
     })
+    const DIR = ['top', 'right', 'bottom', 'left'] as const
+    function filterDir(type: 'padding' | 'margin' | 'border') {
+      return DIR.filter(item => {
+        const name = `${type}${item[0].toUpperCase()}${item.slice(1)}`
+        return (!props.exclude.includes(type) && !props.exclude.includes(name)) &&
+        (props.include.length === 0 ||
+        props.include.includes(type) ||
+        props.include.includes(name))
+      })
+    }
+    const marginDir = computed(() => filterDir('margin'))
+    const paddingDir = computed(() => filterDir('padding'))
+    const borderDir = computed(() => filterDir('border'))
     return {
+      DIR,
+      filterDir,
+      marginDir,
+      paddingDir,
+      borderDir,
       boxWidth,
       boxHeight,
       marginTop,
@@ -204,109 +222,70 @@ export default defineComponent({
   },
 
   render() {
-    const MARGIN = ['marginTop', 'marginRight', 'marginBottom', 'marginLeft']
-    const dirs = [DIRECT.TOP, DIRECT.RIGHT, DIRECT.BOTTOM, DIRECT.LEFT]
-    const marginList = dirs.filter(item =>
-      (!this.exclude.includes('margin') && !this.exclude.includes(MARGIN[item]))
-      || this.include.length === 0
-      || this.include.includes('margin')
-      || this.include.includes(MARGIN[item])
-    )
-    const marginBox = () => h('div', {
-      class: ['box-model', 'margin-box']
+    const genInput = (
+      type: 'margin' | 'padding' | 'border',
+      dir: 'top' | 'right' | 'bottom' | 'left',
+      enable = true,
+    ) => {
+      const name = `${type}${dir[0].toUpperCase()}${dir.slice(1)}`
+      return h(SizeBoxInput, {
+        key: name,
+        modelValue: this[name],
+        'onUpdate:modelValue': (val: number) => { this[name] = val },
+        placeholder: '-',
+        disabled: !enable,
+      })
+    }
+    const marginBox = (node: VNode) => h('div', {
+      class: ['box-model', 'margin-box'],
+      key: 'margin',
     }, [
       h('span', { class: 'box-label' }, '外边距'),
-      marginList.map(item => h('span', {
-        class: ['box-num', 'box-num--']
-      }))
+      this.DIR.map((item, index) => h('span', {
+        class: ['box-num', `box-num--${item}`],
+        key: index,
+      }, genInput('margin', item, this.marginDir.includes(item)))),
+      node,
     ])
-  <div class="box-model margin-box">
-    <span class="box-label">外边距</span>
-    <span class="box-num box-num--top">
-      <SizeBoxInput
-        v-model="marginTop"
-        placeholder="-"
-      />
-    </span>
-    <span class="box-num box-num--right">
-      <SizeBoxInput
-        v-model="marginRight"
-        placeholder="-"
-      />
-    </span>
-    <span class="box-num box-num--bottom">
-      <SizeBoxInput
-        v-model="marginBottom"
-        placeholder="-"
-      />
-    </span>
-    <span class="box-num box-num--left">
-      <SizeBoxInput
-        v-model="marginLeft"
-        placeholder="-"
-      />
-    </span>
-    <div class="box-model border-box">
-      <span class="box-label">边框</span>
-      <span class="box-num box-num--top">
-        <SizeBoxInput
-          v-model="borderTop"
-          placeholder="-"
-        />
-      </span>
-      <span class="box-num box-num--right">
-        <SizeBoxInput
-          v-model="borderRight"
-          placeholder="-"
-        />
-      </span>
-      <span class="box-num box-num--bottom">
-        <SizeBoxInput
-          v-model="borderBottom"
-          placeholder="-"
-        />
-      </span>
-      <span class="box-num box-num--left">
-        <SizeBoxInput
-          v-model="borderLeft"
-          placeholder="-"
-        />
-      </span>
-      <div class="box-model padding-box">
-        <span class="box-label">内边距</span>
-        <span class="box-num box-num--top">
-          <SizeBoxInput
-            v-model="paddingTop"
-            placeholder="-"
-          />
-        </span>
-        <span class="box-num box-num--right">
-          <SizeBoxInput
-            v-model="paddingRight"
-            placeholder="-"
-          />
-        </span>
-        <span class="box-num box-num--bottom">
-          <SizeBoxInput
-            v-model="paddingBottom"
-            placeholder="-"
-          />
-        </span>
-        <span class="box-num box-num--left">
-          <SizeBoxInput
-            v-model="paddingLeft"
-            placeholder="-"
-          />
-        </span>
-        <div class="box-model size-box">
-          <SizeBoxInput v-model="boxWidth" />
-          <span>x</span>
-          <SizeBoxInput v-model="boxHeight" />
-        </div>
-      </div>
-    </div>
-  </div>
-  }
+    const paddingBox = (node: VNode) => h('div', {
+      class: ['box-model', 'padding-box'],
+    }, [
+      h('span', { class: 'box-label' }, '内边距'),
+      this.DIR.map((item, index) => h('span', {
+        class: ['box-num', `box-num--${item}`],
+        key: index,
+      }, genInput('padding', item, this.paddingDir.includes(item)))),
+      node,
+    ])
+    const borderBox = (node: VNode) => h('div', {
+      class: ['box-model', 'border-box'],
+    }, [
+      h('span', { class: 'box-label' }, '边框'),
+      this.DIR.map((item, index) => h('span', {
+        class: ['box-num', `box-num--${item}`],
+        key: index,
+      }, genInput('border', item, this.borderDir.includes(item)))),
+      node,
+    ])
+    const sizeBox = () => h('div', {
+      class: ['box-model', 'size-box'],
+    },
+    [
+      h(SizeBoxInput, {
+        modelValue: this.boxWidth,
+        'onUpdate:modelValue': (val: number) => { this.boxWidth = val },
+        title: '宽度 = 边框 + 内边距 + 内容的宽度',
+      }),
+      h('span', 'x'),
+      h(SizeBoxInput, {
+        modelValue: this.boxHeight,
+        'onUpdate:modelValue': (val: number) => { this.boxHeight = val },
+        title: '高度 = 边框 + 内边距 + 内容的高度',
+      }),
+    ],
+    )
+    return marginBox(borderBox(paddingBox(sizeBox())))
+  },
 })
 </script>
 
