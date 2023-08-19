@@ -179,9 +179,4 @@ export default defineComponent({
 .flip-list-move {
   transition: transform 0.5s;
 }
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
-  color: #153EBA
-}
 </style>
