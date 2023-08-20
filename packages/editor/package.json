@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@sepveneto/basic-comp": "^0.2.1",
-    "@sepveneto/free-dom": "^0.6.0",
+    "@sepveneto/free-dom": "^0.7.4",
     "@sepveneto/mpd-hooks": "workspace:*",
     "@types/sortablejs": "^1.15.1",
     "@vueuse/integrations": "^10.3.0",

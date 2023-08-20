@@ -27,7 +27,7 @@ export default defineComponent({
     const route = useRoute()
 
     const app = useApp()
-    const { activeUuid, onEnter, onLeave } = useHoverActive()
+    const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
 
     provide('Editor', reactive({
       ...toRefs(props),
@@ -82,9 +82,15 @@ export default defineComponent({
         container: ['container', 'swiper'].includes(item._view),
         mask: item._view !== 'container' && item._view !== 'swiper' && item._mask,
         customStyle: item.style,
-        onMouseenter: withModifiers(() => onEnter(item._uuid), ['stop']),
-        onMouseleave: withModifiers(onLeave, ['stop']),
-        onClick: () => handleSelect(item),
+        onMouseenter: withModifiers(() => {
+          onEnter(item._uuid)
+          console.log('container enter', app.activeUuids)
+        }, ['stop']),
+        onMouseleave: withModifiers(() => {
+          onLeave()
+          console.log('container leave', app.activeUuids)
+        }, ['stop']),
+        onMouseup: () => handleSelect(item),
       }, () => renderChild(item))
       return props.preview ? renderPreview(item) : operate
     }
@@ -127,6 +133,8 @@ export default defineComponent({
       data,
       onPut,
       mainRef,
+      onDragStart,
+      onDragEnd,
     }
   },
   render() {
@@ -144,6 +152,8 @@ export default defineComponent({
       handle: '.operate',
       itemKey: '_uuid',
       'onUpdate:modelValue': val => { this.data = val },
+      onStart: this.onDragStart,
+      onEnd: () => this.onDragEnd(),
     }, {
       item: (item) => this.renderWrapper(item.element),
     })

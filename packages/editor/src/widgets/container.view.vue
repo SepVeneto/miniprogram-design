@@ -112,6 +112,8 @@ export default defineComponent({
       draggableRef,
       grid,
       onPut,
+      onDragStart,
+      onDragEnd,
     }
   },
   render() {
@@ -133,6 +135,8 @@ export default defineComponent({
       animation: 200,
       handle: '.operate',
       itemKey: '_uuid',
+      onStart: this.onDragStart,
+      onEnd: () => this.onDragEnd(),
     }, {
       item: ({ element }) => this.grid.renderItem(element),
     })
