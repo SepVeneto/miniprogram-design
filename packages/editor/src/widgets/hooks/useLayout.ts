@@ -1,7 +1,5 @@
-import { h, nextTick, onMounted, ref, shallowRef, watch, withModifiers } from 'vue'
+import { h, nextTick, onMounted, shallowRef, watch } from 'vue'
 import type { Ref, UnwrapNestedRefs, VNode } from 'vue'
-import { ResizeDomCore } from '@sepveneto/free-dom'
-import DraggableWrapper from '@/components/draggableWrapper.vue'
 import type { HoverActiveReturn } from './useHoverActive'
 // eslint-disable-next-line import/no-named-as-default
 import Swiper from 'swiper'
@@ -58,25 +56,23 @@ export function useGrid(options: GridOptions) {
     wrapSwiper,
     renderItem: (item: GridItem) => {
       const active = options.selected._uuid === item._uuid || options.activeUuid === item._uuid
+      const width = normalizeSize(item.style.width, 'width', options.containerRect)
+      const height = normalizeSize(item.style.height, 'height', options.containerRect)
       const itemProps = {
         key: item._uuid,
+        w: width,
+        h: height,
         active,
         element: item,
         options,
+        'onUpdate:w': (val: number) => { item.style.width = val },
+        'onUpdate:h': (val: number) => { item.style.height = val },
       }
       return h(ContainerItem, itemProps)
     },
   }
 }
 
-function reOffsetAll(
-  list: GridOptions['list'],
-  containerSize: GridOptions['containerRect'],
-  cellWidth: number,
-  columnGap = 0,
-) {
-  list.forEach(item => reOffset(item, containerSize, cellWidth, columnGap))
-}
 function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], cellWidth: number, columnGap = 0) {
   if (!item.style.width) {
     item.style.width = cellWidth
