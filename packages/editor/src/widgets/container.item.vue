@@ -1,7 +1,7 @@
 <script lang="ts">
 import DraggableWrapper from '@/components/draggableWrapper.vue'
 import { computed, defineComponent, h, withModifiers } from 'vue'
-import type { GridItem } from './hooks'
+import type { GridItem, GridOptions } from './hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
 
 export default defineComponent({
@@ -17,10 +17,6 @@ export default defineComponent({
     active: Boolean,
   },
   setup(props) {
-    const active = computed(() => {
-      console.log('active', props.active)
-      return props.active
-    })
     function normalizeSize(
       val: number | string,
       type: 'width' | 'height',
@@ -37,26 +33,23 @@ export default defineComponent({
       }
     }
     function renderItem(element: GridItem) {
-      // console.log('render container item', active.value)
-      const { preview, activeUuid, onEnter, onLeave, handleSelect } = props.options
+      const { preview, onEnter, onLeave, handleSelect } = props.options
       const base = {
         dir: 'top',
-        active: active.value,
-        // active: props.options.selected._uuid === element._uuid || props.options.activeUuid === element._uuid,
+        active: props.active,
         hide: element.isShow != null && !element.isShow,
         mask: true,
       }
       const swiper = {
         ...base,
         class: [props.options.type === 'swiper' && 'swiper-slide'],
-        onMouseenter: withModifiers(() => onEnter(element._uuid), ['stop']),
-        onMouseleave: withModifiers(onLeave, ['stop']),
+        onMouseenter: () => onEnter(element._uuid),
+        onMouseleave: onLeave,
         onClick: withModifiers(() => handleSelect(element), ['stop']),
       }
       const wrapperProps = props.options.type === 'swiper' ? swiper : { ...base, style: 'width: 100%; height: 100%;' }
-      console.log('render item', props.active)
       return !preview
-        ? h(DraggableWrapper, wrapperProps, () => getRenderContent(element))
+        ? h(DraggableWrapper, { ...wrapperProps, aactive: props.active }, () => getRenderContent(element))
         : h('div', {
           class: [props.options.type === 'swiper' && 'swiper-slide'],
           style: { height: '100%' },
@@ -76,8 +69,7 @@ export default defineComponent({
       }
     }
     function wrapResizable(node: any, element: any) {
-      console.log('wrap render')
-      const { containerRect, preview, cellWidth, onDragEnd, onDragStart, onEnter, onLeave, list, handleSelect } = options
+      const { containerRect, preview, cellWidth, onDragEnd, onDragStart, onEnter, onLeave, list, handleSelect } = props.options
       const width = normalizeSize(element.style.width, 'width', containerRect)
       const height = normalizeSize(element.style.height, 'height', containerRect)
 
@@ -95,25 +87,44 @@ export default defineComponent({
           startFn: onDragStart,
           stopFn: onDragEnd,
         },
-        onMouseenter: withModifiers(() => {
-          onEnter(element._uuid)
-        }, ['stop']),
-        onMouseleave: withModifiers(() => {
-          onLeave()
-        }, ['stop']),
+        onMouseenter: () => onEnter(element._uuid),
+        onMouseleave: () => onLeave(),
         onClick: withModifiers(() => handleSelect(element), ['stop']),
         resizeFn: (_evt, { width: w, height: h }) => {
           element.style.width = normalizeSize(w, 'width', containerRect)
           element.style.height = normalizeSize(h, 'height', containerRect)
         },
         stopFn: () => {
-          reOffsetAll(list, containerRect, cellWidth, options.columnGap)
+          reOffsetAll(list, containerRect, cellWidth, props.options.columnGap)
         },
       }, node)
     }
 
+    function reOffsetAll(
+      list: GridOptions['list'],
+      containerSize: GridOptions['containerRect'],
+      cellWidth: number,
+      columnGap = 0,
+    ) {
+      list.forEach(item => reOffset(item, containerSize, cellWidth, columnGap))
+    }
+    function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], cellWidth: number, columnGap = 0) {
+      if (!item.style.width) {
+        item.style.width = cellWidth
+        return
+      }
+      const cellNum = Math.round(normalizeSize(item.style.width, 'width', containerSize) / cellWidth)
+      const offset = Math.max((cellNum - 1), 0) * columnGap
+      item.style.width = cellNum * cellWidth + offset
+    }
     return {
-      renderItem,
+      renderItem: (element: any) => {
+        if (props.options.type === 'swiper') {
+          return renderItem(element)
+        } else {
+          return wrapResizable(() => renderItem(element), element)
+        }
+      },
     }
   },
   render() {

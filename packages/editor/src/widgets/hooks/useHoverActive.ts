@@ -15,11 +15,9 @@ export function useHoverActive() {
     !isDrag && app.active.leave()
   }
   function onDragStart() {
-    console.log('start')
     isDrag = true
   }
   function onDragEnd(fn?: any) {
-    console.log('end')
     isDrag = false
     fn?.()
   }

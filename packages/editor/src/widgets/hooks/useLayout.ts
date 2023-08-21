@@ -10,7 +10,7 @@ import ContainerItem from '../container.item.vue'
 import { useApp } from '@/store'
 
 export type GridItem = Record<string, any>
-type GridOptions = UnwrapNestedRefs<{
+export type GridOptions = UnwrapNestedRefs<{
   preview: Ref<boolean>
   list: Ref<GridItem[]>
   cellWidth: Ref<number>
@@ -58,16 +58,13 @@ export function useGrid(options: GridOptions) {
     wrapSwiper,
     renderItem: (item: GridItem) => {
       const active = options.selected._uuid === item._uuid || options.activeUuid === item._uuid
-      console.log(options.activeUuid, item._uuid)
       const itemProps = {
+        key: item._uuid,
         active,
         element: item,
         options,
       }
-      console.log(itemProps)
-      return options.type === 'swiper'
-        ? h(ContainerItem, itemProps)
-        : wrapResizable(() => h(ContainerItem, itemProps), item)
+      return h(ContainerItem, itemProps)
     },
   }
 }

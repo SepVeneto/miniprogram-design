@@ -82,15 +82,9 @@ export default defineComponent({
         container: ['container', 'swiper'].includes(item._view),
         mask: item._view !== 'container' && item._view !== 'swiper' && item._mask,
         customStyle: item.style,
-        onMouseenter: withModifiers(() => {
-          onEnter(item._uuid)
-          console.log('container enter', app.activeUuids)
-        }, ['stop']),
-        onMouseleave: withModifiers(() => {
-          onLeave()
-          console.log('container leave', app.activeUuids)
-        }, ['stop']),
-        onMouseup: () => handleSelect(item),
+        onMouseenter: () => onEnter(item._uuid),
+        onMouseleave: () => onLeave(),
+        onClick: () => handleSelect(item),
       }, () => renderChild(item))
       return props.preview ? renderPreview(item) : operate
     }
