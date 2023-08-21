@@ -1,3 +1,29 @@
+# [0.11.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.10.1...editor@0.11.0) (2023-08-21)
+
+
+### Bug Fixes
+
+* 容器布局尺寸计算错误 ([ca9766d](https://github.com/SepVeneto/miniprogram-design/commit/ca9766d7f9256ee3b7c9fc3187541cc1d94bf577))
+* 容器内组件加载时显示错误 ([5a3bf7f](https://github.com/SepVeneto/miniprogram-design/commit/5a3bf7fda5312e3dca0ec09d7f7ec2fb3fb9789a))
+* 预览模式容器尺寸错误 ([09cd5fe](https://github.com/SepVeneto/miniprogram-design/commit/09cd5fec74eda35c5b86258238feac97bc3955ea))
+* **container:** 设置背景图片无效 ([6d56e72](https://github.com/SepVeneto/miniprogram-design/commit/6d56e7278cea1ccb6b68624c3abf7945b3a0f1bc))
+* **core:** mounted config mix ([b0310cd](https://github.com/SepVeneto/miniprogram-design/commit/b0310cd2fe7088ecf8c2361c9fa2abab077a7da3))
+* **editor:** event action mix ([25f95a1](https://github.com/SepVeneto/miniprogram-design/commit/25f95a11821ddae15c0d49218547c68672e9d896))
+* revert remove dispath config ([594dc65](https://github.com/SepVeneto/miniprogram-design/commit/594dc65fa3ed39541c81d502a0669f135fda619f))
+* **schema:** box删除所有内容导致无法再次编辑 ([4a5aa6a](https://github.com/SepVeneto/miniprogram-design/commit/4a5aa6a98c90f6c17423f6d174d5cf75ebbe19bc))
+* swiper without grid ([09bd794](https://github.com/SepVeneto/miniprogram-design/commit/09bd794b6f95e139449aa11651fb34c215558bcf))
+
+
+### Features
+
+* **box:** include&exclude ([1087919](https://github.com/SepVeneto/miniprogram-design/commit/1087919310de3fc4b4bc2e66e33bfcd822a71af8))
+* **core:** add event mounted ([fdb9f1c](https://github.com/SepVeneto/miniprogram-design/commit/fdb9f1c16a3b70b1426c49a90e8f7639c716297f))
+* **core:** modify struct ([28c609b](https://github.com/SepVeneto/miniprogram-design/commit/28c609b36da454dde420bffe61ebe2b5909dfa95))
+* **editor:** add event mounted ([6c49569](https://github.com/SepVeneto/miniprogram-design/commit/6c49569d0b4bfba861ea4c4fd7bd1dcaa5d006ac))
+* **schema:** add size box ([4f310ff](https://github.com/SepVeneto/miniprogram-design/commit/4f310ffd498e0a0dbc88dbd1b7f6947bd1fb890f))
+
+
+
 ## [0.10.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.10.0...editor@0.10.1) (2023-08-15)
 
 
