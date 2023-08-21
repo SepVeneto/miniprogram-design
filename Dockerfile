@@ -3,7 +3,7 @@ FROM node:16.11.0 as build
 WORKDIR /app
 COPY . .
 
-RUN npm i -g pnpm@7\
+RUN npm i -g pnpm@8\
     && pnpm i --registry=https://registry.npmmirror.com\
     && pnpm build:hooks\
     && pnpm build:editor
