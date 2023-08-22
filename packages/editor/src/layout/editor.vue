@@ -18,6 +18,7 @@ import { normalizeStyle } from '@/utils'
 import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
+import CanvasView from '@/widgets/canvas.view.vue'
 
 export default defineComponent({
   props: {
@@ -95,14 +96,25 @@ export default defineComponent({
         case 'container':
           return h(ContainerView, { config: item, style: normalizeStyle(item.style) })
         default:
-          return ViewRender.value
-            ? h(ViewRender.value, {
-              type: item._view,
-              config: item,
-              style: normalizeStyle(item.style),
-              'onUpdate:config': updateConfig,
-            })
-            : h('div', errorLoading.value ? '加载失败!' : '加载中...')
+          return genRender(item, true)
+      }
+    }
+    function genRender(item: any, isPreview = false) {
+      if (item._custom) {
+        const options = {
+          config: item,
+          preview: isPreview,
+        }
+        return h(CanvasView, isPreview ? { ...options, style: normalizeStyle(item.style) } : options)
+      } else {
+        const options = {
+          type: item._view,
+          config: item,
+          'onUpdate:config': updateConfig,
+        }
+        return ViewRender.value
+          ? h(ViewRender.value, isPreview ? { ...options, style: normalizeStyle(item.style) } : options)
+          : h('div', errorLoading.value ? '加载失败!' : '加载中...')
       }
     }
     function renderChild(item: any) {
@@ -112,13 +124,7 @@ export default defineComponent({
         case 'container':
           return h(ContainerView, { config: item })
         default:
-          return ViewRender.value
-            ? h(ViewRender.value, {
-              type: item._view,
-              config: item,
-              'onUpdate:config': updateConfig,
-            })
-            : h('div', errorLoading.value ? '加载失败!' : '加载中...')
+          return genRender(item)
       }
     }
 

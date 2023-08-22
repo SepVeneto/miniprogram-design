@@ -1,7 +1,7 @@
-import homeIcon from '@/assets/home.svg';
-import homeFillIcon from '@/assets/home-fill.svg';
-import personalIcon from '@/assets/personal.svg';
-import personalFillIcon from '@/assets/personal-fill.svg';
+import homeIcon from '@/assets/home.svg'
+import homeFillIcon from '@/assets/home-fill.svg'
+import personalIcon from '@/assets/personal.svg'
+import personalFillIcon from '@/assets/personal-fill.svg'
 export default {
   globalConfig: {
     color: 'rgba(126,211,33,1)',
@@ -19,7 +19,7 @@ export default {
         _router: 'canTeenOrder',
         isShow: true,
         title: '我的食堂订单',
-        style: {},
+        style: { width: 375, height: 50 },
       },
     ],
     Personal: [
@@ -132,4 +132,4 @@ export default {
       },
     ],
   },
-};
+}

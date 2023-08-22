@@ -3,6 +3,7 @@ import DraggableWrapper from '@/components/draggableWrapper.vue'
 import { defineComponent, h, ref, watchEffect, withModifiers } from 'vue'
 import type { GridItem } from './hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
+import CanvasView from '@/widgets/canvas.view.vue'
 
 export default defineComponent({
   props: {
@@ -62,6 +63,9 @@ export default defineComponent({
         case 'container':
           return undefined
         default:
+          if (element._custom) {
+            return h(CanvasView, { config: element })
+          }
           return props.options.ViewRender
             ? h(props.options.ViewRender, {
               type: element._view,
