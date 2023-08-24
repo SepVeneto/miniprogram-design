@@ -1,12 +1,11 @@
 <script lang="ts">
-import CanvasToolbar from '@/components/CanvasContext.vue'
+import CanvasToolbar from '@/components/CanvasToolbar.vue'
 import CanvasNode from '@/components/CanvasNode.vue'
 import { FreeScene } from '@sepveneto/free-dom'
 import '@sepveneto/free-dom/css'
 // import viewRender from 'widgets_side/viewRender';
 import { computed, defineComponent, h, ref, watchEffect } from 'vue'
-import { useApp } from '@/store'
-import { onClickOutside, useResizeObserver } from '@vueuse/core'
+import { useResizeObserver } from '@vueuse/core'
 import { v4 as uuidv4 } from 'uuid'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
@@ -21,7 +20,6 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const app = useApp()
     const menuRef = ref()
     const showMenu = ref(false)
     const menuStyle = ref({})
@@ -31,7 +29,7 @@ export default defineComponent({
     const selected = ref()
     const pos = ref({ x: 0, y: 0 })
     const isMoving = ref(false)
-    const toolbarRef = ref<InstanceType<typeof CanvasToolbar>>()
+    const toolbarRef = ref<InstanceType<typeof CanvasToolbar> | undefined>()
 
     !props.preview && useResizeObserver(sceneRef, (entries) => {
       const entry = entries[0]
@@ -69,8 +67,10 @@ export default defineComponent({
       nodeList.value = configComp.value.template.list
     })
 
-    function handleAdd(type: 'text' | 'image') {
-      const extra = type === 'text' ? { content: '请输入内容', style: { fontSize: 12 } } : { src: '' }
+    function handleAdd(type: 'text' | 'image', pos: { x: number, y: number }) {
+      const text = { content: '双击输入内容', style: { fontSize: 12, ...pos } }
+      const image = { src: '', style: { ...pos } }
+      const extra = type === 'text' ? text : image
       configComp.value.template.list.push({
         _uuid: uuidv4(),
         type,
@@ -80,17 +80,40 @@ export default defineComponent({
     }
     function handleContextmenu(evt: PointerEvent, data?: any) {
       evt.preventDefault()
+      const { offsetX, offsetY } = evt
       selected.value = data
       const type = data?.type
       const nodeOptions = [
-        { label: '文本', onClick: () => handleAdd('text') },
-        { label: '图片', onClick: () => handleAdd('image') },
+        { label: '文本', onClick: () => handleAdd('text', { x: offsetX, y: offsetY }) },
+        { label: '图片', onClick: () => handleAdd('image', { x: offsetX, y: offsetY }) },
       ]
       const baseOptions = [
-        { type: 'top', label: '置于顶部' },
-        { type: 'bottom', label: '置于底部' },
-        { type: 'next', label: '下一层' },
-        { type: 'prev', label: '上一层' },
+        {
+          type: 'delete',
+          label: '删除',
+          onClick: () => {
+            const { list } = configComp.value.template
+            const index = list.findIndex(item => item._uuid === data._uuid)
+            list.splice(index, 1)
+          },
+        },
+        {
+          type: 'copy',
+          label: '复制',
+          divided: true,
+          onClick: () => {
+            const { list } = configComp.value.template
+            list.push({
+              ...data,
+              _uuid: uuidv4(),
+            })
+          },
+        },
+
+        { type: 'prev', label: '上一层', onClick: () => setZIndex('prev', data) },
+        { type: 'next', label: '下一层', onClick: () => setZIndex('next', data) },
+        { type: 'top', label: '置于顶部', onClick: () => setZIndex('top', data) },
+        { type: 'bottom', label: '置于底部', onClick: () => setZIndex('bottom', data) },
       ]
       const options = type ? baseOptions : nodeOptions
       ContextMenu.showContextMenu({
@@ -98,6 +121,30 @@ export default defineComponent({
         y: evt.y,
         items: options,
       })
+    }
+
+    function setZIndex(action: 'top' | 'bottom' | 'next' | 'prev', data: any) {
+      let currentIndex = data.style.zIndex
+      const hasIndex = currentIndex != null
+      if (!hasIndex) {
+        currentIndex = 0
+      }
+      switch (action) {
+        case 'top':
+          currentIndex = 999
+          break
+        case 'bottom':
+          currentIndex = 0
+          break
+        case 'next':
+          currentIndex -= 1
+          break
+        case 'prev':
+          currentIndex += 1
+          break
+      }
+      currentIndex = Math.max(currentIndex, 0)
+      data.style.zIndex = currentIndex
     }
 
     return {
@@ -128,6 +175,7 @@ export default defineComponent({
         active: node._uuid === this.selected?._uuid,
         toolbar: this.toolbarRef,
         onClick: (evt: Event) => {
+          if (this.preview) return
           evt.stopPropagation()
           this.selected = node
         },
@@ -139,7 +187,7 @@ export default defineComponent({
         },
         onContextmenu: (evt: PointerEvent) => {
           evt.stopPropagation()
-          this.handleContextmenu(evt)
+          this.handleContextmenu(evt, node)
         },
         onMoveStart: () => {
           this.isMoving = true
@@ -166,7 +214,7 @@ export default defineComponent({
     const genToolbar = () => h(
       CanvasToolbar,
       {
-        ref: 'toolbarRef',
+        ref: (vm) => { this.toolbarRef = vm },
         modelValue: this.selected,
         style: {
           position: 'absolute',
