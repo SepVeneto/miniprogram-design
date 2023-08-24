@@ -1,10 +1,13 @@
 <template>
   <FreeDom
-    :model-value="style"
+    ref="freeRef"
+    v-model="pos"
     :class="[(!preview || active) && 'vv-editor--node', active && 'vv-editor--node__active']"
     :disabled-drag="editing || preview"
     :disabled-resize="preview"
-    @update:model-value="$emit('update:modelValue', { ...modelValue, style: $event })"
+    :drag-start-fn="() => $emit('moveStart')"
+    :resize-start-fn="() => $emit('moveStart')"
+    @update:model-value="handleFreedomStyle"
   >
     <CanvasNodeText
       v-if="modelValue.type === 'text'"
@@ -27,6 +30,7 @@ import { FreeDom } from '@sepveneto/free-dom'
 import { computed, ref, watchEffect } from 'vue'
 import CanvasNodeText from './CanvasNode.text.vue'
 import { normalizeStyle } from '@sepveneto/mpd-hooks'
+import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
   modelValue: {
@@ -35,15 +39,39 @@ const props = defineProps({
   },
   preview: Boolean,
   active: Boolean,
+  toolbar: {
+    type: Object,
+    required: true,
+  },
 })
-const style = ref({})
-defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'moveStart', 'moveStop', 'clickOutside'])
 const editing = ref(false)
+const pos = ref<Partial<{ x: number, y: number, w: number, h: number }>>({})
+const freeRef = ref()
 
-const nodeStyle = computed(() => normalizeStyle(props.modelValue.style))
-watchEffect(() => {
-  style.value = props.modelValue.style
+onClickOutside(freeRef, () => {
+  emit('clickOutside')
+}, { ignore: [props.toolbar, '.vv-editor--toolbar__colorpanel'] })
+
+const nodeStyle = computed(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { x, y, width, height, ...normalStyle } = props.modelValue.style
+  return normalizeStyle(normalStyle)
 })
+watchEffect(() => {
+  const { x, y, w, h } = props.modelValue.style
+  pos.value = {
+    x,
+    y,
+    w,
+    h,
+  }
+})
+
+function handleFreedomStyle(style: any) {
+  emit('update:modelValue', { ...props.modelValue, style: { ...props.modelValue.style, ...style } })
+  emit('moveStop', style)
+}
 </script>
 
 <style lang="scss" scoped>

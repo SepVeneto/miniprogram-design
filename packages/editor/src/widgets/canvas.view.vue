@@ -1,32 +1,5 @@
-<template>
-  <FreeScene
-    ref="sceneRef"
-    :width="width"
-    :height="height"
-    :style="sceneStyle"
-    :min-height="10"
-    :scale="['rb']"
-    @contextmenu="handleContextmenu"
-  >
-    <CanvasNode
-      v-for="(node, index) in nodeList"
-      :key="node._uuid"
-      :model-value="node"
-      :preview="preview"
-      :active="node._uuid === selected?._uuid"
-      @click.stop="selected = node"
-      @update:model-value="nodeList[index] = $event"
-      @contextmenu="handleContextmenu($event, node)"
-    />
-  </FreeScene>
-  <CanvasContext
-    :selected="selected"
-    style="position: fixed"
-  />
-</template>
-
 <script lang="ts">
-import CanvasContext from '@/components/CanvasContext.vue'
+import CanvasToolbar from '@/components/CanvasContext.vue'
 import CanvasNode from '@/components/CanvasNode.vue'
 import { FreeScene } from '@sepveneto/free-dom'
 import '@sepveneto/free-dom/css'
@@ -39,11 +12,6 @@ import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
 
 export default defineComponent({
-  components: {
-    CanvasNode,
-    FreeScene,
-    CanvasContext,
-  },
   props: {
     config: {
       type: Object,
@@ -57,10 +25,13 @@ export default defineComponent({
     const menuRef = ref()
     const showMenu = ref(false)
     const menuStyle = ref({})
-    const sceneRef = ref()
+    const sceneRef = ref<InstanceType<typeof FreeScene>>()
     const width = ref()
     const height = ref()
     const selected = ref()
+    const pos = ref({ x: 0, y: 0 })
+    const isMoving = ref(false)
+    const toolbarRef = ref<InstanceType<typeof CanvasToolbar>>()
 
     !props.preview && useResizeObserver(sceneRef, (entries) => {
       const entry = entries[0]
@@ -89,6 +60,9 @@ export default defineComponent({
         emit('update:modelValue', val)
       },
     })
+    const showToolbar = computed(() => {
+      return (selected.value && !isMoving.value) ? 'flex' : 'none'
+    })
 
     const nodeList = ref<any[]>([])
     watchEffect(() => {
@@ -106,7 +80,6 @@ export default defineComponent({
     }
     function handleContextmenu(evt: PointerEvent, data?: any) {
       evt.preventDefault()
-      console.log(evt)
       selected.value = data
       const type = data?.type
       const nodeOptions = [
@@ -128,6 +101,7 @@ export default defineComponent({
     }
 
     return {
+      pos,
       showMenu,
       menuStyle,
       nodeList,
@@ -137,30 +111,78 @@ export default defineComponent({
       sceneRef,
       menuRef,
       selected,
+      isMoving,
+      showToolbar,
+      toolbarRef,
       handleAdd,
       handleContextmenu,
     }
+  },
+  render() {
+    const genNode = (node: any, index: number) => h(
+      CanvasNode,
+      {
+        key: node._uuid,
+        modelValue: node,
+        preview: this.preview,
+        active: node._uuid === this.selected?._uuid,
+        toolbar: this.toolbarRef,
+        onClick: (evt: Event) => {
+          evt.stopPropagation()
+          this.selected = node
+        },
+        onClickOutside: () => {
+          this.selected = undefined
+        },
+        'onUpdate:modelValue': (val: any) => {
+          this.nodeList[index] = val
+        },
+        onContextmenu: (evt: PointerEvent) => {
+          evt.stopPropagation()
+          this.handleContextmenu(evt)
+        },
+        onMoveStart: () => {
+          this.isMoving = true
+        },
+        onMoveStop: (pos?: any) => {
+          pos && (this.pos = pos)
+          this.isMoving = false
+        },
+      },
+    )
+    const genScene = () => h(
+      FreeScene,
+      {
+        ref: 'sceneRef',
+        width: this.width,
+        height: this.height,
+        style: this.sceneStyle,
+        minHeight: 10,
+        scale: ['rb'],
+        onContextmenu: this.handleContextmenu,
+      },
+      () => this.nodeList.map(genNode),
+    )
+    const genToolbar = () => h(
+      CanvasToolbar,
+      {
+        ref: 'toolbarRef',
+        modelValue: this.selected,
+        style: {
+          position: 'absolute',
+          top: `${this.pos.y + this.pos.h}px`,
+          left: `${this.pos.x}px`,
+          display: this.showToolbar,
+        },
+      },
+    )
+    return this.preview
+      ? genScene()
+      : h('fragment', [genScene(), genToolbar()])
   },
 })
 </script>
 
 <style scoped lang="scss">
-.canvas-wrap {
-  position: relative;
-  min-height: 50px;
-  &::before {
-    content: '拖拽至此区域';
-    color: #ddd;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-}
+
 </style>
