@@ -3,6 +3,9 @@
     class="main-container"
     @click="handleOutside"
   >
+    <button @click="handleExtract">
+      extract
+    </button>
     <main
       ref="mainRef"
       style="display: flex; justify-content: space-between;"
@@ -72,14 +75,24 @@
           <template #header>
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span>{{ selected._name || '配置' }}</span>
-              <el-button
-                type="primary"
-                text
-                :disabled="isPreview || !selected._schema || ['tabbar'].includes(selected._schema)"
-                @click="handleDelete"
-              >
-                删除
-              </el-button>
+              <div v-if="selected._schema && !['tabbar'].includes(selected._schema)">
+                <el-switch
+                  v-model="selected._custom"
+                  style="--el-switch-on-color: var(--el-color-success); --el-switch-off-color: var(--el-color-primary)"
+                  inactive-text="固定模板"
+                  active-text="自定义"
+                  inline-prompt
+                  @change="handleModeChange"
+                />
+                <el-button
+                  type="primary"
+                  text
+                  :disabled="isPreview || !selected._schema"
+                  @click="handleDelete"
+                >
+                  删除
+                </el-button>
+              </div>
             </div>
           </template>
           <el-scrollbar wrap-style="height: 700px;">
@@ -124,6 +137,20 @@ onMounted(() => {
   })
 })
 
+function handleExtract() {
+  console.log(app.config)
+}
+function handleModeChange(isCustom: boolean) {
+  if (!isCustom) return
+
+  if ('template' in selected.value) {
+    if (typeof selected.value.template !== 'object') {
+      console.warn('[@sepveneto/mpd-editor] template is a reserved field!')
+    }
+  } else {
+    app.selected.template = { list: [] }
+  }
+}
 function handleDelete() {
   const currentConfig = app.config.body[route.name!]
   const index = currentConfig.findIndex(item => item._uuid === selected.value._uuid)

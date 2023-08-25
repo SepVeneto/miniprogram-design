@@ -18,6 +18,7 @@ import { normalizeStyle } from '@/utils'
 import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
+import CanvasView from '@/widgets/canvas.view.vue'
 
 export default defineComponent({
   props: {
@@ -27,7 +28,7 @@ export default defineComponent({
     const route = useRoute()
 
     const app = useApp()
-    const { activeUuid, onEnter, onLeave } = useHoverActive()
+    const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
 
     provide('Editor', reactive({
       ...toRefs(props),
@@ -82,8 +83,8 @@ export default defineComponent({
         container: ['container', 'swiper'].includes(item._view),
         mask: item._view !== 'container' && item._view !== 'swiper' && item._mask,
         customStyle: item.style,
-        onMouseenter: withModifiers(() => onEnter(item._uuid), ['stop']),
-        onMouseleave: withModifiers(onLeave, ['stop']),
+        onMouseenter: () => onEnter(item._uuid),
+        onMouseleave: () => onLeave(),
         onClick: () => handleSelect(item),
       }, () => renderChild(item))
       return props.preview ? renderPreview(item) : operate
@@ -95,14 +96,25 @@ export default defineComponent({
         case 'container':
           return h(ContainerView, { config: item, style: normalizeStyle(item.style) })
         default:
-          return ViewRender.value
-            ? h(ViewRender.value, {
-              type: item._view,
-              config: item,
-              style: normalizeStyle(item.style),
-              'onUpdate:config': updateConfig,
-            })
-            : h('div', errorLoading.value ? '加载失败!' : '加载中...')
+          return genRender(item, true)
+      }
+    }
+    function genRender(item: any, isPreview = false) {
+      if (item._custom) {
+        const options = {
+          config: item,
+          preview: isPreview,
+        }
+        return h(CanvasView, isPreview ? { ...options, style: normalizeStyle(item.style) } : options)
+      } else {
+        const options = {
+          type: item._view,
+          config: item,
+          'onUpdate:config': updateConfig,
+        }
+        return ViewRender.value
+          ? h(ViewRender.value, isPreview ? { ...options, style: normalizeStyle(item.style) } : options)
+          : h('div', errorLoading.value ? '加载失败!' : '加载中...')
       }
     }
     function renderChild(item: any) {
@@ -112,13 +124,7 @@ export default defineComponent({
         case 'container':
           return h(ContainerView, { config: item })
         default:
-          return ViewRender.value
-            ? h(ViewRender.value, {
-              type: item._view,
-              config: item,
-              'onUpdate:config': updateConfig,
-            })
-            : h('div', errorLoading.value ? '加载失败!' : '加载中...')
+          return genRender(item)
       }
     }
 
@@ -127,6 +133,8 @@ export default defineComponent({
       data,
       onPut,
       mainRef,
+      onDragStart,
+      onDragEnd,
     }
   },
   render() {
@@ -144,6 +152,8 @@ export default defineComponent({
       handle: '.operate',
       itemKey: '_uuid',
       'onUpdate:modelValue': val => { this.data = val },
+      onStart: this.onDragStart,
+      onEnd: () => this.onDragEnd(),
     }, {
       item: (item) => this.renderWrapper(item.element),
     })

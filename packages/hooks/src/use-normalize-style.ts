@@ -21,7 +21,7 @@ export function normalizeStyle(style: Style) {
       const [key, value] = _style
       if (typeof value === 'number') {
         // @ts-expect-error: value is not a number
-        obj[key] = `${value}px`
+        obj[key] = key === 'zIndex' ? value : `${value}px`
       } else if (value?.startsWith('http')) {
         // @ts-expect-error: value is not a number
         obj[key] = `url(${value})`

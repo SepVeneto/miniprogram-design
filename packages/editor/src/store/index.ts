@@ -183,6 +183,7 @@ export const useApp = defineStore('app', () => {
   const activeUuids = ref<string[]>([])
   const active = {
     enter(uuid: string) {
+      if (activeUuids.value.includes(uuid)) return
       activeUuids.value.push(uuid)
     },
     leave() {
