@@ -8,6 +8,7 @@
     :drag-start-fn="onMoveStart"
     :resize-start-fn="() => $emit('moveStart')"
     :style="nodeStyle"
+    lock-aspect-ratio
     @update:model-value="handleFreedomStyle"
   >
     <CanvasNodeText
@@ -21,7 +22,8 @@
     <CanvasNodeImage
       v-else-if="modelValue.type === 'image'"
       :src="modelValue.src"
-      :mode="modelValue.mode"
+      :style="modelValue.style"
+      @update:style="$emit('update:modelValue', { ...modelValue, style: $event })"
     />
   </FreeDom>
 </template>

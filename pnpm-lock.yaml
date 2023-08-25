@@ -109,8 +109,8 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(@element-plus/icons-vue@2.1.0)(element-plus@2.3.9)(vue@3.2.47)
       '@sepveneto/free-dom':
-        specifier: ^0.8.0
-        version: 0.8.0(@types/lodash-es@4.17.8)(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.2.47)
+        specifier: ^0.9.1
+        version: 0.9.1(@types/lodash-es@4.17.8)(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.2.47)
       '@sepveneto/mpd-hooks':
         specifier: workspace:*
         version: link:../hooks
@@ -2316,8 +2316,8 @@ packages:
       vue-demi: 0.14.5(@vue/composition-api@1.0.0-rc.1)(vue@3.2.45)
     dev: false
 
-  /@sepveneto/free-dom@0.8.0(@types/lodash-es@4.17.8)(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.2.47):
-    resolution: {integrity: sha512-ozncfgicozo7Ufy17k0l+EoQ5ReP5HiTEhnhb4OPAXH1q5C9ZNJPgUpninp2YI6/jBkejrjQaif8MOJzOHZRhA==}
+  /@sepveneto/free-dom@0.9.1(@types/lodash-es@4.17.8)(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.2.47):
+    resolution: {integrity: sha512-xWkoa1Pt4245y6jKlfiIBpAbDAu4JP5L1EmN1yywz5F69BJMe0xF64l44xxyQPOIFYAQztXBB46sUN+XGKgYlg==}
     dependencies:
       lodash-unified: 1.0.3(@types/lodash-es@4.17.8)(lodash-es@4.17.21)(lodash@4.17.21)
       uuid: 9.0.0

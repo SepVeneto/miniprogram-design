@@ -1,8 +1,10 @@
 <template>
   <img
     v-if="src"
+    ref="imgRef"
     :src="src"
-    :style="{ objectFit, pointerEvents: 'none', width: '100%', height: '100%' }"
+    :style="{ pointerEvents: 'none', width: '100%', height: '100%' }"
+    @load="handleLoad"
   >
   <ElIcon
     v-else
@@ -15,29 +17,26 @@
 <script lang="ts" setup>
 import { ElIcon } from 'element-plus'
 import { Picture as IconPicture } from '@element-plus/icons-vue'
-import { computed, ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 
+const imgRef = ref<HTMLImageElement>()
 const props = defineProps({
   src: {
     type: String,
     default: '',
   },
-  mode: {
-    type: String,
-    default: undefined,
+  style: {
+    type: Object,
+    default: () => ({}),
   },
-  preview: Boolean,
 })
-const objectFit = computed(() => {
-  switch (props.mode) {
-    case 'scaleToFill':
-      return 'fill'
-    case 'aspectFit':
-      return 'contain'
-    case 'aspectFill':
-      return 'cover'
-    default:
-      return 'fill'
-  }
-})
+const emit = defineEmits(['update:style'])
+function handleLoad() {
+  if (!imgRef.value) return
+  const { naturalHeight, naturalWidth } = imgRef.value
+  const ratio = naturalWidth / naturalHeight
+  const { w = 100 } = props.style
+  const h = w * ratio
+  emit('update:style', { ...props.style, w, h })
+}
 </script>

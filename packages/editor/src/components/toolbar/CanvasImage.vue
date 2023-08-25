@@ -11,38 +11,12 @@
       </ElIcon>
     </ElUpload>
   </ActiveNode>
-  <ActiveNode>
-    <ElDropdown
-      :teleported="false"
-      @command="selected.mode = $event"
-    >
-      <ElIcon>
-        <IconPicture />
-      </ElIcon>
-      <template #dropdown>
-        <ElDropdownMenu>
-          <ElDropdownItem command="scaleToFill">
-            scaleToFill
-          </ElDropdownItem>
-          <ElDropdownItem command="aspectFit">
-            aspectFit
-          </ElDropdownItem>
-          <ElDropdownItem command="aspectFill">
-            aspectFill
-          </ElDropdownItem>
-        </ElDropdownMenu>
-      </template>
-    </ElDropdown>
-  </ActiveNode>
 </template>
 
 <script lang="ts" setup>
 import ActiveNode from '@/components/ActiveNode.vue'
-import { Picture as IconPicture, Upload as IconUpload } from '@element-plus/icons-vue'
+import { Upload as IconUpload } from '@element-plus/icons-vue'
 import {
-  ElDropdown,
-  ElDropdownItem,
-  ElDropdownMenu,
   ElIcon,
   ElUpload,
 } from 'element-plus'
@@ -71,8 +45,7 @@ function noop() {
   /* empty */
 }
 async function customRequest(data: UploadRequestOptions) {
-  selected.value.src = 'https://th.bing.com/th/id/OIP.0-UL9rX37JofuquE90BSjgHaGI?w=195&h=180&c=7&r=0&o=5&pid=1.7'
-  // const res = await uploadRequest(data)
-  // selected.value.src = res
+  const res = await uploadRequest(data)
+  selected.value.src = res
 }
 </script>

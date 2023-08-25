@@ -4,8 +4,8 @@ import CanvasNode from '@/components/CanvasNode.vue'
 import { FreeScene } from '@sepveneto/free-dom'
 import '@sepveneto/free-dom/css'
 // import viewRender from 'widgets_side/viewRender';
-import { computed, defineComponent, h, ref, watchEffect } from 'vue'
-import { useResizeObserver } from '@vueuse/core'
+import { computed, defineComponent, h, ref, shallowRef, watchEffect } from 'vue'
+import { onKeyDown, useResizeObserver } from '@vueuse/core'
 import { v4 as uuidv4 } from 'uuid'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
@@ -27,9 +27,10 @@ export default defineComponent({
     const width = ref()
     const height = ref()
     const selected = ref()
-    const pos = ref({ x: 0, y: 0 })
+    const pos = ref({ x: 0, y: 0, h: 0 })
     const isMoving = ref(false)
     const toolbarRef = ref<InstanceType<typeof CanvasToolbar> | undefined>()
+    const diff = ref(0)
 
     !props.preview && useResizeObserver(sceneRef, (entries) => {
       const entry = entries[0]
@@ -66,7 +67,28 @@ export default defineComponent({
     watchEffect(() => {
       nodeList.value = configComp.value.template.list
     })
+    const listener = shallowRef()
 
+    function listenKeyboard() {
+      const stopDown = onKeyDown('ArrowDown', () => {
+        selected.value.style.y += 1
+      })
+      const stopUp = onKeyDown('ArrowUp', () => {
+        selected.value.style.y -= 1
+      })
+      const stopLeft = onKeyDown('ArrowLeft', () => {
+        selected.value.style.x -= 1
+      })
+      const stopRight = onKeyDown('ArrowRight', () => {
+        selected.value.style.x += 1
+      })
+      return () => {
+        stopDown()
+        stopUp()
+        stopLeft()
+        stopRight()
+      }
+    }
     function handleAdd(type: 'text' | 'image', pos: { x: number, y: number }) {
       const text = { content: '双击输入内容', style: { fontSize: 12, ...pos } }
       const image = { src: '', style: { ...pos } }
@@ -148,6 +170,9 @@ export default defineComponent({
     }
 
     return {
+      listener,
+      listenKeyboard,
+      diff,
       pos,
       showMenu,
       menuStyle,
@@ -177,9 +202,11 @@ export default defineComponent({
         onClick: (evt: Event) => {
           if (this.preview) return
           evt.stopPropagation()
+          this.listener = this.listenKeyboard()
           this.selected = node
         },
         onClickOutside: () => {
+          this.listener()
           this.selected = undefined
         },
         'onUpdate:modelValue': (val: any) => {
@@ -190,9 +217,11 @@ export default defineComponent({
           this.handleContextmenu(evt, node)
         },
         onMoveStart: () => {
+          this.diff = 2
           this.isMoving = true
         },
         onMoveStop: (pos?: any) => {
+          this.diff = 0
           pos && (this.pos = pos)
           this.isMoving = false
         },
@@ -202,6 +231,7 @@ export default defineComponent({
       FreeScene,
       {
         ref: 'sceneRef',
+        diff: this.diff,
         width: this.width,
         height: this.height,
         style: this.sceneStyle,
@@ -214,7 +244,7 @@ export default defineComponent({
     const genToolbar = () => h(
       CanvasToolbar,
       {
-        ref: (vm) => { this.toolbarRef = vm },
+        ref: (vm) => { vm && (this.toolbarRef = vm) },
         modelValue: this.selected,
         style: {
           position: 'absolute',
