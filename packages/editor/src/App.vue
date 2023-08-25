@@ -3,9 +3,6 @@
     class="main-container"
     @click="handleOutside"
   >
-    <button @click="handleExtract">
-      extract
-    </button>
     <main
       ref="mainRef"
       style="display: flex; justify-content: space-between;"
@@ -137,9 +134,6 @@ onMounted(() => {
   })
 })
 
-function handleExtract() {
-  console.log(app.config)
-}
 function handleModeChange(isCustom: boolean) {
   if (!isCustom) return
 
