@@ -45,11 +45,12 @@ export default defineComponent({
     })
 
     const sceneStyle = computed(() => {
-      if (!props.preview) return { width: '100%', height: '100%' }
-      return {
-        width: `${width.value}px`,
-        height: `${height.value}px`,
-      }
+      // if (!props.preview) return { width: '100%', height: '100%' }
+      // return {
+      //   width: `${width.value}px`,
+      //   height: `${height.value}px`,
+      // }
+      return { width: '100%', height: '100%' }
     })
     const configComp = computed<any>({
       get() {
@@ -67,7 +68,7 @@ export default defineComponent({
     watchEffect(() => {
       nodeList.value = configComp.value.template.list
     })
-    const listener = shallowRef()
+    const listener = shallowRef(function () { /* empty */ })
 
     function listenKeyboard() {
       const stopDown = onKeyDown('ArrowDown', () => {

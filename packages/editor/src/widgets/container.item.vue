@@ -52,19 +52,19 @@ export default defineComponent({
       }
       const wrapperProps = props.options.type === 'swiper' ? swiper : { ...base, style: 'width: 100%; height: 100%;' }
       return !preview
-        ? h(DraggableWrapper, { ...wrapperProps, aactive: props.active }, () => getRenderContent(element))
+        ? h(DraggableWrapper, { ...wrapperProps, active: props.active }, () => getRenderContent(element, preview))
         : h('div', {
           class: [props.options.type === 'swiper' && 'swiper-slide'],
           style: { height: '100%' },
-        }, () => getRenderContent(element))
+        }, getRenderContent(element, preview))
     }
-    function getRenderContent(element: any) {
+    function getRenderContent(element: any, isPreview = false) {
       switch (element._view) {
         case 'container':
           return undefined
         default:
           if (element._custom) {
-            return h(CanvasView, { config: element })
+            return h(CanvasView, { config: element, preview: isPreview })
           }
           return props.options.ViewRender
             ? h(props.options.ViewRender, {
@@ -91,6 +91,7 @@ export default defineComponent({
         dragOpts: {
           startFn: onDragStart,
           stopFn: onDragEnd,
+          disabled: props.options.preview,
         },
         onMouseenter: () => onEnter(element._uuid),
         onMouseleave: () => onLeave(),
