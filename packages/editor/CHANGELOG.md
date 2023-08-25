@@ -1,3 +1,25 @@
+# [0.12.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.11.0...editor@0.12.0) (2023-08-25)
+
+
+### Bug Fixes
+
+* 单元格吸附无效 ([a2d801d](https://github.com/SepVeneto/miniprogram-design/commit/a2d801d0ef6a383becf10c2f5ccda5e87cfed6f8))
+* active state error ([a098270](https://github.com/SepVeneto/miniprogram-design/commit/a098270b0fc913fc4562ad784703f18f73216abb))
+* container render empty in preview mode ([8774a8e](https://github.com/SepVeneto/miniprogram-design/commit/8774a8eb563d289db4341ffbd1efddf31d218e9a))
+* container swiper display custom mode ([b8b02c4](https://github.com/SepVeneto/miniprogram-design/commit/b8b02c441ee96d027c688f0eedf9455baecaae2a))
+* z-index transfer error ([d07169f](https://github.com/SepVeneto/miniprogram-design/commit/d07169f14e642dfe1240d805026aa6df03f8356c))
+
+
+### Features
+
+* image toolbar ([db604de](https://github.com/SepVeneto/miniprogram-design/commit/db604de83326b77b9e8ee9e21727d51cd5979167))
+* image upload ([1aa6b5a](https://github.com/SepVeneto/miniprogram-design/commit/1aa6b5a0234cc3d4d8bcfde6ea85012be0c64420))
+* menu&toolbar ([c78b48c](https://github.com/SepVeneto/miniprogram-design/commit/c78b48c25e006276b0afe350d13760d73582ef97))
+* text toolbar ([8c2d42e](https://github.com/SepVeneto/miniprogram-design/commit/8c2d42e0814d7a0d07a1d20e00b7689e456f87fb))
+* update element-plus to 2.3.10 ([6d902b1](https://github.com/SepVeneto/miniprogram-design/commit/6d902b13ac7d800a88e0f3fd05f5db5ce192adba))
+
+
+
 # [0.11.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.10.1...editor@0.11.0) (2023-08-21)
 
 
@@ -9,6 +31,7 @@
 * **container:** 设置背景图片无效 ([6d56e72](https://github.com/SepVeneto/miniprogram-design/commit/6d56e7278cea1ccb6b68624c3abf7945b3a0f1bc))
 * **core:** mounted config mix ([b0310cd](https://github.com/SepVeneto/miniprogram-design/commit/b0310cd2fe7088ecf8c2361c9fa2abab077a7da3))
 * **editor:** event action mix ([25f95a1](https://github.com/SepVeneto/miniprogram-design/commit/25f95a11821ddae15c0d49218547c68672e9d896))
+* **hooks:** dts error ([5a52184](https://github.com/SepVeneto/miniprogram-design/commit/5a52184b4034736c80fd012a41eea7ee29bc04e2))
 * revert remove dispath config ([594dc65](https://github.com/SepVeneto/miniprogram-design/commit/594dc65fa3ed39541c81d502a0669f135fda619f))
 * **schema:** box删除所有内容导致无法再次编辑 ([4a5aa6a](https://github.com/SepVeneto/miniprogram-design/commit/4a5aa6a98c90f6c17423f6d174d5cf75ebbe19bc))
 * swiper without grid ([09bd794](https://github.com/SepVeneto/miniprogram-design/commit/09bd794b6f95e139449aa11651fb34c215558bcf))
