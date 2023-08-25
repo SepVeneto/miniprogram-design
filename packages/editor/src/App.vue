@@ -74,6 +74,7 @@
               <span>{{ selected._name || '配置' }}</span>
               <div v-if="selected._schema && !['tabbar'].includes(selected._schema)">
                 <el-switch
+                  v-if="!['container', 'swiper'].includes(selected._view)"
                   v-model="selected._custom"
                   style="--el-switch-on-color: var(--el-color-success); --el-switch-off-color: var(--el-color-primary)"
                   inactive-text="固定模板"
