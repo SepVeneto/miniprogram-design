@@ -1,3 +1,12 @@
+## [0.12.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.12.0...editor@0.12.1) (2023-08-28)
+
+
+### Bug Fixes
+
+* **custom-mode:** image init size cal error ([03c13e3](https://github.com/SepVeneto/miniprogram-design/commit/03c13e37909ae6c65ec34ac38ce4be3ebbff5ad8))
+
+
+
 # [0.12.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.11.0...editor@0.12.0) (2023-08-25)
 
 
