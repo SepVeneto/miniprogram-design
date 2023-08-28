@@ -1,11 +1,11 @@
 <template>
-  <img
+  <ElImage
     v-if="src"
     ref="imgRef"
     :src="src"
     :style="{ pointerEvents: 'none', width: '100%', height: '100%' }"
     @load="handleLoad"
-  >
+  />
   <ElIcon
     v-else
     :size="24"
@@ -15,11 +15,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ElIcon } from 'element-plus'
+import { ElIcon, ElImage } from 'element-plus'
 import { Picture as IconPicture } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 
-const imgRef = ref<HTMLImageElement>()
+const imgRef = ref<InstanceType<typeof ElImage>>()
 const props = defineProps({
   src: {
     type: String,
@@ -33,8 +33,8 @@ const props = defineProps({
 const emit = defineEmits(['update:style'])
 function handleLoad() {
   if (!imgRef.value) return
-  const { naturalHeight, naturalWidth } = imgRef.value
-  const ratio = naturalWidth / naturalHeight
+  const { naturalHeight, naturalWidth } = imgRef.value.$el.querySelector('img')
+  const ratio = naturalHeight / naturalWidth
   const { w = 100 } = props.style
   const h = w * ratio
   emit('update:style', { ...props.style, w, h })
