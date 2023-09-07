@@ -1,4 +1,4 @@
-name: Publish Docs Deploy
+name: Publish Docs Editor
 
 on:
   workflow_dispatch:
@@ -29,5 +29,5 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          branch: docs
-          folder: packages/editor/dist/prod
+          branch: docs-editor
+          folder: packages/editor/dist/dev
