@@ -51,7 +51,7 @@ function handleLoader() {
   useDesign('#mpd-container', {
     name: 'design',
     // url: 'https://sepveneto.github.io/miniprogram-design/',
-    url: 'http://10.7.12.26:9087/miniprogram-design/',
+    url: 'http://10.7.12.26:9087/miniprogram-design/__dev/',
     inline: true,
     data,
   })
