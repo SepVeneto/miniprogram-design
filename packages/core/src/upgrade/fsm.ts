@@ -1,4 +1,4 @@
-import { CoreDataV1 } from '.';
+import type { CoreDataV1 } from '.'
 abstract class Context {
   abstract setVersion(state: any): void
   abstract data: Record<PropertyKey, unknown>
@@ -11,22 +11,22 @@ interface State {
 }
 
 class StateV1 implements State {
-  readonly VERSION = '1.0';
-  private context: Context;
-  origin: CoreDataV1;
-  constructor (context: Context) {
-    this.context = context;
-    this.origin = this.context.data as CoreDataV1;
+  readonly VERSION = '1.0'
+  private context: Context
+  origin: CoreDataV1
+  constructor(context: Context) {
+    this.context = context
+    this.origin = this.context.data as CoreDataV1
   }
 
-  public updateVersion () {
-    this.upgrade();
+  public updateVersion() {
+    this.upgrade()
     // this.context.setVersion(new StateV11(this.context));
   }
 
   @shouldUpdate
-  public upgrade () {
-    this.origin.version = '1.0';
+  public upgrade() {
+    this.origin.version = '1.0'
   }
 }
 
@@ -79,61 +79,61 @@ class StateV1 implements State {
 // }
 
 export class VersionMachine implements Context {
-  public data: Record<PropertyKey, unknown>;
-  private current;
-  constructor (data: Record<PropertyKey, unknown>) {
-    this.data = JSON.parse(JSON.stringify(data));
-    this.current = new StateV1(this);
+  public data: Record<PropertyKey, unknown>
+  private current
+  constructor(data: Record<PropertyKey, unknown>) {
+    this.data = JSON.parse(JSON.stringify(data))
+    this.current = new StateV1(this)
   }
 
-  setVersion (state: any) {
-    this.current = state;
+  setVersion(state: any) {
+    this.current = state
   }
 
-  getVersion () {
-    return this.data.version;
+  getVersion() {
+    return this.data.version
   }
 
-  upgrade () {
-    this.current.updateVersion();
-    return this.current.origin;
+  upgrade() {
+    this.current.updateVersion()
+    return this.current.origin
   }
 }
 
-function shouldUpdate (
+function shouldUpdate(
   target: any,
   propertyKey: string,
   descriptor: PropertyDescriptor,
 ) {
-  const fn = descriptor.value;
+  const fn = descriptor.value
   descriptor.value = function (this: State, ...args: any) {
-    const current = extractVersion(this.origin.version);
-    const target = extractVersion(this.VERSION);
+    const current = extractVersion(this.origin.version)
+    const target = extractVersion(this.VERSION)
     if (isSmaller(current, target)) {
-      return fn.apply(this, args);
+      return fn.apply(this, args)
     } else {
-      return () => ({});
+      return () => ({})
     }
-  };
+  }
 }
 
-function isSmaller (a: number[], b: number[]) {
+function isSmaller(a: number[], b: number[]) {
   return a.reduce((flag, curr, index) => {
-    flag = curr < b[index];
-    return flag;
-  }, false);
+    flag = curr < b[index]
+    return flag
+  }, false)
 }
 
-function extractVersion (version?: string) {
+function extractVersion(version?: string) {
   if (!version) {
-    return [0];
+    return [0]
   }
   if (typeof version === 'number') {
-    throw new Error(`[@sepveneto/mpd-core] version ${version} must be string.`);
+    throw new Error(`[@sepveneto/mpd-core] version ${version} must be string.`)
   }
-  const [, major, patch] = version.match(/^([0-9]+)\.([0-9]+)$/) ?? [];
+  const [, major, patch] = version.match(/^([0-9]+)\.([0-9]+)$/) ?? []
   if (!major || !patch) {
-    throw new Error(`[@sepveneto/mpd-core] version ${version} is invalid.`);
+    throw new Error(`[@sepveneto/mpd-core] version ${version} is invalid.`)
   }
-  return [Number(major), Number(patch)];
+  return [Number(major), Number(patch)]
 }
