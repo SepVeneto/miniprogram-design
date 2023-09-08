@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = defineConfig({
   lintOnSave: false,
-  assetsDir: 'deign-static',
+  assetsDir: 'design-static',
   publicPath: '',
   outputDir: `dist/${isProduction ? 'prod' : 'dev'}`,
   productionSourceMap: false,
