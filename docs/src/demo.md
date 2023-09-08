@@ -2,43 +2,17 @@
 layout: home
 ---
 
-<div class="remote-wrapper">
-  <input class="remote-input" v-model="remoteUrl" @blur="onBlur">
-  <button @click="handleRemote" class="remote-button">加载远程视图</button>
-</div>
-
 <ClientOnly>
+  <RemoteInput />
   <VpEditor />
 </ClientOnly>
 
 <script setup>
-import { ref } from 'vue'
-
-const remoteUrl = ref(localStorage.getItem('RemoteUrl'))
-
-function onBlur() {
-  localStorage.setItem('RemoteUrl', remoteUrl.value)
-}
-function handleRemote() {
-  window.location.reload()
-}
+import microApp from "@micro-zoe/micro-app"
+import RemoteInput from './.vitepress/theme/components/RemoteInput.vue'
+import { onMounted } from 'vue'
+onMounted(() => {
+  microApp.start()
+})
 </script>
 
-<style scoped>
-.remote-wrapper {
-  width: fit-content;
-  border: 1px solid #999;
-  border-radius: 6px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-.remote-button {
-  padding: 4px;
-  background: #ddd;
-  border-radius: 6px;
-}
-.remote-input {
-  padding: 4px;
-  padding-left: 10px;
-}
-</style>
