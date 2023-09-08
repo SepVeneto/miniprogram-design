@@ -1,59 +1,22 @@
-<div id="mpd-container" />
-<!-- <button @click="handleLoader">loader</button> -->
-<!-- <ClientOnly>
-<micro-app name="design" url="https://sepveneto.github.io/miniprogram-design/" />
-</ClientOnly> -->
+---
+layout: home
 
-<script setup>
-import { useDesign } from '@sepveneto/mpd-core'
-import { ref, onMounted } from 'vue'
-const show = ref(false)
-const containerRef = ref()
+hero:
+  name: miniprogram-design
+  tagline: 分离式可视化编辑器
+  actions:
+    - theme: brand
+      text: Demo
+      link: /demo
+    - theme: alt
+      text: 文档
+      link: /introduction
 
-// onMounted(() => {
-//   console.log('mounted')
-//   handleLoader()
-// })
-
-handleLoader()
-function handleLoader() {
-  const schema = {
-    card: [{
-      type: 'box',
-    }]
-  }
-  const widgets = [
-        {
-          name: '基本组件',
-          group: [
-            {
-              _name: '卡片',
-              _view: 'card',
-              _schema: 'card',
-              style: {},
-            }
-          ]
-        }
-      ]
-  const remoteUrl = localStorage.getItem('RemoteUrl')
-  const data = {
-      schema,
-      widgets,
-      config: {
-        body: {
-          Home: []
-        }
-      }
-    }
-  if (remoteUrl) {
-    data.remoteUrl = remoteUrl
-  }
-  useDesign('#mpd-container', {
-    name: 'design',
-    // url: 'https://sepveneto.github.io/miniprogram-design/',
-    url: 'http://10.7.12.26:9087/miniprogram-design/__dev/',
-    inline: true,
-    data,
-  })
-}
-</script>
+features:
+  - title: Feature A
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Feature B
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Feature C
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+---
