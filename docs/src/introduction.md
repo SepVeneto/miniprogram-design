@@ -2,48 +2,14 @@
 outline: deep
 ---
 
-# Runtime API Examples
+# 介绍
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+`miniprogram-design`的设计初衷是允许将视图组件完全与可视化编辑的功能剥离开来，一方面让开发的关注点下沉，不需要考虑可视化的基础功能，能够快速进行业务组件的开发; 另一方面是能够快速接入不同的项目。
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+## 业务与功能分离
 
-```md
-<script setup>
-import { useData } from 'vitepress'
+依赖`module-federation`让业务组件可以与可视化功能分离开。简单的说编辑器本身可以独立部署，而业务组件可以在本地开发。这也是与常见的可视化编辑器的不同地方，要么是颗粒度太细，导致使用起来很麻烦，上手门槛比较高; 要么是单纯通过json配置，比较死板。
 
-const { theme, page, frontmatter } = useData()
-</script>
+## 快速部署
 
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
-```
-
-<script setup>
-import { useData } from 'vitepress'
-
-const { site, theme, page, frontmatter } = useData()
-</script>
-
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
-
-## More
-
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+支持通过`docker`来快速部署，运行后可以通过端口直接访问，或者是在网关进行简单的匹配转发。

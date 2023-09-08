@@ -17,8 +17,12 @@ export default defineConfig({
         text: '文档',
         items: [
           { text: '介绍', link: '/introduction' },
-          { text: '快速开始', link: '/api-examples' },
+          { text: '快速开始', link: '/quickstart' },
         ],
+      },
+      {
+        text: 'core',
+        link: '/core',
       },
     ],
 
