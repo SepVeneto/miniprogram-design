@@ -26,8 +26,8 @@ importers:
   docs:
     dependencies:
       '@micro-zoe/micro-app':
-        specifier: '0.8'
-        version: 0.8.0
+        specifier: 1.0.0-beta.5
+        version: 1.0.0-beta.5
       '@sepveneto/mpd-core':
         specifier: 'workspace: *'
         version: link:../packages/core
@@ -2456,17 +2456,12 @@ packages:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
     dev: true
 
-  /@micro-zoe/micro-app@0.8.0:
-    resolution: {integrity: sha512-618x1gnFDye0mFpTvzNOhX+jT0NIR3dHTtMhM3DLai+lfPh9wRZpGQLo04Mv+PJ084F7aXpaBcwhTXXFqNg5uA==}
-    dev: false
-
   /@micro-zoe/micro-app@1.0.0-alpha.10:
     resolution: {integrity: sha512-8pILuTZyoFOm0itZ6a78AkNqfsyZhGpNkH5oMk+22Bz3xyRlplRpvjujjtEgkg06rCFHWYwvttiV03UQ2aqh1Q==}
     dev: true
 
   /@micro-zoe/micro-app@1.0.0-beta.5:
     resolution: {integrity: sha512-7d1NGl+gBZB6A0AYU3fzN0MCzKi/MJu6zFr8HCA9lJA/rsfYX8NkjTh0f6rm0wkvoLrBcrICxzNcbqfEMYVPFA==}
-    dev: true
 
   /@node-ipc/js-queue@2.0.3:
     resolution: {integrity: sha512-fL1wpr8hhD5gT2dA1qifeVaoDFlQR5es8tFuKqjHX+kdOtdNHnxkVZbtIrR2rxnMFvehkjaZRNV2H/gPXlb0hw==}
