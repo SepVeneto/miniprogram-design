@@ -1,4 +1,4 @@
-name: Publish Docs Deploy
+name: Deploy Docs
 
 on:
   workflow_dispatch:
@@ -30,13 +30,12 @@ jobs:
 
       - name: Collect
         run: |
+          mv docs/src/.vitepress/dist deploy
           mkdir -p deploy/editor
-          mv packages/editor/dist/dev deploy/editor
-          mkdir -p deploy/docs
-          mv docs/src/.vitepress/dist deploy/docs
+          mv packages/editor/dist/prod deploy/editor
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: docs-editor
-          folder: docs
+          folder: deploy
