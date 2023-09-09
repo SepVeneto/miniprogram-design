@@ -29,8 +29,8 @@ importers:
   docs:
     dependencies:
       '@micro-zoe/micro-app':
-        specifier: 1.0.0-beta.5
-        version: 1.0.0-beta.5
+        specifier: 1.0.0-alpha.10
+        version: 1.0.0-alpha.10
       '@sepveneto/mpd-core':
         specifier: 'worksapce: *'
         version: link:../packages/core
@@ -58,8 +58,8 @@ importers:
         version: 0.13.11(@vue/composition-api@1.0.0-rc.1)(vue@3.2.45)
     devDependencies:
       '@micro-zoe/micro-app':
-        specifier: 1.0.0-alpha.10
-        version: 1.0.0-alpha.10
+        specifier: 1.0.0-beta.5
+        version: 1.0.0-beta.5
       tsup:
         specifier: ^6.5.0
         version: 6.5.0(typescript@4.5.5)
@@ -2508,11 +2508,10 @@ packages:
 
   /@micro-zoe/micro-app@1.0.0-alpha.10:
     resolution: {integrity: sha512-8pILuTZyoFOm0itZ6a78AkNqfsyZhGpNkH5oMk+22Bz3xyRlplRpvjujjtEgkg06rCFHWYwvttiV03UQ2aqh1Q==}
-    dev: true
 
   /@micro-zoe/micro-app@1.0.0-beta.5:
     resolution: {integrity: sha512-7d1NGl+gBZB6A0AYU3fzN0MCzKi/MJu6zFr8HCA9lJA/rsfYX8NkjTh0f6rm0wkvoLrBcrICxzNcbqfEMYVPFA==}
-    dev: false
+    dev: true
 
   /@node-ipc/js-queue@2.0.3:
     resolution: {integrity: sha512-fL1wpr8hhD5gT2dA1qifeVaoDFlQR5es8tFuKqjHX+kdOtdNHnxkVZbtIrR2rxnMFvehkjaZRNV2H/gPXlb0hw==}
