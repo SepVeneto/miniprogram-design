@@ -1,4 +1,4 @@
-name: Publish Docs Editor
+name: Publish Docs Deploy
 
 on:
   workflow_dispatch:
