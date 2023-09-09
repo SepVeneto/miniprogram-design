@@ -35,6 +35,6 @@ jobs:
           mv packages/editor/dist/prod deploy/editor
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifiact@v2
+        uses: actions/upload-pages-artifact@v2
         with: 
           path: deploy/
