@@ -18,8 +18,8 @@
     "vitepress": "1.0.0-rc.10"
   },
   "dependencies": {
-    "@micro-zoe/micro-app": "1.0.0-alpha.10",
-    "@sepveneto/mpd-core": "worksapce: *",
+    "@micro-zoe/micro-app": "1.0.0-beta.5",
+    "@sepveneto/mpd-core": "workspace: *",
     "vue": "^3.3.4"
   }
 }
