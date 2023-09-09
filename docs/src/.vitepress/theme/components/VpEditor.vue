@@ -1,4 +1,5 @@
 <template>
+  <RemoteInput />
   <div
     v-if="loading"
     style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: #4089ef"
@@ -9,10 +10,14 @@
 </template>
 
 <script setup>
+import microApp from '@micro-zoe/micro-app'
+import RemoteInput from './RemoteInput.vue'
 import { useSidebar } from 'vitepress/theme'
 import { useDesign } from '@sepveneto/mpd-core'
 import IconLoading from './IconLoading.vue'
 import { ref } from 'vue'
+
+microApp.start()
 
 const { close } = useSidebar()
 const loading = ref(true)
@@ -56,11 +61,11 @@ function handleLoader() {
   if (remoteUrl) {
     data.remoteUrl = remoteUrl
   }
+  const isProduction = import.meta.env.MODE === 'production'
   useDesign('#mpd-container', {
     name: 'design',
-    url: 'https://sepveneto.github.io/miniprogram-design/editor/prod/',
-    // url: 'http://10.7.12.26:9087/miniprogram-design/__dev/',
-    inline: true,
+    url: isProduction ? 'https://sepveneto.github.io/miniprogram-design/editor/prod/' : 'http://localhost:8082',
+    inline: !isProduction,
     data,
     mounted: () => {
       loading.value = false
