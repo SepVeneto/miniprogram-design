@@ -1,4 +1,5 @@
 import microApp, { renderApp } from '@micro-zoe/micro-app'
+import type { MicroAppConfig } from '@micro-app/types'
 import type { CSSProperties } from 'vue-demi'
 import { getCurrentInstance, nextTick, onMounted } from 'vue-demi'
 import { upgrade } from './upgrade'
@@ -78,7 +79,7 @@ export type DesignOptions = {
   inline: boolean
   data?: EditorData
   mounted?: () => void
-}
+} & MicroAppConfig
 type DataListener = {
   event?: 'mounted'
   config?: EditorConfig
@@ -87,7 +88,7 @@ export async function useDesign(
   dom: string | Element,
   options: DesignOptions,
 ) {
-  const { url, inline, name = 'miniprogram-design', data, mounted } = options
+  const { url, inline, name = 'miniprogram-design', data, mounted, ...params } = options
   microApp.addDataListener(name, (val: DataListener) => {
     const { event } = val
     if (event === 'mounted') {
@@ -104,6 +105,8 @@ export async function useDesign(
         data,
         'clear-data': true,
         'disable-patch-request': true, // 关闭对子应用请求的拦截
+        'disable-memory-router': true, // 关闭虚拟路由
+        ...params,
       }).then((result) => {
         if (result) {
           resolve(result)

@@ -1,4 +1,4 @@
-import { VersionMachine } from './fsm';
+import { VersionMachine } from './fsm'
 interface Upgrade {
   <T extends Record<PropertyKey, unknown>>(data: T): T
   VERSION: string
@@ -35,12 +35,12 @@ export type CoreDataV1 = {
 }
 
 export const upgrade = <Upgrade>((data: CoreDataV1) => {
-  const fsm = new VersionMachine(data);
+  const fsm = new VersionMachine(data)
   while (fsm.getVersion() !== upgrade.VERSION) {
-    fsm.upgrade();
+    fsm.upgrade()
   }
-  return fsm.data;
-});
+  return fsm.data
+})
 
-upgrade.VERSION = '1.0';
-console.log(`数据版本：${upgrade.VERSION}`);
+upgrade.VERSION = '1.0'
+console.log(`数据版本：${upgrade.VERSION}`)

@@ -1,4 +1,4 @@
-name: Publish Docs Editor Deploy
+name: Publish Docs Deploy
 
 on:
   workflow_dispatch:
@@ -25,9 +25,18 @@ jobs:
           pnpm i --registry=https://registry.npmmirror.com
           pnpm build:hooks
           pnpm -C packages/editor build
+          pnpm -C packages/core build
+          pnpm -C docs build
+
+      - name: Collect
+        run: |
+          mkdir -p deploy/editor
+          mv packages/editor/dist/dev deploy/editor
+          mkdir -p deploy/docs
+          mv docs/src/.vitepress/dist deploy/docs
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          branch: docs/editor
-          folder: packages/editor/dist/prod
+          branch: docs-editor
+          folder: docs
