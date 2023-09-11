@@ -13,7 +13,8 @@
     "build:editor": "pnpm -C packages/editor build && pnpm -C packages/editor build --mode development",
     "build:hooks": "pnpm -C packages/hooks build",
     "release:editor": "cd packages/editor && bumpp --tag editor@ --commit --push",
-    "release:core": "cd packages/core && bumpp --tag core@ --commit --push"
+    "release:core": "cd packages/core && bumpp --tag core@ --commit --push",
+    "release:hooks": "cd packages/hooks && bumpp --tag hooks@ --commit --push"
   },
   "pnpm": {
     "peerDependencyRules": {
