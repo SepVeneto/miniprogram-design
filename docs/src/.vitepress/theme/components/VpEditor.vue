@@ -43,7 +43,7 @@ function handleLoader() {
           _name: '卡片',
           _view: 'card',
           _schema: 'card',
-          style: {},
+          style: { width: 375, height: 100 },
         },
       ],
     },

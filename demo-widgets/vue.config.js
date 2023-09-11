@@ -1,11 +1,11 @@
 const { defineConfig } = require('@vue/cli-service')
 const webpack = require('webpack')
+// const { MFLiveReloadPlugin } = require('@module-federation/fmr')
 
 module.exports = defineConfig({
   publicPath: 'auto',
   outputDir: 'miniprogram-design',
   devServer: {
-    http2: true,
     port: 9999,
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -36,6 +36,11 @@ module.exports = defineConfig({
     //   },
     // },
     plugins: [
+      // new MFLiveReloadPlugin({
+      //   port: 9999,
+      //   container: 'widgets_side',
+      //   standalone: false,
+      // }),
       new webpack.container.ModuleFederationPlugin({
         name: 'widgets_side',
         filename: 'remoteEntry.js',
