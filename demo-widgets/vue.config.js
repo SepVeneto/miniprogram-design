@@ -6,7 +6,12 @@ module.exports = defineConfig({
   publicPath: 'auto',
   outputDir: 'miniprogram-design',
   devServer: {
+    // 由于浏览器安全策略，https无法访问http资源
+    server: 'https',
     port: 9999,
+    // InvalidHost/Origin header
+    // 由于是通过github pages远程访问，需要给域名添加白名单来关闭主机校验
+    allowedHosts: ['sepveneto.github.io'],
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
