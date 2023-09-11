@@ -2,6 +2,9 @@ name: Deploy Docs by Action
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ['Build and Publish Editor Docker Image']
+    types: [completed]
 
 jobs:
   build:
