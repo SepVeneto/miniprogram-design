@@ -10,9 +10,10 @@ export function useFederatedComponent(
   // const key = `${remoteUrl}-${scope}-${module}`;
   // const { ready, errorLoading } = useDynamicScript('http://localhost:8090/remoteEntry.js');
   const { ready, errorLoading } = useDynamicScript(`${remoteUrl}/remoteEntry.js`)
-  watch(ready, async () => {
+  watch(ready, async (res) => {
+    if (!res) return
     Component.value = (await loadComponent(scope, module)).default
-  })
+  }, { immediate: true })
   return { Component, errorLoading }
 }
 
