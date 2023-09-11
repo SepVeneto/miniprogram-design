@@ -1,3 +1,7 @@
+# [0.3.0](https://github.com/SepVeneto/miniprogram-design/compare/hooks@0.3.0...hooks@0.3.0) (2023-09-11)
+
+
+
 # [0.2.0](https://github.com/SepVeneto/miniprogram-design/compare/hooks@0.1.0...hooks@0.2.0) (2023-08-15)
 
 
