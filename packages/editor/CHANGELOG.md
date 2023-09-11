@@ -1,3 +1,21 @@
+## [0.12.2](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.12.1...editor@0.12.2) (2023-09-11)
+
+
+### Bug Fixes
+
+* **core:** microApp版本不致导致构建时出现多个实例让数据通信失效 ([9e8369d](https://github.com/SepVeneto/miniprogram-design/commit/9e8369ddc176d1164d52bc3b34789c1090a0861c))
+* **editor:** static dir name spell ([8173ab3](https://github.com/SepVeneto/miniprogram-design/commit/8173ab3a50ca7fe119880bd071e8b2ea414a54dd))
+* **hmr:** 开发环境热更新失败 ([cbfc6ae](https://github.com/SepVeneto/miniprogram-design/commit/cbfc6ae94755426af3edf175c7d6012792207bce))
+* vitepress中部分场景导致的无限重载 ([3a83e7c](https://github.com/SepVeneto/miniprogram-design/commit/3a83e7cd7e4e4bcafcc910499346d2cc3789feb2))
+
+
+### Features
+
+* remote editor ([7d628e9](https://github.com/SepVeneto/miniprogram-design/commit/7d628e937f5600be30ab5cfa6f13883927a18cbe))
+* **template:** update template ([edbf90f](https://github.com/SepVeneto/miniprogram-design/commit/edbf90f7744613e642be8bd48497a70740ec73e0))
+
+
+
 ## [0.12.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.12.0...editor@0.12.1) (2023-08-28)
 
 
