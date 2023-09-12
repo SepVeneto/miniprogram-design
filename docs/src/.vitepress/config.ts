@@ -21,8 +21,17 @@ export default defineConfig({
         ],
       },
       {
-        text: 'core',
+        text: 'Core',
         link: '/core',
+      },
+      {
+        text: 'Editor',
+        items: [
+          { text: 'Widgets', link: '/editor/widgets' },
+          { text: 'Schema', link: '/editor/schema' },
+          { text: 'Router', link: '/editor/router' },
+          { text: 'Config', link: '/editor/config' },
+        ],
       },
     ],
 
