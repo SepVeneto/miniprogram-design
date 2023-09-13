@@ -9,7 +9,6 @@ import SizeBox from './components/SizeBox.vue'
 // import rInput from './input.vue'
 // import rCheckbox from './'
 type WidgetType = 'input'
-  | 'box'
   | 'number'
   | 'checkbox'
   | 'image'
@@ -17,14 +16,37 @@ type WidgetType = 'input'
   | 'select'
   | 'radioGroup'
   | 'editor'
-interface ISchema {
-  type: WidgetType
-  label: string
+  | 'box'
+type BoxModel = 'marginLeft'
+| 'marginTop'
+| 'marginRight'
+| 'marginBottom'
+| 'paddingLeft'
+| 'paddingTop'
+| 'paddingRight'
+| 'paddingBottom'
+| 'borderLeft'
+| 'borderTop'
+| 'borderBottom'
+| 'borderight'
+
+type WidgetOther = {
+  type: Exclude<WidgetType, 'box'>
+  label?: string
   key: string
   tips?: string
-  link?: Record<string, ISchema[]>
+  link?: Record<string, WidgetOther[]>
+  _inContainer?: 'outer' | 'inner'
   [attr: string]: any
 }
+type WidgetBox = {
+  type: Omit<WidgetType, 'box'>
+  _inContainer?: 'outer' | 'inner'
+  include?: BoxModel[]
+  exclude?: BoxModel[]
+}
+
+export type ISchema = WidgetOther | WidgetBox
 
 export default defineComponent({
   name: 'SchemaContainer',
@@ -87,7 +109,7 @@ export default defineComponent({
       updateData(`style.${type}Bottom`, bottom)
       updateData(`style.${type}Left`, left)
     }
-    function renderCheckbox(schema: ISchema) {
+    function renderCheckbox(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
       return (
@@ -98,7 +120,7 @@ export default defineComponent({
         />
       )
     }
-    function renderInput(schema: ISchema) {
+    function renderInput(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, originType, ...args } = schema
       return (
@@ -110,7 +132,7 @@ export default defineComponent({
         />
       )
     }
-    function renderNumber(schema: ISchema) {
+    function renderNumber(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, unit, ...args } = schema
       return (
@@ -122,7 +144,7 @@ export default defineComponent({
         />
       )
     }
-    function renderImage(schema: ISchema) {
+    function renderImage(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
       return (
@@ -133,7 +155,7 @@ export default defineComponent({
         />
       )
     }
-    function renderColorPicker(schema: ISchema) {
+    function renderColorPicker(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
       return (
@@ -144,9 +166,9 @@ export default defineComponent({
         />
       )
     }
-    function renderSelect(schema: ISchema) {
+    function renderSelect(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, options, ...args } = schema
+      const { type, label, key, options = [], ...args } = schema
       return (
         <el-select
           model-value={getData(prop.modelValue, key)}
@@ -159,9 +181,9 @@ export default defineComponent({
         </el-select>
       )
     }
-    function renderRadioGroup(schema: ISchema) {
+    function renderRadioGroup(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, options, ...args } = schema
+      const { type, label, key, options = [], ...args } = schema
       return (
         <el-radio-group
           model-value={getData(prop.modelValue, key)}
@@ -174,7 +196,7 @@ export default defineComponent({
         </el-radio-group>
       )
     }
-    function renderEditor(schema: ISchema) {
+    function renderEditor(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
       return (
@@ -185,7 +207,7 @@ export default defineComponent({
         />
       )
     }
-    function renderCustom(schema: ISchema) {
+    function renderCustom(schema: WidgetOther) {
       const { type, key } = schema
       return ConfigRender.value
         ? (
@@ -197,7 +219,7 @@ export default defineComponent({
           )
         : null
     }
-    function renderLabel(schema: ISchema) {
+    function renderLabel(schema: WidgetOther) {
       if (schema.tips) {
         return (
           <span style="display: flex; align-items: center;">{schema.label}
@@ -210,8 +232,11 @@ export default defineComponent({
         return schema.label ? <span>{schema.label}</span> : null
       }
     }
-    function renderBox(schema: ISchema) {
+    function renderBox(schema: WidgetBox) {
       const { include, exclude } = schema
+      if (!('style' in prop.modelValue)) {
+        updateData('style', {})
+      }
       const {
         marginLeft,
         marginTop,
@@ -245,7 +270,7 @@ export default defineComponent({
         />
       )
     }
-    function allowContainer(item) {
+    function allowContainer(item: ISchema) {
       const { _fromContainer } = prop.modelValue
       let flag
       if (_fromContainer) {
@@ -283,42 +308,43 @@ export default defineComponent({
           node = this.renderBox(schema)
           break
         case 'input':
-          node = this.renderInput(schema)
+          node = this.renderInput(schema as WidgetOther)
           break
         case 'number':
-          node = this.renderNumber(schema)
+          node = this.renderNumber(schema as WidgetOther)
           break
         case 'checkbox':
-          node = this.renderCheckbox(schema)
+          node = this.renderCheckbox(schema as WidgetOther)
           break
         case 'image':
-          node = this.renderImage(schema)
+          node = this.renderImage(schema as WidgetOther)
           break
         case 'colorPicker':
-          node = this.renderColorPicker(schema)
+          node = this.renderColorPicker(schema as WidgetOther)
           break
         case 'select':
-          node = this.renderSelect(schema)
+          node = this.renderSelect(schema as WidgetOther)
           break
         case 'radioGroup':
-          node = this.renderRadioGroup(schema)
+          node = this.renderRadioGroup(schema as WidgetOther)
           break
         case 'editor':
-          node = this.renderEditor(schema)
+          node = this.renderEditor(schema as WidgetOther)
           break
         default:
-          node = this.renderCustom(schema)
+          node = this.renderCustom(schema as WidgetOther)
           // node = <div>暂不支持</div>;
       }
-      if (schema.link) {
-        schema.link[this.modelValue[schema.key]]?.forEach(item => {
+      const _schema = schema as WidgetOther
+      if (_schema.link) {
+        _schema.link[this.modelValue[_schema.key]]?.forEach(item => {
           form.push(...wrapper(item))
         })
       }
       // console.log(schema._uuid)
       return [
         <el-form-item
-          label-width={schema.label ? undefined : '0px'}
+          label-width={_schema.label ? undefined : '0px'}
           v-slots={{
             label: () => this.renderLabel(schema),
           }}
