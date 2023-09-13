@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -38,5 +39,8 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/SepVeneto/miniprogram-design' },
     ],
+  },
+  vite: {
+    plugins: [vueJsx()],
   },
 })
