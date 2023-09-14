@@ -4,6 +4,7 @@
 
 ## 数据结构
 
+
 ```ts
 type WidgetType = 'input' // 输入框
   | 'box' // 盒模型
@@ -17,7 +18,7 @@ type WidgetType = 'input' // 输入框
 type WidgetOther = {
   type: Exclude<WidgetType, 'box'>
   label?: string
-  key: string
+  key: string // 支持链式取值，如style.color
   tips?: string
   link?: Record<string, WidgetOther[]>
   _inContainer?: 'outer' | 'inner'
@@ -30,6 +31,30 @@ type WidgetBox = {
   exclude?: BoxModel[]
 }
 type ISchema = WidgetOther | WidgetBox
+```
+
+## css样式
+
+由于`key`支持链式取值，因此所有依赖于css样式的配置可以直接通过`style.color`这种写法来设置
+
+::: danger 注意
+对于所有的样式相关的配置，必需统一放置在`style`中，其它位置是无效的
+:::
+
+```json
+[
+  {
+    "type": "colorPicker",
+    "label": "字体颜色",
+    "key": "style.color"
+  },
+  {
+    "type": "number",
+    "label": "字体大小",
+    "key": "fontSize" // [!code --]
+    "key": "style.fontSize" // [!code ++]
+  }
+]
 ```
 
 ## 数据联动
