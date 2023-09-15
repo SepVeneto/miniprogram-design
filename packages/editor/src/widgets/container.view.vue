@@ -98,7 +98,8 @@ export default defineComponent({
 
     function onPut(_1: any, _2: any, dom: HTMLElement) {
       // @ts-expect-error: vuedraggable extends dom
-      const { _inContainer } = dom.__draggable_context.element
+      const { _inContainer, _view } = dom.__draggable_context.element
+      if (['container', 'swiper'].includes(_view)) return false
       return !_inContainer || _inContainer === 'inner'
     }
     function handleSelect(data: any) {

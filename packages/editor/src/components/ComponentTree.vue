@@ -41,7 +41,9 @@ const allowDrop = (draggingNode: any, dropNode: any, type: AllowDropType) => {
   const allowContainer = !_inContainer || _inContainer === 'inner'
   const allowOuter = !_inContainer || _inContainer === 'outer'
   const isContainer = ['swiper', 'container'].includes(dropNode.data._view)
+  const targetIsContainer = ['swiper', 'container'].includes(draggingNode.data._view)
 
+  if (targetIsContainer && isContainer) return false
   if (dropNode.level === 1) {
     if (type === 'inner' && allowContainer && isContainer) {
       return true

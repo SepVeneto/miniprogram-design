@@ -5,7 +5,6 @@ import type { HoverActiveReturn } from './useHoverActive'
 import Swiper from 'swiper'
 import 'swiper/css'
 import ContainerItem from '../container.item.vue'
-import { useApp } from '@/store'
 
 export type GridItem = Record<string, any>
 export type GridOptions = UnwrapNestedRefs<{
@@ -21,13 +20,16 @@ export type GridOptions = UnwrapNestedRefs<{
   handleSelect: (item: GridItem) => void
 } & HoverActiveReturn>
 export function useGrid(options: GridOptions) {
-  const app = useApp()
   const swiperRef = shallowRef<HTMLElement>()
   const swiper = shallowRef()
 
   watch([() => options.list.length, () => options.cellWidth], () => {
     options.list.forEach((item: any) => {
-      item.style.height = item.style.height || undefined
+      if (!item.style) {
+        item.style = {}
+      } else {
+        item.style.height = item.style.height || undefined
+      }
       if (!options.cellWidth) {
         return
       }
