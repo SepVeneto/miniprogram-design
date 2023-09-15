@@ -23,22 +23,32 @@ const { close } = useSidebar()
 const loading = ref(true)
 close()
 
-// onMounted(() => {
-//   console.log('mounted')
-//   handleLoader()
-// })
-
 handleLoader()
 function handleLoader() {
   const schema = {
     card: [{
       type: 'box',
     }],
+    container: [
+      { type: 'number', key: 'grid', label: '列数' },
+      { type: 'number', key: 'style.columnGap', label: '列间隙' },
+      { type: 'number', key: 'style.rowGap', label: '行间隙' },
+    ],
   }
   const widgets = [
     {
       name: '基本组件',
       group: [
+        {
+          _name: '容器',
+          _view: 'container',
+          _schema: 'container',
+        },
+        {
+          _name: '轮播',
+          _view: 'swiper',
+          _schema: 'swiper',
+        },
         {
           _name: '卡片',
           _view: 'card',

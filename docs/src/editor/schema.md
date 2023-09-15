@@ -157,3 +157,47 @@ defineEmits(['update:modelValue'])
 </script>
 ```
 通过`emit('update:modelValue')`即可向编辑器更新自定义配置中的数据了
+
+::: warning 
+该功能依赖`module federation`实现，会从视图侧拉取`configRender`，再交由`configRender`根据类型动态渲染指定配置
+
+以下是一个由视图侧实现的demo
+
+```vue
+<template>
+  <component
+    :is="configView"
+    v-bind="$attrs"
+  />
+</template>
+
+<script lang="ts">
+import { defineAsyncComponent, defineComponent, shallowRef, watch } from 'vue'
+export default defineComponent({
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
+    const configView = shallowRef()
+
+    watch(() => props.type, (type) => {
+      configView.value = defineAsyncComponent(
+        // 根据指定规则动态导入配置文件
+        () => import(`@/config/${type}.config.vue`),
+      )
+    }, { immediate: true })
+    return {
+      configView,
+    }
+  },
+})
+</script>
+```
+:::
+
+::: info
+远程组件的缓存策略是本地缓存12小时
+:::

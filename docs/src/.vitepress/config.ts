@@ -20,6 +20,7 @@ export default defineConfig({
           { text: '介绍', link: '/introduction' },
           { text: '快速开始', link: '/quickstart' },
           { text: '远程视图', link: '/remoteview' },
+          { text: '基本操作', link: '/operate' },
         ],
       },
       {
@@ -39,6 +40,7 @@ export default defineConfig({
         text: '预设组件',
         items: [
           { text: 'Contianer', link: '/components/container' },
+          { text: 'Swiper', link: '/components/swiper' },
         ],
       },
     ],
