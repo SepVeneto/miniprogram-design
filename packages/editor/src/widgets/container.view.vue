@@ -39,7 +39,7 @@ export default defineComponent({
       get() {
         const config = props.config
         config.style = props.config.style || {}
-        config.grid = props.config.gird || 2
+        config.grid = props.config.grid || 2
         config.list = props.config.list || []
 
         return config
