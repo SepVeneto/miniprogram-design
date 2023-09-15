@@ -37,7 +37,12 @@ export default defineComponent({
     const columnGap = computed(() => props.config.style.columnGap ?? 0)
     const configComp = computed<any>({
       get() {
-        return props.config
+        const config = props.config
+        config.style = props.config.style || {}
+        config.grid = props.config.gird || 2
+        config.list = props.config.list || []
+
+        return config
       },
       set(val) {
         emit('update:modelValue', val)
@@ -126,7 +131,7 @@ export default defineComponent({
       ],
       style: this.viewStyle,
       modelValue: this.configComp.list,
-      'onUpdate:modelValue': (value) => { this.configComp.list = value },
+      'onUpdate:modelValue': (value: any[]) => { this.configComp.list = value },
       group: { name: 'widgets', pull: true, put: this.onPut },
       componentData: {
         type: 'transition-group',
@@ -138,7 +143,7 @@ export default defineComponent({
       onStart: this.onDragStart,
       onEnd: () => this.onDragEnd(),
     }, {
-      item: ({ element }) => this.grid.renderItem(element),
+      item: ({ element }: any) => this.grid.renderItem(element),
     })
     return this.type === 'swiper' ? this.grid.wrapSwiper(core) : core
   },
