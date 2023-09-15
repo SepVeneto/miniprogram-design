@@ -1,4 +1,17 @@
-## [0.12.2](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.12.1...editor@0.12.2) (2023-09-11)
+## 0.12.3 (2023-09-15)
+
+
+### Bug Fixes
+
+* **container:** 不设置grid，切换预览模式重置grid ([cc8bffa](https://github.com/SepVeneto/miniprogram-design/commit/cc8bffad397c57fd234ad167b8ac3d84464d3c1e))
+* **container:** 容器和轮播可以嵌套 ([2e9692f](https://github.com/SepVeneto/miniprogram-design/commit/2e9692f9a1eefebe77d54aa068d05e5a32912ea4))
+* **container:** 添加默认参数 ([2f97027](https://github.com/SepVeneto/miniprogram-design/commit/2f97027ac2babd36544b233386077951218654d3))
+* **schema:** 部分配置的边界判断 ([a3c61ed](https://github.com/SepVeneto/miniprogram-design/commit/a3c61ed643318328665649dc618fc1db7bf828d4))
+* **template:** websocket error ([2722cd9](https://github.com/SepVeneto/miniprogram-design/commit/2722cd96cf3cfd3770a3bbcc2c46e0bbad0cd950))
+
+
+
+## 0.12.2 (2023-09-11)
 
 
 ### Bug Fixes
@@ -16,7 +29,7 @@
 
 
 
-## [0.12.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.12.0...editor@0.12.1) (2023-08-28)
+## 0.12.1 (2023-08-28)
 
 
 ### Bug Fixes
@@ -25,13 +38,11 @@
 
 
 
-# [0.12.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.11.0...editor@0.12.0) (2023-08-25)
+# 0.12.0 (2023-08-25)
 
 
 ### Bug Fixes
 
-* 单元格吸附无效 ([a2d801d](https://github.com/SepVeneto/miniprogram-design/commit/a2d801d0ef6a383becf10c2f5ccda5e87cfed6f8))
-* active state error ([a098270](https://github.com/SepVeneto/miniprogram-design/commit/a098270b0fc913fc4562ad784703f18f73216abb))
 * container render empty in preview mode ([8774a8e](https://github.com/SepVeneto/miniprogram-design/commit/8774a8eb563d289db4341ffbd1efddf31d218e9a))
 * container swiper display custom mode ([b8b02c4](https://github.com/SepVeneto/miniprogram-design/commit/b8b02c441ee96d027c688f0eedf9455baecaae2a))
 * z-index transfer error ([d07169f](https://github.com/SepVeneto/miniprogram-design/commit/d07169f14e642dfe1240d805026aa6df03f8356c))
@@ -47,14 +58,16 @@
 
 
 
-# [0.11.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.10.1...editor@0.11.0) (2023-08-21)
+# 0.11.0 (2023-08-21)
 
 
 ### Bug Fixes
 
+* 单元格吸附无效 ([a2d801d](https://github.com/SepVeneto/miniprogram-design/commit/a2d801d0ef6a383becf10c2f5ccda5e87cfed6f8))
 * 容器布局尺寸计算错误 ([ca9766d](https://github.com/SepVeneto/miniprogram-design/commit/ca9766d7f9256ee3b7c9fc3187541cc1d94bf577))
 * 容器内组件加载时显示错误 ([5a3bf7f](https://github.com/SepVeneto/miniprogram-design/commit/5a3bf7fda5312e3dca0ec09d7f7ec2fb3fb9789a))
 * 预览模式容器尺寸错误 ([09cd5fe](https://github.com/SepVeneto/miniprogram-design/commit/09cd5fec74eda35c5b86258238feac97bc3955ea))
+* active state error ([a098270](https://github.com/SepVeneto/miniprogram-design/commit/a098270b0fc913fc4562ad784703f18f73216abb))
 * **container:** 设置背景图片无效 ([6d56e72](https://github.com/SepVeneto/miniprogram-design/commit/6d56e7278cea1ccb6b68624c3abf7945b3a0f1bc))
 * **core:** mounted config mix ([b0310cd](https://github.com/SepVeneto/miniprogram-design/commit/b0310cd2fe7088ecf8c2361c9fa2abab077a7da3))
 * **editor:** event action mix ([25f95a1](https://github.com/SepVeneto/miniprogram-design/commit/25f95a11821ddae15c0d49218547c68672e9d896))
@@ -74,7 +87,7 @@
 
 
 
-## [0.10.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.10.0...editor@0.10.1) (2023-08-15)
+## 0.10.1 (2023-08-15)
 
 
 ### Bug Fixes
@@ -88,7 +101,7 @@
 
 
 
-# [0.10.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.9.1...editor@0.10.0) (2023-08-15)
+# 0.10.0 (2023-08-15)
 
 
 ### Bug Fixes
@@ -114,7 +127,7 @@
 
 
 
-## [0.9.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.9.0...editor@0.9.1) (2023-06-12)
+## 0.9.1 (2023-06-12)
 
 
 ### Bug Fixes
@@ -123,7 +136,7 @@
 
 
 
-# [0.9.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.8.1...editor@0.9.0) (2023-06-10)
+# 0.9.0 (2023-06-10)
 
 
 ### Bug Fixes
@@ -140,7 +153,7 @@
 
 
 
-## [0.8.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.8.0...editor@0.8.1) (2023-05-25)
+## 0.8.1 (2023-05-25)
 
 
 ### Bug Fixes
@@ -149,7 +162,7 @@
 
 
 
-# [0.8.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.7.5...editor@0.8.0) (2023-05-25)
+# 0.8.0 (2023-05-25)
 
 
 ### Features
@@ -158,7 +171,7 @@
 
 
 
-## [0.7.5](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.7.4...editor@0.7.5) (2023-05-08)
+## 0.7.5 (2023-05-08)
 
 
 ### Bug Fixes
@@ -167,7 +180,7 @@
 
 
 
-## [0.7.4](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.7.3...editor@0.7.4) (2023-05-05)
+## 0.7.4 (2023-05-05)
 
 
 ### Features
@@ -176,7 +189,7 @@
 
 
 
-## [0.7.3](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.7.2...editor@0.7.3) (2023-05-05)
+## 0.7.3 (2023-05-05)
 
 
 ### Bug Fixes
@@ -185,7 +198,7 @@
 
 
 
-## [0.7.2](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.7.1...editor@0.7.2) (2023-05-05)
+## 0.7.2 (2023-05-05)
 
 
 ### Bug Fixes
@@ -194,7 +207,7 @@
 
 
 
-## [0.7.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.7.0...editor@0.7.1) (2023-05-05)
+## 0.7.1 (2023-05-05)
 
 
 ### Features
@@ -203,7 +216,7 @@
 
 
 
-# [0.7.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.6.0...editor@0.7.0) (2023-04-27)
+# 0.7.0 (2023-04-27)
 
 
 ### Bug Fixes
@@ -220,7 +233,7 @@
 
 
 
-# [0.6.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.5.1...editor@0.6.0) (2023-04-25)
+# 0.6.0 (2023-04-25)
 
 
 ### Bug Fixes
@@ -236,7 +249,7 @@
 
 
 
-## [0.5.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.5.0...editor@0.5.1) (2023-04-23)
+## 0.5.1 (2023-04-23)
 
 
 ### Bug Fixes
@@ -245,7 +258,7 @@
 
 
 
-# [0.5.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.4.0...editor@0.5.0) (2023-04-21)
+# 0.5.0 (2023-04-21)
 
 
 ### Bug Fixes
@@ -262,7 +275,7 @@
 
 
 
-# [0.4.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.3.0...editor@0.4.0) (2023-04-18)
+# 0.4.0 (2023-04-18)
 
 
 ### Bug Fixes
@@ -278,7 +291,7 @@
 
 
 
-# [0.3.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.3.0-alpha.4...editor@0.3.0) (2023-04-16)
+# 0.3.0 (2023-04-16)
 
 
 ### Bug Fixes
@@ -296,7 +309,7 @@
 
 
 
-# [0.3.0-alpha.4](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.3.0-alpha.3...editor@0.3.0-alpha.4) (2023-02-21)
+# 0.3.0-alpha.4 (2023-02-21)
 
 
 ### Bug Fixes
@@ -312,31 +325,31 @@
 
 
 
-# [0.3.0-alpha.2](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.2.0-alpha.5...editor@0.3.0-alpha.2) (2023-02-06)
+# 0.3.0-alpha.2 (2023-02-06)
 
 
 
-# [0.2.0-alpha.5](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.2.0-alpha.4...editor@0.2.0-alpha.5) (2023-02-05)
+# 0.2.0-alpha.5 (2023-02-05)
 
 
 
-# [0.2.0-alpha.4](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.2.0-alpha.3...editor@0.2.0-alpha.4) (2023-02-02)
+# 0.2.0-alpha.4 (2023-02-02)
 
 
 
-# [0.2.0-alpha.3](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.2.0-alpha.2...editor@0.2.0-alpha.3) (2023-02-02)
+# 0.2.0-alpha.3 (2023-02-02)
 
 
 
-# [0.2.0-alpha.2](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.2.0-alpha.1...editor@0.2.0-alpha.2) (2023-02-02)
+# 0.2.0-alpha.2 (2023-02-02)
 
 
 
-# [0.2.0-alpha.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.3.0-alpha.1...editor@0.2.0-alpha.1) (2023-02-02)
+# 0.2.0-alpha.1 (2023-02-02)
 
 
 
-# [0.3.0-alpha.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.1.1...editor@0.3.0-alpha.1) (2023-02-02)
+# 0.3.0-alpha.1 (2023-02-02)
 
 
 ### Bug Fixes
@@ -357,7 +370,7 @@
 
 
 
-## [0.1.1](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.1.0...editor@0.1.1) (2022-10-28)
+## 0.1.1 (2022-10-28)
 
 
 ### Bug Fixes
@@ -366,7 +379,7 @@
 
 
 
-# [0.1.0](https://github.com/SepVeneto/miniprogram-design/compare/editor@0.0.5...editor@0.1.0) (2022-10-28)
+# 0.1.0 (2022-10-28)
 
 
 ### Bug Fixes
