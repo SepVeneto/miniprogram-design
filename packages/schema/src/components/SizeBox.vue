@@ -56,9 +56,9 @@ export default defineComponent({
         emit('update:width', val)
       },
     })
-    const boxHeight = computed<number>({
+    const boxHeight = computed<number | 'auto'>({
       get() {
-        return props.height || 0
+        return props.height == null ? 'auto' : props.height
       },
       set(val) {
         emit('update:height', val)

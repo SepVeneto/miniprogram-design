@@ -57,7 +57,7 @@ export function useContainer(
     const { paddingBottom = 0, paddingTop = 0 } = style.value
     const realHeight = height.value + paddingBottom + paddingTop
     containerRect.height = realHeight
-    style.value.height = realHeight
+    // style.value.height = realHeight
   })
 
   const observe = new window.ResizeObserver(observeFn)
@@ -81,7 +81,7 @@ export function useContainer(
 
     // 如果容器没有默认宽度，自动设定为375
     if (!style.value.width) style.value.width = containerRect.width
-    if (!style.value.height) style.value.height = containerRect.height
+    // if (!style.value.height) style.value.height = containerRect.height
   })
   onBeforeUnmount(() => {
     observe.disconnect()
@@ -91,7 +91,10 @@ export function useContainer(
     const { width, height } = containerRef.value?.$el.getBoundingClientRect() ?? {}
     const { paddingBottom = 0, paddingTop = 0 } = style.value
     containerRect.width = width || 375
-    containerRect.height = style.value.height || height + paddingBottom + paddingTop
+    const calHeight = height + paddingBottom + paddingTop
+    containerRect.height = style.value.height === 'auto'
+      ? calHeight
+      : (style.value.height || calHeight)
   }
 
   return {
