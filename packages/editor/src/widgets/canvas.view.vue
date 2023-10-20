@@ -71,16 +71,20 @@ export default defineComponent({
     const listener = shallowRef(function () { /* empty */ })
 
     function listenKeyboard() {
-      const stopDown = onKeyDown('ArrowDown', () => {
+      const stopDown = onKeyDown('ArrowDown', (evt) => {
+        evt.preventDefault()
         selected.value.style.y += 1
       })
-      const stopUp = onKeyDown('ArrowUp', () => {
+      const stopUp = onKeyDown('ArrowUp', (evt) => {
+        evt.preventDefault()
         selected.value.style.y -= 1
       })
-      const stopLeft = onKeyDown('ArrowLeft', () => {
+      const stopLeft = onKeyDown('ArrowLeft', (evt) => {
+        evt.preventDefault()
         selected.value.style.x -= 1
       })
-      const stopRight = onKeyDown('ArrowRight', () => {
+      const stopRight = onKeyDown('ArrowRight', (evt) => {
+        evt.preventDefault()
         selected.value.style.x += 1
       })
       return () => {
