@@ -8,7 +8,7 @@
     :drag-start-fn="onMoveStart"
     :resize-start-fn="() => $emit('moveStart')"
     :style="nodeStyle"
-    lock-aspect-ratio
+    :lock-aspect-ratio="modelValue.type === 'image'"
     @update:model-value="handleFreedomStyle"
   >
     <CanvasNodeText
