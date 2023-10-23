@@ -141,7 +141,7 @@ export default defineComponent({
     return h(VueDraggable, {
       ref: 'mainRef',
       class: 'draggable-box',
-      style: 'min-height: calc(667px - 60px); position: relative;',
+      style: 'min-height: calc(667px - 60px); position: relative; overflow-x: hidden;',
       modelValue: this.data,
       group: { name: 'widgets', pull: true, put: true },
       componentData: {
