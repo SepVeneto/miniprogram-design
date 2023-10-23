@@ -215,6 +215,7 @@ export default defineComponent({
             type={type}
             modelValue={getData(prop.modelValue, key)}
             onUpdate:modelValue={(val: unknown) => updateData(key, val)}
+            config={prop.modelValue}
           />
           )
         : null
