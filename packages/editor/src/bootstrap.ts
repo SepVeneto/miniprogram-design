@@ -1,4 +1,4 @@
-import './public-path'
+// import './public-path'
 import type { App } from 'vue'
 import { createApp } from 'vue'
 import AppVue from './App.vue'

@@ -20,6 +20,10 @@ module.exports = defineConfig({
     config.optimization.delete('splitChunks')
   },
   configureWebpack: {
+    output: {
+      library: { type: 'system' },
+      libraryExport: 'main',
+    },
     // optimization: {
     //   splitChunks:  {
     //     cacheGroups: {
