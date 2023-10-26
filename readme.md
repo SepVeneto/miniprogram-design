@@ -6,6 +6,12 @@
 
 因此在大部场景下`editor`可以独立部署，只需要针对不同的需求开发不同的`widget`以及`schema`
 
+## TODO
+
+弃用`@originjs/vite-plugin-federation`
+
+是否需要换回webpack
+
 
 ## 使用
 
