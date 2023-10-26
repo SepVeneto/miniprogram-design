@@ -7,7 +7,7 @@ module.exports = defineConfig({
   outputDir: 'miniprogram-design',
   devServer: {
     // 由于浏览器安全策略，https无法访问http资源
-    server: 'https',
+    // server: 'https',
     port: 9999,
     // InvalidHost/Origin header
     // 由于是通过github pages远程访问，需要给域名添加白名单来关闭主机校验
@@ -20,6 +20,10 @@ module.exports = defineConfig({
     config.optimization.delete('splitChunks')
   },
   configureWebpack: {
+    output: {
+      library: { type: 'system' },
+      libraryExport: 'main',
+    },
     // optimization: {
     //   splitChunks:  {
     //     cacheGroups: {

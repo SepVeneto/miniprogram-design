@@ -21,7 +21,7 @@ import type { PropType } from 'vue'
 
 const props = defineProps({
   modelValue: {
-    type: [Number, String] as PropType<number | '-'>,
+    type: [Number, String] as PropType<number | '-' | 'auto'>,
     default: undefined,
   },
   placeholder: {

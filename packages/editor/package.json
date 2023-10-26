@@ -5,8 +5,9 @@
     "mpd": "./scripts/bin.js"
   },
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview --port 8082 --strictPort",
     "lint": "vue-cli-service lint",
     "version": " pnpm changelog && git add CHANGELOG.md",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -t editor@ -l -r 0 --lerna-package editor"
@@ -20,6 +21,9 @@
     "@micro-zoe/micro-app": "1.0.0-alpha.10",
     "@sepveneto/mpd-schema": "workspace:^1.0.0",
     "@types/uuid": "^8.3.4",
+    "@vitejs/plugin-legacy": "^4.1.1",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/cli-plugin-babel": "~5.0.8",
     "@vue/cli-plugin-typescript": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
@@ -33,7 +37,8 @@
     "sass-loader": "^13.2.2",
     "typescript": "~4.5.5",
     "uuid": "^8.3.2",
-    "vue": "^3.2.47",
+    "vite-plugin-top-level-await": "^1.3.1",
+    "vue": "^3.3.4",
     "vuedraggable": "^4.1.0",
     "webpack": "5.75.0"
   },
