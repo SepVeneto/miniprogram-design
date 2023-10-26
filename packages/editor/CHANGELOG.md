@@ -1,3 +1,12 @@
+## 0.13.1 (2023-10-26)
+
+
+### Bug Fixes
+
+* 镜像去除开发环境 ([9c64515](https://github.com/SepVeneto/miniprogram-design/commit/9c645154e81b5d53d3f5eb28a92567d8f6f138da))
+
+
+
 # 0.13.0 (2023-10-26)
 
 
