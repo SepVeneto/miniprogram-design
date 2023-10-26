@@ -1,3 +1,20 @@
+# 0.13.0 (2023-10-26)
+
+
+### Bug Fixes
+
+* editor scroll x ([6dd5549](https://github.com/SepVeneto/miniprogram-design/commit/6dd5549ff98e9ef289a849554a38698d9c361db9))
+
+
+### Features
+
+* 容器高度支持auto ([bf2d55d](https://github.com/SepVeneto/miniprogram-design/commit/bf2d55d24645079d96f212a808280df3ddc5dc8b))
+* **自定义模板:** 文本类型自由缩放 ([3c40b80](https://github.com/SepVeneto/miniprogram-design/commit/3c40b805dc641e39b9afe189f107893c12ac573c))
+* custom config ([cf30077](https://github.com/SepVeneto/miniprogram-design/commit/cf30077c58c84a2a898e2c5f72bd588ae639c280))
+* **editor:** 自定义方向键不触发页面滚动 ([43e6782](https://github.com/SepVeneto/miniprogram-design/commit/43e678295ce39cb1baeff8ec447a75bc5683c409))
+
+
+
 ## 0.12.3 (2023-09-15)
 
 
