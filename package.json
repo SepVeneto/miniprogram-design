@@ -10,7 +10,7 @@
   "scripts": {
     "dev:editor": "pnpm -C packages/editor dev",
     "dev:docs": "pnpm -C docs dev",
-    "build:editor": "pnpm -C packages/editor build && pnpm -C packages/editor build --mode development",
+    "build:editor": "pnpm -C packages/editor build",
     "build:hooks": "pnpm -C packages/hooks build",
     "release:editor": "cd packages/editor && bumpp --tag editor@ --commit --push",
     "release:core": "cd packages/core && bumpp --tag core@ --commit --push",

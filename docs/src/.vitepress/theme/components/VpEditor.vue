@@ -74,9 +74,10 @@ function handleLoader() {
   const isProduction = import.meta.env.MODE === 'production'
   useDesign('#mpd-container', {
     name: 'design',
-    url: isProduction ? 'https://sepveneto.github.io/miniprogram-design/editor/dev/' : 'http://localhost:8082',
+    url: isProduction ? 'https://sepveneto.github.io/miniprogram-design/editor/' : 'http://localhost:8082',
     inline: !isProduction,
     data,
+    iframe: true,
     mounted: () => {
       loading.value = false
     },
