@@ -12,8 +12,8 @@ export function useFederatedComponent(
   const errorLoading = shallowRef(false)
   __federation_method_setRemote(scope, {
     url: () => Promise.resolve(remoteUrl),
-    format: 'var',
-    from: 'webpack',
+    format: 'esm',
+    from: 'vite',
   })
   __federation_method_getRemote(scope, module)
     .then(moduleWraped => __federation_method_unwrapDefault(moduleWraped))

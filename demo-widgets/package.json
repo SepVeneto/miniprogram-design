@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",
+    "dev:webpack": "vue-cli-service serve",
     "build": "vite build",
     "serve": "vite preview --port 8090 --strictPort",
     "lint": "vue-cli-service lint",
     "editor:init": "mpd init --dir public"
   },
   "dependencies": {
-    "@sepveneto/mpd-core": "^0.7.2",
+    "@sepveneto/mpd-core": "workspace: *",
     "@vueuse/core": "^9.1.1",
     "core-js": "^3.8.3",
     "vue": "^3.2.13"
