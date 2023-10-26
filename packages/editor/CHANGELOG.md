@@ -1,3 +1,12 @@
+## 0.13.2 (2023-10-26)
+
+
+### Bug Fixes
+
+* **docker:** nginx error ([4920110](https://github.com/SepVeneto/miniprogram-design/commit/4920110b48a855c92f5b3ca539e83e5acd46bc01))
+
+
+
 ## 0.13.1 (2023-10-26)
 
 
