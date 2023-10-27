@@ -95,7 +95,8 @@
           </template>
           <el-scrollbar wrap-style="height: 700px;">
             <ElConfigProvider :locale="zhCn">
-              <VConfig />
+              <!-- TODO: multiple hmr -->
+              <!-- <VConfig /> -->
             </ElConfigProvider>
           </el-scrollbar>
         </ElCard>

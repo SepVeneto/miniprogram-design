@@ -13,15 +13,20 @@ const config: webpack.Configuration = {
   cache: false,
   target: 'web',
   entry: path.resolve(__dirname, './src/main.ts'),
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+    },
+  },
   resolve: {
     extensions: ['.vue', '.jsx', '.js', '.json', '.ts', '.tsx'],
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
-  // output: {
-  //   publicPath: '',
-  // },
+  output: {
+    publicPath: '',
+  },
   devServer: {
     static: path.join(__dirname, 'public'),
     compress: true,
