@@ -8,7 +8,6 @@ import {
   reactive,
   ref,
   toRefs,
-  withModifiers,
 } from 'vue'
 import { useApp } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
@@ -53,7 +52,7 @@ export default defineComponent({
 
     const { Component: ViewRender, errorLoading } = useFederatedComponent(
       app.remoteUrl,
-      'widgets_side',
+      'widgets',
       './viewRender',
     )
 
@@ -151,11 +150,11 @@ export default defineComponent({
       animation: 200,
       handle: '.operate',
       itemKey: '_uuid',
-      'onUpdate:modelValue': val => { this.data = val },
+      'onUpdate:modelValue': (val: any) => { this.data = val },
       onStart: this.onDragStart,
       onEnd: () => this.onDragEnd(),
     }, {
-      item: (item) => this.renderWrapper(item.element),
+      item: (item: any) => this.renderWrapper(item.element),
     })
   },
 })

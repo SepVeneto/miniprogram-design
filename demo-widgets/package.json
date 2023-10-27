@@ -2,7 +2,7 @@
   "name": "mpd-widgets",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
+    "dev": "webpack-cli serve",
     "dev:webpack": "vue-cli-service serve",
     "build": "vite build",
     "serve": "vite preview --port 8090 --strictPort",
@@ -18,16 +18,27 @@
   "devDependencies": {
     "@micro-zoe/micro-app": "1.0.0-beta.5",
     "@sepveneto/eslint-config": "^0.9.0",
+    "@swc/core": "^1.3.95",
+    "@types/node": "^20.8.9",
     "@vitejs/plugin-legacy": "^4.1.1",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "sass": "^1.54.9",
-    "sass-loader": "^13.0.2",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
+    "style-loader": "^3.3.3",
+    "swc-loader": "^0.2.3",
+    "ts-node": "^10.9.1",
     "typescript": "~4.5.5",
     "vite-plugin-top-level-await": "^1.3.1",
-    "webpack": "^5.74.0"
+    "vue-loader": "^17.3.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }

@@ -3,7 +3,6 @@ import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { VueLoaderPlugin } from 'vue-loader'
-import { version } from './package.json'
 import 'webpack-dev-server'
 
 const { ModuleFederationPlugin } = webpack.container
@@ -12,6 +11,9 @@ const config: webpack.Configuration = {
   mode: 'development',
   cache: false,
   target: 'web',
+  optimization: {
+    minimize: false,
+  },
   entry: path.resolve(__dirname, './src/main.ts'),
   resolve: {
     extensions: ['.vue', '.jsx', '.js', '.json', '.ts', '.tsx'],
@@ -19,13 +21,10 @@ const config: webpack.Configuration = {
       '@': path.resolve(__dirname, './src'),
     },
   },
-  // output: {
-  //   publicPath: '',
-  // },
   devServer: {
     static: path.join(__dirname, 'public'),
     compress: true,
-    port: 8082,
+    port: 8090,
     hot: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -73,9 +72,11 @@ const config: webpack.Configuration = {
       },
     ],
   },
+  output: {
+    publicPath: 'auto',
+  },
   plugins: [
     new webpack.DefinePlugin({
-      __VERSION__: `"${version}"`,
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: true,
     }),
@@ -83,8 +84,12 @@ const config: webpack.Configuration = {
       filename: '[name].css',
     }),
     new ModuleFederationPlugin({
-      name: 'editor-side',
+      name: 'widgets',
       filename: 'remoteEntry.js',
+      exposes: {
+        './viewRender': './src/components/viewRender.vue',
+        './configRender': './src/components/configRender.vue',
+      },
       shared: {
         vue: {
           singleton: true,

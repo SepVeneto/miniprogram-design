@@ -1,7 +1,7 @@
-<script lang="tsx">
+<script lang="ts">
 import ComponentTree from '@/components/ComponentTree.vue'
-import type { PropType } from 'vue'
-import { computed, defineComponent, ref } from 'vue'
+import type { PropType, VNode } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
 import { ElIcon, ElTooltip } from 'element-plus'
 import {
   Edit as IconEdit,
@@ -36,60 +36,42 @@ export default defineComponent({
     }
   },
   render() {
-    const preview = () => {
-      return (
-        <ElTooltip
-          effect="dark"
-          content="预览"
-          placement="right"
-        >
-          <ElIcon
-            class={['bar-operate', { 'is-active': this.isPreview }]}
-            {...{ onClick: () => this.$emit('update:modelValue', 'preview') }}
-          >
-            <IconIphone />
-          </ElIcon>
-        </ElTooltip>
-      )
+    const map = {
+      edit: '编辑',
+      preview: '预览',
+      tree: '组件树',
     }
-    const edit = () => (
-      <ElTooltip
-        effect="dark"
-        content="编辑"
-        placement="right"
-      >
-        <ElIcon
-          class={['bar-operate', { 'is-active': this.isEdit }]}
-          {...{ onClick: () => this.$emit('update:modelValue', 'edit') }}
-        >
-          <IconEdit />
-        </ElIcon>
-      </ElTooltip>
-    )
-    const tree = () => (
-      <ElTooltip
-        effect="dark"
-        content="组件树"
-        placement="right"
-      >
-        <ElIcon
-          class={['bar-operate', { 'is-active': this.showTree }]}
-          {...{ onClick: () => { this.showTree = !this.showTree } }}
-        >
-          <IconTreeTable />
-        </ElIcon>
-      </ElTooltip>
-    )
-    return (
-      <section style="float: left; position: relative;">
-        <div class="operate-container">
-          {edit()}
-          {preview()}
-          {tree()}
-        </div>
-      {this.showTree && <ComponentTree />}
-      </section>
-    )
+    const tooltip = (content: string, node: VNode) => {
+      return h(ElTooltip, {
+        effect: 'dark',
+        content,
+        placement: 'right',
+      }, node)
+    }
+    const iconIphone = () => h(ElIcon, {
+      class: ['bar-operate', { 'is-active': this.isPreview }],
+      onClick: () => this.$emit('update:modelValue', 'preview'),
+    }, () => IconIphone)
+    const iconEdit = () => h(ElIcon, {
+      class: ['bar-operate', { 'is-active': this.isEdit }],
+      onClick: () => this.$emit('update:modelValue', 'edit'),
+    }, IconEdit)
+    const iconTree = () => h(ElIcon, {
+      class: ['bar-operate', { 'is-active': this.showTree }],
+      onClick: () => { this.showTree = !this.showTree },
+    }, IconTreeTable)
+
+    return h(
+      'section',
+      { style: 'float: left; position: relative;' },
+      [
+        h('div', { class: 'operate-container' }, () => [
+          tooltip(map.edit, iconEdit()),
+          tooltip(map.preview, iconIphone()),
+          tooltip(map.tree, iconTree()),
+        ]),
+        this.showTree && h(ComponentTree),
+      ])
   },
 })
 </script>

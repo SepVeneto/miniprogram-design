@@ -1,5 +1,5 @@
-<script lang="tsx">
-import { computed, defineComponent } from 'vue'
+<script lang="ts">
+import { computed, defineComponent, h } from 'vue'
 import { CloseBold, Hide, Rank } from '@element-plus/icons-vue'
 import { normalizeStyle } from '@/utils'
 
@@ -37,39 +37,47 @@ export default defineComponent({
     }
   },
   render() {
-    const operate = () => (
-      <div class='operate'>
-        <el-icon class="operate-icon operate-move" color="#fff" size={18}><Rank /></el-icon>
-        {this.$attrs.onDelete
-          ? <el-icon
-          class="operate-icon"
-          color="#fff"
-          size={18}
-          onClick={this.handleDelete}
-        ><close-bold /></el-icon>
-          : null}
-      </div>
+    const operate = () => {
+      const iconRank = h('el-icon', {
+        class: 'operate-icon operate-move',
+        color: '#fff',
+        size: 18,
+      }, () => Rank)
+      const iconClose = h('el-icon', {
+        class: 'operate-icon',
+        color: '#fff',
+        size: 18,
+        onClick: this.handleDelete,
+      }, CloseBold)
+      return h('div', {
+        class: 'operate',
+      }, () => [iconRank, this.$attrs.onDelete && iconClose])
+    }
+    const hidden = () => h(
+      'div',
+      { class: 'hide-mask' },
+      () => h('el-icon', {
+        size: 40,
+        color: '#fff',
+      }, () => Hide),
     )
-    const hidden = () => (
-      <div class="hide-mask"><el-icon size={40} color="#fff"><Hide /></el-icon></div>
-    )
-    return (
-      <div
-        class={[
+
+    return h(
+      'div',
+      {
+        class: [
           'card',
           { 'is-active': this.active },
           `dir-${this.dir}`,
           { 'has-mask': this.mask },
           { 'is-container': this.container },
-        ]}
-        style={this.wrapStyle}
-      >
-        {!this.disabled && operate()}
-        <div class="container">
-          {this.$slots.default?.()}
-        </div>
-        {this.hide && hidden()}
-      </div>
+        ],
+        style: this.wrapStyle,
+      }, [
+        !this.disabled && operate(),
+        h('div', { class: 'container' }, this.$slots.default?.()),
+        this.hide && hidden(),
+      ],
     )
   },
 })

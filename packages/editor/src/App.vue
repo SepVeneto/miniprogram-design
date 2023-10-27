@@ -130,7 +130,7 @@ const isPreview = computed(() => mode.value === 'preview')
 // const needBack = computed(() => route.)
 
 onMounted(() => {
-  window.microApp?.dispatch({
+  window.microApp && window.microApp.dispatch({
     event: 'mounted',
   })
 })

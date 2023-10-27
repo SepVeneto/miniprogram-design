@@ -20,26 +20,26 @@
 </template>
 
 <script lang="ts" setup>
-import schemaRender from '@sepveneto/mpd-schema';
-import { tabbarConfig } from '@/layout/tabbar';
-import { useApp } from '@/store';
-import { computed } from 'vue';
+import schemaRender from '@sepveneto/mpd-schema'
+import { tabbarConfig } from '@/layout/tabbar'
+import { useApp } from '@/store'
+import { computed } from 'vue'
 
-const app = useApp();
+const app = useApp()
 const selected = computed<any>({
-  get () {
-    return app.selected;
+  get() {
+    return app.selected
   },
-  set (val) {
-    app.selected = val;
+  set(val) {
+    app.selected = val
   },
-});
+})
 const globalConfig = computed<any>({
-  get () {
-    return app.config.globalConfig;
+  get() {
+    return app.config.globalConfig
   },
-  set (val) {
-    app.config.globalConfig = val;
+  set(val) {
+    app.config.globalConfig = val
   },
-});
+})
 </script>
