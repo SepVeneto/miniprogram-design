@@ -1,3 +1,21 @@
+# 0.14.0 (2023-10-28)
+
+
+### Bug Fixes
+
+* **editor:** config组件不显示 ([4bca830](https://github.com/SepVeneto/miniprogram-design/commit/4bca8308030551ed9993e5a51dd0156ca4388e5d))
+* **editor:** load chunk failed ([9dedc8e](https://github.com/SepVeneto/miniprogram-design/commit/9dedc8e31a6a98be624d4513257f221090a30b00))
+* hmr view loading ([e630cd0](https://github.com/SepVeneto/miniprogram-design/commit/e630cd03095605c9beb980d4c6e6fecd6bf57449))
+* remote app create ws failed ([dd76e97](https://github.com/SepVeneto/miniprogram-design/commit/dd76e972f2276392c15ede842ca9b655bdc6b43c))
+
+
+### Features
+
+* **editor:** refactor jsx ([e6f8723](https://github.com/SepVeneto/miniprogram-design/commit/e6f872307a91aeb6286920b7d00904fd80c26215))
+* **editor:** webpack config ([aeac3d2](https://github.com/SepVeneto/miniprogram-design/commit/aeac3d21a915fb3ee12aaf1fe0e1c463ae368d9e))
+
+
+
 ## 0.13.2 (2023-10-26)
 
 
