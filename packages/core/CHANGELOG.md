@@ -1,3 +1,12 @@
+## [0.8.1](https://github.com/SepVeneto/miniprogram-design/compare/core@0.8.0...core@0.8.1) (2023-10-28)
+
+
+### Features
+
+* **core:** update deps ([90b6f01](https://github.com/SepVeneto/miniprogram-design/commit/90b6f0167a4a9137e6b053611db88add2d4abdcc))
+
+
+
 # [0.8.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.7.2...core@0.8.0) (2023-10-26)
 
 
