@@ -86,6 +86,10 @@ const config: webpack.Configuration = {
     new ModuleFederationPlugin({
       name: 'widgets',
       filename: 'remoteEntry.js',
+      library: {
+        type: 'umd',
+        name: 'widgets',
+      },
       exposes: {
         './viewRender': './src/components/viewRender.vue',
         './configRender': './src/components/configRender.vue',

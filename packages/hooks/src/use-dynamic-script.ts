@@ -1,22 +1,27 @@
 import { ref } from 'vue'
 
 type RemoteState = 'init' | 'finish' | 'error' | undefined
-
+let init = false
+let element: HTMLScriptElement | null
 export function useDynamicScript(url: string) {
   const ready = ref(false)
   const errorLoading = ref(false)
 
-  let element: HTMLScriptElement | null = window.document.querySelector('[data-remote]')
   let state: RemoteState
   if (element) {
     state = element.dataset.remote as RemoteState
   } else {
-    element = window.document.createElement('script')
+    element = document.createElement('script')
     element.src = url
     element.type = 'text/javascript'
     element.async = true
     element.dataset.remote = 'init'
-    document.head.appendChild(element)
+    // 添加节点是异步的，初始化的时候不能保证第二次触发时能从dom上获得
+    if (!init) {
+      document.head.appendChild(element)
+    } else {
+      init = true
+    }
   }
 
   switch (state) {
