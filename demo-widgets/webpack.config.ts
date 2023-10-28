@@ -22,12 +22,16 @@ const config: webpack.Configuration = {
     },
   },
   devServer: {
-    static: path.join(__dirname, 'public'),
     compress: true,
     port: 8090,
     hot: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
+    },
+    client: {
+      logging: 'info',
+      overlay: false,
+      webSocketURL: 'auto://localhost:8090/ws',
     },
   },
   module: {

@@ -30,7 +30,6 @@ const config: webpack.Configuration = {
     filename: 'design-static/[name]-[contenthash:6].js',
   },
   devServer: {
-    static: path.join(__dirname, 'public'),
     compress: true,
     port: 8082,
     hot: true,
