@@ -1,18 +1,18 @@
-import path from 'path'
+import path from 'node:path'
 import webpack from 'webpack'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import { VueLoaderPlugin } from 'vue-loader'
-import { version } from './package.json'
 import 'webpack-dev-server'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import { VueLoaderPlugin } from 'vue-loader'
+
+import { version } from '../package.json'
 
 const { ModuleFederationPlugin } = webpack.container
 
 const config: webpack.Configuration = {
   mode: 'development',
-  cache: false,
+  cache: true,
   target: 'web',
-  entry: path.resolve(__dirname, './src/main.ts'),
+  entry: path.resolve(__dirname, '../src/main.ts'),
   optimization: {
     splitChunks: {
       chunks: 'async',
@@ -21,11 +21,13 @@ const config: webpack.Configuration = {
   resolve: {
     extensions: ['.vue', '.jsx', '.js', '.json', '.ts', '.tsx'],
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, '../src'),
     },
   },
   output: {
+    clean: true,
     publicPath: '',
+    filename: 'design-static/[name]-[contenthash:6].js',
   },
   devServer: {
     static: path.join(__dirname, 'public'),
@@ -36,6 +38,27 @@ const config: webpack.Configuration = {
       'Access-Control-Allow-Origin': '*',
     },
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      __VERSION__: `"${version}"`,
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false,
+    }),
+    new ModuleFederationPlugin({
+      name: 'editor-side',
+      filename: 'remoteEntry.js',
+      shared: {
+        vue: {
+          singleton: true,
+          requiredVersion: '^3.3.4',
+        },
+      },
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../index.html'),
+    }),
+    new VueLoaderPlugin(),
+  ],
   module: {
     rules: [
       {
@@ -59,9 +82,6 @@ const config: webpack.Configuration = {
               syntax: 'typescript',
               tsx: true,
             },
-            // experimental: {
-            //   plugins: [['swc-plugin-vue-jsx', {}]],
-            // },
           },
         },
       },
@@ -73,35 +93,11 @@ const config: webpack.Configuration = {
         test: /\.(png|svg|jpe?g|gif)$/,
         type: 'asset',
         generator: {
-          filename: 'images/[name]-[hash][ext]',
+          filename: 'design-static/images/[name]-[hash][ext]',
         },
       },
     ],
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      __VERSION__: `"${version}"`,
-      __VUE_OPTIONS_API__: true,
-      __VUE_PROD_DEVTOOLS__: true,
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
-    new ModuleFederationPlugin({
-      name: 'editor-side',
-      filename: 'remoteEntry.js',
-      shared: {
-        vue: {
-          singleton: true,
-          requiredVersion: '^3.3.4',
-        },
-      },
-    }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './index.html'),
-    }),
-    new VueLoaderPlugin(),
-  ],
 }
 
 export default config

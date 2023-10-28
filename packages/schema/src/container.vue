@@ -199,7 +199,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
       const RichTextEditor = defineAsyncComponent(
-        () => import('./components/editor.vue'),
+        () => import(/* webpackChunkName: "richEditor" */ './components/editor.vue'),
       )
       return h(RichTextEditor, {
         'model-value': getData(prop.modelValue, key),
