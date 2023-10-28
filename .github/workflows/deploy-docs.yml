@@ -27,7 +27,7 @@ jobs:
         run: |
           pnpm i --registry=https://registry.npmmirror.com --no-frozen-lockfile
           pnpm build:hooks
-          pnpm -C packages/editor build
+          pnpm -C packages/editor build --mode development -o dist/dev
           pnpm -C packages/core build
           pnpm -C docs build
       
