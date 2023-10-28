@@ -35,7 +35,7 @@ jobs:
         run: |
           mv docs/src/.vitepress/dist deploy
           mkdir -p deploy/editor
-          mv packages/editor/dist/ deploy/editor
+          mv packages/editor/dist/dev deploy/editor
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2

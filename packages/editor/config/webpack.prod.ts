@@ -5,6 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { version } from '../package.json'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { VueLoaderPlugin } from 'vue-loader'
+import { EsbuildPlugin } from 'esbuild-loader'
 
 const { ModuleFederationPlugin } = webpack.container
 
@@ -15,6 +16,13 @@ const config: webpack.Configuration = {
   entry: path.resolve(__dirname, '../src/main.ts'),
   optimization: {
     minimize: true,
+    minimizer: [
+      new EsbuildPlugin({
+        target: ['es2017'],
+        legalComments: 'none',
+        css: true,
+      }),
+    ],
     splitChunks: {
       chunks: 'async',
     },
