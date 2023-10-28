@@ -1,30 +1,5 @@
-// import type { Component } from 'vue'
 import { shallowRef, watch } from 'vue'
 import { useDynamicScript } from './use-dynamic-script'
-// import { __federation_method_getRemote, __federation_method_setRemote, __federation_method_unwrapDefault } from 'virtual:__federation__'
-
-// export function useFederatedComponent(
-//   remoteUrl: string,
-//   scope: string,
-//   module: string,
-// ) {
-//   const component = shallowRef<Component>()
-//   const errorLoading = shallowRef(false)
-//   __federation_method_setRemote(scope, {
-//     url: () => Promise.resolve(remoteUrl),
-//     format: 'esm',
-//     from: 'vite',
-//   })
-//   __federation_method_getRemote(scope, module)
-//     .then(moduleWraped => __federation_method_unwrapDefault(moduleWraped))
-//     .then(module => {
-//       component.value = module
-//     }).catch((err) => {
-//       console.error(err)
-//       errorLoading.value = true
-//     })
-//   return { Component: component, errorLoading }
-// }
 
 export function useFederatedComponent(
   remoteUrl: string,
@@ -32,8 +7,6 @@ export function useFederatedComponent(
   module: string,
 ) {
   const Component = shallowRef()
-  // const key = `${remoteUrl}-${scope}-${module}`;
-  // const { ready, errorLoading } = useDynamicScript('http://localhost:8090/remoteEntry.js');
   const { ready, errorLoading } = useDynamicScript(`${remoteUrl}/remoteEntry.js`)
   watch(ready, async (res) => {
     if (!res) return
