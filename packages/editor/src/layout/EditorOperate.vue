@@ -46,26 +46,26 @@ export default defineComponent({
         effect: 'dark',
         content,
         placement: 'right',
-      }, node)
+      }, () => node)
     }
     const iconIphone = () => h(ElIcon, {
       class: ['bar-operate', { 'is-active': this.isPreview }],
       onClick: () => this.$emit('update:modelValue', 'preview'),
-    }, () => IconIphone)
+    }, () => h(IconIphone))
     const iconEdit = () => h(ElIcon, {
       class: ['bar-operate', { 'is-active': this.isEdit }],
       onClick: () => this.$emit('update:modelValue', 'edit'),
-    }, IconEdit)
+    }, () => h(IconEdit))
     const iconTree = () => h(ElIcon, {
       class: ['bar-operate', { 'is-active': this.showTree }],
       onClick: () => { this.showTree = !this.showTree },
-    }, IconTreeTable)
+    }, () => h(IconTreeTable))
 
     return h(
       'section',
       { style: 'float: left; position: relative;' },
       [
-        h('div', { class: 'operate-container' }, () => [
+        h('div', { class: 'operate-container' }, [
           tooltip(map.edit, iconEdit()),
           tooltip(map.preview, iconIphone()),
           tooltip(map.tree, iconTree()),

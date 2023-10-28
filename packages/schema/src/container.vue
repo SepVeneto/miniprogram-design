@@ -1,11 +1,24 @@
 <script lang="ts">
-import type { PropType, ShallowRef } from 'vue'
+import type { PropType, ShallowRef, VNode } from 'vue'
 import { defineAsyncComponent, defineComponent, h, watch } from 'vue'
 import OssUpload from './components/ossUpload.vue'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import SizeBox from './components/SizeBox.vue'
-import { ElForm, ElFormItem } from 'element-plus'
+import {
+  ElCheckbox,
+  ElColorPicker,
+  ElForm,
+  ElFormItem,
+  ElIcon,
+  ElInput,
+  ElInputNumber,
+  ElOption,
+  ElRadio,
+  ElRadioGroup,
+  ElSelect,
+  ElTooltip,
+} from 'element-plus'
 
 // import ConfigRender from 'widgets_side/configRender';
 // import rInput from './input.vue'
@@ -97,7 +110,7 @@ export default defineComponent({
       parent[path.slice(-1)[0]] = val
       emit('update:modelValue', prop.modelValue)
     }
-    function getData(data: Record<string, any>, key: string) {
+    function getData(data: Record<string, any>, key: string): any {
       const path = key.split('.')
       return path.reduce((obj, curr) => {
         return obj[curr]
@@ -113,16 +126,16 @@ export default defineComponent({
     function renderCheckbox(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
-      return h('el-checkbox', {
+      return h(ElCheckbox, {
         'model-value': getData(prop.modelValue, key),
-        'onUpdate:modelValue': (val: string) => updateData(key, val),
+        'onUpdate:modelValue': (val) => updateData(key, val),
         ...args,
       })
     }
     function renderInput(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, originType, ...args } = schema
-      return h('el-input', {
+      return h(ElInput, {
         'model-value': getData(prop.modelValue, key),
         'onUpdate:modelValue': (val: string) => updateData(key, val),
         type: originType,
@@ -132,10 +145,10 @@ export default defineComponent({
     function renderNumber(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, unit, ...args } = schema
-      return h('el-input-number', {
-        'model-value': getData(prop.modelValue, key),
-        'value-on-clear': null,
-        'onUpdate:modelValue': (val: string) => updateData(key, Number(val)),
+      return h(ElInputNumber, {
+        modelValue: getData(prop.modelValue, key),
+        valueOnClear: null,
+        'onUpdate:modelValue': (val) => updateData(key, Number(val)),
         ...args,
       })
     }
@@ -151,34 +164,34 @@ export default defineComponent({
     function renderColorPicker(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
-      return h('el-color-picker', {
-        'model-value': getData(prop.modelValue, key),
-        'onUpdate:modelValue': (val: string) => updateData(key, val),
+      return h(ElColorPicker, {
+        'model-value': getData(prop.modelValue, key) as string,
+        'onUpdate:modelValue': (val) => updateData(key, val),
         ...args,
       })
     }
     function renderSelect(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, options = [], ...args } = schema
-      const optionList = options.map((option: any) => h('el-option', {
+      const optionList = options.map((option: any) => h(ElOption, {
         label: option.label,
         value: option.value,
       }))
-      return h('el-select', {
+      return h(ElSelect, {
         'model-value': getData(prop.modelValue, key),
         'onUpdate:modelValue': (val: string) => updateData(key, val),
         ...args,
-      }, optionList)
+      }, () => optionList)
     }
     function renderRadioGroup(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, options = [], ...args } = schema
-      const optionList = options.map((option: any) => h('el-radio', {
+      const optionList = options.map((option: any) => h(ElRadio, {
         label: option.value,
       }, option.label))
-      return h('el-radio-group', {
+      return h(ElRadioGroup, {
         'model-value': getData(prop.modelValue, key),
-        'onUpdate:modelValue': (val: string) => updateData(key, val),
+        'onUpdate:modelValue': (val) => updateData(key, val),
         ...args,
       }, optionList)
     }
@@ -209,7 +222,7 @@ export default defineComponent({
       if (schema.tips) {
         return h('span', {
           style: 'display: flex; align-items: center;',
-        }, [schema.label, h('el-tooltip', { content: schema.tip }, h('el-icon', { style: 'margin-left: 6px;' }, QuestionFilled))],
+        }, [schema.label, h(ElTooltip, { content: schema.tip }, h(ElIcon, { style: 'margin-left: 6px;' }, () => h(QuestionFilled)))],
         )
       } else {
         return schema.label ? h('span', schema.label) : null
@@ -283,7 +296,7 @@ export default defineComponent({
   render() {
     const wrapper = (schema: ISchema): JSX.Element[] => {
       const form: JSX.Element[] = []
-      let node
+      let node: VNode | null
       switch (schema.type) {
         case 'box':
           node = this.renderBox(schema)
@@ -328,7 +341,7 @@ export default defineComponent({
           'label-width': _schema.label ? undefined : '0px',
         }, {
           default: () => node,
-          label: () => this.renderLabel(schema),
+          label: () => this.renderLabel(schema as WidgetOther),
         }),
         ...form,
       ]

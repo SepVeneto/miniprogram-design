@@ -1,13 +1,10 @@
 <script lang="ts">
 import { computed, defineComponent, h } from 'vue'
-import { CloseBold, Hide, Rank } from '@element-plus/icons-vue'
+import { CloseBold, Hide, Rank as IconRank } from '@element-plus/icons-vue'
 import { normalizeStyle } from '@/utils'
+import { ElIcon } from 'element-plus'
 
 export default defineComponent({
-  components: {
-    Rank,
-    CloseBold,
-  },
   props: {
     customStyle: {
       type: Object,
@@ -38,28 +35,28 @@ export default defineComponent({
   },
   render() {
     const operate = () => {
-      const iconRank = h('el-icon', {
+      const iconRank = h(ElIcon, {
         class: 'operate-icon operate-move',
         color: '#fff',
         size: 18,
-      }, () => Rank)
-      const iconClose = h('el-icon', {
+      }, () => h(IconRank))
+      const iconClose = h(ElIcon, {
         class: 'operate-icon',
         color: '#fff',
         size: 18,
         onClick: this.handleDelete,
-      }, CloseBold)
+      }, h(CloseBold))
       return h('div', {
         class: 'operate',
-      }, () => [iconRank, this.$attrs.onDelete && iconClose])
+      }, [iconRank, this.$attrs.onDelete ? iconClose : null])
     }
     const hidden = () => h(
       'div',
       { class: 'hide-mask' },
-      () => h('el-icon', {
+      () => h(ElIcon, {
         size: 40,
         color: '#fff',
-      }, () => Hide),
+      }, h(Hide)),
     )
 
     return h(

@@ -6,7 +6,7 @@
   },
   "scripts": {
     "dev": "webpack-cli serve",
-    "build": "vite build",
+    "build": "webpack-cli build",
     "serve": "vite preview --port 8082 --strictPort",
     "lint": "vue-cli-service lint",
     "version": " pnpm changelog && git add CHANGELOG.md",
