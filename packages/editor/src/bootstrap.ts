@@ -1,4 +1,4 @@
-// import './public-path'
+import './public-path'
 import type { App } from 'vue'
 import { createApp } from 'vue'
 import AppVue from './App.vue'
@@ -24,7 +24,7 @@ function mount() {
   app.mount('#app')
 
   const appStore = useApp()
-  window.microApp?.addDataListener((data: any) => {
+  window.microApp && window.microApp.addDataListener((data: any) => {
     data.remoteUrl && (appStore.remoteUrl = data.remoteUrl)
     if (!data.config) return
     appStore.setConfig(data.config, data.widgets, data.schema, data.routes)

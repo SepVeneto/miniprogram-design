@@ -1,13 +1,10 @@
-<script lang="tsx">
-import { computed, defineComponent } from 'vue'
-import { CloseBold, Hide, Rank } from '@element-plus/icons-vue'
+<script lang="ts">
+import { computed, defineComponent, h } from 'vue'
+import { CloseBold, Hide, Rank as IconRank } from '@element-plus/icons-vue'
 import { normalizeStyle } from '@/utils'
+import { ElIcon } from 'element-plus'
 
 export default defineComponent({
-  components: {
-    Rank,
-    CloseBold,
-  },
   props: {
     customStyle: {
       type: Object,
@@ -37,39 +34,47 @@ export default defineComponent({
     }
   },
   render() {
-    const operate = () => (
-      <div class='operate'>
-        <el-icon class="operate-icon operate-move" color="#fff" size={18}><Rank /></el-icon>
-        {this.$attrs.onDelete
-          ? <el-icon
-          class="operate-icon"
-          color="#fff"
-          size={18}
-          onClick={this.handleDelete}
-        ><close-bold /></el-icon>
-          : null}
-      </div>
+    const operate = () => {
+      const iconRank = h(ElIcon, {
+        class: 'operate-icon operate-move',
+        color: '#fff',
+        size: 18,
+      }, () => h(IconRank))
+      const iconClose = h(ElIcon, {
+        class: 'operate-icon',
+        color: '#fff',
+        size: 18,
+        onClick: this.handleDelete,
+      }, h(CloseBold))
+      return h('div', {
+        class: 'operate',
+      }, [iconRank, this.$attrs.onDelete ? iconClose : null])
+    }
+    const hidden = () => h(
+      'div',
+      { class: 'hide-mask' },
+      () => h(ElIcon, {
+        size: 40,
+        color: '#fff',
+      }, h(Hide)),
     )
-    const hidden = () => (
-      <div class="hide-mask"><el-icon size={40} color="#fff"><Hide /></el-icon></div>
-    )
-    return (
-      <div
-        class={[
+
+    return h(
+      'div',
+      {
+        class: [
           'card',
           { 'is-active': this.active },
           `dir-${this.dir}`,
           { 'has-mask': this.mask },
           { 'is-container': this.container },
-        ]}
-        style={this.wrapStyle}
-      >
-        {!this.disabled && operate()}
-        <div class="container">
-          {this.$slots.default?.()}
-        </div>
-        {this.hide && hidden()}
-      </div>
+        ],
+        style: this.wrapStyle,
+      }, [
+        !this.disabled && operate(),
+        h('div', { class: 'container' }, this.$slots.default?.()),
+        this.hide && hidden(),
+      ],
     )
   },
 })

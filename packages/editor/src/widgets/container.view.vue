@@ -59,7 +59,7 @@ export default defineComponent({
 
     const { Component: ViewRender, errorLoading } = useFederatedComponent(
       app.remoteUrl,
-      'widgets_side',
+      'widgets',
       './viewRender',
     )
 
