@@ -6,6 +6,7 @@ import { version } from '../package.json'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { VueLoaderPlugin } from 'vue-loader'
 import { EsbuildPlugin } from 'esbuild-loader'
+import { getPackageInfoSync } from 'local-pkg'
 
 const { ModuleFederationPlugin } = webpack.container
 
@@ -41,7 +42,9 @@ const config: webpack.Configuration = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      __VERSION__: `"${version}"`,
+      __EDITOR_VERSION__: `"${version}"`,
+      __VR_VERSION__: `"${getPackageInfoSync('vue-router')!.version}"`,
+      __BC_VERSION__: `"${getPackageInfoSync('@sepveneto/basic-comp')!.version}"`,
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false,
     }),
@@ -49,6 +52,9 @@ const config: webpack.Configuration = {
       name: 'editor-side',
       filename: 'remoteEntry.js',
       shared: {
+        'vue-router': {
+          singleton: true,
+        },
         vue: {
           singleton: true,
           requiredVersion: '^3.3.4',

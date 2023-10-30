@@ -1,11 +1,11 @@
 import './public-path'
 import type { App } from 'vue'
-import { createApp } from 'vue'
+import { createApp, version } from 'vue'
 import AppVue from './App.vue'
 import type { Pinia } from 'pinia'
 import { createPinia } from 'pinia'
 import { useApp } from './store'
-import ElementPlus from 'element-plus'
+import ElementPlus, { version as EP_VERSION } from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
 import { router } from './router'
 import BasicComp from '@sepveneto/basic-comp'
@@ -18,7 +18,7 @@ function mount() {
   app = createApp(AppVue)
   store = createPinia()
   app.use(ElementPlus)
-  app.use(BasicComp)
+  app.use(BasicComp, {})
   app.use(store)
   app.use(router)
   app.mount('#app')
@@ -43,4 +43,8 @@ function mount() {
 // 导致如果想使用umd模式，mount和unmount不会立即绑定到window上
 mount()
 
-console.log(`编辑器版本：v${__VERSION__}`)
+console.log(`编辑器版本：v${__EDITOR_VERSION__}`)
+console.log(`VUE版本：v${version}`)
+console.log(`Vue Router版本: v${__VR_VERSION__}`)
+console.log(`Element Plus版本：v${EP_VERSION}`)
+console.log(`Basic Component版本：v${__BC_VERSION__}`)

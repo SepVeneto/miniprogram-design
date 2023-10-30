@@ -179,8 +179,8 @@ importers:
         specifier: ^1.3.3
         version: 1.3.3
       '@sepveneto/basic-comp':
-        specifier: ^0.2.1
-        version: 0.2.1(@element-plus/icons-vue@2.1.0)(element-plus@2.3.10)(vue@3.3.4)
+        specifier: ^0.8.1
+        version: 0.8.1(@element-plus/icons-vue@2.1.0)(element-plus@2.4.1)(vue@3.3.4)
       '@sepveneto/free-dom':
         specifier: ^0.9.1
         version: 0.9.1(vue@3.3.4)
@@ -237,8 +237,8 @@ importers:
         specifier: ^6.8.1
         version: 6.8.1(webpack@5.75.0)
       element-plus:
-        specifier: ^2.3.10
-        version: 2.3.10(vue@3.3.4)
+        specifier: ^2.4.1
+        version: 2.4.1(vue@3.3.4)
       esbuild-loader:
         specifier: ^4.0.2
         version: 4.0.2(webpack@5.75.0)
@@ -248,6 +248,9 @@ importers:
       html-webpack-plugin:
         specifier: ^5.5.1
         version: 5.5.1(webpack@5.75.0)
+      local-pkg:
+        specifier: ^0.5.0
+        version: 0.5.0
       mini-css-extract-plugin:
         specifier: ^2.7.6
         version: 2.7.6(webpack@5.75.0)
@@ -2910,15 +2913,15 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@sepveneto/basic-comp@0.2.1(@element-plus/icons-vue@2.1.0)(element-plus@2.3.10)(vue@3.3.4):
-    resolution: {integrity: sha512-8jijQr60xNJYvTfYpV1S7OJmoPWAMcbTuXrWvbrBealkJo1lij7qAvGOqprL4iTEI+xCpNOJ4Wn0vfKidNOI2Q==}
+  /@sepveneto/basic-comp@0.8.1(@element-plus/icons-vue@2.1.0)(element-plus@2.4.1)(vue@3.3.4):
+    resolution: {integrity: sha512-kGhYpCthNBK+WO5LabPgh8hy6NYuDxdhba5YeXz7YH0P29yfY4Al09pGgmB7SnpvCNjcB06/ze/VIDW+yZOWDg==}
     peerDependencies:
       '@element-plus/icons-vue': ^2.0.0
       element-plus: ^2.0.0
       vue: ^3.2.20
     dependencies:
       '@element-plus/icons-vue': 2.1.0(vue@3.3.4)
-      element-plus: 2.3.10(vue@3.3.4)
+      element-plus: 2.4.1(vue@3.3.4)
       vue: 3.3.4
     dev: false
 
@@ -4586,7 +4589,7 @@ packages:
   /@vueuse/shared@9.13.0(vue@3.3.4):
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
     dependencies:
-      vue-demi: 0.13.11(vue@3.3.4)
+      vue-demi: 0.14.6(vue@3.3.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -6791,6 +6794,30 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
     dev: false
+
+  /element-plus@2.4.1(vue@3.3.4):
+    resolution: {integrity: sha512-t7nl+vQlkBKVk1Ag6AufSDyFV8YIXxTFsaya4Nz/0tiRlcz65WPN4WMFeNURuFJleu1HLNtP4YyQKMuS7El8uA==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@ctrl/tinycolor': 3.6.1
+      '@element-plus/icons-vue': 2.1.0(vue@3.3.4)
+      '@floating-ui/dom': 1.5.1
+      '@popperjs/core': /@sxzz/popperjs-es@2.11.7
+      '@types/lodash': 4.14.198
+      '@types/lodash-es': 4.17.9
+      '@vueuse/core': 9.13.0(vue@3.3.4)
+      async-validator: 4.2.5
+      dayjs: 1.11.9
+      escape-html: 1.0.3
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      lodash-unified: 1.0.3(@types/lodash-es@4.17.9)(lodash-es@4.17.21)(lodash@4.17.21)
+      memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
