@@ -1,3 +1,19 @@
+## 0.14.1 (2023-10-30)
+
+
+### Bug Fixes
+
+* **docs:** remote editor 404 ([fe76e49](https://github.com/SepVeneto/miniprogram-design/commit/fe76e4983fc3675cf0142ecad624b0a0be52777e))
+* hooks publish failed ([96c5464](https://github.com/SepVeneto/miniprogram-design/commit/96c54642cc4409e034b20f73cfde1d49090debb4))
+
+
+### Features
+
+* **core:** update deps ([90b6f01](https://github.com/SepVeneto/miniprogram-design/commit/90b6f0167a4a9137e6b053611db88add2d4abdcc))
+* **editor:** deps version ([505492a](https://github.com/SepVeneto/miniprogram-design/commit/505492abb341b666101c340ba37d18208b26d6e5))
+
+
+
 # 0.14.0 (2023-10-28)
 
 
