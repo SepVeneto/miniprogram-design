@@ -13,7 +13,7 @@
   <section v-else>
     <schema-render
       v-model="globalConfig"
-      :schema="app.schema.globalConfig"
+      :schema="globalSchema"
       :remote-url="app.remoteUrl"
     />
   </section>
@@ -42,4 +42,25 @@ const globalConfig = computed<any>({
     app.config.globalConfig = val
   },
 })
+const globalSchema = computed(() => ([
+  {
+    type: 'radioGroup',
+    key: 'topbarShow',
+    label: '顶部导航栏',
+    options: [
+      { label: '显示', value: 1 },
+      { label: '隐藏', value: 0 },
+    ],
+  },
+  {
+    type: 'radioGroup',
+    key: 'tabbarShow',
+    label: '底部导航栏',
+    options: [
+      { label: '显示', value: 1 },
+      { label: '隐藏', value: 0 },
+    ],
+  },
+  ...app.schema.globalConfig,
+]))
 </script>
