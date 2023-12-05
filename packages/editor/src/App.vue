@@ -25,7 +25,7 @@
         <div class="mobile-frame">
           <div class="mobile-content">
             <header class="header">
-              <div style="cursor: pointer;">
+              <div style="cursor: pointer; position: absolute; left: 10px;">
                 <el-icon
                   v-if="app.hasHistory"
                   @click="router.back()"
@@ -43,7 +43,10 @@
                 </el-icon>
               </div>
               <span>{{ title }}</span>
-              <span class="icon" />
+              <span
+                class="icon"
+                style="position: absolute; right: 0;"
+              />
             </header>
             <el-scrollbar
               style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
@@ -205,6 +208,9 @@ function handleOutside({ target }: Event) {
     overflow: hidden;
   }
   .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 375px;
     height: var(--header-height);
     box-sizing: border-box;
@@ -212,9 +218,6 @@ function handleOutside({ target }: Event) {
     font-size: 18px;
     position: relative;
     background: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     .icon {
       background: url('./assets/4_objects.svg');
       background-size: 100%;

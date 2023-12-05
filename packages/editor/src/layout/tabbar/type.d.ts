@@ -1,8 +1,13 @@
 export interface Tabbar {
   _uuid: string
-  name: string
-  subTitle?: string
+  /**
+   * @deprecated 暂时不需要使用
+   */
+  name?: string
+  type: string
   text: string
+  subTitle?: string
+  isShow?: 1 | 0
   activeColor?: string
   inactiveColor?: string
   activeImage?: string

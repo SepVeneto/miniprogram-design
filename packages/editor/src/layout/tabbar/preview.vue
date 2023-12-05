@@ -9,18 +9,18 @@
           v-for="(item) in configList"
           :key="item._uuid"
           class="bottom-nav-item"
-          @click="handleSelect(item.name)"
+          @click="handleSelect(item.type)"
         >
           <div class="li_content">
             <div class="bottom-cmg">
               <img
-                :src="route.name === item.name ? item.activeImage : item.inactiveImage"
+                :src="route.name === item.type ? item.activeImage : item.inactiveImage"
                 alt=""
               >
             </div>
             <span
               class="bottom-text1"
-              :style="{ color: route.name === item.name ? item.activeColor : '' }"
+              :style="{ color: route.name === item.type ? item.activeColor : '' }"
             >{{ item.text }}</span>
           </div>
         </li>
@@ -41,14 +41,15 @@
 </template>
 
 <script lang="ts" setup>
-import { Hide } from '@element-plus/icons-vue';
-import { computed, PropType } from 'vue';
-import type { TabbarWidgetConfig } from './type';
-import { useRoute, useRouter } from 'vue-router';
-import { useApp } from '@/store';
-const store = useApp();
-const route = useRoute();
-const router = useRouter();
+import { Hide } from '@element-plus/icons-vue'
+import type { PropType } from 'vue'
+import { computed } from 'vue'
+import type { TabbarWidgetConfig } from './type'
+import { useRoute, useRouter } from 'vue-router'
+import { useApp } from '@/store'
+const store = useApp()
+const route = useRoute()
+const router = useRouter()
 const props = defineProps({
   preview: Boolean,
   active: Boolean,
@@ -58,17 +59,17 @@ const props = defineProps({
       list: [],
     }),
   },
-});
+})
 const configList = computed(() => {
-  const _list = props.config.list ?? [];
-  return _list;
-});
-function handleSelect (type: string) {
+  const _list = props.config.list ?? []
+  return _list.filter(item => item.isShow !== 0)
+})
+function handleSelect(type: string) {
   /**
    * TODO 全局拦截replace修改history
    */
-  store.history = [];
-  router.replace({ name: type });
+  store.history = []
+  router.replace({ name: type })
 }
 </script>
 

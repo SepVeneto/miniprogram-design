@@ -19,6 +19,7 @@ export default defineComponent({
     mask: Boolean,
     disabled: Boolean,
     hide: Boolean,
+    canDelete: Boolean,
   },
   emits: ['delete'],
   setup(props, { emit }) {
@@ -45,10 +46,10 @@ export default defineComponent({
         color: '#fff',
         size: 18,
         onClick: this.handleDelete,
-      }, h(CloseBold))
+      }, () => h(CloseBold))
       return h('div', {
         class: 'operate',
-      }, [iconRank, this.$attrs.onDelete ? iconClose : null])
+      }, [iconRank, this.canDelete ? iconClose : null])
     }
     const hidden = () => h(
       'div',
@@ -115,7 +116,7 @@ export default defineComponent({
   &.dir-right > .operate {
     height: 50px;
     right: 0;
-    transform: translateX(50%);
+    transform: translateX(-50%);
     .operate-icon {
       &:last-child {
         cursor: pointer;
@@ -176,6 +177,7 @@ export default defineComponent({
   &.dir-right .container {
     display: block;
     padding: 10px;
+    box-sizing: border-box;
   }
   &.has-mask {
     &::before {

@@ -118,14 +118,14 @@ export default {
     list: [
       {
         _uuid: '7',
-        name: 'Home',
+        type: 'Home',
         text: '首页',
         activeImage: homeFillIcon,
         inactiveImage: homeIcon,
       },
       {
         _uuid: '8',
-        name: 'Personal',
+        type: 'Personal',
         text: '个人中心',
         activeImage: personalFillIcon,
         inactiveImage: personalIcon,
