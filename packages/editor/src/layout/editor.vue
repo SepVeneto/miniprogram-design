@@ -9,7 +9,7 @@ import {
   ref,
   toRefs,
 } from 'vue'
-import { useApp } from '@/store'
+import { useApp, useHistory } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
 // import viewRender from 'widgets_side/viewRender';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
@@ -27,6 +27,7 @@ export default defineComponent({
     const route = useRoute()
 
     const app = useApp()
+    const history = useHistory()
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
 
     provide('Editor', reactive({
@@ -126,6 +127,15 @@ export default defineComponent({
           return genRender(item)
       }
     }
+    function onChange(evt: any) {
+      const { added, moved } = evt
+      if (added) {
+        history.create(`添加-${added.element._name}`)
+      }
+      if (moved) {
+        history.create(`移动-${moved.element._name}`)
+      }
+    }
 
     return {
       renderWrapper,
@@ -134,6 +144,7 @@ export default defineComponent({
       mainRef,
       onDragStart,
       onDragEnd,
+      onChange,
     }
   },
   render() {
@@ -153,6 +164,7 @@ export default defineComponent({
       'onUpdate:modelValue': (val: any) => { this.data = val },
       onStart: this.onDragStart,
       onEnd: () => this.onDragEnd(),
+      onChange: this.onChange,
     }, {
       item: (item: any) => this.renderWrapper(item.element),
     })

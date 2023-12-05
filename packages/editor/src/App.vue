@@ -21,6 +21,7 @@
         </ElCard>
       </aside>
       <div>
+        <!-- TODO: tools -->
         <div class="mobile-frame">
           <div class="mobile-content">
             <header class="header">
@@ -112,7 +113,7 @@ import widgetWrap from '@/layout/widgetWrap.vue'
 import VConfig from '@/layout/config.vue'
 import { tabbarPreview } from '@/layout/tabbar'
 import { computed, onMounted, ref } from 'vue'
-import { useApp } from '@/store'
+import { useApp, useHistory } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
 import type { Mode } from '@/layout/EditorOperate.vue'
@@ -123,6 +124,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 const route = useRoute()
 const router = useRouter()
 const app = useApp()
+const history = useHistory()
 const mainRef = ref()
 const mode = ref<Mode>('edit')
 
@@ -138,7 +140,7 @@ onMounted(() => {
   })
 })
 
-function handleModeChange(isCustom: boolean) {
+function handleModeChange(isCustom: any) {
   if (!isCustom) return
 
   if ('template' in selected.value) {
@@ -162,6 +164,7 @@ function handleDelete() {
     return
   }
   currentConfig.splice(index, 1)
+  history.create(`删除-${selected.value._name}`)
   app.selected = {}
 }
 function handleSelect(data: any) {
