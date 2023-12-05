@@ -1,8 +1,5 @@
 <template>
-  <ElCard
-    header="组件树"
-    style="position: absolute; right: -10px; top: 92px; transform: translateX(100%); min-width: 100px;"
-  >
+  <DraggableLayout header="组件树">
     <ElTree
       :allow-drop="allowDrop"
       :data="data"
@@ -19,15 +16,16 @@
         空
       </template>
     </ElTree>
-  </ElCard>
+  </DraggableLayout>
 </template>
 
 <script lang="ts" setup>
-import { ElCard, ElTree } from 'element-plus'
+import { ElTree } from 'element-plus'
 import type { AllowDropType } from 'element-plus/es/components/tree/src/tree.type'
 import { useApp } from '@/store'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import DraggableLayout from './DraggableLayout.vue'
 
 const route = useRoute()
 const app = useApp()

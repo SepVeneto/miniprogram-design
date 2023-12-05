@@ -1,8 +1,7 @@
 export interface Tabbar {
   _uuid: string
-  id: number
   name: string
-  subTitle: string
+  subTitle?: string
   text: string
   activeColor?: string
   inactiveColor?: string

@@ -22,10 +22,11 @@
 <script lang="ts" setup>
 import schemaRender from '@sepveneto/mpd-schema'
 import { tabbarConfig } from '@/layout/tabbar'
-import { useApp } from '@/store'
-import { computed } from 'vue'
+import { useApp, useHistory } from '@/store'
+import { computed, watch } from 'vue'
 
 const app = useApp()
+const history = useHistory()
 const selected = computed<any>({
   get() {
     return app.selected
@@ -42,4 +43,7 @@ const globalConfig = computed<any>({
     app.config.globalConfig = val
   },
 })
+watch(selected, (val, oldVal) => {
+  val === oldVal && history.create(`编辑-${selected.value._name}`)
+}, { deep: true })
 </script>

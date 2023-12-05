@@ -8,7 +8,7 @@ import {
   reactive,
   shallowRef,
 } from 'vue'
-import { useApp } from '@/store'
+import { useApp, useHistory } from '@/store'
 import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 import type { PropType } from 'vue'
@@ -30,6 +30,7 @@ export default defineComponent({
     const editorContext = inject('Editor', { preview: false })
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
     const app = useApp()
+    const history = useHistory()
     const previewComp = computed(() => editorContext.preview)
     const selected = computed(() => app.selected)
     const itemList = computed(() => props.config.list)
@@ -109,6 +110,15 @@ export default defineComponent({
       app.selected._fromContainer = true
       // app.updateConfig();
     }
+    function onChange(evt: any) {
+      const { added, moved } = evt
+      if (added) {
+        history.create(`添加-${added.element._name}`)
+      }
+      if (moved) {
+        history.create(`移动-${moved.element._name}`)
+      }
+    }
 
     return {
       itemList,
@@ -120,6 +130,7 @@ export default defineComponent({
       onPut,
       onDragStart,
       onDragEnd,
+      onChange,
     }
   },
   render() {
@@ -143,6 +154,7 @@ export default defineComponent({
       itemKey: '_uuid',
       onStart: this.onDragStart,
       onEnd: () => this.onDragEnd(),
+      onChange: this.onChange,
     }, {
       item: ({ element }: any) => this.grid.renderItem(element),
     })
