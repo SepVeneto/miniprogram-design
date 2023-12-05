@@ -188,12 +188,12 @@ export default defineComponent({
       const { type, label, key, options = [], ...args } = schema
       const optionList = options.map((option: any) => h(ElRadio, {
         label: option.value,
-      }, option.label))
+      }, () => option.label))
       return h(ElRadioGroup, {
         'model-value': getData(prop.modelValue, key),
         'onUpdate:modelValue': (val) => updateData(key, val),
         ...args,
-      }, optionList)
+      }, () => optionList)
     }
     function renderEditor(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
