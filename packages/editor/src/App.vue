@@ -25,8 +25,8 @@
         <div class="mobile-frame">
           <div class="mobile-content">
             <header
-              v-if="showTopbar"
               class="header"
+              :class="{ hidden: !showTopbar }"
             >
               <div style="cursor: pointer; position: absolute; left: 10px;">
                 <el-icon
@@ -52,7 +52,7 @@
               />
             </header>
             <el-scrollbar
-              style="height: calc(100% - var(--header-height) - var(--tabbar-height))"
+              :style="`height: calc(100% ${showTopbar ? '- var(--header-height)' : ''} - var(--tabbar-height))`"
             >
               <router-view :preview="isPreview" />
             </el-scrollbar>
@@ -225,6 +225,10 @@ function handleOutside({ target }: Event) {
     font-size: 18px;
     position: relative;
     background: #fff;
+    &.hidden {
+      background: transparent;
+      position: absolute;
+    }
     .icon {
       background: url('./assets/4_objects.svg');
       background-size: 100%;
