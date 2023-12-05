@@ -24,7 +24,10 @@
         <!-- TODO: tools -->
         <div class="mobile-frame">
           <div class="mobile-content">
-            <header class="header">
+            <header
+              v-if="showTopbar"
+              class="header"
+            >
               <div style="cursor: pointer; position: absolute; left: 10px;">
                 <el-icon
                   v-if="app.hasHistory"
@@ -57,6 +60,7 @@
               v-if="tabbar"
             >
               <tabbarPreview
+                v-if="showTabbar"
                 :preview="isPreview"
                 :config="tabbar"
                 :active="tabbar._uuid === selected._uuid"
@@ -133,6 +137,9 @@ const selected = computed(() => app.selected)
 const title = computed(() => route.meta.title)
 const isPreview = computed(() => mode.value === 'preview')
 // const needBack = computed(() => route.)
+
+const showTopbar = computed(() => app.config.globalConfig.topbarShow)
+const showTabbar = computed(() => app.config.globalConfig.tabbarShow)
 
 onMounted(() => {
   window.microApp && window.microApp.dispatch({
