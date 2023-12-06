@@ -23,7 +23,10 @@
       <div>
         <!-- TODO: tools -->
         <div class="mobile-frame">
-          <div class="mobile-content">
+          <div
+            class="mobile-content"
+            :style="backgroundStyle"
+          >
             <header
               class="header"
               :class="{ hidden: !showTopbar }"
@@ -140,6 +143,22 @@ const isPreview = computed(() => mode.value === 'preview')
 
 const showTopbar = computed(() => app.config.globalConfig.topbarShow)
 const showTabbar = computed(() => app.config.globalConfig.tabbarShow)
+const backgroundStyle = computed(() => {
+  const { type, image, color } = app.config.globalConfig.background || {}
+  switch (type) {
+    case 'image':
+      return {
+        backgroundImage: `url(${image})`,
+        backgroundSize: '100%',
+        backgroundRepeat: 'no-repeat',
+      }
+    case 'color':
+      return {
+        backgroundColor: color,
+      }
+  }
+  return {}
+})
 
 onMounted(() => {
   window.microApp && window.microApp.dispatch({

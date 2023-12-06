@@ -112,9 +112,17 @@ export default defineComponent({
     }
     function getData(data: Record<string, any>, key: string): any {
       const path = key.split('.')
-      return path.reduce((obj, curr) => {
-        return obj[curr]
+      if (path.length === 1) {
+        return data[key]
+      }
+      // 自动补全数据结构
+      const res = path.reduce((obj, curr, index) => {
+        if (!obj[curr] && index !== path.length - 1) {
+          obj[curr] = {}
+        }
+        return obj[curr] || ''
       }, data)
+      return res
     }
     function normalizeStyle(type: 'margin' | 'padding' | 'border', list: number[]) {
       const [top, right, bottom, left] = list
@@ -331,11 +339,11 @@ export default defineComponent({
       }
       const _schema = schema as WidgetOther
       if (_schema.link) {
-        _schema.link[this.modelValue[_schema.key]]?.forEach(item => {
+        const key = this.getData(this.modelValue, _schema.key)
+        _schema.link[key]?.forEach(item => {
           form.push(...wrapper(item))
         })
       }
-      // console.log(schema._uuid)
       return [
         h(ElFormItem, {
           'label-width': _schema.label ? undefined : '0px',

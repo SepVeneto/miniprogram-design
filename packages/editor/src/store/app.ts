@@ -9,7 +9,7 @@ import mock from '@/mock'
 import { schema as schemaConfig } from '@/mock.schema'
 
 export interface Config{
-  globalConfig: Record<string, unknown>
+  globalConfig: Record<string, any>
   body: Record<PropertyKey, any[]>
   tabbars: TabbarWidgetConfig
 }

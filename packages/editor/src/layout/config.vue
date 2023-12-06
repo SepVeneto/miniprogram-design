@@ -62,7 +62,26 @@ const globalSchema = computed(() => ([
       { label: '隐藏', value: 0 },
     ],
   },
-  ...app.schema.globalConfig,
+  {
+    type: 'radioGroup',
+    key: 'background.type',
+    label: '背景',
+    options: [
+      { label: '图片', value: 'image' },
+      { label: '颜色', value: 'color' },
+    ],
+    link: {
+      image: [{
+        type: 'image',
+        key: 'background.image',
+        label: '图片',
+        width: '111px',
+        height: '182px',
+      }],
+      color: [{ type: 'colorPicker', key: 'background.color', label: '颜色' }],
+    },
+  },
+  ...(app.schema.globalConfig || []),
 ]))
 watch(selected, (val, oldVal) => {
   val === oldVal && history.create(`编辑-${selected.value._name}`)
