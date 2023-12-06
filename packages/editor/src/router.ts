@@ -1,20 +1,20 @@
-import { createRouter, createMemoryHistory } from 'vue-router';
-import { useApp } from '@/store';
-import Editor from '@/layout/editor.vue';
+import { createMemoryHistory, createRouter } from 'vue-router'
+import { useApp } from '@/store'
+// import Editor from '@/layout/editor.vue'
 
 export const router = createRouter({
   history: createMemoryHistory(),
   routes: [
-    { name: 'default', path: '/', component: Editor },
+    // { name: 'default', path: '/', component: Editor },
   ],
-});
+})
 
 router.beforeEach((to) => {
-  const store = useApp();
-  const routeName = to.name as string;
+  const store = useApp()
+  const routeName = to.name as string
   if (store.history.includes(routeName)) {
-    store.history.pop();
+    store.history.pop()
   } else {
-    routeName && store.history.push(routeName);
+    routeName && store.history.push(routeName)
   }
-});
+})
