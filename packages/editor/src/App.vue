@@ -25,7 +25,6 @@
         <div class="mobile-frame">
           <div
             class="mobile-content"
-            :style="backgroundStyle"
           >
             <header
               class="header"
@@ -57,7 +56,10 @@
             <el-scrollbar
               :style="`height: calc(100% ${showTopbar ? '- var(--header-height)' : ''} - var(--tabbar-height))`"
             >
-              <router-view :preview="isPreview" />
+              <router-view
+                :preview="isPreview"
+                :style="backgroundStyle"
+              />
             </el-scrollbar>
             <template
               v-if="tabbar"
@@ -234,6 +236,7 @@ function handleOutside({ target }: Event) {
     overflow: hidden;
   }
   .header {
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
