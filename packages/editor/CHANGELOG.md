@@ -1,3 +1,28 @@
+## 0.14.2 (2023-12-12)
+
+
+### Bug Fixes
+
+* **editor:** 背景图片被顶部导航栏遮挡 ([35ac670](https://github.com/SepVeneto/miniprogram-design/commit/35ac670e607fa70f137fdce90c4c881a138ab1b4))
+* globalconfig preview ([c05eee8](https://github.com/SepVeneto/miniprogram-design/commit/c05eee87abad1d5c46c41c62da5489810e70aad5))
+* **route:** history error ([8a0cf77](https://github.com/SepVeneto/miniprogram-design/commit/8a0cf77fb1357f02a4c0fdec64f49f15903d1b29))
+* topbar style ([8bc10df](https://github.com/SepVeneto/miniprogram-design/commit/8bc10df64b31d98f5d710e3cc062fe86d559858e))
+
+
+### Features
+
+* **editor:** 背景图片 ([9dbf0b6](https://github.com/SepVeneto/miniprogram-design/commit/9dbf0b6723a80439363036aef744b27b03eb7944))
+* history record ([f3abc29](https://github.com/SepVeneto/miniprogram-design/commit/f3abc29d1cec8ccb34556a3b2deda61904103434))
+* navigation bar global config ([2343955](https://github.com/SepVeneto/miniprogram-design/commit/234395501c42050224761574590e9719c2a8e26a))
+* tabbar-item visible ([af3fb17](https://github.com/SepVeneto/miniprogram-design/commit/af3fb17660fc65a7e60899983d795d95961b4cf5))
+
+
+### Performance Improvements
+
+* **schema:** optimize readio slot render ([1f040f4](https://github.com/SepVeneto/miniprogram-design/commit/1f040f4902cf76687efa641f0255b1f030464dea))
+
+
+
 ## 0.14.1 (2023-10-30)
 
 
