@@ -145,6 +145,9 @@ const isPreview = computed(() => mode.value === 'preview')
 
 const showTopbar = computed(() => app.config.globalConfig.topbarShow)
 const showTabbar = computed(() => app.config.globalConfig.tabbarShow)
+/**
+ * @deprecated
+ */
 const backgroundStyle = computed(() => {
   const { type, image, color } = app.config.globalConfig.background || {}
   switch (type) {
