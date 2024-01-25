@@ -12,7 +12,10 @@
           <template #header>
             <span>组件</span>
           </template>
-          <el-scrollbar wrap-style="height: 700px;">
+          <el-scrollbar
+            wrap-style="height: 700px;"
+            noresize
+          >
             <widget-wrap
               :list="app.widgetList"
               :preview="isPreview"
@@ -54,7 +57,8 @@
               />
             </header>
             <el-scrollbar
-              :style="`height: calc(100% ${showTopbar ? '- var(--header-height)' : ''} - var(--tabbar-height))`"
+              :style="editorStyle"
+              :min-size="375"
             >
               <router-view
                 :preview="isPreview"
@@ -106,7 +110,10 @@
               </div>
             </div>
           </template>
-          <el-scrollbar wrap-style="height: 700px;">
+          <el-scrollbar
+            wrap-style="height: 700px;"
+            noresize
+          >
             <ElConfigProvider :locale="zhCn">
               <VConfig />
             </ElConfigProvider>
@@ -145,6 +152,11 @@ const isPreview = computed(() => mode.value === 'preview')
 
 const showTopbar = computed(() => app.config.globalConfig.topbarShow)
 const showTabbar = computed(() => app.config.globalConfig.tabbarShow)
+const editorStyle = computed(() => {
+  return {
+    height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
+  }
+})
 /**
  * @deprecated
  */
@@ -218,7 +230,8 @@ function handleOutside({ target }: Event) {
   margin-bottom: 20px;
 }
 .mobile-frame {
-  --padding-x: 15px;
+  --padding-left-x: 14px;
+  --padding-right-x: 15px;
   --tabbar-height: 50px;
   --header-height: 44px;
   --safe-bottom: 40px;
@@ -226,11 +239,12 @@ function handleOutside({ target }: Event) {
   background: url('./assets/iPhone13.png');
   width: 375px;
   height: 720px;
-  padding: 0 var(--padding-x);
+  padding-left: var(--padding-left-x);
+  padding-right: var(--padding-right-x);
   padding-top: 50px;
   padding-bottom: var(--safe-bottom);
   box-sizing: content-box;
-  background-size: calc(375px + 2 * var(--padding-x)) 100%;
+  background-size: calc(375px + var(--padding-left-x) + var(--padding-right-x)) 100%;
   .mobile-content {
     height: inherit;
     background: #f4f5f7;
