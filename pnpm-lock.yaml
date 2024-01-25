@@ -189,8 +189,8 @@ importers:
         specifier: ^0.8.1
         version: 0.8.1(@element-plus/icons-vue@2.1.0)(element-plus@2.4.3)(vue@3.3.4)
       '@sepveneto/free-dom':
-        specifier: ^0.11.6
-        version: 0.11.6(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.3.4)
+        specifier: ^0.11.7
+        version: 0.11.7(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.3.4)
       '@sepveneto/mpd-hooks':
         specifier: workspace:*
         version: link:../hooks
@@ -3194,8 +3194,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sepveneto/free-dom@0.11.6(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.3.4):
-    resolution: {integrity: sha512-UPNFTMpvF/YL3xh6Lu4d6p3PxYKNjwaz6ESByfHXn/QV9Ty4MTikMvTGTd2Rj5VEXbTvMNBr0n+joMN1Ajy7ZA==}
+  /@sepveneto/free-dom@0.11.7(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.3.4):
+    resolution: {integrity: sha512-6nSE/0z8FKyTQzhJpswDsrpomDxedCDbtTasOUQgx/EE4XhxZrY61cJDqtGbI4fx6oMQMZcBSDyZpPIrC01DHA==}
     dependencies:
       lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
       uuid: 9.0.1

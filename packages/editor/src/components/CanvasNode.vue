@@ -35,6 +35,7 @@ import CanvasNodeText from './CanvasNode.text.vue'
 import CanvasNodeImage from './CanvasNode.image.vue'
 import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { onClickOutside } from '@vueuse/core'
+import { toFixed } from '@/utils'
 
 const props = defineProps({
   modelValue: {
@@ -88,7 +89,18 @@ watchEffect(() => {
 })
 
 function handleFreedomStyle(style: any) {
-  emit('update:modelValue', { ...props.modelValue, style: { ...props.modelValue.style, ...style } })
+  const { x, y, w, h } = style
+  emit('update:modelValue', {
+    ...props.modelValue,
+    style: {
+      ...props.modelValue.style,
+      ...style,
+      x: toFixed(x),
+      y: toFixed(y),
+      w: toFixed(w),
+      h: toFixed(h),
+    },
+  })
   emit('moveStop', style)
 }
 </script>
