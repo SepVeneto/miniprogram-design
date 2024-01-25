@@ -1,3 +1,13 @@
+## 0.14.4 (2024-01-25)
+
+
+### Features
+
+* **editor:** 自定义节点拖曳缩放单位像素固定为1px ([922c215](https://github.com/SepVeneto/miniprogram-design/commit/922c2151a2b361f5831c9b81d966babf8bd488c5))
+* **editor:** 自定义模板单位像素固定为1px ([0dd585e](https://github.com/SepVeneto/miniprogram-design/commit/0dd585ee1fad99a61cf455cf1febeb4218955728))
+
+
+
 ## 0.14.3 (2023-12-12)
 
 
