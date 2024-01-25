@@ -1,6 +1,6 @@
 {
   "name": "@sepveneto/mpd-editor",
-  "version": "0.14.3",
+  "version": "0.14.4",
   "scripts": {
     "dev": "webpack-cli serve -c ./config/webpack.dev.ts",
     "build": "webpack-cli build -c ./config/webpack.prod.ts",
