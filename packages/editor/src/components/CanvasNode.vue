@@ -5,8 +5,8 @@
     :class="[(!preview || active) && 'vv-editor--node', active && 'vv-editor--node__active']"
     :disabled-drag="editing || preview"
     :disabled-resize="preview"
-    :drag-start-fn="onMoveStart"
-    :resize-start-fn="() => $emit('moveStart')"
+    :drag-fn="onMove"
+    :resize-fn="() => $emit('move')"
     :style="nodeStyle"
     :lock-aspect-ratio="modelValue.type === 'image'"
     @update:model-value="handleFreedomStyle"
@@ -48,7 +48,7 @@ const props = defineProps({
     default: undefined,
   },
 })
-const emit = defineEmits(['update:modelValue', 'moveStart', 'moveStop', 'clickOutside'])
+const emit = defineEmits(['update:modelValue', 'move', 'moveStop', 'clickOutside'])
 const editing = ref(false)
 const pos = ref<Partial<{ x: number, y: number, w: number, h: number }>>({})
 const freeRef = ref()
@@ -62,9 +62,9 @@ onMounted(() => {
   }
 })
 
-function onMoveStart() {
+function onMove() {
   if (props.preview) return
-  emit('moveStart')
+  emit('move')
 }
 function bindListener() {
   return onClickOutside(freeRef, () => {

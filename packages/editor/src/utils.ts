@@ -9,3 +9,7 @@ export function normalizeStyle(customStyle: Record<string, any>) {
   }
   return style
 }
+
+export function toFixed(num: number) {
+  return Number(num.toFixed(0))
+}

@@ -9,6 +9,7 @@ import { onKeyDown, useResizeObserver } from '@vueuse/core'
 import { v4 as uuidv4 } from 'uuid'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
+import { toFixed } from '@/utils'
 
 export default defineComponent({
   props: {
@@ -111,8 +112,8 @@ export default defineComponent({
       selected.value = data
       const type = data?.type
       const nodeOptions = [
-        { label: '文本', onClick: () => handleAdd('text', { x: offsetX, y: offsetY }) },
-        { label: '图片', onClick: () => handleAdd('image', { x: offsetX, y: offsetY }) },
+        { label: '文本', onClick: () => handleAdd('text', { x: toFixed(offsetX), y: toFixed(offsetY) }) },
+        { label: '图片', onClick: () => handleAdd('image', { x: toFixed(offsetX), y: toFixed(offsetY) }) },
       ]
       const baseOptions = [
         {
@@ -207,7 +208,6 @@ export default defineComponent({
         onClick: (evt: Event) => {
           if (this.preview) return
           evt.stopPropagation()
-          this.listener = this.listenKeyboard()
           this.selected = node
         },
         onClickOutside: () => {
@@ -221,7 +221,7 @@ export default defineComponent({
           evt.stopPropagation()
           this.handleContextmenu(evt, node)
         },
-        onMoveStart: () => {
+        onMove: () => {
           this.diff = 2
           this.isMoving = true
         },
@@ -241,6 +241,7 @@ export default defineComponent({
         height: this.height,
         style: this.sceneStyle,
         minHeight: 10,
+        minWidth: 10,
         scale: ['rb'],
         onContextmenu: this.handleContextmenu,
       },

@@ -18,6 +18,7 @@
 import { ElIcon, ElImage } from 'element-plus'
 import { Picture as IconPicture } from '@element-plus/icons-vue'
 import { ref } from 'vue'
+import { toFixed } from '@/utils'
 
 const imgRef = ref<InstanceType<typeof ElImage>>()
 const props = defineProps({
@@ -35,8 +36,8 @@ function handleLoad() {
   if (!imgRef.value) return
   const { naturalHeight, naturalWidth } = imgRef.value.$el.querySelector('img')
   const ratio = naturalHeight / naturalWidth
-  const { w = 100 } = props.style
-  const h = w * ratio
+  const w = 100
+  const h = toFixed(w * ratio)
   emit('update:style', { ...props.style, w, h })
 }
 </script>
