@@ -9,7 +9,7 @@ import {
   shallowRef,
 } from 'vue'
 import { useApp, useHistory } from '@/store'
-import { useFederatedComponent, useNormalizeStyle } from '@sepveneto/mpd-hooks'
+import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 import type { PropType } from 'vue'
 import VueDraggable from 'vuedraggable'
@@ -83,19 +83,17 @@ export default defineComponent({
     })
     const grid = useGrid(options)
 
-    const style = useNormalizeStyle(props.config.style)
-
-    const viewStyle = computed(() => {
-      const { rowGap, columnGap } = style.value
-      return type.value === 'swiper'
-        ? {}
-        : {
-            display: 'flex',
-            flexWrap: 'wrap',
-            rowGap,
-            columnGap,
-          }
-    })
+    // const viewStyle = computed(() => {
+    //   return {
+    //     // margin: `-${rowGap.value}px -${columnGap.value}px`,
+    //   }
+    //   // return type.value === 'swiper'
+    //   //   ? {}
+    //   //   : {
+    //   //       rowGap,
+    //   //       columnGap,
+    //   //     }
+    // })
 
     function onPut(_1: any, _2: any, dom: HTMLElement) {
       // @ts-expect-error: vuedraggable extends dom
@@ -124,7 +122,7 @@ export default defineComponent({
       itemList,
       configComp,
       previewComp,
-      viewStyle,
+      // viewStyle,
       draggableRef,
       grid,
       onPut,
@@ -141,7 +139,7 @@ export default defineComponent({
         { 'is-preview': this.previewComp },
         this.type === 'swiper' && 'swiper-wrapper',
       ],
-      style: this.viewStyle,
+      // style: this.viewStyle,
       modelValue: this.previewComp ? this.configComp.list.filter(item => item.isShow) : this.configComp.list,
       'onUpdate:modelValue': (value: any[]) => { this.configComp.list = value },
       group: { name: 'widgets', pull: true, put: this.onPut },
@@ -197,8 +195,15 @@ export default defineComponent({
 }
 </style>
 
-<style>
+<style scoped lang="scss">
 .flip-list-move {
   transition: transform 0.5s;
+}
+.draggable-group {
+  &:after {
+    content: '';
+    clear: both;
+    display: block;
+  }
 }
 </style>

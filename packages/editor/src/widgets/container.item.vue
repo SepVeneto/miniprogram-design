@@ -2,6 +2,7 @@
 import DraggableWrapper from '@/components/draggableWrapper.vue'
 import { defineComponent, h, ref, watchEffect, withModifiers } from 'vue'
 import type { GridItem } from './hooks'
+import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
 import CanvasView from '@/widgets/canvas.view.vue'
 
@@ -50,13 +51,33 @@ export default defineComponent({
         onMouseleave: onLeave,
         onClick: withModifiers(() => handleSelect(element), ['stop']),
       }
-      const wrapperProps = props.options.type === 'swiper' ? swiper : { ...base, style: 'width: 100%; height: 100%;' }
-      return !preview
-        ? h(DraggableWrapper, { ...wrapperProps, active: props.active }, () => getRenderContent(element, preview))
-        : h('div', {
+      const elementStyle = normalizeStyle(
+        element.style,
+        ['marginLeft', 'marginTop', 'marginRight', 'marginBottom'],
+      )
+      const wrapperProps = props.options.type === 'swiper'
+        ? swiper
+        : {
+            ...base,
+            style: {
+              ...elementStyle,
+              width: '100%',
+              height: '100%',
+            },
+          }
+      if (!preview) {
+        const node = h(DraggableWrapper, {
+          ...wrapperProps,
+          active: props.active,
+        }, () => getRenderContent(element, preview))
+        return node
+      } else {
+        const node = h('div', {
           class: [props.options.type === 'swiper' && 'swiper-slide'],
           style: { height: '100%' },
         }, getRenderContent(element, preview))
+        return node
+      }
     }
     function getRenderContent(element: any, isPreview = false) {
       switch (element._view) {
@@ -76,17 +97,21 @@ export default defineComponent({
     }
     function wrapResizable(node: any, element: any) {
       const { onDragEnd, onDragStart, onEnter, onLeave, handleSelect } = props.options
-
+      const { marginLeft, marginTop, marginRight, marginBottom } = normalizeStyle(element.style)
       return h(ResizeDomCore, {
         key: element._uuid,
         width: width.value,
         height: height.value,
         style: {
+          marginLeft,
+          marginTop,
+          marginRight,
+          marginBottom,
           position: 'relative',
           width: `${width.value}px`,
           height: `${height.value}px`,
         },
-        scale: ['r', 'b'],
+        scale: ['rb'],
         minHeight: 10,
         dragOpts: {
           startFn: onDragStart,
@@ -101,10 +126,10 @@ export default defineComponent({
           height.value = h
         },
         stopFn: () => {
-          const { cellWidth, columnGap } = props.options
+          const { cellWidth } = props.options
           const cellNum = Math.round(width.value / cellWidth)
-          const offset = Math.max((cellNum - 1), 0) * columnGap
-          const snapWidth = Math.max(cellNum * cellWidth + offset, cellWidth)
+          // const offset = Math.max((cellNum - 1), 0) * columnGap
+          const snapWidth = Math.max(cellNum * cellWidth, cellWidth)
           const snapHeight = Math.max(height.value, 10)
           width.value = snapWidth
           height.value = snapHeight

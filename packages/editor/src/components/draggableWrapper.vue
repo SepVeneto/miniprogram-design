@@ -98,7 +98,7 @@ export default defineComponent({
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      border: 1px dashed #4089ef;
+      outline: 1px dashed #4089ef;
       z-index: 1;
       pointer-events: none;
     }
@@ -136,7 +136,7 @@ export default defineComponent({
     display: flex;
   }
   &.is-container > .operate {
-    border: 1px dashed #E6A23C;
+    outline: 1px dashed #E6A23C;
     border-bottom: none;
     transform: translateY(-100%);
   }
@@ -147,7 +147,7 @@ export default defineComponent({
       content: '';
       width: 100%;
       height: 100%;
-      border: 1px dashed #E6A23C;
+      outline: 1px dashed #E6A23C;
       box-sizing: border-box;
       // z-index: 1;
       pointer-events: none;

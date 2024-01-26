@@ -40,10 +40,13 @@ export function useContainer(
     return containerRect.width
   })
   const cellWidth = computed(() => {
-    const { columnGap = 0 } = style.value
     if (type === 'swiper') return containerRect.width
-    const width = containerWidth.value - columnGap * (grid.value - 1)
-    return width / grid.value
+    const res = containerWidth.value / grid.value
+    return res
+    // const { columnGap = 0 } = style.value
+    // if (type === 'swiper') return containerRect.width
+    // const width = containerWidth.value - columnGap * (grid.value - 1)
+    // return width / grid.value
   })
   const height = ref()
 

@@ -33,7 +33,7 @@ export function useGrid(options: GridOptions) {
       if (!options.cellWidth) {
         return
       }
-      reOffset(item, options.containerRect, options.cellWidth, options.columnGap)
+      reOffset(item, options.containerRect, options.cellWidth)
     })
   }, { immediate: true })
 
@@ -58,12 +58,19 @@ export function useGrid(options: GridOptions) {
     wrapSwiper,
     renderItem: (item: GridItem) => {
       const active = options.selected._uuid === item._uuid || options.activeUuid === item._uuid
-      const width = normalizeSize(item.style.width, 'width', options.containerRect)
-      const height = normalizeSize(item.style.height, 'height', options.containerRect)
+      const { width, height } = item.style
+      const _w = normalizeSize(width, 'width', options.containerRect)
+      const _h = normalizeSize(height, 'height', options.containerRect)
+      const style = {
+        float: 'left',
+        // padding: `${options.rowGap}px ${options.columnGap}px`,
+        boxSizing: 'border-box',
+      }
       const itemProps = {
+        style,
         key: item._uuid,
-        w: width,
-        h: height,
+        w: _w,
+        h: _h,
         active,
         element: item,
         options,
@@ -75,16 +82,15 @@ export function useGrid(options: GridOptions) {
   }
 }
 
-function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], cellWidth: number, columnGap = 0) {
+function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], cellWidth: number) {
   if (!item.style.width) {
     item.style.width = cellWidth
     return
   }
-  // console.log(normalizeSize(item.style.width, 'width', containerSize))
   const cellNum = Math.round(normalizeSize(item.style.width, 'width', containerSize) / cellWidth)
-  const offset = Math.max((cellNum - 1), 0) * columnGap
-  // console.log(cellNum, cellWidth, offset)
-  item.style.width = cellNum * cellWidth + offset
+  // const offset = Math.max((cellNum - 1), 0) * columnGap
+  item.style.width = cellNum * cellWidth
+  // + offset
 }
 function normalizeSize(
   val: number | string,

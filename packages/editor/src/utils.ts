@@ -11,5 +11,5 @@ export function normalizeStyle(customStyle: Record<string, any>) {
 }
 
 export function toFixed(num: number) {
-  return Number(num.toFixed(0))
+  return Number(num.toFixed(2))
 }
