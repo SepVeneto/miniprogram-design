@@ -1,6 +1,6 @@
 <script lang="ts">
 import DraggableWrapper from '@/components/draggableWrapper.vue'
-import { defineComponent, h, ref, watchEffect, withModifiers } from 'vue'
+import { defineComponent, h, ref, toRef, watchEffect, withModifiers } from 'vue'
 import type { GridItem } from './hooks'
 import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
@@ -31,9 +31,17 @@ export default defineComponent({
     const width = ref(props.w)
     const height = ref(props.h)
 
+    const marginLeft = toRef(props.element.style, 'marginLeft')
+    const marginRight = toRef(props.element.style, 'marginRight')
+    const marginTop = toRef(props.element.style, 'marginTop')
+    const marginBottom = toRef(props.element.style, 'marginBottom')
     watchEffect(() => {
-      width.value = props.w
-      height.value = props.h
+      const ml = marginLeft.value || 0
+      const mr = marginRight.value || 0
+      const mt = marginTop.value || 0
+      const mb = marginBottom.value || 0
+      width.value = props.w - mr - ml
+      height.value = props.h - mt - mb
     })
 
     function renderItem(element: GridItem) {

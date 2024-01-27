@@ -11,6 +11,7 @@ import {
 } from 'vue'
 import type { Ref } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
+import { toFixed } from '@/utils'
 
 const DEFAULT_WIDTH = 375
 const DEFAULT_HEIGHT = 0
@@ -41,7 +42,7 @@ export function useContainer(
   })
   const cellWidth = computed(() => {
     if (type === 'swiper') return containerRect.width
-    const res = containerWidth.value / grid.value
+    const res = toFixed(containerWidth.value / grid.value)
     return res
     // const { columnGap = 0 } = style.value
     // if (type === 'swiper') return containerRect.width
