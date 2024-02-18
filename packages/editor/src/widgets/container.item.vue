@@ -1,6 +1,6 @@
 <script lang="ts">
 import DraggableWrapper from '@/components/draggableWrapper.vue'
-import { defineComponent, h, ref, toRef, watchEffect, withModifiers } from 'vue'
+import { defineComponent, h, ref, toRef, watch, withModifiers } from 'vue'
 import type { GridItem } from './hooks'
 import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
@@ -33,16 +33,22 @@ export default defineComponent({
 
     const marginLeft = toRef(props.element.style, 'marginLeft')
     const marginRight = toRef(props.element.style, 'marginRight')
-    const marginTop = toRef(props.element.style, 'marginTop')
-    const marginBottom = toRef(props.element.style, 'marginBottom')
-    watchEffect(() => {
-      const ml = marginLeft.value || 0
-      const mr = marginRight.value || 0
-      const mt = marginTop.value || 0
-      const mb = marginBottom.value || 0
-      width.value = props.w - mr - ml
-      height.value = props.h - mt - mb
-    })
+    // const marginTop = toRef(props.element.style, 'marginTop')
+    // const marginBottom = toRef(props.element.style, 'marginBottom')
+
+    watch(
+      [marginLeft, marginRight],
+      ([newML = 0, newMR = 0], [oldML = 0, oldMR = 0]) => {
+        const deltaML = newML - oldML
+        const deltaMR = newMR - oldMR
+        // const deltaMT = newMT - oldMT
+        // const deltaMB = newMB - oldMB
+        width.value = props.w - deltaML - deltaMR
+        // height.value = props.h - deltaMT - deltaMB
+        emit('update:w', width.value)
+        // emit('update:h', height.value)
+      },
+    )
 
     function renderItem(element: GridItem) {
       const { preview, onEnter, onLeave, handleSelect } = props.options
@@ -105,7 +111,12 @@ export default defineComponent({
     }
     function wrapResizable(node: any, element: any) {
       const { onDragEnd, onDragStart, onEnter, onLeave, handleSelect } = props.options
-      const { marginLeft, marginTop, marginRight, marginBottom } = normalizeStyle(element.style)
+      const {
+        marginLeft = 0,
+        marginTop = 0,
+        marginRight = 0,
+        marginBottom = 0,
+      } = normalizeStyle(element.style)
       return h(ResizeDomCore, {
         key: element._uuid,
         width: width.value,
@@ -137,8 +148,13 @@ export default defineComponent({
           const { cellWidth } = props.options
           const cellNum = Math.round(width.value / cellWidth)
           // const offset = Math.max((cellNum - 1), 0) * columnGap
-          const snapWidth = Math.max(cellNum * cellWidth, cellWidth)
-          const snapHeight = Math.max(height.value, 10)
+
+          const offsetWidth = parseFloat(String(marginLeft)) - parseFloat(String(marginRight))
+          const offsetHeight = 0
+          // parseFloat(String(marginTop)) - parseFloat(String(marginBottom))
+
+          const snapWidth = Math.max(cellNum * cellWidth, cellWidth) - offsetWidth
+          const snapHeight = Math.max(height.value, 10) - offsetHeight
           width.value = snapWidth
           height.value = snapHeight
           emit('update:w', snapWidth)
