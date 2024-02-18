@@ -28,6 +28,7 @@
         <div class="mobile-frame">
           <div
             class="mobile-content"
+            :style="globalStyle"
           >
             <header
               class="header"
@@ -152,6 +153,23 @@ const isPreview = computed(() => mode.value === 'preview')
 
 const showTopbar = computed(() => app.config.globalConfig.topbarShow)
 const showTabbar = computed(() => app.config.globalConfig.tabbarShow)
+const globalStyle = computed(() => {
+  const config = app.config.globalConfig.background || {}
+  switch (config.type) {
+    case 'image':
+      return {
+        backgroundImage: `url(${config.image})`,
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+      }
+    case 'color':
+      return {
+        backgroundColor: config.color,
+      }
+    default:
+      return {}
+  }
+})
 const editorStyle = computed(() => {
   return {
     height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
