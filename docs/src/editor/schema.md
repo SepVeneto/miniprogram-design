@@ -87,6 +87,27 @@ type ISchema = WidgetOther | WidgetBox
 ]
 ```
 
+## 页面配置
+
+`pageConfig`可以针对每一个路由来配置。
+
+::: danger 注意
+当初始配置中不存在`pageConfig`时会默认使用全局配置，而当`pageConfig`存在时，全局配置就会被忽略
+:::
+
+::: warning 提醒
+`pageConfig`的`key`值为页面路由的名称，而不是标题，也就是配置中的`name`。如果对应页面没有配置名称或是没有找到，就会使用全局配置。
+:::
+
+```js
+{
+  pageConfig: {
+    Home: {},
+    Personal: {},
+  }
+}
+```
+
 
 ## css样式
 

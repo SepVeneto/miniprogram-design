@@ -89,7 +89,7 @@
         <ElCard>
           <template #header>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span>{{ selected._name || '配置' }}</span>
+              <span>{{ selected._name || '页面配置' }}</span>
               <div v-if="selected._schema && !['tabbar'].includes(selected._schema)">
                 <el-switch
                   v-if="!['container', 'swiper'].includes(selected._view)"
@@ -151,10 +151,17 @@ const title = computed(() => route.meta.title)
 const isPreview = computed(() => mode.value === 'preview')
 // const needBack = computed(() => route.)
 
-const showTopbar = computed(() => app.config.globalConfig.topbarShow)
-const showTabbar = computed(() => app.config.globalConfig.tabbarShow)
+const globalConfig = computed(() => {
+  if (!route.name || !app.config.pageConfig?.[route.name as string]) {
+    return app.config.globalConfig
+  } else {
+    return app.config.pageConfig[route.name as string]
+  }
+})
+const showTopbar = computed(() => globalConfig.value.topbarShow)
+const showTabbar = computed(() => globalConfig.value.tabbarShow)
 const globalStyle = computed(() => {
-  const config = app.config.globalConfig.background || {}
+  const config = globalConfig.value.background || {}
   switch (config.type) {
     case 'image':
       return {
