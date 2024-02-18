@@ -149,7 +149,7 @@ export default defineComponent({
           const cellNum = Math.round(width.value / cellWidth)
           // const offset = Math.max((cellNum - 1), 0) * columnGap
 
-          const offsetWidth = parseFloat(String(marginLeft)) - parseFloat(String(marginRight))
+          const offsetWidth = parseFloat(String(marginLeft)) + parseFloat(String(marginRight))
           const offsetHeight = 0
           // parseFloat(String(marginTop)) - parseFloat(String(marginBottom))
 
