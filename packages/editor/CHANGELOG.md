@@ -1,3 +1,20 @@
+# 0.15.0 (2024-02-18)
+
+
+### Bug Fixes
+
+* **container:** margin affect width ([7ad7572](https://github.com/SepVeneto/miniprogram-design/commit/7ad7572610a39879ccdb37f108a128d7c7325fb1))
+* **editor:** scrollbar-x ([74dcac7](https://github.com/SepVeneto/miniprogram-design/commit/74dcac7ce41ea82420fc769c59cdae914d960fa2))
+
+
+### Features
+
+* 背景设置 ([2e5886f](https://github.com/SepVeneto/miniprogram-design/commit/2e5886f9d86fb8224b1eae41cf6b6cd0a8cc429c))
+* **editor:** auto cal width ([8677d54](https://github.com/SepVeneto/miniprogram-design/commit/8677d54052f794fb3afe78d59b2dfb5b14e0feaf))
+* **editor:** page config ([65269b9](https://github.com/SepVeneto/miniprogram-design/commit/65269b9075366daf1a1776ff9d5bebe5a20e0ae4))
+
+
+
 ## 0.14.4 (2024-01-25)
 
 
