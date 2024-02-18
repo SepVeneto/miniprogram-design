@@ -10,6 +10,7 @@ import { schema as schemaConfig } from '@/mock.schema'
 
 export interface Config{
   globalConfig: Record<string, any>
+  pageConfig?: Record<string, any>
   body: Record<PropertyKey, any[]>
   tabbars: TabbarWidgetConfig
 }

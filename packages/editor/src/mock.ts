@@ -3,6 +3,10 @@ import homeFillIcon from '@/assets/home-fill.svg'
 import personalIcon from '@/assets/personal.svg'
 import personalFillIcon from '@/assets/personal-fill.svg'
 export default {
+  pageConfig: {
+    Home: {},
+    Personal: {},
+  },
   globalConfig: {
     color: 'rgba(126,211,33,1)',
     emptyColor: 'rgba(144,19,254,1)',

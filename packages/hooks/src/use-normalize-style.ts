@@ -15,10 +15,11 @@ export function useNormalizeStyle<T extends Style>(
   })
 }
 
-export function normalizeStyle(style: Style) {
+export function normalizeStyle(style: Style, excludes: string[] = []) {
   return Object.entries(style).reduce<Partial<CSSProperties>>(
     (obj, _style) => {
       const [key, value] = _style
+      if (excludes.includes(key)) return obj
       if (typeof value === 'number') {
         // @ts-expect-error: value is not a number
         obj[key] = key === 'zIndex' ? value : `${value}px`

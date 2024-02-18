@@ -1,7 +1,8 @@
 <script lang="ts">
 import DraggableWrapper from '@/components/draggableWrapper.vue'
-import { defineComponent, h, ref, watchEffect, withModifiers } from 'vue'
+import { defineComponent, h, ref, toRef, watch, withModifiers } from 'vue'
 import type { GridItem } from './hooks'
+import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
 import CanvasView from '@/widgets/canvas.view.vue'
 
@@ -30,10 +31,24 @@ export default defineComponent({
     const width = ref(props.w)
     const height = ref(props.h)
 
-    watchEffect(() => {
-      width.value = props.w
-      height.value = props.h
-    })
+    const marginLeft = toRef(props.element.style, 'marginLeft')
+    const marginRight = toRef(props.element.style, 'marginRight')
+    // const marginTop = toRef(props.element.style, 'marginTop')
+    // const marginBottom = toRef(props.element.style, 'marginBottom')
+
+    watch(
+      [marginLeft, marginRight],
+      ([newML = 0, newMR = 0], [oldML = 0, oldMR = 0]) => {
+        const deltaML = newML - oldML
+        const deltaMR = newMR - oldMR
+        // const deltaMT = newMT - oldMT
+        // const deltaMB = newMB - oldMB
+        width.value = props.w - deltaML - deltaMR
+        // height.value = props.h - deltaMT - deltaMB
+        emit('update:w', width.value)
+        // emit('update:h', height.value)
+      },
+    )
 
     function renderItem(element: GridItem) {
       const { preview, onEnter, onLeave, handleSelect } = props.options
@@ -50,13 +65,33 @@ export default defineComponent({
         onMouseleave: onLeave,
         onClick: withModifiers(() => handleSelect(element), ['stop']),
       }
-      const wrapperProps = props.options.type === 'swiper' ? swiper : { ...base, style: 'width: 100%; height: 100%;' }
-      return !preview
-        ? h(DraggableWrapper, { ...wrapperProps, active: props.active }, () => getRenderContent(element, preview))
-        : h('div', {
+      const elementStyle = normalizeStyle(
+        element.style,
+        ['marginLeft', 'marginTop', 'marginRight', 'marginBottom'],
+      )
+      const wrapperProps = props.options.type === 'swiper'
+        ? swiper
+        : {
+            ...base,
+            style: {
+              ...elementStyle,
+              width: '100%',
+              height: '100%',
+            },
+          }
+      if (!preview) {
+        const node = h(DraggableWrapper, {
+          ...wrapperProps,
+          active: props.active,
+        }, () => getRenderContent(element, preview))
+        return node
+      } else {
+        const node = h('div', {
           class: [props.options.type === 'swiper' && 'swiper-slide'],
           style: { height: '100%' },
         }, getRenderContent(element, preview))
+        return node
+      }
     }
     function getRenderContent(element: any, isPreview = false) {
       switch (element._view) {
@@ -76,17 +111,26 @@ export default defineComponent({
     }
     function wrapResizable(node: any, element: any) {
       const { onDragEnd, onDragStart, onEnter, onLeave, handleSelect } = props.options
-
+      const {
+        marginLeft = 0,
+        marginTop = 0,
+        marginRight = 0,
+        marginBottom = 0,
+      } = normalizeStyle(element.style)
       return h(ResizeDomCore, {
         key: element._uuid,
         width: width.value,
         height: height.value,
         style: {
+          marginLeft,
+          marginTop,
+          marginRight,
+          marginBottom,
           position: 'relative',
           width: `${width.value}px`,
           height: `${height.value}px`,
         },
-        scale: ['r', 'b'],
+        scale: ['rb'],
         minHeight: 10,
         dragOpts: {
           startFn: onDragStart,
@@ -101,11 +145,16 @@ export default defineComponent({
           height.value = h
         },
         stopFn: () => {
-          const { cellWidth, columnGap } = props.options
+          const { cellWidth } = props.options
           const cellNum = Math.round(width.value / cellWidth)
-          const offset = Math.max((cellNum - 1), 0) * columnGap
-          const snapWidth = Math.max(cellNum * cellWidth + offset, cellWidth)
-          const snapHeight = Math.max(height.value, 10)
+          // const offset = Math.max((cellNum - 1), 0) * columnGap
+
+          const offsetWidth = parseFloat(String(marginLeft)) - parseFloat(String(marginRight))
+          const offsetHeight = 0
+          // parseFloat(String(marginTop)) - parseFloat(String(marginBottom))
+
+          const snapWidth = Math.max(cellNum * cellWidth, cellWidth) - offsetWidth
+          const snapHeight = Math.max(height.value, 10) - offsetHeight
           width.value = snapWidth
           height.value = snapHeight
           emit('update:w', snapWidth)

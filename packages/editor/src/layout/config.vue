@@ -24,7 +24,9 @@ import schemaRender from '@sepveneto/mpd-schema'
 import { tabbarConfig } from '@/layout/tabbar'
 import { useApp, useHistory } from '@/store'
 import { computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const app = useApp()
 const history = useHistory()
 const selected = computed<any>({
@@ -37,10 +39,18 @@ const selected = computed<any>({
 })
 const globalConfig = computed<any>({
   get() {
-    return app.config.globalConfig
+    if (!route.name || !app.config.pageConfig?.[route.name as string]) {
+      return app.config.globalConfig
+    } else {
+      return app.config.pageConfig[route.name as string]
+    }
   },
   set(val) {
-    app.config.globalConfig = val
+    if (!route.name || !app.config.pageConfig?.[route.name as string]) {
+      app.config.globalConfig = val
+    } else {
+      app.config.pageConfig[route.name as string] = val
+    }
   },
 })
 const globalSchema = computed(() => ([
@@ -62,25 +72,25 @@ const globalSchema = computed(() => ([
       { label: '隐藏', value: 0 },
     ],
   },
-  // {
-  //   type: 'radioGroup',
-  //   key: 'background.type',
-  //   label: '背景',
-  //   options: [
-  //     { label: '图片', value: 'image' },
-  //     { label: '颜色', value: 'color' },
-  //   ],
-  //   link: {
-  //     image: [{
-  //       type: 'image',
-  //       key: 'background.image',
-  //       label: '图片',
-  //       width: '111px',
-  //       height: '182px',
-  //     }],
-  //     color: [{ type: 'colorPicker', key: 'background.color', label: '颜色' }],
-  //   },
-  // },
+  {
+    type: 'radioGroup',
+    key: 'background.type',
+    label: '背景',
+    options: [
+      { label: '图片', value: 'image' },
+      { label: '颜色', value: 'color' },
+    ],
+    link: {
+      image: [{
+        type: 'image',
+        key: 'background.image',
+        label: '图片',
+        width: '111px',
+        height: '182px',
+      }],
+      color: [{ type: 'colorPicker', key: 'background.color', label: '颜色' }],
+    },
+  },
   ...(app.schema.globalConfig || []),
 ]))
 watch(selected, (val, oldVal) => {

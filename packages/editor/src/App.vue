@@ -12,7 +12,10 @@
           <template #header>
             <span>组件</span>
           </template>
-          <el-scrollbar wrap-style="height: 700px;">
+          <el-scrollbar
+            wrap-style="height: 700px;"
+            noresize
+          >
             <widget-wrap
               :list="app.widgetList"
               :preview="isPreview"
@@ -25,6 +28,7 @@
         <div class="mobile-frame">
           <div
             class="mobile-content"
+            :style="globalStyle"
           >
             <header
               class="header"
@@ -54,7 +58,8 @@
               />
             </header>
             <el-scrollbar
-              :style="`height: calc(100% ${showTopbar ? '- var(--header-height)' : ''} - var(--tabbar-height))`"
+              :style="editorStyle"
+              :min-size="375"
             >
               <router-view
                 :preview="isPreview"
@@ -84,7 +89,7 @@
         <ElCard>
           <template #header>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span>{{ selected._name || '配置' }}</span>
+              <span>{{ selected._name || '页面配置' }}</span>
               <div v-if="selected._schema && !['tabbar'].includes(selected._schema)">
                 <el-switch
                   v-if="!['container', 'swiper'].includes(selected._view)"
@@ -106,7 +111,10 @@
               </div>
             </div>
           </template>
-          <el-scrollbar wrap-style="height: 700px;">
+          <el-scrollbar
+            wrap-style="height: 700px;"
+            noresize
+          >
             <ElConfigProvider :locale="zhCn">
               <VConfig />
             </ElConfigProvider>
@@ -143,8 +151,37 @@ const title = computed(() => route.meta.title)
 const isPreview = computed(() => mode.value === 'preview')
 // const needBack = computed(() => route.)
 
-const showTopbar = computed(() => app.config.globalConfig.topbarShow)
-const showTabbar = computed(() => app.config.globalConfig.tabbarShow)
+const globalConfig = computed(() => {
+  if (!route.name || !app.config.pageConfig?.[route.name as string]) {
+    return app.config.globalConfig
+  } else {
+    return app.config.pageConfig[route.name as string]
+  }
+})
+const showTopbar = computed(() => globalConfig.value.topbarShow)
+const showTabbar = computed(() => globalConfig.value.tabbarShow)
+const globalStyle = computed(() => {
+  const config = globalConfig.value.background || {}
+  switch (config.type) {
+    case 'image':
+      return {
+        backgroundImage: `url(${config.image})`,
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+      }
+    case 'color':
+      return {
+        backgroundColor: config.color,
+      }
+    default:
+      return {}
+  }
+})
+const editorStyle = computed(() => {
+  return {
+    height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
+  }
+})
 /**
  * @deprecated
  */
@@ -218,7 +255,8 @@ function handleOutside({ target }: Event) {
   margin-bottom: 20px;
 }
 .mobile-frame {
-  --padding-x: 15px;
+  --padding-left-x: 14px;
+  --padding-right-x: 15px;
   --tabbar-height: 50px;
   --header-height: 44px;
   --safe-bottom: 40px;
@@ -226,11 +264,12 @@ function handleOutside({ target }: Event) {
   background: url('./assets/iPhone13.png');
   width: 375px;
   height: 720px;
-  padding: 0 var(--padding-x);
+  padding-left: var(--padding-left-x);
+  padding-right: var(--padding-right-x);
   padding-top: 50px;
   padding-bottom: var(--safe-bottom);
   box-sizing: content-box;
-  background-size: calc(375px + 2 * var(--padding-x)) 100%;
+  background-size: calc(375px + var(--padding-left-x) + var(--padding-right-x)) 100%;
   .mobile-content {
     height: inherit;
     background: #f4f5f7;
