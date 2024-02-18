@@ -1,3 +1,12 @@
+## 0.15.1 (2024-02-18)
+
+
+### Bug Fixes
+
+* **editor:** container width cal error ([44a2180](https://github.com/SepVeneto/miniprogram-design/commit/44a2180008a0e048bca5e713265cf4b4d2b8a274))
+
+
+
 # 0.15.0 (2024-02-18)
 
 
