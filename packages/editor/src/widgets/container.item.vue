@@ -1,6 +1,6 @@
 <script lang="ts">
 import DraggableWrapper from '@/components/draggableWrapper.vue'
-import { defineComponent, h, ref, toRef, watch, withModifiers } from 'vue'
+import { defineComponent, h, onMounted, ref, toRef, watch, withModifiers } from 'vue'
 import type { GridItem } from './hooks'
 import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
@@ -35,19 +35,21 @@ export default defineComponent({
     const marginRight = toRef(props.element.style, 'marginRight')
     // const marginTop = toRef(props.element.style, 'marginTop')
     // const marginBottom = toRef(props.element.style, 'marginBottom')
+    onMounted(() => {
+      // 切换编辑模式时重新更新宽度
+      width.value = props.w
+    })
 
     watch(
-      [marginLeft, marginRight],
+      [marginLeft, marginRight, () => props.options.cellWidth],
       ([newML = 0, newMR = 0], [oldML = 0, oldMR = 0]) => {
         const deltaML = newML - oldML
         const deltaMR = newMR - oldMR
-        // const deltaMT = newMT - oldMT
-        // const deltaMB = newMB - oldMB
         width.value = props.w - deltaML - deltaMR
-        // height.value = props.h - deltaMT - deltaMB
         emit('update:w', width.value)
-        // emit('update:h', height.value)
       },
+      // props.w来源为组件的style.width，需要后置等待其更新完成
+      { flush: 'post' },
     )
 
     function renderItem(element: GridItem) {
@@ -88,7 +90,12 @@ export default defineComponent({
       } else {
         const node = h('div', {
           class: [props.options.type === 'swiper' && 'swiper-slide'],
-          style: { height: '100%' },
+          style: swiper
+            ? { height: '100%' }
+            : {
+                width: width.value + 'px',
+                height: '100%',
+              },
         }, getRenderContent(element, preview))
         return node
       }

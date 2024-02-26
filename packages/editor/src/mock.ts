@@ -3,15 +3,17 @@ import homeFillIcon from '@/assets/home-fill.svg'
 import personalIcon from '@/assets/personal.svg'
 import personalFillIcon from '@/assets/personal-fill.svg'
 export default {
-  pageConfig: {
-    Home: {},
-    Personal: {},
-  },
+  // pageConfig: {
+  //   Home: {},
+  //   Personal: {},
+  // },
   globalConfig: {
     color: 'rgba(126,211,33,1)',
     emptyColor: 'rgba(144,19,254,1)',
     bubbleColor: 'rgba(80,227,194,1)',
     loginBg: '',
+    topbarShow: 1,
+    tabbarShow: 1,
   },
   body: {
     Home: [

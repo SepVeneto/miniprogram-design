@@ -58,9 +58,10 @@ export function useGrid(options: GridOptions) {
     wrapSwiper,
     renderItem: (item: GridItem) => {
       const active = options.selected._uuid === item._uuid || options.activeUuid === item._uuid
-      const { width, height } = item.style
-      const _w = normalizeSize(width, 'width', options.containerRect)
-      const _h = normalizeSize(height, 'height', options.containerRect)
+      // const { width, height } = item.style
+      // console.log('?', width)
+      // const _w = normalizeSize(width, 'width', options.containerRect)
+      // const _h = normalizeSize(height, 'height', options.containerRect)
       const style = {
         float: 'left',
         // padding: `${options.rowGap}px ${options.columnGap}px`,
@@ -69,8 +70,8 @@ export function useGrid(options: GridOptions) {
       const itemProps = {
         style,
         key: item._uuid,
-        w: _w,
-        h: _h,
+        w: item.style.width,
+        h: item.style.height,
         active,
         element: item,
         options,
@@ -89,7 +90,8 @@ function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], c
   }
   const cellNum = Math.round(normalizeSize(item.style.width, 'width', containerSize) / cellWidth)
   // const offset = Math.max((cellNum - 1), 0) * columnGap
-  item.style.width = cellNum * cellWidth
+  const { marginLeft = 0, marginRight = 0 } = item.style
+  item.style.width = cellNum * cellWidth - parseFloat(marginLeft) - parseFloat(marginRight)
   // + offset
 }
 function normalizeSize(

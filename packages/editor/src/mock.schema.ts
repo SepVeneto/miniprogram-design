@@ -191,6 +191,9 @@ const mine = [
 
 const container = [
   {
+    type: 'box',
+  },
+  {
     type: 'number',
     label: '栅格',
     key: 'grid',
