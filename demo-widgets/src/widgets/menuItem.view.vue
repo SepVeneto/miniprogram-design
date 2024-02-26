@@ -1,6 +1,5 @@
 <template>
   <div
-    :style="style"
     class="menu-item-wrapper"
   >
     <div>
@@ -22,15 +21,12 @@
 </template>
 
 <script lang="ts" setup>
-import { useNormalizeStyle } from '@/hooks'
-
-const props = defineProps({
+defineProps({
   config: {
     type: Object,
     default: () => ({}),
   },
 })
-const style = useNormalizeStyle(props.config.style)
 </script>
 
 <style lang="scss" scoped>

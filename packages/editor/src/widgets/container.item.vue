@@ -108,12 +108,19 @@ export default defineComponent({
           if (element._custom) {
             return h(CanvasView, { config: element, preview: isPreview })
           }
-          return props.options.ViewRender
-            ? h(props.options.ViewRender, {
-              type: element._view,
-              config: element,
-            })
-            : h('div', props.options.errorLoading ? '加载失败!' : '加载中...')
+
+          {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { marginLeft, marginTop, marginRight, marginBottom, ...otherStyle } = normalizeStyle(element.style)
+
+            return props.options.ViewRender
+              ? h(props.options.ViewRender, {
+                type: element._view,
+                config: element,
+                style: otherStyle,
+              })
+              : h('div', props.options.errorLoading ? '加载失败!' : '加载中...')
+          }
       }
     }
     function wrapResizable(node: any, element: any) {
