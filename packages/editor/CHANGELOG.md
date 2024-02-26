@@ -1,3 +1,13 @@
+## 0.15.2 (2024-02-26)
+
+
+### Bug Fixes
+
+* **editor:** container cell width update error ([4dad149](https://github.com/SepVeneto/miniprogram-design/commit/4dad1494006cb633bc73a3a73afaaed3c9bc1aaf))
+* **editor:** container item missing style in preview ([2416759](https://github.com/SepVeneto/miniprogram-design/commit/2416759263d8878293ebc7eb72041a453b782bf6))
+
+
+
 ## 0.15.1 (2024-02-18)
 
 
