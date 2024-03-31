@@ -1,3 +1,12 @@
+## 0.15.3 (2024-03-31)
+
+
+### Bug Fixes
+
+* **editor:** prevent form default action ([75d7ba3](https://github.com/SepVeneto/miniprogram-design/commit/75d7ba3b897f48d6d9f5e5ede6cf20325147de49))
+
+
+
 ## 0.15.2 (2024-02-26)
 
 
