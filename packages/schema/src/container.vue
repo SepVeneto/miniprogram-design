@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PropType, ShallowRef, VNode } from 'vue'
-import { defineAsyncComponent, defineComponent, h, watch } from 'vue'
+import { defineAsyncComponent, defineComponent, h, watch, withModifiers } from 'vue'
 import OssUpload from './components/ossUpload.vue'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { QuestionFilled } from '@element-plus/icons-vue'
@@ -356,6 +356,7 @@ export default defineComponent({
     }
     return h(ElForm, {
       'label-width': '100px',
+      onSubmit: withModifiers(() => { /* pass */ }, ['prevent']),
     }, () => this.schema.filter(item => this.allowContainer(item)).map(item => {
       return wrapper(item)
     }),
