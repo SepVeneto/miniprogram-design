@@ -127,7 +127,7 @@ export async function useDesign(
   function get(): EditorConfig | null {
     const data = microApp.getData(name) as DataListener
     if (!data.config) {
-      return null
+      throw new Error('[@sepveneto/mpd-core] missing config in data')
     }
     return data.config
   }
