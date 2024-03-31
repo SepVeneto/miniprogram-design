@@ -1,3 +1,12 @@
+## [0.8.2](https://github.com/SepVeneto/miniprogram-design/compare/core@0.8.1...core@0.8.2) (2024-03-31)
+
+
+### Features
+
+* **core:** no config error ([275a8b9](https://github.com/SepVeneto/miniprogram-design/commit/275a8b994dec9f7feea38fd3c20e3bafdacb1673))
+
+
+
 ## [0.8.1](https://github.com/SepVeneto/miniprogram-design/compare/core@0.8.0...core@0.8.1) (2023-10-28)
 
 
