@@ -63,9 +63,9 @@ export function useGrid(options: GridOptions) {
       // const _w = normalizeSize(width, 'width', options.containerRect)
       // const _h = normalizeSize(height, 'height', options.containerRect)
       const style = {
-        float: 'left',
+        // float: 'left',
         // padding: `${options.rowGap}px ${options.columnGap}px`,
-        boxSizing: 'border-box',
+        // boxSizing: 'border-box',
       }
       const itemProps = {
         style,
@@ -90,8 +90,7 @@ function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], c
   }
   const cellNum = Math.round(normalizeSize(item.style.width, 'width', containerSize) / cellWidth)
   // const offset = Math.max((cellNum - 1), 0) * columnGap
-  const { marginLeft = 0, marginRight = 0 } = item.style
-  item.style.width = cellNum * cellWidth - parseFloat(marginLeft) - parseFloat(marginRight)
+  item.style.width = cellNum * cellWidth
   // + offset
 }
 function normalizeSize(

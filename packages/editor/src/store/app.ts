@@ -65,7 +65,7 @@ export const useApp = defineStore('app', () => {
             _name: '容器',
             _view: 'container',
             _schema: 'container',
-            grid: 2,
+            grid: 1,
             style: {
               boxSizing: 'border-box',
             },

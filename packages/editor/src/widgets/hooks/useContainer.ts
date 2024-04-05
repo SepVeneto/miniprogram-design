@@ -30,31 +30,29 @@ export function useContainer(
   })
 
   const containerWidth = computed(() => {
-    if (!containerRect.width) return 0
+    const _width = Math.min(containerRect.width, width.value) || DEFAULT_WIDTH
     // 对于编辑模式，计算的是容器内部的尺寸，所以不需要额外计算padding
     // 对于预览模式，没有套一个container，所以padding是直接应用在容器本身的
     // 需要额外计算padding
     if (preview.value) {
       const { paddingLeft = 0, paddingRight = 0 } = style.value
-      return containerRect.width - paddingLeft - paddingRight
+      return _width - paddingLeft - paddingRight
     }
-    return containerRect.width
+    return _width
   })
   const cellWidth = computed(() => {
     if (type === 'swiper') return containerRect.width
     const res = toFixed(containerWidth.value / grid.value)
     return res
-    // const { columnGap = 0 } = style.value
-    // if (type === 'swiper') return containerRect.width
-    // const width = containerWidth.value - columnGap * (grid.value - 1)
-    // return width / grid.value
   })
   const height = ref()
+  const width = ref()
 
   // let observe: ResizeObserver
   const observeFn = useDebounceFn((records) => {
     const record = records[0]
     height.value = record.contentRect.height
+    width.value = record.contentRect.width
   })
 
   watchEffect(() => {

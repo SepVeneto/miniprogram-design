@@ -13,6 +13,7 @@ import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 import type { PropType } from 'vue'
 import VueDraggable from 'vuedraggable'
+import { watchEffect } from 'vue'
 
 export default defineComponent({
   props: {
@@ -98,7 +99,7 @@ export default defineComponent({
     function onPut(_1: any, _2: any, dom: HTMLElement) {
       // @ts-expect-error: vuedraggable extends dom
       const { _inContainer, _view } = dom.__draggable_context.element
-      if (['container', 'swiper'].includes(_view)) return false
+      if (['swiper'].includes(_view)) return false
       return !_inContainer || _inContainer === 'inner'
     }
     function handleSelect(data: any) {
@@ -163,9 +164,13 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .draggable-group {
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
   min-height: 50px;
   position: relative;
+  height: 100%;
+  align-content: flex-start;
   &::before {
     content: '拖拽至此区域';
     color: #ddd;
