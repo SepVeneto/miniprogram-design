@@ -1,3 +1,12 @@
+# 0.16.0-beta.0 (2024-04-06)
+
+
+### Features
+
+* **core:** no config error ([275a8b9](https://github.com/SepVeneto/miniprogram-design/commit/275a8b994dec9f7feea38fd3c20e3bafdacb1673))
+
+
+
 ## 0.15.3 (2024-03-31)
 
 
