@@ -1,6 +1,5 @@
 <template>
   <div
-    :style="style"
     class="menu-item-wrapper"
   >
     <div>

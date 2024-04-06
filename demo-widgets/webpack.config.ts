@@ -22,7 +22,7 @@ const config: webpack.Configuration = {
     },
   },
   devServer: {
-    server: 'https',
+    // server: 'https',
     allowedHosts: ['sepveneto.github.io'],
     compress: true,
     port: 8090,
