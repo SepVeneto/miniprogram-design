@@ -42,7 +42,7 @@ export function useContainer(
   })
   const cellWidth = computed(() => {
     if (type === 'swiper') return containerRect.width
-    const res = toFixed(containerWidth.value / grid.value)
+    const res = toFixed(containerWidth.value / grid.value - (grid.value - 1) * (style.value.columnGap || 0) / 2)
     return res
   })
   const height = ref()

@@ -7,13 +7,13 @@ import {
   inject,
   reactive,
   shallowRef,
+  watchEffect,
 } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 import type { PropType } from 'vue'
 import VueDraggable from 'vuedraggable'
-import { watchEffect } from 'vue'
 
 export default defineComponent({
   props: {
@@ -36,12 +36,15 @@ export default defineComponent({
     const selected = computed(() => app.selected)
     const itemList = computed(() => props.config.list)
     const type = computed(() => props.type)
-    const columnGap = computed(() => props.config.style.columnGap ?? 0)
+    const columnGap = computed(() => {
+      console.log(props.config.style)
+      return props.config.style.columnGap ?? 0
+    })
     const configComp = computed<any>({
       get() {
         const config = props.config
         config.style = props.config.style || {}
-        config.grid = props.config.grid || 2
+        config.grid = props.config.grid || 1
         config.list = props.config.list || []
 
         return config
@@ -68,6 +71,7 @@ export default defineComponent({
     const options = reactive({
       list: itemList,
       preview: previewComp,
+      grid: configComp.value.grid,
       selected,
       activeUuid,
       cellWidth,
@@ -171,6 +175,7 @@ export default defineComponent({
   position: relative;
   height: 100%;
   align-content: flex-start;
+  justify-content: space-between;
   &::before {
     content: '拖拽至此区域';
     color: #ddd;
@@ -203,12 +208,5 @@ export default defineComponent({
 <style scoped lang="scss">
 .flip-list-move {
   transition: transform 0.5s;
-}
-.draggable-group {
-  &:after {
-    content: '';
-    clear: both;
-    display: block;
-  }
 }
 </style>

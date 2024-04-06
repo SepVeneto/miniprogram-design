@@ -1,19 +1,14 @@
 <script lang="ts">
 import DraggableWrapper from '@/components/draggableWrapper.vue'
-import { computed, defineComponent, h, onMounted, ref, withModifiers } from 'vue'
+import { computed, defineComponent, h, onMounted, ref, watch, withModifiers } from 'vue'
 import type { GridItem } from './hooks'
 import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
 import CanvasView from '@/widgets/canvas.view.vue'
 import ContainerView from './container.view.vue'
-import { watch } from 'vue'
 
 export default defineComponent({
   props: {
-    w: {
-      type: Number,
-      required: true,
-    },
     h: {
       type: Number,
       default: 50,
@@ -28,24 +23,34 @@ export default defineComponent({
     },
     active: Boolean,
   },
-  emits: ['update:w', 'update:h'],
+  emits: ['update:unit', 'update:h', 'update:w'],
   setup(props, { emit }) {
-    const width = ref(props.w)
     const height = ref(props.h)
+    const preview = computed(() => props.options.preview)
     // from draggable wrapper padding-top
-    const displayHeight = computed(() => height.value + 18)
+    const displayHeight = computed(() => height.value + (preview.value ? 0 : 18))
+
+    const cellNum = ref(1)
+    watch(() => props.options._unit, (val) => {
+      cellNum.value = val || 1
+    })
+    const cellWidth = computed(() => props.options.cellWidth)
+    const width = ref(cellNum.value * cellWidth.value)
 
     onMounted(() => {
       // 切换编辑模式时重新更新宽度
-      width.value = props.w
+      width.value = cellNum.value * cellWidth.value
     })
-    const cellNum = ref(1)
-    watch(() => props.options.cellWidth, (cw) => {
-      width.value = cw * cellNum.value
+
+    watch([cellWidth, cellNum], ([cw, cn]) => {
+      width.value = cw * cn
+    })
+    watch(() => props.h, (h) => {
+      height.value = h
     })
 
     function renderItem(element: GridItem) {
-      const { preview, onEnter, onLeave, handleSelect } = props.options
+      const { onEnter, onLeave, handleSelect } = props.options
       const base = {
         dir: 'top',
         active: props.active,
@@ -60,22 +65,20 @@ export default defineComponent({
         onMouseleave: onLeave,
         onClick: withModifiers(() => handleSelect(element), ['stop']),
       }
-      const elementStyle = normalizeStyle(element.style)
       const wrapperProps = props.options.type === 'swiper'
         ? swiper
         : {
             ...base,
             style: {
-              ...elementStyle,
               width: '100%',
               height: '100%',
             },
           }
-      if (!preview) {
+      if (!preview.value) {
         const node = h(DraggableWrapper, {
           ...wrapperProps,
           active: props.active,
-        }, () => getRenderContent(element, preview))
+        }, () => getRenderContent(element, preview.value))
         return node
       } else {
         const node = h('div', {
@@ -86,7 +89,7 @@ export default defineComponent({
                 width: width.value + 'px',
                 height: '100%',
               },
-        }, getRenderContent(element, preview))
+        }, getRenderContent(element, preview.value))
         return node
       }
     }
@@ -99,27 +102,28 @@ export default defineComponent({
             return h(CanvasView, { config: element, preview: isPreview })
           }
 
-          {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { marginLeft, marginTop, marginRight, marginBottom, ...otherStyle } = normalizeStyle(element.style)
+          // {
+          //   const { marginLeft, marginTop, marginRight, marginBottom, ...otherStyle } = normalizeStyle(element.style)
 
-            return props.options.ViewRender
-              ? h(props.options.ViewRender, {
-                type: element._view,
-                config: element,
-                style: otherStyle,
-              })
-              : h('div', props.options.errorLoading ? '加载失败!' : '加载中...')
-          }
+          // }
+          return props.options.ViewRender
+            ? h(props.options.ViewRender, {
+              type: element._view,
+              config: element,
+              // style: otherStyle,
+            })
+            : h('div', props.options.errorLoading ? '加载失败!' : '加载中...')
       }
     }
     function wrapResizable(node: any, element: any) {
       const { onDragEnd, onDragStart, onEnter, onLeave, handleSelect } = props.options
+      const elementStyle = normalizeStyle(element.style)
       return h(ResizeDomCore, {
         key: element._uuid,
         width: width.value,
         height: height.value,
         style: {
+          ...elementStyle,
           position: 'relative',
           width: `${width.value}px`,
           height: `${displayHeight.value}px`,
@@ -140,18 +144,14 @@ export default defineComponent({
         },
         stopFn: () => {
           const { cellWidth } = props.options
-          cellNum.value = Math.round(width.value / cellWidth)
-          // const offset = Math.max((cellNum - 1), 0) * columnGap
-
-          // const offsetWidth = parseFloat(String(marginLeft)) + parseFloat(String(marginRight))
-          // const offsetHeight = 0
-          // parseFloat(String(marginTop)) - parseFloat(String(marginBottom))
+          cellNum.value = Math.max(Math.min(Math.round(width.value / cellWidth), props.options.grid), 1)
 
           const snapWidth = Math.max(cellNum.value * cellWidth, cellWidth)
           const snapHeight = Math.max(height.value, 10)
           width.value = snapWidth
           height.value = snapHeight
-          emit('update:w', snapWidth)
+          emit('update:unit', cellNum.value)
+          emit('update:w', width.value)
           emit('update:h', snapHeight)
         },
       }, node)
