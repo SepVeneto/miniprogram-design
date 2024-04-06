@@ -195,6 +195,11 @@ const container = [
   },
   {
     type: 'number',
+    label: '列间隙',
+    key: 'style.columnGap',
+  },
+  {
+    type: 'number',
     label: '栅格',
     key: 'grid',
     unit: '列',

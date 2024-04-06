@@ -10,6 +10,7 @@ export type GridItem = Record<string, any>
 export type GridOptions = UnwrapNestedRefs<{
   preview: Ref<boolean>
   list: Ref<GridItem[]>
+  grid: Ref<number>
   cellWidth: Ref<number>
   containerRect: { width: number, height: number }
   selected: Ref<GridItem>
@@ -33,7 +34,7 @@ export function useGrid(options: GridOptions) {
       if (!options.cellWidth) {
         return
       }
-      reOffset(item, options.containerRect, options.cellWidth)
+      item.style.width = reOffset(item, options.grid, options.cellWidth)
     })
   }, { immediate: true })
 
@@ -57,25 +58,13 @@ export function useGrid(options: GridOptions) {
   return {
     wrapSwiper,
     renderItem: (item: GridItem) => {
-      const active = options.selected._uuid === item._uuid || options.activeUuid === item._uuid
-      // const { width, height } = item.style
-      // console.log('?', width)
-      // const _w = normalizeSize(width, 'width', options.containerRect)
-      // const _h = normalizeSize(height, 'height', options.containerRect)
-      const style = {
-        float: 'left',
-        // padding: `${options.rowGap}px ${options.columnGap}px`,
-        boxSizing: 'border-box',
-      }
       const itemProps = {
-        style,
         key: item._uuid,
-        w: item.style.width,
         h: item.style.height,
-        active,
         element: item,
         options,
         'onUpdate:w': (val: number) => { item.style.width = val },
+        'onUpdate:unit': (val: number) => { item._unit = val },
         'onUpdate:h': (val: number) => { item.style.height = val },
       }
       return h(ContainerItem, itemProps)
@@ -83,29 +72,8 @@ export function useGrid(options: GridOptions) {
   }
 }
 
-function reOffset(item: GridItem, containerSize: GridOptions['containerRect'], cellWidth: number) {
-  if (!item.style.width) {
-    item.style.width = cellWidth
-    return
-  }
-  const cellNum = Math.round(normalizeSize(item.style.width, 'width', containerSize) / cellWidth)
-  // const offset = Math.max((cellNum - 1), 0) * columnGap
-  const { marginLeft = 0, marginRight = 0 } = item.style
-  item.style.width = cellNum * cellWidth - parseFloat(marginLeft) - parseFloat(marginRight)
-  // + offset
-}
-function normalizeSize(
-  val: number | string,
-  type: 'width' | 'height',
-  container: { width: number, height: number },
-): number {
-  if (typeof val === 'string') {
-    if (type === 'width') {
-      return container.width * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1)
-    } else {
-      return container.height * parseFloat(val) * (val.endsWith('%') ? 0.01 : 1)
-    }
-  } else {
-    return val
-  }
+export function reOffset(item: GridItem, grid: number, cellWidth: number) {
+  const unit = item._unit || 1
+  const cellNum = Math.max(Math.min(unit, grid), 1)
+  return cellNum * cellWidth
 }
