@@ -168,6 +168,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .draggable-group {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
