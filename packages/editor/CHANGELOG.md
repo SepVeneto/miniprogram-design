@@ -1,4 +1,10 @@
-# 0.16.0-beta.0 (2024-04-06)
+# 0.16.0-beta.1 (2024-04-07)
+
+
+### Bug Fixes
+
+* **editor:** preview padding not work ([3de6bcd](https://github.com/SepVeneto/miniprogram-design/commit/3de6bcdfbc07f7340fe87270cefd56b0bd844309))
+* **schema:** container tips ([5ebc105](https://github.com/SepVeneto/miniprogram-design/commit/5ebc10568ab58b099b480dc4d8822b54efa37435))
 
 
 ### Features
