@@ -230,7 +230,7 @@ export default defineComponent({
       if (schema.tips) {
         return h('span', {
           style: 'display: flex; align-items: center;',
-        }, [schema.label, h(ElTooltip, { content: schema.tip }, h(ElIcon, { style: 'margin-left: 6px;' }, () => h(QuestionFilled)))],
+        }, [schema.label, h(ElTooltip, { content: schema.tips }, h(ElIcon, { style: 'margin-left: 6px;' }, () => h(QuestionFilled)))],
         )
       } else {
         return schema.label ? h('span', schema.label) : null
