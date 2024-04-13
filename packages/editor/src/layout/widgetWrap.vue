@@ -14,13 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import widgets from './widgets.vue';
-import type { PropType } from 'vue';
+import widgets from './widgets.vue'
+import type { PropType } from 'vue'
 defineProps({
   preview: Boolean,
   list: {
     type: Array as PropType<{ name: string, group: Record<string, any>[] }[]>,
     default: () => ([]),
   },
-});
+})
 </script>

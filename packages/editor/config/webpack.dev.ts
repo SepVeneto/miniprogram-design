@@ -44,8 +44,10 @@ const config: webpack.Configuration = {
       __EDITOR_VERSION__: `"${version}"`,
       __VR_VERSION__: `"${getPackageInfoSync('vue-router')!.version}"`,
       __BC_VERSION__: `"${getPackageInfoSync('@sepveneto/basic-comp')!.version}"`,
+      // 不能关闭，vuedraggable使用了options api
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false,
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
     }),
     new ModuleFederationPlugin({
       name: 'editor-side',
@@ -56,7 +58,7 @@ const config: webpack.Configuration = {
         },
         vue: {
           singleton: true,
-          requiredVersion: '^3.3.4',
+          requiredVersion: '^3.4.21',
         },
       },
     }),
