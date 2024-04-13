@@ -10,15 +10,17 @@
 </template>
 
 <script lang="ts" setup>
-import { useDesign } from '@sepveneto/mpd-core';
+import { useDesign } from '@sepveneto/mpd-core'
 
 useDesign('#design-container', {
+  // url: 'https://scsj.jsrxjt.com/miniprogram-design/v16/',
+  // url: 'http://demo.jstest.com:8082',
   url: 'http://localhost:8082',
   name: 'demo',
   inline: true,
   data: {
     remoteUrl: 'http://localhost:8090',
-    config: { globalConfig: {}, body: {}},
-  }
+    config: { globalConfig: {}, body: {} },
+  },
 })
 </script>

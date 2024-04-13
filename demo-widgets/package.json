@@ -16,9 +16,9 @@
     "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@sepveneto/mpd-core": "workspace: *",
     "@micro-zoe/micro-app": "1.0.0-rc.4",
     "@sepveneto/eslint-config": "^0.9.0",
+    "@sepveneto/mpd-core": "workspace: *",
     "@swc/core": "^1.3.95",
     "@types/node": "^20.8.9",
     "@vitejs/plugin-legacy": "^4.1.1",

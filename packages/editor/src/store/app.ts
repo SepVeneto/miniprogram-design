@@ -46,9 +46,9 @@ export const useApp = defineStore('app', () => {
             _view: 'menuItem',
             _schema: 'menuItem',
             title: '标题',
-            width: 0,
-            height: 0,
             style: {
+              width: 375,
+              height: 100,
               background: '#fff',
             },
           },
@@ -69,6 +69,7 @@ export const useApp = defineStore('app', () => {
             grid: 1,
             style: {
               boxSizing: 'border-box',
+              columnGap: 10,
             },
             list: [],
           },
@@ -85,7 +86,7 @@ export const useApp = defineStore('app', () => {
             _schema: 'image',
             _inContainer: 'canvas',
             img: '/favicon.ico',
-            style: { width: 40, height: 40 },
+            style: { width: 375, height: 100 },
           },
           {
             _name: '文字',

@@ -33,6 +33,7 @@ const config: webpack.Configuration = {
   devServer: {
     compress: true,
     port: 8082,
+    allowedHosts: 'all',
     hot: true,
     headers: {
       'Access-Control-Allow-Origin': '*',

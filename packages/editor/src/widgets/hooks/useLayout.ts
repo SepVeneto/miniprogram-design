@@ -61,6 +61,7 @@ export function useGrid(options: GridOptions) {
       const itemProps = {
         key: item._uuid,
         h: item.style.height,
+        active: options.activeUuid === item._uuid || options.selected._uuid === item._uuid,
         element: item,
         options,
         'onUpdate:w': (val: number) => { item.style.width = val },

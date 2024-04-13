@@ -7,7 +7,6 @@ import {
   inject,
   reactive,
   shallowRef,
-  watchEffect,
 } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
@@ -145,7 +144,7 @@ export default defineComponent({
         this.type === 'swiper' && 'swiper-wrapper',
       ],
       // style: this.viewStyle,
-      modelValue: this.previewComp ? this.configComp.list.filter(item => item.isShow) : this.configComp.list,
+      modelValue: this.previewComp ? this.configComp.list.filter((item: any) => item.isShow) : this.configComp.list,
       'onUpdate:modelValue': (value: any[]) => { this.configComp.list = value },
       group: { name: 'widgets', pull: true, put: this.onPut },
       componentData: {

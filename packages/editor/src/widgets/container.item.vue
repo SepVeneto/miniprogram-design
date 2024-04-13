@@ -28,7 +28,19 @@ export default defineComponent({
     const height = ref(props.h)
     const preview = computed(() => props.options.preview)
     // from draggable wrapper padding-top
-    const displayHeight = computed(() => height.value + (preview.value ? 0 : 18))
+    // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
+    // 容器内元素因为外面包裹了ResizeCore，所以高度不能直接设置在内部的DraggableWrapper
+    const displayHeight = computed(() => {
+      let offset
+      if (preview.value) {
+        offset = 0
+      } else if (props.active) {
+        offset = 18
+      } else {
+        offset = 0
+      }
+      return height.value + offset
+    })
 
     const cellNum = ref(1)
     watch(() => props.options._unit, (val) => {
@@ -53,6 +65,7 @@ export default defineComponent({
       const { onEnter, onLeave, handleSelect } = props.options
       const base = {
         dir: 'top',
+        name: element._name,
         active: props.active,
         hide: element.isShow != null && !element.isShow,
         mask: true,
@@ -138,7 +151,7 @@ export default defineComponent({
         onMouseenter: () => onEnter(element._uuid),
         onMouseleave: () => onLeave(),
         onClick: withModifiers(() => handleSelect(element), ['stop']),
-        resizeFn: (_evt, { width: w, height: h }) => {
+        resizeFn: (_evt: MouseEvent, { width: w, height: h }: any) => {
           width.value = w
           height.value = h
         },

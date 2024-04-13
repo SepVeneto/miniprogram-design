@@ -1,6 +1,6 @@
 <script lang="ts">
 import { computed, defineComponent, h } from 'vue'
-import { CloseBold, Hide, Rank as IconRank } from '@element-plus/icons-vue'
+import { Hide, Rank as IconRank } from '@element-plus/icons-vue'
 import { normalizeStyle } from '@/utils'
 import { ElIcon } from 'element-plus'
 
@@ -15,43 +15,35 @@ export default defineComponent({
       type: String,
       default: 'top',
     },
+    name: {
+      type: String,
+      default: '',
+    },
     active: Boolean,
     mask: Boolean,
     disabled: Boolean,
     hide: Boolean,
     canDelete: Boolean,
   },
-  emits: ['delete'],
-  setup(props, { emit }) {
+  setup(props) {
     const wrapStyle = computed(() => {
       const { height, ...style } = props.customStyle
       // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
-      return normalizeStyle({ ...style, height: height + 18 })
+      return normalizeStyle({ ...style, height: height + (props.active ? 18 : 0) })
     })
-    function handleDelete() {
-      emit('delete')
-    }
     return {
       wrapStyle,
-      handleDelete,
     }
   },
   render() {
     const operate = () => {
       const iconRank = h(ElIcon, {
         class: 'operate-icon operate-move',
-        color: '#fff',
         size: 18,
       }, () => h(IconRank))
-      const iconClose = h(ElIcon, {
-        class: 'operate-icon',
-        color: '#fff',
-        size: 18,
-        onClick: this.handleDelete,
-      }, () => h(CloseBold))
       return h('div', {
         class: 'operate',
-      }, [iconRank, this.canDelete ? iconClose : null])
+      }, [iconRank, h('span', this.name)])
     }
     const hidden = () => h(
       'div',
@@ -85,112 +77,58 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
+  --item-color: #79bbff;
+  --container-color: #eebe77;
+  --top: 0px;
   box-sizing: border-box;
-  // &:first-child.is-container {
-  //   margin-top: 18px;
-  // }
   position: relative;
-  padding-top: 18px;
-  outline: 1px dashed #79bbff;
-  &.is-container {
-    outline: 1px dashed #eebe77;
-    & > .operate {
-      background: #eebe77;
-    }
+  padding-top: var(--top);
+  transition: outline-color,padding-top 0.2s;
+  outline: 1px dashed transparent;
+  &:hover, &.is-active {
+    --top: 18px;
   }
   .operate {
+    font-size: 14px;
+    display: flex;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 18px;
+    color: #fff;
+    transition: all 0.2s;
+    opacity: 0;
+    background: var(--item-color);
     cursor: move;
-    background: #79bbff;
+    &>span {
+      margin-left: 10px;
+    }
   }
-  // &.is-active > .container {
-  //   &::after {
-  //     top: 0;
-  //     left: 0;
-  //     position: absolute;
-  //     content: '';
-  //     display: block;
-  //     width: 100%;
-  //     height: 100%;
-  //     box-sizing: border-box;
-  //     outline: 1px dashed #4089ef;
-  //     z-index: 1;
-  //     pointer-events: none;
-  //   }
-  // }
-  // &.dir-top {
-  //   .operate {
-  //     top: 0;
-  //     right: 0;
-  //     left: 0;
-  //     background: #a7c9f8;
-  //     .operate-icon {
-  //       background: transparent;
-  //       color: #fff;
-  //     }
-  //   }
-  // }
-  // &.is-active > .operate, &:hover > .operate {
-  //   display: flex;
-  // }
-  // &.is-container > .operate {
-  //   outline: 1px dashed #E6A23C;
-  //   background: #ffd089;
-  //   border-bottom: none;
-  // }
-  // &.is-active.is-container > .container {
-  //   &::after {
-  //     top: 0;
-  //     position: absolute;
-  //     content: '';
-  //     width: 100%;
-  //     height: 100%;
-  //     outline: 1px dashed #E6A23C;
-  //     box-sizing: border-box;
-  //     // z-index: 1;
-  //     pointer-events: none;
-  //   }
-  // }
-  // .operate {
-  //   cursor: move;
-  //   // display: none;
-  //   position: absolute;
-  //   flex-direction: column;
-  //   justify-content: space-between;
-  //   z-index: 1;
-  //   .operate-icon {
-  //     & > svg {
-  //       z-index: 2;
-  //     }
-  //   }
-  // }
-  // .container {
-  //   width: 100%;
-  //   height: 100%;
-  //   transition: all 0.3s;
-  // }
-  // &.dir-right:not(:last-child) {
-  //   margin-bottom: 20px;
-  // }
-  // &.dir-right .container {
-  //   display: block;
-  //   padding: 10px;
-  //   box-sizing: border-box;
-  // }
-  // &.has-mask {
-  //   &::before {
-  //     position: absolute;
-  //     content: '';
-  //     display: block;
-  //     width: 100%;
-  //     height: 100%;
-  //     box-sizing: border-box;
-  //   }
-  // }
+  & ~ :deep(.vv-resize-dom--handler) {
+    opacity: 0;
+  }
+  &.is-active ~ :deep(.vv-resize-dom--handler) {
+    opacity: 1;
+  }
+  &.is-active > .operate {
+    opacity: 1;
+  }
+  &:hover > .operate {
+    opacity: 1;
+  }
+  &.is-active.is-container > .operate {
+    background: var(--container-color);
+  }
+  &:hover.is-container > .operate {
+    background: var(--container-color);
+  }
+  &:hover, &.is-active {
+    outline-color: var(--item-color);
+  }
+  &:hover.is-container, &.is-active.is-container {
+    outline-color: var(--container-color);
+  }
 }
 .hide-mask {
   position: absolute;

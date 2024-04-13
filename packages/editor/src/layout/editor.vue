@@ -78,6 +78,7 @@ export default defineComponent({
       const operate = h(DraggableWrapper, {
         key: item._uuid,
         dir: 'top',
+        name: item._name,
         active: activeUuid.value === item._uuid || selected.value._uuid === item._uuid,
         hide: item.isShow != null && !item.isShow,
         container: ['container', 'swiper'].includes(item._view),
