@@ -1,3 +1,18 @@
+# 0.16.0-beta.2 (2024-04-13)
+
+
+### Bug Fixes
+
+* **editor:** 编辑模式显示高度与设置高度不一致 ([4436c97](https://github.com/SepVeneto/miniprogram-design/commit/4436c97a356be938500533bc5f6b2da0d1b1691f))
+
+
+### Features
+
+* deps update ([ce59fc5](https://github.com/SepVeneto/miniprogram-design/commit/ce59fc5c29b2668f6bcee813cec10fae306ce800))
+* **editor:** 选中高亮 ([99960ef](https://github.com/SepVeneto/miniprogram-design/commit/99960efca2b3cf64b590640a6c73f8b91ebf79f6))
+
+
+
 # 0.16.0-beta.1 (2024-04-07)
 
 
