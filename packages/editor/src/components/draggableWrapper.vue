@@ -24,7 +24,9 @@ export default defineComponent({
   emits: ['delete'],
   setup(props, { emit }) {
     const wrapStyle = computed(() => {
-      return normalizeStyle(props.customStyle)
+      const { height, ...style } = props.customStyle
+      // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
+      return normalizeStyle({ ...style, height: height + 18 })
     })
     function handleDelete() {
       emit('delete')
