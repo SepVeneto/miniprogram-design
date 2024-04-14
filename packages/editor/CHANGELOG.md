@@ -1,3 +1,12 @@
+# 0.16.0-beta.3 (2024-04-14)
+
+
+### Bug Fixes
+
+* esbuild-loader types error ([e6fbad2](https://github.com/SepVeneto/miniprogram-design/commit/e6fbad20ef0ddb8bd4a873a63cd2b775069c9c48))
+
+
+
 # 0.16.0-beta.2 (2024-04-13)
 
 
