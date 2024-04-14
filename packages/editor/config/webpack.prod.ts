@@ -5,6 +5,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { version } from '../package.json'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { VueLoaderPlugin } from 'vue-loader'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { EsbuildPlugin } from 'esbuild-loader'
 import { getPackageInfoSync } from 'local-pkg'
 
