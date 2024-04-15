@@ -103,6 +103,9 @@ export default defineComponent({
     cursor: move;
     &>span {
       margin-left: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   & ~ :deep(.vv-resize-dom--handler) {
