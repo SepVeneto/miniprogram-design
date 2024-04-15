@@ -1,3 +1,17 @@
+# 0.16.0-beta.4 (2024-04-15)
+
+
+### Bug Fixes
+
+* **editor:** 组件宽度过小，名称显示错位 ([b53be83](https://github.com/SepVeneto/miniprogram-design/commit/b53be834b759908bc4baaf52a763cde9b149cb91))
+
+
+### Features
+
+* **schema:** 容器内组件无法修改宽度 ([74feb4f](https://github.com/SepVeneto/miniprogram-design/commit/74feb4f83b441a50728c54e7bba13730cfd5342c))
+
+
+
 # 0.16.0-beta.3 (2024-04-14)
 
 
