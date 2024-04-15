@@ -273,11 +273,13 @@ export default defineComponent({
     [
       h(SizeBoxInput, {
         modelValue: this.boxWidth,
+        disabled: this.exclude.includes('width'),
         'onUpdate:modelValue': (val: number) => { this.boxWidth = val },
         title: '宽度 = 边框 + 内边距 + 内容的宽度',
       }),
       h('span', 'x'),
       h(SizeBoxInput, {
+        disabled: this.exclude.includes('height'),
         modelValue: this.boxHeight,
         'onUpdate:modelValue': (val: number) => { this.boxHeight = val },
         title: '高度 = 边框 + 内边距 + 内容的高度',

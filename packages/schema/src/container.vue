@@ -257,9 +257,11 @@ export default defineComponent({
         width,
         height,
       } = getData(prop.modelValue, 'style')
+      const _exclude = prop.modelValue._fromContainer ? ['width'] : []
+      _exclude.push(...(exclude || []))
       return h(SizeBox, {
         include,
-        exclude,
+        exclude: _exclude,
         margin: [marginTop, marginRight, marginBottom, marginLeft],
         'onUpdate:margin': val => normalizeStyle('margin', val),
         padding: [paddingTop, paddingRight, paddingBottom, paddingLeft],
