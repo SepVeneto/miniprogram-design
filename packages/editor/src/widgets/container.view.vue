@@ -8,7 +8,6 @@ import {
   reactive,
   shallowRef,
   toRef,
-  toRefs,
 } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
@@ -69,23 +68,21 @@ export default defineComponent({
     )
 
     const options = reactive({
-      ...toRefs({
-        list: itemList,
-        preview: previewComp,
-        grid: toRef(configComp.value, 'grid'),
-        selected,
-        activeUuid,
-        cellWidth,
-        containerRect,
-        ViewRender,
-        columnGap,
-        type,
-        onEnter,
-        onLeave,
-        onDragEnd,
-        onDragStart,
-        handleSelect,
-      }),
+      list: itemList,
+      preview: previewComp,
+      grid: toRef(configComp.value, 'grid'),
+      selected,
+      activeUuid,
+      cellWidth,
+      containerRect,
+      ViewRender,
+      columnGap,
+      type,
+      onEnter,
+      onLeave,
+      onDragEnd,
+      onDragStart,
+      handleSelect,
     })
     const grid = useGrid(options)
 
