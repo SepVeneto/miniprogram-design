@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
 import { toFixed } from '@/utils'
+import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
 
 export default defineComponent({
   props: {
@@ -254,7 +255,7 @@ export default defineComponent({
         modelValue: this.selected,
         style: {
           position: 'absolute',
-          top: `${this.pos.y + this.pos.h}px`,
+          top: `${this.pos.y + this.pos.h + WIDGET_TOP_BAR_HEIGHT + 2}px`,
           left: `${this.pos.x}px`,
           display: this.showToolbar,
         },

@@ -3,6 +3,7 @@ import { computed, defineComponent, h } from 'vue'
 import { Hide, Rank as IconRank } from '@element-plus/icons-vue'
 import { normalizeStyle } from '@/utils'
 import { ElIcon } from 'element-plus'
+import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
 
 export default defineComponent({
   props: {
@@ -29,7 +30,7 @@ export default defineComponent({
     const wrapStyle = computed(() => {
       const { height, ...style } = props.customStyle
       // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
-      return normalizeStyle({ ...style, height: height + (props.active ? 18 : 0) })
+      return normalizeStyle({ ...style, height: height + (props.active ? WIDGET_TOP_BAR_HEIGHT : 0) })
     })
     return {
       wrapStyle,
@@ -39,7 +40,7 @@ export default defineComponent({
     const operate = () => {
       const iconRank = h(ElIcon, {
         class: 'operate-icon operate-move',
-        size: 18,
+        size: WIDGET_TOP_BAR_HEIGHT,
       }, () => h(IconRank))
       return h('div', {
         class: 'operate',

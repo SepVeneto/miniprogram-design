@@ -6,6 +6,7 @@ import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { ResizeDomCore } from '@sepveneto/free-dom'
 import CanvasView from '@/widgets/canvas.view.vue'
 import ContainerView from './container.view.vue'
+import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
 
 export default defineComponent({
   props: {
@@ -35,7 +36,7 @@ export default defineComponent({
       if (preview.value) {
         offset = 0
       } else if (props.active) {
-        offset = 18
+        offset = WIDGET_TOP_BAR_HEIGHT
       } else {
         offset = 0
       }
