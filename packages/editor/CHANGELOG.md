@@ -1,3 +1,19 @@
+# 0.16.0-beta.5 (2024-04-28)
+
+
+### Bug Fixes
+
+* **editor:** 容器高度调整后内部元素消失 ([12eaa74](https://github.com/SepVeneto/miniprogram-design/commit/12eaa743549b1ca2535981c36793a060dcca45d7))
+* **editor:** 容器内元素栅格占比设置无效 ([25a8974](https://github.com/SepVeneto/miniprogram-design/commit/25a89740c61101bd8512dfe702173a3834fb4a66))
+* **editor:** 自定义模板工作栏错位 ([7fb30a9](https://github.com/SepVeneto/miniprogram-design/commit/7fb30a96e3b0aa088703a90e17c5333e4fc3786f))
+
+
+### Features
+
+* **editor:** 拖曳时固定显示顶部组件名 ([fb4d6b7](https://github.com/SepVeneto/miniprogram-design/commit/fb4d6b73256e9d89fa756db1134310395b04573c))
+
+
+
 # 0.16.0-beta.4 (2024-04-15)
 
 
