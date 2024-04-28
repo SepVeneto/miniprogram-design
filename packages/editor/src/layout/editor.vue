@@ -9,7 +9,7 @@ import {
   ref,
   toRefs,
 } from 'vue'
-import { useApp, useHistory } from '@/store'
+import { useApp, useHistory, useState } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
 // import viewRender from 'widgets_side/viewRender';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
@@ -26,6 +26,7 @@ export default defineComponent({
   setup(props) {
     const route = useRoute()
 
+    const state = useState()
     const app = useApp()
     const history = useHistory()
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
@@ -143,6 +144,7 @@ export default defineComponent({
       data,
       onPut,
       mainRef,
+      state,
       onDragStart,
       onDragEnd,
       onChange,
@@ -163,8 +165,8 @@ export default defineComponent({
       handle: '.operate',
       itemKey: '_uuid',
       'onUpdate:modelValue': (val: any) => { this.data = val },
-      onStart: this.onDragStart,
-      onEnd: () => this.onDragEnd(),
+      onStart: () => { this.state.dragging = true; this.onDragStart() },
+      onEnd: () => { this.state.dragging = false; this.onDragEnd() },
       onChange: this.onChange,
     }, {
       item: (item: any) => this.renderWrapper(item.element),

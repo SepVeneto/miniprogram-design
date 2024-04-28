@@ -9,7 +9,7 @@ import {
   shallowRef,
   toRef,
 } from 'vue'
-import { useApp, useHistory } from '@/store'
+import { useApp, useHistory, useState } from '@/store'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 import type { PropType } from 'vue'
@@ -31,6 +31,7 @@ export default defineComponent({
     const editorContext = inject('Editor', { preview: false })
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
     const app = useApp()
+    const state = useState()
     const history = useHistory()
     const previewComp = computed(() => editorContext.preview)
     const selected = computed(() => app.selected)
@@ -128,6 +129,7 @@ export default defineComponent({
       // viewStyle,
       draggableRef,
       grid,
+      state,
       onPut,
       onDragStart,
       onDragEnd,
@@ -153,8 +155,8 @@ export default defineComponent({
       animation: 200,
       handle: '.operate',
       itemKey: '_uuid',
-      onStart: this.onDragStart,
-      onEnd: () => this.onDragEnd(),
+      onStart: () => { this.state.dragging = true; this.onDragStart() },
+      onEnd: () => { this.state.dragging = false; this.onDragEnd() },
       onChange: this.onChange,
     }, {
       item: ({ element }: any) => this.grid.renderItem(element),

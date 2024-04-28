@@ -4,6 +4,7 @@ import { Hide, Rank as IconRank } from '@element-plus/icons-vue'
 import { normalizeStyle } from '@/utils'
 import { ElIcon } from 'element-plus'
 import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
+import { useState } from '@/store'
 
 export default defineComponent({
   props: {
@@ -27,13 +28,18 @@ export default defineComponent({
     canDelete: Boolean,
   },
   setup(props) {
+    const state = useState()
+    const isActive = computed(() => {
+      return props.active || state.dragging
+    })
     const wrapStyle = computed(() => {
       const { height, ...style } = props.customStyle
       // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
-      return normalizeStyle({ ...style, height: height + (props.active ? WIDGET_TOP_BAR_HEIGHT : 0) })
+      return normalizeStyle({ ...style, height: height + (isActive.value ? WIDGET_TOP_BAR_HEIGHT : 0) })
     })
     return {
       wrapStyle,
+      isActive,
     }
   },
   render() {
@@ -60,7 +66,7 @@ export default defineComponent({
       {
         class: [
           'card',
-          { 'is-active': this.active },
+          { 'is-active': this.isActive },
           `dir-${this.dir}`,
           { 'has-mask': this.mask },
           { 'is-container': this.container },

@@ -6,6 +6,8 @@
     :sort="false"
     item-key="type"
     style="padding: 0 10px;"
+    @start="state.dragging = true"
+    @end="state.dragging = false"
   >
     <template #item="{ element }">
       <div
@@ -27,6 +29,9 @@
 import { v4 as uuidv4 } from 'uuid'
 import { computed } from 'vue'
 import VueDraggable from 'vuedraggable'
+import { useState } from '@/store'
+
+const state = useState()
 
 const props = defineProps({
   preview: Boolean,

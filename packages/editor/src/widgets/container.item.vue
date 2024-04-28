@@ -7,6 +7,7 @@ import { ResizeDomCore } from '@sepveneto/free-dom'
 import CanvasView from '@/widgets/canvas.view.vue'
 import ContainerView from './container.view.vue'
 import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
+import { useState } from '@/store'
 
 export default defineComponent({
   props: {
@@ -26,6 +27,7 @@ export default defineComponent({
   },
   emits: ['update:unit', 'update:h', 'update:w'],
   setup(props, { emit }) {
+    const state = useState()
     const height = ref(props.h)
     const preview = computed(() => props.options.preview)
     // from draggable wrapper padding-top
@@ -152,11 +154,15 @@ export default defineComponent({
         onMouseenter: () => onEnter(element._uuid),
         onMouseleave: () => onLeave(),
         onClick: withModifiers(() => handleSelect(element), ['stop']),
+        startFn: () => {
+          state.dragging = true
+        },
         resizeFn: (_evt: MouseEvent, { width: w, height: h }: any) => {
           width.value = w
           height.value = h
         },
         stopFn: () => {
+          state.dragging = false
           const { cellWidth } = props.options
           cellNum.value = Math.max(Math.min(Math.round(width.value / cellWidth), props.options.grid), 1)
 
