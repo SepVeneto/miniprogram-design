@@ -7,6 +7,8 @@ import {
   inject,
   reactive,
   shallowRef,
+  toRef,
+  toRefs,
 } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
@@ -36,7 +38,6 @@ export default defineComponent({
     const itemList = computed(() => props.config.list)
     const type = computed(() => props.type)
     const columnGap = computed(() => {
-      console.log(props.config.style)
       return props.config.style.columnGap ?? 0
     })
     const configComp = computed<any>({
@@ -61,29 +62,30 @@ export default defineComponent({
       previewComp,
     )
 
-    const { Component: ViewRender, errorLoading } = useFederatedComponent(
+    const { Component: ViewRender } = useFederatedComponent(
       app.remoteUrl,
       'widgets',
       './viewRender',
     )
 
     const options = reactive({
-      list: itemList,
-      preview: previewComp,
-      grid: configComp.value.grid,
-      selected,
-      activeUuid,
-      cellWidth,
-      containerRect,
-      ViewRender,
-      errorLoading,
-      columnGap,
-      type,
-      onEnter,
-      onLeave,
-      onDragEnd,
-      onDragStart,
-      handleSelect,
+      ...toRefs({
+        list: itemList,
+        preview: previewComp,
+        grid: toRef(configComp.value, 'grid'),
+        selected,
+        activeUuid,
+        cellWidth,
+        containerRect,
+        ViewRender,
+        columnGap,
+        type,
+        onEnter,
+        onLeave,
+        onDragEnd,
+        onDragStart,
+        handleSelect,
+      }),
     })
     const grid = useGrid(options)
 
