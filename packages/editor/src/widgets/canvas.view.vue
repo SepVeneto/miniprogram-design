@@ -5,7 +5,10 @@ import { FreeScene } from '@sepveneto/free-dom'
 import '@sepveneto/free-dom/css'
 // import viewRender from 'widgets_side/viewRender';
 import { computed, defineComponent, h, ref, shallowRef, watchEffect } from 'vue'
-import { onKeyDown, useResizeObserver } from '@vueuse/core'
+import {
+  onKeyDown,
+  // useResizeObserver
+} from '@vueuse/core'
 import { v4 as uuidv4 } from 'uuid'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
