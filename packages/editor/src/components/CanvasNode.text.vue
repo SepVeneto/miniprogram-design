@@ -63,8 +63,8 @@ function selectAll(node: Element) {
 
 <style lang="scss" scoped>
 .canvas-node--input {
-  padding: 0 4px;
   overflow: hidden;
+  word-break: break-all;
   height: 100%;
   &.editing {
     outline: none;

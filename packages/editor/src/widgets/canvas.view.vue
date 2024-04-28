@@ -34,17 +34,17 @@ export default defineComponent({
     const toolbarRef = ref<InstanceType<typeof CanvasToolbar> | undefined>()
     const diff = ref(0)
 
-    !props.preview && useResizeObserver(sceneRef, (entries) => {
-      const entry = entries[0]
-      const { width: w, height: h } = entry.contentRect
-      width.value = w
-      height.value = h
-      configComp.value.style = {
-        ...configComp.value.style,
-        width: w,
-        height: h,
-      }
-    })
+    // !props.preview && useResizeObserver(sceneRef, (entries) => {
+    //   const entry = entries[0]
+    //   const { width: w, height: h } = entry.contentRect
+    //   width.value = w
+    //   height.value = h
+    //   configComp.value.style = {
+    //     ...configComp.value.style,
+    //     width: w,
+    //     height: h,
+    //   }
+    // })
 
     const sceneStyle = computed(() => {
       // if (!props.preview) return { width: '100%', height: '100%' }
@@ -241,9 +241,7 @@ export default defineComponent({
         width: this.width,
         height: this.height,
         style: this.sceneStyle,
-        minHeight: 10,
-        minWidth: 10,
-        scale: ['rb'],
+        minHeight: 24,
         onContextmenu: this.handleContextmenu,
       },
       () => this.nodeList.map(genNode),
