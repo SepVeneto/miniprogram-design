@@ -1,3 +1,12 @@
+# 0.16.0-beta.8 (2024-04-29)
+
+
+### Features
+
+* **editor:** free-dom upgrade ([a2b0f2c](https://github.com/SepVeneto/miniprogram-design/commit/a2b0f2c6b93b7a92f4a420220c8e56d21aca1464))
+
+
+
 # 0.16.0-beta.7 (2024-04-29)
 
 
