@@ -1,3 +1,16 @@
+# 0.16.0-beta.7 (2024-04-29)
+
+
+
+## 0.15.4 (2024-04-29)
+
+
+### Bug Fixes
+
+* **editor:** 自定义模板图片大小显示异常 ([59ddb20](https://github.com/SepVeneto/miniprogram-design/commit/59ddb20fd43c9425f14f8cf78e42dda184c33e1e))
+
+
+
 # 0.16.0-beta.6 (2024-04-29)
 
 
