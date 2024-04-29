@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, shallowRef, triggerRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { useApp } from './app'
 import type { Config } from './app'
@@ -24,7 +24,7 @@ export const useHistory = defineStore('history', () => {
       list.value.splice(MAX_HISTORY, offset)
     }
     current.value = 0
-    triggerRef(list)
+    list.value = [...list.value]
   }
   function jumpTo(id: string) {
     const index = list.value.findIndex(item => item.id === id)
@@ -33,7 +33,7 @@ export const useHistory = defineStore('history', () => {
     current.value = 0
 
     list.value.splice(0, index)
-    triggerRef(list)
+    list.value = [...list.value]
   }
   /**
    * TODO: shortcut
