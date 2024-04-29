@@ -14,6 +14,7 @@ import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
 import { toFixed } from '@/utils'
 import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
+import { useHistory } from '@/store'
 
 export default defineComponent({
   props: {
@@ -25,6 +26,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
+    const history = useHistory()
     const menuRef = ref()
     const showMenu = ref(false)
     const menuStyle = ref({})
@@ -50,11 +52,6 @@ export default defineComponent({
     // })
 
     const sceneStyle = computed(() => {
-      // if (!props.preview) return { width: '100%', height: '100%' }
-      // return {
-      //   width: `${width.value}px`,
-      //   height: `${height.value}px`,
-      // }
       return { width: '100%', height: '100%' }
     })
     const configComp = computed<any>({
@@ -109,6 +106,7 @@ export default defineComponent({
         ...extra,
       })
       showMenu.value = false
+      history.create('添加元素')
     }
     function handleContextmenu(evt: PointerEvent, data?: any) {
       evt.preventDefault()
@@ -127,6 +125,7 @@ export default defineComponent({
             const { list } = configComp.value.template
             const index = list.findIndex(item => item._uuid === data._uuid)
             list.splice(index, 1)
+            history.create('删除元素')
           },
         },
         {
@@ -139,6 +138,7 @@ export default defineComponent({
               ...data,
               _uuid: uuidv4(),
             })
+            history.create('复制元素')
           },
         },
 
@@ -196,6 +196,7 @@ export default defineComponent({
       isMoving,
       showToolbar,
       toolbarRef,
+      history,
       handleAdd,
       handleContextmenu,
     }
@@ -212,6 +213,7 @@ export default defineComponent({
         onClick: (evt: Event) => {
           if (this.preview) return
           evt.stopPropagation()
+          this.pos = node.style
           this.selected = node
         },
         onClickOutside: () => {
@@ -241,6 +243,7 @@ export default defineComponent({
       {
         ref: 'sceneRef',
         diff: this.diff,
+        scale: ['rb', 'b', 'r'],
         width: this.width,
         height: this.height,
         style: this.sceneStyle,

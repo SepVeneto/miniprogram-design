@@ -6,7 +6,9 @@
     :disabled-drag="editing || preview"
     :disabled-resize="preview"
     :drag-fn="onMove"
+    :drag-stop-fn="() => history.create('移动元素')"
     :resize-fn="() => $emit('move')"
+    :resize-stop-fn="() => history.create('缩放元素')"
     :style="nodeStyle"
     :lock-aspect-ratio="modelValue.type === 'image'"
     @update:model-value="handleFreedomStyle"
@@ -36,6 +38,7 @@ import CanvasNodeImage from './CanvasNode.image.vue'
 import { normalizeStyle } from '@sepveneto/mpd-hooks'
 import { onClickOutside } from '@vueuse/core'
 import { toFixed } from '@/utils'
+import { useHistory } from '@/store'
 
 const props = defineProps({
   modelValue: {
@@ -53,6 +56,7 @@ const emit = defineEmits(['update:modelValue', 'move', 'moveStop', 'clickOutside
 const editing = ref(false)
 const pos = ref<Partial<{ x: number, y: number, w: number, h: number }>>({})
 const freeRef = ref()
+const history = useHistory()
 
 let stop: (() => void) | undefined
 onMounted(() => {
