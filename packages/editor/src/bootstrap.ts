@@ -6,7 +6,8 @@ import type { Pinia } from 'pinia'
 import { createPinia } from 'pinia'
 import { useApp } from './store'
 import ElementPlus, { version as EP_VERSION } from 'element-plus'
-import 'element-plus/theme-chalk/index.css'
+import './styles/global.scss'
+// import 'element-plus/theme-chalk/index.css'
 import { router } from './router'
 import BasicComp from '@sepveneto/basic-comp'
 import '@sepveneto/basic-comp/css'
@@ -17,7 +18,7 @@ let store: Pinia | null
 function mount() {
   app = createApp(AppVue)
   store = createPinia()
-  app.use(ElementPlus)
+  app.use(ElementPlus, { namespace: 'mpd' })
   app.use(BasicComp, {})
   app.use(store)
   app.use(router)

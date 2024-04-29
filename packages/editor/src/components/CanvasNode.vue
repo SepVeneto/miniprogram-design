@@ -113,10 +113,10 @@ function handleFreedomStyle(style: any) {
     opacity: 0;
   }
   &__active {
-    border-color: var(--el-color-success);
+    border-color: var(--mpd-color-success);
   }
   &:hover {
-    border-color: var(--el-color-success);
+    border-color: var(--mpd-color-success);
     :deep(.vv-resize-dom--handler) {
       opacity: 1;
     }

@@ -1,128 +1,131 @@
 <template>
-  <section
-    class="main-container"
-    @click="handleOutside"
+  <ElConfigProvider
+    :locale="zhCn"
+    namespace="mpd"
   >
-    <main
-      ref="mainRef"
-      style="display: flex; justify-content: space-between;"
+    <section
+      class="main-container"
+      @click="handleOutside"
     >
-      <aside style="width: 300px; background: #fff;">
-        <ElCard>
-          <template #header>
-            <span>组件</span>
-          </template>
-          <el-scrollbar
-            wrap-style="height: 700px;"
-            noresize
-          >
-            <widget-wrap
-              :list="app.widgetList"
-              :preview="isPreview"
-            />
-          </el-scrollbar>
-        </ElCard>
-      </aside>
-      <div>
-        <!-- TODO: tools -->
-        <div class="mobile-frame">
-          <div
-            class="mobile-content"
-            :style="globalStyle"
-          >
-            <header
-              class="header"
-              :class="{ hidden: !showTopbar }"
-            >
-              <div style="cursor: pointer; position: absolute; left: 10px;">
-                <el-icon
-                  v-if="app.hasHistory"
-                  @click="router.back()"
-                >
-                  <ArrowLeftBold />
-                </el-icon>
-                <el-icon
-                  v-else
-                  @click="app.toHome()"
-                >
-                  <img
-                    style="width: 100%; height: 100%;"
-                    src="@/assets/home.svg"
-                  >
-                </el-icon>
-              </div>
-              <span>{{ title }}</span>
-              <span
-                class="icon"
-                style="position: absolute; right: 0;"
-              />
-            </header>
+      <main
+        ref="mainRef"
+        style="display: flex; justify-content: space-between;"
+      >
+        <aside style="width: 300px; background: #fff;">
+          <ElCard>
+            <template #header>
+              <span>组件</span>
+            </template>
             <el-scrollbar
-              :style="editorStyle"
-              :min-size="375"
+              wrap-style="height: 700px;"
+              noresize
             >
-              <router-view
+              <widget-wrap
+                :list="app.widgetList"
                 :preview="isPreview"
-                :style="backgroundStyle"
               />
             </el-scrollbar>
-            <template
-              v-if="tabbar"
-            >
-              <tabbarPreview
-                v-if="showTabbar"
-                :preview="isPreview"
-                :config="tabbar"
-                :active="tabbar._uuid === selected._uuid"
-                @click="handleSelect(tabbar)"
-              />
-            </template>
+          </ElCard>
+        </aside>
+        <div>
+          <!-- TODO: tools -->
+          <div class="mobile-frame">
             <div
-              v-else
-              style="background: #fff; height: var(--tabbar-height)"
-            />
-          </div>
-        </div>
-        <EditorOperate v-model="mode" />
-      </div>
-      <aside style="background: #fff; width: 400px; max-height: 810px">
-        <ElCard>
-          <template #header>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span>{{ selected._name || '页面配置' }}</span>
-              <div v-if="selected._schema && !['tabbar'].includes(selected._schema)">
-                <el-switch
-                  v-if="!['container', 'swiper'].includes(selected._view)"
-                  v-model="selected._custom"
-                  style="--el-switch-on-color: var(--el-color-success); --el-switch-off-color: var(--el-color-primary)"
-                  inactive-text="固定模板"
-                  active-text="自定义"
-                  inline-prompt
-                  @change="handleModeChange"
+              class="mobile-content"
+              :style="globalStyle"
+            >
+              <header
+                class="header"
+                :class="{ hidden: !showTopbar }"
+              >
+                <div style="cursor: pointer; position: absolute; left: 10px;">
+                  <el-icon
+                    v-if="app.hasHistory"
+                    @click="router.back()"
+                  >
+                    <ArrowLeftBold />
+                  </el-icon>
+                  <el-icon
+                    v-else
+                    @click="app.toHome()"
+                  >
+                    <img
+                      style="width: 100%; height: 100%;"
+                      src="@/assets/home.svg"
+                    >
+                  </el-icon>
+                </div>
+                <span>{{ title }}</span>
+                <span
+                  class="icon"
+                  style="position: absolute; right: 0;"
                 />
-                <el-button
-                  type="primary"
-                  text
-                  :disabled="isPreview || !selected._schema"
-                  @click="handleDelete"
-                >
-                  删除
-                </el-button>
-              </div>
+              </header>
+              <el-scrollbar
+                :style="editorStyle"
+                :min-size="375"
+              >
+                <router-view
+                  :preview="isPreview"
+                  :style="backgroundStyle"
+                />
+              </el-scrollbar>
+              <template
+                v-if="tabbar"
+              >
+                <tabbarPreview
+                  v-if="showTabbar"
+                  :preview="isPreview"
+                  :config="tabbar"
+                  :active="tabbar._uuid === selected._uuid"
+                  @click="handleSelect(tabbar)"
+                />
+              </template>
+              <div
+                v-else
+                style="background: #fff; height: var(--tabbar-height)"
+              />
             </div>
-          </template>
-          <el-scrollbar
-            wrap-style="height: 700px;"
-            noresize
-          >
-            <ElConfigProvider :locale="zhCn">
+          </div>
+          <EditorOperate v-model="mode" />
+        </div>
+        <aside style="background: #fff; width: 400px; max-height: 810px">
+          <ElCard>
+            <template #header>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>{{ selected._name || '页面配置' }}</span>
+                <div v-if="selected._schema && !['tabbar'].includes(selected._schema)">
+                  <el-switch
+                    v-if="!['container', 'swiper'].includes(selected._view)"
+                    v-model="selected._custom"
+                    style="--mpd-switch-on-color: var(--mpd-color-success); --mpd-switch-off-color: var(--mpd-color-primary)"
+                    inactive-text="固定模板"
+                    active-text="自定义"
+                    inline-prompt
+                    @change="handleModeChange"
+                  />
+                  <el-button
+                    type="primary"
+                    text
+                    :disabled="isPreview || !selected._schema"
+                    @click="handleDelete"
+                  >
+                    删除
+                  </el-button>
+                </div>
+              </div>
+            </template>
+            <el-scrollbar
+              wrap-style="height: 700px;"
+              noresize
+            >
               <VConfig />
-            </ElConfigProvider>
-          </el-scrollbar>
-        </ElCard>
-      </aside>
-    </main>
-  </section>
+            </el-scrollbar>
+          </ElCard>
+        </aside>
+      </main>
+    </section>
+  </ElConfigProvider>
 </template>
 
 <script lang="ts" setup>

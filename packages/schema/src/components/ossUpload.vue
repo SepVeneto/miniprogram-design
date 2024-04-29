@@ -45,10 +45,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Plus, ZoomIn as IconZoomIn, Delete as IconDelete } from '@element-plus/icons-vue';
-import { computed, PropType, ref } from 'vue';
-import type { UploadRequestOptions } from 'element-plus';
-const emit = defineEmits(['update:modelValue']);
+import { Delete as IconDelete, ZoomIn as IconZoomIn, Plus } from '@element-plus/icons-vue'
+import type { PropType } from 'vue'
+import { computed, ref } from 'vue'
+import type { UploadRequestOptions } from 'element-plus'
+const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   width: {
     type: String,
@@ -66,38 +67,38 @@ const props = defineProps({
     type: String,
     default: '',
   },
-});
-const show = ref(false);
-const previewUrl = ref('');
+})
+const show = ref(false)
+const previewUrl = ref('')
 const imgStyle = computed(() => {
   return {
     width: props.width,
     height: props.height,
-  };
-});
+  }
+})
 const imageUrl = computed<string>({
-  get () {
-    return props.modelValue;
+  get() {
+    return props.modelValue
   },
-  set (val) {
-    emit('update:modelValue', val);
+  set(val) {
+    emit('update:modelValue', val)
   },
-});
-const uploadRequest: any = window.microApp?.getData()?.upload ?? noop;
-function noop () {
+})
+const uploadRequest: any = window.microApp?.getData()?.upload ?? noop
+function noop() {
   /* empty */
 }
-async function customRequest (data: UploadRequestOptions) {
-  const res = await uploadRequest(data);
-  imageUrl.value = res;
+async function customRequest(data: UploadRequestOptions) {
+  const res = await uploadRequest(data)
+  imageUrl.value = res
 }
 const handlePreview = () => {
-  show.value = true;
-  previewUrl.value = imageUrl.value;
-};
+  show.value = true
+  previewUrl.value = imageUrl.value
+}
 const handleRemove = () => {
-  imageUrl.value = '';
-};
+  imageUrl.value = ''
+}
 </script>
 
 <style scoped lang="scss">
@@ -132,20 +133,20 @@ const handleRemove = () => {
 </style>
 
 <style>
-.avatar-uploader .el-upload {
-  border: 1px dashed var(--el-border-color);
+.avatar-uploader .mpd-upload {
+  border: 1px dashed var(--mpd-border-color);
   border-radius: 6px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: var(--el-transition-duration-fast);
+  transition: var(--mpd-transition-duration-fast);
 }
 
-.avatar-uploader .el-upload:hover {
-  border-color: var(--el-color-primary);
+.avatar-uploader .mpd-upload:hover {
+  border-color: var(--mpd-color-primary);
 }
 
-.el-icon.avatar-uploader-icon {
+.mpd-icon.avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
   width: 178px;

@@ -36,16 +36,16 @@ const list = computed(() => history.list)
   transition: all 0.3s;
   font-size: 12px;
   &.active {
-    color: var(--el-color-primary);
-    background: var(--el-color-primary-light-9);
+    color: var(--mpd-color-primary);
+    background: var(--mpd-color-primary-light-9);
     &:hover {
       color: #fff;
-      background: var(--el-color-primary);
+      background: var(--mpd-color-primary);
     }
   }
   &:hover {
     color: #fff;
-    background: var(--el-color-primary);
+    background: var(--mpd-color-primary);
   }
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <FreeDom
-    handle=".el-card__header"
+    handle=".mpd-card__header"
     disabled-resize
     class="draggable-layout"
-    style="min-width: 100px; width: auto !important;"
+    style="min-width: 100px; width: auto !important; height: auto !important;"
   >
     <ElCard>
       <template #header>
@@ -29,7 +29,7 @@ defineProps({
 <style scoped lang="scss">
 .draggable-layout {
   cursor: auto;
-  &:deep(.el-card__header) {
+  &:deep(.mpd-card__header) {
     cursor: move;
   }
 }

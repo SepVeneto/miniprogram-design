@@ -8,6 +8,7 @@ import SizeBox from './components/SizeBox.vue'
 import {
   ElCheckbox,
   ElColorPicker,
+  ElConfigProvider,
   ElForm,
   ElFormItem,
   ElIcon,
@@ -356,13 +357,14 @@ export default defineComponent({
         ...form,
       ]
     }
-    return h(ElForm, {
+    const formItem = () => h(ElForm, {
       'label-width': '100px',
       onSubmit: withModifiers(() => { /* pass */ }, ['prevent']),
     }, () => this.schema.filter(item => this.allowContainer(item)).map(item => {
       return wrapper(item)
     }),
     )
+    return h(ElConfigProvider, { namespace: 'mpd' }, formItem)
   },
 })
 </script>

@@ -35,12 +35,12 @@ const toolbarComponent = computed(() => {
 
 <style lang="scss" scoped>
 .vv-editor--toolbar {
-  background: var(--el-border-color);
+  background: var(--mpd-border-color);
   padding: 4px;
   border-radius: 4px;
   display: flex;
   z-index: 99;
-  :deep(.el-color-picker__trigger) {
+  :deep(.mpd-color-picker__trigger) {
     display: none;
   }
 }

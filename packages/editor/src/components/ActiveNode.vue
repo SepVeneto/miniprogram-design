@@ -36,7 +36,7 @@ function handleToggle() {
 .vv-editor--toolbar__option {
   width: 24px;
   height: 24px;
-  border: var(--el-border);
+  border: var(--mpd-border);
   background: #fff;
   display: flex;
   align-items: center;
@@ -45,7 +45,7 @@ function handleToggle() {
   cursor: pointer;
 }
 .vv-editor--toolbar__option--active {
-  background: var(--el-color-primary);
+  background: var(--mpd-color-primary);
   color: #fff;
 }
 </style>
