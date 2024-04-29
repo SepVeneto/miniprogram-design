@@ -1,6 +1,6 @@
 <template>
   <DraggableLayout
-    header="历史记录"
+    header="历史记录(beta)"
     style="min-width: 200px;"
   >
     <ElScrollbar
