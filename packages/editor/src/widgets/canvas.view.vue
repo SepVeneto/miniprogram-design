@@ -156,6 +156,7 @@ export default defineComponent({
     }
 
     function setZIndex(action: 'top' | 'bottom' | 'next' | 'prev', data: any) {
+      // TODO: optimize
       let currentIndex = data.style.zIndex
       const hasIndex = currentIndex != null
       if (!hasIndex) {
