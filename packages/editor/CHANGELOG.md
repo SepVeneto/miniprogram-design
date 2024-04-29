@@ -1,3 +1,18 @@
+# 0.16.0-beta.9 (2024-04-29)
+
+
+### Bug Fixes
+
+* **editor:** 历史记录响应性丢失 ([74ed5bf](https://github.com/SepVeneto/miniprogram-design/commit/74ed5bfe0454d685f30642effeea60a1086d2b47))
+
+
+### Features
+
+* **editor:** 自定义模板添加历史记录 ([b548e52](https://github.com/SepVeneto/miniprogram-design/commit/b548e528c166e0ebda1f7b7b9d2783409c771c59))
+* update deps ([65d7bbb](https://github.com/SepVeneto/miniprogram-design/commit/65d7bbb9d6784d5f6b1a99ae27a9693ab22fcc80))
+
+
+
 # 0.16.0-beta.8 (2024-04-29)
 
 
