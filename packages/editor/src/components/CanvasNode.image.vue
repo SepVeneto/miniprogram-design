@@ -36,7 +36,7 @@ function handleLoad() {
   if (!imgRef.value) return
   const { naturalHeight, naturalWidth } = imgRef.value.$el.querySelector('img')
   const ratio = naturalHeight / naturalWidth
-  const w = 100
+  const w = props.style.w || 100
   const h = toFixed(w * ratio)
   emit('update:style', { ...props.style, w, h })
 }
