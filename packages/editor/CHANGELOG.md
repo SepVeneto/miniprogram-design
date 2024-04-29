@@ -1,3 +1,12 @@
+# 0.16.0-beta.6 (2024-04-29)
+
+
+### Features
+
+* **editor:** 自定义模板图片锁定纵横比 ([4e00153](https://github.com/SepVeneto/miniprogram-design/commit/4e0015354fce20d4e523c9846a5b4455ec2e79e4))
+
+
+
 # 0.16.0-beta.5 (2024-04-28)
 
 
