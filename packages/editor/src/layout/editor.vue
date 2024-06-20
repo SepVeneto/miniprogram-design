@@ -112,6 +112,7 @@ export default defineComponent({
         const options = {
           type: item._view,
           config: item,
+          preview: isPreview,
           'onUpdate:config': updateConfig,
         }
         return ViewRender.value
