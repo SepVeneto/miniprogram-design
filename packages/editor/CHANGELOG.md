@@ -1,3 +1,12 @@
+# 0.16.0 (2024-06-20)
+
+
+### Features
+
+* **editor:** view inject preview ([d4413e9](https://github.com/SepVeneto/miniprogram-design/commit/d4413e9865c611621559b4e045526aa820b2ca01))
+
+
+
 # 0.16.0-beta.9 (2024-04-29)
 
 
