@@ -103,7 +103,6 @@ export async function useDesign(
         container: dom,
         inline,
         data,
-        'clear-data': true,
         'disable-patch-request': true, // 关闭对子应用请求的拦截
         'disable-memory-router': true, // 关闭虚拟路由
         ...params,
