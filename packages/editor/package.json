@@ -11,8 +11,6 @@
     "dist"
   ],
   "devDependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
-    "@micro-zoe/micro-app": "1.0.0-rc.1",
     "@sepveneto/mpd-schema": "workspace:^",
     "@swc/core": "^1.4.17",
     "@types/node": "^20.12.7",
@@ -21,7 +19,6 @@
     "@vueuse/core": "^10.9.0",
     "core-js": "^3.37.0",
     "css-loader": "^6.11.0",
-    "element-plus": "^2.7.2",
     "esbuild-loader": "^4.1.0",
     "fs-extra": "^10.1.0",
     "html-webpack-plugin": "^5.6.0",
@@ -38,7 +35,7 @@
     "unplugin-auto-import": "^0.16.7",
     "unplugin-vue-components": "^0.25.2",
     "uuid": "^8.3.2",
-    "vue": "^3.4.25",
+    "vue": "^3.4.33",
     "vue-loader": "^17.4.2",
     "vuedraggable": "^4.1.0",
     "webpack": "5.75.0",
@@ -52,10 +49,11 @@
     "@sepveneto/mpd-hooks": "workspace:*",
     "@types/sortablejs": "^1.15.8",
     "@vueuse/integrations": "^10.9.0",
+    "element-plus": "^2.7.7",
     "minimist": "^1.2.8",
     "sortablejs": "^1.15.2",
     "swiper": "^8.4.7",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.4.0"
   },
   "changelog": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor/CHANGELOG.md",
   "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/editor",

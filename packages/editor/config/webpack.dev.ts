@@ -35,6 +35,12 @@ const config: webpack.Configuration = {
     port: 8082,
     allowedHosts: 'all',
     hot: true,
+    client: {
+      overlay: {
+        warnings: false,
+        errors: false,
+      },
+    },
     headers: {
       'Access-Control-Allow-Origin': '*',
     },

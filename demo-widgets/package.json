@@ -16,7 +16,6 @@
     "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@micro-zoe/micro-app": "1.0.0-rc.4",
     "@sepveneto/eslint-config": "^0.9.0",
     "@sepveneto/mpd-core": "workspace: *",
     "@swc/core": "^1.3.95",
