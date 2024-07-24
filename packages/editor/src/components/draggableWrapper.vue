@@ -35,7 +35,8 @@ export default defineComponent({
     const wrapStyle = computed(() => {
       const { height, ...style } = props.customStyle
       // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
-      return normalizeStyle({ ...style, height: height + (isActive.value ? WIDGET_TOP_BAR_HEIGHT : 0) })
+      const _height = height + (isActive.value ? WIDGET_TOP_BAR_HEIGHT : 0)
+      return normalizeStyle({ ...style, height: typeof height === 'number' ? _height : 'auto' })
     })
     return {
       wrapStyle,
