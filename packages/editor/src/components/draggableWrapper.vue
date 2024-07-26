@@ -84,6 +84,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.card :deep(img) {
+  vertical-align: top;
+}
+
 .card {
   --item-color: #79bbff;
   --container-color: #eebe77;
