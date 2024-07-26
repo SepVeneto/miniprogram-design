@@ -1,3 +1,18 @@
+## 0.16.1 (2024-07-26)
+
+
+### Bug Fixes
+
+* **editor:** image gap ([14fddac](https://github.com/SepVeneto/miniprogram-design/commit/14fddaccbe0f7b77f0a7d04868f4a90505ae55b3))
+* **editor:** size box auto no effect ([7e90bf8](https://github.com/SepVeneto/miniprogram-design/commit/7e90bf8d8dd562c34490000c4825621ba3889310))
+
+
+### Features
+
+* **editor:** element-plus select width ([548434d](https://github.com/SepVeneto/miniprogram-design/commit/548434d86ff4a5a1c1923c33533efd00cbbee954))
+
+
+
 # 0.16.0 (2024-06-20)
 
 
