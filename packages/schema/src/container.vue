@@ -305,8 +305,8 @@ export default defineComponent({
     }
   },
   render() {
-    const wrapper = (schema: ISchema): JSX.Element[] => {
-      const form: JSX.Element[] = []
+    const wrapper = (schema: ISchema): VNode[] => {
+      const form: VNode[] = []
       let node: VNode | null
       switch (schema.type) {
         case 'box':
