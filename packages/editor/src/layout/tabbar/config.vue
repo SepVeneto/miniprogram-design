@@ -36,10 +36,10 @@
           <div style="display: flex; margin: 10px 0; align-items: center;">
             <span style="white-space: nowrap;">可见性：</span>
             <el-radio-group v-model="element.isShow">
-              <el-radio :label="1">
+              <el-radio :value="1">
                 显示
               </el-radio>
-              <el-radio :label="0">
+              <el-radio :value="0">
                 隐藏
               </el-radio>
             </el-radio-group>

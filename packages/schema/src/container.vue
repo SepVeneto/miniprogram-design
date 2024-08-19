@@ -196,7 +196,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, options = [], ...args } = schema
       const optionList = options.map((option: any) => h(ElRadio, {
-        label: option.value,
+        value: option.value,
       }, () => option.label))
       return h(ElRadioGroup, {
         'model-value': getData(prop.modelValue, key),
@@ -231,7 +231,7 @@ export default defineComponent({
       if (schema.tips) {
         return h('span', {
           style: 'display: flex; align-items: center;',
-        }, [schema.label, h(ElTooltip, { content: schema.tips }, h(ElIcon, { style: 'margin-left: 6px;' }, () => h(QuestionFilled)))],
+        }, [schema.label, h(ElTooltip, { content: schema.tips }, () => h(ElIcon, { style: 'margin-left: 6px;' }, () => h(QuestionFilled)))],
         )
       } else {
         return schema.label ? h('span', schema.label) : null
@@ -349,7 +349,7 @@ export default defineComponent({
       }
       return [
         h(ElFormItem, {
-          'label-width': _schema.label ? undefined : '0px',
+          'label-width': _schema.label ? '' : '0px',
         }, {
           default: () => node,
           label: () => this.renderLabel(schema as WidgetOther),

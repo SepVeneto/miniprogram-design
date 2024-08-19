@@ -1,47 +1,49 @@
 <template>
-  <el-upload
-    class="avatar-uploader"
-    action=""
-    :show-file-list="false"
-    :http-request="customRequest"
-  >
-    <div
-      v-if="imageUrl"
-      class="image-preview"
+  <div>
+    <el-upload
+      class="avatar-uploader"
+      action=""
+      :show-file-list="false"
+      :http-request="customRequest"
     >
-      <img
-        :src="imageUrl"
-        class="avatar"
+      <div
+        v-if="imageUrl"
+        class="image-preview"
+      >
+        <img
+          :src="imageUrl"
+          class="avatar"
+          :style="imgStyle"
+        >
+        <div class="image-operate">
+          <ElIcon
+            @click.stop="handlePreview"
+          >
+            <IconZoomIn />
+          </ElIcon>
+          <ElIcon
+            @click.stop="handleRemove"
+          >
+            <IconDelete />
+          </ElIcon>
+        </div>
+      </div>
+      <el-icon
+        v-else
+        class="avatar-uploader-icon"
         :style="imgStyle"
       >
-      <div class="image-operate">
-        <ElIcon
-          @click.stop="handlePreview"
-        >
-          <IconZoomIn />
-        </ElIcon>
-        <ElIcon
-          @click.stop="handleRemove"
-        >
-          <IconDelete />
-        </ElIcon>
-      </div>
-    </div>
-    <el-icon
-      v-else
-      class="avatar-uploader-icon"
-      :style="imgStyle"
-    >
-      <Plus />
-    </el-icon>
-  </el-upload>
-  <el-dialog v-model="show">
-    <img
-      style="width: 100%;"
-      :src="previewUrl"
-      alt="Preview Image"
-    >
-  </el-dialog>
+        <Plus />
+      </el-icon>
+    </el-upload>
+    <el-dialog v-model="show">
+      <img
+        style="width: 100%;"
+        :src="previewUrl"
+        alt="Preview Image"
+      >
+    </el-dialog>
+  </div>
 </template>
 
 <script lang="ts" setup>
