@@ -1,3 +1,12 @@
+## 0.16.2 (2024-08-19)
+
+
+### Features
+
+* update element-plus ([b1ad08b](https://github.com/SepVeneto/miniprogram-design/commit/b1ad08b456154797bbd94594b29284aa3a612a2d))
+
+
+
 ## 0.16.1 (2024-07-26)
 
 
