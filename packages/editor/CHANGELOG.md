@@ -1,3 +1,30 @@
+## 0.15.5 (2024-09-07)
+
+
+### Features
+
+* **editor:** 容器宽度计算及盒模型输入限制两位小数 ([27fdfb3](https://github.com/SepVeneto/miniprogram-design/commit/27fdfb3fc98c02d3adfdfbd104689999a94964be))
+
+
+
+## 0.15.4 (2024-04-29)
+
+
+### Bug Fixes
+
+* **editor:** 自定义模板图片大小显示异常 ([59ddb20](https://github.com/SepVeneto/miniprogram-design/commit/59ddb20fd43c9425f14f8cf78e42dda184c33e1e))
+
+
+
+## 0.15.3 (2024-03-31)
+
+
+### Bug Fixes
+
+* **editor:** prevent form default action ([75d7ba3](https://github.com/SepVeneto/miniprogram-design/commit/75d7ba3b897f48d6d9f5e5ede6cf20325147de49))
+
+
+
 ## 0.15.2 (2024-02-26)
 
 
