@@ -92,7 +92,7 @@ export function useContainer(
   function syncSize() {
     const { width, height } = containerRef.value?.$el.getBoundingClientRect() ?? {}
     const { paddingBottom = 0, paddingTop = 0 } = style.value
-    containerRect.width = width || 375
+    containerRect.width = Number(width.toFixed(2)) || 375
     const calHeight = height + paddingBottom + paddingTop
     containerRect.height = style.value.height === 'auto'
       ? calHeight

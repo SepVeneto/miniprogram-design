@@ -1,3 +1,12 @@
+## 0.15.5 (2024-09-07)
+
+
+### Features
+
+* **editor:** 容器宽度计算及盒模型输入限制两位小数 ([27fdfb3](https://github.com/SepVeneto/miniprogram-design/commit/27fdfb3fc98c02d3adfdfbd104689999a94964be))
+
+
+
 ## 0.16.2 (2024-08-19)
 
 

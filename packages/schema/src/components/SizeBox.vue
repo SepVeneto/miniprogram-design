@@ -228,9 +228,10 @@ export default defineComponent({
       enable = true,
     ) => {
       const name = `${type}${dir[0].toUpperCase()}${dir.slice(1)}`
+      const modelValue = this[name] as number || '-'
       return h(SizeBoxInput, {
         key: name,
-        modelValue: this[name],
+        modelValue: typeof modelValue === 'number' ? Number(modelValue.toFixed(2)) : modelValue,
         'onUpdate:modelValue': (val: number) => { this[name] = val },
         placeholder: '-',
         disabled: !enable,
