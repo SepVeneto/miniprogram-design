@@ -9,6 +9,7 @@ on:
       - editor@*
 
 env:
+  TAG_VERSION:
   REGISTRY: docker.io
   IMAGE_NAME: ${{ github.event.repository.name }}
 
@@ -55,3 +56,18 @@ jobs:
         with:
           push: ${{ github.event_name != 'pull_request' }}
           tags: sepveneto/editor:latest,sepveneto/editor:${{ env.TAG_VERSION }}
+
+      # sync image to aliyun
+      - name: Login to aliyun
+        uses: docker/login-action@v2.2.0
+        with:
+          registry: ${{ vars.ALIYUN_REGISTRY }}
+          username: ${{ vars.ALIYUN_USER }}
+          password: ${{ secrets.ALIYUN_PWD }}
+          logout: false
+
+      - name: Use Skopeo Tools Sync Image to Docker Hub
+        run: |
+          skopeo copy docker://docker.io/sepveneto/editor:${{ env.TAG_VERSION }} docker://registry.cn-hangzhou.aliyuncs.com/sepveneto/editor:${{ env.TAG_VERSION }}
+
+
