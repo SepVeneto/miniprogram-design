@@ -1,9 +1,9 @@
-FROM node:16.14.2 as build
+FROM node:20.16.0 as build
 
 WORKDIR /app
 COPY . .
 
-RUN npm i -g pnpm@8\
+RUN npm i -g pnpm@9\
     && pnpm i --registry=https://registry.npmmirror.com\
     && pnpm build:hooks\
     && pnpm build:editor
