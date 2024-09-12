@@ -35,7 +35,7 @@
     "unplugin-auto-import": "^0.16.7",
     "unplugin-vue-components": "^0.25.2",
     "uuid": "^8.3.2",
-    "vue": "^3.4.33",
+    "vue": "^3.5.4",
     "vue-loader": "^17.4.2",
     "vuedraggable": "^4.1.0",
     "webpack": "5.75.0",
