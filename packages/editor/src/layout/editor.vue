@@ -18,6 +18,7 @@ import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
 import CanvasView from '@/widgets/canvas.view.vue'
+import { FreeDom, FreeScene } from '@sepveneto/free-dom'
 
 export default defineComponent({
   props: {
@@ -89,7 +90,20 @@ export default defineComponent({
         onMouseleave: () => onLeave(),
         onClick: () => handleSelect(item),
       }, () => renderChild(item))
-      return props.preview ? renderPreview(item) : operate
+      return props.preview
+        ? renderPreview(item)
+        : layoutMode.value === 'free'
+          ? h(FreeDom, {
+            x: item.style.x,
+            y: item.style.y,
+            width: item.style.width,
+            height: item.style.height,
+            'onUpdate:x': val => { item.style.x = val },
+            'onUpdate:y': val => { item.style.y = val },
+            'onUpdate:width': val => { item.style.width = val },
+            'onUpdate:height': val => { item.style.height = val },
+          }, () => operate)
+          : operate
     }
     function renderPreview(item: any) {
       switch (item._view) {
@@ -140,7 +154,10 @@ export default defineComponent({
       }
     }
 
+    const layoutMode = computed(() => app.config.globalConfig.layoutMode || 'grid')
+
     return {
+      layoutMode,
       renderWrapper,
       data,
       onPut,
@@ -152,26 +169,35 @@ export default defineComponent({
     }
   },
   render() {
-    return h(VueDraggable, {
-      ref: 'mainRef',
-      class: 'draggable-box',
-      style: 'min-height: calc(667px - 60px); position: relative;',
-      modelValue: this.data,
-      group: { name: 'widgets', pull: true, put: true },
-      componentData: {
-        type: 'transition-group',
-        name: 'flip-list',
-      },
-      animation: 200,
-      handle: '.operate',
-      itemKey: '_uuid',
-      'onUpdate:modelValue': (val: any) => { this.data = val },
-      onStart: () => { this.state.dragging = true; this.onDragStart() },
-      onEnd: () => { this.state.dragging = false; this.onDragEnd() },
-      onChange: this.onChange,
-    }, {
-      item: (item: any) => this.renderWrapper(item.element),
-    })
+    console.log(this.layoutMode)
+    if (this.layoutMode !== 'free') {
+      return h(VueDraggable, {
+        ref: 'mainRef',
+        class: 'draggable-box',
+        style: 'min-height: calc(667px - 60px); position: relative;',
+        modelValue: this.data,
+        group: { name: 'widgets', pull: true, put: true },
+        componentData: {
+          type: 'transition-group',
+          name: 'flip-list',
+        },
+        animation: 200,
+        handle: '.operate',
+        itemKey: '_uuid',
+        'onUpdate:modelValue': (val: any) => { this.data = val },
+        onStart: () => { this.state.dragging = true; this.onDragStart() },
+        onEnd: () => { this.state.dragging = false; this.onDragEnd() },
+        onChange: this.onChange,
+      }, {
+        item: (item: any) => this.renderWrapper(item.element),
+      })
+    } else {
+      console.log('trigger render')
+      return (h(FreeScene, {
+        style: 'width: 375px; height: 100%;',
+        diff: 0,
+      }, () => this.data.map(item => this.renderWrapper(item))))
+    }
   },
 })
 </script>

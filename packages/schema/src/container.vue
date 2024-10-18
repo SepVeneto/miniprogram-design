@@ -18,6 +18,7 @@ import {
   ElRadio,
   ElRadioGroup,
   ElSelect,
+  ElSwitch,
   ElTooltip,
 } from 'element-plus'
 
@@ -33,6 +34,7 @@ type WidgetType = 'input'
   | 'radioGroup'
   | 'editor'
   | 'box'
+  | 'switch'
 type BoxModel = 'marginLeft'
 | 'marginTop'
 | 'marginRight'
@@ -131,6 +133,16 @@ export default defineComponent({
       updateData(`style.${type}Right`, right)
       updateData(`style.${type}Bottom`, bottom)
       updateData(`style.${type}Left`, left)
+    }
+
+    function renderSwitch(schema: WidgetOther) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { type, label, key, ...args } = schema
+      return h(ElSwitch, {
+        'model-value': getData(prop.modelValue, key),
+        'onUpdate:modelValue': (val) => updateData(key, val),
+        ...args,
+      })
     }
     function renderCheckbox(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -293,6 +305,7 @@ export default defineComponent({
       renderBox,
       renderInput,
       renderNumber,
+      renderSwitch,
       renderCheckbox,
       renderImage,
       renderColorPicker,
@@ -309,6 +322,9 @@ export default defineComponent({
       const form: VNode[] = []
       let node: VNode | null
       switch (schema.type) {
+        case 'switch':
+          node = this.renderSwitch(schema as WidgetOther)
+          break
         case 'box':
           node = this.renderBox(schema)
           break
@@ -340,6 +356,16 @@ export default defineComponent({
           node = this.renderCustom(schema as WidgetOther)
           // node = <div>暂不支持</div>;
       }
+
+      // 除了盒模型，其它的配置如果初始数据中没有对应的字段
+      // 就认为是不支持的配置，会被禁用掉
+      const disabled = schema.type === 'box'
+        ? false
+        : !((schema as WidgetOther).key in this.modelValue)
+      if (node && node.props) {
+        node.props.disabled = disabled
+      }
+
       const _schema = schema as WidgetOther
       if (_schema.link) {
         const key = this.getData(this.modelValue, _schema.key)

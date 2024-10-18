@@ -195,6 +195,25 @@ export const useApp = defineStore('app', () => {
       activeUuids.value.pop()
     },
   }
+  function flatteBody() {
+    const res: Record<string, any> = {}
+    Object.entries(config.value.body).forEach(([name, list]) => {
+      res[name] = flatte(list)
+    })
+    function flatte(list: any[]) {
+      const res: any[] = []
+      list.forEach(item => {
+        if (item.list && item.list.length > 0) {
+          res.push(...flatte(item.list))
+          item.list = []
+        }
+        res.push(item)
+      })
+      return res
+    }
+
+    config.value.body = res
+  }
   return {
     activeUuids,
     active,
@@ -202,6 +221,7 @@ export const useApp = defineStore('app', () => {
     // updateConfig,
     setConfig,
     getConfig,
+    flatteBody,
     widgetList,
     // currentTab,
     // currentRoute,

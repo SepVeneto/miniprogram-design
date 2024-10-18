@@ -29,6 +29,9 @@ importers:
       conventional-changelog-cli:
         specifier: ^3.0.0
         version: 3.0.0
+      debug:
+        specifier: ^4.3.7
+        version: 4.3.7
       element-plus:
         specifier: ^2.8.0
         version: 2.8.0(vue@3.5.4(typescript@4.9.5))
@@ -125,7 +128,7 @@ importers:
         version: 5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0)
       webpack-dev-server:
         specifier: ^4.15.1
-        version: 4.15.2(webpack-cli@5.1.4)(webpack@5.75.0)
+        version: 4.15.2(debug@4.3.7)(webpack-cli@5.1.4)(webpack@5.75.0)
 
   docs:
     dependencies:
@@ -186,8 +189,8 @@ importers:
         specifier: ^0.8.6
         version: 0.8.6(@element-plus/icons-vue@2.3.1(vue@3.5.4(typescript@4.5.5)))(element-plus@2.8.0(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5))
       '@sepveneto/free-dom':
-        specifier: ^0.12.0
-        version: 0.12.1(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.4(typescript@4.5.5))
+        specifier: ^0.12.5
+        version: 0.12.5(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.4(typescript@4.5.5))
       '@sepveneto/mpd-hooks':
         specifier: workspace:*
         version: link:../hooks
@@ -302,7 +305,7 @@ importers:
         version: 5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0)
       webpack-dev-server:
         specifier: ^4.15.2
-        version: 4.15.2(webpack-cli@5.1.4)(webpack@5.75.0)
+        version: 4.15.2(debug@4.3.7)(webpack-cli@5.1.4)(webpack@5.75.0)
 
   packages/hooks:
     dependencies:
@@ -1684,8 +1687,8 @@ packages:
     peerDependencies:
       eslint: '>=7.4.0'
 
-  '@sepveneto/free-dom@0.12.1':
-    resolution: {integrity: sha512-tvs+9kp5vFW5f8/5hLwl845e9t9GZ0omy3iSycyFqP7nbm+oKfU0jfQLkALrHnxUzp6VCapo892k5B3ytA1hbQ==}
+  '@sepveneto/free-dom@0.12.5':
+    resolution: {integrity: sha512-K0ojcPWaTKALezzpcA5GtCuSxlwsjtZZ+LbyXRy74Idwxj0RYS3lmj/6MS0Obxldl/Z8jT0Ld/RYEWHfS3Qthw==}
 
   '@sideway/address@4.1.5':
     resolution: {integrity: sha512-IqO/DUQHUkPeixNQ8n0JA6102hT9CmaljNTPmQ1u8MEhBo/R4Q8eKLN/vGZxuebwOroDB4cbpjheD4+/sKFK4Q==}
@@ -3367,6 +3370,15 @@ packages:
 
   debug@4.3.5:
     resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
+  debug@4.3.7:
+    resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -8079,7 +8091,7 @@ snapshots:
   '@eslint/eslintrc@2.1.4':
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.5
+      debug: 4.3.7
       espree: 9.6.1
       globals: 13.24.0
       ignore: 5.3.1
@@ -8112,7 +8124,7 @@ snapshots:
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
       '@humanwhocodes/object-schema': 2.0.3
-      debug: 4.3.5
+      debug: 4.3.7
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -8280,7 +8292,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  '@sepveneto/free-dom@0.12.1(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.4(typescript@4.5.5))':
+  '@sepveneto/free-dom@0.12.5(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.4(typescript@4.5.5))':
     dependencies:
       lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
       uuid: 9.0.1
@@ -8523,7 +8535,7 @@ snapshots:
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/type-utils': 5.62.0(eslint@8.57.0)(typescript@4.9.5)
       '@typescript-eslint/utils': 5.62.0(eslint@8.57.0)(typescript@4.9.5)
-      debug: 4.3.5
+      debug: 4.3.7
       eslint: 8.57.0
       graphemer: 1.4.0
       ignore: 5.3.1
@@ -8540,7 +8552,7 @@ snapshots:
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@4.9.5)
-      debug: 4.3.5
+      debug: 4.3.7
       eslint: 8.57.0
     optionalDependencies:
       typescript: 4.9.5
@@ -8556,7 +8568,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@4.9.5)
       '@typescript-eslint/utils': 5.62.0(eslint@8.57.0)(typescript@4.9.5)
-      debug: 4.3.5
+      debug: 4.3.7
       eslint: 8.57.0
       tsutils: 3.21.0(typescript@4.9.5)
     optionalDependencies:
@@ -8570,7 +8582,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/visitor-keys': 5.62.0
-      debug: 4.3.5
+      debug: 4.3.7
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.6.3
@@ -9219,6 +9231,16 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
+  '@vueuse/core@10.11.0(vue@3.5.4(typescript@4.5.5))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.20
+      '@vueuse/metadata': 10.11.0
+      '@vueuse/shared': 10.11.0(vue@3.5.4(typescript@4.5.5))
+      vue-demi: 0.14.8(vue@3.5.4(typescript@4.5.5))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
   '@vueuse/core@10.11.0(vue@3.5.4(typescript@4.9.5))':
     dependencies:
       '@types/web-bluetooth': 0.0.20
@@ -9274,9 +9296,9 @@ snapshots:
 
   '@vueuse/integrations@10.11.0(async-validator@4.2.5)(focus-trap@7.5.4)(sortablejs@1.15.2)(vue@3.5.4(typescript@4.5.5))':
     dependencies:
-      '@vueuse/core': 10.11.0(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5))
-      '@vueuse/shared': 10.11.0(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5))
-      vue-demi: 0.14.8(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5))
+      '@vueuse/core': 10.11.0(vue@3.5.4(typescript@4.5.5))
+      '@vueuse/shared': 10.11.0(vue@3.5.4(typescript@4.5.5))
+      vue-demi: 0.14.8(vue@3.5.4(typescript@4.5.5))
     optionalDependencies:
       async-validator: 4.2.5
       focus-trap: 7.5.4
@@ -9305,6 +9327,13 @@ snapshots:
   '@vueuse/shared@10.11.0(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5))':
     dependencies:
       vue-demi: 0.14.8(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
+  '@vueuse/shared@10.11.0(vue@3.5.4(typescript@4.5.5))':
+    dependencies:
+      vue-demi: 0.14.8(vue@3.5.4(typescript@4.5.5))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -9531,12 +9560,12 @@ snapshots:
       webpack: 5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0))(webpack-dev-server@4.15.2(webpack-cli@5.1.4)(webpack@5.75.0))(webpack@5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4))':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0))(webpack-dev-server@4.15.2(debug@4.3.7)(webpack-cli@5.1.4)(webpack@5.75.0))(webpack@5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4))':
     dependencies:
       webpack: 5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0)
     optionalDependencies:
-      webpack-dev-server: 4.15.2(webpack-cli@5.1.4)(webpack@5.75.0)
+      webpack-dev-server: 4.15.2(debug@4.3.7)(webpack-cli@5.1.4)(webpack@5.75.0)
 
   '@xtuc/ieee754@1.2.0': {}
 
@@ -10386,6 +10415,10 @@ snapshots:
     dependencies:
       ms: 2.1.2
 
+  debug@4.3.7:
+    dependencies:
+      ms: 2.1.3
+
   decamelize-keys@1.1.1:
     dependencies:
       decamelize: 1.2.0
@@ -10919,7 +10952,7 @@ snapshots:
 
   eslint-plugin-yml@1.14.0(eslint@8.57.0):
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.7
       eslint: 8.57.0
       eslint-compat-utils: 0.5.1(eslint@8.57.0)
       lodash: 4.17.21
@@ -10966,7 +10999,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.3
-      debug: 4.3.5
+      debug: 4.3.7
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.2
@@ -11203,6 +11236,10 @@ snapshots:
   follow-redirects@1.15.6(debug@4.3.5):
     optionalDependencies:
       debug: 4.3.5
+
+  follow-redirects@1.15.6(debug@4.3.7):
+    optionalDependencies:
+      debug: 4.3.7
 
   for-each@0.3.3:
     dependencies:
@@ -11545,10 +11582,30 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
+  http-proxy-middleware@2.0.6(@types/express@4.17.21)(debug@4.3.7):
+    dependencies:
+      '@types/http-proxy': 1.17.14
+      http-proxy: 1.18.1(debug@4.3.7)
+      is-glob: 4.0.3
+      is-plain-obj: 3.0.0
+      micromatch: 4.0.7
+    optionalDependencies:
+      '@types/express': 4.17.21
+    transitivePeerDependencies:
+      - debug
+
   http-proxy@1.18.1(debug@4.3.5):
     dependencies:
       eventemitter3: 4.0.7
       follow-redirects: 1.15.6(debug@4.3.5)
+      requires-port: 1.0.0
+    transitivePeerDependencies:
+      - debug
+
+  http-proxy@1.18.1(debug@4.3.7):
+    dependencies:
+      eventemitter3: 4.0.7
+      follow-redirects: 1.15.6(debug@4.3.7)
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -13762,7 +13819,7 @@ snapshots:
       '@docsearch/css': 3.6.1
       '@docsearch/js': 3.6.1(@algolia/client-search@4.24.0)(search-insights@2.15.0)
       '@vue/devtools-api': 6.6.3
-      '@vueuse/core': 10.11.0(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5))
+      '@vueuse/core': 10.11.0(vue@3.5.4(typescript@4.5.5))
       '@vueuse/integrations': 10.11.0(async-validator@4.2.5)(focus-trap@7.5.4)(sortablejs@1.15.2)(vue@3.5.4(typescript@4.5.5))
       focus-trap: 7.5.4
       mark.js: 8.11.1
@@ -13904,13 +13961,17 @@ snapshots:
     optionalDependencies:
       '@vue/composition-api': 1.7.2(vue@3.5.4(typescript@4.5.5))
 
+  vue-demi@0.14.8(vue@3.5.4(typescript@4.5.5)):
+    dependencies:
+      vue: 3.5.4(typescript@4.5.5)
+
   vue-demi@0.14.8(vue@3.5.4(typescript@4.9.5)):
     dependencies:
       vue: 3.5.4(typescript@4.9.5)
 
   vue-eslint-parser@9.4.3(eslint@8.57.0):
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.7
       eslint: 8.57.0
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3
@@ -14110,7 +14171,7 @@ snapshots:
       '@discoveryjs/json-ext': 0.5.7
       '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0))(webpack@5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4))
       '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0))(webpack@5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4))
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0))(webpack-dev-server@4.15.2(webpack-cli@5.1.4)(webpack@5.75.0))(webpack@5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4))
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0))(webpack-dev-server@4.15.2(debug@4.3.7)(webpack-cli@5.1.4)(webpack@5.75.0))(webpack@5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4))
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.3
@@ -14122,7 +14183,7 @@ snapshots:
       webpack: 5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4)
       webpack-merge: 5.10.0
     optionalDependencies:
-      webpack-dev-server: 4.15.2(webpack-cli@5.1.4)(webpack@5.75.0)
+      webpack-dev-server: 4.15.2(debug@4.3.7)(webpack-cli@5.1.4)(webpack@5.75.0)
 
   webpack-dev-middleware@5.3.4(webpack@5.75.0(@swc/core@1.7.0)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0))):
     dependencies:
@@ -14183,7 +14244,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  webpack-dev-server@4.15.2(webpack-cli@5.1.4)(webpack@5.75.0):
+  webpack-dev-server@4.15.2(debug@4.3.7)(webpack-cli@5.1.4)(webpack@5.75.0):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
@@ -14202,7 +14263,7 @@ snapshots:
       express: 4.19.2
       graceful-fs: 4.2.11
       html-entities: 2.5.2
-      http-proxy-middleware: 2.0.6(@types/express@4.17.21)(debug@4.3.5)
+      http-proxy-middleware: 2.0.6(@types/express@4.17.21)(debug@4.3.7)
       ipaddr.js: 2.2.0
       launch-editor: 2.8.0
       open: 8.4.2

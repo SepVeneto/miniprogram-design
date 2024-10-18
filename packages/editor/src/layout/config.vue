@@ -53,7 +53,21 @@ const globalConfig = computed<any>({
     }
   },
 })
+watch(() => app.config.globalConfig.layoutMode, (val) => {
+  if (val === 'free') {
+    app.flatteBody()
+  }
+})
 const globalSchema = computed(() => ([
+  {
+    type: 'switch',
+    key: 'layoutMode',
+    label: '布局模式',
+    activeText: '自由',
+    activeValue: 'free',
+    inactiveText: '栅格',
+    inactiveValue: 'grid',
+  },
   {
     type: 'radioGroup',
     key: 'topbarShow',
