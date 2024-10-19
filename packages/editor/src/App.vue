@@ -251,7 +251,7 @@ function handleSelect(data: any) {
   app.selected = data
 }
 function handleOutside({ target }: Event) {
-  if (target === mainRef.value) {
+  if (target === mainRef.value || ['draggable-box', 'vv-free-dom--scene'].includes((target as HTMLElement).className)) {
     app.selected = {}
   }
 }
