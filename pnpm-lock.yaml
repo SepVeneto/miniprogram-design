@@ -189,8 +189,8 @@ importers:
         specifier: ^0.8.6
         version: 0.8.6(@element-plus/icons-vue@2.3.1(vue@3.5.4(typescript@4.5.5)))(element-plus@2.8.0(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5)))(vue@3.5.4(typescript@4.5.5))
       '@sepveneto/free-dom':
-        specifier: ^0.12.5
-        version: 0.12.5(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.4(typescript@4.5.5))
+        specifier: ^0.12.8
+        version: 0.12.8(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.4(typescript@4.5.5))
       '@sepveneto/mpd-hooks':
         specifier: workspace:*
         version: link:../hooks
@@ -1687,8 +1687,8 @@ packages:
     peerDependencies:
       eslint: '>=7.4.0'
 
-  '@sepveneto/free-dom@0.12.5':
-    resolution: {integrity: sha512-K0ojcPWaTKALezzpcA5GtCuSxlwsjtZZ+LbyXRy74Idwxj0RYS3lmj/6MS0Obxldl/Z8jT0Ld/RYEWHfS3Qthw==}
+  '@sepveneto/free-dom@0.12.8':
+    resolution: {integrity: sha512-7tcPLXatlUkBf6hDcsrFXnsxz59gCotsQfw0RXJM5VxMFiN2oNVzvWqLitObmIp8xJTM6JI9NmTv6R7Qk+T2fw==}
 
   '@sideway/address@4.1.5':
     resolution: {integrity: sha512-IqO/DUQHUkPeixNQ8n0JA6102hT9CmaljNTPmQ1u8MEhBo/R4Q8eKLN/vGZxuebwOroDB4cbpjheD4+/sKFK4Q==}
@@ -8292,7 +8292,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  '@sepveneto/free-dom@0.12.5(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.4(typescript@4.5.5))':
+  '@sepveneto/free-dom@0.12.8(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.4(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.4(typescript@4.5.5))':
     dependencies:
       lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
       uuid: 9.0.1

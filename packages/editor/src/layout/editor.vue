@@ -88,12 +88,13 @@ export default defineComponent({
         customStyle: item.style,
         onMouseenter: () => onEnter(item._uuid),
         onMouseleave: () => onLeave(),
-        onClick: () => handleSelect(item),
+        onMousedown: () => handleSelect(item),
       }, () => renderChild(item))
       return props.preview
         ? renderPreview(item)
         : layoutMode.value === 'free'
           ? h(FreeDom, {
+            active: selected.value._uuid === item._uuid,
             x: item.style.x,
             y: item.style.y,
             width: item.style.width,
@@ -129,8 +130,15 @@ export default defineComponent({
           preview: isPreview,
           'onUpdate:config': updateConfig,
         }
+        let style = normalizeStyle(item.style)
+        if (layoutMode.value === 'free') {
+          style.transform = `translate(${item.style.x}px, ${item.style.y}px)`
+          style.position = 'absolute'
+          style.top = '0px'
+          style.left = '0px'
+        }
         return ViewRender.value
-          ? h(ViewRender.value, isPreview ? { ...options, style: normalizeStyle(item.style) } : options)
+          ? h(ViewRender.value, isPreview ? { ...options, style } : options)
           : h('div', errorLoading.value ? '加载失败!' : '加载中...')
       }
     }
@@ -169,7 +177,6 @@ export default defineComponent({
     }
   },
   render() {
-    console.log(this.layoutMode)
     if (this.layoutMode !== 'free') {
       return h(VueDraggable, {
         ref: 'mainRef',
@@ -192,10 +199,9 @@ export default defineComponent({
         item: (item: any) => this.renderWrapper(item.element),
       })
     } else {
-      console.log('trigger render')
       return (h(FreeScene, {
         style: 'width: 375px; height: 100%;',
-        diff: 0,
+        manualDiff: true,
       }, () => this.data.map(item => this.renderWrapper(item))))
     }
   },
