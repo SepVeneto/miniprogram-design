@@ -1,3 +1,18 @@
+# 0.17.0-beta.1 (2024-10-25)
+
+
+### Features
+
+* drag from outside ([683c112](https://github.com/SepVeneto/miniprogram-design/commit/683c11291b5a0a5b918d50768d3bb66d98cd231d))
+* **editor:** layout mode ([fd6e3b1](https://github.com/SepVeneto/miniprogram-design/commit/fd6e3b1b87e2877be0bb999d41c2feae96a761d5))
+
+
+### Performance Improvements
+
+* **editor:** 优化取消选中的逻辑 ([1e69680](https://github.com/SepVeneto/miniprogram-design/commit/1e696806f240bf49fe2f72772cc7c2fda64a1ceb))
+
+
+
 ## 0.16.3 (2024-09-12)
 
 
