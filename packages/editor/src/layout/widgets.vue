@@ -6,11 +6,12 @@
     :sort="false"
     item-key="type"
     style="padding: 0 10px;"
-    @start="state.dragging = true"
-    @end="state.dragging = false"
+    @start="onStart"
+    @end="onEnd"
   >
     <template #item="{ element }">
       <div
+        :data-view="element._view"
         style="border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; cursor: move"
         :class="{ disabled: element._disabled }"
       >
@@ -43,6 +44,14 @@ const props = defineProps({
 
 const list = computed<any[]>(() => props.list)
 
+function onStart(evt: any) {
+  state.dragging = true
+  state.currentElem = onClone(evt.item._underlying_vm_)
+}
+function onEnd() {
+  state.dragging = false
+  state.currentElem = {}
+}
 function onClone(original: any) {
   return JSON.parse(JSON.stringify({
     ...original,

@@ -164,6 +164,16 @@ export default defineComponent({
 
     const layoutMode = computed(() => app.config.globalConfig.layoutMode || 'grid')
 
+    function onDrop(evt: DragEvent) {
+      const { offsetX, offsetY } = evt
+
+      const list = data.value
+      state.currentElem.style.x = offsetX
+      state.currentElem.style.y = offsetY
+      list.push(state.currentElem)
+      data.value = list
+      // console.log(state.currentElem, evt)
+    }
     return {
       layoutMode,
       renderWrapper,
@@ -173,6 +183,7 @@ export default defineComponent({
       state,
       onDragStart,
       onDragEnd,
+      onDrop,
       onChange,
     }
   },
@@ -199,10 +210,14 @@ export default defineComponent({
         item: (item: any) => this.renderWrapper(item.element),
       })
     } else {
-      return (h(FreeScene, {
+      const scene = (h(FreeScene, {
         style: 'width: 375px; height: 100%;',
         manualDiff: true,
+        disabledBatch: true,
+        keyboard: true,
+        onDrop: this.onDrop,
       }, () => this.data.map(item => this.renderWrapper(item))))
+      return scene
     }
   },
 })

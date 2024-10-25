@@ -60,7 +60,8 @@ const imageUrl = computed({
   },
 })
 const uploadRequest: any = window.microApp?.getData()?.upload ?? noop
-function noop() {
+function noop(data) {
+  return URL.createObjectURL(new Blob([data.file]))
   /* empty */
 }
 async function customRequest(data: UploadRequestOptions) {
