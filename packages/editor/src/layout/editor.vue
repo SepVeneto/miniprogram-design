@@ -8,6 +8,8 @@ import {
   reactive,
   ref,
   toRefs,
+  useTemplateRef,
+  watchEffect,
 } from 'vue'
 import { useApp, useHistory, useState } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
@@ -19,6 +21,7 @@ import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
 import CanvasView from '@/widgets/canvas.view.vue'
 import { FreeDom, FreeScene } from '@sepveneto/free-dom'
+import { useZIndex } from './useZIndex'
 
 export default defineComponent({
   props: {
@@ -94,15 +97,21 @@ export default defineComponent({
         ? renderPreview(item)
         : layoutMode.value === 'free'
           ? h(FreeDom, {
+            'data-type': 'node',
             active: selected.value._uuid === item._uuid,
-            x: item.style.x,
-            y: item.style.y,
-            width: item.style.width,
-            height: item.style.height,
-            'onUpdate:x': val => { item.style.x = val },
-            'onUpdate:y': val => { item.style.y = val },
-            'onUpdate:width': val => { item.style.width = val },
-            'onUpdate:height': val => { item.style.height = val },
+            style: { zIndex: item.style.zIndex },
+            modelValue: {
+              x: item.style.x,
+              y: item.style.y,
+              w: item.style.width,
+              h: item.style.height,
+            },
+            'onUpdate:modelValue': ({ x, y, w, h }) => {
+              item.style.x = x
+              item.style.y = y
+              item.style.width = w
+              item.style.height= h
+            },
           }, () => operate)
           : operate
     }
@@ -174,7 +183,19 @@ export default defineComponent({
       data.value = list
       // console.log(state.currentElem, evt)
     }
+
+    const sceneRef = useTemplateRef<InstanceType<typeof FreeScene>>('sceneRef')
+    const zIndex = useZIndex(sceneRef as any, data)
+    watchEffect(() => {
+      if (layoutMode.value === 'free') {
+        zIndex.init()
+      } else {
+        zIndex.stop()
+      }
+    })
+
     return {
+      sceneRef,
       layoutMode,
       renderWrapper,
       data,
@@ -211,10 +232,12 @@ export default defineComponent({
       })
     } else {
       const scene = (h(FreeScene, {
+        ref: 'sceneRef',
         style: 'width: 375px; height: 100%;',
         manualDiff: true,
         disabledBatch: true,
         keyboard: true,
+        autoExpand: { height: true },
         onDrop: this.onDrop,
       }, () => this.data.map(item => this.renderWrapper(item))))
       return scene

@@ -61,17 +61,12 @@
                   style="position: absolute; right: 0;"
                 />
               </header>
-              <el-scrollbar
-                :style="editorStyle"
-                wrap-style="height: 100%;"
-                :view-style="viewStyle"
-                :min-size="375"
-              >
+              <div :style="editorStyle">
                 <router-view
                   :preview="isPreview"
                   :style="backgroundStyle"
                 />
-              </el-scrollbar>
+              </div>
               <template
                 v-if="tabbar"
               >
@@ -241,10 +236,12 @@ function handleModeChange(isCustom: any) {
 function handleDelete() {
   const currentConfig = app.config.body[route.name!]
   const index = currentConfig.findIndex(item => item._uuid === selected.value._uuid)
+  // 删被嵌套的组件
   if (index === -1) {
     const list = currentConfig.find((item: any) => item.list && item.list.length > 0)?.list ?? null
     if (list) {
       const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid)
+      history.create(`删除-${selected.value._name}`)
       list.splice(tIndex, 1)
     }
     app.selected = {}
@@ -294,7 +291,6 @@ function handleOutside({ target }: Event) {
     background: #f4f5f7;
     border-bottom-left-radius: 18px;
     border-bottom-right-radius: 18px;
-    overflow: hidden;
   }
   .header {
     z-index: 1;
