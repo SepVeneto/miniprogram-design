@@ -5,6 +5,7 @@ import OssUpload from './components/ossUpload.vue'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import SizeBox from './components/SizeBox.vue'
+import { isKeyExist } from './utils'
 import {
   ElCheckbox,
   ElColorPicker,
@@ -55,6 +56,7 @@ type WidgetOther = {
   tips?: string
   link?: Record<string, WidgetOther[]>
   _inContainer?: 'outer' | 'inner'
+  onChange: (data: any) => void,
   [attr: string]: any
 }
 type WidgetBox = {
@@ -359,11 +361,14 @@ export default defineComponent({
 
       // 除了盒模型，其它的配置如果初始数据中没有对应的字段
       // 就认为是不支持的配置，会被禁用掉
-      const disabled = schema.type === 'box'
+      const disabled = isBoxWidget(schema)
         ? false
-        : !((schema as WidgetOther).key in this.modelValue)
+        : !isKeyExist(schema.key, this.modelValue)
       if (node && node.props) {
         node.props.disabled = disabled
+      }
+      function isBoxWidget(schema: ISchema): schema is WidgetBox {
+        return schema.type === 'box'
       }
 
       const _schema = schema as WidgetOther

@@ -1,5 +1,7 @@
 <template>
-  <BcDialog v-model="show">
+  <BcDialog
+    v-model="show"
+  >
     <ElSteps :active="step">
       <ElStep title="导入设计图" />
       <ElStep title="指定功能组件" />
@@ -14,7 +16,7 @@
       <BcButton @click="show = false">取消</BcButton>
       <BcButton v-if="step > 0" @click="step -= 1">上一步</BcButton>
       <BcButton v-if="step < 1" @click="step += 1">下一步</BcButton>
-      <BcButton v-if="step === 1">确认</BcButton>
+      <BcButton v-if="step === 1" @click="handleSubmit">确认</BcButton>
     </template>
   </BcDialog>
 </template>
@@ -23,9 +25,13 @@
 import { computed, h, ref } from 'vue';
 import ImgUpload from './ImgUpload.vue';
 import FunctionModule from './FunctionModule.vue';
+import { useApp } from '@/store';
+import { useRoute } from 'vue-router';
 
 const show = defineModel({ type: Boolean })
-const formData = ref({})
+const formData = ref({
+  widgets: [],
+})
 
 const step = ref(0)
 const activeComp = computed(() => {
@@ -38,4 +44,11 @@ const activeComp = computed(() => {
       h('div', 'unknown step')
   }
 })
+const app = useApp()
+const route = useRoute()
+function handleSubmit() {
+  app.config.globalConfig.layoutMode = 'free'
+  app.config.body[route.name] = formData.value.widgets
+  show.value = false
+}
 </script>

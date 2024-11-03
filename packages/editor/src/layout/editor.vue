@@ -9,6 +9,7 @@ import {
   ref,
   toRefs,
   useTemplateRef,
+  VNode,
   watchEffect,
 } from 'vue'
 import { useApp, useHistory, useState } from '@/store'
@@ -194,6 +195,26 @@ export default defineComponent({
       }
     })
 
+    function renderScene(nodes: () => VNode[]) {
+      console.log('height', app.config.globalConfig.size.height)
+      return h(FreeScene, {
+        ref: 'sceneRef',
+        style: 'width: 375px; height: 100%;',
+        height: Number(app.config.globalConfig.size.height),
+        'onUpdate:height': (val: number) => {
+          console.log(val)
+          app.config.globalConfig.size.height = val
+        },
+        width: Number(app.config.globalConfig.size.width),
+        'onUpdate:width': (val: number) => app.config.globalConfig.size.width= val,
+        manualDiff: true,
+        disabledBatch: true,
+        keyboard: true,
+        autoExpand: { height: true },
+        onDrop,
+      }, nodes)
+    }
+
     return {
       sceneRef,
       layoutMode,
@@ -206,6 +227,7 @@ export default defineComponent({
       onDragEnd,
       onDrop,
       onChange,
+      renderScene,
     }
   },
   render() {
@@ -231,15 +253,7 @@ export default defineComponent({
         item: (item: any) => this.renderWrapper(item.element),
       })
     } else {
-      const scene = (h(FreeScene, {
-        ref: 'sceneRef',
-        style: 'width: 375px; height: 100%;',
-        manualDiff: true,
-        disabledBatch: true,
-        keyboard: true,
-        autoExpand: { height: true },
-        onDrop: this.onDrop,
-      }, () => this.data.map(item => this.renderWrapper(item))))
+      const scene = this.renderScene(() => this.data.map(item => this.renderWrapper(item)))
       return scene
     }
   },
