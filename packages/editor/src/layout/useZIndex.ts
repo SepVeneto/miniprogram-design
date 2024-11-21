@@ -1,7 +1,9 @@
 import ContextMenu from '@imengyu/vue3-context-menu'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
-import { MaybeElementRef, unrefElement, VueInstance } from '@vueuse/core'
-import { ref, Ref } from 'vue'
+import type { MaybeElementRef } from '@vueuse/core'
+import { unrefElement } from '@vueuse/core'
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useRoute } from 'vue-router'
 
@@ -13,58 +15,58 @@ export function useZIndex(elRef: MaybeElementRef, nodes: Ref<any[]>) {
   const app = useApp()
 
   function handleContextMenu(evt: MouseEvent) {
-      const current = app.selected
-      if (!current || !isNode(evt.target as HTMLElement)) return
+    const current = app.selected
+    if (!current || !isNode(evt.target as HTMLElement)) return
 
-      evt.preventDefault();
+    evt.preventDefault()
 
-      ContextMenu.showContextMenu({
-        x: evt.x,
-        y: evt.y,
-        items: [
-          {
-            label: '删除',
-            onClick: () => {
-              const currentConfig = app.config.body[route.name!]
-              const index = currentConfig.findIndex(item => item._uuid === app.selected._uuid)
-              currentConfig.splice(index, 1)
-              history.create(`删除-${app.selected._name}`)
-              app.selected = {}
-            }
+    ContextMenu.showContextMenu({
+      x: evt.x,
+      y: evt.y,
+      items: [
+        {
+          label: '删除',
+          onClick: () => {
+            const currentConfig = app.config.body[route.name!]
+            const index = currentConfig.findIndex(item => item._uuid === app.selected._uuid)
+            currentConfig.splice(index, 1)
+            history.create(`删除-${app.selected._name}`)
+            app.selected = {}
           },
-          {
-            label: '下一层',
-            onClick: () => {
-              const nodes = getCollisionNodes()
-              const currentMax = getMaxIndex(nodes)
-              current.style.zIndex = Math.min(currentMax - 1, 0)
-            }
+        },
+        {
+          label: '下一层',
+          onClick: () => {
+            const nodes = getCollisionNodes()
+            const currentMax = getMaxIndex(nodes)
+            current.style.zIndex = Math.min(currentMax - 1, 0)
           },
-          {
-            label: '上一层',
-            onClick: () => {
-              const nodes = getCollisionNodes()
-              const currentMax = getMaxIndex(nodes)
-              current.style.zIndex = currentMax + 1
-              maxZindex.value = Math.max(current.style.zIndex, maxZindex.value)
-            }
+        },
+        {
+          label: '上一层',
+          onClick: () => {
+            const nodes = getCollisionNodes()
+            const currentMax = getMaxIndex(nodes)
+            current.style.zIndex = currentMax + 1
+            maxZindex.value = Math.max(current.style.zIndex, maxZindex.value)
           },
-          {
-            label: '置于顶层',
-            onClick: () => {
-              current.style.zIndex = maxZindex.value
-            }
+        },
+        {
+          label: '置于顶层',
+          onClick: () => {
+            current.style.zIndex = maxZindex.value
           },
-          {
-            label: '置于底层',
-            onClick: () => {
-              // const nodes = getCollisionNodes()
-              // const currentMax = getMaxIndex(nodes)
-              current.style.zIndex = 0
-            }
+        },
+        {
+          label: '置于底层',
+          onClick: () => {
+            // const nodes = getCollisionNodes()
+            // const currentMax = getMaxIndex(nodes)
+            current.style.zIndex = 0
           },
-        ]
-      })
+        },
+      ],
+    })
   }
 
   function init() {

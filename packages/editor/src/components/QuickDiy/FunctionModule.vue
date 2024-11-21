@@ -4,7 +4,7 @@
       style="width: 100%; z-index: 0;"
       :src="formData.design"
       @load="onLoad"
-    />
+    >
     <FreeScene
       v-if="imgLoad"
       class="scene-wrap"
@@ -21,7 +21,7 @@
         :y="item.style.y"
       >
         <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
-          <ElTag>{{item._name}}</ElTag>
+          <ElTag>{{ item._name }}</ElTag>
         </div>
       </FreeDom>
     </FreeScene>
@@ -29,12 +29,12 @@
 </template>
 
 <script lang="ts" setup>
-import { FreeScene, FreeDom } from '@sepveneto/free-dom';
-import { computed, ref, shallowRef } from 'vue';
+import { FreeDom, FreeScene } from '@sepveneto/free-dom'
+import { computed, ref, shallowRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import ContextMenu from '@imengyu/vue3-context-menu'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
-import { useApp } from '@/store';
+import { useApp } from '@/store'
 
 const formData = defineModel({ default: {} })
 const app = useApp()
@@ -59,8 +59,8 @@ const menus = computed(() => {
         label: each._name,
         onClick: () => {
           createWidget(each)
-        }
-      }))
+        },
+      })),
     })
   })
   return list
@@ -78,7 +78,7 @@ function createWidget(widget) {
       y: startY,
       width: Math.abs(startX - lastX),
       height: Math.abs(startY - lastY),
-    }
+    },
   })
 }
 function showMenu(x: number, y: number, addtionalData) {
@@ -87,7 +87,7 @@ function showMenu(x: number, y: number, addtionalData) {
     zIndex: 2024,
     x,
     y,
-    items: menus.value
+    items: menus.value,
   })
 }
 
