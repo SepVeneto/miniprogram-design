@@ -1,5 +1,6 @@
 <script lang="ts">
 import DraggableWrapper from '@/components/draggableWrapper.vue'
+import type { VNode } from 'vue'
 import {
   computed,
   defineComponent,
@@ -9,7 +10,6 @@ import {
   ref,
   toRefs,
   useTemplateRef,
-  VNode,
   watchEffect,
 } from 'vue'
 import { useApp, useHistory, useState } from '@/store'
@@ -72,6 +72,7 @@ export default defineComponent({
       // 不能使用运算展开符，需要确保selected与editor指向同一地址
       // 否则选择后的配置结果无法反应到编辑器和store里
       app.selected = data
+      zIndex.select(data)
       app.selected._fromContainer = false
     }
     function updateConfig(data: any) {
@@ -111,7 +112,7 @@ export default defineComponent({
               item.style.x = x
               item.style.y = y
               item.style.width = w
-              item.style.height= h
+              item.style.height = h
             },
           }, () => operate)
           : operate
@@ -140,7 +141,7 @@ export default defineComponent({
           preview: isPreview,
           'onUpdate:config': updateConfig,
         }
-        let style = normalizeStyle(item.style)
+        const style = normalizeStyle(item.style)
         if (layoutMode.value === 'free') {
           style.transform = `translate(${item.style.x}px, ${item.style.y}px)`
           style.position = 'absolute'
@@ -186,7 +187,15 @@ export default defineComponent({
     }
 
     const sceneRef = useTemplateRef<InstanceType<typeof FreeScene>>('sceneRef')
-    const zIndex = useZIndex(sceneRef as any, data)
+    const zIndex = useZIndex(sceneRef as any, data, {
+      onDelete: (selected) => {
+        const currentConfig = app.config.body[route.name!]
+        const index = currentConfig.findIndex(item => item._uuid === selected._uuid)
+        currentConfig.splice(index, 1)
+        history.create(`删除-${selected._name}`)
+        app.selected = {}
+      },
+    })
     watchEffect(() => {
       if (layoutMode.value === 'free') {
         zIndex.init()
@@ -206,7 +215,7 @@ export default defineComponent({
           app.config.globalConfig.size.height = val
         },
         width: Number(app.config.globalConfig.size.width),
-        'onUpdate:width': (val: number) => app.config.globalConfig.size.width= val,
+        'onUpdate:width': (val: number) => { app.config.globalConfig.size.width = val },
         manualDiff: true,
         disabledBatch: true,
         keyboard: true,

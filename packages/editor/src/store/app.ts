@@ -7,6 +7,7 @@ import Editor from '@/layout/editor.vue'
 
 import mock from '@/mock'
 import { schema as schemaConfig } from '@/mock.schema'
+import type { WidgetNode } from '@/types/type'
 
 export interface Config{
   globalConfig: Record<string, any>
@@ -16,7 +17,7 @@ export interface Config{
 }
 
 export const useApp = defineStore('app', () => {
-  const widgetList = ref<any[]>([])
+  const widgetList = ref<{name: string, group: WidgetNode[]}[]>([])
   const config = ref<Config>({
     globalConfig: {},
     body: {},

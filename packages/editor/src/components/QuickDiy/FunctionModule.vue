@@ -7,18 +7,21 @@
     >
     <FreeScene
       v-if="imgLoad"
+      ref="sceneRef"
       class="scene-wrap"
       :style="sceneStyle"
-      @batch-select="onBatchSelect"
-      @mouseup="handleUpdateEvt"
+      @batch-select="widgets.create"
+      @mouseup="widgets.syncEvent"
     >
       <FreeDom
         v-for="item in formData.widgets"
         :key="item._uuid"
-        :height="item.style.height"
-        :width="item.style.width"
-        :x="item.style.x"
-        :y="item.style.y"
+        v-model:x="item.style.x"
+        v-model:y="item.style.y"
+        v-model:w="item.style.width"
+        v-model:h="item.style.height"
+        data-type="node"
+        @mouseup="zIndex.select(item)"
       >
         <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
           <ElTag>{{ item._name }}</ElTag>
@@ -30,74 +33,39 @@
 
 <script lang="ts" setup>
 import { FreeDom, FreeScene } from '@sepveneto/free-dom'
-import { computed, ref, shallowRef } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
-import ContextMenu from '@imengyu/vue3-context-menu'
-import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
-import { useApp } from '@/store'
+import type { CSSProperties, PropType } from 'vue'
+import { nextTick, ref, toRef } from 'vue'
+import { useZIndex } from '@/layout/useZIndex'
+import { useWidgets } from './hooks'
 
-const formData = defineModel({ default: {} })
-const app = useApp()
-const sceneStyle = ref({})
+const formData = defineModel({
+  type: Object as PropType<{ design: string, widgets: any[] }>,
+  default: () => ({ widgets: [] }),
+})
+const sceneStyle = ref<CSSProperties>({})
+const sceneRef = ref()
 
-const currentEvt = shallowRef()
 const imgLoad = ref(false)
-function onLoad(evt) {
+const zIndex = useZIndex(
+  sceneRef,
+  toRef(() => formData.value.widgets),
+  {
+    onDelete: (selected) => {
+      const list = formData.value.widgets
+      const index = list.findIndex(item => item._uuid === selected._uuid)
+      list.splice(index, 1)
+    },
+  },
+)
+
+const widgets = useWidgets(toRef(() => formData.value.widgets))
+
+function onLoad(evt: Event) {
   sceneStyle.value.height = (evt.target as HTMLImageElement).offsetHeight + 'px'
   imgLoad.value = true
-}
-function handleUpdateEvt(evt: MouseEvent) {
-  currentEvt.value = evt
-}
-
-const menus = computed(() => {
-  const list = []
-  app.widgetList.forEach(item => {
-    list.push({
-      label: item.name,
-      children: item.group.map(each => ({
-        label: each._name,
-        onClick: () => {
-          createWidget(each)
-        },
-      })),
-    })
+  nextTick().then(() => {
+    zIndex.init()
   })
-  return list
-})
-let batchPos
-function createWidget(widget) {
-  const { lastX, lastY, startX, startY } = batchPos
-  console.log(lastX - startX)
-  formData.value.widgets.push({
-    _uuid: uuidv4(),
-    ...widget,
-    style: {
-      ...(widget.style || {}),
-      x: startX,
-      y: startY,
-      width: Math.abs(startX - lastX),
-      height: Math.abs(startY - lastY),
-    },
-  })
-}
-function showMenu(x: number, y: number, addtionalData) {
-  console.log(app.widgetList)
-  ContextMenu.showContextMenu({
-    zIndex: 2024,
-    x,
-    y,
-    items: menus.value,
-  })
-}
-
-function onBatchSelect(pos) {
-  batchPos = pos
-  showMenu(
-    currentEvt.value.x,
-    currentEvt.value.y,
-    pos,
-  )
 }
 </script>
 

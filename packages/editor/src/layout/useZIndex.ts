@@ -1,37 +1,44 @@
+import type { LikeWidgetNode } from '@/types/type'
 import ContextMenu from '@imengyu/vue3-context-menu'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import type { MaybeElementRef } from '@vueuse/core'
 import { unrefElement } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { ref } from 'vue'
-import { useApp, useHistory } from '@/store'
-import { useRoute } from 'vue-router'
 
-export function useZIndex(elRef: MaybeElementRef, nodes: Ref<any[]>) {
-  const route = useRoute()
+type Callbacks = {
+  onDelete: (selected: LikeWidgetNode) => void
+}
+
+export function useZIndex(
+  elRef: MaybeElementRef,
+  nodes: Ref<any[]>,
+  callbacks: Callbacks,
+) {
   const maxZindex = ref(381)
 
-  const history = useHistory()
-  const app = useApp()
+  const selectedNode = ref<LikeWidgetNode>()
 
   function handleContextMenu(evt: MouseEvent) {
-    const current = app.selected
+    const current = selectedNode.value
     if (!current || !isNode(evt.target as HTMLElement)) return
 
     evt.preventDefault()
 
     ContextMenu.showContextMenu({
+      zIndex: 2024,
       x: evt.x,
       y: evt.y,
       items: [
         {
           label: '删除',
           onClick: () => {
-            const currentConfig = app.config.body[route.name!]
-            const index = currentConfig.findIndex(item => item._uuid === app.selected._uuid)
-            currentConfig.splice(index, 1)
-            history.create(`删除-${app.selected._name}`)
-            app.selected = {}
+            if (!selectedNode.value) {
+              console.warn('找不到待删除的节点')
+              return
+            }
+
+            callbacks.onDelete(selectedNode.value)
           },
         },
         {
@@ -71,7 +78,11 @@ export function useZIndex(elRef: MaybeElementRef, nodes: Ref<any[]>) {
 
   function init() {
     const node = unrefElement(elRef) as HTMLElement
-    node?.addEventListener('contextmenu', handleContextMenu)
+    if (!node) {
+      console.warn('找不到右键菜单的触发区域')
+      return
+    }
+    node.addEventListener('contextmenu', handleContextMenu)
   }
 
   function stop() {
@@ -84,10 +95,15 @@ export function useZIndex(elRef: MaybeElementRef, nodes: Ref<any[]>) {
   }
 
   function getCollisionNodes() {
-    return nodes.value.filter(node => collisionDetection(node, app.selected))
+    return nodes.value.filter(node => collisionDetection(node, selectedNode.value))
+  }
+
+  function select(node: LikeWidgetNode) {
+    selectedNode.value = node
   }
 
   return {
+    select,
     init,
     stop,
   }

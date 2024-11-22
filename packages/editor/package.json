@@ -13,6 +13,7 @@
   "devDependencies": {
     "@sepveneto/mpd-schema": "workspace:^",
     "@swc/core": "^1.7.36",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.16.13",
     "@types/uuid": "^8.3.4",
     "@types/webpack": "^5.28.5",
@@ -45,11 +46,12 @@
   "dependencies": {
     "@imengyu/vue3-context-menu": "^1.4.3",
     "@sepveneto/basic-comp": "^0.8.6",
-    "@sepveneto/free-dom": "^0.13.2",
+    "@sepveneto/free-dom": "^0.13.3",
     "@sepveneto/mpd-hooks": "workspace:*",
     "@types/sortablejs": "^1.15.8",
     "@vueuse/integrations": "^10.11.1",
     "element-plus": "^2.8.6",
+    "lodash-es": "^4.17.21",
     "minimist": "^1.2.8",
     "sortablejs": "^1.15.3",
     "swiper": "^8.4.7",
