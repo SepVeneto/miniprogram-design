@@ -102,18 +102,14 @@ export default defineComponent({
             'data-type': 'node',
             active: selected.value._uuid === item._uuid,
             style: { zIndex: item.style.zIndex },
-            modelValue: {
-              x: item.style.x,
-              y: item.style.y,
-              w: item.style.width,
-              h: item.style.height,
-            },
-            'onUpdate:modelValue': ({ x, y, w, h }) => {
-              item.style.x = x
-              item.style.y = y
-              item.style.width = w
-              item.style.height = h
-            },
+            x: item.style.x,
+            y: item.style.y,
+            w: item.style.width,
+            h: item.style.height,
+            'onUpdate:x': (val) => item.style.x = val,
+            'onUpdate:y': (val) => item.style.y = val,
+            'onUpdate:w': (val) => item.style.width = val,
+            'onUpdate:h': (val) => item.style.height = val,
           }, () => operate)
           : operate
     }

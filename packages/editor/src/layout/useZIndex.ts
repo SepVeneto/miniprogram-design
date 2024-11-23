@@ -1,4 +1,4 @@
-import type { LikeWidgetNode } from '@/types/type'
+import type { LikeWidgetNode, WidgetNode } from '@/types/type'
 import ContextMenu from '@imengyu/vue3-context-menu'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import type { MaybeElementRef } from '@vueuse/core'
@@ -12,10 +12,9 @@ type Callbacks = {
 
 export function useZIndex(
   elRef: MaybeElementRef,
-  nodes: Ref<any[]>,
+  nodes: Ref<WidgetNode[]>,
   callbacks: Callbacks,
 ) {
-  const maxZindex = ref(381)
 
   const selectedNode = ref<LikeWidgetNode>()
 
@@ -55,20 +54,24 @@ export function useZIndex(
             const nodes = getCollisionNodes()
             const currentMax = getMaxIndex(nodes)
             current.style.zIndex = currentMax + 1
-            maxZindex.value = Math.max(current.style.zIndex, maxZindex.value)
           },
         },
         {
           label: '置于顶层',
           onClick: () => {
-            current.style.zIndex = maxZindex.value
+            current.style.zIndex = getMaxIndex(nodes.value) + 1
           },
         },
         {
           label: '置于底层',
           onClick: () => {
-            // const nodes = getCollisionNodes()
-            // const currentMax = getMaxIndex(nodes)
+            nodes.value.forEach(node => {
+              if (!node.style.zIndex) {
+                node.style.zIndex = 1
+              } else {
+                (node.style.zIndex as number) += 1
+              }
+            })
             current.style.zIndex = 0
           },
         },
@@ -77,6 +80,7 @@ export function useZIndex(
   }
 
   function init() {
+    normalize(nodes.value)
     const node = unrefElement(elRef) as HTMLElement
     if (!node) {
       console.warn('找不到右键菜单的触发区域')
@@ -129,4 +133,12 @@ function collisionDetection(node1: any, node2: any) {
   else if (x1 >= x2 + w2) return false
   else if (y1 >= y2 + h2) return false
   else return true
+}
+
+function normalize(widgets: WidgetNode[]) {
+  widgets.forEach(widget => {
+    if (!widget.style.zIndex) {
+      widget.style.zIndex = 0
+    }
+  })
 }
