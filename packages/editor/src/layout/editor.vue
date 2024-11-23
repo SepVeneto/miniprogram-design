@@ -198,7 +198,7 @@ export default defineComponent({
       } else {
         zIndex.stop()
       }
-    })
+    }, { flush: 'post' })
 
     function renderScene(nodes: () => VNode[]) {
       console.log('height', app.config.globalConfig.size.height)

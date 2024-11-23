@@ -79,7 +79,7 @@ const globalSchema = computed(() => ([
             cancelButtonText: '取消',
           }
         ).then(() => {
-          app.config.globalConfig.size = { width: 375, height: 667 }
+          app.config.globalConfig.size = { width: 375, height: 630 }
           app.config.globalConfig.layoutMode = mode
         }).catch(() => {})
       } else {
@@ -91,7 +91,8 @@ const globalSchema = computed(() => ([
         {
           type: 'number',
           key: 'size.width',
-          label: '页面宽度'
+          label: '页面宽度',
+          disabled: true,
         },
         {
           type: 'number',

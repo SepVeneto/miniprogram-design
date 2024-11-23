@@ -365,7 +365,7 @@ export default defineComponent({
         ? false
         : !isKeyExist(schema.key, this.modelValue)
       if (node && node.props) {
-        node.props.disabled = disabled
+        node.props.disabled ||= disabled
       }
       function isBoxWidget(schema: ISchema): schema is WidgetBox {
         return schema.type === 'box'

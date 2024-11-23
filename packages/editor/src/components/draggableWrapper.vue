@@ -93,6 +93,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
+  position: relative;
   & ~ :deep(.vv-resize-dom--handler) {
     opacity: 0;
   }

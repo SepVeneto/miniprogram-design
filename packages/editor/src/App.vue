@@ -61,12 +61,13 @@
                   style="position: absolute; right: 0;"
                 />
               </header>
-              <div :style="editorStyle">
+              <ElScrollbar
+                :wrap-style="editorStyle"
+              >
                 <router-view
                   :preview="isPreview"
-                  :style="backgroundStyle"
                 />
-              </div>
+              </ElScrollbar>
               <template
                 v-if="tabbar"
               >
@@ -134,7 +135,7 @@
 import widgetWrap from '@/layout/widgetWrap.vue'
 import VConfig from '@/layout/config.vue'
 import { tabbarPreview } from '@/layout/tabbar'
-import { computed, onMounted, ref } from 'vue'
+import { computed, CSSProperties, onMounted, ref } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
@@ -184,34 +185,12 @@ const globalStyle = computed(() => {
       return {}
   }
 })
-const editorStyle = computed(() => {
-  return {
-    height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
-    overflowX: 'hidden',
-  }
-})
-const viewStyle = computed(() => {
-  return {
-    height: '100%',
-    overflowX: 'hidden',
-  }
-})
-/**
- * @deprecated
- */
-const backgroundStyle = computed(() => {
-  const { type, image, color } = app.config.globalConfig.background || {}
-  switch (type) {
-    case 'image':
-      return {
-        backgroundImage: `url(${image})`,
-        backgroundSize: '100%',
-        backgroundRepeat: 'no-repeat',
-      }
-    case 'color':
-      return {
-        backgroundColor: color,
-      }
+const editorStyle = computed<CSSProperties>(() => {
+  if (globalConfig.value.layoutMode === 'grid') {
+    return {
+      height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
+      overflowX: 'hidden',
+    }
   }
   return {}
 })
@@ -287,12 +266,15 @@ function handleOutside({ target }: Event) {
   box-sizing: content-box;
   background-size: calc(375px + var(--padding-left-x) + var(--padding-right-x)) 100%;
   .mobile-content {
+    display: flex;
+    flex-direction: column;
     height: inherit;
     background: #f4f5f7;
     border-bottom-left-radius: 18px;
     border-bottom-right-radius: 18px;
   }
   .header {
+    flex-shrink: 0;
     z-index: 1;
     display: flex;
     align-items: center;
