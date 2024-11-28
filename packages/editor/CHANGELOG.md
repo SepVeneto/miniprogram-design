@@ -1,3 +1,20 @@
+# 0.17.0-beta.2 (2024-11-28)
+
+
+### Features
+
+* **editor:** free layout qiuck start ([83cda8d](https://github.com/SepVeneto/miniprogram-design/commit/83cda8d941601e0855c243880b20b1f60dd1e719))
+* **editor:** layoutmode switch ([11b526c](https://github.com/SepVeneto/miniprogram-design/commit/11b526c650dbb25878ad2b106d422022870c9e55))
+* **editor:** zIndex manage ([46ebec1](https://github.com/SepVeneto/miniprogram-design/commit/46ebec13a26b963c341bfd8a307501bc15d22345))
+
+
+### Performance Improvements
+
+* **editor:** 优化图层管理 ([9b46a14](https://github.com/SepVeneto/miniprogram-design/commit/9b46a140a0e6b7579e15ff494d5eaf35008feb82))
+* **editor:** optimize detail ([e5ad939](https://github.com/SepVeneto/miniprogram-design/commit/e5ad9390f7091b3efc293aa9b36b054ad8a1ae2f))
+
+
+
 # 0.17.0-beta.1 (2024-10-25)
 
 
