@@ -5,6 +5,7 @@ import OssUpload from './components/ossUpload.vue'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import SizeBox from './components/SizeBox.vue'
+import { isKeyExist } from './utils'
 import {
   ElCheckbox,
   ElColorPicker,
@@ -18,6 +19,7 @@ import {
   ElRadio,
   ElRadioGroup,
   ElSelect,
+  ElSwitch,
   ElTooltip,
 } from 'element-plus'
 
@@ -33,6 +35,7 @@ type WidgetType = 'input'
   | 'radioGroup'
   | 'editor'
   | 'box'
+  | 'switch'
 type BoxModel = 'marginLeft'
 | 'marginTop'
 | 'marginRight'
@@ -53,6 +56,7 @@ type WidgetOther = {
   tips?: string
   link?: Record<string, WidgetOther[]>
   _inContainer?: 'outer' | 'inner'
+  onChange: (data: any) => void,
   [attr: string]: any
 }
 type WidgetBox = {
@@ -131,6 +135,16 @@ export default defineComponent({
       updateData(`style.${type}Right`, right)
       updateData(`style.${type}Bottom`, bottom)
       updateData(`style.${type}Left`, left)
+    }
+
+    function renderSwitch(schema: WidgetOther) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { type, label, key, ...args } = schema
+      return h(ElSwitch, {
+        'model-value': getData(prop.modelValue, key),
+        'onUpdate:modelValue': (val) => updateData(key, val),
+        ...args,
+      })
     }
     function renderCheckbox(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -293,6 +307,7 @@ export default defineComponent({
       renderBox,
       renderInput,
       renderNumber,
+      renderSwitch,
       renderCheckbox,
       renderImage,
       renderColorPicker,
@@ -309,6 +324,9 @@ export default defineComponent({
       const form: VNode[] = []
       let node: VNode | null
       switch (schema.type) {
+        case 'switch':
+          node = this.renderSwitch(schema as WidgetOther)
+          break
         case 'box':
           node = this.renderBox(schema)
           break
@@ -340,6 +358,19 @@ export default defineComponent({
           node = this.renderCustom(schema as WidgetOther)
           // node = <div>暂不支持</div>;
       }
+
+      // 除了盒模型，其它的配置如果初始数据中没有对应的字段
+      // 就认为是不支持的配置，会被禁用掉
+      const disabled = isBoxWidget(schema)
+        ? false
+        : !isKeyExist(schema.key, this.modelValue)
+      if (node && node.props) {
+        node.props.disabled ||= disabled
+      }
+      function isBoxWidget(schema: ISchema): schema is WidgetBox {
+        return schema.type === 'box'
+      }
+
       const _schema = schema as WidgetOther
       if (_schema.link) {
         const key = this.getData(this.modelValue, _schema.key)

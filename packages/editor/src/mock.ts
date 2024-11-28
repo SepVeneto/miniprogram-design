@@ -8,6 +8,7 @@ export default {
   //   Personal: {},
   // },
   globalConfig: {
+    layoutMode: 'grid',
     color: 'rgba(126,211,33,1)',
     emptyColor: 'rgba(144,19,254,1)',
     bubbleColor: 'rgba(80,227,194,1)',

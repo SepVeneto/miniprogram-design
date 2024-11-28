@@ -8,10 +8,12 @@
   "author": "",
   "license": "MIT",
   "scripts": {
+    "bootstrap": "pnpm build:hooks && pnpm build:core",
     "dev:editor": "pnpm -C packages/editor dev",
     "dev:docs": "pnpm -C docs dev",
     "build:editor": "pnpm -C packages/editor build -o dist/prod && pnpm -C packages/editor build --mode development -o dist/dev",
     "build:hooks": "pnpm -C packages/hooks build",
+    "build:core": "pnpm -C packages/core build",
     "release:editor": "cd packages/editor && bumpp --tag editor@ --commit --push",
     "release:core": "cd packages/core && bumpp --tag core@ --commit --push",
     "release:hooks": "cd packages/hooks && bumpp --tag hooks@ --commit --push"
@@ -31,6 +33,7 @@
     "bumpp": "^9.1.0",
     "conventional-changelog": "^4.0.0",
     "conventional-changelog-cli": "^3.0.0",
+    "debug": "^4.3.7",
     "element-plus": "^2.8.0",
     "eslint": "^8.32.0",
     "vite": "^4.3.1",

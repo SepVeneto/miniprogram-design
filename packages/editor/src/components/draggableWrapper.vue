@@ -4,7 +4,7 @@ import { Hide, Rank as IconRank } from '@element-plus/icons-vue'
 import { normalizeStyle } from '@/utils'
 import { ElIcon } from 'element-plus'
 import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
-import { useState } from '@/store'
+import { useApp, useState } from '@/store'
 
 export default defineComponent({
   props: {
@@ -28,17 +28,24 @@ export default defineComponent({
     canDelete: Boolean,
   },
   setup(props) {
+    const app = useApp()
+    const layoutMode = computed(() => app.config.globalConfig.layoutMode)
     const state = useState()
     const isActive = computed(() => {
       return props.active || state.dragging
     })
     const wrapStyle = computed(() => {
-      const { height, ...style } = props.customStyle
-      // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
-      const _height = height + (isActive.value ? WIDGET_TOP_BAR_HEIGHT : 0)
-      return normalizeStyle({ ...style, height: typeof height === 'number' ? _height : 'auto' })
+      if (layoutMode.value === 'free') {
+        return normalizeStyle(props.customStyle)
+      } else {
+        const { height, ...style } = props.customStyle
+        // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
+        const _height = height + (isActive.value ? WIDGET_TOP_BAR_HEIGHT : 0)
+        return normalizeStyle({ ...style, height: typeof height === 'number' ? _height : 'auto' })
+      }
     })
     return {
+      layoutMode,
       wrapStyle,
       isActive,
     }
@@ -67,6 +74,7 @@ export default defineComponent({
       {
         class: [
           'card',
+          this.layoutMode === 'free' ? 'free-card' : 'grid-card',
           { 'is-active': this.isActive },
           `dir-${this.dir}`,
           { 'has-mask': this.mask },
@@ -74,7 +82,7 @@ export default defineComponent({
         ],
         style: this.wrapStyle,
       }, [
-        !this.disabled && operate(),
+        !this.disabled && this.layoutMode !== 'free' && operate(),
         this.$slots.default?.(),
         this.hide && hidden(),
       ],
@@ -84,11 +92,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.card :deep(img) {
+.card {
+  position: relative;
+  & ~ :deep(.vv-resize-dom--handler) {
+    opacity: 0;
+  }
+  &.is-active ~ :deep(.vv-resize-dom--handler) {
+    opacity: 1;
+  }
+}
+.grid-card :deep(img) {
   vertical-align: top;
 }
 
-.card {
+.grid-card {
   --item-color: #79bbff;
   --container-color: #eebe77;
   --top: 0px;
@@ -119,12 +136,6 @@ export default defineComponent({
       overflow: hidden;
       text-overflow: ellipsis;
     }
-  }
-  & ~ :deep(.vv-resize-dom--handler) {
-    opacity: 0;
-  }
-  &.is-active ~ :deep(.vv-resize-dom--handler) {
-    opacity: 1;
   }
   &.is-active > .operate {
     opacity: 1;
@@ -159,7 +170,7 @@ export default defineComponent({
 </style>
 
 <style lang="scss">
-.free-dom__widget-wrapper {
+.vv-resize-dom--box {
   > .card, .container {
     width: 100%;
     height: 100%;

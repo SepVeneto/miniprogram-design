@@ -1,5 +1,6 @@
 <script lang="ts">
 import DraggableWrapper from '@/components/draggableWrapper.vue'
+import type { VNode } from 'vue'
 import {
   computed,
   defineComponent,
@@ -8,6 +9,8 @@ import {
   reactive,
   ref,
   toRefs,
+  useTemplateRef,
+  watchEffect,
 } from 'vue'
 import { useApp, useHistory, useState } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
@@ -18,6 +21,8 @@ import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
 import CanvasView from '@/widgets/canvas.view.vue'
+import { FreeDom, FreeScene } from '@sepveneto/free-dom'
+import { useZIndex } from './useZIndex'
 
 export default defineComponent({
   props: {
@@ -67,6 +72,7 @@ export default defineComponent({
       // 不能使用运算展开符，需要确保selected与editor指向同一地址
       // 否则选择后的配置结果无法反应到编辑器和store里
       app.selected = data
+      zIndex.select(data)
       app.selected._fromContainer = false
     }
     function updateConfig(data: any) {
@@ -87,9 +93,25 @@ export default defineComponent({
         customStyle: item.style,
         onMouseenter: () => onEnter(item._uuid),
         onMouseleave: () => onLeave(),
-        onClick: () => handleSelect(item),
+        onMousedown: () => handleSelect(item),
       }, () => renderChild(item))
-      return props.preview ? renderPreview(item) : operate
+      return props.preview
+        ? renderPreview(item)
+        : layoutMode.value === 'free'
+          ? h(FreeDom, {
+            'data-type': 'node',
+            active: selected.value._uuid === item._uuid,
+            style: { zIndex: item.style.zIndex },
+            x: item.style.x,
+            y: item.style.y,
+            w: item.style.width,
+            h: item.style.height,
+            'onUpdate:x': (val) => item.style.x = val,
+            'onUpdate:y': (val) => item.style.y = val,
+            'onUpdate:w': (val) => item.style.width = val,
+            'onUpdate:h': (val) => item.style.height = val,
+          }, () => operate)
+          : operate
     }
     function renderPreview(item: any) {
       switch (item._view) {
@@ -115,8 +137,15 @@ export default defineComponent({
           preview: isPreview,
           'onUpdate:config': updateConfig,
         }
+        const style = normalizeStyle(item.style)
+        if (layoutMode.value === 'free') {
+          style.transform = `translate(${item.style.x}px, ${item.style.y}px)`
+          style.position = 'absolute'
+          style.top = '0px'
+          style.left = '0px'
+        }
         return ViewRender.value
-          ? h(ViewRender.value, isPreview ? { ...options, style: normalizeStyle(item.style) } : options)
+          ? h(ViewRender.value, isPreview ? { ...options, style } : options)
           : h('div', errorLoading.value ? '加载失败!' : '加载中...')
       }
     }
@@ -140,7 +169,60 @@ export default defineComponent({
       }
     }
 
+    const layoutMode = computed(() => app.config.globalConfig.layoutMode || 'grid')
+
+    function onDrop(evt: DragEvent) {
+      const { offsetX, offsetY } = evt
+
+      const list = data.value
+      state.currentElem.style.x = offsetX
+      state.currentElem.style.y = offsetY
+      list.push(state.currentElem)
+      data.value = list
+      // console.log(state.currentElem, evt)
+    }
+
+    const sceneRef = useTemplateRef<InstanceType<typeof FreeScene>>('sceneRef')
+    const zIndex = useZIndex(sceneRef as any, data, {
+      onDelete: (selected) => {
+        const currentConfig = app.config.body[route.name!]
+        const index = currentConfig.findIndex(item => item._uuid === selected._uuid)
+        currentConfig.splice(index, 1)
+        history.create(`删除-${selected._name}`)
+        app.selected = {}
+      },
+    })
+    watchEffect(() => {
+      if (layoutMode.value === 'free') {
+        zIndex.init()
+      } else {
+        zIndex.stop()
+      }
+    }, { flush: 'post' })
+
+    function renderScene(nodes: () => VNode[]) {
+      console.log('height', app.config.globalConfig.size.height)
+      return h(FreeScene, {
+        ref: 'sceneRef',
+        style: 'width: 375px; height: 100%;',
+        height: Number(app.config.globalConfig.size.height),
+        'onUpdate:height': (val: number) => {
+          console.log(val)
+          app.config.globalConfig.size.height = val
+        },
+        width: Number(app.config.globalConfig.size.width),
+        'onUpdate:width': (val: number) => { app.config.globalConfig.size.width = val },
+        manualDiff: true,
+        disabledBatch: true,
+        keyboard: true,
+        autoExpand: { height: true },
+        onDrop,
+      }, nodes)
+    }
+
     return {
+      sceneRef,
+      layoutMode,
       renderWrapper,
       data,
       onPut,
@@ -148,30 +230,37 @@ export default defineComponent({
       state,
       onDragStart,
       onDragEnd,
+      onDrop,
       onChange,
+      renderScene,
     }
   },
   render() {
-    return h(VueDraggable, {
-      ref: 'mainRef',
-      class: 'draggable-box',
-      style: 'min-height: calc(667px - 60px); position: relative;',
-      modelValue: this.data,
-      group: { name: 'widgets', pull: true, put: true },
-      componentData: {
-        type: 'transition-group',
-        name: 'flip-list',
-      },
-      animation: 200,
-      handle: '.operate',
-      itemKey: '_uuid',
-      'onUpdate:modelValue': (val: any) => { this.data = val },
-      onStart: () => { this.state.dragging = true; this.onDragStart() },
-      onEnd: () => { this.state.dragging = false; this.onDragEnd() },
-      onChange: this.onChange,
-    }, {
-      item: (item: any) => this.renderWrapper(item.element),
-    })
+    if (this.layoutMode !== 'free') {
+      return h(VueDraggable, {
+        ref: 'mainRef',
+        class: 'draggable-box',
+        style: 'min-height: calc(667px - 60px); position: relative;',
+        modelValue: this.data,
+        group: { name: 'widgets', pull: true, put: true },
+        componentData: {
+          type: 'transition-group',
+          name: 'flip-list',
+        },
+        animation: 200,
+        handle: '.operate',
+        itemKey: '_uuid',
+        'onUpdate:modelValue': (val: any) => { this.data = val },
+        onStart: () => { this.state.dragging = true; this.onDragStart() },
+        onEnd: () => { this.state.dragging = false; this.onDragEnd() },
+        onChange: this.onChange,
+      }, {
+        item: (item: any) => this.renderWrapper(item.element),
+      })
+    } else {
+      const scene = this.renderScene(() => this.data.map(item => this.renderWrapper(item)))
+      return scene
+    }
   },
 })
 </script>

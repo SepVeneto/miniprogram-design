@@ -25,6 +25,7 @@ import { tabbarConfig } from '@/layout/tabbar'
 import { useApp, useHistory } from '@/store'
 import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
 
 const route = useRoute()
 const app = useApp()
@@ -53,7 +54,56 @@ const globalConfig = computed<any>({
     }
   },
 })
+watch(() => app.config.globalConfig.layoutMode, (val) => {
+  if (val === 'free') {
+    app.flatteBody()
+  }
+})
 const globalSchema = computed(() => ([
+  {
+    type: 'switch',
+    key: 'layoutMode',
+    label: '布局模式',
+    activeText: '自由',
+    activeValue: 'free',
+    inactiveText: '栅格',
+    inactiveValue: 'grid',
+    'onUpdate:modelValue': async (mode: 'free' | 'grid') => {
+      if (mode === 'free') {
+        ElMessageBox.confirm(
+          '切换到自由布局会破坏原来栅格布局的结构，该操作不可逆，请确认是否需要切换？',
+          '警告',
+          {
+            type: 'warning',
+            confirmButtonText: '切换',
+            cancelButtonText: '取消',
+          }
+        ).then(() => {
+          app.config.globalConfig.size = { width: 375, height: 630 }
+          app.config.globalConfig.layoutMode = mode
+        }).catch(() => {})
+      } else {
+        app.config.globalConfig.layoutMode = mode
+      }
+    },
+    link: {
+      free: [
+        {
+          type: 'number',
+          key: 'size.width',
+          label: '页面宽度',
+          disabled: true,
+        },
+        {
+          type: 'number',
+          key: 'size.height',
+          label: '页面高度',
+          tips: '根据设备分辨率的不同，部分设备可能会出现滚动条'
+        },
+      ],
+      grid: [],
+    }
+  },
   {
     type: 'radioGroup',
     key: 'topbarShow',

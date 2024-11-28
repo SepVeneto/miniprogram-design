@@ -61,15 +61,13 @@
                   style="position: absolute; right: 0;"
                 />
               </header>
-              <el-scrollbar
-                :style="editorStyle"
-                :min-size="375"
+              <ElScrollbar
+                :wrap-style="editorStyle"
               >
                 <router-view
                   :preview="isPreview"
-                  :style="backgroundStyle"
                 />
-              </el-scrollbar>
+              </ElScrollbar>
               <template
                 v-if="tabbar"
               >
@@ -113,6 +111,9 @@
                     删除
                   </el-button>
                 </div>
+                <div v-else>
+                  <ElButton @click="show = true">快速生成</ElButton>
+                </div>
               </div>
             </template>
             <el-scrollbar
@@ -125,6 +126,8 @@
         </aside>
       </main>
     </section>
+
+    <QuickDiy v-model="show" />
   </ElConfigProvider>
 </template>
 
@@ -132,7 +135,7 @@
 import widgetWrap from '@/layout/widgetWrap.vue'
 import VConfig from '@/layout/config.vue'
 import { tabbarPreview } from '@/layout/tabbar'
-import { computed, onMounted, ref } from 'vue'
+import { computed, CSSProperties, onMounted, ref } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
@@ -140,6 +143,7 @@ import type { Mode } from '@/layout/EditorOperate.vue'
 import EditorOperate from '@/layout/EditorOperate.vue'
 // @ts-expect-error: no def
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import QuickDiy from '@/components/QuickDiy/index.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -147,6 +151,7 @@ const app = useApp()
 const history = useHistory()
 const mainRef = ref()
 const mode = ref<Mode>('edit')
+const show = ref(false)
 
 const tabbar = computed(() => app.config.tabbars)
 const selected = computed(() => app.selected)
@@ -180,27 +185,12 @@ const globalStyle = computed(() => {
       return {}
   }
 })
-const editorStyle = computed(() => {
-  return {
-    height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
-  }
-})
-/**
- * @deprecated
- */
-const backgroundStyle = computed(() => {
-  const { type, image, color } = app.config.globalConfig.background || {}
-  switch (type) {
-    case 'image':
-      return {
-        backgroundImage: `url(${image})`,
-        backgroundSize: '100%',
-        backgroundRepeat: 'no-repeat',
-      }
-    case 'color':
-      return {
-        backgroundColor: color,
-      }
+const editorStyle = computed<CSSProperties>(() => {
+  if (globalConfig.value.layoutMode === 'grid') {
+    return {
+      height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
+      overflowX: 'hidden',
+    }
   }
   return {}
 })
@@ -225,10 +215,12 @@ function handleModeChange(isCustom: any) {
 function handleDelete() {
   const currentConfig = app.config.body[route.name!]
   const index = currentConfig.findIndex(item => item._uuid === selected.value._uuid)
+  // 删被嵌套的组件
   if (index === -1) {
     const list = currentConfig.find((item: any) => item.list && item.list.length > 0)?.list ?? null
     if (list) {
       const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid)
+      history.create(`删除-${selected.value._name}`)
       list.splice(tIndex, 1)
     }
     app.selected = {}
@@ -242,7 +234,7 @@ function handleSelect(data: any) {
   app.selected = data
 }
 function handleOutside({ target }: Event) {
-  if (target === mainRef.value) {
+  if (target === mainRef.value || ['draggable-box', 'vv-free-dom--scene'].includes((target as HTMLElement).className)) {
     app.selected = {}
   }
 }
@@ -274,13 +266,15 @@ function handleOutside({ target }: Event) {
   box-sizing: content-box;
   background-size: calc(375px + var(--padding-left-x) + var(--padding-right-x)) 100%;
   .mobile-content {
+    display: flex;
+    flex-direction: column;
     height: inherit;
     background: #f4f5f7;
     border-bottom-left-radius: 18px;
     border-bottom-right-radius: 18px;
-    overflow: hidden;
   }
   .header {
+    flex-shrink: 0;
     z-index: 1;
     display: flex;
     align-items: center;

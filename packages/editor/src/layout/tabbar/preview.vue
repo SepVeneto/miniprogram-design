@@ -132,6 +132,8 @@ function handleSelect(type: string) {
     position: relative;
     width: 100%;
     height: 100%;
+    border-end-end-radius: 10px;
+    border-bottom-left-radius: 10px;
     &:hover::before, &.is-active::before {
       position: absolute;
       content: '';

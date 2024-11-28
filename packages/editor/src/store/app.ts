@@ -7,6 +7,7 @@ import Editor from '@/layout/editor.vue'
 
 import mock from '@/mock'
 import { schema as schemaConfig } from '@/mock.schema'
+import type { WidgetNode } from '@/types/type'
 
 export interface Config{
   globalConfig: Record<string, any>
@@ -16,7 +17,7 @@ export interface Config{
 }
 
 export const useApp = defineStore('app', () => {
-  const widgetList = ref<any[]>([])
+  const widgetList = ref<{name: string, group: WidgetNode[]}[]>([])
   const config = ref<Config>({
     globalConfig: {},
     body: {},
@@ -195,6 +196,25 @@ export const useApp = defineStore('app', () => {
       activeUuids.value.pop()
     },
   }
+  function flatteBody() {
+    const res: Record<string, any> = {}
+    Object.entries(config.value.body).forEach(([name, list]) => {
+      res[name] = flatte(list)
+    })
+    function flatte(list: any[]) {
+      const res: any[] = []
+      list.forEach(item => {
+        if (item.list && item.list.length > 0) {
+          res.push(...flatte(item.list))
+          item.list = []
+        }
+        res.push(item)
+      })
+      return res
+    }
+
+    config.value.body = res
+  }
   return {
     activeUuids,
     active,
@@ -202,6 +222,7 @@ export const useApp = defineStore('app', () => {
     // updateConfig,
     setConfig,
     getConfig,
+    flatteBody,
     widgetList,
     // currentTab,
     // currentRoute,
