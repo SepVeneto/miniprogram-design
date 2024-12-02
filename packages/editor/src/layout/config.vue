@@ -54,7 +54,7 @@ const globalConfig = computed<any>({
     }
   },
 })
-watch(() => app.config.globalConfig.layoutMode, (val) => {
+watch(() => globalConfig.value.layoutMode, (val) => {
   if (val === 'free') {
     app.flatteBody()
   }
@@ -77,13 +77,13 @@ const globalSchema = computed(() => ([
             type: 'warning',
             confirmButtonText: '切换',
             cancelButtonText: '取消',
-          }
+          },
         ).then(() => {
-          app.config.globalConfig.size = { width: 375, height: 630 }
-          app.config.globalConfig.layoutMode = mode
+          globalConfig.value.size = { width: 375, height: 630 }
+          globalConfig.value.layoutMode = mode
         }).catch(() => {})
       } else {
-        app.config.globalConfig.layoutMode = mode
+        globalConfig.value.layoutMode = mode
       }
     },
     link: {
@@ -98,11 +98,11 @@ const globalSchema = computed(() => ([
           type: 'number',
           key: 'size.height',
           label: '页面高度',
-          tips: '根据设备分辨率的不同，部分设备可能会出现滚动条'
+          tips: '根据设备分辨率的不同，部分设备可能会出现滚动条',
         },
       ],
       grid: [],
-    }
+    },
   },
   {
     type: 'radioGroup',
