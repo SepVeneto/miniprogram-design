@@ -35,10 +35,13 @@ export default defineComponent({
     const app = useApp()
     const history = useHistory()
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
+    const config = computed(() => {
+      return app.config.pageConfig?.[route.name as string] || app.config.globalConfig
+    })
 
     provide('Editor', reactive({
       ...toRefs(props),
-      globalConfig: computed(() => app.config.globalConfig),
+      globalConfig: config,
 
       updateConfig,
     }))
@@ -169,7 +172,9 @@ export default defineComponent({
       }
     }
 
-    const layoutMode = computed(() => app.config.globalConfig.layoutMode || 'grid')
+    const layoutMode = computed(() => {
+      return config.value.layoutMode || 'grid'
+    })
 
     function onDrop(evt: DragEvent) {
       const { offsetX, offsetY } = evt
@@ -201,17 +206,16 @@ export default defineComponent({
     }, { flush: 'post' })
 
     function renderScene(nodes: () => VNode[]) {
-      console.log('height', app.config.globalConfig.size.height)
       return h(FreeScene, {
         ref: 'sceneRef',
         style: 'width: 375px; height: 100%;',
-        height: Number(app.config.globalConfig.size.height),
+        height: Number(config.value.size.height),
         'onUpdate:height': (val: number) => {
           console.log(val)
-          app.config.globalConfig.size.height = val
+          config.value.size.height = val
         },
-        width: Number(app.config.globalConfig.size.width),
-        'onUpdate:width': (val: number) => { app.config.globalConfig.size.width = val },
+        width: Number(config.value.size.width),
+        'onUpdate:width': (val: number) => { config.value.size.width = val },
         manualDiff: true,
         disabledBatch: true,
         keyboard: true,

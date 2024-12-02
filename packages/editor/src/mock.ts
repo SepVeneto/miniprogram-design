@@ -16,6 +16,18 @@ export default {
     topbarShow: 1,
     tabbarShow: 1,
   },
+  pageConfig: {
+    Home: {
+      layoutMode: 'grid',
+      topbarShow: 1,
+      tabbarShow: 1,
+    },
+    Personal: {
+      layoutMode: 'grid',
+      topbarShow: 1,
+      tabbarShow: 1,
+    },
+  },
   body: {
     Home: [
       {
