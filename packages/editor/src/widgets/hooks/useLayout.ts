@@ -50,6 +50,7 @@ export function useGrid(options: GridOptions) {
     return h('div', {
       class: 'swiper',
       ref: swiperRef,
+      style: options.preview ? '' : 'height: 100%;',
       'data-type': 'swiper',
     }, content)
   }
