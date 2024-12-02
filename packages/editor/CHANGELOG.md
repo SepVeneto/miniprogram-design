@@ -1,3 +1,12 @@
+# 0.17.0-beta.3 (2024-12-02)
+
+
+### Bug Fixes
+
+* pageConfig not work ([a06952f](https://github.com/SepVeneto/miniprogram-design/commit/a06952f533296c1d88a278ca384e343e43b33bc8))
+
+
+
 # 0.17.0-beta.2 (2024-11-28)
 
 
