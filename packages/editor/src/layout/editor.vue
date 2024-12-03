@@ -36,7 +36,8 @@ export default defineComponent({
     const history = useHistory()
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
     const config = computed(() => {
-      return app.config.pageConfig?.[route.name as string] || app.config.globalConfig
+      const res = { ...(app.config.pageConfig?.[route.name as string] || app.config.globalConfig) }
+      return res
     })
 
     provide('Editor', reactive({
@@ -184,7 +185,6 @@ export default defineComponent({
       state.currentElem.style.y = offsetY
       list.push(state.currentElem)
       data.value = list
-      // console.log(state.currentElem, evt)
     }
 
     const sceneRef = useTemplateRef<InstanceType<typeof FreeScene>>('sceneRef')
@@ -208,10 +208,10 @@ export default defineComponent({
     function renderScene(nodes: () => VNode[]) {
       return h(FreeScene, {
         ref: 'sceneRef',
+        key: route.name,
         style: 'width: 375px; height: 100%;',
         height: Number(config.value.size.height),
         'onUpdate:height': (val: number) => {
-          console.log(val)
           config.value.size.height = val
         },
         width: Number(config.value.size.width),

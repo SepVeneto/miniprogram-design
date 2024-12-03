@@ -81,7 +81,7 @@ const globalSchema = computed(() => ([
         ).then(() => {
           globalConfig.value.size = { width: 375, height: 630 }
           globalConfig.value.layoutMode = mode
-        }).catch(() => {})
+        }).catch((err) => { console.error(err) })
       } else {
         globalConfig.value.layoutMode = mode
       }

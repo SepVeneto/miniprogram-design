@@ -8,6 +8,7 @@ import Editor from '@/layout/editor.vue'
 import mock from '@/mock'
 import { schema as schemaConfig } from '@/mock.schema'
 import type { WidgetNode } from '@/types/type'
+import { useRoute } from 'vue-router'
 
 export interface Config{
   globalConfig: Record<string, any>
@@ -196,10 +197,19 @@ export const useApp = defineStore('app', () => {
       activeUuids.value.pop()
     },
   }
+  const route = useRoute()
   function flatteBody() {
+    if (!route.name) return
+
     const res: Record<string, any> = {}
     Object.entries(config.value.body).forEach(([name, list]) => {
-      res[name] = flatte(list)
+      const hasPageConfig = !!config.value.pageConfig?.[route.name as string]
+      // 只有当前路由启用页面级配置时，才需要尝试扁平化
+      if (hasPageConfig && name === route.name) {
+        res[name] = flatte(list)
+      } else {
+        res[name] = list
+      }
     })
     function flatte(list: any[]) {
       const res: any[] = []
