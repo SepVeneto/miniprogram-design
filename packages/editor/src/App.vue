@@ -61,9 +61,7 @@
                   style="position: absolute; right: 0;"
                 />
               </header>
-              <ElScrollbar
-                :wrap-style="editorStyle"
-              >
+              <ElScrollbar>
                 <router-view
                   :preview="isPreview"
                 />
@@ -112,7 +110,9 @@
                   </el-button>
                 </div>
                 <div v-else>
-                  <ElButton @click="show = true">快速生成</ElButton>
+                  <ElButton @click="show = true">
+                    快速生成
+                  </ElButton>
                 </div>
               </div>
             </template>
@@ -135,7 +135,7 @@
 import widgetWrap from '@/layout/widgetWrap.vue'
 import VConfig from '@/layout/config.vue'
 import { tabbarPreview } from '@/layout/tabbar'
-import { computed, CSSProperties, onMounted, ref } from 'vue'
+import { CSSProperties, computed, onMounted, ref } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
@@ -184,15 +184,6 @@ const globalStyle = computed(() => {
     default:
       return {}
   }
-})
-const editorStyle = computed<CSSProperties>(() => {
-  if (globalConfig.value.layoutMode === 'grid') {
-    return {
-      height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
-      overflowX: 'hidden',
-    }
-  }
-  return {}
 })
 
 onMounted(() => {
