@@ -1,3 +1,14 @@
+# 0.17.0-beta.5 (2024-12-03)
+
+
+### Bug Fixes
+
+* **editor:** editor height ([4bf13f3](https://github.com/SepVeneto/miniprogram-design/commit/4bf13f36a2d6a435d6643cef1a83e23bfd7df576))
+* **editor:** layout free mode ([3a5bf56](https://github.com/SepVeneto/miniprogram-design/commit/3a5bf5675db22bf9f89b285b54fd1a80d261957a))
+* **editor:** swiper edit mode ([2a5f866](https://github.com/SepVeneto/miniprogram-design/commit/2a5f866dcf8fc82372b2fb93ec4077592bad7999))
+
+
+
 # 0.17.0-beta.4 (2024-12-02)
 
 
