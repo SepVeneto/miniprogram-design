@@ -15,6 +15,7 @@
       v-model="globalConfig"
       :schema="globalSchema"
       :remote-url="app.remoteUrl"
+      disabled-when-without
     />
   </section>
 </template>

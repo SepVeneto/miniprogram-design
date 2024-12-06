@@ -90,6 +90,7 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    disabledWhenWithout: Boolean,
   },
   emits: ['update:modelValue'],
   setup(prop, { emit }) {
@@ -363,7 +364,7 @@ export default defineComponent({
       // 就认为是不支持的配置，会被禁用掉
       const disabled = isBoxWidget(schema)
         ? false
-        : !isKeyExist(schema.key, this.modelValue)
+        : (this.disabledWhenWithout && !isKeyExist(schema.key, this.modelValue))
       if (node && node.props) {
         node.props.disabled ||= disabled
       }
