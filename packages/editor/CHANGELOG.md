@@ -1,3 +1,12 @@
+# 0.17.0-beta.6 (2024-12-06)
+
+
+### Features
+
+* **editor:** field disabled only check globalconfig ([b6f5d01](https://github.com/SepVeneto/miniprogram-design/commit/b6f5d0175d925e35eac935b8c698a54a5586b0ba))
+
+
+
 # 0.17.0-beta.5 (2024-12-03)
 
 
