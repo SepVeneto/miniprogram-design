@@ -15,7 +15,6 @@ export function useZIndex(
   nodes: Ref<WidgetNode[]>,
   callbacks: Callbacks,
 ) {
-
   const selectedNode = ref<LikeWidgetNode>()
 
   function handleContextMenu(evt: MouseEvent) {
@@ -43,36 +42,51 @@ export function useZIndex(
         {
           label: '下一层',
           onClick: () => {
-            const nodes = getCollisionNodes()
-            const currentMax = getMaxIndex(nodes)
-            current.style.zIndex = Math.min(currentMax - 1, 0)
+            if (!selectedNode.value) return
+
+            const list = [...nodes.value]
+            const index = list.findIndex(node => node._uuid === selectedNode.value!._uuid)
+            list.splice(index, 1)
+            const nextLayer = Math.max(0, index - 1)
+            list.splice(nextLayer, 0, selectedNode.value as WidgetNode)
+            nodes.value = list
           },
         },
         {
           label: '上一层',
           onClick: () => {
-            const nodes = getCollisionNodes()
-            const currentMax = getMaxIndex(nodes)
-            current.style.zIndex = currentMax + 1
+            if (!selectedNode.value) return
+
+            const list = [...nodes.value]
+            const index = list.findIndex(node => node._uuid === selectedNode.value!._uuid)
+            list.splice(index, 1)
+            const previous = Math.min(list.length, index + 1)
+            list.splice(previous, 0, selectedNode.value as WidgetNode)
+            nodes.value = list
           },
         },
         {
           label: '置于顶层',
           onClick: () => {
-            current.style.zIndex = getMaxIndex(nodes.value) + 1
+            if (!selectedNode.value) return
+
+            const list = [...nodes.value]
+            const index = list.findIndex(node => node._uuid === selectedNode.value!._uuid)
+            list.splice(index, 1)
+            list.splice(list.length, 0, selectedNode.value as WidgetNode)
+            nodes.value = list
           },
         },
         {
           label: '置于底层',
           onClick: () => {
-            nodes.value.forEach(node => {
-              if (!node.style.zIndex) {
-                node.style.zIndex = 1
-              } else {
-                (node.style.zIndex as number) += 1
-              }
-            })
-            current.style.zIndex = 0
+            if (!selectedNode.value) return
+
+            const list = [...nodes.value]
+            const index = list.findIndex(node => node._uuid === selectedNode.value!._uuid)
+            list.splice(index, 1)
+            list.splice(0, 0, selectedNode.value as WidgetNode)
+            nodes.value = list
           },
         },
       ],
@@ -94,14 +108,6 @@ export function useZIndex(
     node?.removeEventListener('contextmenu', handleContextMenu)
   }
 
-  function getMaxIndex(nodes: any[]) {
-    return Math.max(...nodes.map(item => Number(item.style.zIndex) || 0))
-  }
-
-  function getCollisionNodes() {
-    return nodes.value.filter(node => collisionDetection(node, selectedNode.value))
-  }
-
   function select(node: LikeWidgetNode) {
     selectedNode.value = node
   }
@@ -121,18 +127,6 @@ function isNode(elm: HTMLElement | null) {
   }
 
   return isNode(elm.parentElement)
-}
-
-function collisionDetection(node1: any, node2: any) {
-  const { x: x1, y: y1, width: w1, height: h1 } = node1.style
-  const { x: x2, y: y2, width: w2, height: h2 } = node2.style
-
-  if (node1._uuid === node2._uuid) return false
-  else if (x1 + w1 <= x2) return false
-  else if (y1 + h1 <= y2) return false
-  else if (x1 >= x2 + w2) return false
-  else if (y1 >= y2 + h2) return false
-  else return true
 }
 
 function normalize(widgets: WidgetNode[]) {
