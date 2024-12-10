@@ -48,6 +48,7 @@ import { useConfig } from '@/hooks'
 
 const show = defineModel({ type: Boolean })
 const formData = ref({
+  size: {},
   widgets: [],
 })
 
@@ -69,6 +70,7 @@ function handleSubmit() {
   config.value = {
     ...config.value,
     layoutMode: 'free',
+    size: formData.value.size,
   }
   app.config.body[route.name as string] = formData.value.widgets
   show.value = false

@@ -34,12 +34,13 @@
 <script lang="ts" setup>
 import { FreeDom, FreeScene } from '@sepveneto/free-dom'
 import type { CSSProperties, PropType } from 'vue'
-import { nextTick, ref, toRef } from 'vue'
+import { nextTick, ref, shallowRef, toRef } from 'vue'
 import { useZIndex } from '@/layout/useZIndex'
 import { useWidgets } from './hooks'
 
+type FormData = { design: string, widgets: any[], size: { width: number, height: number } }
 const formData = defineModel({
-  type: Object as PropType<{ design: string, widgets: any[] }>,
+  type: Object as PropType<FormData>,
   default: () => ({ widgets: [] }),
 })
 const sceneStyle = ref<CSSProperties>({})
@@ -59,9 +60,16 @@ const zIndex = useZIndex(
 )
 
 const widgets = useWidgets(toRef(() => formData.value.widgets))
+const size = shallowRef<FormData['size']>()
 
 function onLoad(evt: Event) {
-  sceneStyle.value.height = (evt.target as HTMLImageElement).offsetHeight + 'px'
+  const img = evt.target as HTMLImageElement
+  sceneStyle.value.height = img.offsetHeight + 'px'
+  size.value = {
+    width: img.offsetWidth,
+    height: img.offsetHeight,
+  }
+  formData.value.size = size.value
   imgLoad.value = true
   nextTick().then(() => {
     zIndex.init()
