@@ -46,7 +46,7 @@
   "dependencies": {
     "@imengyu/vue3-context-menu": "^1.4.3",
     "@sepveneto/basic-comp": "^0.8.6",
-    "@sepveneto/free-dom": "^0.14.0",
+    "@sepveneto/free-dom": "^0.14.1",
     "@sepveneto/mpd-hooks": "workspace:*",
     "@types/sortablejs": "^1.15.8",
     "@vueuse/integrations": "^10.11.1",
