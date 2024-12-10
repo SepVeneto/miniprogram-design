@@ -161,7 +161,7 @@ export default defineComponent({
       const { type, label, key, originType, ...args } = schema
       return h(ElInput, {
         'model-value': getData(prop.modelValue, key),
-        'onUpdate:modelValue': (val: string) => updateData(key, val),
+        onChange: (val: string) => updateData(key, val),
         type: originType,
         ...args,
       })
@@ -172,7 +172,7 @@ export default defineComponent({
       return h(ElInputNumber, {
         modelValue: getData(prop.modelValue, key),
         valueOnClear: null,
-        'onUpdate:modelValue': (val) => updateData(key, Number(val)),
+        onChange: (val) => updateData(key, Number(val)),
         ...args,
       })
     }

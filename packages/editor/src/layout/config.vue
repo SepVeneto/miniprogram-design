@@ -1,23 +1,25 @@
 <template>
-  <tabbar-config
-    v-if="selected._schema === 'tabbar'"
-    v-model="selected"
-  />
-  <schema-render
-    v-else-if="selected._schema"
-    :key="selected._uuid"
-    v-model="selected"
-    :schema="app.schema[selected._schema]"
-    :remote-url="app.remoteUrl"
-  />
-  <section v-else>
-    <schema-render
-      v-model="globalConfig"
-      :schema="globalSchema"
-      :remote-url="app.remoteUrl"
-      disabled-when-without
+  <keep-alive>
+    <tabbar-config
+      v-if="selected._schema === 'tabbar'"
+      v-model="selected"
     />
-  </section>
+    <schema-render
+      v-else-if="selected._schema"
+      :key="selected._uuid"
+      v-model="selected"
+      :schema="app.schema[selected._schema]"
+      :remote-url="app.remoteUrl"
+    />
+    <section v-else>
+      <schema-render
+        v-model="globalConfig"
+        :schema="globalSchema"
+        :remote-url="app.remoteUrl"
+        disabled-when-without
+      />
+    </section>
+  </keep-alive>
 </template>
 
 <script lang="ts" setup>
