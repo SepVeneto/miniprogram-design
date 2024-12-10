@@ -1,3 +1,12 @@
+# 0.17.0-beta.7 (2024-12-10)
+
+
+### Features
+
+* **editor:** 深度管理优化 ([f5a3fa6](https://github.com/SepVeneto/miniprogram-design/commit/f5a3fa682d234585de44aeb73ffe3a7f2b955a01))
+
+
+
 # 0.17.0-beta.6 (2024-12-06)
 
 
