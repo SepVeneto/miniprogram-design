@@ -1,3 +1,18 @@
+# 0.17.0-beta.8 (2024-12-10)
+
+
+### Bug Fixes
+
+* **editor:** layoutmode sync update ([a983dca](https://github.com/SepVeneto/miniprogram-design/commit/a983dcaff5837a05329324ce90bbe1f4a4d7c8ec))
+* **editor:** quick diy exception ([fe76f2a](https://github.com/SepVeneto/miniprogram-design/commit/fe76f2aeffbf6fe950c5746af65ca4d15f6a5f50))
+
+
+### Performance Improvements
+
+* **editor:** 优化频繁操作的性能 ([653e73d](https://github.com/SepVeneto/miniprogram-design/commit/653e73d36404b3344bdc697b8c5557d7ad641f49))
+
+
+
 # 0.17.0-beta.7 (2024-12-10)
 
 
