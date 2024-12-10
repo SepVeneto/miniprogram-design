@@ -13,20 +13,38 @@
     />
 
     <template #footer>
-      <BcButton @click="show = false">取消</BcButton>
-      <BcButton v-if="step > 0" @click="step -= 1">上一步</BcButton>
-      <BcButton v-if="step < 1" @click="step += 1">下一步</BcButton>
-      <BcButton v-if="step === 1" @click="handleSubmit">确认</BcButton>
+      <BcButton @click="show = false">
+        取消
+      </BcButton>
+      <BcButton
+        v-if="step > 0"
+        @click="step -= 1"
+      >
+        上一步
+      </BcButton>
+      <BcButton
+        v-if="step < 1"
+        @click="step += 1"
+      >
+        下一步
+      </BcButton>
+      <BcButton
+        v-if="step === 1"
+        @click="handleSubmit"
+      >
+        确认
+      </BcButton>
     </template>
   </BcDialog>
 </template>
 
 <script lang="ts" setup>
-import { computed, h, ref } from 'vue';
-import ImgUpload from './ImgUpload.vue';
-import FunctionModule from './FunctionModule.vue';
-import { useApp } from '@/store';
-import { useRoute } from 'vue-router';
+import { computed, h, ref } from 'vue'
+import ImgUpload from './ImgUpload.vue'
+import FunctionModule from './FunctionModule.vue'
+import { useApp } from '@/store'
+import { useRoute } from 'vue-router'
+import { useConfig } from '@/hooks'
 
 const show = defineModel({ type: Boolean })
 const formData = ref({
@@ -46,9 +64,13 @@ const activeComp = computed(() => {
 })
 const app = useApp()
 const route = useRoute()
+const config = useConfig()
 function handleSubmit() {
-  app.config.globalConfig.layoutMode = 'free'
-  app.config.body[route.name] = formData.value.widgets
+  config.value = {
+    ...config.value,
+    layoutMode: 'free',
+  }
+  app.config.body[route.name as string] = formData.value.widgets
   show.value = false
 }
 </script>

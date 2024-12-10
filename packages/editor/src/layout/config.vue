@@ -13,7 +13,7 @@
     />
     <section v-else>
       <schema-render
-        v-model="globalConfig"
+        v-model="config"
         :schema="globalSchema"
         :remote-url="app.remoteUrl"
         disabled-when-without
@@ -27,10 +27,9 @@ import schemaRender from '@sepveneto/mpd-schema'
 import { tabbarConfig } from '@/layout/tabbar'
 import { useApp, useHistory } from '@/store'
 import { computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
+import { useConfig } from '@/hooks'
 
-const route = useRoute()
 const app = useApp()
 const history = useHistory()
 const selected = computed<any>({
@@ -41,23 +40,8 @@ const selected = computed<any>({
     app.selected = val
   },
 })
-const globalConfig = computed<any>({
-  get() {
-    if (!route.name || !app.config.pageConfig?.[route.name as string]) {
-      return app.config.globalConfig
-    } else {
-      return app.config.pageConfig[route.name as string]
-    }
-  },
-  set(val) {
-    if (!route.name || !app.config.pageConfig?.[route.name as string]) {
-      app.config.globalConfig = val
-    } else {
-      app.config.pageConfig[route.name as string] = val
-    }
-  },
-})
-watch(() => globalConfig.value.layoutMode, (val) => {
+const config = useConfig()
+watch(() => config.value.layoutMode, (val) => {
   if (val === 'free') {
     app.flatteBody()
   }
@@ -82,11 +66,11 @@ const globalSchema = computed(() => ([
             cancelButtonText: '取消',
           },
         ).then(() => {
-          globalConfig.value.size = { width: 375, height: 630 }
-          globalConfig.value.layoutMode = mode
+          config.value.size = { width: 375, height: 630 }
+          config.value.layoutMode = mode
         }).catch((err) => { console.error(err) })
       } else {
-        globalConfig.value.layoutMode = mode
+        config.value.layoutMode = mode
       }
     },
     link: {

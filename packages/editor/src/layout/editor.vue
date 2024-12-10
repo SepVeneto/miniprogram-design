@@ -23,6 +23,7 @@ import VueDraggable from 'vuedraggable'
 import CanvasView from '@/widgets/canvas.view.vue'
 import { FreeDom, FreeScene } from '@sepveneto/free-dom'
 import { useZIndex } from './useZIndex'
+import { useConfig } from '@/hooks'
 
 export default defineComponent({
   props: {
@@ -35,10 +36,7 @@ export default defineComponent({
     const app = useApp()
     const history = useHistory()
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
-    const config = computed(() => {
-      const res = { ...(app.config.pageConfig?.[route.name as string] || app.config.globalConfig) }
-      return res
-    })
+    const config = useConfig()
 
     provide('Editor', reactive({
       ...toRefs(props),
@@ -110,10 +108,10 @@ export default defineComponent({
             y: item.style.y,
             w: item.style.width,
             h: item.style.height,
-            'onUpdate:x': (val) => item.style.x = val,
-            'onUpdate:y': (val) => item.style.y = val,
-            'onUpdate:w': (val) => item.style.width = val,
-            'onUpdate:h': (val) => item.style.height = val,
+            'onUpdate:x': (val) => { item.style.x = val },
+            'onUpdate:y': (val) => { item.style.y = val },
+            'onUpdate:w': (val) => { item.style.width = val },
+            'onUpdate:h': (val) => { item.style.height = val },
           }, () => operate)
           : operate
     }

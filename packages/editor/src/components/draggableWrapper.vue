@@ -4,7 +4,8 @@ import { Hide, Rank as IconRank } from '@element-plus/icons-vue'
 import { normalizeStyle } from '@/utils'
 import { ElIcon } from 'element-plus'
 import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
-import { useApp, useState } from '@/store'
+import { useState } from '@/store'
+import { useConfig } from '@/hooks'
 
 export default defineComponent({
   props: {
@@ -28,8 +29,8 @@ export default defineComponent({
     canDelete: Boolean,
   },
   setup(props) {
-    const app = useApp()
-    const layoutMode = computed(() => app.config.globalConfig.layoutMode)
+    const config = useConfig()
+    const layoutMode = computed(() => config.value.layoutMode)
     const state = useState()
     const isActive = computed(() => {
       return props.active || state.dragging
