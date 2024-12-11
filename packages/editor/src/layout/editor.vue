@@ -118,9 +118,9 @@ export default defineComponent({
     function renderPreview(item: any) {
       switch (item._view) {
         case 'swiper':
-          return h(ContainerView, { config: item, type: 'swiper', style: normalizeStyle(item.style) })
+          return h(ContainerView, { config: item, type: 'swiper', style: normalizeStyle(item.style, layoutMode.value) })
         case 'container':
-          return h(ContainerView, { config: item, style: normalizeStyle(item.style) })
+          return h(ContainerView, { config: item, style: normalizeStyle(item.style, layoutMode.value) })
         default:
           return genRender(item, true)
       }
@@ -131,7 +131,7 @@ export default defineComponent({
           config: item,
           preview: isPreview,
         }
-        return h(CanvasView, isPreview ? { ...options, style: normalizeStyle(item.style) } : options)
+        return h(CanvasView, isPreview ? { ...options, style: normalizeStyle(item.style, layoutMode.value) } : options)
       } else {
         const options = {
           type: item._view,
@@ -139,13 +139,7 @@ export default defineComponent({
           preview: isPreview,
           'onUpdate:config': updateConfig,
         }
-        const style = normalizeStyle(item.style)
-        if (layoutMode.value === 'free') {
-          style.transform = `translate(${item.style.x}px, ${item.style.y}px)`
-          style.position = 'absolute'
-          style.top = '0px'
-          style.left = '0px'
-        }
+        const style = normalizeStyle(item.style, layoutMode.value)
         return ViewRender.value
           ? h(ViewRender.value, isPreview ? { ...options, style } : options)
           : h('div', errorLoading.value ? '加载失败!' : '加载中...')
@@ -183,6 +177,9 @@ export default defineComponent({
       state.currentElem.style.y = offsetY
       list.push(state.currentElem)
       data.value = list
+      if (config.value.layoutMode === 'free') {
+        app.flatteBody()
+      }
     }
 
     const sceneRef = useTemplateRef<InstanceType<typeof FreeScene>>('sceneRef')
