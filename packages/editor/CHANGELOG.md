@@ -1,3 +1,13 @@
+# 0.17.0-beta.10 (2024-12-11)
+
+
+### Features
+
+* **editor:** merge global config ([b163399](https://github.com/SepVeneto/miniprogram-design/commit/b1633993fe955e5f74074ed619c1ba1645deadb2))
+* **editor:** qiuck diy control ([ec0bd20](https://github.com/SepVeneto/miniprogram-design/commit/ec0bd2075b528f3c661f26796e64dd39dec0358b))
+
+
+
 # 0.17.0-beta.9 (2024-12-11)
 
 
