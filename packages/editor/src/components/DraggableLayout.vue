@@ -2,6 +2,7 @@
   <FreeDom
     handle=".mpd-card__header"
     disabled-resize
+    :mask="false"
     class="draggable-layout"
     style="min-width: 100px; width: auto !important; height: auto !important;"
   >
