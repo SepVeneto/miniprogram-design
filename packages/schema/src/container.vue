@@ -5,7 +5,6 @@ import OssUpload from './components/ossUpload.vue'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import SizeBox from './components/SizeBox.vue'
-import { isKeyExist } from './utils'
 import {
   ElCheckbox,
   ElColorPicker,
@@ -158,7 +157,7 @@ export default defineComponent({
     }
     function renderInput(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, originType, ...args } = schema
+      const { type, label, key, originType, onChange, ...args } = schema
       return h(ElInput, {
         'model-value': getData(prop.modelValue, key),
         onChange: (val: string) => updateData(key, val),
@@ -168,7 +167,7 @@ export default defineComponent({
     }
     function renderNumber(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, unit, ...args } = schema
+      const { type, label, key, unit, onChange, ...args } = schema
       return h(ElInputNumber, {
         modelValue: getData(prop.modelValue, key),
         valueOnClear: null,
@@ -358,18 +357,6 @@ export default defineComponent({
         default:
           node = this.renderCustom(schema as WidgetOther)
           // node = <div>暂不支持</div>;
-      }
-
-      // 除了盒模型，其它的配置如果初始数据中没有对应的字段
-      // 就认为是不支持的配置，会被禁用掉
-      const disabled = isBoxWidget(schema)
-        ? false
-        : (this.disabledWhenWithout && !isKeyExist(schema.key, this.modelValue))
-      if (node && node.props) {
-        node.props.disabled ||= disabled
-      }
-      function isBoxWidget(schema: ISchema): schema is WidgetBox {
-        return schema.type === 'box'
       }
 
       const _schema = schema as WidgetOther
