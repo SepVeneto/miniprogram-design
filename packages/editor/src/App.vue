@@ -110,7 +110,10 @@
                   </el-button>
                 </div>
                 <div v-else>
-                  <ElButton @click="show = true">
+                  <ElButton
+                    :disabled="qiuckDiyDisabled"
+                    @click="show = true"
+                  >
                     快速生成
                   </ElButton>
                 </div>
@@ -135,7 +138,7 @@
 import widgetWrap from '@/layout/widgetWrap.vue'
 import VConfig from '@/layout/config.vue'
 import { tabbarPreview } from '@/layout/tabbar'
-import { CSSProperties, computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useApp, useHistory } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
@@ -160,11 +163,16 @@ const isPreview = computed(() => mode.value === 'preview')
 // const needBack = computed(() => route.)
 
 const globalConfig = computed(() => {
+  console.log(route.name)
   if (!route.name || !app.config.pageConfig?.[route.name as string]) {
     return app.config.globalConfig
   } else {
     return app.config.pageConfig[route.name as string]
   }
+})
+const qiuckDiyDisabled = computed(() => {
+  const res = app.schema.globalConfig?.find((item: any) => item.key === 'layoutMode')
+  return res?.disabled
 })
 const showTopbar = computed(() => globalConfig.value.topbarShow)
 const showTabbar = computed(() => globalConfig.value.tabbarShow)
