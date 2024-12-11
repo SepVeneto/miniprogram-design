@@ -157,10 +157,12 @@ export default defineComponent({
     }
     function renderInput(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, label, key, originType, onChange, ...args } = schema
+      const { type, label, key, originType, onInput, ...args } = schema
       return h(ElInput, {
         'model-value': getData(prop.modelValue, key),
-        onChange: (val: string) => updateData(key, val),
+        onInput: (val: string) => {
+          updateData(key, val)
+        },
         type: originType,
         ...args,
       })
