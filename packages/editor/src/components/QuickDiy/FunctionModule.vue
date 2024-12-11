@@ -1,7 +1,7 @@
 <template>
   <div class="design-wrap">
     <img
-      style="width: 100%; z-index: 0;"
+      style="width: 375px; z-index: 0;"
       :src="formData.design"
       @load="onLoad"
     >
@@ -43,7 +43,7 @@ const formData = defineModel({
   type: Object as PropType<FormData>,
   default: () => ({ widgets: [] }),
 })
-const sceneStyle = ref<CSSProperties>({})
+const sceneStyle = ref<CSSProperties>({ width: '375px' })
 const sceneRef = ref()
 
 const imgLoad = ref(false)
@@ -81,9 +81,8 @@ function onLoad(evt: Event) {
 .design-wrap {
   position: relative;
   overflow: auto;
-  width: 375px;
+  text-align: center;
   height: 667px;
-  border: 1px solid #999;
 }
 .scene-wrap {
   position: absolute;
@@ -91,8 +90,7 @@ function onLoad(evt: Event) {
   // height: 5249px;
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
