@@ -1,3 +1,18 @@
+# 0.17.0-beta.11 (2024-12-11)
+
+
+### Bug Fixes
+
+* **editor:** input cannot edit ([ad4b3e8](https://github.com/SepVeneto/miniprogram-design/commit/ad4b3e89b0b2276705c413a5c7a30c07f8ba798f))
+* **editor:** remove default zindex ([d9a1854](https://github.com/SepVeneto/miniprogram-design/commit/d9a1854c8e43a8aa504646cc634479e587336ce4))
+
+
+### Features
+
+* **editor:** optimize quick diy style ([ba9dd94](https://github.com/SepVeneto/miniprogram-design/commit/ba9dd9433f1982d3aab068ba92c9ef079c31071a))
+
+
+
 # 0.17.0-beta.10 (2024-12-11)
 
 
