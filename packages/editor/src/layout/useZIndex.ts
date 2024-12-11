@@ -94,7 +94,6 @@ export function useZIndex(
   }
 
   function init() {
-    normalize(nodes.value)
     const node = unrefElement(elRef) as HTMLElement
     if (!node) {
       console.warn('找不到右键菜单的触发区域')
@@ -127,12 +126,4 @@ function isNode(elm: HTMLElement | null) {
   }
 
   return isNode(elm.parentElement)
-}
-
-function normalize(widgets: WidgetNode[]) {
-  widgets.forEach(widget => {
-    if (!widget.style.zIndex) {
-      widget.style.zIndex = 0
-    }
-  })
 }
