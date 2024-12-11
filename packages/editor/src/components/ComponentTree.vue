@@ -7,6 +7,8 @@
         label: '_name',
         children: 'list',
       }"
+      :current-node-key="app.selected._uuid"
+      highlight-current
       draggable
       node-key="_uuid"
       default-expand-all
@@ -58,6 +60,7 @@ const allowDrop = (draggingNode: any, dropNode: any, type: AllowDropType) => {
 }
 function handleNodeClick(data: any) {
   app.selected = data
-  console.log(data)
+  const target = document.body.querySelector(`[data-id=id-${data._uuid}]`)
+  target?.scrollIntoView()
 }
 </script>

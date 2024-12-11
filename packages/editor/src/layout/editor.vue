@@ -101,6 +101,7 @@ export default defineComponent({
         ? renderPreview(item)
         : layoutMode.value === 'free'
           ? h(FreeDom, {
+            'data-id': `id-${item._uuid}`,
             'data-type': 'node',
             active: selected.value._uuid === item._uuid,
             style: { zIndex: item.style.zIndex },
