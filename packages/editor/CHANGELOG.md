@@ -1,3 +1,19 @@
+# 0.17.0-beta.9 (2024-12-11)
+
+
+### Bug Fixes
+
+* **editor:** free layout not flatten ([de90ccf](https://github.com/SepVeneto/miniprogram-design/commit/de90ccfedecc619a4c0177345a27d410d4c0eb1a))
+* **editor:** opeate panel ([abc2c2b](https://github.com/SepVeneto/miniprogram-design/commit/abc2c2b3781e08bde781008377dcdf21864f1613))
+* **editor:** preview layout exception ([95804f1](https://github.com/SepVeneto/miniprogram-design/commit/95804f1e64189e2b903ade4e5abb1e85a8f75399))
+
+
+### Features
+
+* **editor:** 优化组件树选择 ([a5d319a](https://github.com/SepVeneto/miniprogram-design/commit/a5d319a5560c5a98e13dd9242ea7237603d805c2))
+
+
+
 # 0.17.0-beta.8 (2024-12-10)
 
 
