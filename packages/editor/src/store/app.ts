@@ -203,9 +203,7 @@ export const useApp = defineStore('app', () => {
 
     const res: Record<string, any> = {}
     Object.entries(config.value.body).forEach(([name, list]) => {
-      const hasPageConfig = !!config.value.pageConfig?.[route.name as string]
-      // 只有当前路由启用页面级配置时，才需要尝试扁平化
-      if (hasPageConfig && name === route.name) {
+      if (name === route.name) {
         res[name] = flatte(list)
       } else {
         res[name] = list
