@@ -42,11 +42,6 @@ const selected = computed<any>({
   },
 })
 const config = useConfig()
-watch(() => config.value.layoutMode, (val) => {
-  if (val === 'free') {
-    app.flatteBody()
-  }
-})
 // merge global config
 const globalSchema = computed(() => {
   const newList = [...(app.schema.globalConfig || [])]

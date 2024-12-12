@@ -14,6 +14,7 @@ import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 import type { PropType } from 'vue'
 import VueDraggable from 'vuedraggable'
+import { useConfig } from '@/hooks'
 
 export default defineComponent({
   props: {
@@ -99,7 +100,11 @@ export default defineComponent({
     //   //     }
     // })
 
+    const globalConfig = useConfig()
     function onPut(_1: any, _2: any, dom: HTMLElement) {
+      if (globalConfig.value.layoutMode === 'free') {
+        return false
+      }
       // @ts-expect-error: vuedraggable extends dom
       const { _inContainer, _view } = dom.__draggable_context.element
       if (['swiper'].includes(_view)) return false
@@ -123,6 +128,7 @@ export default defineComponent({
     }
 
     return {
+      globalConfig,
       itemList,
       configComp,
       previewComp,
@@ -141,7 +147,7 @@ export default defineComponent({
       ref: 'draggableRef',
       class: [
         'draggable-group',
-        { 'is-preview': this.previewComp },
+        { 'is-preview': this.previewComp || this.globalConfig.layoutMode === 'free' },
         this.type === 'swiper' && 'swiper-wrapper',
       ],
       // style: this.viewStyle,

@@ -178,9 +178,6 @@ export default defineComponent({
       state.currentElem.style.y = offsetY
       list.push(state.currentElem)
       data.value = list
-      if (config.value.layoutMode === 'free') {
-        app.flatteBody()
-      }
     }
 
     const sceneRef = useTemplateRef<InstanceType<typeof FreeScene>>('sceneRef')
