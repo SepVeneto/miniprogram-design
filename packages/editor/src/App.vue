@@ -89,8 +89,21 @@
           <ElCard>
             <template #header>
               <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span>{{ selected._name || '页面配置' }}</span>
-                <div v-if="selected._schema && !['tabbar'].includes(selected._schema)">
+                <span v-if="selected._name == null">页面配置</span>
+                <BcInput
+                  v-else
+                  v-model="selected._desc"
+                  style="margin-right: 20px;"
+                  placeholder=""
+                >
+                  <template #suffix>
+                    {{ selected._name }}
+                  </template>
+                </BcInput>
+                <div
+                  v-if="selected._schema && !['tabbar'].includes(selected._schema)"
+                  style="flex-shrink: 0;"
+                >
                   <el-switch
                     v-if="!['container', 'swiper'].includes(selected._view)"
                     v-model="selected._custom"

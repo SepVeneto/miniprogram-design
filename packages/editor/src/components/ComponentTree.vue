@@ -4,7 +4,7 @@
       :allow-drop="allowDrop"
       :data="data"
       :props="{
-        label: '_name',
+        label: (data) => data._desc || data._name,
         children: 'list',
       }"
       :current-node-key="app.selected._uuid"
