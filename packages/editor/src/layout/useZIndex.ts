@@ -1,10 +1,11 @@
 import type { LikeWidgetNode, WidgetNode } from '@/types/type'
+import type { MenuItem } from '@imengyu/vue3-context-menu'
 import ContextMenu from '@imengyu/vue3-context-menu'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import type { MaybeElementRef } from '@vueuse/core'
 import { unrefElement } from '@vueuse/core'
 import type { Ref } from 'vue'
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 
 type Callbacks = {
   onDelete: (selected: LikeWidgetNode) => void
@@ -16,6 +17,7 @@ export function useZIndex(
   callbacks: Callbacks,
 ) {
   const selectedNode = ref<LikeWidgetNode>()
+  const extraMenu = shallowRef<MenuItem[]>([])
 
   function handleContextMenu(evt: MouseEvent) {
     const current = selectedNode.value
@@ -89,6 +91,7 @@ export function useZIndex(
             nodes.value = list
           },
         },
+        ...extraMenu.value,
       ],
     })
   }
@@ -112,6 +115,7 @@ export function useZIndex(
   }
 
   return {
+    extraMenu,
     select,
     init,
     stop,
