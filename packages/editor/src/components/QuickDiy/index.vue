@@ -1,6 +1,7 @@
 <template>
   <BcDialog
     v-model="show"
+    destroy-on-close
   >
     <ElSteps :active="step">
       <ElStep title="导入设计图" />
@@ -60,7 +61,7 @@ const activeComp = computed(() => {
     case 1:
       return FunctionModule
     default:
-      h('div', 'unknown step')
+      return h('div', 'unknown step')
   }
 })
 const app = useApp()

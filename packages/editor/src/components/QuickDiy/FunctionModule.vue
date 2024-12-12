@@ -10,6 +10,7 @@
       ref="sceneRef"
       class="scene-wrap"
       :style="sceneStyle"
+      manual-diff
       @batch-select="widgets.create"
       @mouseup="widgets.syncEvent"
     >
