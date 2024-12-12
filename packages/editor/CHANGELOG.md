@@ -1,3 +1,19 @@
+# 0.17.0-beta.12 (2024-12-12)
+
+
+### Bug Fixes
+
+* **editor:** quick diy old config ([8a5be9c](https://github.com/SepVeneto/miniprogram-design/commit/8a5be9c3ef44fb506dc33ed638653a5d4194cb05))
+* free mode clickoutside ([efaef5d](https://github.com/SepVeneto/miniprogram-design/commit/efaef5d91ac093a57c6e69113c0bf232971c44f8))
+
+
+### Features
+
+* **editor:** quick diff manual diff ([f60e00a](https://github.com/SepVeneto/miniprogram-design/commit/f60e00a2fd95345af9fd788af92ed0ec9f01007f))
+* widgets rename ([8a2cda3](https://github.com/SepVeneto/miniprogram-design/commit/8a2cda3052a35459de8493b75e437d03696d540a))
+
+
+
 # 0.17.0-beta.11 (2024-12-11)
 
 
