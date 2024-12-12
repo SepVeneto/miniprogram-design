@@ -26,7 +26,7 @@ import { Plus } from '@element-plus/icons-vue'
 import type { PropType } from 'vue'
 import { computed } from 'vue'
 import type { UploadRequestOptions } from 'element-plus'
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'change'])
 const props = defineProps({
   width: {
     type: String,
@@ -57,6 +57,7 @@ const imageUrl = computed({
   },
   set(val) {
     emit('update:modelValue', val)
+    emit('change', val)
   },
 })
 const uploadRequest: any = window.microApp?.getData()?.upload ?? noop

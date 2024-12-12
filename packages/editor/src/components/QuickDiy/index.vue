@@ -1,7 +1,7 @@
 <template>
   <BcDialog
     v-model="show"
-    destroy-on-close
+    @closed="step = 0"
   >
     <ElSteps :active="step">
       <ElStep title="导入设计图" />
