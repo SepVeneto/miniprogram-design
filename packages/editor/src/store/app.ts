@@ -18,6 +18,7 @@ export interface Config{
 }
 
 export const useApp = defineStore('app', () => {
+  const schemaType = ref<'widget' | 'page' | 'global'>('page')
   const widgetList = ref<{name: string, group: WidgetNode[]}[]>([])
   const config = ref<Config>({
     globalConfig: {},
@@ -224,6 +225,7 @@ export const useApp = defineStore('app', () => {
     config.value.body = res
   }
   return {
+    schemaType,
     activeUuids,
     active,
     toHome,

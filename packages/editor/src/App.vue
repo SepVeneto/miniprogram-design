@@ -86,59 +86,8 @@
           <EditorOperate v-model="mode" />
         </div>
         <aside style="background: #fff; width: 400px; max-height: 810px">
-          <ElCard>
-            <template #header>
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span v-if="selected._name == null">页面配置</span>
-                <BcInput
-                  v-else
-                  v-model="selected._desc"
-                  style="margin-right: 20px;"
-                  placeholder=""
-                >
-                  <template #suffix>
-                    {{ selected._name }}
-                  </template>
-                </BcInput>
-                <div
-                  v-if="selected._schema && !['tabbar'].includes(selected._schema)"
-                  style="flex-shrink: 0;"
-                >
-                  <el-switch
-                    v-if="!['container', 'swiper'].includes(selected._view)"
-                    v-model="selected._custom"
-                    style="--mpd-switch-on-color: var(--mpd-color-success); --mpd-switch-off-color: var(--mpd-color-primary)"
-                    inactive-text="固定模板"
-                    active-text="自定义"
-                    inline-prompt
-                    @change="handleModeChange"
-                  />
-                  <el-button
-                    type="primary"
-                    text
-                    :disabled="isPreview || !selected._schema"
-                    @click="handleDelete"
-                  >
-                    删除
-                  </el-button>
-                </div>
-                <div v-else>
-                  <ElButton
-                    :disabled="qiuckDiyDisabled"
-                    @click="show = true"
-                  >
-                    快速生成
-                  </ElButton>
-                </div>
-              </div>
-            </template>
-            <el-scrollbar
-              wrap-style="height: 700px;"
-              noresize
-            >
-              <VConfig />
-            </el-scrollbar>
-          </ElCard>
+          <SettingGlobal v-if="selected._name == null" />
+          <SettingWidget v-else />
         </aside>
       </main>
     </section>
@@ -149,10 +98,9 @@
 
 <script lang="ts" setup>
 import widgetWrap from '@/layout/widgetWrap.vue'
-import VConfig from '@/layout/config.vue'
 import { tabbarPreview } from '@/layout/tabbar'
 import { computed, onMounted, ref } from 'vue'
-import { useApp, useHistory } from '@/store'
+import { useApp } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
 import type { Mode } from '@/layout/EditorOperate.vue'
@@ -160,11 +108,13 @@ import EditorOperate from '@/layout/EditorOperate.vue'
 // @ts-expect-error: no def
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import QuickDiy from '@/components/QuickDiy/index.vue'
+import SettingGlobal from './layout/Setting.global.vue'
+import SettingWidget from './layout/Setting.widget.vue'
+import { useConfig } from './hooks'
 
 const route = useRoute()
 const router = useRouter()
 const app = useApp()
-const history = useHistory()
 const mainRef = ref()
 const mode = ref<Mode>('edit')
 const show = ref(false)
@@ -175,22 +125,12 @@ const title = computed(() => route.meta.title)
 const isPreview = computed(() => mode.value === 'preview')
 // const needBack = computed(() => route.)
 
-const globalConfig = computed(() => {
-  console.log(route.name)
-  if (!route.name || !app.config.pageConfig?.[route.name as string]) {
-    return app.config.globalConfig
-  } else {
-    return app.config.pageConfig[route.name as string]
-  }
-})
-const qiuckDiyDisabled = computed(() => {
-  const res = app.schema.globalConfig?.find((item: any) => item.key === 'layoutMode')
-  return res?.disabled
-})
-const showTopbar = computed(() => globalConfig.value.topbarShow)
-const showTabbar = computed(() => globalConfig.value.tabbarShow)
+const pageConfig = useConfig('page')
+
+const showTopbar = computed(() => pageConfig.value.topbarShow)
+const showTabbar = computed(() => pageConfig.value.tabbarShow)
 const globalStyle = computed(() => {
-  const config = globalConfig.value.background || {}
+  const config = pageConfig.value.background || {}
   switch (config.type) {
     case 'image':
       return {
@@ -213,35 +153,6 @@ onMounted(() => {
   })
 })
 
-function handleModeChange(isCustom: any) {
-  if (!isCustom) return
-
-  if ('template' in selected.value) {
-    if (typeof selected.value.template !== 'object') {
-      console.warn('[@sepveneto/mpd-editor] template is a reserved field!')
-    }
-  } else {
-    app.selected.template = { list: [] }
-  }
-}
-function handleDelete() {
-  const currentConfig = app.config.body[route.name!]
-  const index = currentConfig.findIndex(item => item._uuid === selected.value._uuid)
-  // 删被嵌套的组件
-  if (index === -1) {
-    const list = currentConfig.find((item: any) => item.list && item.list.length > 0)?.list ?? null
-    if (list) {
-      const tIndex = list.findIndex((item: any) => item._uuid === selected.value._uuid)
-      history.create(`删除-${selected.value._name}`)
-      list.splice(tIndex, 1)
-    }
-    app.selected = {}
-    return
-  }
-  currentConfig.splice(index, 1)
-  history.create(`删除-${selected.value._name}`)
-  app.selected = {}
-}
 function handleSelect(data: any) {
   app.selected = data
 }

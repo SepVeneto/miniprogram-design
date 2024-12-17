@@ -100,9 +100,9 @@ export default defineComponent({
     //   //     }
     // })
 
-    const globalConfig = useConfig()
+    const pageConfig = useConfig('page')
     function onPut(_1: any, _2: any, dom: HTMLElement) {
-      if (globalConfig.value.layoutMode === 'free') {
+      if (pageConfig.value.layoutMode === 'free') {
         return false
       }
       // @ts-expect-error: vuedraggable extends dom
@@ -128,7 +128,7 @@ export default defineComponent({
     }
 
     return {
-      globalConfig,
+      pageConfig,
       itemList,
       configComp,
       previewComp,
@@ -147,7 +147,7 @@ export default defineComponent({
       ref: 'draggableRef',
       class: [
         'draggable-group',
-        { 'is-preview': this.previewComp || this.globalConfig.layoutMode === 'free' },
+        { 'is-preview': this.previewComp || this.pageConfig.layoutMode === 'free' },
         this.type === 'swiper' && 'swiper-wrapper',
       ],
       // style: this.viewStyle,

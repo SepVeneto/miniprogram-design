@@ -14,7 +14,7 @@
     <section v-else>
       <schema-render
         v-model="config"
-        :schema="globalSchema"
+        :schema="type === 'page' ? pageSchema : globalSchema"
         :remote-url="app.remoteUrl"
         disabled-when-without
       />
@@ -30,6 +30,7 @@ import { computed, watch } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import { useConfig } from '@/hooks'
 import { merge } from 'lodash-es'
+import { useRoute } from 'vue-router'
 
 const app = useApp()
 const history = useHistory()
@@ -41,10 +42,13 @@ const selected = computed<any>({
     app.selected = val
   },
 })
+const type = computed(() => app.schemaType)
 const config = useConfig()
-// merge global config
-const globalSchema = computed(() => {
-  const newList = [...(app.schema.globalConfig || [])]
+
+const route = useRoute()
+// merge page config
+const pageSchema = computed(() => {
+  const newList = [...app.schema.$pageConfig?.[route.name as string] || []]
   const target = [
     {
       type: 'switch',
@@ -65,8 +69,12 @@ const globalSchema = computed(() => {
               cancelButtonText: '取消',
             },
           ).then(() => {
-            config.value.size = { width: 375, height: 630 }
-            config.value.layoutMode = mode
+            const _config = {
+              ...config.value,
+              size: { width: 375, height: 630 },
+              layoutMode: mode,
+            }
+            config.value = _config
           }).catch((err) => { console.error(err) })
         } else {
           config.value.layoutMode = mode
@@ -132,12 +140,16 @@ const globalSchema = computed(() => {
     const source = newList[sourceIndex]
     if (source) {
       newList.splice(sourceIndex, 1)
-      return merge(item, source)
+      const res = merge(item, source)
+      return res
     } else {
       return item
     }
   })
   return target.concat(newList)
+})
+const globalSchema = computed(() => {
+  return app.schema.globalConfig
 })
 watch(selected, (val, oldVal) => {
   val === oldVal && history.create(`编辑-${selected.value._name}`)

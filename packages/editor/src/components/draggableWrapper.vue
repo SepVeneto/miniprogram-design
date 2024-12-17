@@ -29,7 +29,7 @@ export default defineComponent({
     canDelete: Boolean,
   },
   setup(props) {
-    const config = useConfig()
+    const config = useConfig('page')
     const layoutMode = computed(() => config.value.layoutMode)
     const state = useState()
     const isActive = computed(() => {

@@ -36,7 +36,7 @@ export default defineComponent({
     const app = useApp()
     const history = useHistory()
     const { activeUuid, onEnter, onLeave, onDragEnd, onDragStart } = useHoverActive()
-    const config = useConfig()
+    const config = useConfig('page')
 
     provide('Editor', reactive({
       ...toRefs(props),

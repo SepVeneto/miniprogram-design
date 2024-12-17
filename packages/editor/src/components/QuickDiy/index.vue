@@ -66,7 +66,7 @@ const activeComp = computed(() => {
 })
 const app = useApp()
 const route = useRoute()
-const config = useConfig()
+const config = useConfig('page')
 function handleSubmit() {
   config.value = {
     ...config.value,
