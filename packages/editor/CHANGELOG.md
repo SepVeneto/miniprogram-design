@@ -1,3 +1,12 @@
+# 0.17.0-beta.14 (2024-12-17)
+
+
+### Features
+
+* **editor:** page config ([d2aadcf](https://github.com/SepVeneto/miniprogram-design/commit/d2aadcfa2497478913e7f926f7e0251e86c60989))
+
+
+
 # 0.17.0-beta.13 (2024-12-12)
 
 
