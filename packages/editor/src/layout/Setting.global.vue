@@ -29,10 +29,13 @@
     >
       <VConfig />
     </el-scrollbar>
+
+    <QuickDiy v-model="show" />
   </ElCard>
 </template>
 
 <script lang="ts" setup>
+import QuickDiy from '@/components/QuickDiy/index.vue'
 import { useApp } from '@/store'
 import { computed, ref } from 'vue'
 import VConfig from '@/layout/config.vue'

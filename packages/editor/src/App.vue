@@ -91,8 +91,6 @@
         </aside>
       </main>
     </section>
-
-    <QuickDiy v-model="show" />
   </ElConfigProvider>
 </template>
 
@@ -107,7 +105,6 @@ import type { Mode } from '@/layout/EditorOperate.vue'
 import EditorOperate from '@/layout/EditorOperate.vue'
 // @ts-expect-error: no def
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import QuickDiy from '@/components/QuickDiy/index.vue'
 import SettingGlobal from './layout/Setting.global.vue'
 import SettingWidget from './layout/Setting.widget.vue'
 import { useConfig } from './hooks'
@@ -117,7 +114,6 @@ const router = useRouter()
 const app = useApp()
 const mainRef = ref()
 const mode = ref<Mode>('edit')
-const show = ref(false)
 
 const tabbar = computed(() => app.config.tabbars)
 const selected = computed(() => app.selected)
