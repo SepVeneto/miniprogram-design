@@ -1,3 +1,12 @@
+## 0.17.1 (2024-12-24)
+
+
+### Bug Fixes
+
+* **editor:** quick diy show failed ([6a4708e](https://github.com/SepVeneto/miniprogram-design/commit/6a4708ebb13132326bc74b21b03b6ac067b9b275))
+
+
+
 # 0.17.0 (2024-12-19)
 
 
