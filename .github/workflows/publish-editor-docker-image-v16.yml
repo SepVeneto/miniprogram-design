@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - editor@0.17.*
+      - editor@0.16.*
 
 env:
   TAG_VERSION:
@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: 'v16'
 
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
