@@ -205,10 +205,10 @@ export default defineComponent({
         style: 'width: 375px; height: 100%;',
         height: Number(config.value.size.height),
         'onUpdate:height': (val: number) => {
-          config.value.size.height = val
+          config.value.size.height = Math.floor(val)
         },
         width: Number(config.value.size.width),
-        'onUpdate:width': (val: number) => { config.value.size.width = val },
+        'onUpdate:width': (val: number) => { config.value.size.width = Math.floor(val) },
         manualDiff: true,
         disabledBatch: true,
         keyboard: true,
