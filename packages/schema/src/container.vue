@@ -125,7 +125,7 @@ export default defineComponent({
         if (!obj[curr] && index !== path.length - 1) {
           obj[curr] = {}
         }
-        return obj[curr] || ''
+        return obj[curr] == null ? '' : obj[curr]
       }, data)
       return res
     }
@@ -170,6 +170,7 @@ export default defineComponent({
     function renderNumber(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, unit, onChange, ...args } = schema
+      console.log(getData(prop.modelValue, key), prop.modelValue, key)
       return h(ElInputNumber, {
         modelValue: getData(prop.modelValue, key),
         valueOnClear: null,

@@ -1,3 +1,13 @@
+const baseSchema = [
+  { type: 'box' },
+  {
+    type: 'checkbox',
+    label: '可见性',
+    key: 'isShow',
+    trueLabel: 1,
+    falseLabel: 0,
+  },
+]
 const cardSchema = [
   {
     type: 'number',
@@ -325,8 +335,39 @@ const image = [
     key: 'img',
   },
 ]
+const floatBtn = [
+  ...baseSchema,
+  {
+    type: 'checkbox',
+    label: '悬浮',
+    key: 'style.position',
+    trueValue: 'fixed',
+    falseValue: 'relative',
+  },
+  {
+    type: 'input',
+    label: '离顶部的位置',
+    key: 'style.top',
+  },
+  {
+    type: 'input',
+    label: '离底部的位置',
+    key: 'style.bottom',
+  },
+  {
+    type: 'input',
+    label: '离左侧的位置',
+    key: 'style.left',
+  },
+  {
+    type: 'input',
+    label: '离右侧的位置',
+    key: 'style.right',
+  },
+]
 
 export const schema = {
+  floatBtn,
   image,
   text,
   globalConfig,

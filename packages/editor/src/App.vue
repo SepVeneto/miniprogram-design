@@ -61,7 +61,7 @@
                   style="position: absolute; right: 0;"
                 />
               </header>
-              <ElScrollbar>
+              <ElScrollbar style="transform: translate(0, 0);">
                 <router-view
                   :preview="isPreview"
                 />

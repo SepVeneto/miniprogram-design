@@ -56,6 +56,20 @@ export const useApp = defineStore('app', () => {
             },
           },
           {
+            _name: '浮窗',
+            _view: 'floatBtn',
+            _schema: 'floatBtn',
+            _inContainer: 'outer',
+            isShow: 1,
+            style: {
+              width: 50,
+              height: 50,
+              position: 'fixed',
+              bottom: 0,
+              right: 0,
+            },
+          },
+          {
             _name: '说明',
             _view: 'menuItem',
             _schema: 'desc',

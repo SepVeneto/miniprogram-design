@@ -19,8 +19,8 @@
   </ElSelect>
   <ActiveNode
     v-model="selected.fontWeight"
-    true-label="bold"
-    false-label="normal"
+    true-value="bold"
+    false-value="normal"
   >
     <ElIcon>
       <IconBold />
