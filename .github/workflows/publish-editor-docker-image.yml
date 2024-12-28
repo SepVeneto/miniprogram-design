@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - editor@0.17.*
+      - editor@*
 
 env:
   TAG_VERSION:
