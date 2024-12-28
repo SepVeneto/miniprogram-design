@@ -183,6 +183,7 @@ const globalStyle = computed(() => {
 const editorStyle = computed(() => {
   return {
     height: `calc(100% ${showTopbar.value ? '- var(--header-height)' : ''} ${showTabbar.value ? '- var(--tabbar-height))' : ''}`,
+    transform: 'translate(0, 0)',
   }
 })
 /**

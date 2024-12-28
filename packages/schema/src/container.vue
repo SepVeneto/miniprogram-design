@@ -121,7 +121,7 @@ export default defineComponent({
         if (!obj[curr] && index !== path.length - 1) {
           obj[curr] = {}
         }
-        return obj[curr] || ''
+        return obj[curr] == null ? '' : obj[curr]
       }, data)
       return res
     }
