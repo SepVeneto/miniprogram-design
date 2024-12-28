@@ -1,9 +1,19 @@
-## 0.15.5 (2024-09-07)
+## 0.16.4 (2024-12-28)
+
+
+### Features
+
+* **editor:** support widgets style float ([5134100](https://github.com/SepVeneto/miniprogram-design/commit/5134100a19894c259ecce14930a2362c9070b4ce))
+
+
+
+## 0.16.3 (2024-09-12)
 
 
 ### Features
 
 * **editor:** 容器宽度计算及盒模型输入限制两位小数 ([27fdfb3](https://github.com/SepVeneto/miniprogram-design/commit/27fdfb3fc98c02d3adfdfbd104689999a94964be))
+* **editor:** update vue version ([615a61f](https://github.com/SepVeneto/miniprogram-design/commit/615a61fd4263662b709ea4e968367344469db02b))
 
 
 
