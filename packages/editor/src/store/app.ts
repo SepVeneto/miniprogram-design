@@ -48,6 +48,7 @@ export const useApp = defineStore('app', () => {
             _name: '菜单项',
             _view: 'menuItem',
             _schema: 'menuItem',
+            isShow: 1,
             title: '标题',
             style: {
               width: 375,
@@ -94,6 +95,7 @@ export const useApp = defineStore('app', () => {
             _name: '轮播',
             _view: 'swiper',
             _schema: 'swiper',
+            type: 'swiper',
             style: {},
             list: [],
           },
@@ -197,7 +199,6 @@ export const useApp = defineStore('app', () => {
   function toHome() {
     history.value = []
     const home = routes.value[0]
-    console.log(home)
     router.replace({ name: home.name })
   }
 

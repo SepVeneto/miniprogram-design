@@ -170,7 +170,6 @@ export default defineComponent({
     function renderNumber(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, unit, onChange, ...args } = schema
-      console.log(getData(prop.modelValue, key), prop.modelValue, key)
       return h(ElInputNumber, {
         modelValue: getData(prop.modelValue, key),
         valueOnClear: null,
