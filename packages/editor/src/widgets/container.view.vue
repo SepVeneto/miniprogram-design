@@ -183,6 +183,9 @@ export default defineComponent({
   height: 100%;
   align-content: flex-start;
   justify-content: space-between;
+  &.swiper-wrapper {
+    flex-wrap: nowrap;
+  }
   &::before {
     content: '拖拽至此区域';
     color: #ddd;

@@ -5,6 +5,7 @@ import type { HoverActiveReturn } from './useHoverActive'
 import Swiper from 'swiper'
 import 'swiper/css'
 import ContainerItem from '../container.item.vue'
+import { useApp } from '@/store'
 
 export type GridItem = Record<string, any>
 export type GridOptions = UnwrapNestedRefs<{
@@ -38,11 +39,21 @@ export function useGrid(options: GridOptions) {
   }, { immediate: true })
 
   onMounted(() => {
-    if (options.type === 'swiper' && swiperRef.value && options.preview) {
+    if (options.type === 'swiper' && swiperRef.value) {
       swiper.value = new Swiper(swiperRef.value, {})
       watch(() => options.list.length, () => {
         nextTick().then(() => swiper.value?.update())
       })
+    }
+  })
+
+  const app = useApp()
+  watch(() => app.selected, (selected) => {
+    if (swiper.value) {
+      // TODO: store element index in list
+      // TODO: updateActiveIndex trigger rerender
+      console.log(selected)
+      // swiper.value.updateActiveIndex()
     }
   })
 
