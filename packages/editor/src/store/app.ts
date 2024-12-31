@@ -199,7 +199,6 @@ export const useApp = defineStore('app', () => {
   function toHome() {
     history.value = []
     const home = routes.value[0]
-    console.log(home)
     router.replace({ name: home.name })
   }
 
