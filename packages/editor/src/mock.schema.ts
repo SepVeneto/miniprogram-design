@@ -378,6 +378,9 @@ export const schema = {
   reserve,
   container,
   menuItem,
+  swiper: [
+    { type: 'box' },
+  ],
   desc,
   link,
   entry,

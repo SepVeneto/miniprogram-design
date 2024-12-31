@@ -40,9 +40,11 @@ export function useGrid(options: GridOptions) {
 
   onMounted(() => {
     if (options.type === 'swiper' && swiperRef.value) {
-      swiper.value = new Swiper(swiperRef.value, {})
-      watch(() => options.list.length, () => {
-        nextTick().then(() => swiper.value?.update())
+      swiper.value = new Swiper(swiperRef.value, {
+        allowTouchMove: options.preview,
+      })
+      nextTick().then(() => {
+        swiper.value?.update()
       })
     }
   })
@@ -50,10 +52,8 @@ export function useGrid(options: GridOptions) {
   const app = useApp()
   watch(() => app.selected, (selected) => {
     if (swiper.value) {
-      // TODO: store element index in list
-      // TODO: updateActiveIndex trigger rerender
-      console.log(selected)
-      // swiper.value.updateActiveIndex()
+      const index = options.list.findIndex(item => item._uuid === selected._uuid)
+      swiper.value.slideTo(index)
     }
   })
 
