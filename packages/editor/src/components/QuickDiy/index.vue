@@ -4,8 +4,9 @@
     @closed="step = 0"
   >
     <ElSteps :active="step">
-      <ElStep title="导入设计图" />
-      <ElStep title="指定功能组件" />
+      <ElStep title="选择生成方式" />
+      <ElStep title="导入设计源" />
+      <ElStep title="详细配置" />
     </ElSteps>
 
     <component
@@ -43,6 +44,7 @@
 import { computed, h, ref } from 'vue'
 import ImgUpload from './ImgUpload.vue'
 import FunctionModule from './FunctionModule.vue'
+import GenMethod from './GenMethod.vue'
 import { useApp } from '@/store'
 import { useRoute } from 'vue-router'
 import { useConfig } from '@/hooks'
@@ -57,8 +59,10 @@ const step = ref(0)
 const activeComp = computed(() => {
   switch (step.value) {
     case 0:
-      return ImgUpload
+      return GenMethod
     case 1:
+      return ImgUpload
+    case 2:
       return FunctionModule
     default:
       return h('div', 'unknown step')
