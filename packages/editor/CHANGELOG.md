@@ -1,3 +1,27 @@
+## 0.17.2 (2025-01-03)
+
+
+### Bug Fixes
+
+* **editor:** 修正尺寸更新为整数值 ([b174756](https://github.com/SepVeneto/miniprogram-design/commit/b17475615aa41de2b0c9e3ea0910b04d1548232a))
+* **editor:** container swiper ([61c71d7](https://github.com/SepVeneto/miniprogram-design/commit/61c71d75b391b33093b277ba389c730919402e49))
+* **editor:** preview mode swiper ([8668a25](https://github.com/SepVeneto/miniprogram-design/commit/8668a25adf52ccc59423d549bfd1f0aa4e1fa1f9))
+* **editor:** preview mode swiper ([dfe7c2e](https://github.com/SepVeneto/miniprogram-design/commit/dfe7c2eb44fa285952c48d2c0263405bd5f76864))
+* **editor:** swiper container ([942e6ce](https://github.com/SepVeneto/miniprogram-design/commit/942e6ce70e5ecd2a347dd7ea4bc749e2d44880df))
+
+
+### Features
+
+* **editor:** 栅格布局支持组件float ([2b0d1bc](https://github.com/SepVeneto/miniprogram-design/commit/2b0d1bcc41c6cf17fb3d1eaaaa0a6dc9ad111b7b))
+
+
+### Reverts
+
+* Revert "TODO(editor): code editor" ([6d1ffdd](https://github.com/SepVeneto/miniprogram-design/commit/6d1ffdde9e59dcebff88d78e57bdd17067ad1d57))
+* Revert "ci(workflow): 添加发布编辑器 Docker 镜像的工作流并更新版本标签" ([99be31a](https://github.com/SepVeneto/miniprogram-design/commit/99be31ab2443ce457e52fe4a0fcf08d968f016e9))
+
+
+
 ## 0.17.1 (2024-12-24)
 
 
