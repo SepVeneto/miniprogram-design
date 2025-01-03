@@ -51,7 +51,6 @@
     "@types/sortablejs": "^1.15.8",
     "@vueuse/integrations": "^10.11.1",
     "element-plus": "^2.8.6",
-    "json-editor-vue": "^0.17.3",
     "lodash-es": "^4.17.21",
     "minimist": "^1.2.8",
     "sortablejs": "^1.15.3",
