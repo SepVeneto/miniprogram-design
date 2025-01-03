@@ -51,7 +51,7 @@ export function useGrid(options: GridOptions) {
 
   const app = useApp()
   watch(() => app.selected, (selected) => {
-    if (swiper.value) {
+    if (!options.preview && swiper.value) {
       const index = options.list.findIndex(item => item._uuid === selected._uuid)
       swiper.value.slideTo(index)
     }
