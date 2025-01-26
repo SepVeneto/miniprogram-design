@@ -217,9 +217,11 @@ export default defineComponent({
       })
     }
     function renderCustom(schema: WidgetOther) {
-      const { type, key } = schema
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { type, label, key, ...args } = schema
       return ConfigRender.value
         ? h(ConfigRender.value, {
+          ...args,
           type,
           modelValue: getData(prop.modelValue, key),
           'onUpdate:modelValue': (val: unknown) => updateData(key, val),
