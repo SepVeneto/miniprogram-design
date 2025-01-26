@@ -1,3 +1,12 @@
+## 0.16.5 (2025-01-26)
+
+
+### Features
+
+* **schema:** custom config inherit other props ([76147f5](https://github.com/SepVeneto/miniprogram-design/commit/76147f5e83a5b42d884fbe99e8920c80dadf880f))
+
+
+
 ## 0.16.4 (2024-12-28)
 
 
