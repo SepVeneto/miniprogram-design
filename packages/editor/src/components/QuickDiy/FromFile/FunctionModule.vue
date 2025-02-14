@@ -37,7 +37,7 @@ import { FreeDom, FreeScene } from '@sepveneto/free-dom'
 import type { CSSProperties, PropType } from 'vue'
 import { nextTick, ref, shallowRef, toRef } from 'vue'
 import { useZIndex } from '@/layout/useZIndex'
-import { useWidgets } from './hooks'
+import { useWidgets } from '../hooks'
 
 type FormData = { design: string, widgets: any[], size: { width: number, height: number } }
 const formData = defineModel({

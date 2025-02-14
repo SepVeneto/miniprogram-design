@@ -35,6 +35,8 @@ export default defineConfig({
   },
   source: {
     define: {
+      // sketch2json
+      'process.env.FOLKTALE_DOCS': '""',
       __EDITOR_VERSION__: `"${version}"`,
       __VR_VERSION__: `"${getPackageInfoSync('vue-router')!.version}"`,
       __BC_VERSION__: `"${getPackageInfoSync('@sepveneto/basic-comp')!.version}"`,

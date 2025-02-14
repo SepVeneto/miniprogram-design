@@ -2,6 +2,7 @@
   <el-upload
     class="avatar-uploader"
     action=""
+    :accept="accept"
     :show-file-list="false"
     :http-request="customRequest"
   >
@@ -29,6 +30,10 @@ import type { UploadRequestOptions } from 'element-plus'
 const emit = defineEmits(['update:modelValue', 'change'])
 const props = defineProps({
   width: {
+    type: String,
+    default: undefined,
+  },
+  accept: {
     type: String,
     default: undefined,
   },
@@ -61,7 +66,7 @@ const imageUrl = computed({
   },
 })
 const uploadRequest: any = window.microApp?.getData()?.upload ?? noop
-function noop(data) {
+function noop(data: any) {
   return URL.createObjectURL(new Blob([data.file]))
   /* empty */
 }
