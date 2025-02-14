@@ -10,6 +10,7 @@ import {
   ref,
   toRefs,
   useTemplateRef,
+  watch,
   watchEffect,
 } from 'vue'
 import { useApp, useHistory, useState } from '@/store'
@@ -21,7 +22,8 @@ import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
 import CanvasView from '@/widgets/canvas.view.vue'
-import { FreeDom, FreeScene } from '@sepveneto/free-dom'
+import type { FreeScene } from '@sepveneto/free-dom'
+import { GridLayout } from '@sepveneto/free-dom'
 import { useZIndex } from './useZIndex'
 import { useConfig } from '@/hooks'
 
@@ -49,7 +51,8 @@ export default defineComponent({
 
     const data = computed({
       get() {
-        return app.config.body[route.name!] ?? []
+        const val = app.config.body[route.name!] ?? []
+        return val
       },
       set(val: any) {
         app.config.body[route.name!] = val
@@ -100,20 +103,13 @@ export default defineComponent({
       return props.preview
         ? renderPreview(item)
         : layoutMode.value === 'free'
-          ? h(FreeDom, {
-            'data-id': `id-${item._uuid}`,
+          ? h('div', {
+            key: String(item._uuid),
+            style: 'width: 100%; height: 100%;',
             'data-type': 'node',
-            active: selected.value._uuid === item._uuid,
-            style: { zIndex: item.style.zIndex },
-            x: item.style.x,
-            y: item.style.y,
-            w: item.style.width,
-            h: item.style.height,
-            'onUpdate:x': (val) => { item.style.x = val },
-            'onUpdate:y': (val) => { item.style.y = val },
-            'onUpdate:w': (val) => { item.style.width = val },
-            'onUpdate:h': (val) => { item.style.height = val },
-          }, () => operate)
+            class: app.selected._uuid === item._uuid && 'grid-item',
+            onMousedown: () => handleSelect(item),
+          }, genRender(item, false))
           : operate
     }
     function renderPreview(item: any) {
@@ -131,16 +127,18 @@ export default defineComponent({
         const options = {
           config: item,
           preview: isPreview,
+          key: String(item._uuid),
         }
         return h(CanvasView, isPreview ? { ...options, style: normalizeStyle(item.style, layoutMode.value) } : options)
       } else {
         const options = {
           type: item._view,
           config: item,
+          key: String(item._uuid),
           preview: isPreview,
           'onUpdate:config': updateConfig,
         }
-        const style = normalizeStyle(item.style, layoutMode.value)
+        const style = normalizeStyle(item.style, 'grid')
         return ViewRender.value
           ? h(ViewRender.value, isPreview ? { ...options, style } : options)
           : h('div', errorLoading.value ? '加载失败!' : '加载中...')
@@ -198,22 +196,33 @@ export default defineComponent({
       }
     }, { flush: 'post' })
 
+    const layout = ref([])
+    // TODO: layout同步到data中
+    watch(data, (val) => {
+      layout.value = val.map(item => ({
+        i: String(item._uuid),
+        x: item.style.x,
+        y: item.style.y,
+        w: item.style.width,
+        h: item.style.height,
+      }))
+    }, { immediate: true })
     function renderScene(nodes: () => VNode[]) {
-      return h(FreeScene, {
+      return h(GridLayout, {
         ref: 'sceneRef',
-        key: route.name,
-        style: 'width: 375px; height: 100%;',
-        height: Number(config.value.size.height),
-        'onUpdate:height': (val: number) => {
-          config.value.size.height = Math.floor(val)
+        width: 375,
+        cols: 375,
+        disabledDrag: props.preview,
+        disabledResize: props.preview,
+        rowHeight: 1,
+        margin: [0, 0],
+        modelValue: layout.value,
+        'onUpdate:modelValue': (val) => {
+          layout.value = val
         },
-        width: Number(config.value.size.width),
-        'onUpdate:width': (val: number) => { config.value.size.width = Math.floor(val) },
-        manualDiff: true,
-        disabledBatch: true,
-        keyboard: true,
-        autoExpand: { height: true },
-        onDrop,
+        key: route.name,
+        minW: 1,
+        minH: 1,
       }, nodes)
     }
 
@@ -268,6 +277,12 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   height: max-content;
+}
+.grid-item {
+  cursor: move;
+  outline: 1px dashed #4089EF;
+  width: 100%;
+  height: 100%;
 }
 </style>
 
