@@ -249,7 +249,6 @@ export default defineComponent({
         height: this.height,
         style: this.sceneStyle,
         minHeight: 24,
-        onContextmenu: this.handleContextmenu,
       },
       () => this.nodeList.map(genNode),
     )

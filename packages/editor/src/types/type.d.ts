@@ -9,6 +9,7 @@ export type WidgetPos = {
 export type WidgetNode = {
   _uuid?: string,
   _name: string,
+  _custom?: boolean,
   _view: string,
   _schema: string,
   style: WidgetPos & CSSProperties

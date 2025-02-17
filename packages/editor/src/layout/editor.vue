@@ -8,6 +8,7 @@ import {
   provide,
   reactive,
   ref,
+  shallowRef,
   toRefs,
   useTemplateRef,
   watch,
@@ -24,8 +25,9 @@ import VueDraggable from 'vuedraggable'
 import CanvasView from '@/widgets/canvas.view.vue'
 import type { FreeScene } from '@sepveneto/free-dom'
 import { GridLayout } from '@sepveneto/free-dom'
-import { useZIndex } from './useZIndex'
+import { useContextMenu } from './useContextMenu'
 import { useConfig } from '@/hooks'
+import { ElDialog } from 'element-plus'
 
 export default defineComponent({
   props: {
@@ -59,7 +61,6 @@ export default defineComponent({
       },
     })
 
-    // const selected = ref({} as any)
     const selected = computed(() => app.selected)
 
     const { Component: ViewRender, errorLoading } = useFederatedComponent(
@@ -90,7 +91,7 @@ export default defineComponent({
       const operate = h(DraggableWrapper, {
         key: item._uuid,
         dir: 'top',
-        'data-type': 'node',
+        'data-type': item._custom ? 'custom' : 'node',
         name: item._name,
         active: activeUuid.value === item._uuid || selected.value._uuid === item._uuid,
         hide: item.isShow != null && !item.isShow,
@@ -107,7 +108,7 @@ export default defineComponent({
           ? h('div', {
             key: String(item._uuid),
             style: 'width: 100%; height: 100%;',
-            'data-type': 'node',
+            'data-type': item._custom ? 'custom' : 'node',
             class: app.selected._uuid === item._uuid && 'grid-item',
             onMousedown: () => handleSelect(item),
           }, genRender(item, false))
@@ -179,8 +180,20 @@ export default defineComponent({
       data.value = list
     }
 
+    const canvasDialog = shallowRef()
     const sceneRef = useTemplateRef<InstanceType<typeof FreeScene>>('sceneRef')
-    const zIndex = useZIndex(data, {
+    const zIndex = useContextMenu(data, {
+      onEdit: (selected) => {
+        canvasDialog.value = h(ElDialog, {
+          title: '自定义模板',
+          modelValue: true,
+          appendToBody: true,
+          closeOnClickModal: false,
+          onClosed: () => {
+            canvasDialog.value = null
+          },
+        })
+      },
       onDelete: (selected) => {
         const currentConfig = app.config.body[route.name!]
         const index = currentConfig.findIndex(item => item._uuid === selected._uuid)
@@ -240,11 +253,13 @@ export default defineComponent({
       onDrop,
       onChange,
       renderScene,
+      canvasDialog,
     }
   },
   render() {
+    let comp
     if (this.layoutMode !== 'free') {
-      return h(VueDraggable, {
+      comp = h(VueDraggable, {
         ref: 'mainRef',
         class: 'draggable-box',
         style: 'min-height: calc(667px - 60px); position: relative;',
@@ -265,9 +280,9 @@ export default defineComponent({
         item: (item: any) => this.renderWrapper(item.element),
       })
     } else {
-      const scene = this.renderScene(() => this.data.map(item => this.renderWrapper(item)))
-      return scene
+      comp = this.renderScene(() => this.data.map(item => this.renderWrapper(item)))
     }
+    return [comp, this.canvasDialog]
   },
 })
 </script>

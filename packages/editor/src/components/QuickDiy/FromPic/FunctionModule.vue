@@ -36,7 +36,7 @@
 import { FreeDom, FreeScene } from '@sepveneto/free-dom'
 import type { CSSProperties, PropType } from 'vue'
 import { nextTick, ref, shallowRef, toRef } from 'vue'
-import { useZIndex } from '@/layout/useZIndex'
+import { useContextMenu } from '@/layout/useContextMenu'
 import { useWidgets } from '../hooks'
 
 type FormData = { design: string, widgets: any[], size: { width: number, height: number } }
@@ -48,8 +48,7 @@ const sceneStyle = ref<CSSProperties>({ width: '375px' })
 const sceneRef = ref()
 
 const imgLoad = ref(false)
-const zIndex = useZIndex(
-  sceneRef,
+const zIndex = useContextMenu(
   toRef(() => formData.value.widgets),
   {
     onDelete: (selected) => {
@@ -73,7 +72,7 @@ function onLoad(evt: Event) {
   formData.value.size = size.value
   imgLoad.value = true
   nextTick().then(() => {
-    zIndex.init()
+    zIndex.init(sceneRef)
   })
 }
 </script>
