@@ -90,6 +90,7 @@ export default defineComponent({
       const operate = h(DraggableWrapper, {
         key: item._uuid,
         dir: 'top',
+        'data-type': 'node',
         name: item._name,
         active: activeUuid.value === item._uuid || selected.value._uuid === item._uuid,
         hide: item.isShow != null && !item.isShow,
@@ -179,7 +180,7 @@ export default defineComponent({
     }
 
     const sceneRef = useTemplateRef<InstanceType<typeof FreeScene>>('sceneRef')
-    const zIndex = useZIndex(sceneRef as any, data, {
+    const zIndex = useZIndex(data, {
       onDelete: (selected) => {
         const currentConfig = app.config.body[route.name!]
         const index = currentConfig.findIndex(item => item._uuid === selected._uuid)
@@ -190,9 +191,9 @@ export default defineComponent({
     })
     watchEffect(() => {
       if (layoutMode.value === 'free') {
-        zIndex.init()
+        zIndex.init(sceneRef as any)
       } else {
-        zIndex.stop()
+        zIndex.init(mainRef)
       }
     }, { flush: 'post' })
 

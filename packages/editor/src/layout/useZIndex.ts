@@ -12,7 +12,6 @@ type Callbacks = {
 }
 
 export function useZIndex(
-  elRef: MaybeElementRef,
   nodes: Ref<WidgetNode[]>,
   callbacks: Callbacks,
 ) {
@@ -96,7 +95,8 @@ export function useZIndex(
     })
   }
 
-  function init() {
+  function init(elRef: MaybeElementRef) {
+    stop(elRef)
     const node = unrefElement(elRef) as HTMLElement
     if (!node) {
       console.warn('找不到右键菜单的触发区域')
@@ -105,7 +105,7 @@ export function useZIndex(
     node.addEventListener('contextmenu', handleContextMenu)
   }
 
-  function stop() {
+  function stop(elRef: MaybeElementRef) {
     const node = unrefElement(elRef) as HTMLElement
     node?.removeEventListener('contextmenu', handleContextMenu)
   }
