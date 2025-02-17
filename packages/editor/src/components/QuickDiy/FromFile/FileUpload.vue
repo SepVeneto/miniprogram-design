@@ -22,6 +22,7 @@ import { type PropType, shallowRef } from 'vue'
 import { UploadFilled as IconUploadFilled } from '@element-plus/icons-vue'
 import type { UploadFile } from 'element-plus'
 import sketch2json from 'sketch2json'
+import type FileFormat from '@sketch-hq/sketch-file-format-ts'
 
 const formData = defineModel({
   type: Object as PropType<{ design: string, widgets: any[] }>,
@@ -33,9 +34,16 @@ console.log(file)
 async function onFile(file: UploadFile) {
   const buffer = await file2arrayBuffer(file.raw!)
   const res = await sketch2json(buffer)
-  const defaultPage = res.document.pages[0]
-  const widgets = processSketch(res)
-  console.log(widgets, res)
+  const defaultPage = res.document.pages[0] as FileFormat.FileRef
+  if (defaultPage._ref_class === 'MSImmutablePage') {
+    const path = defaultPage._ref.split('/')
+    const page = path.reduce((source, curr) => {
+      return source[curr]
+    }, res)
+    // const widgets = processSketch(res)
+    console.log(res, page)
+  }
+//  console.log(widgets, res)
 }
 
 async function file2arrayBuffer(file: File) {
