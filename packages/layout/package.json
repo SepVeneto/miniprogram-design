@@ -1,0 +1,39 @@
+{
+  "name": "@sepveneto/mpd-layout",
+  "version": "0.0.0",
+  "description": "",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "version": " pnpm changelog && git add CHANGELOG.md",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path . --lerna-package hooks -t hooks@"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "author": "sepveneto",
+  "license": "MIT",
+  "homepage": "https://github.com/SepVeneto/miniprogram-design/blob/master/packages/layout",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SepVeneto/miniprogram-design"
+  },
+  "devDependencies": {
+    "@sepveneto/free-dom": "^0.14.4",
+    "tsup": "^6.7.0",
+    "typescript": "~4.5.5",
+    "vitest": "^3.0.6",
+    "vue": "^3.5.12"
+  }
+}
