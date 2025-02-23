@@ -9,6 +9,8 @@ const layoutMap = {
   y: new Map(),
 }
 
+const placeLayout: LayoutItem[] = []
+
 export function getRowPrev(item: LayoutItem, layout: LayoutItem[]) {
   const ymin = Math.min(0, item.y - CAL_ERROR)
   const ymax = item.y + CAL_ERROR
@@ -94,14 +96,15 @@ const projectionY: { proj: number[], id: number }[] = []
 function getCollsion(item: LayoutItem) {
   let collsionX
   let collsionY
+  console.log('check', projectionX)
   for (let i = projectionX.length - 1; i >= 0; --i) {
     const pendingX = projectionX[i]
     const pendingY = projectionY[i]
     if (!collsionX && checkContainX(item, pendingX.proj)) {
-      collsionX = item
+      collsionX = pendingX.id
     }
     if (!collsionY && checkContainY(item, pendingY.proj)) {
-      collsionY = item
+      collsionY = pendingY.id
     }
   }
   return {
@@ -114,7 +117,13 @@ export function normalize(layout: LayoutItem[]) {
     const id = genId(item.x, item.y)
     const config = {
       ...item,
+      _origin: { ...item },
       id,
+    }
+    if (item.visible !== false) {
+      const projection = getProjection(item)
+      projectionX.push({ proj: projection.x, id })
+      projectionY.push({ proj: projection.y, id })
     }
     // const projection = getProjection(config)
     // insertToProjectionMap(projectionXMap, projection.x, config)
@@ -123,24 +132,57 @@ export function normalize(layout: LayoutItem[]) {
   })
 
   nLayout.sort((a, b) => a.id - b.id)
+  console.log('sort', projectionX, projectionY)
 
   for (let i = 0; i < nLayout.length; ++i) {
     const item = nLayout[i]
     const projection = getProjection(item)
-    projectionX.push({ proj: projection.x, id: item.id })
-    projectionY.push({ proj: projection.y, id: item.id })
-
     if (item.visible === false) {
       // const proj = getProjection(item)
-      for (let j = i; j < nLayout.length; ++j) {
-        console.log('start', j)
+      const start = i + 1
+      let target = item
+      for (let j = start; j < nLayout.length; ++j) {
+        // console.log('start', j, projectionX, projectionY)
         const each = nLayout[j]
-        // if (checkContainY(each, proj.y)) {
-        //   const offset = each.x - item.x
+        if (checkContainY(each, projection.y)) {
+          console.log('try', each)
+          const success = tryPlace(each, target, nLayout)
+          if (success) {
+            target = each
+          } else {
+            // const end = j
+            const offset = Math.abs(target._origin.x - each.x)
+            each.x = target.x + offset
+            // tryPlace(each, nLayout[start]._origin, nLayout)
+            // console.log('fail', nLayout[start]._origin)
+          }
+        }
+        if (checkContainX(each, projection.x)) {
+          console.log('try', each)
+          const success = tryPlace(each, target, nLayout)
+          if (success) {
+            target = each
+          } else {
+            // const end = j
+            const offset = Math.abs(target._origin.y - each.y)
+            each.y = target.y + offset
+            // tryPlace(each, nLayout[start]._origin, nLayout)
+            // console.log('fail', nLayout[start]._origin)
+          }
+        }
+        // const res = getCollsion(each)
+        // const collsionX = nLayout.find(item => item.id === res.x)
+        // const collsionY = nLayout.find(item => item.id === res.y)
+        // console.log('collsion', collsionX, collsionY)
+        // if (collsionX) {
+        //   const offset = collsionX.y - each.y
+        //   each.y -= offset
+        // }
+        // if (collsionY) {
+        //   const offset = Math.abs(collsionY.x - each.x)
+        //   console.log('res', offset)
         //   each.x -= offset
         // }
-        const res = getCollsion(each)
-        console.log('collsion', each, res)
         // if (checkContainX(each, proj.x)) {
         //   const offset = each.y - item.y
         //   each.y -= offset
@@ -149,6 +191,45 @@ export function normalize(layout: LayoutItem[]) {
     }
   }
   return nLayout
+}
+
+function tryPlace(place: LayoutItem, hiddenItem: LayoutItem, layout: LayoutItem[]) {
+  if (checkCollsion(place, hiddenItem)) {
+    console.log('collsion', place)
+    return false
+  } else {
+    const offsetX = place.x - hiddenItem.x
+    place.x -= offsetX
+
+    const offsetY = place.y - hiddenItem.y
+    place.y -= offsetY
+    return true
+  }
+  if (checkCollsion(place, layout)) {
+    // TODO: 判断投影决定实际移动的位置
+    const res = getCollsion(place)
+    const collsionX = layout.find(item => item.id === res.x)
+    const collsionY = layout.find(item => item.id === res.y)
+    console.log('try place', collsionX, collsionY)
+
+    if (collsionY) {
+      const offset = Math.abs(collsionY.x - place.x)
+      console.log('res', offset)
+      place.x -= offset
+    }
+    // console.log('collsion', res)
+  }
+}
+
+function checkCollsion(item: LayoutItem & { _origin: LayoutItem }, target: (LayoutItem & { _origin: LayoutItem })) {
+  if (item.id === target.id || target.visible === false) return false
+  const x1 = target.x
+  const y1 = target.y
+  const x2 = item.x
+  const y2 = item.y
+  const collsion = Math.max(x1, x2) <= Math.min(y1, y2)
+  if (collsion) return true
+  return false
 }
 
 function insertToProjectionMap(
