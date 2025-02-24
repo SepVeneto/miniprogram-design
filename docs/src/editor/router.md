@@ -11,6 +11,10 @@
 `set`并不会校验添加的路由在路由表中是否已存在，对于重复的路由行为参考`vue-router`
 :::
 
+::: info 页面配置与全局配置
+当仅存在一个路由时，固定为全局配置，页面配置无效，同时右侧配置选项卡不显示
+:::
+
 ```ts
 import { useDesign } from '@sepveneto/mpd-core'
 

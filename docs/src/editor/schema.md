@@ -7,6 +7,14 @@ import DataLink from '../demo/DataLink.vue'
 
 指定视图组件的可配置内容
 
+## 禁用快速生成
+
+```js
+[
+  { key: 'layoutMode', disabled: true },
+]
+```
+
 ## 数据结构
 
 
@@ -89,24 +97,32 @@ type ISchema = WidgetOther | WidgetBox
 
 ## 页面配置
 
-`pageConfig`可以针对每一个路由来配置。
+`$pageConfig`可以针对每一个路由来配置。
 
 ::: danger 注意
-当初始配置中不存在`pageConfig`时会默认使用全局配置，而当`pageConfig`存在时，全局配置就会被忽略
+当初始配置中不存在`$pageConfig`时会默认使用全局配置，而当`$pageConfig`存在时，全局配置就会被忽略
 :::
 
 ::: warning 提醒
-`pageConfig`的`key`值为页面路由的名称，而不是标题，也就是配置中的`name`。如果对应页面没有配置名称或是没有找到，就会使用全局配置。
+`$pageConfig`的`key`值为页面路由的名称，而不是标题，也就是配置中的`name`。如果对应页面没有配置名称或是没有找到，就会使用全局配置。
+:::
+
+::: warning 注意
+在`schema`中通过`$pageConfig`来控制页面配置的内容，在`config`中是`pageConfig`。
 :::
 
 ```js
 {
-  pageConfig: {
+  $pageConfig: {
     Home: {},
     Personal: {},
   }
 }
 ```
+
+::: info 提示
+可以通过配置同样的key来重写全局/页面配置里的预设
+:::
 
 
 ## css样式
