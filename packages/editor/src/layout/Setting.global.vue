@@ -57,6 +57,9 @@ watch(() => app.routes, val => {
   if (val.length === 1) {
     app.schemaType = 'global'
     onlyGlobal.value = true
+  } else {
+    app.schemaType = 'page'
+    onlyGlobal.value = false
   }
 }, { immediate: true })
 </script>

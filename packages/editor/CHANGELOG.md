@@ -1,3 +1,12 @@
+## 0.17.6 (2025-02-25)
+
+
+### Bug Fixes
+
+* **editor:** setting ([3e34da1](https://github.com/SepVeneto/miniprogram-design/commit/3e34da1f3261c289d5d62a20585bba555bca2e5d))
+
+
+
 ## 0.17.5 (2025-02-25)
 
 
