@@ -1,3 +1,12 @@
+## 0.17.4 (2025-02-25)
+
+
+### Features
+
+* **editor:** 右侧配置根据路由动态配置 ([798a061](https://github.com/SepVeneto/miniprogram-design/commit/798a061395d136d2c2c97b7f011cb0a0877cd534))
+
+
+
 ## 0.17.3 (2025-01-26)
 
 
