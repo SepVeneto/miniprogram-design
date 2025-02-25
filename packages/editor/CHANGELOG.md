@@ -1,3 +1,12 @@
+## 0.17.5 (2025-02-25)
+
+
+### Bug Fixes
+
+* **editor:** router set fail ([53ea06d](https://github.com/SepVeneto/miniprogram-design/commit/53ea06d18ae91460114342b4730628b98d3ec3cc))
+
+
+
 ## 0.17.4 (2025-02-25)
 
 
