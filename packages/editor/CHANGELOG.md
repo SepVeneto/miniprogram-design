@@ -1,3 +1,13 @@
+## 0.17.7 (2025-02-25)
+
+
+### Bug Fixes
+
+* **editor:** 兼容性 ([3bb7673](https://github.com/SepVeneto/miniprogram-design/commit/3bb767341b0aaa2dbb8a8a53b9db5be3085f2c46))
+* **editor:** extra tabbar blank ([8d3caaf](https://github.com/SepVeneto/miniprogram-design/commit/8d3caafd1f08e5f9e986da71fac526afe14a3290))
+
+
+
 ## 0.17.6 (2025-02-25)
 
 
