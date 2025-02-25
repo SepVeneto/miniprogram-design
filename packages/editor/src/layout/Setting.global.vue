@@ -43,9 +43,8 @@
 <script lang="ts" setup>
 import QuickDiy from '@/components/QuickDiy/index.vue'
 import { useApp } from '@/store'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import VConfig from '@/layout/config.vue'
-import { useRouter } from 'vue-router'
 
 const show = ref(false)
 const app = useApp()
@@ -53,10 +52,11 @@ const quickDiyDisabled = computed(() => {
   const res = app.schema.globalConfig?.find((item: any) => item.key === 'layoutMode')
   return res?.disabled
 })
-const router = useRouter()
 const onlyGlobal = ref(false)
-if (router.getRoutes().length === 1) {
-  app.schemaType = 'global'
-  onlyGlobal.value = true
-}
+watch(() => app.routes, val => {
+  if (val.length === 1) {
+    app.schemaType = 'global'
+    onlyGlobal.value = true
+  }
+}, { immediate: true })
 </script>
