@@ -77,10 +77,10 @@
                   @click="handleSelect(tabbar)"
                 />
               </template>
-              <div
+              <!-- <div
                 v-else
                 style="background: #fff; height: var(--tabbar-height)"
-              />
+              /> -->
             </div>
           </div>
           <EditorOperate v-model="mode" />
