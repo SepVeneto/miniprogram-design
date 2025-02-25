@@ -156,7 +156,7 @@ export const useApp = defineStore('app', () => {
     schema.value = _schema
     routes.value = _routes
     if (_routes) {
-      updateRouter(_routes)
+      updateRouter()
     } else {
       router.replace({ path: '/' })
     }

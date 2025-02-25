@@ -16,6 +16,7 @@
           <el-switch
             v-if="!['container', 'swiper'].includes(selected._view)"
             v-model="selected._custom"
+            :disabled="selected._custom === false"
             style="--mpd-switch-on-color: var(--mpd-color-success); --mpd-switch-off-color: var(--mpd-color-primary)"
             inactive-text="固定模板"
             active-text="自定义"
