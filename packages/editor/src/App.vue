@@ -11,7 +11,10 @@
         ref="mainRef"
         style="display: flex; justify-content: space-between;"
       >
-        <aside style="width: 300px; background: #fff;">
+        <aside
+          v-if="!settings.disableAdd"
+          style="width: 300px; background: #fff;"
+        >
           <ElCard>
             <template #header>
               <span>组件</span>
@@ -79,7 +82,7 @@
               </template>
               <!-- <div
                 v-else
-                style="background: #fff; height: var(--tabbar-height)"
+                style="ba ckground: #fff; height: var(--tabbar-height)"
               /> -->
             </div>
           </div>
@@ -119,6 +122,7 @@ const tabbar = computed(() => app.config.tabbars)
 const selected = computed(() => app.selected)
 const title = computed(() => route.meta.title)
 const isPreview = computed(() => mode.value === 'preview')
+const settings = computed(() => app.settings)
 // const needBack = computed(() => route.)
 
 const pageConfig = useConfig('page')

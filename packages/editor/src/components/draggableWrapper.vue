@@ -40,8 +40,11 @@ export default defineComponent({
         return normalizeStyle(props.customStyle)
       } else {
         const { height, ...style } = props.customStyle
+        if (height == null) {
+          console.warn(`[@sepveneto/mpd-editor] 组件${props.name}没有设置高度`)
+        }
         // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
-        const _height = height + (isActive.value ? WIDGET_TOP_BAR_HEIGHT : 0)
+        const _height = height + ((isActive.value && !props.disabled) ? WIDGET_TOP_BAR_HEIGHT : 0)
         return normalizeStyle({ ...style, height: typeof height === 'number' ? _height : 'auto' })
       }
     })
@@ -76,6 +79,7 @@ export default defineComponent({
         class: [
           'card',
           this.layoutMode === 'free' ? 'free-card' : 'grid-card',
+          { 'grid-disabled': this.disabled },
           { 'is-active': this.isActive },
           `dir-${this.dir}`,
           { 'has-mask': this.mask },
@@ -107,6 +111,10 @@ export default defineComponent({
 }
 
 .grid-card {
+  &:first-child {
+    // 防止outline被隐藏
+    margin-top: 1px;
+  }
   --item-color: #79bbff;
   --container-color: #eebe77;
   --top: 0px;
@@ -115,6 +123,11 @@ export default defineComponent({
   padding-top: var(--top);
   transition: outline-color,padding-top 0.2s;
   outline: 1px dashed transparent;
+  &.grid-disabled {
+    &:hover, &.is-active {
+      --top: 0;
+    }
+  }
   &:hover, &.is-active {
     --top: 18px;
   }

@@ -373,6 +373,7 @@ export default defineComponent({
       return [
         h(ElFormItem, {
           'label-width': _schema.label ? '' : '0px',
+          style: { display: _schema._hidden && 'none' },
         }, {
           default: () => node,
           label: () => this.renderLabel(schema as WidgetOther),

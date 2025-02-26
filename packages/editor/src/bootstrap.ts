@@ -28,6 +28,7 @@ function mount() {
   window.microApp && window.microApp.addDataListener((data: any) => {
     data.remoteUrl && (appStore.remoteUrl = data.remoteUrl)
     if (!data.config) return
+    appStore.setSettings(data.settings)
     appStore.setConfig(data.config, data.widgets, data.schema, data.routes)
   }, true)
 }

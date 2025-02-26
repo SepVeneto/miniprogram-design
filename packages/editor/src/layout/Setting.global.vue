@@ -20,7 +20,7 @@
         </div>
         <div>
           <ElButton
-            :disabled="quickDiyDisabled"
+            v-if="!quickDiyDisabled"
             @click="show = true"
           >
             快速生成

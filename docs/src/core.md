@@ -111,6 +111,12 @@ interface EditorRoute {
   path: string
   meta?: Record<PropertyKey, unknown> & { title?: string }
 }
+```
+```ts [EditorSettings]
+interface EditorSettings {
+  disableAdd?: boolean
+  disableDnD?: boolean
+}
 :::
 
 ::: details DesignReturn

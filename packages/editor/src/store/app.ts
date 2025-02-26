@@ -10,6 +10,12 @@ import { schema as schemaConfig } from '@/mock.schema'
 import type { WidgetNode } from '@/types/type'
 import { useRoute } from 'vue-router'
 
+export interface Settings {
+  // 禁用添加
+  disableAdd?: boolean
+  // 禁用拖曳
+  disableDnD?: boolean
+}
 export interface Config{
   globalConfig: Record<string, any>
   pageConfig?: Record<string, any>
@@ -35,6 +41,7 @@ export const useApp = defineStore('app', () => {
   const remoteUrl = ref('')
   const history = ref<string[]>([])
   const hasHistory = computed(() => history.value.length > 1)
+  const settings = ref<Settings>({})
 
   /** mock */
   if (!window.__MICRO_APP_ENVIRONMENT__) {
@@ -141,6 +148,9 @@ export const useApp = defineStore('app', () => {
   function getConfig(name: string) {
     return config.value.body[name]
   }
+  function setSettings(_settings: Settings) {
+    settings.value = _settings
+  }
   function setConfig(
     data: Config,
     widgets: Record<string, any>,
@@ -246,6 +256,8 @@ export const useApp = defineStore('app', () => {
     toHome,
     routes,
     // updateConfig,
+    settings,
+    setSettings,
     setConfig,
     getConfig,
     flatteBody,

@@ -35,6 +35,7 @@ type WidgetOther = {
   tips?: string
   link?: Record<string, WidgetOther[]>
   _inContainer?: 'outer' | 'inner'
+  _hidden?: boolean // 是否隐藏当前配置项
   [attr: string]: any
 }
 type WidgetBox = {

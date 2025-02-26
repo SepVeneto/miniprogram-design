@@ -14,9 +14,8 @@
 
         <div style="flex-shrink: 0;">
           <el-switch
-            v-if="!['container', 'swiper'].includes(selected._view)"
+            v-if="!['container', 'swiper'].includes(selected._view) && selected._custom !== false"
             v-model="selected._custom"
-            :disabled="selected._custom === false"
             style="--mpd-switch-on-color: var(--mpd-color-success); --mpd-switch-off-color: var(--mpd-color-primary)"
             inactive-text="固定模板"
             active-text="自定义"
@@ -24,9 +23,9 @@
             @change="handleModeChange"
           />
           <el-button
+            v-if="!disableDelete"
             type="primary"
             text
-            :disabled="isPreview || !selected._schema"
             @click="handleDelete"
           >
             删除
@@ -63,6 +62,9 @@ const app = useApp()
 const selected = computed(() => app.selected)
 
 const isPreview = computed(() => props.mode === 'preview')
+const disableDelete = computed(() => {
+  return isPreview.value || !selected.value._schema || app.settings.disableAdd
+})
 
 function handleModeChange(isCustom: any) {
   if (!isCustom) return
