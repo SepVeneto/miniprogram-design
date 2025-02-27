@@ -88,7 +88,10 @@
           </div>
           <EditorOperate v-model="mode" />
         </div>
-        <aside style="background: #fff; width: 400px; max-height: 810px">
+        <aside
+          id="widget-setting"
+          style="background: #fff; min-width: 400px; max-height: 810px"
+        >
           <SettingGlobal v-if="selected._name == null" />
           <SettingWidget v-else />
         </aside>

@@ -36,10 +36,11 @@ const config: webpack.Configuration = {
     allowedHosts: 'all',
     hot: true,
     client: {
-      overlay: {
-        warnings: false,
-        errors: false,
-      },
+      overlay: false,
+      // {
+      //   warnings: false,
+      //   errors: false,
+      // },
     },
     headers: {
       'Access-Control-Allow-Origin': '*',
