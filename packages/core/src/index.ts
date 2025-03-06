@@ -95,7 +95,7 @@ export async function useDesign(
       mounted?.()
     }
   })
-  await new Promise((resolve, reject) => {
+  const prepare = new Promise((resolve, reject) => {
     tryOnMounted(() => {
       renderApp({
         name,
@@ -116,14 +116,16 @@ export async function useDesign(
     })
   })
 
-  function set(data: EditorData) {
+  async function set(data: EditorData) {
+    await prepare
     const { config } = data
     if (!config.version) {
       config.version = upgrade.VERSION
     }
     microApp.setData(name, { ...data, config })
   }
-  function get(): EditorConfig | null {
+  async function get(): Promise<EditorConfig | null> {
+    await prepare
     const data = microApp.getData(name) as DataListener
     if (!data.config) {
       throw new Error('[@sepveneto/mpd-core] missing config in data')
