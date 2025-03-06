@@ -84,7 +84,7 @@ type DataListener = {
   event?: 'mounted'
   config?: EditorConfig
 }
-export async function useDesign(
+export function useDesign(
   dom: string | Element,
   options: DesignOptions,
 ) {
