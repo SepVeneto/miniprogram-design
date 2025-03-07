@@ -32,6 +32,11 @@ function mount() {
     appStore.setConfig(data.config, data.widgets, data.schema, data.routes)
     appStore.selected = {}
   }, true)
+
+  window.microApp && window.microApp.addDataListener((data: any) => {
+    console.log(data)
+    appStore.widgetList = data.widgets
+  })
 }
 
 // function unmount () {

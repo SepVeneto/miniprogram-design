@@ -33,6 +33,7 @@ export type EditorSchema = {
   globalConfig: ISchema[]
   [key: string]: ISchema[]
 }
+
 export type EditorWidget = {
   _name: string
   _view: string
@@ -41,6 +42,19 @@ export type EditorWidget = {
   style?: Partial<CSSProperties>
   [key: string]: unknown
 }
+export type EditorWidgets = {
+  name: string,
+  group: EditorWidget[],
+}[]
+
+export type EditorSettings = {
+  dndPutRule?: () => void
+  // 禁用添加
+  disableAdd?: boolean
+  // 禁用拖曳
+  disableDnD?: boolean
+}
+
 export type EditorRoute = {
   name: string
   path: string
@@ -71,6 +85,7 @@ export type EditorData = {
    * 编辑器的路由
    */
   routes?: EditorRoute[]
+  settings?: EditorSettings,
 }
 
 export type DesignOptions = {
@@ -87,7 +102,7 @@ type DataListener = {
 export function useDesign(
   dom: string | Element,
   options: DesignOptions,
-) {
+): [() => (EditorConfig | null), (data: EditorData) => void, Promise<boolean>] {
   const { url, inline, name = 'miniprogram-design', data, mounted, ...params } = options
   microApp.addDataListener(name, (val: DataListener) => {
     const { event } = val
@@ -95,7 +110,7 @@ export function useDesign(
       mounted?.()
     }
   })
-  const prepare = new Promise((resolve, reject) => {
+  const prepare = new Promise<boolean>((resolve, reject) => {
     tryOnMounted(() => {
       renderApp({
         name,

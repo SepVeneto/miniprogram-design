@@ -23,6 +23,7 @@
               wrap-style="height: 700px;"
               noresize
             >
+              <div>{{ app.widgetList }}</div>
               <widget-wrap
                 :list="app.widgetList"
                 :preview="isPreview"
