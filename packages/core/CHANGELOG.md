@@ -1,3 +1,17 @@
+## [0.9.1](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.0...core@0.9.1) (2025-03-07)
+
+
+### Bug Fixes
+
+* **core:** return type ([682f287](https://github.com/SepVeneto/miniprogram-design/commit/682f287e34be62472c5ac94c9a0dfe8e765afc43))
+
+
+### Features
+
+* **core:** 优化异步流程 ([26eb980](https://github.com/SepVeneto/miniprogram-design/commit/26eb980e3851285d2b6791b5852495f7c5003c61))
+
+
+
 # [0.9.0](https://github.com/SepVeneto/miniprogram-design/compare/core@0.8.2...core@0.9.0) (2025-03-06)
 
 
