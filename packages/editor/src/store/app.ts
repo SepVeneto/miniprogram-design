@@ -11,6 +11,7 @@ import type { WidgetNode } from '@/types/type'
 import { useRoute } from 'vue-router'
 
 export interface Settings {
+  dndPutRule?: () => void
   // 禁用添加
   disableAdd?: boolean
   // 禁用拖曳

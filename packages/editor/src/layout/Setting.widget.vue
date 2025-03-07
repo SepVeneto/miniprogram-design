@@ -63,7 +63,9 @@ const selected = computed(() => app.selected)
 
 const isPreview = computed(() => props.mode === 'preview')
 const disableDelete = computed(() => {
-  return isPreview.value || !selected.value._schema || app.settings.disableAdd
+  return isPreview.value ||
+    !selected.value._schema ||
+    (selected.value._disableDel == null ? app.settings.disableAdd : selected.value._disableDel)
 })
 
 function handleModeChange(isCustom: any) {

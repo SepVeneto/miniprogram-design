@@ -30,6 +30,7 @@ function mount() {
     if (!data.config) return
     appStore.setSettings(data.settings)
     appStore.setConfig(data.config, data.widgets, data.schema, data.routes)
+    appStore.selected = {}
   }, true)
 }
 

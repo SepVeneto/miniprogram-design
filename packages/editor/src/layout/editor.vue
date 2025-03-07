@@ -88,8 +88,9 @@ export default defineComponent({
         key: item._uuid,
         dir: 'top',
         name: item._name,
+        'data-id': `id-${item._uuid}`,
         active: activeUuid.value === item._uuid || selected.value._uuid === item._uuid,
-        disabled: app.settings.disableDnD,
+        disabled: item._disableDnD == null ? app.settings.disableDnD : item._disableDnD,
         hide: item.isShow != null && !item.isShow,
         container: ['container', 'swiper'].includes(item._view),
         mask: item._view !== 'container' && item._view !== 'swiper' && item._mask,
@@ -221,6 +222,7 @@ export default defineComponent({
     }
 
     return {
+      app,
       sceneRef,
       layoutMode,
       renderWrapper,

@@ -37,11 +37,13 @@ const data = computed(() => {
 })
 
 const allowDrop = (draggingNode: any, dropNode: any, type: AllowDropType) => {
-  const { _inContainer } = draggingNode.data
+  const { _disableDnD, _inContainer } = draggingNode.data
   const allowContainer = !_inContainer || _inContainer === 'inner'
   const allowOuter = !_inContainer || _inContainer === 'outer'
   const isContainer = ['swiper', 'container'].includes(dropNode.data._view)
   const targetIsContainer = ['swiper', 'container'].includes(draggingNode.data._view)
+
+  if (_disableDnD == null ? app.settings.disableDnD : _disableDnD) return false
 
   if (targetIsContainer && isContainer) return false
   if (dropNode.level === 1) {
@@ -61,6 +63,6 @@ const allowDrop = (draggingNode: any, dropNode: any, type: AllowDropType) => {
 function handleNodeClick(data: any) {
   app.selected = data
   const target = document.body.querySelector(`[data-id=id-${data._uuid}]`)
-  target?.scrollIntoView()
+  target?.scrollIntoView({ behavior: 'smooth' })
 }
 </script>

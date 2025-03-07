@@ -13,7 +13,7 @@
       >
         <aside
           v-if="!settings.disableAdd"
-          style="width: 300px; background: #fff;"
+          style="width: 300px;"
         >
           <ElCard>
             <template #header>
@@ -90,7 +90,7 @@
         </div>
         <aside
           id="widget-setting"
-          style="background: #fff; min-width: 400px; max-height: 810px"
+          style="min-width: 400px; max-height: 810px"
         >
           <SettingGlobal v-if="selected._name == null" />
           <SettingWidget v-else />
