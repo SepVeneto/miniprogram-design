@@ -50,6 +50,7 @@ import { computed } from 'vue'
 import type { Mode } from './EditorOperate.vue'
 import { useRoute } from 'vue-router'
 import VConfig from '@/layout/config.vue'
+import { emitEvt } from '@/utils'
 
 const props = defineProps({
   mode: {
@@ -98,6 +99,7 @@ function handleDelete() {
   }
   currentConfig.splice(index, 1)
   history.create(`删除-${selected.value._name}`)
+  emitEvt('SET_DELETE', app.selected)
   app.selected = {}
 }
 </script>

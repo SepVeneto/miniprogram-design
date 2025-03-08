@@ -23,7 +23,6 @@
               wrap-style="height: 700px;"
               noresize
             >
-              <div>{{ app.widgetList }}</div>
               <widget-wrap
                 :list="app.widgetList"
                 :preview="isPreview"
@@ -115,6 +114,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import SettingGlobal from './layout/Setting.global.vue'
 import SettingWidget from './layout/Setting.widget.vue'
 import { useConfig } from './hooks'
+import { emitEvt } from './utils'
 
 const route = useRoute()
 const router = useRouter()
@@ -152,9 +152,7 @@ const globalStyle = computed(() => {
 })
 
 onMounted(() => {
-  window.microApp && window.microApp.dispatch({
-    event: 'mounted',
-  })
+  emitEvt('MOUNTED')
 })
 
 function handleSelect(data: any) {

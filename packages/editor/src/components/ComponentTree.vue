@@ -28,6 +28,7 @@ import { useApp } from '@/store'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import DraggableLayout from './DraggableLayout.vue'
+import { emitEvt } from '@/utils'
 
 const route = useRoute()
 const app = useApp()
@@ -62,6 +63,7 @@ const allowDrop = (draggingNode: any, dropNode: any, type: AllowDropType) => {
 }
 function handleNodeClick(data: any) {
   app.selected = data
+  emitEvt('SET_SELECTED', data)
   const target = document.body.querySelector(`[data-id=id-${data._uuid}]`)
   target?.scrollIntoView({ behavior: 'smooth' })
 }

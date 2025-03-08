@@ -6,6 +6,7 @@ import { upgrade } from './upgrade'
 import type { UploadRequestOptions } from 'element-plus'
 
 export * from './upgrade'
+export * from './emitter'
 
 export type EditorConfig = {
   version?: string
