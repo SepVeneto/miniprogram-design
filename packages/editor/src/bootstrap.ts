@@ -27,25 +27,29 @@ function mount() {
 
   const emitter = window.microApp?.getGlobalData()?.MPD_EMITTER as any
   const baseEmitter = window.microApp?.getGlobalData()?.BASE_EMITTER
-  appStore.emitter = baseEmitter
-  emitter.on('SET_CONFIG', (val: any) => {
-    appStore.config = val
-  })
-  emitter.on('SET_SCHEMA', (val: any) => {
-    appStore.schema = val
-  })
-  emitter.on('SET_ROUTES', (val: any) => {
-    appStore.setRoutes(val)
-  })
-  emitter.on('SET_WIDGETS', (val: any) => {
-    appStore.widgetList = val
-  })
-  emitter.on('SET_REMOTE_URL', (val: string) => {
-    appStore.remoteUrl = val
-  })
-  emitter.on('SET_SETTINGS', (val: any) => {
-    appStore.setSettings(val)
-  })
+  if (baseEmitter) {
+    appStore.emitter = baseEmitter
+  }
+  if (emitter) {
+    emitter.on('SET_CONFIG', (val: any) => {
+      appStore.config = val
+    })
+    emitter.on('SET_SCHEMA', (val: any) => {
+      appStore.schema = val
+    })
+    emitter.on('SET_ROUTES', (val: any) => {
+      appStore.setRoutes(val)
+    })
+    emitter.on('SET_WIDGETS', (val: any) => {
+      appStore.widgetList = val
+    })
+    emitter.on('SET_REMOTE_URL', (val: string) => {
+      appStore.remoteUrl = val
+    })
+    emitter.on('SET_SETTINGS', (val: any) => {
+      appStore.setSettings(val)
+    })
+  }
 
   window.microApp && window.microApp.addDataListener((data: any) => {
     data.remoteUrl && (appStore.remoteUrl = data.remoteUrl)

@@ -1,11 +1,11 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { useApp } from '@/store'
-// import Editor from '@/layout/editor.vue'
+import Editor from '@/layout/editor.vue'
 
 export const router = createRouter({
   history: createMemoryHistory(),
   routes: [
-    // { name: 'default', path: '/', component: Editor },
+    { name: 'Home', path: '/', component: Editor },
   ],
 })
 

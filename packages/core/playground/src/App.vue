@@ -33,7 +33,7 @@ function onMount() {
 const config = ref({ globalConfig: {}, body: {} })
 
 // initEmitter()
-// useDesign('#miniprogram-design', {
+// const [get, set, prepare] = useDesign('#miniprogram-design', {
 //   name: 'mp',
 //   url: 'http://localhost:8082',
 //   inline: true,
@@ -50,7 +50,7 @@ const config = ref({ globalConfig: {}, body: {} })
 //   },
 // })
 
-setTimeout(() => {
+setTimeout(async () => {
   config.value = {
     globalConfig: {},
     body: {
@@ -59,6 +59,8 @@ setTimeout(() => {
       ],
     },
   }
+  // await prepare
+  // set({ config: config.value })
 }, 2000)
 const widgets = shallowRef<any[]>([])
 function handleSetWidget() {

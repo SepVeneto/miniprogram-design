@@ -22,6 +22,11 @@
       "types": "./dist/vue/index.d.ts",
       "import": "./dist/vue/index.js",
       "require": "./dist/vue/index.cjs"
+    },
+    "./helper": {
+      "types": "./dist/helper.d.ts",
+      "import": "./dist/helper.js",
+      "require": "./dist/helper.cjs"
     }
   },
   "files": [
