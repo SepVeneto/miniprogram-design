@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-# @sepveneto/mpd-core
+# hooks使用
 
 ## useDesign
 
@@ -64,6 +64,10 @@ interface EditorData {
    * 编辑器的路由
    */
   routes?: EditorRoute[]
+  /**
+   * 编辑器配置
+   */
+  settings?: EditorSettings
 }
 ```
 除了上述属性，还兼容了[MicroAppConfig](https://micro-zoe.com/docs/1.x/#/zh-cn/api?id=renderapp)
@@ -114,8 +118,15 @@ interface EditorRoute {
 ```
 ```ts [EditorSettings]
 interface EditorSettings {
+  disabledItem?: (widget: EditorWidget) => (boolean | {
+    // 是否禁用选中项的删除按钮
+    delete?: boolean,
+    // 是否允许编辑器内的拖曳排序
+    sort?: boolean,
+    // 是否禁用选中项的模板自定义
+    custom?: boolean,
+  })
   disableAdd?: boolean
-  disableDnD?: boolean
 }
 :::
 

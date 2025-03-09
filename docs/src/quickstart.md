@@ -48,6 +48,26 @@ useDesign('#design-container', {
 ```
 :::
 
+
+### vue
+
+```html
+<html>
+  <VueEditor
+    v-model="config"
+    url="http://localhost:8082"
+    remote-url="http://localhost:8090"
+    :widgets="widgets"
+    @selected="handleSelected"
+    @delete="handleDelete"
+    @mounted="onMount"
+  />
+</html>
+<script setup>
+import { VueEditor } from '@sepveneto/mpd-core/vue'
+</script>
+```
+
 ## 远程视图
 
 ```shell
