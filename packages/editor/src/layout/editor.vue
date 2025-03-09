@@ -16,7 +16,7 @@ import { useApp, useHistory, useState } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
 // import viewRender from 'widgets_side/viewRender';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
-import { normalizeStyle } from '@/utils'
+import { emitEvt, genDisabled, normalizeStyle } from '@/utils'
 import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
@@ -74,6 +74,7 @@ export default defineComponent({
       // 不能使用运算展开符，需要确保selected与editor指向同一地址
       // 否则选择后的配置结果无法反应到编辑器和store里
       app.selected = data
+      emitEvt('SET_SELECTED', data)
       zIndex.select(data)
       app.selected._fromContainer = false
     }
@@ -90,7 +91,7 @@ export default defineComponent({
         name: item._name,
         'data-id': `id-${item._uuid}`,
         active: activeUuid.value === item._uuid || selected.value._uuid === item._uuid,
-        disabled: item._disableDnD == null ? app.settings.disableDnD : item._disableDnD,
+        disabled: genDisabled(item, 'sort'),
         hide: item.isShow != null && !item.isShow,
         container: ['container', 'swiper'].includes(item._view),
         mask: item._view !== 'container' && item._view !== 'swiper' && item._mask,
@@ -107,16 +108,15 @@ export default defineComponent({
             'data-type': 'node',
             active: selected.value._uuid === item._uuid,
             style: { zIndex: item.style.zIndex },
-            disabledDrag: app.settings.disableDnD,
-            disabledResize: app.settings.disableDnD,
+            disabledDrag: genDisabled(item, 'sort'),
             x: item.style.x,
             y: item.style.y,
             w: item.style.width,
             h: item.style.height,
-            'onUpdate:x': (val) => { item.style.x = val },
-            'onUpdate:y': (val) => { item.style.y = val },
-            'onUpdate:w': (val) => { item.style.width = val },
-            'onUpdate:h': (val) => { item.style.height = val },
+            'onUpdate:x': (val: number) => { item.style.x = val },
+            'onUpdate:y': (val: number) => { item.style.y = val },
+            'onUpdate:w': (val: number) => { item.style.width = val },
+            'onUpdate:h': (val: number) => { item.style.height = val },
           }, () => operate)
           : operate
     }

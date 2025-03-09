@@ -12,7 +12,7 @@
         style="display: flex; justify-content: space-between;"
       >
         <aside
-          v-if="!settings.disableAdd"
+          v-if="!settings.disabledAdd"
           style="width: 300px;"
         >
           <ElCard>
@@ -151,9 +151,7 @@ const globalStyle = computed(() => {
 })
 
 onMounted(() => {
-  window.microApp && window.microApp.dispatch({
-    event: 'mounted',
-  })
+  window.microApp?.dispatch({ event: 'mounted' })
 })
 
 function handleSelect(data: any) {

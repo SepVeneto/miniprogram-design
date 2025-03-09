@@ -7,15 +7,14 @@ import Editor from '@/layout/editor.vue'
 
 import mock from '@/mock'
 import { schema as schemaConfig } from '@/mock.schema'
-import type { WidgetNode } from '@/types/type'
+import type { DisabledItemFn, WidgetNode } from '@/types/type'
 import { useRoute } from 'vue-router'
+import { emitEvt } from '@/utils'
 
 export interface Settings {
-  dndPutRule?: () => void
+  disabledItem?: DisabledItemFn
   // 禁用添加
-  disableAdd?: boolean
-  // 禁用拖曳
-  disableDnD?: boolean
+  disabledAdd?: boolean
 }
 export interface Config{
   globalConfig: Record<string, any>
@@ -25,6 +24,7 @@ export interface Config{
 }
 
 export const useApp = defineStore('app', () => {
+  const emitter = shallowRef()
   const schemaType = ref<'widget' | 'page' | 'global'>('page')
   const widgetList = ref<{name: string, group: WidgetNode[]}[]>([])
   const config = ref<Config>({
@@ -173,10 +173,16 @@ export const useApp = defineStore('app', () => {
     }
   }
 
+  function setRoutes(_routes: any[]) {
+    routes.value = _routes
+    updateRouter()
+  }
+
   watch(config, (val) => {
-    window.microApp?.dispatch({ config: val })
+    emitEvt('SET_CONFIG', val)
   }, { deep: true })
   function updateRouter(route?: any) {
+    router.clearRoutes()
     if (route) {
       router.addRoute({ ...route, component: Editor })
     } else {
@@ -184,7 +190,11 @@ export const useApp = defineStore('app', () => {
         router.addRoute({ ...raw, component: Editor })
       })
       router.isReady().then(() => {
-        router.replace({ name: routes.value[0].name })
+        if (routes.value.length > 0) {
+          router.replace({ name: routes.value[0].name })
+        } else {
+          console.warn('请至少设置一个路由')
+        }
       })
     }
   }
@@ -251,6 +261,7 @@ export const useApp = defineStore('app', () => {
     config.value.body = res
   }
   return {
+    emitter,
     schemaType,
     activeUuids,
     active,
@@ -260,6 +271,7 @@ export const useApp = defineStore('app', () => {
     settings,
     setSettings,
     setConfig,
+    setRoutes,
     getConfig,
     flatteBody,
     widgetList,

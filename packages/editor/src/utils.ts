@@ -1,4 +1,6 @@
 import { normalizeStyle as format } from '@sepveneto/mpd-hooks'
+import { useApp } from './store'
+import type { LikeWidgetNode } from './types/type'
 
 export function normalizeStyle(customStyle: Record<string, any>, mode: 'grid' | 'free' = 'grid') {
   const { x, y, ..._style } = customStyle
@@ -20,4 +22,23 @@ export function normalizeStyle(customStyle: Record<string, any>, mode: 'grid' | 
 
 export function toFixed(num: number) {
   return Number(num.toFixed(2))
+}
+
+export function emitEvt(name: string, data?: any) {
+  const app = useApp()
+  if (!app.emitter) return
+  app.emitter.emit(name, data)
+}
+
+export function genDisabled(selected: LikeWidgetNode, type: 'delete' | 'custom' | 'sort') {
+  const app = useApp()
+  if (!app.settings?.disabledItem) {
+    return false
+  }
+  const rules = app.settings.disabledItem(selected)
+  if (typeof rules === 'boolean') {
+    return rules
+  } else {
+    return rules[type]
+  }
 }

@@ -25,7 +25,10 @@ export default defineConfig({
       },
       {
         text: 'Core',
-        link: '/core',
+        items: [
+          { text: 'hooks', link: '/core/hooks' },
+          { text: 'vue', link: '/core/vue' },
+        ],
       },
       {
         text: 'Editor',
@@ -34,13 +37,6 @@ export default defineConfig({
           { text: 'Schema', link: '/editor/schema' },
           { text: 'Router', link: '/editor/router' },
           { text: 'Config', link: '/editor/config' },
-        ],
-      },
-      {
-        text: '预设组件',
-        items: [
-          { text: 'Contianer', link: '/components/container' },
-          { text: 'Swiper', link: '/components/swiper' },
         ],
       },
     ],

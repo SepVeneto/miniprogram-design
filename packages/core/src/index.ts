@@ -33,6 +33,7 @@ export type EditorSchema = {
   globalConfig: ISchema[]
   [key: string]: ISchema[]
 }
+
 export type EditorWidget = {
   _name: string
   _view: string
@@ -41,6 +42,22 @@ export type EditorWidget = {
   style?: Partial<CSSProperties>
   [key: string]: unknown
 }
+type DisabledRules = boolean | Partial<{
+  delete: boolean
+  custom: boolean
+  sort: boolean
+}>
+export type DisabledItemFn = (widget: EditorWidget) => DisabledRules
+export type EditorWidgets = {
+  name: string,
+  group: EditorWidget[],
+}[]
+
+export type EditorSettings = {
+  disabledItem?: DisabledItemFn
+  disabledAdd?: boolean
+}
+
 export type EditorRoute = {
   name: string
   path: string
@@ -71,6 +88,10 @@ export type EditorData = {
    * 编辑器的路由
    */
   routes?: EditorRoute[]
+  /**
+   * 编辑器配置
+   */
+  settings?: EditorSettings,
 }
 
 export type DesignOptions = {
@@ -84,10 +105,11 @@ type DataListener = {
   event?: 'mounted'
   config?: EditorConfig
 }
+
 export function useDesign(
   dom: string | Element,
   options: DesignOptions,
-) {
+): [() => (EditorConfig | null), (data: EditorData) => void, Promise<boolean>] {
   const { url, inline, name = 'miniprogram-design', data, mounted, ...params } = options
   microApp.addDataListener(name, (val: DataListener) => {
     const { event } = val
@@ -95,7 +117,7 @@ export function useDesign(
       mounted?.()
     }
   })
-  const prepare = new Promise((resolve, reject) => {
+  const prepare = new Promise<boolean>((resolve, reject) => {
     tryOnMounted(() => {
       renderApp({
         name,
