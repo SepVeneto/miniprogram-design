@@ -3,12 +3,16 @@
   <div>事件值：{{ eventData }}</div>
 
   <div>编辑器：{{ config }}</div>
-  <Editor
+  <!-- <div id="miniprogram-design" /> -->
+  <VueEditor
     v-model="config"
     url="http://localhost:8082"
     remote-url="http://localhost:8090"
     :widgets="widgets"
+    :settings="{ disabledItem: disableItem }"
+    @selected="handleSelected"
     @delete="handleDelete"
+    @mounted="onMount"
   />
 
   <button @click="handleSetWidget">
@@ -18,9 +22,33 @@
 
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
-import Editor from './components/Editor.vue'
+import { VueEditor } from '../../src/vue'
+// import { useDesign } from '../../src/index'
+// import { initEmitter } from '../../src/helper'
+
+function onMount() {
+  console.log('mounted')
+}
 
 const config = ref({ globalConfig: {}, body: {} })
+
+// initEmitter()
+// useDesign('#miniprogram-design', {
+//   name: 'mp',
+//   url: 'http://localhost:8082',
+//   inline: true,
+//   data: {
+//     remoteUrl: 'http://localhost:8090',
+//     config: config.value,
+//     schema: { globalConfig: [] },
+//     widgets: [],
+//     routes: [{ name: 'Home', path: '/' }],
+//     settings: {},
+//   },
+//   mounted() {
+//     console.log('m')
+//   },
+// })
 
 setTimeout(() => {
   config.value = {
@@ -32,16 +60,28 @@ setTimeout(() => {
     },
   }
 }, 2000)
-const widgets = shallowRef([])
+const widgets = shallowRef<any[]>([])
 function handleSetWidget() {
   widgets.value = [{ name: 'test', group: [{ _view: 'test', _schema: 'test', style: { height: 100, width: 375 }, _name: 'comp1' }] }]
 }
 
 const eventName = ref()
 const eventData = ref()
+function handleSelected(data: any) {
+  eventName.value = 'selected'
+  eventData.value = data
+}
 function handleDelete(data: any) {
   eventName.value = 'delete'
   eventData.value = data
+}
+
+function disableItem(selected) {
+  return {
+    delete: true,
+    sort: false,
+    custom: true,
+  }
 }
 </script>
 

@@ -6,7 +6,6 @@ import { upgrade } from './upgrade'
 import type { UploadRequestOptions } from 'element-plus'
 
 export * from './upgrade'
-export * from './emitter'
 
 export type EditorConfig = {
   version?: string
@@ -43,17 +42,20 @@ export type EditorWidget = {
   style?: Partial<CSSProperties>
   [key: string]: unknown
 }
+type DisabledRules = boolean | Partial<{
+  delete: boolean
+  custom: boolean
+  sort: boolean
+}>
+export type DisabledItemFn = (widget: EditorWidget) => DisabledRules
 export type EditorWidgets = {
   name: string,
   group: EditorWidget[],
 }[]
 
 export type EditorSettings = {
-  dndPutRule?: () => void
-  // 禁用添加
-  disableAdd?: boolean
-  // 禁用拖曳
-  disableDnD?: boolean
+  disabledItem?: DisabledItemFn
+  disabledAdd?: boolean
 }
 
 export type EditorRoute = {
@@ -86,6 +88,9 @@ export type EditorData = {
    * 编辑器的路由
    */
   routes?: EditorRoute[]
+  /**
+   * 编辑器配置
+   */
   settings?: EditorSettings,
 }
 
@@ -100,6 +105,7 @@ type DataListener = {
   event?: 'mounted'
   config?: EditorConfig
 }
+
 export function useDesign(
   dom: string | Element,
   options: DesignOptions,

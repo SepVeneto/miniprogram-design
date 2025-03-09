@@ -12,7 +12,7 @@
         style="display: flex; justify-content: space-between;"
       >
         <aside
-          v-if="!settings.disableAdd"
+          v-if="!settings.disabledAdd"
           style="width: 300px;"
         >
           <ElCard>
@@ -114,7 +114,6 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import SettingGlobal from './layout/Setting.global.vue'
 import SettingWidget from './layout/Setting.widget.vue'
 import { useConfig } from './hooks'
-import { emitEvt } from './utils'
 
 const route = useRoute()
 const router = useRouter()
@@ -152,7 +151,7 @@ const globalStyle = computed(() => {
 })
 
 onMounted(() => {
-  emitEvt('MOUNTED')
+  window.microApp?.dispatch({ event: 'mounted' })
 })
 
 function handleSelect(data: any) {

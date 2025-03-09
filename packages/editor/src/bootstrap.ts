@@ -22,7 +22,6 @@ function mount() {
   app.use(BasicComp, {})
   app.use(store)
   app.use(router)
-  app.mount('#app')
 
   const appStore = useApp()
 
@@ -55,6 +54,8 @@ function mount() {
     appStore.setConfig(data.config, data.widgets, data.schema, data.routes)
     appStore.selected = {}
   }, true)
+
+  app.mount('#app')
 }
 
 // function unmount () {

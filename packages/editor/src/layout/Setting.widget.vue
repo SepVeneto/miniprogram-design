@@ -14,7 +14,7 @@
 
         <div style="flex-shrink: 0;">
           <el-switch
-            v-if="!['container', 'swiper'].includes(selected._view) && selected._custom !== false"
+            v-if="!['container', 'swiper'].includes(selected._view) && !genDisabled(selected, 'custom')"
             v-model="selected._custom"
             style="--mpd-switch-on-color: var(--mpd-color-success); --mpd-switch-off-color: var(--mpd-color-primary)"
             inactive-text="固定模板"
@@ -50,7 +50,7 @@ import { computed } from 'vue'
 import type { Mode } from './EditorOperate.vue'
 import { useRoute } from 'vue-router'
 import VConfig from '@/layout/config.vue'
-import { emitEvt } from '@/utils'
+import { emitEvt, genDisabled } from '@/utils'
 
 const props = defineProps({
   mode: {
@@ -65,8 +65,7 @@ const selected = computed(() => app.selected)
 const isPreview = computed(() => props.mode === 'preview')
 const disableDelete = computed(() => {
   return isPreview.value ||
-    !selected.value._schema ||
-    (selected.value._disableDel == null ? app.settings.disableAdd : selected.value._disableDel)
+    !selected.value._schema || genDisabled(selected.value, 'delete')
 })
 
 function handleModeChange(isCustom: any) {

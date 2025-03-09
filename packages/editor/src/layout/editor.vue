@@ -16,7 +16,7 @@ import { useApp, useHistory, useState } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
 // import viewRender from 'widgets_side/viewRender';
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
-import { emitEvt, normalizeStyle } from '@/utils'
+import { emitEvt, genDisabled, normalizeStyle } from '@/utils'
 import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
@@ -91,7 +91,7 @@ export default defineComponent({
         name: item._name,
         'data-id': `id-${item._uuid}`,
         active: activeUuid.value === item._uuid || selected.value._uuid === item._uuid,
-        disabled: item._disableDnD == null ? app.settings.disableDnD : item._disableDnD,
+        disabled: genDisabled(item, 'sort'),
         hide: item.isShow != null && !item.isShow,
         container: ['container', 'swiper'].includes(item._view),
         mask: item._view !== 'container' && item._view !== 'swiper' && item._mask,
@@ -108,8 +108,7 @@ export default defineComponent({
             'data-type': 'node',
             active: selected.value._uuid === item._uuid,
             style: { zIndex: item.style.zIndex },
-            disabledDrag: app.settings.disableDnD,
-            disabledResize: app.settings.disableDnD,
+            disabledDrag: genDisabled(item, 'sort'),
             x: item.style.x,
             y: item.style.y,
             w: item.style.width,

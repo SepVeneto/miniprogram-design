@@ -16,3 +16,11 @@ export type WidgetNode = {
 }
 
 export type LikeWidgetNode = Pick<WidgetNode, '_uuid' | 'style'> & { _name?: string }
+
+type DisabledRules = boolean | Partial<{
+  delete: boolean
+  custom: boolean
+  sort: boolean
+}>
+
+export type DisabledItemFn = (widget: LikeWidgetNode) => DisabledRules

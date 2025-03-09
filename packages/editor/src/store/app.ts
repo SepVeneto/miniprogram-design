@@ -7,16 +7,14 @@ import Editor from '@/layout/editor.vue'
 
 import mock from '@/mock'
 import { schema as schemaConfig } from '@/mock.schema'
-import type { WidgetNode } from '@/types/type'
+import type { DisabledItemFn, WidgetNode } from '@/types/type'
 import { useRoute } from 'vue-router'
 import { emitEvt } from '@/utils'
 
 export interface Settings {
-  dndPutRule?: () => void
+  disabledItem?: DisabledItemFn
   // 禁用添加
-  disableAdd?: boolean
-  // 禁用拖曳
-  disableDnD?: boolean
+  disabledAdd?: boolean
 }
 export interface Config{
   globalConfig: Record<string, any>
