@@ -1,3 +1,14 @@
+## [0.9.2](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.1...core@0.9.2) (2025-03-09)
+
+
+### Features
+
+* **core:** disabled fn ([765e705](https://github.com/SepVeneto/miniprogram-design/commit/765e7057e7ab87c3799280c58315449390d0eec2))
+* **core:** editor vue ([f679cc3](https://github.com/SepVeneto/miniprogram-design/commit/f679cc3b4a33836639ed84bdea5799b440778b5a))
+* **editor:** emitter兜底 ([2310f57](https://github.com/SepVeneto/miniprogram-design/commit/2310f5755a295f9fd5e8805b04ad7ca468399a79))
+
+
+
 ## [0.9.1](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.0...core@0.9.1) (2025-03-07)
 
 

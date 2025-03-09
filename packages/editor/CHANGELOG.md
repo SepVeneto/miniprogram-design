@@ -1,3 +1,23 @@
+## 0.17.8 (2025-03-09)
+
+
+### Bug Fixes
+
+* **core:** return type ([682f287](https://github.com/SepVeneto/miniprogram-design/commit/682f287e34be62472c5ac94c9a0dfe8e765afc43))
+
+
+### Features
+
+* **core:** 优化异步流程 ([26eb980](https://github.com/SepVeneto/miniprogram-design/commit/26eb980e3851285d2b6791b5852495f7c5003c61))
+* **core:** disabled fn ([765e705](https://github.com/SepVeneto/miniprogram-design/commit/765e7057e7ab87c3799280c58315449390d0eec2))
+* **core:** editor vue ([f679cc3](https://github.com/SepVeneto/miniprogram-design/commit/f679cc3b4a33836639ed84bdea5799b440778b5a))
+* **editor:** 配置id ([2f794c5](https://github.com/SepVeneto/miniprogram-design/commit/2f794c549cddd4e11ea37dc42819f2380d91a70e))
+* **editor:** 细化操作控制 ([82b2446](https://github.com/SepVeneto/miniprogram-design/commit/82b244684670f0c023c5b3bb4bf8f1e839126da7))
+* **editor:** 支持拖曳删除禁用 ([cdcbaa0](https://github.com/SepVeneto/miniprogram-design/commit/cdcbaa0a9a8d85aed2c10e820920caa3e22fe830))
+* **editor:** emitter兜底 ([2310f57](https://github.com/SepVeneto/miniprogram-design/commit/2310f5755a295f9fd5e8805b04ad7ca468399a79))
+
+
+
 ## 0.17.7 (2025-02-25)
 
 
