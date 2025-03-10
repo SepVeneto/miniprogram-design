@@ -58,6 +58,7 @@ export default defineComponent({
     'update:modelValue',
     'selected',
   ],
+  expose: ['clearSelected'],
   setup(props, { emit, expose }) {
     const isPrepare = ref(false)
     microApp.addDataListener(props.name, (val: any) => {
@@ -126,8 +127,7 @@ export default defineComponent({
         setData('CLEAR_SELECTED')
       },
     })
-  },
-  render() {
-    return h('div', { id: this.name })
+
+    return () => h('div', { id: props.name })
   },
 })
