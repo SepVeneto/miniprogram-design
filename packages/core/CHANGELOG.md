@@ -1,3 +1,12 @@
+## [0.9.3](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.2...core@0.9.3) (2025-03-10)
+
+
+### Bug Fixes
+
+* **core:** editor initial ([cbf0462](https://github.com/SepVeneto/miniprogram-design/commit/cbf0462738ed8545c4fb95dc524d83614bb2e8f2))
+
+
+
 ## [0.9.2](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.1...core@0.9.2) (2025-03-09)
 
 
