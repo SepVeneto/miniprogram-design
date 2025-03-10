@@ -37,15 +37,23 @@ jobs:
           mkdir -p deploy/editor-container
           mv packages/editor/dist/dev deploy/editor-container
 
-      - name: Fix permissions
+      - name: Archive artifact
+        shell: sh
         run: |
-          chmod -c -R +rX "_site/" | while read line; do
-            echo "::warning title=Invalid file permissions automatically fixed::$line"
-          done
+          echo ::group::Archive artifact
+          tar \
+            --dereference --hard-dereference \
+            --directory "deploy/" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            .
+          echo ::endgroup::
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with: 
-          path: deploy/
+          path: ${{ runner.temp }}/artifact.tar
 
       - name: Debug-upload
         run: |
