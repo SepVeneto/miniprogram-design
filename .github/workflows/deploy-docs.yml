@@ -47,6 +47,10 @@ jobs:
         with: 
           path: deploy/
 
+      - name: Debug-upload
+        run: |
+          ls
+
   deploy:
     needs: build 
     permissions:
