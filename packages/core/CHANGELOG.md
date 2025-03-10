@@ -1,3 +1,12 @@
+## [0.9.5](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.4...core@0.9.5) (2025-03-10)
+
+
+### Bug Fixes
+
+* **core:** missing expose ([c3542f4](https://github.com/SepVeneto/miniprogram-design/commit/c3542f4e81879356ae5cb8cb536925cdea157779))
+
+
+
 ## [0.9.4](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.3...core@0.9.4) (2025-03-10)
 
 
