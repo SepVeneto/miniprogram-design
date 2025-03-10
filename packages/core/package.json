@@ -1,6 +1,6 @@
 {
   "name": "@sepveneto/mpd-core",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "",
   "types": "./dist/index.d.ts",
   "type": "module",
