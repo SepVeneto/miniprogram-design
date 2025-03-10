@@ -1,8 +1,8 @@
-import { defineComponent, h } from 'vue-demi'
-import { type PropType, watch } from 'vue-demi'
+import { defineComponent, h, onMounted, ref, watchEffect } from 'vue-demi'
+import { type PropType } from 'vue-demi'
 import type { EditorConfig, EditorData, EditorRoute, EditorSchema, EditorSettings, EditorWidgets } from '../index'
-import { useDesign } from '../index'
 import { initEmitter } from '../helper'
+import microApp, { renderApp } from '@micro-zoe/micro-app'
 
 export default defineComponent({
   props: {
@@ -46,6 +46,10 @@ export default defineComponent({
       type: Object as PropType<EditorSettings>,
       default: () => ({}),
     },
+    extra: {
+      type: Object as PropType<Record<string, any>>,
+      default: () => ({}),
+    },
   },
   emits: [
     'mounted',
@@ -54,24 +58,29 @@ export default defineComponent({
     'update:modelValue',
     'selected',
   ],
-  setup(props, { emit }) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_get, _set, prepare] = useDesign(`#${props.name}`, {
-      name: props.name,
-      url: props.url,
-      inline: props.inline,
-      data: {
-        upload: props.upload,
-        remoteUrl: props.remoteUrl,
-        config: props.modelValue,
-        schema: props.schema,
-        widgets: props.widgets,
-        routes: props.routes,
-        settings: props.settings,
-      },
-      mounted() {
+  setup(props, { emit, expose }) {
+    const isPrepare = ref(false)
+    microApp.addDataListener(props.name, (val: any) => {
+      const { event } = val
+      if (event === 'mounted') {
         emit('mounted')
-      },
+        isPrepare.value = true
+      }
+    })
+    onMounted(() => {
+      renderApp({
+        name: props.name,
+        url: props.url,
+        container: `#${props.name}`,
+        inline: props.inline,
+        'disable-patch-request': true, // 关闭对子应用请求的拦截
+        'disable-memory-router': true, // 关闭虚拟路由
+        data: {
+          upload: props.upload,
+          remoteUrl: props.remoteUrl,
+          ...props.extra,
+        },
+      })
     })
 
     const { appEvent } = initEmitter({
@@ -87,34 +96,36 @@ export default defineComponent({
       },
     })
 
-    async function setData(name: string, data: any) {
-      await prepare
+    watchEffect(() => {
+      isPrepare.value && setData('SET_WIDGETS', props.widgets)
+    })
+    watchEffect(() => {
+      isPrepare.value && setData('SET_REMOTE_URL', props.remoteUrl)
+    })
+
+    watchEffect(() => {
+      isPrepare.value && setData('SET_SETTINGS', props.settings)
+    })
+
+    watchEffect(() => {
+      isPrepare.value && setData('SET_SCHEMA', props.schema)
+    })
+    watchEffect(() => {
+      isPrepare.value && setData('SET_ROUTES', props.routes)
+    })
+    watchEffect(() => {
+      isPrepare.value && setData('SET_CONFIG', props.modelValue)
+    })
+
+    async function setData(name: string, data?: any) {
       appEvent.emit(name, data)
     }
 
-    watch(() => props.widgets, (val) => {
-      setData('SET_WIDGETS', val)
-    }, { immediate: true })
-
-    watch(() => props.remoteUrl, (val) => {
-      setData('SET_REMOTE_URL', val)
-    }, { immediate: true })
-
-    watch(() => props.settings, (val) => {
-      setData('SET_SETTINGS', val)
-    }, { immediate: true })
-
-    watch(() => props.schema, (val) => {
-      setData('SET_SCHEMA', val)
-    }, { immediate: true })
-
-    watch(() => props.routes, (val) => {
-      setData('SET_ROUTES', val)
-    }, { immediate: true })
-
-    watch(() => props.modelValue, (val) => {
-      setData('SET_CONFIG', val)
-    }, { immediate: true })
+    expose({
+      clearSelected() {
+        setData('CLEAR_SELECTED')
+      },
+    })
   },
   render() {
     return h('div', { id: this.name })
