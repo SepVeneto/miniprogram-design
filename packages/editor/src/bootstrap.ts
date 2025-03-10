@@ -49,6 +49,9 @@ function mount() {
     emitter.on('SET_SETTINGS', (val: any) => {
       appStore.setSettings(val)
     })
+    emitter.on('CLEAR_SELECTED', () => {
+      appStore.selected = {}
+    })
   }
 
   window.microApp && window.microApp.addDataListener((data: any) => {

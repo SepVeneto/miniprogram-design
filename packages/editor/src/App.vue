@@ -151,7 +151,8 @@ const globalStyle = computed(() => {
 })
 
 onMounted(() => {
-  window.microApp?.dispatch({ event: 'mounted' })
+  // 热更新需要强制触发消息发送
+  window.microApp?.dispatch({ event: 'mounted' }, undefined, true)
 })
 
 function handleSelect(data: any) {
