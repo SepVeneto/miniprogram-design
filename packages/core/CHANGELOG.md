@@ -1,3 +1,12 @@
+## [0.9.4](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.3...core@0.9.4) (2025-03-10)
+
+
+### Features
+
+* **core:** vue optimize ([d55b6f8](https://github.com/SepVeneto/miniprogram-design/commit/d55b6f8bebefd1b4a0e89ca182e97ff289bd29a7))
+
+
+
 ## [0.9.3](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.2...core@0.9.3) (2025-03-10)
 
 
