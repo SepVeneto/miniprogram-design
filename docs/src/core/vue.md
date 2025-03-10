@@ -40,3 +40,8 @@ import { VueEditor } from '@sepveneto/mpd-core/vue'
 | :--- | :--- |
 | disabledAdd | 是否允许向编辑器中添加新的组件，禁用后左侧组件列表将消失 |
 | disabledItem | 选中项将被禁用的操作<br>delete: 是否禁用删除<br>sort: 是否禁用拖曳排序<br>custom: 是否禁用自定义模板 |
+
+## 方法
+| 名称 | 说明 |
+| :--- | :--- |
+| clearSelected | 清除编辑器当前的选中项 |
