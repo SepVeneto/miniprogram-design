@@ -56,7 +56,7 @@ export default defineComponent({
   ],
   setup(props, { emit }) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_get, _set, prepare] = useDesign('#miniprogram-design', {
+    const [_get, _set, prepare] = useDesign(`#${props.name}`, {
       name: props.name,
       url: props.url,
       inline: props.inline,
@@ -94,28 +94,29 @@ export default defineComponent({
 
     watch(() => props.widgets, (val) => {
       setData('SET_WIDGETS', val)
-    })
+    }, { immediate: true })
 
     watch(() => props.remoteUrl, (val) => {
       setData('SET_REMOTE_URL', val)
-    })
+    }, { immediate: true })
 
     watch(() => props.settings, (val) => {
       setData('SET_SETTINGS', val)
-    })
+    }, { immediate: true })
 
     watch(() => props.schema, (val) => {
       setData('SET_SCHEMA', val)
-    })
+    }, { immediate: true })
 
     watch(() => props.routes, (val) => {
       setData('SET_ROUTES', val)
-    })
+    }, { immediate: true })
+
     watch(() => props.modelValue, (val) => {
       setData('SET_CONFIG', val)
-    })
+    }, { immediate: true })
   },
   render() {
-    return h('div', { id: 'miniprogram-design' })
+    return h('div', { id: this.name })
   },
 })
