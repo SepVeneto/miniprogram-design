@@ -1,3 +1,20 @@
+## 0.17.9 (2025-03-11)
+
+
+### Bug Fixes
+
+* 老版本兜底 ([7ca193f](https://github.com/SepVeneto/miniprogram-design/commit/7ca193f559bb1f5f9a8b73116585755a5badaa63))
+* **core:** editor initial ([cbf0462](https://github.com/SepVeneto/miniprogram-design/commit/cbf0462738ed8545c4fb95dc524d83614bb2e8f2))
+* **core:** missing expose ([c3542f4](https://github.com/SepVeneto/miniprogram-design/commit/c3542f4e81879356ae5cb8cb536925cdea157779))
+
+
+### Features
+
+* **core:** vue optimize ([d55b6f8](https://github.com/SepVeneto/miniprogram-design/commit/d55b6f8bebefd1b4a0e89ca182e97ff289bd29a7))
+* **editor:** clear selected ([5f7c14e](https://github.com/SepVeneto/miniprogram-design/commit/5f7c14e98bd9f925393f2676866c408b630cc81b))
+
+
+
 ## 0.17.8 (2025-03-09)
 
 
