@@ -49,7 +49,12 @@ export default defineComponent({
 
     const data = computed({
       get() {
-        return app.config.body[route.name!] ?? []
+        const list = app.config.body[route.name!] ?? []
+        if (props.preview) {
+          return list.filter(item => item.isShow !== 0)
+        } else {
+          return list
+        }
       },
       set(val: any) {
         app.config.body[route.name!] = val

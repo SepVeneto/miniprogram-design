@@ -171,6 +171,7 @@ export default defineComponent({
   }
 }
 .hide-mask {
+  z-index: 1;
   position: absolute;
   width: 100%;
   height: 100%;

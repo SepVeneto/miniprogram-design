@@ -37,23 +37,10 @@ jobs:
           mkdir -p deploy/editor-container
           mv packages/editor/dist/dev deploy/editor-container
 
-      - name: Archive artifact
-        shell: sh
-        run: |
-          echo ::group::Archive artifact
-          tar \
-            --dereference --hard-dereference \
-            --directory "deploy/" \
-            -cvf "$RUNNER_TEMP/artifact.tar" \
-            --exclude=.git \
-            --exclude=.github \
-            .
-          echo ::endgroup::
-
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with: 
-          path: ${{ runner.temp }}/artifact.tar
+          path: deploy/
 
       - name: Debug-upload
         run: |
@@ -74,3 +61,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
+
