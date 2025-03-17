@@ -1,3 +1,12 @@
+## 0.17.10 (2025-03-17)
+
+
+### Bug Fixes
+
+* **editor:** isShow preview ([f8564b0](https://github.com/SepVeneto/miniprogram-design/commit/f8564b03a6c6a43ecc408620350609975fafc96e))
+
+
+
 ## 0.17.9 (2025-03-11)
 
 
