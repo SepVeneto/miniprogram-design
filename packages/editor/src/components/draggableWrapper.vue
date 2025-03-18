@@ -40,9 +40,6 @@ export default defineComponent({
         return normalizeStyle(props.customStyle)
       } else {
         const { height, ...style } = props.customStyle
-        if (height == null) {
-          console.warn(`[@sepveneto/mpd-editor] 组件${props.name}没有设置高度`)
-        }
         // 为了保证编辑模式里高度能按照设定的正常显示，这里高度额外加上了操作栏的高度 18px
         const _height = height + ((isActive.value && !props.disabled) ? WIDGET_TOP_BAR_HEIGHT : 0)
         return normalizeStyle({ ...style, height: typeof height === 'number' ? _height : 'auto' })
