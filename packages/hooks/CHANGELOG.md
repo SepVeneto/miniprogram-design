@@ -1,3 +1,12 @@
+# [0.6.0](https://github.com/SepVeneto/miniprogram-design/compare/hooks@0.5.0...hooks@0.6.0) (2025-03-21)
+
+
+### Features
+
+* tabbar schema custom ([0bc638e](https://github.com/SepVeneto/miniprogram-design/commit/0bc638e3dd1414a01cbf38f76eaf875afa560eb2))
+
+
+
 # [0.5.0](https://github.com/SepVeneto/miniprogram-design/compare/hooks@0.4.0...hooks@0.5.0) (2023-10-30)
 
 
