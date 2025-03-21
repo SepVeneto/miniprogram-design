@@ -384,4 +384,5 @@ export const schema = {
   desc,
   link,
   entry,
+  tabbar: { custom: false },
 }

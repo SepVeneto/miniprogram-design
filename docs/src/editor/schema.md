@@ -7,16 +7,17 @@ import DataLink from '../demo/DataLink.vue'
 
 指定视图组件的可配置内容
 
-## 禁用快速生成
+## 自定义tabbar配置
 
-```js
-[
-  { key: 'layoutMode', disabled: true },
-]
+```ts
+{
+  tabbar: {
+    custom: true
+  }
+}
 ```
 
 ## 数据结构
-
 
 ```ts
 type WidgetType = 'input' // 输入框
@@ -55,6 +56,8 @@ type ISchema = WidgetOther | WidgetBox
 
 ```js
 [
+  // 禁用快速生成
+  { key: 'layoutMode', disabled: true },
   {
     type: 'radioGroup',
     key: 'topbarShow',

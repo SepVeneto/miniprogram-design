@@ -3,6 +3,7 @@
     <tabbar-config
       v-if="selected._schema === 'tabbar'"
       v-model="selected"
+      :schema="app.schema[selected._schema]"
     />
     <schema-render
       v-else-if="selected._schema"

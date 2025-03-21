@@ -1,4 +1,4 @@
-import { shallowRef, watch } from 'vue'
+import { defineAsyncComponent, h, shallowRef, watch } from 'vue'
 import { useDynamicScript } from './use-dynamic-script'
 
 export function useFederatedComponent(
@@ -10,7 +10,14 @@ export function useFederatedComponent(
   const { ready, errorLoading } = useDynamicScript(`${remoteUrl}/remoteEntry.js`)
   watch(ready, async (res) => {
     if (!res) return
-    Component.value = (await loadComponent(scope, module)).default
+    Component.value = defineAsyncComponent({
+      loader: () => loadComponent(scope, module),
+      loadingComponent: () => h('div', '加载中...'),
+      onError(error, retry, fail) {
+        console.error(error)
+        fail()
+      },
+    })
   }, { immediate: true })
   return { Component, errorLoading }
 }
