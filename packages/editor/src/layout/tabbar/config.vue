@@ -1,66 +1,63 @@
 <template>
-  <section>
-    <VueDraggable
-      v-model="data.list"
-      item-key="_uuid"
-      handle=".operate-move"
-      style="margin-top: 10px;"
-      :component-data="{
-        type: 'transition-group',
-        name: 'flip-list',
-      }"
-      :animation="200"
-    >
-      <template #item="{ element }">
-        <draggable-wrapper
-          dir="right"
-          style="background: #f8f8f8"
-          @delete="onDelete(element)"
-        >
-          <div style="display: flex;">
-            <span style="flex-basis: 100px;">激活图标：</span>
-            <oss-upload
-              v-model="element.activeImage"
-              width="25px"
-              height="25px"
-            />
-          </div>
-          <div style="display: flex">
-            <span style="flex-basis: 100px">未激活图标：</span>
-            <oss-upload
-              v-model="element.inactiveImage"
-              width="25px"
-              height="25px"
-            />
-          </div>
-          <div style="display: flex; margin: 10px 0; align-items: center;">
-            <span style="white-space: nowrap;">可见性：</span>
-            <el-radio-group v-model="element.isShow">
-              <el-radio :value="1">
-                显示
-              </el-radio>
-              <el-radio :value="0">
-                隐藏
-              </el-radio>
-            </el-radio-group>
-          </div>
-          <div style="display: flex; margin: 10px 0;">
-            <span style="white-space: nowrap;">名称：</span>
-            <el-input
-              v-model="element.text"
-            />
-          </div>
-          <div style="display: flex; margin-bottom: 20px;">
-            <span style="white-space: nowrap;">描述：</span>
-            <el-input
-              v-model="element.subTitle"
-            />
-          </div>
-        </draggable-wrapper>
-      </template>
-    </VueDraggable>
+  <div>
+    <section>
+      <!-- <VueDraggable
+        v-model="data.list"
+        item-key="_uuid"
+        handle=".operate-move"
+        style="margin-top: 10px;"
+        :component-data="{
+          type: 'transition-group',
+          name: 'flip-list',
+        }"
+        :animation="200"
+      >
+        <template #item="{ element }">
+          <draggable-wrapper
+            dir="right"
+            style="background: #f8f8f8"
+            @delete="onDelete(element)"
+          >
+            <div style="display: flex;">
+              <span style="flex-basis: 100px;">激活图标：</span>
+              <oss-upload
+                v-model="element.activeImage"
+                width="25px"
+                height="25px"
+              />
+            </div>
+            <div style="display: flex">
+              <span style="flex-basis: 100px">未激活图标：</span>
+              <oss-upload
+                v-model="element.inactiveImage"
+                width="25px"
+                height="25px"
+              />
+            </div>
+            <div style="display: flex; margin: 10px 0; align-items: center;">
+              <span style="white-space: nowrap;">可见性：</span>
+              <el-radio-group v-model="element.isShow">
+                <el-radio :value="1">
+                  显示
+                </el-radio>
+                <el-radio :value="0">
+                  隐藏
+                </el-radio>
+              </el-radio-group>
+            </div>
+            <div style="display: flex; margin: 10px 0;">
+              <span style="white-space: nowrap;">名称：</span>
+              <el-input v-model="element.text" />
+            </div>
+            <div style="display: flex; margin-bottom: 20px;">
+              <span style="white-space: nowrap;">描述：</span>
+              <el-input v-model="element.subTitle" />
+            </div>
+          </draggable-wrapper>
+        </template>
+      </VueDraggable> -->
 
-    <!-- <div
+      <!-- <div
       class="operate-add"
       @click="handleAdd"
     >
@@ -68,7 +65,14 @@
         <IconPlus />
       </ElIcon>
     </div> -->
-  </section>
+    </section>
+    <component
+      :is="ConfigRender"
+      v-if="ConfigRender"
+      v-model="data"
+      type="tabbar"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -84,7 +88,8 @@ import {
 } from 'vue'
 import type { TabbarWidgetConfig } from './type'
 // import { v4 as uuidv4 } from 'uuid'
-// import { useApp } from '@/store'
+import { useApp } from '@/store'
+import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
@@ -122,6 +127,13 @@ function onDelete(node: any) {
 //     text: defaultItem.label,
 //   })
 // }
+
+const app = useApp()
+const { Component: ConfigRender } = useFederatedComponent(
+  app.remoteUrl,
+  'widgets',
+  './configRender',
+)
 </script>
 
 <style scoped lang="scss">
