@@ -1,3 +1,19 @@
+## 0.17.11 (2025-03-21)
+
+
+### Bug Fixes
+
+* **editor:** old version set config fail ([3994fcb](https://github.com/SepVeneto/miniprogram-design/commit/3994fcbccafdd27b1de79717912b4f85ba65d8e2))
+* **editor:** scroll position and tree sort ([bc1155c](https://github.com/SepVeneto/miniprogram-design/commit/bc1155c0144991e23e5089d340ee89d3a534d861))
+
+
+### Features
+
+* **editor:** remove height warning ([14dc3f8](https://github.com/SepVeneto/miniprogram-design/commit/14dc3f86680a8433da41be21c70a38de50edda5f))
+* tabbar schema custom ([0bc638e](https://github.com/SepVeneto/miniprogram-design/commit/0bc638e3dd1414a01cbf38f76eaf875afa560eb2))
+
+
+
 ## 0.17.10 (2025-03-17)
 
 
