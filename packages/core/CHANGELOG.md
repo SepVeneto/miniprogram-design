@@ -1,3 +1,12 @@
+## [0.9.6](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.5...core@0.9.6) (2025-04-30)
+
+
+### Bug Fixes
+
+* **core:** VueEditor没有暴露方法 ([85ebfa7](https://github.com/SepVeneto/miniprogram-design/commit/85ebfa7bb79c0e2b2baf899dca0a3d9e9f0a3403))
+
+
+
 ## [0.9.5](https://github.com/SepVeneto/miniprogram-design/compare/core@0.9.4...core@0.9.5) (2025-03-10)
 
 
