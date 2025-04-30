@@ -4,6 +4,10 @@ import type { EditorConfig, EditorData, EditorRoute, EditorSchema, EditorSetting
 import { initEmitter } from '../helper'
 import microApp, { renderApp } from '@micro-zoe/micro-app'
 
+export interface EditorInstance {
+  clearSelected: () => void
+}
+
 export default defineComponent({
   props: {
     name: {
@@ -58,7 +62,6 @@ export default defineComponent({
     'update:modelValue',
     'selected',
   ],
-  expose: ['clearSelected'],
   setup(props, { emit, expose }) {
     const isPrepare = ref(false)
     microApp.addDataListener(props.name, (val: any) => {
@@ -126,7 +129,7 @@ export default defineComponent({
       clearSelected() {
         setData('CLEAR_SELECTED')
       },
-    })
+    } as EditorInstance)
 
     return () => h('div', { id: props.name })
   },
