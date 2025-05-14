@@ -22,6 +22,10 @@ import {
   ElTooltip,
 } from 'element-plus'
 
+const RichTextEditor = defineAsyncComponent(
+  () => import(/* webpackChunkName: "richEditor" */ './components/editor.vue'),
+)
+
 // import ConfigRender from 'widgets_side/configRender';
 // import rInput from './input.vue'
 // import rCheckbox from './'
@@ -223,9 +227,6 @@ export default defineComponent({
     function renderEditor(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
-      const RichTextEditor = defineAsyncComponent(
-        () => import(/* webpackChunkName: "richEditor" */ './components/editor.vue'),
-      )
       return h(RichTextEditor, {
         'model-value': getData(prop.modelValue, key),
         'onUpdate:modelValue': (val: string) => updateData(key, val),
