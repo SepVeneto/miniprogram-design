@@ -211,11 +211,11 @@ importers:
         specifier: ^1.4.3
         version: 1.4.3
       '@sepveneto/basic-comp':
-        specifier: ^0.8.6
-        version: 0.8.6(@element-plus/icons-vue@2.3.1(vue@3.5.12(typescript@4.5.5)))(element-plus@2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+        specifier: ^0.9.6
+        version: 0.9.6(@element-plus/icons-vue@2.3.1(vue@3.5.12(typescript@5.7.3)))(element-plus@2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
       '@sepveneto/free-dom':
         specifier: ^0.14.4
-        version: 0.14.4(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.12(typescript@4.5.5))
+        version: 0.14.4(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.12(typescript@5.7.3))
       '@sepveneto/mpd-hooks':
         specifier: workspace:*
         version: link:../hooks
@@ -224,10 +224,10 @@ importers:
         version: 1.15.8
       '@vueuse/integrations':
         specifier: ^10.11.1
-        version: 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(async-validator@4.2.5)(focus-trap@7.5.4)(sortablejs@1.15.3)(vue@3.5.12(typescript@4.5.5))
+        version: 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(async-validator@4.2.5)(focus-trap@7.5.4)(sortablejs@1.15.3)(vue@3.5.12(typescript@5.7.3))
       element-plus:
         specifier: ^2.8.6
-        version: 2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+        version: 2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -242,8 +242,11 @@ importers:
         version: 8.4.7
       vue-router:
         specifier: ^4.4.5
-        version: 4.4.5(vue@3.5.12(typescript@4.5.5))
+        version: 4.4.5(vue@3.5.12(typescript@5.7.3))
     devDependencies:
+      '@sepveneto/mpd-core':
+        specifier: 'workspace: *'
+        version: link:../core
       '@sepveneto/mpd-schema':
         specifier: workspace:^
         version: link:../schema
@@ -264,7 +267,7 @@ importers:
         version: 5.28.5(@swc/core@1.7.36)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.75.0))
       '@vueuse/core':
         specifier: ^10.11.1
-        version: 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+        version: 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
       core-js:
         specifier: ^3.38.1
         version: 3.38.1
@@ -288,7 +291,7 @@ importers:
         version: 2.9.1(webpack@5.75.0(@swc/core@1.7.36)(webpack-cli@5.1.4))
       pinia:
         specifier: ^2.2.4
-        version: 2.2.4(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(typescript@4.5.5)(vue@3.5.12(typescript@4.5.5))
+        version: 2.2.4(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(typescript@5.7.3)(vue@3.5.12(typescript@5.7.3))
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
@@ -306,28 +309,28 @@ importers:
         version: 0.2.6(@swc/core@1.7.36)(webpack@5.75.0(@swc/core@1.7.36)(webpack-cli@5.1.4))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.36)(@types/node@20.16.13)(typescript@4.5.5)
+        version: 10.9.2(@swc/core@1.7.36)(@types/node@20.16.13)(typescript@5.7.3)
       typescript:
-        specifier: ~4.5.5
-        version: 4.5.5
+        specifier: ^5.5.4
+        version: 5.7.3
       unplugin-auto-import:
         specifier: ^0.16.7
-        version: 0.16.7(@vueuse/core@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5)))(rollup@4.34.8)(webpack-sources@3.2.3)
+        version: 0.16.7(@vueuse/core@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3)))(rollup@4.34.8)(webpack-sources@3.2.3)
       unplugin-vue-components:
         specifier: ^0.25.2
-        version: 0.25.2(@babel/parser@7.25.8)(rollup@4.34.8)(vue@3.5.12(typescript@4.5.5))(webpack-sources@3.2.3)
+        version: 0.25.2(@babel/parser@7.25.8)(rollup@4.34.8)(vue@3.5.12(typescript@5.7.3))(webpack-sources@3.2.3)
       uuid:
         specifier: ^8.3.2
         version: 8.3.2
       vue:
         specifier: ^3.5.12
-        version: 3.5.12(typescript@4.5.5)
+        version: 3.5.12(typescript@5.7.3)
       vue-loader:
         specifier: ^17.4.2
-        version: 17.4.2(vue@3.5.12(typescript@4.5.5))(webpack@5.75.0(@swc/core@1.7.36)(webpack-cli@5.1.4))
+        version: 17.4.2(vue@3.5.12(typescript@5.7.3))(webpack@5.75.0(@swc/core@1.7.36)(webpack-cli@5.1.4))
       vuedraggable:
         specifier: ^4.1.0
-        version: 4.1.0(vue@3.5.12(typescript@4.5.5))
+        version: 4.1.0(vue@3.5.12(typescript@5.7.3))
       webpack:
         specifier: 5.75.0
         version: 5.75.0(@swc/core@1.7.36)(webpack-cli@5.1.4)
@@ -2034,8 +2037,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@sepveneto/basic-comp@0.8.6':
-    resolution: {integrity: sha512-ejnZ2mbDeLojuyLJMvZXe/tTJunf8PVxJnk6A+f5ji1rh6NN41mHEKpM9ZaUJcnWDoCGk8mApLE1KYL3basEkg==}
+  '@sepveneto/basic-comp@0.9.6':
+    resolution: {integrity: sha512-6CJ7iqKt0XF0thzTjS/MaWuhGahQ7pFco84Tm+LDf0HYrpqcW4xAFhWJ0rsMbLygfbaXFgsMlnNTobc/P8dh2A==}
     peerDependencies:
       '@element-plus/icons-vue': ^2.0.0
       element-plus: ^2.0.0
@@ -8776,9 +8779,9 @@ snapshots:
     dependencies:
       vue: 3.3.13(typescript@4.5.5)
 
-  '@element-plus/icons-vue@2.3.1(vue@3.5.12(typescript@4.5.5))':
+  '@element-plus/icons-vue@2.3.1(vue@3.5.12(typescript@5.7.3))':
     dependencies:
-      vue: 3.5.12(typescript@4.5.5)
+      vue: 3.5.12(typescript@5.7.3)
 
   '@element-plus/icons-vue@2.3.1(vue@3.5.13(typescript@4.5.5))':
     dependencies:
@@ -9339,11 +9342,11 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.34.8':
     optional: true
 
-  '@sepveneto/basic-comp@0.8.6(@element-plus/icons-vue@2.3.1(vue@3.5.12(typescript@4.5.5)))(element-plus@2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))':
+  '@sepveneto/basic-comp@0.9.6(@element-plus/icons-vue@2.3.1(vue@3.5.12(typescript@5.7.3)))(element-plus@2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))':
     dependencies:
-      '@element-plus/icons-vue': 2.3.1(vue@3.5.12(typescript@4.5.5))
-      element-plus: 2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
-      vue: 3.5.12(typescript@4.5.5)
+      '@element-plus/icons-vue': 2.3.1(vue@3.5.12(typescript@5.7.3))
+      element-plus: 2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
+      vue: 3.5.12(typescript@5.7.3)
 
   '@sepveneto/eslint-config-basic@0.9.2(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0)':
     dependencies:
@@ -9409,11 +9412,11 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  '@sepveneto/free-dom@0.14.4(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.12(typescript@4.5.5))':
+  '@sepveneto/free-dom@0.14.4(@types/lodash-es@4.17.12)(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(lodash-es@4.17.21)(lodash@4.17.21)(vue@3.5.12(typescript@5.7.3))':
     dependencies:
       lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
       uuid: 9.0.1
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
     transitivePeerDependencies:
       - '@types/lodash-es'
       - '@vue/composition-api'
@@ -10685,6 +10688,11 @@ snapshots:
     dependencies:
       vue: 3.5.12(typescript@4.5.5)
 
+  '@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3))':
+    dependencies:
+      vue: 3.5.12(typescript@5.7.3)
+    optional: true
+
   '@vue/composition-api@1.7.2(vue@3.5.13(typescript@4.5.5))':
     dependencies:
       vue: 3.5.13(typescript@4.5.5)
@@ -10828,12 +10836,12 @@ snapshots:
 
   '@vue/web-component-wrapper@1.3.0': {}
 
-  '@vueuse/core@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))':
+  '@vueuse/core@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))':
     dependencies:
       '@types/web-bluetooth': 0.0.20
       '@vueuse/metadata': 10.11.1
-      '@vueuse/shared': 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      '@vueuse/shared': 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -10868,12 +10876,12 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/core@9.13.0(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))':
+  '@vueuse/core@9.13.0(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))':
     dependencies:
       '@types/web-bluetooth': 0.0.16
       '@vueuse/metadata': 9.13.0
-      '@vueuse/shared': 9.13.0(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
-      vue-demi: 0.13.11(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      '@vueuse/shared': 9.13.0(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
+      vue-demi: 0.13.11(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -10908,11 +10916,11 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/integrations@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(async-validator@4.2.5)(focus-trap@7.5.4)(sortablejs@1.15.3)(vue@3.5.12(typescript@4.5.5))':
+  '@vueuse/integrations@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(async-validator@4.2.5)(focus-trap@7.5.4)(sortablejs@1.15.3)(vue@3.5.12(typescript@5.7.3))':
     dependencies:
-      '@vueuse/core': 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
-      '@vueuse/shared': 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      '@vueuse/core': 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
+      '@vueuse/shared': 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
     optionalDependencies:
       async-validator: 4.2.5
       focus-trap: 7.5.4
@@ -10951,9 +10959,9 @@ snapshots:
 
   '@vueuse/metadata@9.13.0': {}
 
-  '@vueuse/shared@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))':
+  '@vueuse/shared@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))':
     dependencies:
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -10979,9 +10987,9 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/shared@9.13.0(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))':
+  '@vueuse/shared@9.13.0(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))':
     dependencies:
-      vue-demi: 0.13.11(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      vue-demi: 0.13.11(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -12360,15 +12368,15 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  element-plus@2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5)):
+  element-plus@2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3)):
     dependencies:
       '@ctrl/tinycolor': 3.6.1
-      '@element-plus/icons-vue': 2.3.1(vue@3.5.12(typescript@4.5.5))
+      '@element-plus/icons-vue': 2.3.1(vue@3.5.12(typescript@5.7.3))
       '@floating-ui/dom': 1.6.11
       '@popperjs/core': '@sxzz/popperjs-es@2.11.7'
       '@types/lodash': 4.17.12
       '@types/lodash-es': 4.17.12
-      '@vueuse/core': 9.13.0(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      '@vueuse/core': 9.13.0(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
       async-validator: 4.2.5
       dayjs: 1.11.13
       escape-html: 1.0.3
@@ -12377,7 +12385,7 @@ snapshots:
       lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
       memoize-one: 6.0.0
       normalize-wheel-es: 1.2.0
-      vue: 3.5.12(typescript@4.5.5)
+      vue: 3.5.12(typescript@5.7.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
@@ -14373,14 +14381,14 @@ snapshots:
 
   pify@3.0.0: {}
 
-  pinia@2.2.4(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(typescript@4.5.5)(vue@3.5.12(typescript@4.5.5)):
+  pinia@2.2.4(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(typescript@5.7.3)(vue@3.5.12(typescript@5.7.3)):
     dependencies:
       '@vue/devtools-api': 6.6.4
-      vue: 3.5.12(typescript@4.5.5)
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      vue: 3.5.12(typescript@5.7.3)
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
     optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@3.5.12(typescript@4.5.5))
-      typescript: 4.5.5
+      '@vue/composition-api': 1.7.2(vue@3.5.12(typescript@5.7.3))
+      typescript: 5.7.3
 
   pirates@4.0.6: {}
 
@@ -15715,7 +15723,7 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.7.0
 
-  ts-node@10.9.2(@swc/core@1.7.36)(@types/node@20.16.13)(typescript@4.5.5):
+  ts-node@10.9.2(@swc/core@1.7.36)(@types/node@20.16.13)(typescript@5.7.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -15729,7 +15737,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 4.5.5
+      typescript: 5.7.3
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
@@ -15890,7 +15898,7 @@ snapshots:
 
   unpipe@1.0.0: {}
 
-  unplugin-auto-import@0.16.7(@vueuse/core@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5)))(rollup@4.34.8)(webpack-sources@3.2.3):
+  unplugin-auto-import@0.16.7(@vueuse/core@10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3)))(rollup@4.34.8)(webpack-sources@3.2.3):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.2(rollup@4.34.8)
@@ -15901,12 +15909,12 @@ snapshots:
       unimport: 3.13.1(rollup@4.34.8)(webpack-sources@3.2.3)
       unplugin: 1.14.1(webpack-sources@3.2.3)
     optionalDependencies:
-      '@vueuse/core': 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5))
+      '@vueuse/core': 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
     transitivePeerDependencies:
       - rollup
       - webpack-sources
 
-  unplugin-vue-components@0.25.2(@babel/parser@7.25.8)(rollup@4.34.8)(vue@3.5.12(typescript@4.5.5))(webpack-sources@3.2.3):
+  unplugin-vue-components@0.25.2(@babel/parser@7.25.8)(rollup@4.34.8)(vue@3.5.12(typescript@5.7.3))(webpack-sources@3.2.3):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.2(rollup@4.34.8)
@@ -15918,7 +15926,7 @@ snapshots:
       minimatch: 9.0.5
       resolve: 1.22.8
       unplugin: 1.14.1(webpack-sources@3.2.3)
-      vue: 3.5.12(typescript@4.5.5)
+      vue: 3.5.12(typescript@5.7.3)
     optionalDependencies:
       '@babel/parser': 7.25.8
     transitivePeerDependencies:
@@ -16183,6 +16191,12 @@ snapshots:
     optionalDependencies:
       '@vue/composition-api': 1.7.2(vue@3.5.12(typescript@4.5.5))
 
+  vue-demi@0.13.11(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3)):
+    dependencies:
+      vue: 3.5.12(typescript@5.7.3)
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.5.12(typescript@5.7.3))
+
   vue-demi@0.13.11(@vue/composition-api@1.7.2(vue@3.5.13(typescript@4.5.5)))(vue@3.5.13(typescript@4.5.5)):
     dependencies:
       vue: 3.5.13(typescript@4.5.5)
@@ -16197,11 +16211,11 @@ snapshots:
     dependencies:
       vue: 3.5.13(typescript@5.7.3)
 
-  vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@4.5.5)))(vue@3.5.12(typescript@4.5.5)):
+  vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3)):
     dependencies:
-      vue: 3.5.12(typescript@4.5.5)
+      vue: 3.5.12(typescript@5.7.3)
     optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@3.5.12(typescript@4.5.5))
+      '@vue/composition-api': 1.7.2(vue@3.5.12(typescript@5.7.3))
 
   vue-demi@0.14.10(vue@3.5.13(typescript@4.5.5)):
     dependencies:
@@ -16378,19 +16392,19 @@ snapshots:
       '@vue/compiler-sfc': 3.5.13
       vue: 3.5.13(typescript@4.5.5)
 
-  vue-loader@17.4.2(vue@3.5.12(typescript@4.5.5))(webpack@5.75.0(@swc/core@1.7.36)(webpack-cli@5.1.4)):
+  vue-loader@17.4.2(vue@3.5.12(typescript@5.7.3))(webpack@5.75.0(@swc/core@1.7.36)(webpack-cli@5.1.4)):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
       watchpack: 2.4.2
       webpack: 5.75.0(@swc/core@1.7.36)(webpack-cli@5.1.4)
     optionalDependencies:
-      vue: 3.5.12(typescript@4.5.5)
+      vue: 3.5.12(typescript@5.7.3)
 
-  vue-router@4.4.5(vue@3.5.12(typescript@4.5.5)):
+  vue-router@4.4.5(vue@3.5.12(typescript@5.7.3)):
     dependencies:
       '@vue/devtools-api': 6.6.4
-      vue: 3.5.12(typescript@4.5.5)
+      vue: 3.5.12(typescript@5.7.3)
 
   vue-style-loader@4.1.3:
     dependencies:
@@ -16465,10 +16479,10 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
 
-  vuedraggable@4.1.0(vue@3.5.12(typescript@4.5.5)):
+  vuedraggable@4.1.0(vue@3.5.12(typescript@5.7.3)):
     dependencies:
       sortablejs: 1.14.0
-      vue: 3.5.12(typescript@4.5.5)
+      vue: 3.5.12(typescript@5.7.3)
 
   watchpack@2.4.2:
     dependencies:

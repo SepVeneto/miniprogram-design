@@ -3,8 +3,9 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
+    "skipDefaultLibCheck": true,
     "jsx": "preserve",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,6 +16,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "swiper/swiper.esm.js": [
+        "./node_modules/swiper/types/index.d.ts"
       ]
     },
     "types": [
@@ -42,6 +46,6 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
   ]
 }

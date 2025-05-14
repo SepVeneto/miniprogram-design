@@ -1,8 +1,8 @@
 import { h, nextTick, onMounted, shallowRef, watch } from 'vue'
 import type { Ref, UnwrapNestedRefs, VNode } from 'vue'
 import type { HoverActiveReturn } from './useHoverActive'
-// eslint-disable-next-line import/no-named-as-default
-import Swiper from 'swiper'
+
+import { Swiper } from 'swiper/swiper.esm.js'
 import 'swiper/css'
 import ContainerItem from '../container.item.vue'
 import { useApp } from '@/store'

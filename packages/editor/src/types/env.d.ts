@@ -2,6 +2,9 @@ declare module '*.png' {
   const value: string;
   export = value
 }
+declare module 'swiper/core' {
+  export * from 'swiper'
+}
 interface Window {
   mount: () => void
   unmount: () => void
