@@ -225,6 +225,9 @@ importers:
       '@vueuse/integrations':
         specifier: ^10.11.1
         version: 10.11.1(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(async-validator@4.2.5)(focus-trap@7.5.4)(sortablejs@1.15.3)(vue@3.5.12(typescript@5.7.3))
+      async-validator:
+        specifier: ^4.2.5
+        version: 4.2.5
       element-plus:
         specifier: ^2.8.6
         version: 2.8.6(@vue/composition-api@1.7.2(vue@3.5.12(typescript@5.7.3)))(vue@3.5.12(typescript@5.7.3))
@@ -371,6 +374,9 @@ importers:
 
   packages/schema:
     dependencies:
+      '@sepveneto/mpd-core':
+        specifier: workspace:^
+        version: link:../core
       '@sepveneto/mpd-hooks':
         specifier: workspace:^
         version: link:../hooks

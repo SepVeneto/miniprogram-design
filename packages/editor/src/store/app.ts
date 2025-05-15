@@ -4,12 +4,16 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { router } from '@/router'
 import Editor from '@/layout/editor.vue'
+import { isBox } from '@sepveneto/mpd-core'
+import type { EditorSchema, ISchema } from '@sepveneto/mpd-core'
 
 import mock from '@/mock'
 import { schema as schemaConfig } from '@/mock.schema'
 import type { DisabledItemFn, WidgetNode } from '@/types/type'
 import { useRoute } from 'vue-router'
 import { emitEvt } from '@/utils'
+
+// type SchemaConfig =
 
 export interface Settings {
   disabledItem?: DisabledItemFn
@@ -35,7 +39,24 @@ export const useApp = defineStore('app', () => {
       list: [],
     },
   })
-  const schema = shallowRef<Record<string, any>>({})
+  const schema = shallowRef<EditorSchema>({})
+  const schemaRuleMap = new Map()
+  const schemaRule = computed(() => {
+    Object.entries(schema.value).forEach(([name, config]) => {
+      if (name === 'tabbar') return
+
+      (config as ISchema).forEach(each => {
+        if (isBox(each) || !each.rules || !each.key) return
+        const rules = schemaRuleMap.get(name)
+        if (!rules) {
+          schemaRuleMap.set(name, { [each.key]: each.rules })
+        } else {
+          rules[each.key] = each.rules
+        }
+      })
+    })
+    return schemaRuleMap
+  })
   const routes = shallowRef<any[]>([
     { path: '/' },
   ])
@@ -282,5 +303,7 @@ export const useApp = defineStore('app', () => {
     remoteUrl,
     history,
     hasHistory,
+
+    schemaRule,
   }
 })

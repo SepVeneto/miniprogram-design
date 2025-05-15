@@ -4,6 +4,7 @@ import type { CSSProperties } from 'vue-demi'
 import { getCurrentInstance, nextTick, onMounted } from 'vue-demi'
 import { upgrade } from './upgrade'
 import type { UploadRequestOptions } from 'element-plus'
+import type { ISchema, SchemaOther } from './types'
 
 export * from './upgrade'
 export * from './types'
@@ -15,24 +16,11 @@ export type EditorConfig = {
   tabbars?: Record<PropertyKey, unknown>
 }
 
-type WidgetType = 'input'
-  | 'number'
-  | 'checkbox'
-  | 'image'
-  | 'colorPicker'
-  | 'select'
-  | 'radioGroup'
-  | 'editor'
-interface ISchema {
-  type: WidgetType | string
-  label: string
-  key: string
-  link?: Record<string, ISchema[]>
-  [attr: string]: any
-}
 export type EditorSchema = {
-  globalConfig: ISchema[]
-  [key: string]: ISchema[]
+  globalConfig?: SchemaOther<any>[]
+  $pageConfig?: Record<string, SchemaOther<any>[]>
+  tabbar?: { custom?: boolean }
+  [other: string]: ISchema | undefined | { custom?: boolean} | SchemaOther<any>[]
 }
 
 export type EditorWidget = {

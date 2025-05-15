@@ -1,4 +1,6 @@
-const baseSchema = [
+import type { EditorSchema, ISchema } from '@sepveneto/mpd-core'
+
+const baseSchema: ISchema = [
   { type: 'box' },
   {
     type: 'checkbox',
@@ -7,8 +9,8 @@ const baseSchema = [
     trueLabel: 1,
     falseLabel: 0,
   },
-]
-const cardSchema = [
+] as const
+const cardSchema: ISchema = [
   {
     type: 'number',
     label: '顶部外边距',
@@ -48,7 +50,7 @@ const cardSchema = [
   },
 ]
 
-const explain = [
+const explain: ISchema = [
   {
     type: 'number',
     label: '顶部外边距',
@@ -88,7 +90,7 @@ const explain = [
   },
 ]
 
-const shop = [
+const shop: ISchema = [
   {
     type: 'number',
     label: '顶部外边距',
@@ -128,7 +130,7 @@ const shop = [
   },
 ]
 
-const reserve = [
+const reserve: ISchema = [
   {
     type: 'number',
     label: '顶部外边距',
@@ -181,7 +183,7 @@ const reserve = [
   },
 ]
 
-const mine = [
+const mine: ISchema = [
   ...cardSchema,
   {
     type: 'checkbox',
@@ -199,7 +201,7 @@ const mine = [
   },
 ]
 
-const container = [
+const container: ISchema = [
   {
     type: 'box',
   },
@@ -221,7 +223,7 @@ const container = [
   },
 ]
 
-const menuItem = [
+const menuItem: ISchema = [
   {
     type: 'box',
   },
@@ -229,6 +231,7 @@ const menuItem = [
     type: 'input',
     label: '标题',
     key: 'title',
+    rules: [{ required: true, message: 'test' }],
   },
   {
     type: 'checkbox',
@@ -252,7 +255,7 @@ const menuItem = [
   },
 ]
 
-const desc = [
+const desc: ISchema = [
   {
     type: 'editor',
     label: '说明内容',
@@ -265,7 +268,7 @@ const desc = [
   },
 ]
 
-const link = [
+const link: ISchema = [
   {
     type: 'checkbox',
     label: '可见性',
@@ -278,7 +281,7 @@ const link = [
   },
 ]
 
-const entry = [
+const entry: ISchema = [
   {
     type: 'checkbox',
     label: '可见性',
@@ -303,9 +306,9 @@ const entry = [
   },
 ]
 
-const globalConfig: any[] = []
+const globalConfig: EditorSchema['globalConfig'] = []
 
-const text = [
+const text: ISchema = [
   {
     type: 'colorPicker',
     label: '字体颜色',
@@ -318,7 +321,7 @@ const text = [
   },
 ]
 
-const image = [
+const image: ISchema = [
   // {
   //   type: 'number',
   //   label: '宽度',
@@ -335,7 +338,7 @@ const image = [
     key: 'img',
   },
 ]
-const floatBtn = [
+const floatBtn: ISchema = [
   ...baseSchema,
   {
     type: 'checkbox',
@@ -380,7 +383,7 @@ export const schema = {
   menuItem,
   swiper: [
     { type: 'box' },
-  ],
+  ] as ISchema,
   desc,
   link,
   entry,

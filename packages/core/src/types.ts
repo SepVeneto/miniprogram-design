@@ -1,5 +1,7 @@
+import type { FormItemRule } from 'element-plus'
 import type { CSSProperties } from 'vue'
 
+// region Widget
 export type WidgetPos = {
   x?: number,
   y?: number,
@@ -28,13 +30,63 @@ type BaseKey =
 | '_uuid'
 | '_view'
 
-export type Schema<T extends Base> = {
-  [k in (Exclude<keyof T, BaseKey> | `style.${string}`)]: {
+export type IWidget<T extends Base = any> = Base<T>
+// endregion
+
+// region Schema
+// type WidgetType =
+//   'input'
+//   | 'number'
+//   | 'checkbox'
+//   | 'image'
+//   | 'colorPicker'
+//   | 'select'
+//   | 'radioGroup'
+//   | 'editor'
+//   | 'box'
+//   | 'switch'
+type BoxModel = 'marginLeft'
+| 'marginTop'
+| 'marginRight'
+| 'marginBottom'
+| 'paddingLeft'
+| 'paddingTop'
+| 'paddingRight'
+| 'paddingBottom'
+| 'borderLeft'
+| 'borderTop'
+| 'borderBottom'
+| 'borderight'
+
+type SchemaRule = FormItemRule
+
+type ValidKey<T extends Base> = Exclude<keyof T, BaseKey> | `style.${string}`
+
+export type SchemaOther<T extends Base> = {
+  [k in ValidKey<T>]: {
     type: string
-    label: string
+    label?: string
     key: k
+    tips?: string
+    link?: Record<string, SchemaOther<T>[]>
+    _inContainer?: 'outer' | 'inner'
+    onChange?: (data: any) => void,
+    rules?: SchemaRule[]
     [other: string]: any
   }
-}[Exclude<keyof T, BaseKey> | `style.${string}`][]
+}[ValidKey<T>]
 
-export type Widget<T extends Base> = Base<T>
+export type SchemaBox = {
+  type: 'box'
+  _inContainer?: 'outer' | 'inner'
+  include?: BoxModel[]
+  exclude?: BoxModel[]
+}
+
+export type ISchema<T extends Record<string, any> = any> = (SchemaOther<T> | SchemaBox)[]
+
+export function isBox(schema: ISchema<any>[number]): schema is SchemaBox {
+  return schema.type === 'box'
+}
+
+// endregion

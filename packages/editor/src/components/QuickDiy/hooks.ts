@@ -6,6 +6,7 @@ import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import { defaultsDeep } from 'lodash-es'
 import { useApp } from '@/store'
 import type { LikeWidgetNode } from '@/types/type'
+import type { EditorWidget } from '@sepveneto/mpd-core'
 
 type BatchSelectPos = {
   lastX: number,
@@ -24,7 +25,7 @@ export function useWidgets(widgets: Ref<LikeWidgetNode[]>) {
     app.widgetList.forEach(item => {
       list.push({
         label: item.name,
-        children: item.group.map(each => ({
+        children: item.group.map((each: EditorWidget) => ({
           label: each._name,
           onClick: () => {
             defaultsDeep(placeholder, each)

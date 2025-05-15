@@ -52,6 +52,7 @@
     "@sepveneto/mpd-hooks": "workspace:*",
     "@types/sortablejs": "^1.15.8",
     "@vueuse/integrations": "^10.11.1",
+    "async-validator": "^4.2.5",
     "element-plus": "^2.8.6",
     "lodash-es": "^4.17.21",
     "minimist": "^1.2.8",

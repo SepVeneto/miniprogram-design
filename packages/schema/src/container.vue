@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PropType, ShallowRef, VNode } from 'vue'
-import { defineAsyncComponent, defineComponent, h, watch, withModifiers } from 'vue'
+import { defineAsyncComponent, defineComponent, h, onMounted, ref, watch, withModifiers } from 'vue'
 import OssUpload from './components/ossUpload.vue'
 import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { QuestionFilled } from '@element-plus/icons-vue'
@@ -21,6 +21,15 @@ import {
   ElSwitch,
   ElTooltip,
 } from 'element-plus'
+import type {
+  ISchema as ISchemaList,
+  SchemaBox,
+  SchemaOther,
+} from '@sepveneto/mpd-core'
+
+type ISchema = ISchemaList[number]
+type WidgetBox = SchemaBox
+type WidgetOther = SchemaOther<unknown>
 
 const RichTextEditor = defineAsyncComponent(
   () => import(/* webpackChunkName: "richEditor" */ './components/editor.vue'),
@@ -29,48 +38,6 @@ const RichTextEditor = defineAsyncComponent(
 // import ConfigRender from 'widgets_side/configRender';
 // import rInput from './input.vue'
 // import rCheckbox from './'
-type WidgetType = 'input'
-  | 'number'
-  | 'checkbox'
-  | 'image'
-  | 'colorPicker'
-  | 'select'
-  | 'radioGroup'
-  | 'editor'
-  | 'box'
-  | 'switch'
-type BoxModel = 'marginLeft'
-| 'marginTop'
-| 'marginRight'
-| 'marginBottom'
-| 'paddingLeft'
-| 'paddingTop'
-| 'paddingRight'
-| 'paddingBottom'
-| 'borderLeft'
-| 'borderTop'
-| 'borderBottom'
-| 'borderight'
-
-type WidgetOther = {
-  type: Exclude<WidgetType, 'box'>
-  label?: string
-  key: string
-  tips?: string
-  link?: Record<string, WidgetOther[]>
-  _inContainer?: 'outer' | 'inner'
-  onChange: (data: any) => void,
-  [attr: string]: any
-}
-type WidgetBox = {
-  type: Omit<WidgetType, 'box'>
-  _inContainer?: 'outer' | 'inner'
-  include?: BoxModel[]
-  exclude?: BoxModel[]
-}
-
-export type ISchema = WidgetOther | WidgetBox
-
 export default defineComponent({
   name: 'SchemaContainer',
   components: {
@@ -304,7 +271,12 @@ export default defineComponent({
       }
       return flag
     }
+    const formRef = ref()
+    onMounted(() => {
+      formRef.value?.validate()
+    })
     return {
+      formRef,
       // schemaList,
       updateData,
       getData,
@@ -333,7 +305,7 @@ export default defineComponent({
           node = this.renderSwitch(schema as WidgetOther)
           break
         case 'box':
-          node = this.renderBox(schema)
+          node = this.renderBox(schema as WidgetBox)
           break
         case 'input':
           node = this.renderInput(schema as WidgetOther)
@@ -375,6 +347,8 @@ export default defineComponent({
         h(ElFormItem, {
           'label-width': _schema.label ? '' : '0px',
           style: { display: _schema._hidden && 'none' },
+          prop: _schema.key,
+          rules: _schema.rules,
         }, {
           default: () => node,
           label: () => this.renderLabel(schema as WidgetOther),
@@ -383,6 +357,8 @@ export default defineComponent({
       ]
     }
     const formItem = () => h(ElForm, {
+      ref: 'formRef',
+      model: this.modelValue,
       'label-width': '100px',
       onSubmit: withModifiers(() => { /* pass */ }, ['prevent']),
     }, () => this.schema.filter(item => this.allowContainer(item)).map(item => {

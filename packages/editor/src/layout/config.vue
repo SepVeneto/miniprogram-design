@@ -9,13 +9,13 @@
       v-else-if="selected._schema"
       :key="selected._uuid"
       v-model="selected"
-      :schema="app.schema[selected._schema]"
+      :schema="commonSchema(app.schema[selected._schema])"
       :remote-url="app.remoteUrl"
     />
     <section v-else>
       <schema-render
         v-model="config"
-        :schema="type === 'page' ? pageSchema : globalSchema"
+        :schema="commonSchema(type === 'page' ? pageSchema : globalSchema)"
         :remote-url="app.remoteUrl"
         disabled-when-without
       />
@@ -32,10 +32,11 @@ import { ElMessageBox } from 'element-plus'
 import { useConfig } from '@/hooks'
 import { merge } from 'lodash-es'
 import { useRoute } from 'vue-router'
+import type { ISchema, IWidget } from '@sepveneto/mpd-core'
 
 const app = useApp()
 const history = useHistory()
-const selected = computed<any>({
+const selected = computed<IWidget>({
   get() {
     return app.selected
   },
@@ -46,97 +47,101 @@ const selected = computed<any>({
 const type = computed(() => app.schemaType)
 const config = useConfig()
 
+const commonSchema = (schema: any) => schema as ISchema
+
+const DEFAULT_LIST = [
+  {
+    type: 'switch',
+    key: 'layoutMode',
+    label: '布局模式',
+    activeText: '自由',
+    activeValue: 'free',
+    inactiveText: '栅格',
+    inactiveValue: 'grid',
+    'onUpdate:modelValue': async (mode: 'free' | 'grid') => {
+      if (mode === 'free') {
+        ElMessageBox.confirm(
+          '切换到自由布局会破坏原来栅格布局的结构，该操作不可逆，请确认是否需要切换？',
+          '警告',
+          {
+            type: 'warning',
+            confirmButtonText: '切换',
+            cancelButtonText: '取消',
+          },
+        ).then(() => {
+          const _config = {
+            ...config.value,
+            size: { width: 375, height: 630 },
+            layoutMode: mode,
+          }
+          config.value = _config
+        }).catch((err) => { console.error(err) })
+      } else {
+        config.value.layoutMode = mode
+      }
+    },
+    link: {
+      free: [
+        {
+          type: 'number',
+          key: 'size.width',
+          label: '页面宽度',
+          disabled: true,
+        },
+        {
+          type: 'number',
+          key: 'size.height',
+          label: '页面高度',
+          tips: '根据设备分辨率的不同，部分设备可能会出现滚动条',
+        },
+      ],
+      grid: [],
+    },
+  },
+  {
+    type: 'radioGroup',
+    key: 'topbarShow',
+    label: '顶部导航栏',
+    options: [
+      { label: '显示', value: 1 },
+      { label: '隐藏', value: 0 },
+    ],
+  },
+  {
+    type: 'radioGroup',
+    key: 'tabbarShow',
+    label: '底部导航栏',
+    options: [
+      { label: '显示', value: 1 },
+      { label: '隐藏', value: 0 },
+    ],
+  },
+  {
+    type: 'radioGroup',
+    key: 'background.type',
+    label: '背景',
+    options: [
+      { label: '图片', value: 'image' },
+      { label: '颜色', value: 'color' },
+    ],
+    link: {
+      image: [{
+        type: 'image',
+        key: 'background.image',
+        label: '图片',
+        width: '111px',
+        height: '182px',
+      }],
+      color: [{ type: 'colorPicker', key: 'background.color', label: '颜色' }],
+    },
+  },
+] as const
+
 const route = useRoute()
 // merge page config
 const pageSchema = computed(() => {
   const newList = [...app.schema.$pageConfig?.[route.name as string] || []]
-  const target = [
-    {
-      type: 'switch',
-      key: 'layoutMode',
-      label: '布局模式',
-      activeText: '自由',
-      activeValue: 'free',
-      inactiveText: '栅格',
-      inactiveValue: 'grid',
-      'onUpdate:modelValue': async (mode: 'free' | 'grid') => {
-        if (mode === 'free') {
-          ElMessageBox.confirm(
-            '切换到自由布局会破坏原来栅格布局的结构，该操作不可逆，请确认是否需要切换？',
-            '警告',
-            {
-              type: 'warning',
-              confirmButtonText: '切换',
-              cancelButtonText: '取消',
-            },
-          ).then(() => {
-            const _config = {
-              ...config.value,
-              size: { width: 375, height: 630 },
-              layoutMode: mode,
-            }
-            config.value = _config
-          }).catch((err) => { console.error(err) })
-        } else {
-          config.value.layoutMode = mode
-        }
-      },
-      link: {
-        free: [
-          {
-            type: 'number',
-            key: 'size.width',
-            label: '页面宽度',
-            disabled: true,
-          },
-          {
-            type: 'number',
-            key: 'size.height',
-            label: '页面高度',
-            tips: '根据设备分辨率的不同，部分设备可能会出现滚动条',
-          },
-        ],
-        grid: [],
-      },
-    },
-    {
-      type: 'radioGroup',
-      key: 'topbarShow',
-      label: '顶部导航栏',
-      options: [
-        { label: '显示', value: 1 },
-        { label: '隐藏', value: 0 },
-      ],
-    },
-    {
-      type: 'radioGroup',
-      key: 'tabbarShow',
-      label: '底部导航栏',
-      options: [
-        { label: '显示', value: 1 },
-        { label: '隐藏', value: 0 },
-      ],
-    },
-    {
-      type: 'radioGroup',
-      key: 'background.type',
-      label: '背景',
-      options: [
-        { label: '图片', value: 'image' },
-        { label: '颜色', value: 'color' },
-      ],
-      link: {
-        image: [{
-          type: 'image',
-          key: 'background.image',
-          label: '图片',
-          width: '111px',
-          height: '182px',
-        }],
-        color: [{ type: 'colorPicker', key: 'background.color', label: '颜色' }],
-      },
-    },
-  ].map(item => {
+  const target = DEFAULT_LIST.map(item => {
     const sourceIndex = newList?.findIndex((each: any) => each.key === item.key)
     const source = newList[sourceIndex]
     if (source) {
@@ -147,7 +152,8 @@ const pageSchema = computed(() => {
       return item
     }
   })
-  return target.concat(newList)
+  // TODO: 需要优化
+  return target.concat(newList as any)
 })
 const globalSchema = computed(() => {
   return app.schema.globalConfig
