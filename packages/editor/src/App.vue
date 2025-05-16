@@ -1,5 +1,5 @@
 <template>
-  <ElButton @click="validateTest">
+  <ElButton>
     form validate
   </ElButton>
   <ElConfigProvider
@@ -118,9 +118,6 @@ import SettingGlobal from './layout/Setting.global.vue'
 import SettingWidget from './layout/Setting.widget.vue'
 import { useConfig } from './hooks'
 
-import Validator from 'async-validator'
-import type { IWidget } from '@sepveneto/mpd-core'
-
 const route = useRoute()
 const router = useRouter()
 const app = useApp()
@@ -161,47 +158,6 @@ onMounted(() => {
   window.microApp?.dispatch({ event: 'mounted' }, undefined, true)
 })
 
-function formatData(
-  list: IWidget<any>[],
-  pageData: Record<string, any> = {},
-) {
-  list.forEach(widget => {
-    if (widget._schema === 'tabbar') return
-
-    if (widget._schema === 'container') {
-      formatData(widget.list, pageData)
-    } else {
-      pageData[widget._uuid] = widget
-    }
-  })
-  return pageData
-}
-function validateTest() {
-  const pages = Object.keys(app.config.body)
-  for (const page of pages) {
-    const pageData = formatData(app.config.body[page])
-
-    Object.entries(pageData).forEach(([uid, data]) => {
-      const rules = app.schemaRule.get(data._schema)
-      const validator = new Validator(rules)
-      validator.validate(data).then((res) => {
-        console.log('pass', res)
-      }).catch(err => {
-        console.error(err, uid)
-        // TODO: 串行检查，错误中止
-        handleSelect(data)
-      })
-    })
-
-    // console.log(rules, pageData)
-    // const validator = new Validator(rules)
-    // validator.validate(pageData).then(res => {
-    //   console.log(res)
-    // }).catch(err => {
-    //   console.error(err)
-    // })
-  }
-}
 function handleSelect(data: any) {
   app.selected = data
 }

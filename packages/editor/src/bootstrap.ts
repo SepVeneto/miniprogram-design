@@ -11,6 +11,7 @@ import './styles/global.scss'
 import { router } from './router'
 import BasicComp from '@sepveneto/basic-comp'
 import '@sepveneto/basic-comp/css'
+import { register } from './helper'
 
 let app: App | null
 let store: Pinia | null
@@ -82,3 +83,5 @@ console.log(`VUE版本：v${version}`)
 console.log(`Vue Router版本: v${__VR_VERSION__}`)
 console.log(`Element Plus版本：v${EP_VERSION}`)
 console.log(`Basic Component版本：v${__BC_VERSION__}`)
+
+register()

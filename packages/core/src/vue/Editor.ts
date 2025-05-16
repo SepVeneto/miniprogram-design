@@ -1,4 +1,4 @@
-import { defineComponent, h, onMounted, ref, watchEffect } from 'vue-demi'
+import { defineComponent, h, onMounted, ref, watchEffect } from 'vue'
 import { type PropType } from 'vue-demi'
 import type { EditorConfig, EditorData, EditorRoute, EditorSchema, EditorSettings, EditorWidgets } from '../index'
 import { initEmitter } from '../helper'
@@ -6,6 +6,7 @@ import microApp, { renderApp } from '@micro-zoe/micro-app'
 
 export interface EditorInstance {
   clearSelected: () => void
+  validate: () => void
 }
 
 export default defineComponent({
@@ -125,7 +126,18 @@ export default defineComponent({
       appEvent.emit(name, data)
     }
 
+    async function select(data: any) {
+      const api = microApp.getData(props.name) as any
+      api.selectWidget?.(data)
+    }
+
     expose({
+      async validate() {
+        const data = microApp.getData(props.name) as any
+        const res = await data.validate?.()
+        select(res)
+      },
+      select,
       clearSelected() {
         setData('CLEAR_SELECTED')
       },
