@@ -1,7 +1,4 @@
 <template>
-  <ElButton>
-    form validate
-  </ElButton>
   <ElConfigProvider
     :locale="zhCn"
     namespace="mpd"

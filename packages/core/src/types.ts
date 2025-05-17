@@ -1,4 +1,4 @@
-import type { FormItemRule } from 'element-plus'
+import type { FormItemRule, UploadRequestOptions } from 'element-plus'
 import type { CSSProperties } from 'vue'
 
 // region Widget
@@ -90,3 +90,76 @@ export function isBox(schema: ISchema<any>[number]): schema is SchemaBox {
 }
 
 // endregion
+
+// region Editor
+export type EditorConfig = {
+  version?: string
+  globalConfig: Record<PropertyKey, unknown>
+  body: Record<PropertyKey, unknown>
+  tabbars?: Record<PropertyKey, unknown>
+}
+export type EditorSchema = {
+  globalConfig?: SchemaOther<any>[]
+  $pageConfig?: Record<string, SchemaOther<any>[]>
+  tabbar?: { custom?: boolean }
+  [other: string]: ISchema | undefined | { custom?: boolean} | SchemaOther<any>[]
+}
+export type EditorWidget = {
+  _name: string
+  _view: string
+  _schema: string
+  _inContainer?: 'outer' | 'inner'
+  style?: Partial<CSSProperties>
+  [key: string]: unknown
+}
+export type EditorRoute = {
+  name: string
+  path: string
+  meta?: Record<PropertyKey, unknown> & { title?: string }
+}
+type DisabledRules = boolean | Partial<{
+  delete: boolean
+  custom: boolean
+  sort: boolean
+}>
+export type DisabledItemFn = (widget: EditorWidget) => DisabledRules
+export type EditorWidgets = {
+  name: string,
+  group: EditorWidget[],
+}[]
+
+export type EditorSettings = {
+  disabledItem?: DisabledItemFn
+  disabledAdd?: boolean
+}
+
+export type EditorData = {
+  upload?: (data: UploadRequestOptions) => Promise<string>
+  /**
+   * 组件视图的可访问地址
+   */
+  remoteUrl?: string
+  /**
+   * 编辑器数据
+   */
+  config: EditorConfig
+  /**
+   * 组件的配置项
+   */
+  schema?: EditorSchema
+  /**
+   * 可配置的组件列表
+   */
+  widgets?: {
+    name: string
+    group: EditorWidget[]
+  }[]
+  /**
+   * 编辑器的路由
+   */
+  routes?: EditorRoute[]
+  /**
+   * 编辑器配置
+   */
+  settings?: EditorSettings,
+}

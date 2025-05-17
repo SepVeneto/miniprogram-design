@@ -29,7 +29,8 @@
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
 import { VueEditor, type VueEditorInstance } from '../../src/vue'
-import type { ISchema } from '../../src'
+import * as schema from './mock/schema'
+import * as widget from './mock/widgets'
 // import { useDesign } from '../../src/index'
 // import { initEmitter } from '../../src/helper'
 
@@ -44,18 +45,13 @@ function onMount() {
 }
 
 const config = ref({ globalConfig: {}, body: {} })
-const schema: Record<string, ISchema> = {
-  test: [
-    { label: 'input', key: 'a', type: 'datepicker', rules: [{ required: true, message: 'test' }] },
-  ],
-} as const
 
 setTimeout(async () => {
   config.value = {
     globalConfig: {},
     body: {
       Home: [
-        { _view: 'test', _schema: 'test', style: { height: 100, width: 375 }, _name: 'comp1', _uuid: '1' },
+        widget.card,
       ],
     },
   }
@@ -64,7 +60,7 @@ setTimeout(async () => {
 }, 2000)
 const widgets = shallowRef<any[]>([])
 function handleSetWidget() {
-  widgets.value = [{ name: 'test', group: [{ _view: 'test', _schema: 'test', style: { height: 100, width: 375 }, _name: 'comp1' }] }]
+  widgets.value = [widget.card]
 }
 
 const eventName = ref()
