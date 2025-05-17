@@ -3,13 +3,19 @@
   <div>事件值：{{ eventData }}</div>
 
   <div>编辑器：{{ config }}</div>
+
+  <button @click="handleValidate">
+    validate
+  </button>
   <!-- <div id="miniprogram-design" /> -->
   <VueEditor
+    ref="editorRef"
     v-model="config"
     url="http://localhost:8082"
     remote-url="http://localhost:8090"
     :widgets="widgets"
     :settings="{ disabledItem: disableItem }"
+    :schema="schema"
     @selected="handleSelected"
     @delete="handleDelete"
     @mounted="onMount"
@@ -22,33 +28,27 @@
 
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
-import { VueEditor } from '../../src/vue'
+import { VueEditor, type VueEditorInstance } from '../../src/vue'
+import type { ISchema } from '../../src'
 // import { useDesign } from '../../src/index'
 // import { initEmitter } from '../../src/helper'
+
+const editorRef = ref<VueEditorInstance>()
+
+function handleValidate() {
+  editorRef.value?.validate()
+}
 
 function onMount() {
   console.log('mounted')
 }
 
 const config = ref({ globalConfig: {}, body: {} })
-
-// initEmitter()
-// const [get, set, prepare] = useDesign('#miniprogram-design', {
-//   name: 'mp',
-//   url: 'http://localhost:8082',
-//   inline: true,
-//   data: {
-//     remoteUrl: 'http://localhost:8090',
-//     config: config.value,
-//     schema: { globalConfig: [] },
-//     widgets: [],
-//     routes: [{ name: 'Home', path: '/' }],
-//     settings: {},
-//   },
-//   mounted() {
-//     console.log('m')
-//   },
-// })
+const schema: Record<string, ISchema> = {
+  test: [
+    { label: 'input', key: 'a', type: 'datepicker', rules: [{ required: true, message: 'test' }] },
+  ],
+} as const
 
 setTimeout(async () => {
   config.value = {
@@ -78,7 +78,7 @@ function handleDelete(data: any) {
   eventData.value = data
 }
 
-function disableItem(selected) {
+function disableItem() {
   return {
     delete: true,
     sort: false,

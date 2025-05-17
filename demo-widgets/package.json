@@ -13,7 +13,7 @@
     "@sepveneto/mpd-core": "workspace: *",
     "@vueuse/core": "^9.1.1",
     "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "vue": "^3.5.14"
   },
   "devDependencies": {
     "@sepveneto/eslint-config": "^0.9.0",

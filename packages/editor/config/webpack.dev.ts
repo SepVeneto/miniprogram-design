@@ -67,6 +67,10 @@ const config: webpack.Configuration = {
           singleton: true,
           requiredVersion: '^3.4.21',
         },
+        'element-plus': {
+          singleton: true,
+          requiredVersion: '^2.8.6',
+        },
       },
     }),
     new HtmlWebpackPlugin({
