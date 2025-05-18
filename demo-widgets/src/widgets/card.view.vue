@@ -12,7 +12,7 @@
       v-else
       style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;"
     >
-      empty
+      {{ config.age }}111
     </div>
   </div>
 </template>

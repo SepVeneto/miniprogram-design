@@ -2,7 +2,7 @@ import { h, nextTick, onMounted, shallowRef, watch } from 'vue'
 import type { Ref, UnwrapNestedRefs, VNode } from 'vue'
 import type { HoverActiveReturn } from './useHoverActive'
 
-import { Swiper } from 'swiper/swiper.esm.js'
+import Swiper from 'swiper'
 import 'swiper/css'
 import ContainerItem from '../container.item.vue'
 import { useApp } from '@/store'
@@ -15,7 +15,6 @@ export type GridOptions = UnwrapNestedRefs<{
   cellWidth: Ref<number>
   containerRect: { width: number, height: number }
   selected: Ref<GridItem>
-  ViewRender: any
   type: 'swiper' | 'grid'
   columnGap: number,
   handleSelect: (item: GridItem) => void

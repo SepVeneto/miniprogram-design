@@ -11,8 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sepveneto/mpd-hooks": "workspace:^",
+    "@module-federation/enhanced": "^0.14.0",
     "@sepveneto/mpd-core": "workspace:^",
+    "@sepveneto/mpd-hooks": "workspace:^",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "^5.1.12",
     "uuid": "^8.3.2",

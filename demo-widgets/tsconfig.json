@@ -4,7 +4,7 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -30,7 +30,7 @@
     }
   },
   "include": [
-    "webpack.config.ts",
+    "rspack.config.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",

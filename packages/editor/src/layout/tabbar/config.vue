@@ -71,8 +71,7 @@ import draggableWrapper from '@/components/draggableWrapper.vue'
 import ossUpload from '@/components/ossUpload.vue'
 import type { PropType } from 'vue'
 import type { TabbarWidgetConfig } from './type'
-import { useApp } from '@/store'
-import { useFederatedComponent } from '@sepveneto/mpd-hooks'
+import { loadFromRemote } from '@/utils'
 
 const data = defineModel('modelValue', {
   type: Object as PropType<TabbarWidgetConfig>,
@@ -93,12 +92,7 @@ function onDelete(node: any) {
   data.value.list.splice(index, 1)
 }
 
-const app = useApp()
-const { Component: ConfigRender } = useFederatedComponent(
-  app.remoteUrl,
-  'widgets',
-  './configRender',
-)
+const ConfigRender = loadFromRemote('widgets', 'configRender')
 </script>
 
 <style scoped lang="scss">

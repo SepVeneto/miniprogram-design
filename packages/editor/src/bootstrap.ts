@@ -12,6 +12,7 @@ import { router } from './router'
 import BasicComp from '@sepveneto/basic-comp'
 import '@sepveneto/basic-comp/css'
 import { register } from './helper'
+import { init } from '@module-federation/enhanced/runtime'
 
 let app: App | null
 let store: Pinia | null
@@ -23,6 +24,36 @@ function mount() {
   app.use(BasicComp, {})
   app.use(store)
   app.use(router)
+
+  init({
+    name: 'editor-side',
+    remotes: [],
+    shared: {
+      'vue-router': {
+        shareConfig: {
+          singleton: true,
+          requiredVersion: '^4',
+        },
+      },
+      vue: {
+        lib: () => {
+          console.log('?')
+          return app
+        },
+        strategy: 'loaded-first',
+        shareConfig: {
+          singleton: true,
+          requiredVersion: '^3',
+        },
+      },
+      'element-plus': {
+        shareConfig: {
+          singleton: true,
+          requiredVersion: '^2.8.6',
+        },
+      },
+    },
+  })
 
   const appStore = useApp()
 

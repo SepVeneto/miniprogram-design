@@ -1,6 +1,8 @@
 import { normalizeStyle as format } from '@sepveneto/mpd-hooks'
 import { useApp } from './store'
 import type { LikeWidgetNode } from './types/type'
+import { loadRemote } from '@module-federation/enhanced/runtime'
+import { defineAsyncComponent, h } from 'vue'
 
 export function normalizeStyle(customStyle: Record<string, any>, mode: 'grid' | 'free' = 'grid') {
   const { x, y, ..._style } = customStyle
@@ -41,4 +43,17 @@ export function genDisabled(selected: LikeWidgetNode, type: 'delete' | 'custom' 
   } else {
     return rules[type]
   }
+}
+
+export function loadFromRemote(scope: string, module: string) {
+  const renderer = defineAsyncComponent({
+    loader: () => loadRemote(`${scope}/${module}`) as any,
+    loadingComponent: () => h('div', '加载中...'),
+    onError(error, retry, fail) {
+      console.error(error)
+      fail()
+    },
+  })
+
+  return renderer
 }

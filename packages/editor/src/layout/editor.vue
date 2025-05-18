@@ -15,8 +15,7 @@ import {
 import { useApp, useHistory, useState } from '@/store'
 import ContainerView from '@/widgets/container.view.vue'
 // import viewRender from 'widgets_side/viewRender';
-import { useFederatedComponent } from '@sepveneto/mpd-hooks'
-import { emitEvt, genDisabled, normalizeStyle } from '@/utils'
+import { emitEvt, genDisabled, loadFromRemote, normalizeStyle } from '@/utils'
 import { useRoute } from 'vue-router'
 import { useHoverActive } from '@/widgets/hooks'
 import VueDraggable from 'vuedraggable'
@@ -61,14 +60,9 @@ export default defineComponent({
       },
     })
 
-    // const selected = ref({} as any)
     const selected = computed(() => app.selected)
 
-    const { Component: ViewRender, errorLoading } = useFederatedComponent(
-      app.remoteUrl,
-      'widgets',
-      './viewRender',
-    )
+    const ViewRender = loadFromRemote('widgets', 'viewRender')
 
     function onPut(_1: any, _2: any, dom: HTMLElement) {
       // @ts-expect-error: vuedraggable extends dom
@@ -150,9 +144,7 @@ export default defineComponent({
           'onUpdate:config': updateConfig,
         }
         const style = normalizeStyle(item.style, layoutMode.value)
-        return ViewRender.value
-          ? h(ViewRender.value, isPreview ? { ...options, style } : options)
-          : h('div', errorLoading.value ? '加载失败!' : '加载中...')
+        return h(ViewRender, isPreview ? { ...options, style } : options)
       }
     }
     function renderChild(item: any) {

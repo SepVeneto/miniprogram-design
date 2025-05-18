@@ -16,9 +16,6 @@
     "paths": {
       "@/*": [
         "src/*"
-      ],
-      "swiper/swiper.esm.js": [
-        "./node_modules/swiper/types/index.d.ts"
       ]
     },
     "types": [
@@ -38,7 +35,6 @@
     }
   },
   "include": [
-    "config/**/*.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",

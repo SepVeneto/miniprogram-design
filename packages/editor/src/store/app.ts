@@ -12,6 +12,7 @@ import { schema as schemaConfig } from '@/mock.schema'
 import type { DisabledItemFn, WidgetNode } from '@/types/type'
 import { useRoute } from 'vue-router'
 import { emitEvt } from '@/utils'
+import { registerRemotes } from '@module-federation/enhanced/runtime'
 
 // type SchemaConfig =
 
@@ -64,6 +65,17 @@ export const useApp = defineStore('app', () => {
   const history = ref<string[]>([])
   const hasHistory = computed(() => history.value.length > 1)
   const settings = ref<Settings>({})
+
+  watch(remoteUrl, (url) => {
+    if (!url) return
+
+    registerRemotes([
+      {
+        name: 'widgets',
+        entry: url + '/mf-manifest.json',
+      },
+    ])
+  })
 
   /** mock */
   if (!window.__MICRO_APP_ENVIRONMENT__) {

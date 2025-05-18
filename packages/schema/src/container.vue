@@ -1,8 +1,7 @@
 <script lang="ts">
-import type { PropType, ShallowRef, VNode } from 'vue'
-import { defineAsyncComponent, defineComponent, h, onMounted, ref, watch, withModifiers } from 'vue'
+import type { PropType, VNode } from 'vue'
+import { defineAsyncComponent, defineComponent, h, onMounted, ref, withModifiers } from 'vue'
 import OssUpload from './components/ossUpload.vue'
-import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import SizeBox from './components/SizeBox.vue'
 import {
@@ -26,6 +25,7 @@ import type {
   SchemaBox,
   SchemaOther,
 } from '@sepveneto/mpd-core'
+import { loadRemote } from '@module-federation/enhanced/runtime'
 
 type ISchema = ISchemaList[number]
 type WidgetBox = SchemaBox
@@ -64,16 +64,16 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(prop, { emit }) {
-    let ConfigRender: ShallowRef<any>
-    watch(() => prop.remoteUrl, (url) => {
-      if (!url) return
-      const { Component } = useFederatedComponent(
-        url,
-        'widgets',
-        './configRender',
-      )
-      ConfigRender = Component
-    }, { immediate: true })
+    // let ConfigRender: ShallowRef<any>
+    const ConfigRender = defineAsyncComponent({
+      loader: () => loadRemote('widgets/configRender') as any,
+      loadingComponent: () => h('div', '加载中...'),
+      errorComponent: () => h('div', '加载失败'),
+      onError(error, retry, fail) {
+        console.error(error)
+        fail()
+      },
+    })
 
     function updateData(key: string, val: unknown) {
       const path = key.split('.')
@@ -203,15 +203,13 @@ export default defineComponent({
     function renderCustom(schema: WidgetOther) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { type, label, key, ...args } = schema
-      return ConfigRender.value
-        ? h(ConfigRender.value, {
-          ...args,
-          type,
-          modelValue: getData(prop.modelValue, key),
-          'onUpdate:modelValue': (val: unknown) => updateData(key, val),
-          config: prop.modelValue,
-        })
-        : null
+      return h(ConfigRender, {
+        ...args,
+        type,
+        modelValue: getData(prop.modelValue, key),
+        'onUpdate:modelValue': (val: unknown) => updateData(key, val),
+        config: prop.modelValue,
+      })
     }
     function renderLabel(schema: WidgetOther) {
       if (schema.tips) {

@@ -8,6 +8,7 @@ import CanvasView from '@/widgets/canvas.view.vue'
 import ContainerView from './container.view.vue'
 import { WIDGET_TOP_BAR_HEIGHT } from '@/constants'
 import { useState } from '@/store'
+import { loadFromRemote } from '@/utils'
 
 export default defineComponent({
   props: {
@@ -109,6 +110,8 @@ export default defineComponent({
         return node
       }
     }
+
+    const ViewRender = loadFromRemote('widgets', 'viewRender')
     function getRenderContent(element: any, isPreview = false) {
       switch (element._view) {
         case 'container':
@@ -122,13 +125,11 @@ export default defineComponent({
           //   const { marginLeft, marginTop, marginRight, marginBottom, ...otherStyle } = normalizeStyle(element.style)
 
           // }
-          return props.options.ViewRender
-            ? h(props.options.ViewRender, {
-              type: element._view,
-              config: element,
-              // style: otherStyle,
-            })
-            : h('div', props.options.errorLoading ? '加载失败!' : '加载中...')
+          return h(ViewRender, {
+            type: element._view,
+            config: element,
+            // style: otherStyle,
+          })
       }
     }
     function wrapResizable(node: any, element: any) {

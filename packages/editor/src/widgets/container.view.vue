@@ -10,7 +10,6 @@ import {
   toRef,
 } from 'vue'
 import { useApp, useHistory, useState } from '@/store'
-import { useFederatedComponent } from '@sepveneto/mpd-hooks'
 import { useContainer, useGrid, useHoverActive } from './hooks'
 import type { PropType } from 'vue'
 import VueDraggable from 'vuedraggable'
@@ -63,12 +62,6 @@ export default defineComponent({
       previewComp,
     )
 
-    const { Component: ViewRender } = useFederatedComponent(
-      app.remoteUrl,
-      'widgets',
-      './viewRender',
-    )
-
     const options = reactive({
       list: itemList,
       preview: previewComp,
@@ -77,7 +70,6 @@ export default defineComponent({
       activeUuid,
       cellWidth,
       containerRect,
-      ViewRender,
       columnGap,
       type,
       onEnter,
