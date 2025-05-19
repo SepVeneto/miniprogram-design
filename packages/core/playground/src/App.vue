@@ -11,7 +11,7 @@
   <VueEditor
     ref="editorRef"
     v-model="config"
-    url="http://localhost:5500"
+    url="http://localhost:8082"
     remote-url="http://localhost:8090"
     :widgets="widgets"
     :settings="{ disabledItem: disableItem }"

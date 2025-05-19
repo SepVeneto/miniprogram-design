@@ -271,6 +271,8 @@ export default defineComponent({
     }
     const formRef = ref()
     onMounted(() => {
+      if (!prop.modelValue.isShow) return
+
       formRef.value?.validate()
     })
     return {

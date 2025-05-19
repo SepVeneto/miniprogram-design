@@ -10,6 +10,8 @@ async function validate() {
 
     for (const uid of Object.keys(pageData)) {
       const data = pageData[uid]
+      if (!data.isShow) continue
+
       const rules = app.schemaRule.get(data._schema)
       if (!rules) continue
 

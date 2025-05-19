@@ -8,5 +8,6 @@ export const card: IWidget<Card> = {
   _view: 'card',
   name: '',
   age: '',
+  isShow: 1,
   style: {},
 }

@@ -17,7 +17,7 @@ type Base<T = any> = {
   _custom?: boolean
   _disableDel?: boolean
   _inContainer?: 'inner' | 'outer' | boolean
-  isShow?: 0 | 1
+  isShow: 0 | 1
   style: CSSProperties & WidgetPos
 } & T
 
@@ -60,7 +60,7 @@ type BoxModel = 'marginLeft'
 
 type SchemaRule = FormItemRule
 
-type ValidKey<T extends Base> = Exclude<keyof T, BaseKey> | `style.${string}`
+type ValidKey<T extends Base> = Exclude<keyof T, BaseKey> | `style.${string}` | 'isShow'
 
 export type SchemaOther<T extends Base> = {
   [k in ValidKey<T>]: {
