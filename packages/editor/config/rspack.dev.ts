@@ -80,7 +80,11 @@ export default defineConfig({
       dts: false,
       name: 'editor-side',
       filename: 'remoteEntry.js',
-      shared: ['vue-router', 'vue', 'element-plus'],
+      shared: {
+        'vue-router': { singleton: true },
+        vue: { singleton: true },
+        'element-plus': { singleton: true },
+      },
     }),
   ],
 })

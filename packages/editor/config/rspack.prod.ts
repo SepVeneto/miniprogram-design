@@ -7,7 +7,7 @@ import { getPackageInfoSync } from 'local-pkg'
 import { version } from '../package.json'
 
 export default defineConfig({
-  mode: 'development',
+  mode: 'production',
   html: {
     template: 'public/index.html',
   },
@@ -52,6 +52,11 @@ export default defineConfig({
       js: '[contenthash:6].js',
       css: '[contenthash:6].css',
     },
+    minify: {
+      jsOptions: {
+        extractComments: false,
+      },
+    },
   },
   plugins: [
     pluginSass(),
@@ -60,7 +65,11 @@ export default defineConfig({
       dts: false,
       name: 'editor-side',
       filename: 'remoteEntry.js',
-      shared: ['vue-router', 'vue', 'element-plus'],
+      shared: {
+        'vue-router': { singleton: true, requiredVersion: '^4.0.0' },
+        vue: { singleton: true, requiredVersion: '^3.5.0' },
+        'element-plus': { singleton: true, requiredVersion: '^2.9.0' },
+      },
     }),
   ],
 })

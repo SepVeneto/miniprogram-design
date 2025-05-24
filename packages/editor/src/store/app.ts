@@ -74,7 +74,8 @@ export const useApp = defineStore('app', () => {
         name: 'widgets',
         entry: url + '/mf-manifest.json',
       },
-    ])
+    // 必须开启，否则从其它页面切换回编辑器会导致渲染异常
+    ], { force: true })
   })
 
   /** mock */

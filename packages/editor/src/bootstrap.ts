@@ -12,7 +12,6 @@ import { router } from './router'
 import BasicComp from '@sepveneto/basic-comp'
 import '@sepveneto/basic-comp/css'
 import { register } from './helper'
-import { init } from '@module-federation/enhanced/runtime'
 
 let app: App | null
 let store: Pinia | null
@@ -24,36 +23,6 @@ function mount() {
   app.use(BasicComp, {})
   app.use(store)
   app.use(router)
-
-  init({
-    name: 'editor-side',
-    remotes: [],
-    shared: {
-      'vue-router': {
-        shareConfig: {
-          singleton: true,
-          requiredVersion: '^4',
-        },
-      },
-      vue: {
-        lib: () => {
-          console.log('?')
-          return app
-        },
-        strategy: 'loaded-first',
-        shareConfig: {
-          singleton: true,
-          requiredVersion: '^3',
-        },
-      },
-      'element-plus': {
-        shareConfig: {
-          singleton: true,
-          requiredVersion: '^2.8.6',
-        },
-      },
-    },
-  })
 
   const appStore = useApp()
 
@@ -97,12 +66,13 @@ function mount() {
   app.mount('#app')
 }
 
-// function unmount () {
-//   console.log('trigger');
-//   app?.unmount();
-//   store = null;
-//   app = null;
-//   window.microApp?.clearDataListener();
+// window.unmount = unmount
+// function unmount() {
+//   console.log('trigger')
+//   app?.unmount()
+//   store = null
+//   app = null
+//   window.microApp?.clearDataListener()
 // }
 // micro-app 会在子应用创建之初就对window进行代理
 // 而mdf需要异步加载
