@@ -53,6 +53,7 @@ export default defineConfig({
       exposes: {
         './viewRender': './src/components/viewRender.vue',
         './configRender': './src/components/configRender.vue',
+        './remote': './src/components/remoteRender.vue',
       },
       shared: ['vue', 'vue-router', 'element-plus'],
     }),
