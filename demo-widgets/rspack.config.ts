@@ -3,6 +3,7 @@ import { defineConfig } from '@rsbuild/core'
 import { pluginModuleFederation } from '@module-federation/rsbuild-plugin'
 import { pluginSass } from '@rsbuild/plugin-sass'
 import { pluginVue } from '@rsbuild/plugin-vue'
+import { pluginEditor } from '@sepveneto/dnd-plugins'
 
 export default defineConfig({
   mode: 'development',
@@ -40,6 +41,7 @@ export default defineConfig({
     // assetPrefix: 'auto',
   },
   plugins: [
+    pluginEditor(),
     pluginSass(),
     pluginVue(),
     pluginModuleFederation({

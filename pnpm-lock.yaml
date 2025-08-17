@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@element-plus/icons-vue':
         specifier: ^2.3.1
-        version: 2.3.1(vue@3.5.14(typescript@4.9.5))
+        version: 2.3.1(vue@3.5.14(typescript@5.8.3))
       '@micro-zoe/micro-app':
         specifier: 1.0.0-rc.5
         version: 1.0.0-rc.5
@@ -34,7 +34,7 @@ importers:
         version: 4.4.1
       element-plus:
         specifier: ^2.9.10
-        version: 2.9.10(vue@3.5.14(typescript@4.9.5))
+        version: 2.9.10(vue@3.5.14(typescript@5.8.3))
       eslint:
         specifier: ^8.57.1
         version: 8.57.1
@@ -43,16 +43,16 @@ importers:
         version: 4.5.14(@types/node@22.7.7)(sass@1.80.3)(terser@5.36.0)
       vitepress:
         specifier: 1.0.0-rc.10
-        version: 1.0.0-rc.10(@algolia/client-search@5.25.0)(@types/node@22.7.7)(async-validator@4.2.5)(axios@1.9.0(debug@4.4.1))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.80.3)(search-insights@2.15.0)(sortablejs@1.15.3)(terser@5.36.0)(typescript@4.9.5)
+        version: 1.0.0-rc.10(@algolia/client-search@5.25.0)(@types/node@22.7.7)(async-validator@4.2.5)(axios@1.9.0(debug@4.4.1))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.80.3)(search-insights@2.15.0)(sortablejs@1.15.3)(terser@5.36.0)(typescript@5.8.3)
 
   demo-widgets:
     dependencies:
       '@module-federation/enhanced':
         specifier: ^0.14.0
-        version: 0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       '@module-federation/rsbuild-plugin':
         specifier: ^0.14.0
-        version: 0.14.0(@rsbuild/core@1.3.20)(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 0.14.0(@rsbuild/core@1.4.15)(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       '@sepveneto/mpd-core':
         specifier: 'workspace: *'
         version: link:../packages/core
@@ -67,14 +67,17 @@ importers:
         version: 3.5.14(typescript@5.8.3)
     devDependencies:
       '@rsbuild/core':
-        specifier: ^1.3.20
-        version: 1.3.20
+        specifier: ^1.4.15
+        version: 1.4.15
       '@rsbuild/plugin-sass':
         specifier: ^1.3.1
-        version: 1.3.1(@rsbuild/core@1.3.20)
+        version: 1.3.1(@rsbuild/core@1.4.15)
       '@rsbuild/plugin-vue':
         specifier: ^1.0.7
-        version: 1.0.7(@rsbuild/core@1.3.20)(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(vue@3.5.14(typescript@5.8.3))
+        version: 1.0.7(@rsbuild/core@1.4.15)(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(vue@3.5.14(typescript@5.8.3))
+      '@rspack/core':
+        specifier: ^1.3.10
+        version: 1.3.10(@swc/helpers@0.5.17)
       '@sepveneto/eslint-config':
         specifier: ^0.9.0
         version: 0.9.2(eslint@8.57.1)
@@ -86,43 +89,43 @@ importers:
         version: 20.14.11
       '@vitejs/plugin-legacy':
         specifier: ^4.1.1
-        version: 4.1.1(terser@5.36.0)(vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))
+        version: 4.1.1(terser@5.36.0)(vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))
       '@vitejs/plugin-vue':
         specifier: ^4.4.0
-        version: 4.6.2(vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.14(typescript@5.8.3))
+        version: 4.6.2(vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.14(typescript@5.8.3))
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.2
-        version: 3.1.0(vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.14(typescript@5.8.3))
+        version: 3.1.0(vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.14(typescript@5.8.3))
       '@vue/cli-plugin-babel':
         specifier: ~5.0.0
-        version: 5.0.8(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))(core-js@3.37.1)(vue@3.5.14(typescript@5.8.3))
+        version: 5.0.8(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))(core-js@3.37.1)(vue@3.5.14(typescript@5.8.3))
       '@vue/cli-plugin-typescript':
         specifier: ~5.0.0
-        version: 5.0.8(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))(eslint@8.57.1)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
+        version: 5.0.8(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))(eslint@8.57.1)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
       '@vue/cli-service':
         specifier: ~5.0.0
-        version: 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
+        version: 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
       css-loader:
         specifier: ^6.8.1
-        version: 6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       html-webpack-plugin:
         specifier: ^5.5.1
-        version: 5.6.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 5.6.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       mini-css-extract-plugin:
         specifier: ^2.7.6
-        version: 2.9.0(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 2.9.0(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       sass:
         specifier: ^1.62.1
         version: 1.77.8
       sass-loader:
         specifier: ^13.2.2
-        version: 13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       style-loader:
         specifier: ^3.3.3
-        version: 3.3.4(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 3.3.4(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       swc-loader:
         specifier: ^0.2.3
-        version: 0.2.6(@swc/core@1.7.0(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 0.2.6(@swc/core@1.7.0(@swc/helpers@0.5.17))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       ts-node:
         specifier: ^10.9.1
         version: 10.9.2(@swc/core@1.7.0(@swc/helpers@0.5.17))(@types/node@20.14.11)(typescript@5.8.3)
@@ -131,10 +134,10 @@ importers:
         version: 5.8.3
       vite-plugin-top-level-await:
         specifier: ^1.3.1
-        version: 1.4.2(@swc/helpers@0.5.17)(rollup@4.34.8)(vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))
+        version: 1.4.2(@swc/helpers@0.5.17)(rollup@4.34.8)(vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))
       vue-loader:
         specifier: ^17.3.0
-        version: 17.4.2(@vue/compiler-sfc@3.5.14)(vue@3.5.14(typescript@5.8.3))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+        version: 17.4.2(@vue/compiler-sfc@3.5.14)(vue@3.5.14(typescript@5.8.3))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
 
   docs:
     dependencies:
@@ -153,7 +156,7 @@ importers:
         version: link:../packages/schema
       '@vitejs/plugin-vue-jsx':
         specifier: ~3.0.2
-        version: 3.0.2(vite@6.2.1(@types/node@22.7.7)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5))(vue@3.3.13(typescript@4.5.5))
+        version: 3.0.2(vite@6.2.1(@types/node@22.7.7)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5))(vue@3.3.13(typescript@4.5.5))
       typescript:
         specifier: ~4.5.5
         version: 4.5.5
@@ -175,7 +178,7 @@ importers:
     devDependencies:
       tsup:
         specifier: ^8.4.0
-        version: 8.4.0(@swc/core@1.7.36(@swc/helpers@0.5.17))(jiti@2.4.2)(postcss@8.5.3)(typescript@4.5.5)(yaml@2.4.5)
+        version: 8.4.0(@swc/core@1.7.36(@swc/helpers@0.5.17))(jiti@2.5.1)(postcss@8.5.3)(typescript@4.5.5)(yaml@2.4.5)
       typescript:
         specifier: ~4.5.5
         version: 4.5.5
@@ -197,7 +200,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^5.2.1
-        version: 5.2.1(vite@6.2.1(@types/node@22.7.7)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.13(typescript@5.7.3))
+        version: 5.2.1(vite@6.2.1(@types/node@22.7.7)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.13(typescript@5.7.3))
       '@vue/tsconfig':
         specifier: ^0.7.0
         version: 0.7.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
@@ -206,7 +209,7 @@ importers:
         version: 5.7.3
       vite:
         specifier: ^6.2.0
-        version: 6.2.1(@types/node@22.7.7)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5)
+        version: 6.2.1(@types/node@22.7.7)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5)
       vue-tsc:
         specifier: ^2.2.4
         version: 2.2.8(typescript@5.7.3)
@@ -376,7 +379,7 @@ importers:
         version: 1.3.6
       tsup:
         specifier: ^8.4.0
-        version: 8.4.0(@swc/core@1.7.36(@swc/helpers@0.5.17))(jiti@2.4.2)(postcss@8.5.3)(typescript@4.5.5)(yaml@2.4.5)
+        version: 8.4.0(@swc/core@1.7.36(@swc/helpers@0.5.17))(jiti@2.5.1)(postcss@8.5.3)(typescript@4.5.5)(yaml@2.4.5)
       typescript:
         specifier: ~4.5.5
         version: 4.5.5
@@ -391,7 +394,7 @@ importers:
     dependencies:
       '@module-federation/enhanced':
         specifier: ^0.14.0
-        version: 0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8)
+        version: 0.14.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8)
       '@sepveneto/mpd-core':
         specifier: workspace:^
         version: link:../core
@@ -450,13 +453,13 @@ importers:
         version: 1.0.0-beta.5
       '@vue/cli-plugin-babel':
         specifier: ~5.0.0
-        version: 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))(core-js@3.38.1)(vue@3.5.13(typescript@4.5.5))
+        version: 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))(core-js@3.38.1)(vue@3.5.13(typescript@4.5.5))
       '@vue/cli-plugin-typescript':
         specifier: ~5.0.0
-        version: 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))(eslint@8.57.1)(typescript@4.5.5)(vue@3.5.13(typescript@4.5.5))
+        version: 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))(eslint@8.57.1)(typescript@4.5.5)(vue@3.5.13(typescript@4.5.5))
       '@vue/cli-service':
         specifier: ~5.0.0
-        version: 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
+        version: 5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
       sass:
         specifier: ^1.54.9
         version: 1.79.6
@@ -1256,6 +1259,15 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
+  '@emnapi/core@1.4.5':
+    resolution: {integrity: sha512-XsLw1dEOpkSX/WucdqUhPWP7hDxSvZiY+fsUC14h+FtQ2Ifni4znbBt8punRX+Uj2JG/uDb8nEHVKvrVlvdZ5Q==}
+
+  '@emnapi/runtime@1.4.5':
+    resolution: {integrity: sha512-++LApOtY0pEEz1zrd9vy1/zXVaVJJ/EbAF3u0fXIzPJEDtnITsBGbbK0EkM72amhl/R5b+5xx0Y/QhcVOpuulg==}
+
+  '@emnapi/wasi-threads@1.0.4':
+    resolution: {integrity: sha512-PJR+bOmMOPH8AtcTGAyYNiuJ3/Fcoj2XN/gBEWzDIKh254XO+mM9XoXHk5GNEhodxeMznbg7BlRojVbKN+gC6g==}
+
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
     engines: {node: '>=12'}
@@ -1974,6 +1986,9 @@ packages:
   '@module-federation/error-codes@0.14.0':
     resolution: {integrity: sha512-GGk+EoeSACJikZZyShnLshtq9E2eCrDWbRiB4QAFXCX4oYmGgFfzXlx59vMNwqTKPJWxkEGnPYacJMcr2YYjag==}
 
+  '@module-federation/error-codes@0.17.1':
+    resolution: {integrity: sha512-n6Elm4qKSjwAPxLUGtwnl7qt4y1dxB8OpSgVvXBIzqI9p27a3ZXshLPLnumlpPg1Qudaj8sLnSnFtt9yGpt5yQ==}
+
   '@module-federation/inject-external-runtime-core-plugin@0.14.0':
     resolution: {integrity: sha512-bpSByxlKfnOJPnyM3rnoO/Iyk8DY/dKeGbI+niGZNPy5NvtfS4D7OX25P1fozhdUYOsYQ4UZ/h9x1OXjPlF1lQ==}
     peerDependencies:
@@ -2012,11 +2027,17 @@ packages:
   '@module-federation/runtime-core@0.14.0':
     resolution: {integrity: sha512-fGE1Ro55zIFDp/CxQuRhKQ1pJvG7P0qvRm2N+4i8z++2bgDjcxnCKUqDJ8lLD+JfJQvUJf0tuSsJPgevzueD4g==}
 
+  '@module-federation/runtime-core@0.17.1':
+    resolution: {integrity: sha512-LCtIFuKgWPQ3E+13OyrVpuTPOWBMI/Ggwsq1Q874YeT8Px28b8tJRCj09DjyRFyhpSPyV/uG80T6iXPAUoLIfQ==}
+
   '@module-federation/runtime-tools@0.13.1':
     resolution: {integrity: sha512-GEF1pxqLc80osIMZmE8j9UKZSaTm2hX2lql8tgIH/O9yK4wnF06k6LL5Ah+wJt+oJv6Dj55ri/MoxMP4SXoPNA==}
 
   '@module-federation/runtime-tools@0.14.0':
     resolution: {integrity: sha512-y/YN0c2DKsLETE+4EEbmYWjqF9G6ZwgZoDIPkaQ9p0pQu0V4YxzWfQagFFxR0RigYGuhJKmSU/rtNoHq+qF8jg==}
+
+  '@module-federation/runtime-tools@0.17.1':
+    resolution: {integrity: sha512-4kr6zTFFwGywJx6whBtxsc84V+COAuuBpEdEbPZN//YLXhNB0iz2IGsy9r9wDl+06h84bD+3dQ05l9euRLgXzQ==}
 
   '@module-federation/runtime@0.13.1':
     resolution: {integrity: sha512-ZHnYvBquDm49LiHfv6fgagMo/cVJneijNJzfPh6S0CJrPS2Tay1bnTXzy8VA5sdIrESagYPaskKMGIj7YfnPug==}
@@ -2024,11 +2045,17 @@ packages:
   '@module-federation/runtime@0.14.0':
     resolution: {integrity: sha512-kR3cyHw/Y64SEa7mh4CHXOEQYY32LKLK75kJOmBroLNLO7/W01hMNAvGBYTedS7hWpVuefPk1aFZioy3q2VLdQ==}
 
+  '@module-federation/runtime@0.17.1':
+    resolution: {integrity: sha512-vKEN32MvUbpeuB/s6UXfkHDZ9N5jFyDDJnj83UTJ8n4N1jHIJu9VZ6Yi4/Ac8cfdvU8UIK9bIbfVXWbUYZUDsw==}
+
   '@module-federation/sdk@0.13.1':
     resolution: {integrity: sha512-bmf2FGQ0ymZuxYnw9bIUfhV3y6zDhaqgydEjbl4msObKMLGXZqhse2pTIIxBFpIxR1oONKX/y2FAolDCTlWKiw==}
 
   '@module-federation/sdk@0.14.0':
     resolution: {integrity: sha512-lg/OWRsh18hsyTCamOOhEX546vbDiA2O4OggTxxH2wTGr156N6DdELGQlYIKfRdU/0StgtQS81Goc0BgDZlx9A==}
+
+  '@module-federation/sdk@0.17.1':
+    resolution: {integrity: sha512-nlUcN6UTEi+3HWF+k8wPy7gH0yUOmCT+xNatihkIVR9REAnr7BUvHFGlPJmx7WEbLPL46+zJUbtQHvLzXwFhng==}
 
   '@module-federation/third-party-dts-extractor@0.14.0':
     resolution: {integrity: sha512-rUgYWpZvIlt5f+Bt2g1j8yXBuyjqv8+CfMnC+eT7TcUI8IsL68jwFHCN+9muCFtIjLCbJ65BwJXCxLOSAE02KA==}
@@ -2038,6 +2065,12 @@ packages:
 
   '@module-federation/webpack-bundler-runtime@0.14.0':
     resolution: {integrity: sha512-POWS6cKBicAAQ3DNY5X7XEUSfOfUsRaBNxbuwEfSGlrkTE9UcWheO06QP2ndHi8tHQuUKcIHi2navhPkJ+k5xg==}
+
+  '@module-federation/webpack-bundler-runtime@0.17.1':
+    resolution: {integrity: sha512-Swspdgf4PzcbvS9SNKFlBzfq8h/Qxwqjq/xRSqw1pqAZWondZQzwTTqPXhgrg0bFlz7qWjBS/6a8KuH/gRvGaQ==}
+
+  '@napi-rs/wasm-runtime@1.0.3':
+    resolution: {integrity: sha512-rZxtMsLwjdXkMUGC3WwsPwLNVqVqnTJT6MNIB6e+5fhMcSCPP0AOsNWuMQ5mdCq6HNjs/ZeWAEchpqeprqBD2Q==}
 
   '@node-ipc/js-queue@2.0.3':
     resolution: {integrity: sha512-fL1wpr8hhD5gT2dA1qifeVaoDFlQR5es8tFuKqjHX+kdOtdNHnxkVZbtIrR2rxnMFvehkjaZRNV2H/gPXlb0hw==}
@@ -2346,6 +2379,11 @@ packages:
     engines: {node: '>=16.10.0'}
     hasBin: true
 
+  '@rsbuild/core@1.4.15':
+    resolution: {integrity: sha512-KoSTtKjzQUQwamcbeCp63Ne9kL7io1WI4+skTJe2chfLz6wsp/Gfg8aKkfs1DuyG1p+zxFDcYpwTWMsNtxqqiw==}
+    engines: {node: '>=16.10.0'}
+    hasBin: true
+
   '@rsbuild/plugin-sass@1.3.1':
     resolution: {integrity: sha512-hyqsMyI/XPntdL3xRRC25SIkWUWA9I7gVG46K9a8+xJVLJfLp8rHR1sKtc8JYOSPBIXcYwtzHIA9ib1gS2kRUQ==}
     peerDependencies:
@@ -2361,8 +2399,18 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@rspack/binding-darwin-arm64@1.4.11':
+    resolution: {integrity: sha512-PrmBVhR8MC269jo6uQ+BMy1uwIDx0HAJYLQRQur8gXiehWabUBCRg/d4U9KR7rLzdaSScRyc5JWXR52T7/4MfA==}
+    cpu: [arm64]
+    os: [darwin]
+
   '@rspack/binding-darwin-x64@1.3.10':
     resolution: {integrity: sha512-jOyqYW/18cgxw60wK5oqJvM194pbD4H99xaif89McNtLkH3npFvBkXBHVWWuOHGoXNX0LhRpHcI89p9b9THQZQ==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@rspack/binding-darwin-x64@1.4.11':
+    resolution: {integrity: sha512-YIV8Wzy+JY0SoSsVtN4wxFXOjzxxVPnVXNswrrfqVUTPr9jqGOFYUWCGpbt8lcCgfuBFm6zN8HpOsKm1xUNsVA==}
     cpu: [x64]
     os: [darwin]
 
@@ -2371,8 +2419,18 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@rspack/binding-linux-arm64-gnu@1.4.11':
+    resolution: {integrity: sha512-ms6uwECUIcu+6e82C5HJhRMHnfsI+l33v7XQezntzRPN0+sG3EpikEoT7SGbgt4vDwaWLR7wS20suN4qd5r3GA==}
+    cpu: [arm64]
+    os: [linux]
+
   '@rspack/binding-linux-arm64-musl@1.3.10':
     resolution: {integrity: sha512-o3x7IrOSCHK6lcRvdZgsSuOG1CHRQR00xiyLW7kkWmNm7t417LC9xdFWKIK62C5fKXGC5YcTbUkDMnQujespkg==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rspack/binding-linux-arm64-musl@1.4.11':
+    resolution: {integrity: sha512-9evq0DOdxMN/H8VM8ZmyY9NSuBgILNVV6ydBfVPMHPx4r1E7JZGpWeKDegZcS5Erw3sS9kVSIxyX78L5PDzzKw==}
     cpu: [arm64]
     os: [linux]
 
@@ -2381,13 +2439,32 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@rspack/binding-linux-x64-gnu@1.4.11':
+    resolution: {integrity: sha512-bHYFLxPPYBOSaHdQbEoCYGMQ1gOrEWj7Mro/DLfSHZi1a0okcQ2Q1y0i1DczReim3ZhLGNrK7k1IpFXCRbAobQ==}
+    cpu: [x64]
+    os: [linux]
+
   '@rspack/binding-linux-x64-musl@1.3.10':
     resolution: {integrity: sha512-e0xbY9SlbRGIFz41v1yc0HfREvmgMnLV1bLmTSPK8wI2suIEJ7iYYqsocHOAOk86qLZcxVrTnL6EjUcNaRTWlg==}
     cpu: [x64]
     os: [linux]
 
+  '@rspack/binding-linux-x64-musl@1.4.11':
+    resolution: {integrity: sha512-wrm4E7q2k4+cwT6Uhp6hIQ3eUe/YoaUttj6j5TqHYZX6YeLrNPtD9+ne6lQQ17BV8wmm6NZsmoFIJ5xIptpRhQ==}
+    cpu: [x64]
+    os: [linux]
+
+  '@rspack/binding-wasm32-wasi@1.4.11':
+    resolution: {integrity: sha512-hiYxHZjaZ17wQtXyLCK0IdtOvMWreGVTiGsaHCxyeT+SldDG+r16bXNjmlqfZsjlfl1mkAqKz1dg+mMX28OTqw==}
+    cpu: [wasm32]
+
   '@rspack/binding-win32-arm64-msvc@1.3.10':
     resolution: {integrity: sha512-YHJPvEujWeWjU6EUF6sDpaec9rsOtKVvy16YCtGaxRpDQXqfuxibnp6Ge0ZTTrY+joRiWehRA9OUI+3McqI+QA==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@rspack/binding-win32-arm64-msvc@1.4.11':
+    resolution: {integrity: sha512-+HF/mnjmTr8PC1dccRt1bkrD2tPDGeqvXC1BBLYd/Klq1VbtIcnrhfmvQM6KaXbiLcY9VWKzcZPOTmnyZ8TaHQ==}
     cpu: [arm64]
     os: [win32]
 
@@ -2396,16 +2473,38 @@ packages:
     cpu: [ia32]
     os: [win32]
 
+  '@rspack/binding-win32-ia32-msvc@1.4.11':
+    resolution: {integrity: sha512-EU2fQGwrRfwFd/tcOInlD0jy6gNQE4Q3Ayj0Is+cX77sbhPPyyOz0kZDEaQ4qaN2VU8w4Hu/rrD7c0GAKLFvCw==}
+    cpu: [ia32]
+    os: [win32]
+
   '@rspack/binding-win32-x64-msvc@1.3.10':
     resolution: {integrity: sha512-ehWJ9Y5Zezj/+uJpiWbt29RZaRIM00f91PWuabM6/sKmHJhdCEE21u5iI3B8DeW/EjJsH8zkI69YYAxJWwGn9A==}
+    cpu: [x64]
+    os: [win32]
+
+  '@rspack/binding-win32-x64-msvc@1.4.11':
+    resolution: {integrity: sha512-1Nc5ZzWqfvE+iJc47qtHFzYYnHsC3awavXrCo74GdGip1vxtksM3G30BlvAQHHVtEmULotWqPbjZpflw/Xk9Ag==}
     cpu: [x64]
     os: [win32]
 
   '@rspack/binding@1.3.10':
     resolution: {integrity: sha512-9TjO+Ig5U4VqdYWpBsv01n4d2KsgFfdXGIE7zdHXDDbry0avL0J4109ESqSeP9uC+Bi7ZCF53iaxJRvZDflNVQ==}
 
+  '@rspack/binding@1.4.11':
+    resolution: {integrity: sha512-maGl/zRwnl0QVwkBCkgjn5PH20L9HdlRIdkYhEsfTepy5x2QZ0ti/0T49djjTJQrqb+S1i6wWQymMMMMMsxx6Q==}
+
   '@rspack/core@1.3.10':
     resolution: {integrity: sha512-YomvSRGuMUQgCE2rNMdff2q1Z0YpZw/z6m5+PVTMSs9l/q69YKUzpbpSD8YyB5i1DddrRxC2RE34DkrBuwlREQ==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@swc/helpers': '>=0.5.1'
+    peerDependenciesMeta:
+      '@swc/helpers':
+        optional: true
+
+  '@rspack/core@1.4.11':
+    resolution: {integrity: sha512-JtKnL6p7Kc/YgWQJF3Woo4OccbgKGyT/4187W4dyex8BMkdQcbqCNIdi6dFk02hwQzxpOOxRSBI4hlGRbz7oYQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@swc/helpers': '>=0.5.1'
@@ -2652,6 +2751,9 @@ packages:
 
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
+
+  '@tybys/wasm-util@0.10.0':
+    resolution: {integrity: sha512-VyyPYFlOMNylG45GoAe0xDoLwWuowvf92F9kySqzYh8vmYm7D2u4iUJKa1tOUpS70Ku13ASrOkS4ScXFsTaCNQ==}
 
   '@types/body-parser@1.19.5':
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
@@ -4296,6 +4398,9 @@ packages:
   core-js@3.42.0:
     resolution: {integrity: sha512-Sz4PP4ZA+Rq4II21qkNqOEDTDrCvcANId3xpIgB34NDkWc3UduWj2dqEtN9yZIq8Dk3HyPI33x9sqqU5C8sr0g==}
 
+  core-js@3.45.0:
+    resolution: {integrity: sha512-c2KZL9lP4DjkN3hk/an4pWn5b5ZefhRJnAc42n6LJ19kSnbeRbdQZE5dSeE2LBol1OwJD3X1BQvFTAsa8ReeDA==}
+
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
@@ -5721,6 +5826,10 @@ packages:
 
   jiti@2.4.2:
     resolution: {integrity: sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==}
+    hasBin: true
+
+  jiti@2.5.1:
+    resolution: {integrity: sha512-twQoecYPiVA5K/h6SxtORw/Bs3ar+mLUtoPSc7iMXzQzK8d7eJ/R09wmTwAjiamETn1cXYPGfNnu7DMoHgu12w==}
     hasBin: true
 
   joi@17.13.3:
@@ -7834,6 +7943,9 @@ packages:
   tslib@2.8.0:
     resolution: {integrity: sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==}
 
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+
   tsscmp@1.0.6:
     resolution: {integrity: sha512-LxhtAkPDTkVCMQjt2h6eBVY28KCjikZqZfMcC15YBeNjkgUpdCfBu5HoiOTDu86v6smE8yOjyEktJ8hlbANHQA==}
     engines: {node: '>=0.6.x'}
@@ -9582,13 +9694,29 @@ snapshots:
     dependencies:
       vue: 3.5.13(typescript@4.5.5)
 
-  '@element-plus/icons-vue@2.3.1(vue@3.5.14(typescript@4.9.5))':
-    dependencies:
-      vue: 3.5.14(typescript@4.9.5)
-
   '@element-plus/icons-vue@2.3.1(vue@3.5.14(typescript@5.7.3))':
     dependencies:
       vue: 3.5.14(typescript@5.7.3)
+
+  '@element-plus/icons-vue@2.3.1(vue@3.5.14(typescript@5.8.3))':
+    dependencies:
+      vue: 3.5.14(typescript@5.8.3)
+
+  '@emnapi/core@1.4.5':
+    dependencies:
+      '@emnapi/wasi-threads': 1.0.4
+      tslib: 2.8.1
+    optional: true
+
+  '@emnapi/runtime@1.4.5':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
+
+  '@emnapi/wasi-threads@1.0.4':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
@@ -10130,7 +10258,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@module-federation/enhanced@0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))':
+  '@module-federation/enhanced@0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))':
     dependencies:
       '@module-federation/bridge-react-webpack-plugin': 0.14.0
       '@module-federation/cli': 0.14.0(debug@4.4.1)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))
@@ -10149,7 +10277,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
       vue-tsc: 2.2.8(typescript@5.8.3)
-      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
+      webpack: 5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))
     transitivePeerDependencies:
       - '@rspack/core'
       - bufferutil
@@ -10159,7 +10287,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@module-federation/enhanced@0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8)':
+  '@module-federation/enhanced@0.14.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8)':
     dependencies:
       '@module-federation/bridge-react-webpack-plugin': 0.14.0
       '@module-federation/cli': 0.14.0(debug@4.4.1)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))
@@ -10169,7 +10297,7 @@ snapshots:
       '@module-federation/inject-external-runtime-core-plugin': 0.14.0(@module-federation/runtime-tools@0.14.0)
       '@module-federation/managers': 0.14.0
       '@module-federation/manifest': 0.14.0(debug@4.4.1)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))
-      '@module-federation/rspack': 0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))
+      '@module-federation/rspack': 0.14.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(debug@4.4.1)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))
       '@module-federation/runtime-tools': 0.14.0
       '@module-federation/sdk': 0.14.0
       btoa: 1.2.1
@@ -10191,6 +10319,8 @@ snapshots:
   '@module-federation/error-codes@0.13.1': {}
 
   '@module-federation/error-codes@0.14.0': {}
+
+  '@module-federation/error-codes@0.17.1': {}
 
   '@module-federation/inject-external-runtime-core-plugin@0.14.0(@module-federation/runtime-tools@0.14.0)':
     dependencies:
@@ -10250,12 +10380,12 @@ snapshots:
       - vue-tsc
       - webpack
 
-  '@module-federation/rsbuild-plugin@0.14.0(@rsbuild/core@1.3.20)(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))':
+  '@module-federation/rsbuild-plugin@0.14.0(@rsbuild/core@1.4.15)(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))':
     dependencies:
-      '@module-federation/enhanced': 0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+      '@module-federation/enhanced': 0.14.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(debug@4.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       '@module-federation/sdk': 0.14.0
     optionalDependencies:
-      '@rsbuild/core': 1.3.20
+      '@rsbuild/core': 1.4.15
     transitivePeerDependencies:
       - '@rspack/core'
       - bufferutil
@@ -10308,6 +10438,26 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@module-federation/rspack@0.14.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(debug@4.4.1)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))':
+    dependencies:
+      '@module-federation/bridge-react-webpack-plugin': 0.14.0
+      '@module-federation/dts-plugin': 0.14.0(debug@4.4.1)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))
+      '@module-federation/inject-external-runtime-core-plugin': 0.14.0(@module-federation/runtime-tools@0.14.0)
+      '@module-federation/managers': 0.14.0
+      '@module-federation/manifest': 0.14.0(debug@4.4.1)(typescript@5.8.3)(vue-tsc@2.2.8(typescript@5.8.3))
+      '@module-federation/runtime-tools': 0.14.0
+      '@module-federation/sdk': 0.14.0
+      '@rspack/core': 1.4.11(@swc/helpers@0.5.17)
+      btoa: 1.2.1
+    optionalDependencies:
+      typescript: 5.8.3
+      vue-tsc: 2.2.8(typescript@5.8.3)
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+
   '@module-federation/runtime-core@0.13.1':
     dependencies:
       '@module-federation/error-codes': 0.13.1
@@ -10318,6 +10468,11 @@ snapshots:
       '@module-federation/error-codes': 0.14.0
       '@module-federation/sdk': 0.14.0
 
+  '@module-federation/runtime-core@0.17.1':
+    dependencies:
+      '@module-federation/error-codes': 0.17.1
+      '@module-federation/sdk': 0.17.1
+
   '@module-federation/runtime-tools@0.13.1':
     dependencies:
       '@module-federation/runtime': 0.13.1
@@ -10327,6 +10482,11 @@ snapshots:
     dependencies:
       '@module-federation/runtime': 0.14.0
       '@module-federation/webpack-bundler-runtime': 0.14.0
+
+  '@module-federation/runtime-tools@0.17.1':
+    dependencies:
+      '@module-federation/runtime': 0.17.1
+      '@module-federation/webpack-bundler-runtime': 0.17.1
 
   '@module-federation/runtime@0.13.1':
     dependencies:
@@ -10340,9 +10500,17 @@ snapshots:
       '@module-federation/runtime-core': 0.14.0
       '@module-federation/sdk': 0.14.0
 
+  '@module-federation/runtime@0.17.1':
+    dependencies:
+      '@module-federation/error-codes': 0.17.1
+      '@module-federation/runtime-core': 0.17.1
+      '@module-federation/sdk': 0.17.1
+
   '@module-federation/sdk@0.13.1': {}
 
   '@module-federation/sdk@0.14.0': {}
+
+  '@module-federation/sdk@0.17.1': {}
 
   '@module-federation/third-party-dts-extractor@0.14.0':
     dependencies:
@@ -10359,6 +10527,18 @@ snapshots:
     dependencies:
       '@module-federation/runtime': 0.14.0
       '@module-federation/sdk': 0.14.0
+
+  '@module-federation/webpack-bundler-runtime@0.17.1':
+    dependencies:
+      '@module-federation/runtime': 0.17.1
+      '@module-federation/sdk': 0.17.1
+
+  '@napi-rs/wasm-runtime@1.0.3':
+    dependencies:
+      '@emnapi/core': 1.4.5
+      '@emnapi/runtime': 1.4.5
+      '@tybys/wasm-util': 0.10.0
+    optional: true
 
   '@node-ipc/js-queue@2.0.3':
     dependencies:
@@ -10585,6 +10765,14 @@ snapshots:
       core-js: 3.42.0
       jiti: 2.4.2
 
+  '@rsbuild/core@1.4.15':
+    dependencies:
+      '@rspack/core': 1.4.11(@swc/helpers@0.5.17)
+      '@rspack/lite-tapable': 1.0.1
+      '@swc/helpers': 0.5.17
+      core-js: 3.45.0
+      jiti: 2.5.1
+
   '@rsbuild/plugin-sass@1.3.1(@rsbuild/core@1.3.20)':
     dependencies:
       '@rsbuild/core': 1.3.20
@@ -10594,18 +10782,14 @@ snapshots:
       reduce-configs: 1.1.0
       sass-embedded: 1.89.0
 
-  '@rsbuild/plugin-vue@1.0.7(@rsbuild/core@1.3.20)(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(vue@3.5.14(typescript@5.8.3))':
+  '@rsbuild/plugin-sass@1.3.1(@rsbuild/core@1.4.15)':
     dependencies:
-      '@rsbuild/core': 1.3.20
-      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.14)(vue@3.5.14(typescript@5.8.3))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
-      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@vue/compiler-sfc'
-      - esbuild
-      - uglify-js
-      - vue
-      - webpack-cli
+      '@rsbuild/core': 1.4.15
+      deepmerge: 4.3.1
+      loader-utils: 2.0.4
+      postcss: 8.5.3
+      reduce-configs: 1.1.0
+      sass-embedded: 1.89.0
 
   '@rsbuild/plugin-vue@1.0.7(@rsbuild/core@1.3.20)(@swc/core@1.7.36(@swc/helpers@0.5.17))(vue@3.5.14(typescript@5.7.3))':
     dependencies:
@@ -10620,31 +10804,76 @@ snapshots:
       - vue
       - webpack-cli
 
+  '@rsbuild/plugin-vue@1.0.7(@rsbuild/core@1.4.15)(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(vue@3.5.14(typescript@5.8.3))':
+    dependencies:
+      '@rsbuild/core': 1.4.15
+      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.14)(vue@3.5.14(typescript@5.8.3))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@vue/compiler-sfc'
+      - esbuild
+      - uglify-js
+      - vue
+      - webpack-cli
+
   '@rspack/binding-darwin-arm64@1.3.10':
+    optional: true
+
+  '@rspack/binding-darwin-arm64@1.4.11':
     optional: true
 
   '@rspack/binding-darwin-x64@1.3.10':
     optional: true
 
+  '@rspack/binding-darwin-x64@1.4.11':
+    optional: true
+
   '@rspack/binding-linux-arm64-gnu@1.3.10':
+    optional: true
+
+  '@rspack/binding-linux-arm64-gnu@1.4.11':
     optional: true
 
   '@rspack/binding-linux-arm64-musl@1.3.10':
     optional: true
 
+  '@rspack/binding-linux-arm64-musl@1.4.11':
+    optional: true
+
   '@rspack/binding-linux-x64-gnu@1.3.10':
+    optional: true
+
+  '@rspack/binding-linux-x64-gnu@1.4.11':
     optional: true
 
   '@rspack/binding-linux-x64-musl@1.3.10':
     optional: true
 
+  '@rspack/binding-linux-x64-musl@1.4.11':
+    optional: true
+
+  '@rspack/binding-wasm32-wasi@1.4.11':
+    dependencies:
+      '@napi-rs/wasm-runtime': 1.0.3
+    optional: true
+
   '@rspack/binding-win32-arm64-msvc@1.3.10':
+    optional: true
+
+  '@rspack/binding-win32-arm64-msvc@1.4.11':
     optional: true
 
   '@rspack/binding-win32-ia32-msvc@1.3.10':
     optional: true
 
+  '@rspack/binding-win32-ia32-msvc@1.4.11':
+    optional: true
+
   '@rspack/binding-win32-x64-msvc@1.3.10':
+    optional: true
+
+  '@rspack/binding-win32-x64-msvc@1.4.11':
     optional: true
 
   '@rspack/binding@1.3.10':
@@ -10659,12 +10888,33 @@ snapshots:
       '@rspack/binding-win32-ia32-msvc': 1.3.10
       '@rspack/binding-win32-x64-msvc': 1.3.10
 
+  '@rspack/binding@1.4.11':
+    optionalDependencies:
+      '@rspack/binding-darwin-arm64': 1.4.11
+      '@rspack/binding-darwin-x64': 1.4.11
+      '@rspack/binding-linux-arm64-gnu': 1.4.11
+      '@rspack/binding-linux-arm64-musl': 1.4.11
+      '@rspack/binding-linux-x64-gnu': 1.4.11
+      '@rspack/binding-linux-x64-musl': 1.4.11
+      '@rspack/binding-wasm32-wasi': 1.4.11
+      '@rspack/binding-win32-arm64-msvc': 1.4.11
+      '@rspack/binding-win32-ia32-msvc': 1.4.11
+      '@rspack/binding-win32-x64-msvc': 1.4.11
+
   '@rspack/core@1.3.10(@swc/helpers@0.5.17)':
     dependencies:
       '@module-federation/runtime-tools': 0.13.1
       '@rspack/binding': 1.3.10
       '@rspack/lite-tapable': 1.0.1
       caniuse-lite: 1.0.30001718
+    optionalDependencies:
+      '@swc/helpers': 0.5.17
+
+  '@rspack/core@1.4.11(@swc/helpers@0.5.17)':
+    dependencies:
+      '@module-federation/runtime-tools': 0.17.1
+      '@rspack/binding': 1.4.11
+      '@rspack/lite-tapable': 1.0.1
     optionalDependencies:
       '@swc/helpers': 0.5.17
 
@@ -10721,7 +10971,7 @@ snapshots:
     dependencies:
       '@sepveneto/eslint-config-vue': 0.9.2(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@4.9.5))(eslint@8.57.1)(typescript@4.9.5)
       '@typescript-eslint/eslint-plugin': 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@4.9.5))(eslint@8.57.1)(typescript@4.9.5)
-      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@4.9.5)
+      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.8.3)
       eslint: 8.57.1
       eslint-plugin-eslint-comments: 3.2.0(eslint@8.57.1)
       eslint-plugin-html: 7.1.0
@@ -10912,6 +11162,11 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
+  '@tybys/wasm-util@0.10.0':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
+
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
@@ -11074,7 +11329,7 @@ snapshots:
   '@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@4.9.5))(eslint@8.57.1)(typescript@4.9.5)':
     dependencies:
       '@eslint-community/regexpp': 4.11.0
-      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@4.9.5)
+      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/type-utils': 5.62.0(eslint@8.57.1)(typescript@4.9.5)
       '@typescript-eslint/utils': 5.62.0(eslint@8.57.1)(typescript@4.9.5)
@@ -11099,6 +11354,18 @@ snapshots:
       eslint: 8.57.1
     optionalDependencies:
       typescript: 4.9.5
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.8.3)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 5.62.0
+      '@typescript-eslint/types': 5.62.0
+      '@typescript-eslint/typescript-estree': 5.62.0(typescript@4.9.5)
+      debug: 4.4.1
+      eslint: 8.57.1
+    optionalDependencies:
+      typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
 
@@ -11186,7 +11453,7 @@ snapshots:
       '@uppy/utils': 4.1.3
       nanoid: 3.3.7
 
-  '@vitejs/plugin-legacy@4.1.1(terser@5.36.0)(vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))':
+  '@vitejs/plugin-legacy@4.1.1(terser@5.36.0)(vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))':
     dependencies:
       '@babel/core': 7.24.9
       '@babel/preset-env': 7.24.8(@babel/core@7.24.9)
@@ -11196,38 +11463,38 @@ snapshots:
       regenerator-runtime: 0.13.11
       systemjs: 6.15.1
       terser: 5.36.0
-      vite: 6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)
+      vite: 6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue-jsx@3.0.2(vite@6.2.1(@types/node@22.7.7)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5))(vue@3.3.13(typescript@4.5.5))':
+  '@vitejs/plugin-vue-jsx@3.0.2(vite@6.2.1(@types/node@22.7.7)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5))(vue@3.3.13(typescript@4.5.5))':
     dependencies:
       '@babel/core': 7.24.9
       '@babel/plugin-transform-typescript': 7.24.8(@babel/core@7.24.9)
       '@vue/babel-plugin-jsx': 1.2.2(@babel/core@7.24.9)
-      vite: 6.2.1(@types/node@22.7.7)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5)
+      vite: 6.2.1(@types/node@22.7.7)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5)
       vue: 3.3.13(typescript@4.5.5)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue-jsx@3.1.0(vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.14(typescript@5.8.3))':
+  '@vitejs/plugin-vue-jsx@3.1.0(vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.14(typescript@5.8.3))':
     dependencies:
       '@babel/core': 7.24.9
       '@babel/plugin-transform-typescript': 7.24.8(@babel/core@7.24.9)
       '@vue/babel-plugin-jsx': 1.2.2(@babel/core@7.24.9)
-      vite: 6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)
+      vite: 6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)
       vue: 3.5.14(typescript@5.8.3)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue@4.6.2(vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.14(typescript@5.8.3))':
+  '@vitejs/plugin-vue@4.6.2(vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.14(typescript@5.8.3))':
     dependencies:
-      vite: 6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)
+      vite: 6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)
       vue: 3.5.14(typescript@5.8.3)
 
-  '@vitejs/plugin-vue@5.2.1(vite@6.2.1(@types/node@22.7.7)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.13(typescript@5.7.3))':
+  '@vitejs/plugin-vue@5.2.1(vite@6.2.1(@types/node@22.7.7)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5))(vue@3.5.13(typescript@5.7.3))':
     dependencies:
-      vite: 6.2.1(@types/node@22.7.7)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5)
+      vite: 6.2.1(@types/node@22.7.7)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5)
       vue: 3.5.13(typescript@5.7.3)
 
   '@vitest/expect@0.28.5':
@@ -11430,11 +11697,11 @@ snapshots:
 
   '@vue/cli-overlay@5.0.8': {}
 
-  '@vue/cli-plugin-babel@5.0.8(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))(core-js@3.37.1)(vue@3.5.14(typescript@5.8.3))':
+  '@vue/cli-plugin-babel@5.0.8(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))(core-js@3.37.1)(vue@3.5.14(typescript@5.8.3))':
     dependencies:
       '@babel/core': 7.24.9
       '@vue/babel-preset-app': 5.0.8(@babel/core@7.24.9)(core-js@3.37.1)(vue@3.5.14(typescript@5.8.3))
-      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
+      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.3.0(@babel/core@7.24.9)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       thread-loader: 3.0.4(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
@@ -11449,11 +11716,11 @@ snapshots:
       - vue
       - webpack-cli
 
-  '@vue/cli-plugin-babel@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))(core-js@3.38.1)(vue@3.5.13(typescript@4.5.5))':
+  '@vue/cli-plugin-babel@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))(core-js@3.38.1)(vue@3.5.13(typescript@4.5.5))':
     dependencies:
       '@babel/core': 7.24.9
       '@vue/babel-preset-app': 5.0.8(@babel/core@7.24.9)(core-js@3.38.1)(vue@3.5.13(typescript@4.5.5))
-      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
+      '@vue/cli-service': 5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.3.0(@babel/core@7.24.9)(webpack@5.75.0)
       thread-loader: 3.0.4(webpack@5.75.0)
@@ -11468,25 +11735,25 @@ snapshots:
       - vue
       - webpack-cli
 
-  '@vue/cli-plugin-router@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))':
+  '@vue/cli-plugin-router@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))':
     dependencies:
-      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
+      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
       '@vue/cli-shared-utils': 5.0.8
     transitivePeerDependencies:
       - encoding
 
-  '@vue/cli-plugin-router@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))':
+  '@vue/cli-plugin-router@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))':
     dependencies:
-      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
+      '@vue/cli-service': 5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
       '@vue/cli-shared-utils': 5.0.8
     transitivePeerDependencies:
       - encoding
 
-  '@vue/cli-plugin-typescript@5.0.8(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))(eslint@8.57.1)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
+  '@vue/cli-plugin-typescript@5.0.8(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))(eslint@8.57.1)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
     dependencies:
       '@babel/core': 7.24.9
       '@types/webpack-env': 1.18.5
-      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
+      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.3.0(@babel/core@7.24.9)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       fork-ts-checker-webpack-plugin: 6.5.3(eslint@8.57.1)(typescript@5.8.3)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
@@ -11505,11 +11772,11 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@vue/cli-plugin-typescript@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))(eslint@8.57.1)(typescript@4.5.5)(vue@3.5.13(typescript@4.5.5))':
+  '@vue/cli-plugin-typescript@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))(eslint@8.57.1)(typescript@4.5.5)(vue@3.5.13(typescript@4.5.5))':
     dependencies:
       '@babel/core': 7.24.9
       '@types/webpack-env': 1.18.5
-      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
+      '@vue/cli-service': 5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.3.0(@babel/core@7.24.9)(webpack@5.75.0)
       fork-ts-checker-webpack-plugin: 6.5.3(eslint@8.57.1)(typescript@4.5.5)(webpack@5.75.0)
@@ -11528,26 +11795,26 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@vue/cli-plugin-vuex@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))':
+  '@vue/cli-plugin-vuex@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))':
     dependencies:
-      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
+      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)
 
-  '@vue/cli-plugin-vuex@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))':
+  '@vue/cli-plugin-vuex@5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))':
     dependencies:
-      '@vue/cli-service': 5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
+      '@vue/cli-service': 5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)
 
-  '@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)':
+  '@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3)':
     dependencies:
       '@babel/helper-compilation-targets': 7.24.8
       '@soda/friendly-errors-webpack-plugin': 1.8.1(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.5
       '@vue/cli-overlay': 5.0.8
-      '@vue/cli-plugin-router': 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))
-      '@vue/cli-plugin-vuex': 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))
+      '@vue/cli-plugin-router': 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))
+      '@vue/cli-plugin-vuex': 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@swc/core@1.7.0(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(vue@3.5.14(typescript@5.8.3))(webpack-sources@3.2.3))
       '@vue/cli-shared-utils': 5.0.8
       '@vue/component-compiler-utils': 3.3.0(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.5.14)(css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+      '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.5.14)(css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       '@vue/web-component-wrapper': 1.3.0
       acorn: 8.12.1
       acorn-walk: 8.3.3
@@ -11594,7 +11861,7 @@ snapshots:
       webpack-virtual-modules: 0.4.6
       whatwg-fetch: 3.6.20
     optionalDependencies:
-      sass-loader: 13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+      sass-loader: 13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       webpack-sources: 3.2.3
     transitivePeerDependencies:
       - '@parcel/css'
@@ -11666,18 +11933,18 @@ snapshots:
       - webpack-cli
       - whiskers
 
-  '@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)':
+  '@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3)':
     dependencies:
       '@babel/helper-compilation-targets': 7.24.8
       '@soda/friendly-errors-webpack-plugin': 1.8.1(webpack@5.75.0)
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.5
       '@vue/cli-overlay': 5.0.8
-      '@vue/cli-plugin-router': 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))
-      '@vue/cli-plugin-vuex': 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.3.10(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))
+      '@vue/cli-plugin-router': 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))
+      '@vue/cli-plugin-vuex': 5.0.8(@vue/cli-service@5.0.8(@rspack/core@1.4.11(@swc/helpers@0.5.17))(@vue/compiler-sfc@3.5.14)(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.79.6)(webpack@5.75.0))(vue@3.5.13(typescript@4.5.5))(webpack-sources@3.2.3))
       '@vue/cli-shared-utils': 5.0.8
       '@vue/component-compiler-utils': 3.3.0(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.5.14)(css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0))(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@5.75.0)
+      '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.5.14)(css-loader@6.11.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(webpack@5.75.0))(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@5.75.0)
       '@vue/web-component-wrapper': 1.3.0
       acorn: 8.12.1
       acorn-walk: 8.3.3
@@ -11689,7 +11956,7 @@ snapshots:
       clipboardy: 2.3.0
       cliui: 7.0.4
       copy-webpack-plugin: 9.1.0(webpack@5.75.0)
-      css-loader: 6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0)
+      css-loader: 6.11.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(webpack@5.75.0)
       css-minimizer-webpack-plugin: 3.4.1(webpack@5.75.0)
       cssnano: 5.1.15(postcss@8.4.39)
       debug: 4.4.1
@@ -11699,7 +11966,7 @@ snapshots:
       fs-extra: 9.1.0
       globby: 11.1.0
       hash-sum: 2.0.0
-      html-webpack-plugin: 5.6.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0)
+      html-webpack-plugin: 5.6.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(webpack@5.75.0)
       is-file-esm: 1.0.0
       launch-editor-middleware: 2.8.0
       lodash.defaultsdeep: 4.6.1
@@ -12159,12 +12426,6 @@ snapshots:
       '@vue/shared': 3.5.14
       vue: 3.5.14(typescript@4.5.5)
 
-  '@vue/server-renderer@3.5.14(vue@3.5.14(typescript@4.9.5))':
-    dependencies:
-      '@vue/compiler-ssr': 3.5.14
-      '@vue/shared': 3.5.14
-      vue: 3.5.14(typescript@4.9.5)
-
   '@vue/server-renderer@3.5.14(vue@3.5.14(typescript@5.7.3))':
     dependencies:
       '@vue/compiler-ssr': 3.5.14
@@ -12212,12 +12473,12 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/core@10.11.1(vue@3.5.14(typescript@4.9.5))':
+  '@vueuse/core@10.11.1(vue@3.5.14(typescript@5.8.3))':
     dependencies:
       '@types/web-bluetooth': 0.0.20
       '@vueuse/metadata': 10.11.1
-      '@vueuse/shared': 10.11.1(vue@3.5.14(typescript@4.9.5))
-      vue-demi: 0.14.10(vue@3.5.14(typescript@4.9.5))
+      '@vueuse/shared': 10.11.1(vue@3.5.14(typescript@5.8.3))
+      vue-demi: 0.14.10(vue@3.5.14(typescript@5.8.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -12262,12 +12523,12 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/core@9.13.0(vue@3.5.14(typescript@4.9.5))':
+  '@vueuse/core@9.13.0(vue@3.5.14(typescript@5.8.3))':
     dependencies:
       '@types/web-bluetooth': 0.0.16
       '@vueuse/metadata': 9.13.0
-      '@vueuse/shared': 9.13.0(vue@3.5.14(typescript@4.9.5))
-      vue-demi: 0.13.11(vue@3.5.14(typescript@4.9.5))
+      '@vueuse/shared': 9.13.0(vue@3.5.14(typescript@5.8.3))
+      vue-demi: 0.13.11(vue@3.5.14(typescript@5.8.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -12300,11 +12561,11 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/integrations@10.11.1(async-validator@4.2.5)(axios@1.9.0(debug@4.4.1))(focus-trap@7.6.4)(sortablejs@1.15.3)(vue@3.5.14(typescript@4.9.5))':
+  '@vueuse/integrations@10.11.1(async-validator@4.2.5)(axios@1.9.0(debug@4.4.1))(focus-trap@7.6.4)(sortablejs@1.15.3)(vue@3.5.14(typescript@5.8.3))':
     dependencies:
-      '@vueuse/core': 10.11.1(vue@3.5.14(typescript@4.9.5))
-      '@vueuse/shared': 10.11.1(vue@3.5.14(typescript@4.9.5))
-      vue-demi: 0.14.10(vue@3.5.14(typescript@4.9.5))
+      '@vueuse/core': 10.11.1(vue@3.5.14(typescript@5.8.3))
+      '@vueuse/shared': 10.11.1(vue@3.5.14(typescript@5.8.3))
+      vue-demi: 0.14.10(vue@3.5.14(typescript@5.8.3))
     optionalDependencies:
       async-validator: 4.2.5
       axios: 1.9.0(debug@4.4.1)
@@ -12332,9 +12593,9 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/shared@10.11.1(vue@3.5.14(typescript@4.9.5))':
+  '@vueuse/shared@10.11.1(vue@3.5.14(typescript@5.8.3))':
     dependencies:
-      vue-demi: 0.14.10(vue@3.5.14(typescript@4.9.5))
+      vue-demi: 0.14.10(vue@3.5.14(typescript@5.8.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -12367,9 +12628,9 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/shared@9.13.0(vue@3.5.14(typescript@4.9.5))':
+  '@vueuse/shared@9.13.0(vue@3.5.14(typescript@5.8.3))':
     dependencies:
-      vue-demi: 0.13.11(vue@3.5.14(typescript@4.9.5))
+      vue-demi: 0.13.11(vue@3.5.14(typescript@5.8.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -13395,6 +13656,8 @@ snapshots:
 
   core-js@3.42.0: {}
 
+  core-js@3.45.0: {}
+
   core-util-is@1.0.3: {}
 
   cosmiconfig@6.0.0:
@@ -13455,34 +13718,6 @@ snapshots:
       '@rspack/core': 1.3.10(@swc/helpers@0.5.17)
       webpack: 5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))
 
-  css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0):
-    dependencies:
-      icss-utils: 5.1.0(postcss@8.4.47)
-      postcss: 8.4.47
-      postcss-modules-extract-imports: 3.1.0(postcss@8.4.47)
-      postcss-modules-local-by-default: 4.0.5(postcss@8.4.47)
-      postcss-modules-scope: 3.2.0(postcss@8.4.47)
-      postcss-modules-values: 4.0.0(postcss@8.4.47)
-      postcss-value-parser: 4.2.0
-      semver: 7.6.3
-    optionalDependencies:
-      '@rspack/core': 1.3.10(@swc/helpers@0.5.17)
-      webpack: 5.75.0
-
-  css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))):
-    dependencies:
-      icss-utils: 5.1.0(postcss@8.4.47)
-      postcss: 8.4.47
-      postcss-modules-extract-imports: 3.1.0(postcss@8.4.47)
-      postcss-modules-local-by-default: 4.0.5(postcss@8.4.47)
-      postcss-modules-scope: 3.2.0(postcss@8.4.47)
-      postcss-modules-values: 4.0.0(postcss@8.4.47)
-      postcss-value-parser: 4.2.0
-      semver: 7.6.3
-    optionalDependencies:
-      '@rspack/core': 1.3.10(@swc/helpers@0.5.17)
-      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
-
   css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.36(@swc/helpers@0.5.17))):
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.47)
@@ -13496,6 +13731,20 @@ snapshots:
     optionalDependencies:
       '@rspack/core': 1.3.10(@swc/helpers@0.5.17)
       webpack: 5.99.8(@swc/core@1.7.36(@swc/helpers@0.5.17))
+
+  css-loader@6.11.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(webpack@5.75.0):
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.4.47)
+      postcss: 8.4.47
+      postcss-modules-extract-imports: 3.1.0(postcss@8.4.47)
+      postcss-modules-local-by-default: 4.0.5(postcss@8.4.47)
+      postcss-modules-scope: 3.2.0(postcss@8.4.47)
+      postcss-modules-values: 4.0.0(postcss@8.4.47)
+      postcss-value-parser: 4.2.0
+      semver: 7.6.3
+    optionalDependencies:
+      '@rspack/core': 1.4.11(@swc/helpers@0.5.17)
+      webpack: 5.75.0
 
   css-minimizer-webpack-plugin@3.4.1(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))):
     dependencies:
@@ -13892,15 +14141,15 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  element-plus@2.9.10(vue@3.5.14(typescript@4.9.5)):
+  element-plus@2.9.10(vue@3.5.14(typescript@5.8.3)):
     dependencies:
       '@ctrl/tinycolor': 3.6.1
-      '@element-plus/icons-vue': 2.3.1(vue@3.5.14(typescript@4.9.5))
+      '@element-plus/icons-vue': 2.3.1(vue@3.5.14(typescript@5.8.3))
       '@floating-ui/dom': 1.7.0
       '@popperjs/core': '@sxzz/popperjs-es@2.11.7'
       '@types/lodash': 4.17.16
       '@types/lodash-es': 4.17.12
-      '@vueuse/core': 9.13.0(vue@3.5.14(typescript@4.9.5))
+      '@vueuse/core': 9.13.0(vue@3.5.14(typescript@5.8.3))
       async-validator: 4.2.5
       dayjs: 1.11.13
       escape-html: 1.0.3
@@ -13909,7 +14158,7 @@ snapshots:
       lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
       memoize-one: 6.0.0
       normalize-wheel-es: 1.2.0
-      vue: 3.5.14(typescript@4.9.5)
+      vue: 3.5.14(typescript@5.8.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
@@ -14193,7 +14442,7 @@ snapshots:
     dependencies:
       debug: 3.2.7
     optionalDependencies:
-      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@4.9.5)
+      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.8.3)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
     transitivePeerDependencies:
@@ -14236,7 +14485,7 @@ snapshots:
       semver: 6.3.1
       tsconfig-paths: 3.15.0
     optionalDependencies:
-      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@4.9.5)
+      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.8.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -14953,7 +15202,7 @@ snapshots:
       '@rspack/core': 1.3.10(@swc/helpers@0.5.17)
       webpack: 5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))
 
-  html-webpack-plugin@5.6.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0):
+  html-webpack-plugin@5.6.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(webpack@5.75.0):
     dependencies:
       '@types/html-minifier-terser': 6.1.0
       html-minifier-terser: 6.1.0
@@ -14961,19 +15210,8 @@ snapshots:
       pretty-error: 4.0.0
       tapable: 2.2.1
     optionalDependencies:
-      '@rspack/core': 1.3.10(@swc/helpers@0.5.17)
+      '@rspack/core': 1.4.11(@swc/helpers@0.5.17)
       webpack: 5.75.0
-
-  html-webpack-plugin@5.6.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))):
-    dependencies:
-      '@types/html-minifier-terser': 6.1.0
-      html-minifier-terser: 6.1.0
-      lodash: 4.17.21
-      pretty-error: 4.0.0
-      tapable: 2.2.1
-    optionalDependencies:
-      '@rspack/core': 1.3.10(@swc/helpers@0.5.17)
-      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
 
   html-webpack-plugin@5.6.2(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.36(@swc/helpers@0.5.17))):
     dependencies:
@@ -15287,6 +15525,8 @@ snapshots:
       supports-color: 8.1.1
 
   jiti@2.4.2: {}
+
+  jiti@2.5.1: {}
 
   joi@17.13.3:
     dependencies:
@@ -15666,12 +15906,6 @@ snapshots:
       schema-utils: 4.2.0
       tapable: 2.2.1
       webpack: 5.75.0
-
-  mini-css-extract-plugin@2.9.0(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))):
-    dependencies:
-      schema-utils: 4.2.0
-      tapable: 2.2.1
-      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
 
   mini-css-extract-plugin@2.9.1(webpack@5.99.8(@swc/core@1.7.36(@swc/helpers@0.5.17))):
     dependencies:
@@ -16167,11 +16401,11 @@ snapshots:
     dependencies:
       postcss: 8.5.3
 
-  postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.3)(yaml@2.4.5):
+  postcss-load-config@6.0.1(jiti@2.5.1)(postcss@8.5.3)(yaml@2.4.5):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
-      jiti: 2.4.2
+      jiti: 2.5.1
       postcss: 8.5.3
       yaml: 2.4.5
 
@@ -16874,10 +17108,10 @@ snapshots:
       sass-embedded-win32-ia32: 1.89.0
       sass-embedded-win32-x64: 1.89.0
 
-  sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))):
+  sass-loader@13.3.3(sass-embedded@1.89.0)(sass@1.77.8)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))):
     dependencies:
       neo-async: 2.6.2
-      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
+      webpack: 5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))
     optionalDependencies:
       sass: 1.77.8
       sass-embedded: 1.89.0
@@ -17282,9 +17516,9 @@ snapshots:
     dependencies:
       js-tokens: 9.0.0
 
-  style-loader@3.3.4(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))):
+  style-loader@3.3.4(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))):
     dependencies:
-      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
+      webpack: 5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))
 
   style-loader@3.3.4(webpack@5.99.8(@swc/core@1.7.36(@swc/helpers@0.5.17))):
     dependencies:
@@ -17338,11 +17572,11 @@ snapshots:
       picocolors: 1.1.1
       stable: 0.1.8
 
-  swc-loader@0.2.6(@swc/core@1.7.0(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))):
+  swc-loader@0.2.6(@swc/core@1.7.0(@swc/helpers@0.5.17))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))):
     dependencies:
       '@swc/core': 1.7.0(@swc/helpers@0.5.17)
       '@swc/counter': 0.1.3
-      webpack: 5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))
+      webpack: 5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))
 
   swc-loader@0.2.6(@swc/core@1.7.36(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.36(@swc/helpers@0.5.17))):
     dependencies:
@@ -17612,9 +17846,12 @@ snapshots:
 
   tslib@2.8.0: {}
 
+  tslib@2.8.1:
+    optional: true
+
   tsscmp@1.0.6: {}
 
-  tsup@8.4.0(@swc/core@1.7.36(@swc/helpers@0.5.17))(jiti@2.4.2)(postcss@8.5.3)(typescript@4.5.5)(yaml@2.4.5):
+  tsup@8.4.0(@swc/core@1.7.36(@swc/helpers@0.5.17))(jiti@2.5.1)(postcss@8.5.3)(typescript@4.5.5)(yaml@2.4.5):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.25.0)
       cac: 6.7.14
@@ -17624,7 +17861,7 @@ snapshots:
       esbuild: 0.25.0
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(jiti@2.4.2)(postcss@8.5.3)(yaml@2.4.5)
+      postcss-load-config: 6.0.1(jiti@2.5.1)(postcss@8.5.3)(yaml@2.4.5)
       resolve-from: 5.0.0
       rollup: 4.34.8
       source-map: 0.8.0-beta.0
@@ -17868,12 +18105,12 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-top-level-await@1.4.2(@swc/helpers@0.5.17)(rollup@4.34.8)(vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)):
+  vite-plugin-top-level-await@1.4.2(@swc/helpers@0.5.17)(rollup@4.34.8)(vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)):
     dependencies:
       '@rollup/plugin-virtual': 3.0.2(rollup@4.34.8)
       '@swc/core': 1.7.0(@swc/helpers@0.5.17)
       uuid: 10.0.0
-      vite: 6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)
+      vite: 6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5)
     transitivePeerDependencies:
       - '@swc/helpers'
       - rollup
@@ -17900,7 +18137,7 @@ snapshots:
       sass: 1.80.3
       terser: 5.36.0
 
-  vite@6.2.1(@types/node@20.14.11)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5):
+  vite@6.2.1(@types/node@20.14.11)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.77.8)(terser@5.36.0)(yaml@2.4.5):
     dependencies:
       esbuild: 0.25.0
       postcss: 8.5.3
@@ -17908,13 +18145,13 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.14.11
       fsevents: 2.3.3
-      jiti: 2.4.2
+      jiti: 2.5.1
       sass: 1.77.8
       sass-embedded: 1.89.0
       terser: 5.36.0
       yaml: 2.4.5
 
-  vite@6.2.1(@types/node@22.7.7)(jiti@2.4.2)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5):
+  vite@6.2.1(@types/node@22.7.7)(jiti@2.5.1)(sass-embedded@1.89.0)(sass@1.80.3)(terser@5.36.0)(yaml@2.4.5):
     dependencies:
       esbuild: 0.25.0
       postcss: 8.5.3
@@ -17922,7 +18159,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.7.7
       fsevents: 2.3.3
-      jiti: 2.4.2
+      jiti: 2.5.1
       sass: 1.80.3
       sass-embedded: 1.89.0
       terser: 5.36.0
@@ -17968,19 +18205,19 @@ snapshots:
       - typescript
       - universal-cookie
 
-  vitepress@1.0.0-rc.10(@algolia/client-search@5.25.0)(@types/node@22.7.7)(async-validator@4.2.5)(axios@1.9.0(debug@4.4.1))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.80.3)(search-insights@2.15.0)(sortablejs@1.15.3)(terser@5.36.0)(typescript@4.9.5):
+  vitepress@1.0.0-rc.10(@algolia/client-search@5.25.0)(@types/node@22.7.7)(async-validator@4.2.5)(axios@1.9.0(debug@4.4.1))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.80.3)(search-insights@2.15.0)(sortablejs@1.15.3)(terser@5.36.0)(typescript@5.8.3):
     dependencies:
       '@docsearch/css': 3.9.0
       '@docsearch/js': 3.9.0(@algolia/client-search@5.25.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(search-insights@2.15.0)
       '@vue/devtools-api': 6.6.4
-      '@vueuse/core': 10.11.1(vue@3.5.14(typescript@4.9.5))
-      '@vueuse/integrations': 10.11.1(async-validator@4.2.5)(axios@1.9.0(debug@4.4.1))(focus-trap@7.6.4)(sortablejs@1.15.3)(vue@3.5.14(typescript@4.9.5))
+      '@vueuse/core': 10.11.1(vue@3.5.14(typescript@5.8.3))
+      '@vueuse/integrations': 10.11.1(async-validator@4.2.5)(axios@1.9.0(debug@4.4.1))(focus-trap@7.6.4)(sortablejs@1.15.3)(vue@3.5.14(typescript@5.8.3))
       focus-trap: 7.6.4
       mark.js: 8.11.1
       minisearch: 6.3.0
       shiki: 0.14.7
       vite: 4.5.14(@types/node@22.7.7)(sass@1.80.3)(terser@5.36.0)
-      vue: 3.5.14(typescript@4.9.5)
+      vue: 3.5.14(typescript@5.8.3)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -18077,9 +18314,9 @@ snapshots:
     dependencies:
       vue: 3.3.13(typescript@4.5.5)
 
-  vue-demi@0.13.11(vue@3.5.14(typescript@4.9.5)):
+  vue-demi@0.13.11(vue@3.5.14(typescript@5.8.3)):
     dependencies:
-      vue: 3.5.14(typescript@4.9.5)
+      vue: 3.5.14(typescript@5.8.3)
 
   vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.5.14(typescript@5.7.3)))(vue@3.5.14(typescript@5.7.3)):
     dependencies:
@@ -18091,9 +18328,9 @@ snapshots:
     dependencies:
       vue: 3.5.14(typescript@4.5.5)
 
-  vue-demi@0.14.10(vue@3.5.14(typescript@4.9.5)):
+  vue-demi@0.14.10(vue@3.5.14(typescript@5.8.3)):
     dependencies:
-      vue: 3.5.14(typescript@4.9.5)
+      vue: 3.5.14(typescript@5.8.3)
 
   vue-eslint-parser@9.4.3(eslint@8.57.1):
     dependencies:
@@ -18110,15 +18347,15 @@ snapshots:
 
   vue-hot-reload-api@2.3.4: {}
 
-  vue-loader@15.11.1(@vue/compiler-sfc@3.5.14)(css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0))(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@5.75.0):
+  vue-loader@15.11.1(@vue/compiler-sfc@3.5.14)(css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))))(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))):
     dependencies:
       '@vue/component-compiler-utils': 3.3.0(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      css-loader: 6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0)
+      css-loader: 6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17)))
       hash-sum: 1.0.2
       loader-utils: 1.4.2
       vue-hot-reload-api: 2.3.4
       vue-style-loader: 4.1.3
-      webpack: 5.75.0
+      webpack: 5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))
     optionalDependencies:
       '@vue/compiler-sfc': 3.5.14
     transitivePeerDependencies:
@@ -18176,15 +18413,15 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@15.11.1(@vue/compiler-sfc@3.5.14)(css-loader@6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17))))(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))):
+  vue-loader@15.11.1(@vue/compiler-sfc@3.5.14)(css-loader@6.11.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(webpack@5.75.0))(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(webpack@5.75.0):
     dependencies:
       '@vue/component-compiler-utils': 3.3.0(handlebars@4.7.8)(lodash@4.17.21)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      css-loader: 6.11.0(@rspack/core@1.3.10(@swc/helpers@0.5.17))(webpack@5.99.8(@swc/core@1.7.0(@swc/helpers@0.5.17)))
+      css-loader: 6.11.0(@rspack/core@1.4.11(@swc/helpers@0.5.17))(webpack@5.75.0)
       hash-sum: 1.0.2
       loader-utils: 1.4.2
       vue-hot-reload-api: 2.3.4
       vue-style-loader: 4.1.3
-      webpack: 5.75.0(@swc/core@1.7.0(@swc/helpers@0.5.17))
+      webpack: 5.75.0
     optionalDependencies:
       '@vue/compiler-sfc': 3.5.14
     transitivePeerDependencies:
@@ -18365,16 +18602,6 @@ snapshots:
       '@vue/shared': 3.5.14
     optionalDependencies:
       typescript: 4.5.5
-
-  vue@3.5.14(typescript@4.9.5):
-    dependencies:
-      '@vue/compiler-dom': 3.5.14
-      '@vue/compiler-sfc': 3.5.14
-      '@vue/runtime-dom': 3.5.14
-      '@vue/server-renderer': 3.5.14(vue@3.5.14(typescript@4.9.5))
-      '@vue/shared': 3.5.14
-    optionalDependencies:
-      typescript: 4.9.5
 
   vue@3.5.14(typescript@5.7.3):
     dependencies:
