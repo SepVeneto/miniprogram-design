@@ -1,3 +1,29 @@
+## 0.17.13 (2025-12-26)
+
+
+### Bug Fixes
+
+* **editor:** iterator ([9d51092](https://github.com/SepVeneto/miniprogram-design/commit/9d510927af275b4228776c3d5f6db9b9cdc3252d))
+
+
+
+## 0.17.12 (2025-12-26)
+
+
+### Bug Fixes
+
+* **core:** VueEditor没有暴露方法 ([85ebfa7](https://github.com/SepVeneto/miniprogram-design/commit/85ebfa7bb79c0e2b2baf899dca0a3d9e9f0a3403))
+* **editor:** rich text rerender ([33b04c6](https://github.com/SepVeneto/miniprogram-design/commit/33b04c6b5497a0e716c64b546f7abdb588d341b1))
+* **editor:** 部分情况富文本全屏样式异常 ([2ea6644](https://github.com/SepVeneto/miniprogram-design/commit/2ea6644c99f2c0f302819a98e3b81dc7aa5c8d14))
+
+
+### Features
+
+* **core:** widget&schema type ([2861ee9](https://github.com/SepVeneto/miniprogram-design/commit/2861ee9caf9217ae04f05b7fb1a5d0dea85b8532))
+* pageconfig&globalconfig ([3cdea84](https://github.com/SepVeneto/miniprogram-design/commit/3cdea8464fe9a0ee0514180b58da8eca2fd998ce))
+
+
+
 ## 0.17.11 (2025-03-21)
 
 
@@ -28,9 +54,9 @@
 
 ### Bug Fixes
 
-* 老版本兜底 ([7ca193f](https://github.com/SepVeneto/miniprogram-design/commit/7ca193f559bb1f5f9a8b73116585755a5badaa63))
 * **core:** editor initial ([cbf0462](https://github.com/SepVeneto/miniprogram-design/commit/cbf0462738ed8545c4fb95dc524d83614bb2e8f2))
 * **core:** missing expose ([c3542f4](https://github.com/SepVeneto/miniprogram-design/commit/c3542f4e81879356ae5cb8cb536925cdea157779))
+* 老版本兜底 ([7ca193f](https://github.com/SepVeneto/miniprogram-design/commit/7ca193f559bb1f5f9a8b73116585755a5badaa63))
 
 
 ### Features
@@ -50,13 +76,13 @@
 
 ### Features
 
-* **core:** 优化异步流程 ([26eb980](https://github.com/SepVeneto/miniprogram-design/commit/26eb980e3851285d2b6791b5852495f7c5003c61))
 * **core:** disabled fn ([765e705](https://github.com/SepVeneto/miniprogram-design/commit/765e7057e7ab87c3799280c58315449390d0eec2))
 * **core:** editor vue ([f679cc3](https://github.com/SepVeneto/miniprogram-design/commit/f679cc3b4a33836639ed84bdea5799b440778b5a))
-* **editor:** 配置id ([2f794c5](https://github.com/SepVeneto/miniprogram-design/commit/2f794c549cddd4e11ea37dc42819f2380d91a70e))
-* **editor:** 细化操作控制 ([82b2446](https://github.com/SepVeneto/miniprogram-design/commit/82b244684670f0c023c5b3bb4bf8f1e839126da7))
-* **editor:** 支持拖曳删除禁用 ([cdcbaa0](https://github.com/SepVeneto/miniprogram-design/commit/cdcbaa0a9a8d85aed2c10e820920caa3e22fe830))
+* **core:** 优化异步流程 ([26eb980](https://github.com/SepVeneto/miniprogram-design/commit/26eb980e3851285d2b6791b5852495f7c5003c61))
 * **editor:** emitter兜底 ([2310f57](https://github.com/SepVeneto/miniprogram-design/commit/2310f5755a295f9fd5e8805b04ad7ca468399a79))
+* **editor:** 支持拖曳删除禁用 ([cdcbaa0](https://github.com/SepVeneto/miniprogram-design/commit/cdcbaa0a9a8d85aed2c10e820920caa3e22fe830))
+* **editor:** 细化操作控制 ([82b2446](https://github.com/SepVeneto/miniprogram-design/commit/82b244684670f0c023c5b3bb4bf8f1e839126da7))
+* **editor:** 配置id ([2f794c5](https://github.com/SepVeneto/miniprogram-design/commit/2f794c549cddd4e11ea37dc42819f2380d91a70e))
 
 
 
@@ -65,8 +91,8 @@
 
 ### Bug Fixes
 
-* **editor:** 兼容性 ([3bb7673](https://github.com/SepVeneto/miniprogram-design/commit/3bb767341b0aaa2dbb8a8a53b9db5be3085f2c46))
 * **editor:** extra tabbar blank ([8d3caaf](https://github.com/SepVeneto/miniprogram-design/commit/8d3caafd1f08e5f9e986da71fac526afe14a3290))
+* **editor:** 兼容性 ([3bb7673](https://github.com/SepVeneto/miniprogram-design/commit/3bb767341b0aaa2dbb8a8a53b9db5be3085f2c46))
 
 
 
@@ -111,11 +137,11 @@
 
 ### Bug Fixes
 
-* **editor:** 修正尺寸更新为整数值 ([b174756](https://github.com/SepVeneto/miniprogram-design/commit/b17475615aa41de2b0c9e3ea0910b04d1548232a))
 * **editor:** container swiper ([61c71d7](https://github.com/SepVeneto/miniprogram-design/commit/61c71d75b391b33093b277ba389c730919402e49))
 * **editor:** preview mode swiper ([8668a25](https://github.com/SepVeneto/miniprogram-design/commit/8668a25adf52ccc59423d549bfd1f0aa4e1fa1f9))
 * **editor:** preview mode swiper ([dfe7c2e](https://github.com/SepVeneto/miniprogram-design/commit/dfe7c2eb44fa285952c48d2c0263405bd5f76864))
 * **editor:** swiper container ([942e6ce](https://github.com/SepVeneto/miniprogram-design/commit/942e6ce70e5ecd2a347dd7ea4bc749e2d44880df))
+* **editor:** 修正尺寸更新为整数值 ([b174756](https://github.com/SepVeneto/miniprogram-design/commit/b17475615aa41de2b0c9e3ea0910b04d1548232a))
 
 
 ### Features
@@ -287,8 +313,8 @@
 
 ### Performance Improvements
 
-* **editor:** 优化图层管理 ([9b46a14](https://github.com/SepVeneto/miniprogram-design/commit/9b46a140a0e6b7579e15ff494d5eaf35008feb82))
 * **editor:** optimize detail ([e5ad939](https://github.com/SepVeneto/miniprogram-design/commit/e5ad9390f7091b3efc293aa9b36b054ad8a1ae2f))
+* **editor:** 优化图层管理 ([9b46a14](https://github.com/SepVeneto/miniprogram-design/commit/9b46a140a0e6b7579e15ff494d5eaf35008feb82))
 
 
 
@@ -312,8 +338,8 @@
 
 ### Features
 
-* **editor:** 容器宽度计算及盒模型输入限制两位小数 ([27fdfb3](https://github.com/SepVeneto/miniprogram-design/commit/27fdfb3fc98c02d3adfdfbd104689999a94964be))
 * **editor:** update vue version ([615a61f](https://github.com/SepVeneto/miniprogram-design/commit/615a61fd4263662b709ea4e968367344469db02b))
+* **editor:** 容器宽度计算及盒模型输入限制两位小数 ([27fdfb3](https://github.com/SepVeneto/miniprogram-design/commit/27fdfb3fc98c02d3adfdfbd104689999a94964be))
 
 
 
@@ -401,8 +427,8 @@
 
 ### Bug Fixes
 
-* **editor:** 容器高度调整后内部元素消失 ([12eaa74](https://github.com/SepVeneto/miniprogram-design/commit/12eaa743549b1ca2535981c36793a060dcca45d7))
 * **editor:** 容器内元素栅格占比设置无效 ([25a8974](https://github.com/SepVeneto/miniprogram-design/commit/25a89740c61101bd8512dfe702173a3834fb4a66))
+* **editor:** 容器高度调整后内部元素消失 ([12eaa74](https://github.com/SepVeneto/miniprogram-design/commit/12eaa743549b1ca2535981c36793a060dcca45d7))
 * **editor:** 自定义模板工作栏错位 ([7fb30a9](https://github.com/SepVeneto/miniprogram-design/commit/7fb30a96e3b0aa088703a90e17c5333e4fc3786f))
 
 
@@ -504,9 +530,9 @@
 
 ### Features
 
-* 背景设置 ([2e5886f](https://github.com/SepVeneto/miniprogram-design/commit/2e5886f9d86fb8224b1eae41cf6b6cd0a8cc429c))
 * **editor:** auto cal width ([8677d54](https://github.com/SepVeneto/miniprogram-design/commit/8677d54052f794fb3afe78d59b2dfb5b14e0feaf))
 * **editor:** page config ([65269b9](https://github.com/SepVeneto/miniprogram-design/commit/65269b9075366daf1a1776ff9d5bebe5a20e0ae4))
+* 背景设置 ([2e5886f](https://github.com/SepVeneto/miniprogram-design/commit/2e5886f9d86fb8224b1eae41cf6b6cd0a8cc429c))
 
 
 
@@ -515,8 +541,8 @@
 
 ### Features
 
-* **editor:** 自定义节点拖曳缩放单位像素固定为1px ([922c215](https://github.com/SepVeneto/miniprogram-design/commit/922c2151a2b361f5831c9b81d966babf8bd488c5))
 * **editor:** 自定义模板单位像素固定为1px ([0dd585e](https://github.com/SepVeneto/miniprogram-design/commit/0dd585ee1fad99a61cf455cf1febeb4218955728))
+* **editor:** 自定义节点拖曳缩放单位像素固定为1px ([922c215](https://github.com/SepVeneto/miniprogram-design/commit/922c2151a2b361f5831c9b81d966babf8bd488c5))
 
 
 
@@ -611,10 +637,10 @@
 
 ### Features
 
-* 容器高度支持auto ([bf2d55d](https://github.com/SepVeneto/miniprogram-design/commit/bf2d55d24645079d96f212a808280df3ddc5dc8b))
-* **自定义模板:** 文本类型自由缩放 ([3c40b80](https://github.com/SepVeneto/miniprogram-design/commit/3c40b805dc641e39b9afe189f107893c12ac573c))
 * custom config ([cf30077](https://github.com/SepVeneto/miniprogram-design/commit/cf30077c58c84a2a898e2c5f72bd588ae639c280))
 * **editor:** 自定义方向键不触发页面滚动 ([43e6782](https://github.com/SepVeneto/miniprogram-design/commit/43e678295ce39cb1baeff8ec447a75bc5683c409))
+* 容器高度支持auto ([bf2d55d](https://github.com/SepVeneto/miniprogram-design/commit/bf2d55d24645079d96f212a808280df3ddc5dc8b))
+* **自定义模板:** 文本类型自由缩放 ([3c40b80](https://github.com/SepVeneto/miniprogram-design/commit/3c40b805dc641e39b9afe189f107893c12ac573c))
 
 
 
@@ -683,10 +709,6 @@
 
 ### Bug Fixes
 
-* 单元格吸附无效 ([a2d801d](https://github.com/SepVeneto/miniprogram-design/commit/a2d801d0ef6a383becf10c2f5ccda5e87cfed6f8))
-* 容器布局尺寸计算错误 ([ca9766d](https://github.com/SepVeneto/miniprogram-design/commit/ca9766d7f9256ee3b7c9fc3187541cc1d94bf577))
-* 容器内组件加载时显示错误 ([5a3bf7f](https://github.com/SepVeneto/miniprogram-design/commit/5a3bf7fda5312e3dca0ec09d7f7ec2fb3fb9789a))
-* 预览模式容器尺寸错误 ([09cd5fe](https://github.com/SepVeneto/miniprogram-design/commit/09cd5fec74eda35c5b86258238feac97bc3955ea))
 * active state error ([a098270](https://github.com/SepVeneto/miniprogram-design/commit/a098270b0fc913fc4562ad784703f18f73216abb))
 * **container:** 设置背景图片无效 ([6d56e72](https://github.com/SepVeneto/miniprogram-design/commit/6d56e7278cea1ccb6b68624c3abf7945b3a0f1bc))
 * **core:** mounted config mix ([b0310cd](https://github.com/SepVeneto/miniprogram-design/commit/b0310cd2fe7088ecf8c2361c9fa2abab077a7da3))
@@ -695,6 +717,10 @@
 * revert remove dispath config ([594dc65](https://github.com/SepVeneto/miniprogram-design/commit/594dc65fa3ed39541c81d502a0669f135fda619f))
 * **schema:** box删除所有内容导致无法再次编辑 ([4a5aa6a](https://github.com/SepVeneto/miniprogram-design/commit/4a5aa6a98c90f6c17423f6d174d5cf75ebbe19bc))
 * swiper without grid ([09bd794](https://github.com/SepVeneto/miniprogram-design/commit/09bd794b6f95e139449aa11651fb34c215558bcf))
+* 单元格吸附无效 ([a2d801d](https://github.com/SepVeneto/miniprogram-design/commit/a2d801d0ef6a383becf10c2f5ccda5e87cfed6f8))
+* 容器内组件加载时显示错误 ([5a3bf7f](https://github.com/SepVeneto/miniprogram-design/commit/5a3bf7fda5312e3dca0ec09d7f7ec2fb3fb9789a))
+* 容器布局尺寸计算错误 ([ca9766d](https://github.com/SepVeneto/miniprogram-design/commit/ca9766d7f9256ee3b7c9fc3187541cc1d94bf577))
+* 预览模式容器尺寸错误 ([09cd5fe](https://github.com/SepVeneto/miniprogram-design/commit/09cd5fec74eda35c5b86258238feac97bc3955ea))
 
 
 ### Features
@@ -726,24 +752,24 @@
 
 ### Bug Fixes
 
+* container move no effect ([29c6d2e](https://github.com/SepVeneto/miniprogram-design/commit/29c6d2ebea89e25afa4d99d606471bad71f9eff2))
+* 容器内丢失部分样式 ([53b3d63](https://github.com/SepVeneto/miniprogram-design/commit/53b3d63c1aa27fb1bb011b58044118e3ec91c485))
 * 操作按钮尺寸受宿主环境的box-sizing影响 ([af48aaf](https://github.com/SepVeneto/miniprogram-design/commit/af48aaf38afef638cffd1774c94136edacd878ee))
 * 跨组件拖曳无效 ([853807f](https://github.com/SepVeneto/miniprogram-design/commit/853807f7efd650f921ffe9e500418fe983b8158d))
-* 容器内丢失部分样式 ([53b3d63](https://github.com/SepVeneto/miniprogram-design/commit/53b3d63c1aa27fb1bb011b58044118e3ec91c485))
-* container move no effect ([29c6d2e](https://github.com/SepVeneto/miniprogram-design/commit/29c6d2ebea89e25afa4d99d606471bad71f9eff2))
 
 
 ### Features
 
-* 轮播效果仅预览 ([aa5eb1a](https://github.com/SepVeneto/miniprogram-design/commit/aa5eb1af6a361f394d399b4f5c7efdb7b21f255c))
+* tabbar支持隐藏 ([bca88ff](https://github.com/SepVeneto/miniprogram-design/commit/bca88ffe30d9427a4c86061379f7c5b5f4782c84))
 * 主要功能弃用vuedraggable ([2993ea1](https://github.com/SepVeneto/miniprogram-design/commit/2993ea15bba0c4ff21086012e1f372fba90570ff))
 * 组件树 ([7b03ca1](https://github.com/SepVeneto/miniprogram-design/commit/7b03ca1b19ee92af7f6ca80ca80db28b4d213c6a))
-* tabbar支持隐藏 ([bca88ff](https://github.com/SepVeneto/miniprogram-design/commit/bca88ffe30d9427a4c86061379f7c5b5f4782c84))
+* 轮播效果仅预览 ([aa5eb1a](https://github.com/SepVeneto/miniprogram-design/commit/aa5eb1af6a361f394d399b4f5c7efdb7b21f255c))
 
 
 ### Performance Improvements
 
-* 优化拖曳的流畅度 ([da9814c](https://github.com/SepVeneto/miniprogram-design/commit/da9814c7d859bf98815f7fabe481216817c2e01f))
 * ResizeObserver loop completed with undelivered notifications ([e0eeb91](https://github.com/SepVeneto/miniprogram-design/commit/e0eeb9199559d463f10e4a45bcd8fc26b9adc126))
+* 优化拖曳的流畅度 ([da9814c](https://github.com/SepVeneto/miniprogram-design/commit/da9814c7d859bf98815f7fabe481216817c2e01f))
 
 
 
@@ -767,9 +793,9 @@
 ### Features
 
 * **editor:** 补偿容器设置column-gap时的内部元素宽度 ([1e2272b](https://github.com/SepVeneto/miniprogram-design/commit/1e2272b1d297eacd50b709bbbc3b02cb27550b3c))
-* **schema:** 更换number控件 ([09b9cae](https://github.com/SepVeneto/miniprogram-design/commit/09b9cae99e5613a947df7c061105978a866008f3))
-* **schema:** 支持通过_inContainer控制表单内容 ([9f611e3](https://github.com/SepVeneto/miniprogram-design/commit/9f611e3fb4ab416f3647d847a50f0b5bd9bc053b))
 * **schema:** 支持tips ([917dda0](https://github.com/SepVeneto/miniprogram-design/commit/917dda06bdf27d59014d83d35d338f1b97515caa))
+* **schema:** 支持通过_inContainer控制表单内容 ([9f611e3](https://github.com/SepVeneto/miniprogram-design/commit/9f611e3fb4ab416f3647d847a50f0b5bd9bc053b))
+* **schema:** 更换number控件 ([09b9cae](https://github.com/SepVeneto/miniprogram-design/commit/09b9cae99e5613a947df7c061105978a866008f3))
 
 
 
@@ -863,9 +889,9 @@
 
 ### Features
 
-* 设置配置数据时默认添加当前数据版本 ([7a1861d](https://github.com/SepVeneto/miniprogram-design/commit/7a1861d1315907f89f824a95535964ea3b6ea0c0))
-* 添加@sepveneto/basic-comp ([1b1a481](https://github.com/SepVeneto/miniprogram-design/commit/1b1a4813267020ad2cad069d1a1e3fef7345df66))
 * **upgrade:** tabbars可选 ([f46c883](https://github.com/SepVeneto/miniprogram-design/commit/f46c8837ad3c96133966543d16cd0992b1c34e9c))
+* 添加@sepveneto/basic-comp ([1b1a481](https://github.com/SepVeneto/miniprogram-design/commit/1b1a4813267020ad2cad069d1a1e3fef7345df66))
+* 设置配置数据时默认添加当前数据版本 ([7a1861d](https://github.com/SepVeneto/miniprogram-design/commit/7a1861d1315907f89f824a95535964ea3b6ea0c0))
 
 
 
@@ -889,9 +915,9 @@
 ### Features
 
 * **core:** log version ([101726a](https://github.com/SepVeneto/miniprogram-design/commit/101726a893e5136b42b07e16047aeebf4150844d))
-* **editor:** 输出版本号 ([35c3fe1](https://github.com/SepVeneto/miniprogram-design/commit/35c3fe12812359bcd39de50c93960d0122ee4242))
-* **editor:** 添加basic-comp ([d40a1a9](https://github.com/SepVeneto/miniprogram-design/commit/d40a1a94f6028a6584d8a7840813f779ac369313))
 * **editor:** element 中文 ([c4a4a63](https://github.com/SepVeneto/miniprogram-design/commit/c4a4a634bf758cb406221efe98e0bc48cca6d714))
+* **editor:** 添加basic-comp ([d40a1a9](https://github.com/SepVeneto/miniprogram-design/commit/d40a1a94f6028a6584d8a7840813f779ac369313))
+* **editor:** 输出版本号 ([35c3fe1](https://github.com/SepVeneto/miniprogram-design/commit/35c3fe12812359bcd39de50c93960d0122ee4242))
 
 
 
@@ -900,14 +926,14 @@
 
 ### Bug Fixes
 
-* **editor:** 组件视图初始化时，grid宽度计算错误 ([8568afc](https://github.com/SepVeneto/miniprogram-design/commit/8568afcf68e2c96982a369e8e95c4f6e5a63e114))
 * **editor:** container宽度计算在存在padding时有偏差 ([1d2d670](https://github.com/SepVeneto/miniprogram-design/commit/1d2d67006b9712c7ca82bf7ae647f3313ab9edfc))
+* **editor:** 组件视图初始化时，grid宽度计算错误 ([8568afc](https://github.com/SepVeneto/miniprogram-design/commit/8568afcf68e2c96982a369e8e95c4f6e5a63e114))
 
 
 ### Features
 
-* **editor:** 不限制vueuse的版本 ([6624cc6](https://github.com/SepVeneto/miniprogram-design/commit/6624cc69dc8c5a2f8e86042f6f5dff7edfcbdfc6))
 * **editor:** container内的元素添加默认值 ([ed281fa](https://github.com/SepVeneto/miniprogram-design/commit/ed281fa0fc87c72db6b55a83bcca625ff5bcd0ce))
+* **editor:** 不限制vueuse的版本 ([6624cc6](https://github.com/SepVeneto/miniprogram-design/commit/6624cc69dc8c5a2f8e86042f6f5dff7edfcbdfc6))
 
 
 
@@ -922,10 +948,10 @@
 
 ### Features
 
-* 添加tabbar与router的默认行为 ([30b6cb1](https://github.com/SepVeneto/miniprogram-design/commit/30b6cb1091eec2da78a9abb584f16868c6c0f3d7))
-* 子元素宽度完全贴合预览大小 ([e029e60](https://github.com/SepVeneto/miniprogram-design/commit/e029e603ab2695b57120b7eed36fecbc240b3aca))
 * **editor:** 容器内组件支持缩放 ([9aad63a](https://github.com/SepVeneto/miniprogram-design/commit/9aad63ae231ee2ac47111ca3a429d67086ba6156))
 * **schema:** configRender添加双向绑定 ([4d0b802](https://github.com/SepVeneto/miniprogram-design/commit/4d0b8028860f875605e12a58b29db9ee6135641f))
+* 子元素宽度完全贴合预览大小 ([e029e60](https://github.com/SepVeneto/miniprogram-design/commit/e029e603ab2695b57120b7eed36fecbc240b3aca))
+* 添加tabbar与router的默认行为 ([30b6cb1](https://github.com/SepVeneto/miniprogram-design/commit/30b6cb1091eec2da78a9abb584f16868c6c0f3d7))
 
 
 
@@ -979,7 +1005,6 @@
 
 ### Features
 
-* 数据结构自动升级 ([6fd82e4](https://github.com/SepVeneto/miniprogram-design/commit/6fd82e4525eaf06c5a4b4c713c222ce98e4dac95))
 * add options data ([f35422b](https://github.com/SepVeneto/miniprogram-design/commit/f35422be848327ef91d2d9361b304da01b2961d5))
 * add route ([cde8030](https://github.com/SepVeneto/miniprogram-design/commit/cde80302550a1c7aaf27a453269780430afc5ef2))
 * apply routes ([c6fc2d0](https://github.com/SepVeneto/miniprogram-design/commit/c6fc2d0bc84edd4e5e0f4400ece9e3b73bdcbc87))
@@ -987,6 +1012,7 @@
 * dynamic remote ([1751e9a](https://github.com/SepVeneto/miniprogram-design/commit/1751e9adfe2d435746f86ca3baa7c01fd3f63a55))
 * dynamic set remote url ([42299c9](https://github.com/SepVeneto/miniprogram-design/commit/42299c9c347b045a8430fcdca67b999629cc572e))
 * hooks ([b577b80](https://github.com/SepVeneto/miniprogram-design/commit/b577b8086e9919779b606f3b421219e28d2fe330))
+* 数据结构自动升级 ([6fd82e4](https://github.com/SepVeneto/miniprogram-design/commit/6fd82e4525eaf06c5a4b4c713c222ce98e4dac95))
 
 
 
@@ -1004,10 +1030,10 @@
 
 ### Bug Fixes
 
+* vue2.6无法执行 ([f0a19ee](https://github.com/SepVeneto/miniprogram-design/commit/f0a19ee50462c5ea1cf99f993167507748bd5605))
+* 组件默认数据被编辑器影响 ([54f9185](https://github.com/SepVeneto/miniprogram-design/commit/54f91858aa73739d9c872393180b18a691cfb4b4))
 * 轮播容器插入新组件无法切换 ([f7afbfd](https://github.com/SepVeneto/miniprogram-design/commit/f7afbfd16e6a6c683e9f06f63d24f71e0f1f18df))
 * 选择tabbar异常 ([b646413](https://github.com/SepVeneto/miniprogram-design/commit/b646413cfed359019e8d98e2d4704b91608fc04a))
-* 组件默认数据被编辑器影响 ([54f9185](https://github.com/SepVeneto/miniprogram-design/commit/54f91858aa73739d9c872393180b18a691cfb4b4))
-* vue2.6无法执行 ([f0a19ee](https://github.com/SepVeneto/miniprogram-design/commit/f0a19ee50462c5ea1cf99f993167507748bd5605))
 
 
 * feat(globalConfig)!: 支持配置 ([c0ef74b](https://github.com/SepVeneto/miniprogram-design/commit/c0ef74b4566df663fd7929e67a7da92147a62a47))
@@ -1016,14 +1042,14 @@
 
 ### Features
 
-* 添加canvas ([617cd81](https://github.com/SepVeneto/miniprogram-design/commit/617cd81f8085da3d88a7ac014f442870223322d7))
-* 修改数据更新逻辑 ([6849a05](https://github.com/SepVeneto/miniprogram-design/commit/6849a05e8203bde6e08a542b377fc692beec5346))
-* 依赖版本更新 ([3d4d04a](https://github.com/SepVeneto/miniprogram-design/commit/3d4d04abd9914d7f8833c353b2ee77df60f57a58))
-* 支持使用全局配置 ([3bf82e1](https://github.com/SepVeneto/miniprogram-design/commit/3bf82e14a33da7519c765d64c7bca81d7157d0ff))
 * schema ([75378fc](https://github.com/SepVeneto/miniprogram-design/commit/75378fc11e9038f98a013da89d3b93380ce8bde5))
-* **schema:** 全部支持数据联动 ([df3c0b3](https://github.com/SepVeneto/miniprogram-design/commit/df3c0b32b0c820bed376b7b61ba718d2006ee93f))
 * **schema:** input 支持原生type ([9d64d34](https://github.com/SepVeneto/miniprogram-design/commit/9d64d34ec285340cded11c6ebdc38a4060518406))
+* **schema:** 全部支持数据联动 ([df3c0b3](https://github.com/SepVeneto/miniprogram-design/commit/df3c0b32b0c820bed376b7b61ba718d2006ee93f))
 * text, image ([6006263](https://github.com/SepVeneto/miniprogram-design/commit/6006263211dc925e08ce3741ae9ef1b736d93db0))
+* 依赖版本更新 ([3d4d04a](https://github.com/SepVeneto/miniprogram-design/commit/3d4d04abd9914d7f8833c353b2ee77df60f57a58))
+* 修改数据更新逻辑 ([6849a05](https://github.com/SepVeneto/miniprogram-design/commit/6849a05e8203bde6e08a542b377fc692beec5346))
+* 支持使用全局配置 ([3bf82e1](https://github.com/SepVeneto/miniprogram-design/commit/3bf82e14a33da7519c765d64c7bca81d7157d0ff))
+* 添加canvas ([617cd81](https://github.com/SepVeneto/miniprogram-design/commit/617cd81f8085da3d88a7ac014f442870223322d7))
 
 
 ### BREAKING CHANGES
@@ -1044,10 +1070,6 @@
 
 ### Features
 
-* 默认样式 ([f50a81e](https://github.com/SepVeneto/miniprogram-design/commit/f50a81e9e2c2b8bb09ef8a5fc7ee2456a85a00d9))
-* 添加类型声明 ([41c49dd](https://github.com/SepVeneto/miniprogram-design/commit/41c49dd9944cb689525994aa9ba36a1e92050275))
-* 拖拽位置限制 ([c050535](https://github.com/SepVeneto/miniprogram-design/commit/c050535f37a7f4fcf2c5c6ae982eea7aa09949ab))
-* 与宿主环境数据通信 ([5a523cd](https://github.com/SepVeneto/miniprogram-design/commit/5a523cd7b4e474531146e7310c49a1eafb5cb80f))
 * add container ([e1bea59](https://github.com/SepVeneto/miniprogram-design/commit/e1bea59339ef922ebbbfbb225b4c2dbeae7120f3))
 * add disabled ([343a453](https://github.com/SepVeneto/miniprogram-design/commit/343a453e21b05485723e0c987e97c236ef7419e3))
 * add remote render ([fb837dc](https://github.com/SepVeneto/miniprogram-design/commit/fb837dc6f54bd2f81136d12c1481de96d6b74a49))
@@ -1067,6 +1089,10 @@
 * rich text ([80bc1a5](https://github.com/SepVeneto/miniprogram-design/commit/80bc1a59d18b54b3f64cc1e495509b80b6e76bd3))
 * schema-render ([6cc1a22](https://github.com/SepVeneto/miniprogram-design/commit/6cc1a22e8224431808a04fe098b9ed1cb49f04b5))
 * widgets federation ([00cb2ad](https://github.com/SepVeneto/miniprogram-design/commit/00cb2add78490811135ac45df99ba03795c64e26))
+* 与宿主环境数据通信 ([5a523cd](https://github.com/SepVeneto/miniprogram-design/commit/5a523cd7b4e474531146e7310c49a1eafb5cb80f))
+* 拖拽位置限制 ([c050535](https://github.com/SepVeneto/miniprogram-design/commit/c050535f37a7f4fcf2c5c6ae982eea7aa09949ab))
+* 添加类型声明 ([41c49dd](https://github.com/SepVeneto/miniprogram-design/commit/41c49dd9944cb689525994aa9ba36a1e92050275))
+* 默认样式 ([f50a81e](https://github.com/SepVeneto/miniprogram-design/commit/f50a81e9e2c2b8bb09ef8a5fc7ee2456a85a00d9))
 
 
 
