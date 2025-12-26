@@ -150,7 +150,11 @@ const pageSchema = computed(() => {
   return target.concat(newList)
 })
 const globalSchema = computed(() => {
-  return app.schema.globalConfig
+  if (app.routes.length === 1) {
+    return [ ...pageSchema.value, ...app.schema.globalConfig ]
+  } else {
+    return app.schema.globalConfig
+  }
 })
 watch(selected, (val, oldVal) => {
   val === oldVal && history.create(`编辑-${selected.value._name}`)

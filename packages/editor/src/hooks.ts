@@ -10,8 +10,14 @@ export function useConfig(target?: 'page' | 'global') {
     get() {
       const _type = target || type.value
       switch (_type) {
-        case 'page':
-          return app.config.pageConfig?.[route.name as string] || {}
+        case 'page': {
+          if (app.routes.length === 1) {
+            const res = app.config.pageConfig?.[route.name as string] || app.config.globalConfig
+            return res
+          } else {
+            return app.config.pageConfig?.[route.name as string] || {}
+          }
+        }
         case 'global':
           return app.config.globalConfig
         default:
