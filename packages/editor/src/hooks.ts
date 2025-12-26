@@ -8,7 +8,9 @@ export function useConfig(target?: 'page' | 'global') {
   const type = computed(() => app.schemaType)
   const config = computed<any>({
     get() {
-      const _type = target || type.value
+      // TODO: check
+      const _type = type.value
+      console.log(type.value, target)
       switch (_type) {
         case 'page': {
           if (app.routes.length === 1) {

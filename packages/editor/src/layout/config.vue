@@ -151,7 +151,7 @@ const pageSchema = computed(() => {
 })
 const globalSchema = computed(() => {
   if (app.routes.length === 1) {
-    return [ ...pageSchema.value, ...app.schema.globalConfig ]
+    return [ ...pageSchema.value, ...(app.schema.globalConfig || []) ]
   } else {
     return app.schema.globalConfig
   }
